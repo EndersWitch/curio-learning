@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2405111123009991"
+     crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2405111123009991"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Curio — Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Caveat:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;
+  --cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;
+  --m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);
+  --m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--m03:rgba(247,247,255,0.03);
+  --c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--c06:rgba(109,211,206,0.06);
+  --r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);
+  --h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;--script:'Caveat',cursive;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;}
+body{font-family:var(--b);background:var(--deep);color:var(--moon);min-height:100vh;display:flex;flex-direction:column;}
+a{text-decoration:none;color:inherit;}
+button{font-family:var(--b);cursor:pointer;border:none;background:none;}
+
+/* Asterisk highlight */
+.hl{color:var(--cyan);font-weight:600;background:var(--c12);padding:0.05em 0.3em;border-radius:3px;}
+
+/* Screens */
+.screen{display:none;min-height:100vh;flex-direction:column;}
+.screen.active{display:flex;}
+
+/* ══════════════════════════════
+   NAV
+══════════════════════════════ */
+.qnav{
+  position:sticky;top:0;z-index:100;
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.8rem;
+  background:rgba(26,18,40,0.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--m06);
+  flex-shrink:0;
+}
+.qnav-logo{display:flex;align-items:center;gap:0.55rem;font-family:var(--h);font-size:1.05rem;font-weight:800;color:var(--moon);}
+.qnav-right{display:flex;gap:0.5rem;align-items:center;}
+.qnav-link{font-size:0.78rem;color:var(--m30);padding:0.35rem 0.7rem;border-radius:6px;transition:all .15s;}
+.qnav-link:hover{color:var(--moon);background:var(--m06);}
+.qnav-btn{font-size:0.78rem;font-weight:700;color:var(--plum);background:var(--cyan);padding:0.38rem 0.9rem;border-radius:7px;font-family:var(--h);transition:all .15s;}
+.qnav-btn:hover{background:var(--moon);}
+.profile-btn{width:30px;height:30px;border-radius:50%;background:var(--mid);border:2px solid var(--c25);display:flex;align-items:center;justify-content:center;font-family:var(--h);font-size:0.78rem;font-weight:700;color:var(--cyan);cursor:pointer;}
+.profile-wrap{position:relative;}
+.profile-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:var(--mid);border:1px solid var(--c12);border-radius:12px;min-width:190px;box-shadow:0 16px 48px rgba(0,0,0,0.5);display:none;flex-direction:column;overflow:hidden;z-index:300;}
+.profile-dropdown.open{display:flex;}
+.profile-dd-head{padding:0.8rem 1rem 0.6rem;border-bottom:1px solid var(--m06);}
+.profile-dd-name{font-family:var(--h);font-size:0.85rem;font-weight:700;}
+.profile-dd-email{font-size:0.65rem;color:var(--m30);margin-top:0.1rem;}
+.profile-dd-item{padding:0.55rem 1rem;font-size:0.78rem;color:var(--m55);display:block;transition:background .1s;text-align:left;width:100%;cursor:pointer;}
+.profile-dd-item:hover{background:var(--m06);color:var(--moon);}
+.profile-dd-item.danger{color:var(--coral);}
+
+/* ══════════════════════════════
+   SCREEN 1: TOPIC SELECT
+══════════════════════════════ */
+#screen-select{display:grid;grid-template-columns:280px 1fr;min-height:100vh;}
+@media(max-width:700px){#screen-select{grid-template-columns:1fr;}}
+
+.select-sidebar{
+  background:var(--plum);border-right:1px solid var(--m06);
+  padding:2rem 1.5rem;
+  position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;
+  display:flex;flex-direction:column;gap:1.5rem;
+}
+.sidebar-section-label{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--m30);margin-bottom:0.6rem;}
+
+/* Grade list */
+.grade-list{display:flex;flex-direction:column;gap:0.25rem;}
+.grade-item{
+  padding:0.55rem 0.8rem;border-radius:8px;
+  font-size:0.82rem;font-weight:500;color:var(--m55);
+  cursor:pointer;transition:all .12s;display:flex;align-items:center;justify-content:space-between;
+}
+.grade-item:hover{background:var(--m06);color:var(--moon);}
+.grade-item.active{background:var(--c12);color:var(--cyan);font-weight:600;}
+.grade-item-badge{font-size:0.58rem;font-weight:700;padding:0.1rem 0.4rem;border-radius:3px;background:var(--mid);color:var(--m30);}
+.grade-item.active .grade-item-badge{background:var(--c25);color:var(--cyan);}
+
+/* Subject list */
+.subject-list{display:flex;flex-direction:column;gap:0.25rem;}
+.subject-item{
+  padding:0.55rem 0.8rem;border-radius:8px;
+  font-size:0.82rem;font-weight:500;color:var(--m55);
+  cursor:pointer;transition:all .12s;
+}
+.subject-item:hover{background:var(--m06);color:var(--moon);}
+.subject-item.active{background:var(--c12);color:var(--cyan);font-weight:600;}
+
+/* Main area */
+.select-main{padding:2.5rem 2.5rem;overflow-y:auto;}
+.select-header{margin-bottom:2rem;}
+.select-eyebrow{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--cyan);margin-bottom:0.4rem;}
+.select-h{font-family:var(--h);font-size:1.6rem;font-weight:800;letter-spacing:-0.8px;color:var(--moon);}
+
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
+.topic-card{
+  background:var(--card);border:1px solid var(--m06);border-radius:16px;
+  padding:1.4rem;cursor:pointer;transition:all .2s;position:relative;
+  display:flex;flex-direction:column;gap:0.4rem;
+}
+.topic-card:hover{border-color:var(--c25);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+.topic-card.premium{cursor:default;opacity:0.7;}
+.topic-card.premium:hover{transform:none;box-shadow:none;border-color:var(--m06);}
+.tc-lock{position:absolute;top:1rem;right:1rem;font-size:0.9rem;opacity:0.5;}
+.tc-tag{font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.15rem 0.45rem;border-radius:3px;display:inline-block;margin-bottom:0.2rem;}
+.tc-tag.free{background:var(--c12);color:var(--cyan);}
+.tc-tag.premium{background:var(--r10);color:var(--coral);}
+.tc-title{font-family:var(--h);font-size:0.92rem;font-weight:700;color:var(--moon);line-height:1.2;}
+.tc-meta{font-size:0.72rem;color:var(--m30);line-height:1.4;}
+.tc-count{font-size:0.65rem;font-weight:600;color:var(--m30);margin-top:0.3rem;}
+
+/* ══════════════════════════════
+   SCREEN 2: QUIZ
+══════════════════════════════ */
+#screen-quiz{display:grid;grid-template-columns:1fr 320px;min-height:100vh;}
+@media(max-width:760px){#screen-quiz{grid-template-columns:1fr;}}
+
+/* Quiz header bar */
+.quiz-header{
+  grid-column:1/-1;
+  height:52px;display:flex;align-items:center;gap:1.5rem;
+  padding:0 1.8rem;
+  background:var(--plum);border-bottom:1px solid var(--m06);
+  flex-shrink:0;
+}
+.qh-back{font-size:0.78rem;color:var(--m30);cursor:pointer;transition:color .15s;padding:0.3rem 0;}
+.qh-back:hover{color:var(--moon);}
+.qh-topic{font-family:var(--h);font-size:0.78rem;font-weight:700;color:var(--moon);background:var(--mid);padding:0.25rem 0.7rem;border-radius:100px;}
+.qh-prog{flex:1;display:flex;align-items:center;gap:0.8rem;}
+.qh-prog-track{flex:1;height:3px;background:var(--m06);border-radius:2px;overflow:hidden;}
+.qh-prog-fill{height:100%;background:var(--cyan);transition:width .4s;border-radius:2px;}
+.qh-prog-text{font-size:0.68rem;font-weight:600;color:var(--m30);white-space:nowrap;}
+.qh-score-wrap{display:flex;align-items:center;gap:0.3rem;font-size:0.72rem;color:var(--m30);}
+.qh-score-val{font-family:var(--h);font-weight:800;color:var(--cyan);}
+
+/* Progress dots */
+.qh-dots{display:flex;gap:0.3rem;align-items:center;}
+.q-dot{width:8px;height:8px;border-radius:50%;background:var(--m06);transition:all .2s;flex-shrink:0;}
+.q-dot.current{background:var(--cyan);box-shadow:0 0 6px var(--cyan);}
+.q-dot.done-right{background:var(--cyan);}
+.q-dot.done-wrong{background:var(--coral);}
+
+/* Question area */
+.quiz-area{padding:2.5rem 2.5rem;display:flex;flex-direction:column;overflow-y:auto;}
+.qa-num{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--m30);margin-bottom:0.6rem;}
+.qa-question{
+  font-family:var(--h);font-size:clamp(1rem,2vw,1.3rem);font-weight:700;
+  line-height:1.5;color:var(--moon);margin-bottom:2rem;
+}
+.qa-opts{display:flex;flex-direction:column;gap:0.6rem;}
+.qa-opt{
+  display:flex;align-items:center;gap:0.8rem;
+  padding:0.85rem 1rem;border-radius:12px;
+  background:var(--card);border:1.5px solid var(--m06);
+  cursor:pointer;font-size:0.88rem;color:var(--m55);
+  transition:all .15s;text-align:left;width:100%;
+}
+.qa-opt:hover:not(:disabled){border-color:var(--c25);color:var(--moon);background:var(--c06);}
+.qa-opt:disabled{cursor:default;}
+.qa-opt.correct{background:var(--c12);border-color:var(--cyan);color:var(--cyan);}
+.qa-opt.wrong{background:var(--r10);border-color:var(--coral);color:var(--coral);}
+.qa-opt.reveal{background:var(--c12);border-color:var(--cyan);color:var(--cyan);}
+.qa-opt-letter{
+  width:28px;height:28px;border-radius:7px;flex-shrink:0;
+  background:var(--m06);display:flex;align-items:center;justify-content:center;
+  font-family:var(--h);font-size:0.68rem;font-weight:700;color:var(--m30);
+}
+.qa-opt.correct .qa-opt-letter{background:var(--cyan);color:var(--plum);}
+.qa-opt.wrong .qa-opt-letter{background:var(--coral);color:var(--moon);}
+.qa-opt.reveal .qa-opt-letter{background:var(--cyan);color:var(--plum);}
+
+/* Sidebar feedback */
+.quiz-sidebar{
+  background:var(--plum);border-left:1px solid var(--m06);
+  padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1rem;
+  overflow-y:auto;
+}
+.qs-waiting{font-size:0.82rem;color:var(--m30);font-style:italic;padding:0.5rem 0;}
+
+.qs-result{
+  border-radius:12px;padding:1.2rem;border:1px solid transparent;
+  display:none;
+}
+.qs-result.show{display:block;}
+.qs-result.ok{background:var(--c12);border-color:var(--c25);}
+.qs-result.err{background:var(--r10);border-color:var(--r20);}
+.qs-result-badge{
+  display:inline-block;font-size:0.62rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.1em;
+  padding:0.2rem 0.55rem;border-radius:4px;margin-bottom:0.6rem;
+}
+.qs-result-badge.ok{background:var(--cyan);color:var(--plum);}
+.qs-result-badge.err{background:var(--coral);color:var(--moon);}
+.qs-result-exp{font-size:0.82rem;color:var(--m80);line-height:1.65;}
+
+/* Deep learn prompt */
+.deep-learn-prompt{
+  background:linear-gradient(135deg,var(--mid),var(--card));
+  border:1px solid var(--c25);border-radius:12px;
+  padding:1rem 1.2rem;display:none;
+}
+.deep-learn-prompt.show{display:block;}
+.dlp-header{font-family:var(--h);font-size:0.8rem;font-weight:700;color:var(--moon);margin-bottom:0.3rem;}
+.dlp-sub{font-size:0.72rem;color:var(--m55);margin-bottom:0.8rem;line-height:1.5;}
+.dlp-btn{
+  width:100%;padding:0.6rem;border-radius:8px;
+  background:var(--cyan);color:var(--plum);
+  font-family:var(--h);font-size:0.78rem;font-weight:700;
+  cursor:pointer;border:none;transition:all .15s;
+}
+.dlp-btn:hover{background:var(--moon);}
+
+.btn-next-q{
+  width:100%;padding:0.75rem;border-radius:10px;
+  background:var(--coral);color:var(--moon);
+  font-family:var(--h);font-size:0.85rem;font-weight:700;
+  cursor:pointer;border:none;transition:all .15s;display:none;margin-top:auto;
+}
+.btn-next-q.show{display:block;}
+.btn-next-q:hover{background:#ff4a47;}
+
+/* Dot strip in sidebar */
+.qs-dots{display:flex;flex-wrap:wrap;gap:0.4rem;padding:0.5rem 0;}
+
+/* ══════════════════════════════
+   SCREEN 3: RESULTS
+══════════════════════════════ */
+#screen-results{align-items:center;justify-content:center;padding:3rem 2rem;}
+.results-card{
+  background:var(--card);border:1px solid var(--m06);border-radius:24px;
+  padding:3rem;max-width:520px;width:100%;text-align:center;
+}
+.r-bloom{display:flex;justify-content:center;margin-bottom:1.5rem;}
+.r-topic{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--m30);margin-bottom:1rem;}
+.r-score-big{font-family:var(--h);font-size:5rem;font-weight:900;letter-spacing:-3px;line-height:1;color:var(--moon);}
+.r-score-big span{color:var(--cyan);}
+.r-score-big sub{font-size:2.5rem;color:var(--m30);}
+.r-pct{font-family:var(--h);font-size:1.2rem;font-weight:700;color:var(--cyan);margin-bottom:0.3rem;}
+.r-message{font-family:var(--h);font-size:1.1rem;font-weight:700;color:var(--moon);margin-bottom:0.4rem;}
+.r-sub{font-size:0.85rem;color:var(--m55);line-height:1.7;margin-bottom:2rem;}
+.r-stats{display:flex;justify-content:center;gap:2rem;margin-bottom:2rem;}
+.r-stat{display:flex;flex-direction:column;align-items:center;gap:0.15rem;}
+.r-stat-val{font-family:var(--h);font-size:1.5rem;font-weight:800;color:var(--moon);}
+.r-stat-val.ok{color:var(--cyan);}
+.r-stat-val.err{color:var(--coral);}
+.r-stat-label{font-size:0.65rem;color:var(--m30);font-weight:500;}
+.r-actions{display:flex;gap:0.8rem;flex-wrap:wrap;justify-content:center;}
+.r-btn{
+  padding:0.75rem 1.5rem;border-radius:10px;
+  font-family:var(--h);font-size:0.85rem;font-weight:700;
+  cursor:pointer;border:none;transition:all .15s;
+}
+.r-btn-primary{background:var(--coral);color:var(--moon);}
+.r-btn-primary:hover{background:#ff4a47;}
+.r-btn-soft{background:var(--m06);color:var(--moon);border:1px solid var(--m12);}
+.r-btn-soft:hover{background:var(--m12);}
+.results-premium-nudge{
+  display:none;margin-top:1.5rem;
+  padding:1rem 1.2rem;border-radius:12px;
+  background:linear-gradient(135deg,var(--mid),var(--card));
+  border:1px solid var(--c25);
+  font-size:0.8rem;color:var(--m55);line-height:1.65;text-align:left;
+}
+.results-premium-nudge.show{display:block;}
+.results-premium-nudge strong{color:var(--moon);}
+.results-premium-nudge a{color:var(--cyan);font-weight:600;}
+
+/* ══════════════════════════════
+   DEEP LEARN OVERLAY
+══════════════════════════════ */
+.dl-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(26,18,40,0.85);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:flex-end;
+}
+.dl-overlay.show{display:flex;}
+.dl-panel{
+  width:440px;max-width:100vw;height:100vh;
+  background:var(--card);border-left:1px solid var(--c25);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.dlp-bar{
+  height:52px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.5rem;border-bottom:1px solid var(--m06);flex-shrink:0;
+}
+.dlp-bar-title{font-family:var(--h);font-size:0.88rem;font-weight:700;color:var(--moon);display:flex;align-items:center;gap:0.5rem;}
+.dlp-bar-badge{font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:var(--coral);color:var(--moon);padding:0.15rem 0.45rem;border-radius:3px;}
+.dlp-bar-close{width:28px;height:28px;border-radius:6px;background:var(--m06);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.75rem;color:var(--m55);transition:all .15s;}
+.dlp-bar-close:hover{background:var(--m12);color:var(--moon);}
+.dlp-body{padding:1.5rem;overflow-y:auto;flex:1;}
+.dlp-topic-tag{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--cyan);margin-bottom:0.6rem;}
+.dlp-q{font-family:var(--h);font-size:1rem;font-weight:700;color:var(--moon);margin-bottom:1.2rem;line-height:1.4;}
+.dlp-tabs{display:flex;gap:0.3rem;margin-bottom:1.2rem;background:var(--plum);border-radius:9px;padding:3px;}
+.dlp-tab{
+  flex:1;padding:0.45rem;font-family:var(--h);font-size:0.72rem;font-weight:600;
+  color:var(--m30);border-radius:7px;cursor:pointer;border:none;background:none;transition:all .15s;
+}
+.dlp-tab.active{background:var(--mid);color:var(--moon);}
+.dlp-content{font-size:0.82rem;color:var(--m80);line-height:1.7;}
+.dlp-step{display:flex;gap:0.7rem;margin-bottom:0.8rem;}
+.dlp-step-n{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  background:var(--cyan);color:var(--plum);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--h);font-size:0.65rem;font-weight:800;margin-top:0.1rem;
+}
+.dlp-rule{border:none;border-top:1px solid var(--m06);margin:1rem 0;}
+.dlp-source{font-size:0.62rem;color:var(--m30);font-style:italic;}
+.dlp-upgrade{
+  margin-top:1rem;padding:1rem;border-radius:10px;
+  background:linear-gradient(135deg,var(--mid),var(--card));
+  border:1px solid var(--c25);
+  font-size:0.78rem;color:var(--m55);line-height:1.65;
+}
+.dlp-upgrade strong{color:var(--moon);}
+.dlp-upgrade a{color:var(--amber);font-weight:600;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="qnav">
+  <a href="index.html" class="qnav-logo">
+    <svg width="24" height="24" viewBox="0 0 64 64" fill="none">
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+      <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+    </svg>
+    curio
+  </a>
+  <div class="qnav-right" id="navRight">
+    <a href="login.html" class="qnav-link">Log in</a>
+    <a href="login.html?tab=signup" class="qnav-btn">Start free →</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════
+     SCREEN 1: TOPIC SELECT
+══════════════════════════════ -->
+<div id="screen-select" class="screen active">
+
+  <!-- Sidebar -->
+  <div class="select-sidebar">
+
+    <div>
+      <div class="sidebar-section-label">Grade</div>
+      <div class="grade-list" id="gradeList">
+        <div class="grade-item active" onclick="selectGrade(4,this)">Grade 4 <span class="grade-item-badge">3</span></div>
+        <div class="grade-item" onclick="selectGrade(5,this)">Grade 5 <span class="grade-item-badge">2</span></div>
+        <div class="grade-item" onclick="selectGrade(6,this)">Grade 6 <span class="grade-item-badge">3</span></div>
+        <div class="grade-item" onclick="selectGrade(7,this)">Grade 7 — <span style="font-size:.65rem;color:var(--m30)">soon</span></div>
+        <div class="grade-item" onclick="selectGrade(8,this)">Grade 8 — <span style="font-size:.65rem;color:var(--m30)">soon</span></div>
+        <div class="grade-item" onclick="selectGrade(9,this)">Grade 9 — <span style="font-size:.65rem;color:var(--m30)">soon</span></div>
+        <div class="grade-item" onclick="selectGrade(10,this)">Grade 10 — <span style="font-size:.65rem;color:var(--m30)">soon</span></div>
+        <div class="grade-item" onclick="selectGrade(11,this)">Grade 11 — <span style="font-size:.65rem;color:var(--m30)">soon</span></div>
+        <div class="grade-item" onclick="selectGrade(12,this)">Grade 12 <span class="grade-item-badge">★</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-section-label">Subject</div>
+      <div class="subject-list">
+        <div class="subject-item active" onclick="selectSubject('english',this)">English HL</div>
+        <div class="subject-item" onclick="selectSubject('maths',this)">Mathematics</div>
+        <div class="subject-item" onclick="selectSubject('science',this)">Natural Sciences</div>
+        <div class="subject-item" onclick="selectSubject('social',this)">Social Sciences</div>
+        <div class="subject-item" onclick="selectSubject('afrikaans',this)">Afrikaans</div>
+        <div class="subject-item" onclick="selectSubject('lifeskills',this)">Life Skills</div>
+        <div class="subject-item" onclick="selectSubject('technology',this)">Technology</div>
+        <div class="subject-item" onclick="selectSubject('arts',this)">Arts &amp; Culture</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Main topic area -->
+  <div class="select-main">
+    <div class="select-header">
+      <div class="select-eyebrow" id="selectEyebrow">Grade 4 · English HL</div>
+      <h1 class="select-h">Choose a topic</h1>
+    </div>
+    <div class="topic-grid" id="topicGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SCREEN 2: QUIZ
+══════════════════════════════ -->
+<div id="screen-quiz" class="screen">
+
+  <!-- Header bar -->
+  <div class="quiz-header">
+    <span class="qh-back" onclick="exitQuiz()">← Topics</span>
+    <span class="qh-topic" id="qhTopicPill">—</span>
+    <div class="qh-prog">
+      <div class="qh-prog-track"><div class="qh-prog-fill" id="qhProgFill" style="width:0%"></div></div>
+      <span class="qh-prog-text" id="qhProgText">Q 1 / 5</span>
+    </div>
+    <div class="qh-score-wrap">Score: <span class="qh-score-val" id="qhScore">0</span></div>
+  </div>
+
+  <!-- Question area -->
+  <div class="quiz-area">
+    <div class="qa-num" id="qaNum">Question 1 of 5</div>
+    <div class="qa-question" id="qaQuestion"></div>
+    <div class="qa-opts" id="qaOptions"></div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="quiz-sidebar">
+    <div>
+      <div class="sidebar-section-label">Progress</div>
+      <div class="qs-dots" id="qsDots"></div>
+    </div>
+
+    <div class="qs-waiting" id="qsWaiting">Pick an answer to see feedback here.</div>
+
+    <div class="qs-result" id="qsResult">
+      <div class="qs-result-badge" id="qsResultBadge"></div>
+      <div class="qs-result-exp" id="qsResultExp"></div>
+    </div>
+
+    <div class="deep-learn-prompt" id="deepLearnPrompt">
+      <div class="dlp-header">✦ Deep Learn</div>
+      <div class="dlp-sub">Get a full breakdown of this concept — method, theory, and practice questions.</div>
+      <button class="dlp-btn" onclick="showDeepLearn()">Explain this →</button>
+    </div>
+
+    <button class="btn-next-q" id="btnNextQ" onclick="nextQuestion()">Next question →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SCREEN 3: RESULTS
+══════════════════════════════ -->
+<div id="screen-results" class="screen">
+  <div class="results-card">
+    <div class="r-bloom">
+      <svg width="52" height="52" viewBox="0 0 64 64" fill="none">
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.8"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.55" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.4" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.4" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.55" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+      </svg>
+    </div>
+    <div class="r-topic" id="rTopic">Grade 4 · Parts of Speech</div>
+    <div class="r-score-big"><span id="rScore">4</span><sub>/<span id="rTotal">5</span></sub></div>
+    <div class="r-pct" id="rPct">80%</div>
+    <div class="r-message" id="rMessage">Well done!</div>
+    <p class="r-sub" id="rSub"></p>
+    <div class="r-stats">
+      <div class="r-stat"><div class="r-stat-val ok" id="rCorrect">4</div><div class="r-stat-label">Correct</div></div>
+      <div class="r-stat"><div class="r-stat-val err" id="rWrong">1</div><div class="r-stat-label">Incorrect</div></div>
+    </div>
+    <div class="r-actions">
+      <button class="r-btn r-btn-primary" onclick="retryQuiz()">Try again →</button>
+      <button class="r-btn r-btn-soft" onclick="exitQuiz()">← Topics</button>
+    </div>
+    <div class="results-premium-nudge" id="rPremiumNudge">
+      <strong>✦ Want to understand what you got wrong?</strong><br/>
+      Upgrade to Curio Premium to unlock Deep Learn — full step-by-step breakdowns for every question you miss.
+      From <strong>R49/month</strong>, 7-day free trial. <a href="index.html#pricing">See pricing →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     DEEP LEARN OVERLAY
+══════════════════════════════ -->
+<div class="dl-overlay" id="dlOverlay" onclick="closeDeepLearn(event)">
+  <div class="dl-panel" id="dlPanel">
+    <div class="dlp-bar">
+      <div class="dlp-bar-title">
+        Deep Learn
+        <span class="dlp-bar-badge">Premium preview</span>
+      </div>
+      <div class="dlp-bar-close" onclick="closeDeepLearnDirect()">✕</div>
+    </div>
+    <div class="dlp-body">
+      <div class="dlp-topic-tag" id="dlTag"></div>
+      <div class="dlp-q" id="dlQ"></div>
+      <div class="dlp-tabs">
+        <button class="dlp-tab active" onclick="dlTab(this,'method')">Method</button>
+        <button class="dlp-tab" onclick="dlTab(this,'concept')">Concept</button>
+        <button class="dlp-tab" onclick="dlTab(this,'practice')">Practice</button>
+      </div>
+      <div class="dlp-content" id="dl-method"></div>
+      <div class="dlp-content" id="dl-concept" style="display:none"></div>
+      <div class="dlp-content" id="dl-practice" style="display:none"></div>
+      <div class="dlp-upgrade">
+        <strong>✦ This is a Premium preview.</strong> Upgrade to Curio Premium to unlock Deep Learn for every question you miss — from <strong>R49/month</strong>. <a href="index.html#pricing">See pricing →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════
+// DATA
+// ════════════════════════
+const TOPICS={
+  4:{
+    english:[
+      {id:'pos',title:'Parts of Speech',meta:'Nouns, verbs, adjectives, adverbs',count:5,premium:false},
+      {id:'punct',title:'Punctuation',meta:'Full stops, commas, question marks',count:5,premium:false},
+      {id:'spelling',title:'Spelling',meta:'Common Grade 4 words',count:5,premium:false},
+      {id:'pos_all',title:'Parts of Speech — Full Set',meta:'All types, mixed difficulty',count:20,premium:true},
+    ],
+    maths:[
+      {id:'fractions',title:'Fractions',meta:'Basic fractions and equivalents',count:5,premium:false},
+      {id:'multiply',title:'Multiplication',meta:'Times tables and word problems',count:5,premium:false},
+      {id:'fractions_adv',title:'Fractions — Advanced',meta:'Adding and comparing fractions',count:20,premium:true},
+    ],
+    science:[
+      {id:'body',title:'The Human Body',meta:'Organs and their functions',count:5,premium:false},
+      {id:'plants',title:'Plants',meta:'Parts of a plant and photosynthesis',count:5,premium:false},
+    ],
+    social:[{id:'saflag',title:'South African History',meta:'Early history and heritage',count:5,premium:false}]
+  },
+  5:{
+    english:[
+      {id:'comprehension',title:'Reading Comprehension',meta:'Passages and questions',count:5,premium:false},
+      {id:'grammar',title:'Grammar Basics',meta:'Tenses and sentence structure',count:5,premium:false},
+    ],
+    maths:[{id:'decimals',title:'Decimals',meta:'Tenths, hundredths, operations',count:5,premium:false}],
+    science:[{id:'energy',title:'Energy & Change',meta:'Forms of energy and examples',count:5,premium:false}],
+    social:[],afrikaans:[],lifeskills:[],technology:[],arts:[]
+  },
+  6:{
+    english:[{id:'adverbs',title:'Adverbs & Adjectives',meta:'Descriptive words in sentences',count:5,premium:false}],
+    maths:[{id:'frac6',title:'Fractions',meta:'Adding and subtracting fractions',count:5,premium:false}],
+    science:[{id:'matter',title:'Matter & Materials',meta:'Properties and classification',count:5,premium:false}],
+    social:[],afrikaans:[],lifeskills:[],technology:[],arts:[]
+  }
+};
+
+const QUESTIONS={
+  pos:[
+    {q:'Which word is the verb in this sentence?\n\n"The dog ran across the yard."',opts:['dog','across','ran','yard'],correct:2,exp:'Correct — "ran" is the verb. A verb shows the action in a sentence.',deepLearn:{tag:'Grade 4 · English · Parts of Speech',q:'What is a verb and how do you find one?',method:`<div class="dlp-step"><div class="dlp-step-n">1</div><div>Ask yourself: <strong>what is happening in the sentence?</strong> The word that answers this is the verb.</div></div><div class="dlp-step"><div class="dlp-step-n">2</div><div>In "The dog ran across the yard" — what did the dog do? <strong>Ran.</strong> That is the verb.</div></div><div class="dlp-step"><div class="dlp-step-n">3</div><div>Other verbs: jump, eat, sleep, think, is, was. They all show <strong>action or a state of being</strong>.</div></div><div class="dlp-rule"></div><div class="dlp-source">CAPS Grade 4 English HL — Parts of Speech</div>`,concept:`A <strong>verb</strong> is one of the most important parts of speech. Every complete sentence must have one.<br/><br/>Verbs can show:<br/>• <strong>Action</strong> — ran, jumped, ate, wrote<br/>• <strong>State of being</strong> — is, was, were, seems<br/><br/>If you can put "I ___" in front of the word and it makes sense, it's probably a verb.<div class="dlp-rule"></div><div class="dlp-source">CAPS Gr.4 English — Grammar and Vocabulary</div>`,practice:`<strong>Find the verb in each sentence:</strong><br/><br/>1. The cat <u>&nbsp;&nbsp;&nbsp;&nbsp;</u> on the warm mat.<br/>2. She <u>&nbsp;&nbsp;&nbsp;&nbsp;</u> her homework every evening.<br/>3. They <u>&nbsp;&nbsp;&nbsp;&nbsp;</u> to the park last Saturday.<br/><br/><em>Answers: 1. slept &nbsp; 2. does &nbsp; 3. walked</em><div class="dlp-rule"></div><div class="dlp-source">Curio question bank · Gr.4 Parts of Speech</div>`}},
+    {q:'What type of word is "beautiful" in this sentence?\n\n"She wore a beautiful dress."',opts:['Verb','Noun','Adverb','Adjective'],correct:3,exp:'"Beautiful" is an adjective — it describes the noun "dress". Adjectives tell us what kind, how many, or which one.',deepLearn:null},
+    {q:'Which sentence uses a noun correctly?\n\nA noun is a person, place, thing, or idea.',opts:['She ran quickly.','The dog barked.','He is very tall.','They always smile.'],correct:1,exp:'"Dog" is a noun — it is a thing. "The dog barked" contains a clear noun as the subject.',deepLearn:null},
+    {q:'Identify the adverb in this sentence:\n\n"He spoke very quietly during the lesson."',opts:['spoke','very','lesson','during'],correct:1,exp:'"Very" is an adverb — it modifies "quietly" and tells us to what degree.',deepLearn:null},
+    {q:'Which of these is a proper noun?',opts:['city','river','Cape Town','mountain'],correct:2,exp:'"Cape Town" is a proper noun — the specific name of a place. Always written with a capital letter.',deepLearn:null}
+  ],
+  punct:[
+    {q:'Which punctuation mark goes at the end of a question?',opts:['Full stop','Exclamation mark','Question mark','Comma'],correct:2,exp:'A question mark (?) goes at the end of every question.',deepLearn:null},
+    {q:'Where does the comma go in this sentence?\n\n"I bought apples oranges and bananas."',opts:['After "bought"','After "apples" and "oranges"','After "and"','No comma needed'],correct:1,exp:'Commas separate items in a list: "I bought apples, oranges, and bananas."',deepLearn:null},
+    {q:'Which sentence uses a full stop correctly?',opts:['Where are you going.','She is at home.','What time is it.','Come here!'],correct:1,exp:'"She is at home." is a statement and ends correctly with a full stop.',deepLearn:null},
+    {q:'When do you use an exclamation mark?',opts:['At the end of every sentence','To show strong feeling or surprise','Before a list','After a person\'s name'],correct:1,exp:'An exclamation mark (!) shows strong emotion, excitement, or surprise.',deepLearn:null},
+    {q:'Which word should have a capital letter?\n\n"my friend lives in johannesburg."',opts:['friend','lives','johannesburg','in'],correct:2,exp:'"Johannesburg" is a proper noun — always starts with a capital letter.',deepLearn:null}
+  ],
+  fractions:[
+    {q:'What is ¾ + ½?',opts:['1','1¼','1½','⁵⁄₆'],correct:1,exp:'Convert ½ to ²⁄₄, then add: ¾ + ²⁄₄ = ⁵⁄₄ = 1¼.',deepLearn:{tag:'Grade 4–6 · Mathematics · Fractions',q:'How do you add fractions with different denominators?',method:`<div class="dlp-step"><div class="dlp-step-n">1</div><div>Check if the denominators are the same. Here: 4 and 2 — they are <strong>different</strong>.</div></div><div class="dlp-step"><div class="dlp-step-n">2</div><div>Find the <strong>Lowest Common Denominator (LCD)</strong>. For 4 and 2, the LCD is <strong>4</strong>.</div></div><div class="dlp-step"><div class="dlp-step-n">3</div><div>Convert ½: multiply top and bottom by 2 → <strong>²⁄₄</strong></div></div><div class="dlp-step"><div class="dlp-step-n">4</div><div>Now add: ¾ + ²⁄₄ = <strong>⁵⁄₄</strong> = <strong>1¼</strong></div></div><div class="dlp-rule"></div><div class="dlp-source">CAPS Grade 6 Mathematics — Common Fractions</div>`,concept:`When adding fractions, <strong>the denominators must match</strong> before you add the numerators. Think of it like pizza slices — you can only add slices of the same size.<div class="dlp-rule"></div><div class="dlp-source">CAPS Gr.4–6 Mathematics — Number Sense</div>`,practice:`<strong>Try these:</strong><br/><br/>1. ½ + ¼ = ?<br/>2. ⅔ + ⅙ = ?<br/>3. ⅘ + ⅗ = ?<br/><br/><em>Answers: 1. ¾ &nbsp; 2. ⅚ &nbsp; 3. 1⅗</em><div class="dlp-rule"></div><div class="dlp-source">Curio question bank · Fractions</div>`}},
+    {q:'Which fraction is equivalent to ²⁄₃?',opts:['³⁄₄','⁴⁄₆','²⁄₄','⁵⁄₆'],correct:1,exp:'⁴⁄₆ = ²⁄₃ because you multiply both numerator and denominator of ²⁄₃ by 2.',deepLearn:null},
+    {q:'What is ⅓ of 12?',opts:['3','4','6','12'],correct:1,exp:'To find ⅓ of 12, divide 12 by 3. 12 ÷ 3 = 4.',deepLearn:null},
+    {q:'Which fraction is the largest?',opts:['½','⅓','¼','⅛'],correct:0,exp:'½ is the largest. The bigger the denominator, the smaller each piece.',deepLearn:null},
+    {q:'Simplify the fraction: ⁶⁄₈',opts:['³⁄₄','²⁄₃','⁴⁄₆','½'],correct:0,exp:'Divide both 6 and 8 by 2: 6÷2=3 and 8÷2=4. So ⁶⁄₈ = ¾.',deepLearn:null}
+  ],
+  body:[
+    {q:'What is the main function of the heart?',opts:['Digest food','Pump blood around the body','Filter waste from blood','Control breathing'],correct:1,exp:'The heart is a muscle that pumps blood continuously, delivering oxygen and nutrients to every cell.',deepLearn:null},
+    {q:'Which organ removes waste from blood and produces urine?',opts:['Liver','Stomach','Kidney','Lungs'],correct:2,exp:'The kidneys filter waste from blood and produce urine.',deepLearn:null},
+    {q:'What do the lungs do?',opts:['Pump blood','Break down food','Exchange oxygen and carbon dioxide','Produce hormones'],correct:2,exp:'The lungs take in oxygen from the air and release carbon dioxide as a waste gas.',deepLearn:null},
+    {q:'Which system includes the brain and spinal cord?',opts:['Digestive system','Nervous system','Circulatory system','Skeletal system'],correct:1,exp:'The brain and spinal cord make up the central nervous system.',deepLearn:null},
+    {q:'What is the function of the skeleton?',opts:['Pumps blood','Digests food','Supports and protects the body','Produces urine'],correct:2,exp:'The skeleton supports the body, protects internal organs, and allows movement.',deepLearn:null}
+  ]
+};
+
+// ════════════════════════
+// STATE
+// ════════════════════════
+let currentGrade=4,currentSubject='english',currentTopicId=null;
+let currentQuestions=[],currentQ=0,score=0,answered=false,results=[];
+let liveTopics={};
+
+// ════════════════════════
+// NAV AUTH
+// ════════════════════════
+function toggleProfileDD(e){e.stopPropagation();document.getElementById('profileDD')?.classList.toggle('open');}
+document.addEventListener('click',()=>document.getElementById('profileDD')?.classList.remove('open'));
+function doLogout(){localStorage.removeItem('curio_session');renderNav(null);}
+function renderNav(session){
+  const nr=document.getElementById('navRight');if(!nr)return;
+  if(session){
+    const u=session.user||{},name=u.user_metadata?.full_name||'',email=u.email||'';
+    const init=name?name[0].toUpperCase():(email?email[0].toUpperCase():'?');
+    nr.innerHTML=`<div class="profile-wrap"><button class="profile-btn" onclick="toggleProfileDD(event)">${init}</button><div class="profile-dropdown" id="profileDD"><div class="profile-dd-head"><div class="profile-dd-name">${name||'My account'}</div><div class="profile-dd-email">${email}</div></div><a href="index.html" class="profile-dd-item">🏠 &nbsp;Home</a><button class="profile-dd-item danger" onclick="doLogout()">Sign out</button></div></div>`;
+  }else{nr.innerHTML=`<a href="login.html" class="qnav-link">Log in</a><a href="login.html?tab=signup" class="qnav-btn">Start free →</a>`;}
+}
+(function(){let s=null;try{const st=localStorage.getItem('curio_session');if(st){const p=JSON.parse(st);if(p?.access_token&&p?.expires_at>Date.now()/1000)s=p;else localStorage.removeItem('curio_session');}}catch(e){localStorage.removeItem('curio_session');}renderNav(s);})();
+
+// ════════════════════════
+// SCREENS
+// ════════════════════════
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active');s.style.display='';});
+  const el=document.getElementById(id);
+  el.classList.add('active');
+  if(id==='screen-quiz')el.style.display='grid';
+  else if(id==='screen-select')el.style.display='grid';
+  else el.style.display='flex';
+}
+
+// ════════════════════════
+// TOPIC SELECT
+// ════════════════════════
+function selectGrade(g,el){
+  currentGrade=g;
+  document.querySelectorAll('.grade-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');renderTopics();
+}
+function selectSubject(s,el){
+  currentSubject=s;
+  document.querySelectorAll('.subject-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');renderTopics();
+}
+function renderTopics(){
+  const subjectNames={english:'English HL',maths:'Mathematics',science:'Natural Sciences',social:'Social Sciences',afrikaans:'Afrikaans',lifeskills:'Life Skills',technology:'Technology',arts:'Arts & Culture'};
+  document.getElementById('selectEyebrow').textContent=`Grade ${currentGrade} · ${subjectNames[currentSubject]||currentSubject}`;
+  const data=liveTopics[currentGrade]?.[currentSubject]||[];
+  const grid=document.getElementById('topicGrid');
+  if(data.length===0){
+    grid.innerHTML=`<div style="grid-column:1/-1;padding:3rem 0;text-align:center;color:var(--m30);font-style:italic;font-size:0.9rem">Content for this grade and subject is coming soon.</div>`;
+    return;
+  }
+  grid.innerHTML=data.map(t=>`
+    <div class="topic-card${t.premium?' premium':''}" onclick="${t.premium?'showPremiumPrompt()':`startQuiz('${t.id}')`}">
+      ${t.premium?'<div class="tc-lock">🔒</div>':''}
+      <div class="tc-tag ${t.premium?'premium':'free'}">${t.premium?'Premium':'Free'}</div>
+      <div class="tc-title">${t.title}</div>
+      <div class="tc-meta">${t.meta}</div>
+      <div class="tc-count">${t.count} question${t.count!==1?'s':''}</div>
+    </div>
+  `).join('');
+}
+function showPremiumPrompt(){alert('✦ Premium feature\n\nUpgrade to Curio Premium to access all topic sets, Deep Learn explanations, and progress tracking.\n\nFrom R49/month — 7-day free trial available.');}
+
+// ════════════════════════
+// QUIZ
+// ════════════════════════
+function buildDots(){
+  document.getElementById('qsDots').innerHTML=currentQuestions.map((_,i)=>`<div class="q-dot" id="dot-${i}"></div>`).join('');
+}
+function renderQuestion(){
+  answered=false;
+  const q=currentQuestions[currentQ],total=currentQuestions.length;
+  document.getElementById('qhProgFill').style.width=`${(currentQ/total)*100}%`;
+  document.getElementById('qhProgText').textContent=`Q ${currentQ+1} / ${total}`;
+  document.getElementById('qhScore').textContent=score;
+  document.getElementById('qaNum').textContent=`Question ${currentQ+1} of ${total}`;
+  document.getElementById('qaQuestion').innerHTML=highlightAsterisks(q.q.replace(/\n/g,'<br/>'));
+  document.querySelectorAll('.q-dot').forEach((d,i)=>{
+    d.className='q-dot';
+    if(i<currentQ)d.classList.add(results[i]?'done-right':'done-wrong');
+    if(i===currentQ)d.classList.add('current');
+  });
+  const optsEl=document.getElementById('qaOptions');optsEl.innerHTML='';
+  ['A','B','C','D'].forEach((l,i)=>{
+    if(i>=q.opts.length)return;
+    const btn=document.createElement('button');btn.className='qa-opt';
+    btn.innerHTML=`<div class="qa-opt-letter">${l}</div>${q.opts[i]}`;
+    btn.onclick=()=>pickAnswer(i,btn);optsEl.appendChild(btn);
+  });
+  document.getElementById('qsWaiting').style.display='block';
+  document.getElementById('qsResult').className='qs-result';
+  document.getElementById('deepLearnPrompt').className='deep-learn-prompt';
+  document.getElementById('btnNextQ').className='btn-next-q';
+}
+function pickAnswer(i,el){
+  if(answered)return;answered=true;
+  const q=currentQuestions[currentQ];
+  document.querySelectorAll('.qa-opt').forEach(o=>o.disabled=true);
+  const isCorrect=i===q.correct;
+  results.push(isCorrect);
+  if(isCorrect){score++;el.classList.add('correct');}
+  else{el.classList.add('wrong');document.querySelectorAll('.qa-opt')[q.correct].classList.add('reveal');}
+  document.getElementById(`dot-${currentQ}`).className=`q-dot ${isCorrect?'done-right':'done-wrong'}`;
+  document.getElementById('qhScore').textContent=score;
+  document.getElementById('qsWaiting').style.display='none';
+  const resultEl=document.getElementById('qsResult');
+  const badge=document.getElementById('qsResultBadge');
+  const exp=document.getElementById('qsResultExp');
+  resultEl.className=`qs-result show ${isCorrect?'ok':'err'}`;
+  badge.className=`qs-result-badge ${isCorrect?'ok':'err'}`;
+  badge.textContent=isCorrect?'✓ Correct':'✗ Incorrect';
+  exp.innerHTML=highlightAsterisks(q.exp);
+  if(!isCorrect&&q.deepLearn)document.getElementById('deepLearnPrompt').className='deep-learn-prompt show';
+  const nextBtn=document.getElementById('btnNextQ');
+  const isLast=currentQ>=currentQuestions.length-1;
+  nextBtn.textContent=isLast?'See results →':'Next question →';
+  nextBtn.className='btn-next-q show';
+}
+function nextQuestion(){
+  currentQ>=currentQuestions.length-1?showResults():(currentQ++,renderQuestion());
+}
+function showResults(){
+  const total=currentQuestions.length,wrong=total-score,pct=Math.round((score/total)*100);
+  document.getElementById('rScore').textContent=score;
+  document.getElementById('rTotal').textContent=total;
+  document.getElementById('rCorrect').textContent=score;
+  document.getElementById('rWrong').textContent=wrong;
+  document.getElementById('rPct').textContent=pct+'%';
+  const topic=findTopic(currentTopicId);
+  document.getElementById('rTopic').textContent=`Grade ${currentGrade} · ${topic?.title||'Quiz'}`;
+  let msg,sub;
+  if(pct===100){msg='Perfect score — outstanding!';sub=`You answered every question correctly. You have mastered this topic.`;}
+  else if(pct>=80){msg='Well done — that\'s a strong result.';sub=`You answered ${score} out of ${total} correctly. Review the ones you missed to get to 100%.`;}
+  else if(pct>=60){msg='Good effort — keep practising.';sub=`You answered ${score} out of ${total} correctly. A few more rounds and you\'ll have this.`;}
+  else{msg='This topic needs more practice.';sub=`You answered ${score} out of ${total} correctly. Read through the explanations and try again.`;}
+  document.getElementById('rMessage').textContent=msg;
+  document.getElementById('rSub').textContent=sub;
+  document.getElementById('rPremiumNudge').className=wrong>0?'results-premium-nudge show':'results-premium-nudge';
+  showScreen('screen-results');
+}
+function retryQuiz(){startQuiz(currentTopicId);}
+function exitQuiz(){showScreen('screen-select');}
+function findTopic(id){for(const g of Object.values(TOPICS)){for(const s of Object.values(g)){const t=s.find(x=>x.id===id);if(t)return t;}}return null;}
+
+// ════════════════════════
+// DEEP LEARN
+// ════════════════════════
+function showDeepLearn(){
+  const q=currentQuestions[currentQ];if(!q.deepLearn)return;
+  const dl=q.deepLearn;
+  document.getElementById('dlTag').textContent=dl.tag;
+  document.getElementById('dlQ').textContent=dl.q;
+  document.getElementById('dl-method').innerHTML=dl.method;
+  document.getElementById('dl-concept').innerHTML=dl.concept;
+  document.getElementById('dl-practice').innerHTML=dl.practice;
+  document.querySelectorAll('.dlp-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.dlp-tab')[0].classList.add('active');
+  document.getElementById('dl-method').style.display='block';
+  document.getElementById('dl-concept').style.display='none';
+  document.getElementById('dl-practice').style.display='none';
+  document.getElementById('dlOverlay').className='dl-overlay show';
+}
+function dlTab(btn,id){
+  document.querySelectorAll('.dlp-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');
+  ['method','concept','practice'].forEach(k=>document.getElementById('dl-'+k).style.display=k===id?'block':'none');
+}
+function closeDeepLearn(e){if(e.target===document.getElementById('dlOverlay'))closeDeepLearnDirect();}
+function closeDeepLearnDirect(){document.getElementById('dlOverlay').className='dl-overlay';}
+
+// ════════════════════════
+// HIGHLIGHT
+// ════════════════════════
+function highlightAsterisks(text){return text.replace(/\*(.*?)\*/g,'<span class="hl">$1</span>');}
+
+// ════════════════════════
+// SUPABASE
+// ════════════════════════
+const SUPABASE_URL='https://inmrsgujgfktapjnekjs.supabase.co';
+const SUPABASE_KEY='sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
+async function sbGet(path){
+  const res=await fetch(`${SUPABASE_URL}/rest/v1/${path}`,{headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}});
+  if(!res.ok)throw new Error(await res.text());return res.json();
+}
+
+async function startQuiz(topicId){
+  currentTopicId=topicId;currentQ=0;score=0;answered=false;results=[];
+  const topicObj=(liveTopics[currentGrade]?.[currentSubject]||[]).find(t=>t.id===topicId);
+  document.getElementById('qhTopicPill').textContent=topicObj?.title||topicId;
+  document.getElementById('qhProgFill').style.width='0%';
+  document.getElementById('qhProgText').textContent='Loading…';
+  document.getElementById('qhScore').textContent='0';
+  document.getElementById('qaNum').textContent='';
+  document.getElementById('qaQuestion').innerHTML='<span style="color:var(--m30);font-style:italic;font-size:0.9rem">Fetching questions…</span>';
+  document.getElementById('qaOptions').innerHTML='';
+  document.getElementById('qsDots').innerHTML='';
+  document.getElementById('qsWaiting').style.display='block';
+  document.getElementById('qsResult').className='qs-result';
+  document.getElementById('btnNextQ').className='btn-next-q';
+  showScreen('screen-quiz');
+  try{
+    const rows=await sbGet(`questions?grade=eq.${currentGrade}&subject=eq.${currentSubject}&topic=eq.${topicId}&order=id.asc`);
+    if(rows&&rows.length>0){
+      currentQuestions=rows.map(row=>({q:row.question_text,opts:[row.option_a,row.option_b,row.option_c,row.option_d].filter(Boolean),correct:['a','b','c','d'].indexOf(row.correct_option),exp:row.explanation,deepLearn:null}));
+    }else{
+      const qs=QUESTIONS[topicId];
+      if(!qs||qs.length===0){showScreen('screen-select');alert('Questions for this topic are being added — check back soon!');return;}
+      currentQuestions=[...qs];
+    }
+    buildDots();renderQuestion();
+  }catch(e){
+    console.error('Error loading questions:',e);
+    const qs=QUESTIONS[topicId];
+    if(qs&&qs.length>0){currentQuestions=[...qs];buildDots();renderQuestion();}
+    else{showScreen('screen-select');alert('Could not load questions. Please try again.');}
+  }
+}
+
+async function loadLiveTopics(){
+  try{
+    const rows=await sbGet('questions?select=grade,subject,topic,is_premium&order=grade.asc,subject.asc,topic.asc');
+    if(!rows||rows.length===0)return;
+    const grouped={};
+    for(const row of rows){
+      const g=row.grade,s=row.subject,t=row.topic;
+      if(!grouped[g])grouped[g]={};if(!grouped[g][s])grouped[g][s]={};
+      if(!grouped[g][s][t])grouped[g][s][t]={count:0,premium:row.is_premium};
+      grouped[g][s][t].count++;
+    }
+    for(const[grade,subjects]of Object.entries(grouped)){
+      const g=parseInt(grade);if(!liveTopics[g])liveTopics[g]={};
+      for(const[subject,topics]of Object.entries(subjects)){
+        if(!liveTopics[g][subject])liveTopics[g][subject]=[];
+        for(const[topicId,info]of Object.entries(topics)){
+          const existing=liveTopics[g][subject].find(t=>t.id===topicId);
+          if(!existing){liveTopics[g][subject].push({id:topicId,title:topicId.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase()),meta:`${info.count} question${info.count!==1?'s':''} available`,count:info.count,premium:info.premium,fromDB:true});}
+          else{existing.count=info.count;existing.fromDB=true;}
+        }
+      }
+    }
+    for(const[g,subjects]of Object.entries(TOPICS)){
+      const grade=parseInt(g);if(!liveTopics[grade])liveTopics[grade]={};
+      for(const[subject,topics]of Object.entries(subjects)){
+        if(!liveTopics[grade][subject])liveTopics[grade][subject]=[];
+        for(const t of topics){if(!liveTopics[grade][subject].find(x=>x.id===t.id))liveTopics[grade][subject].push(t);}
+      }
+    }
+    renderTopics();
+  }catch(e){
+    console.warn('Could not load live topics, using demo data:',e);
+    for(const[g,subjects]of Object.entries(TOPICS))liveTopics[parseInt(g)]=subjects;
+    renderTopics();
+  }
+}
+
+// INIT
+for(const[g,subjects]of Object.entries(TOPICS))liveTopics[parseInt(g)]=subjects;
+renderTopics();
+loadLiveTopics();
+</script>
+</body>
+</html>

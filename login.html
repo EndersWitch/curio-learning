@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Curio — Sign in</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Caveat:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;
+  --cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;
+  --m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);
+  --m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);
+  --c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--c06:rgba(109,211,206,0.06);
+  --r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);
+  --h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;--script:'Caveat',cursive;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{height:100%;}
+body{font-family:var(--b);background:var(--deep);color:var(--moon);min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
+a{text-decoration:none;color:inherit;}
+button{font-family:var(--b);cursor:pointer;border:none;background:none;}
+@media(max-width:720px){body{grid-template-columns:1fr;}.brand-panel{display:none;}}
+
+/* ═══ LEFT — brand panel ═══ */
+.brand-panel{
+  background:var(--plum);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:3rem;min-height:100vh;position:relative;overflow:hidden;
+}
+.brand-panel::before{
+  content:'';position:absolute;
+  width:500px;height:500px;border-radius:50%;
+  background:rgba(109,211,206,0.04);
+  top:-120px;right:-160px;
+}
+.brand-panel::after{
+  content:'';position:absolute;
+  width:300px;height:300px;border-radius:50%;
+  background:rgba(255,94,91,0.04);
+  bottom:-80px;left:-80px;
+}
+.bp-top{position:relative;z-index:1;}
+.bp-logo{display:flex;align-items:center;gap:0.6rem;font-family:var(--h);font-size:1.1rem;font-weight:800;color:var(--moon);margin-bottom:0;}
+.bp-mid{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center;padding:3rem 0 2rem;}
+.bp-tagline{
+  font-family:var(--h);font-size:clamp(2rem,3vw,2.8rem);
+  font-weight:800;letter-spacing:-1.5px;line-height:1.05;
+  color:var(--moon);margin-bottom:1.2rem;
+}
+.bp-tagline .cy{color:var(--cyan);}
+.bp-tagline .co{color:var(--coral);}
+.bp-sub{font-size:0.88rem;font-weight:300;color:var(--m55);line-height:1.8;max-width:340px;margin-bottom:2rem;}
+.bp-features{list-style:none;display:flex;flex-direction:column;gap:0.7rem;}
+.bp-feature{display:flex;align-items:center;gap:0.7rem;font-size:0.82rem;color:var(--m55);}
+.bp-chk{
+  width:18px;height:18px;border-radius:5px;flex-shrink:0;
+  background:var(--c12);border:1px solid var(--c25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.6rem;color:var(--cyan);
+}
+.bp-script{
+  font-family:var(--script);font-size:1.1rem;color:var(--amber);
+  opacity:0.7;transform:rotate(-2deg);display:inline-block;margin-top:1.5rem;
+}
+.bp-bloom{position:absolute;bottom:2.5rem;right:2.5rem;opacity:0.06;z-index:0;}
+.bp-bottom{position:relative;z-index:1;}
+.bp-note{font-size:0.68rem;color:var(--m30);line-height:1.6;}
+
+/* ═══ RIGHT — form panel ═══ */
+.form-panel{
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:3rem 2rem;min-height:100vh;
+  background:var(--deep);border-left:1px solid var(--m06);
+}
+.form-inner{width:100%;max-width:400px;}
+
+.form-back{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-size:0.75rem;color:var(--m30);margin-bottom:2.5rem;
+  transition:color .15s;
+}
+.form-back:hover{color:var(--moon);}
+
+.form-header{margin-bottom:2rem;}
+.form-eyebrow{
+  font-size:0.6rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.16em;color:var(--cyan);margin-bottom:0.5rem;
+}
+.form-title{
+  font-family:var(--h);font-size:1.9rem;font-weight:800;
+  letter-spacing:-1px;line-height:1.05;color:var(--moon);margin-bottom:0.3rem;
+}
+.form-title em{font-style:normal;color:var(--cyan);}
+.form-title .cr{color:var(--coral);}
+.form-sub{font-size:0.82rem;color:var(--m30);font-weight:300;line-height:1.6;}
+
+/* Tab switcher */
+.tab-row{
+  display:flex;background:var(--plum);border:1px solid var(--m12);
+  border-radius:10px;overflow:hidden;margin-bottom:1.8rem;padding:4px;gap:4px;
+}
+.tab-btn{
+  flex:1;padding:0.6rem;font-family:var(--h);font-size:0.8rem;font-weight:600;
+  border:none;background:none;cursor:pointer;color:var(--m30);
+  border-radius:7px;transition:all .15s;
+}
+.tab-btn.active{background:var(--mid);color:var(--moon);}
+
+/* Alert */
+.alert{
+  padding:0.75rem 1rem;border-radius:8px;font-size:0.8rem;line-height:1.5;
+  margin-bottom:1.2rem;display:none;
+}
+.alert.show{display:block;}
+.alert.err{background:var(--r10);color:#ff9a98;border:1px solid var(--r20);}
+.alert.ok{background:var(--c12);color:var(--cyan);border:1px solid var(--c25);}
+
+/* Fields */
+.field{margin-bottom:1rem;}
+.field-label{
+  font-size:0.65rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.1em;color:var(--m30);margin-bottom:0.35rem;display:block;
+}
+.field-input{
+  width:100%;padding:0.75rem 1rem;
+  background:var(--plum);border:1.5px solid var(--m12);border-radius:9px;
+  font-family:var(--b);font-size:0.88rem;color:var(--moon);
+  transition:border-color .15s;-webkit-appearance:none;
+}
+.field-input:focus{outline:none;border-color:var(--cyan);}
+.field-input.error{border-color:var(--coral);background:rgba(255,94,91,0.06);}
+.field-input::placeholder{color:var(--m30);}
+select.field-input{cursor:pointer;}
+.field-hint{font-size:0.68rem;color:var(--m30);margin-top:0.3rem;font-weight:300;}
+
+/* Password strength */
+.pw-strength{margin-top:0.4rem;display:none;}
+.pw-strength.show{display:block;}
+.pw-bar-track{height:3px;background:var(--m06);border-radius:2px;overflow:hidden;margin-bottom:0.25rem;}
+.pw-bar-fill{height:100%;border-radius:2px;transition:width .3s,background .3s;width:0%;}
+.pw-label{font-size:0.62rem;font-weight:600;}
+
+/* Submit */
+.btn-submit{
+  width:100%;padding:0.85rem;
+  background:var(--coral);color:var(--moon);
+  font-family:var(--h);font-size:0.9rem;font-weight:700;
+  border:none;border-radius:10px;cursor:pointer;
+  transition:all .15s;margin-top:0.4rem;letter-spacing:0.01em;
+}
+.btn-submit:hover{background:#ff4a47;transform:translateY(-1px);}
+.btn-submit:active{transform:scale(0.99);}
+.btn-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+/* Switch link */
+.switch-link{
+  font-size:0.78rem;color:var(--m30);text-align:center;margin-top:1.2rem;
+}
+.switch-link a{color:var(--cyan);font-weight:500;}
+.switch-link a:hover{text-decoration:underline;}
+
+/* Forgot link */
+.forgot-link{
+  font-size:0.72rem;color:var(--m30);text-align:right;
+  display:block;margin-top:0.2rem;margin-bottom:0.3rem;transition:color .15s;
+}
+.forgot-link:hover{color:var(--moon);}
+
+/* Success screen */
+.success-screen{display:none;text-align:center;padding:1rem 0;}
+.success-screen.show{display:block;}
+.success-icon{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--c12);border:1.5px solid var(--c25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin:0 auto 1.2rem;color:var(--cyan);
+}
+.success-title{font-family:var(--h);font-size:1.6rem;font-weight:800;letter-spacing:-0.5px;color:var(--moon);margin-bottom:0.5rem;}
+.success-sub{font-size:0.85rem;color:var(--m55);line-height:1.7;margin-bottom:1.5rem;}
+.btn-go{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:var(--coral);color:var(--moon);
+  padding:0.8rem 1.8rem;border-radius:10px;
+  font-family:var(--h);font-size:0.88rem;font-weight:700;
+  transition:all .15s;
+}
+.btn-go:hover{background:#ff4a47;}
+</style>
+</head>
+<body>
+
+<!-- ═══ LEFT: BRAND ═══ -->
+<div class="brand-panel">
+  <div class="bp-top">
+    <a href="index.html" class="bp-logo">
+      <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+      </svg>
+      curio
+    </a>
+  </div>
+
+  <div class="bp-mid">
+    <h2 class="bp-tagline">
+      Your<br/>study<br/><span class="cy">friend</span><br/>is waiting.
+    </h2>
+    <p class="bp-sub">Exam papers, AI-powered quizzes and deep explanations — all in one place. Free to start, always.</p>
+    <ul class="bp-features">
+      <li class="bp-feature"><span class="bp-chk">✓</span>Exam papers &amp; memos — free forever</li>
+      <li class="bp-feature"><span class="bp-chk">✓</span>AI-powered topic quizzes</li>
+      <li class="bp-feature"><span class="bp-chk">✓</span>Deep Learn explanations</li>
+      <li class="bp-feature"><span class="bp-chk">✓</span>Grade R to 12, every subject</li>
+    </ul>
+    <span class="bp-script">let's do this 🌱</span>
+  </div>
+
+  <div class="bp-bottom">
+    <p class="bp-note">© 2025 Curio Learning · Built for SA students</p>
+  </div>
+
+  <!-- Decorative bloom -->
+  <svg class="bp-bloom" width="380" height="380" viewBox="0 0 64 64" fill="none">
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+    <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+  </svg>
+</div>
+
+<!-- ═══ RIGHT: FORM ═══ -->
+<div class="form-panel">
+  <div class="form-inner">
+
+    <a href="index.html" class="form-back">← Back to home</a>
+
+    <div class="form-header">
+      <div class="form-eyebrow" id="formEyebrow">Welcome back</div>
+      <h1 class="form-title" id="formTitle">Sign <em>in</em> to Curio</h1>
+      <p class="form-sub" id="formSub">Access your papers, quizzes and progress.</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tab-row">
+      <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">Sign in</button>
+      <button class="tab-btn" id="tabSignup" onclick="switchTab('signup')">Create account</button>
+    </div>
+
+    <!-- Alert -->
+    <div class="alert" id="alertBox"></div>
+
+    <!-- ── LOGIN FORM ── -->
+    <div id="loginForm">
+      <div class="field">
+        <label class="field-label">Email address</label>
+        <input class="field-input" type="email" id="loginEmail" placeholder="you@email.com" onkeydown="if(event.key==='Enter')doLogin()"/>
+      </div>
+      <div class="field">
+        <label class="field-label">Password</label>
+        <input class="field-input" type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+        <a href="#" class="forgot-link" onclick="showForgot(event)">Forgot password?</a>
+      </div>
+      <button class="btn-submit" id="loginBtn" onclick="doLogin()">Sign in →</button>
+      <div class="switch-link">
+        No account yet? <a href="#" onclick="switchTab('signup');return false">Create one free</a>
+      </div>
+    </div>
+
+    <!-- ── SIGNUP FORM ── -->
+    <div id="signupForm" style="display:none">
+      <div class="field">
+        <label class="field-label">Your name</label>
+        <input class="field-input" type="text" id="signupName" placeholder="First name is fine"/>
+      </div>
+      <div class="field">
+        <label class="field-label">Email address</label>
+        <input class="field-input" type="email" id="signupEmail" placeholder="you@email.com"/>
+      </div>
+      <div class="field">
+        <label class="field-label">Password</label>
+        <input class="field-input" type="password" id="signupPassword" placeholder="At least 6 characters" oninput="checkPwStrength(this.value)"/>
+        <div class="pw-strength" id="pwStrength">
+          <div class="pw-bar-track"><div class="pw-bar-fill" id="pwBar"></div></div>
+          <span class="pw-label" id="pwLabel"></span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Your grade</label>
+        <select class="field-input" id="signupGrade">
+          <option value="">Select grade (optional)</option>
+          <option value="R">Grade R</option>
+          <option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option>
+          <option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option>
+          <option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option>
+          <option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12 (Matric)</option>
+        </select>
+        <div class="field-hint">Helps us show you the most relevant content</div>
+      </div>
+      <button class="btn-submit" id="signupBtn" onclick="doSignup()">Create free account →</button>
+      <div class="switch-link">
+        Already have an account? <a href="#" onclick="switchTab('login');return false">Sign in</a>
+      </div>
+    </div>
+
+    <!-- ── FORGOT PASSWORD ── -->
+    <div id="forgotForm" style="display:none">
+      <div class="field">
+        <label class="field-label">Email address</label>
+        <input class="field-input" type="email" id="forgotEmail" placeholder="you@email.com"/>
+      </div>
+      <button class="btn-submit" onclick="doForgot()">Send reset link →</button>
+      <div class="switch-link">
+        <a href="#" onclick="switchTab('login');return false">← Back to sign in</a>
+      </div>
+    </div>
+
+    <!-- ── SUCCESS ── -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✓</div>
+      <div class="success-title" id="successTitle">You're in!</div>
+      <p class="success-sub" id="successSub">Your account is ready. Start practising.</p>
+      <a href="index.html" class="btn-go">Go to home →</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL='https://inmrsgujgfktapjnekjs.supabase.co';
+const SUPABASE_KEY='sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
+
+async function sbAuth(endpoint,body){
+  const res=await fetch(`${SUPABASE_URL}/auth/v1/${endpoint}`,{
+    method:'POST',
+    headers:{'apikey':SUPABASE_KEY,'Content-Type':'application/json'},
+    body:JSON.stringify(body)
+  });
+  const data=await res.json();
+  if(!res.ok)throw new Error(data.error_description||data.msg||data.message||'Something went wrong');
+  return data;
+}
+
+let currentTab='login';
+
+function switchTab(tab){
+  currentTab=tab;clearAlert();
+  document.getElementById('loginForm').style.display=tab==='login'?'block':'none';
+  document.getElementById('signupForm').style.display=tab==='signup'?'block':'none';
+  document.getElementById('forgotForm').style.display=tab==='forgot'?'block':'none';
+  document.getElementById('successScreen').classList.remove('show');
+  document.getElementById('tabLogin').classList.toggle('active',tab==='login'||tab==='forgot');
+  document.getElementById('tabSignup').classList.toggle('active',tab==='signup');
+  if(tab==='login'||tab==='forgot'){
+    document.getElementById('formEyebrow').textContent='Welcome back';
+    document.getElementById('formTitle').innerHTML='Sign <em>in</em> to Curio';
+    document.getElementById('formSub').textContent='Access your papers, quizzes and progress.';
+  }else{
+    document.getElementById('formEyebrow').textContent='Get started free';
+    document.getElementById('formTitle').innerHTML='Create your <em>account</em>';
+    document.getElementById('formSub').textContent='Free to browse. No credit card needed.';
+  }
+}
+
+function showForgot(e){
+  e.preventDefault();
+  document.getElementById('loginForm').style.display='none';
+  document.getElementById('forgotForm').style.display='block';
+  document.getElementById('formEyebrow').textContent='Reset password';
+  document.getElementById('formTitle').innerHTML='Forgot your <span class="cr">password?</span>';
+  document.getElementById('formSub').textContent="We'll send a reset link to your email.";
+  currentTab='forgot';clearAlert();
+}
+
+function showAlert(msg,type='err'){
+  const el=document.getElementById('alertBox');
+  el.textContent=msg;el.className=`alert ${type} show`;
+}
+function clearAlert(){document.getElementById('alertBox').className='alert';}
+
+function checkPwStrength(pw){
+  const el=document.getElementById('pwStrength');
+  const bar=document.getElementById('pwBar');
+  const lbl=document.getElementById('pwLabel');
+  el.classList.toggle('show',pw.length>0);
+  if(!pw)return;
+  let score=0;
+  if(pw.length>=6)score++;if(pw.length>=10)score++;
+  if(/[A-Z]/.test(pw))score++;if(/[0-9]/.test(pw))score++;if(/[^a-zA-Z0-9]/.test(pw))score++;
+  const levels=[
+    {w:'20%',bg:'var(--coral)',t:'Too short'},
+    {w:'40%',bg:'#c47c1a',t:'Weak'},
+    {w:'60%',bg:'#c47c1a',t:'Fair'},
+    {w:'80%',bg:'var(--cyan)',t:'Good'},
+    {w:'100%',bg:'#2a8a4a',t:'Strong'},
+  ];
+  const l=levels[Math.max(0,score-1)];
+  bar.style.width=l.w;bar.style.background=l.bg;
+  lbl.textContent=l.t;lbl.style.color=l.bg;
+}
+
+function setLoading(btnId,loading,defaultText){
+  const btn=document.getElementById(btnId);
+  btn.disabled=loading;btn.textContent=loading?'Please wait…':defaultText;
+}
+
+async function doLogin(){
+  clearAlert();
+  const email=document.getElementById('loginEmail').value.trim();
+  const password=document.getElementById('loginPassword').value;
+  if(!email||!password){showAlert('Please fill in your email and password.');return;}
+  setLoading('loginBtn',true,'Sign in →');
+  try{
+    const data=await sbAuth('token?grant_type=password',{email,password});
+    localStorage.setItem('curio_session',JSON.stringify({
+      access_token:data.access_token,refresh_token:data.refresh_token,
+      expires_at:Math.floor(Date.now()/1000)+data.expires_in,user:data.user
+    }));
+    window.location.href='index.html';
+  }catch(e){
+    showAlert(friendlyError(e.message));
+    setLoading('loginBtn',false,'Sign in →');
+  }
+}
+
+async function doSignup(){
+  clearAlert();
+  const name=document.getElementById('signupName').value.trim();
+  const email=document.getElementById('signupEmail').value.trim();
+  const pw=document.getElementById('signupPassword').value;
+  const grade=document.getElementById('signupGrade').value;
+  if(!email||!pw){showAlert('Please fill in your email and password.');return;}
+  if(pw.length<6){showAlert('Password must be at least 6 characters.');return;}
+  setLoading('signupBtn',true,'Create free account →');
+  try{
+    await sbAuth('signup',{email,password:pw,data:{full_name:name,grade}});
+    document.getElementById('signupForm').style.display='none';
+    document.getElementById('successTitle').textContent=`Welcome${name?', '+name.split(' ')[0]:''}!`;
+    document.getElementById('successSub').textContent="Check your email to confirm your account, then you're ready to go.";
+    document.getElementById('successScreen').classList.add('show');
+    document.getElementById('formEyebrow').textContent='Account created';
+    document.getElementById('formTitle').innerHTML="You're <em>all set</em>";
+    document.getElementById('formSub').textContent='';
+  }catch(e){
+    showAlert(friendlyError(e.message));
+    setLoading('signupBtn',false,'Create free account →');
+  }
+}
+
+async function doForgot(){
+  clearAlert();
+  const email=document.getElementById('forgotEmail').value.trim();
+  if(!email){showAlert('Please enter your email address.');return;}
+  try{
+    await sbAuth('recover',{email});
+    showAlert('Reset link sent! Check your inbox.','ok');
+  }catch(e){showAlert(friendlyError(e.message));}
+}
+
+function friendlyError(msg){
+  if(!msg)return'Something went wrong. Please try again.';
+  const m=msg.toLowerCase();
+  if(m.includes('invalid login')||m.includes('invalid credentials')||m.includes('wrong'))return'Incorrect email or password. Please try again.';
+  if(m.includes('already registered')||m.includes('already exists'))return'An account with this email already exists. Try signing in instead.';
+  if(m.includes('email'))return'Please enter a valid email address.';
+  if(m.includes('password'))return'Password must be at least 6 characters.';
+  if(m.includes('rate limit')||m.includes('too many'))return'Too many attempts. Please wait a moment and try again.';
+  return msg;
+}
+
+try{
+  const stored=localStorage.getItem('curio_session');
+  if(stored){
+    const session=JSON.parse(stored);
+    if(session?.access_token&&session?.expires_at>Date.now()/1000)window.location.href='index.html';
+  }
+}catch(e){localStorage.removeItem('curio_session');}
+
+if(new URLSearchParams(window.location.search).get('tab')==='signup')switchTab('signup');
+</script>
+</body>
+</html>
