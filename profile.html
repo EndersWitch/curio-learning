@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Curio — Edit Profile</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;--cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;--m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);--m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);--h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--b);background:var(--deep);color:var(--moon);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{font-family:var(--b);cursor:pointer;border:none;background:none;}
+nav{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(26,18,40,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--m06);position:sticky;top:0;z-index:100;}
+.nav-logo{display:flex;align-items:center;gap:0.6rem;font-family:var(--h);font-size:1.2rem;font-weight:800;color:var(--moon);}
+.nav-back{font-size:0.8rem;color:var(--m30);transition:color .15s;}
+.nav-back:hover{color:var(--moon);}
+.page-wrap{max-width:620px;margin:0 auto;padding:3.5rem 2rem;}
+.page-eyebrow{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--cyan);margin-bottom:0.4rem;}
+.page-title{font-family:var(--h);font-size:1.9rem;font-weight:800;letter-spacing:-1px;color:var(--moon);margin-bottom:0.3rem;}
+.page-sub{font-size:0.85rem;color:var(--m55);margin-bottom:2.5rem;}
+/* Avatar */
+.avatar-row{display:flex;align-items:center;gap:1.2rem;margin-bottom:2.5rem;padding:1.4rem;background:var(--card);border:1px solid var(--m06);border-radius:14px;}
+.avatar-circle{width:56px;height:56px;border-radius:50%;background:var(--mid);border:2px solid var(--c25);display:flex;align-items:center;justify-content:center;font-family:var(--h);font-size:1.3rem;font-weight:800;color:var(--cyan);flex-shrink:0;}
+.avatar-name{font-family:var(--h);font-size:1rem;font-weight:700;color:var(--moon);}
+.avatar-email{font-size:0.72rem;color:var(--m30);margin-top:0.15rem;}
+/* Section */
+.section-card{background:var(--card);border:1px solid var(--m06);border-radius:16px;overflow:hidden;margin-bottom:1.4rem;}
+.section-head{padding:1rem 1.5rem;border-bottom:1px solid var(--m06);font-family:var(--h);font-size:0.78rem;font-weight:700;color:var(--m55);text-transform:uppercase;letter-spacing:0.1em;}
+.section-body{padding:1.5rem;}
+.field{margin-bottom:1rem;}
+.field-label{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.35rem;display:block;}
+.field-input,.field-select{width:100%;padding:0.72rem 1rem;background:var(--plum);border:1.5px solid var(--m12);border-radius:9px;font-family:var(--b);font-size:0.88rem;color:var(--moon);transition:border-color .15s;-webkit-appearance:none;}
+.field-input:focus,.field-select:focus{outline:none;border-color:var(--cyan);}
+.field-input::placeholder{color:var(--m30);}
+.field-input:disabled{opacity:0.5;cursor:not-allowed;}
+.field-hint{font-size:0.68rem;color:var(--m30);margin-top:0.3rem;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;}
+/* Buttons */
+.btn-primary{display:inline-flex;align-items:center;gap:0.4rem;background:var(--coral);color:var(--moon);padding:0.72rem 1.4rem;border-radius:9px;font-family:var(--h);font-size:0.82rem;font-weight:700;border:none;cursor:pointer;transition:all .15s;}
+.btn-primary:hover{background:#ff4a47;}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;}
+.btn-soft{display:inline-flex;align-items:center;gap:0.4rem;background:var(--m06);color:var(--m55);padding:0.7rem 1.3rem;border-radius:9px;font-family:var(--h);font-size:0.8rem;font-weight:600;border:1px solid var(--m12);cursor:pointer;transition:all .15s;}
+.btn-soft:hover{background:var(--m12);color:var(--moon);}
+.btn-danger{display:inline-flex;align-items:center;gap:0.4rem;background:var(--r10);color:var(--coral);padding:0.7rem 1.3rem;border-radius:9px;font-family:var(--h);font-size:0.8rem;font-weight:600;border:1px solid var(--r20);cursor:pointer;transition:all .15s;}
+.btn-danger:hover{background:var(--r20);}
+.btn-row{display:flex;gap:0.7rem;flex-wrap:wrap;margin-top:0.5rem;}
+/* Alert */
+.alert{padding:0.75rem 1rem;border-radius:8px;font-size:0.8rem;line-height:1.5;margin-bottom:1rem;display:none;}
+.alert.show{display:block;}
+.alert.err{background:var(--r10);color:#ff9a98;border:1px solid var(--r20);}
+.alert.ok{background:var(--c12);color:var(--cyan);border:1px solid var(--c25);}
+/* PW strength */
+.pw-track{height:3px;background:var(--m06);border-radius:2px;overflow:hidden;margin:0.4rem 0 0.2rem;}
+.pw-fill{height:100%;border-radius:2px;transition:width .3s,background .3s;width:0;}
+.pw-label{font-size:0.62rem;font-weight:600;}
+/* Danger zone */
+.section-card.danger{border-color:var(--r20);}
+.section-card.danger .section-head{color:var(--coral);border-color:var(--r20);}
+footer{margin-top:3rem;padding:1.5rem;border-top:1px solid var(--m06);text-align:center;font-size:0.72rem;color:var(--m30);}
+footer a{color:var(--m30);margin:0 0.6rem;}
+footer a:hover{color:var(--moon);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="24" height="24" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/><circle cx="32" cy="32" r="7" fill="#FF5E5B"/></svg>
+    curio
+  </a>
+  <a href="index.html" class="nav-back">← Back to home</a>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-eyebrow">Account</div>
+  <h1 class="page-title">Edit Profile</h1>
+  <p class="page-sub">Update your personal details, grade, email and password.</p>
+
+  <!-- Avatar row -->
+  <div class="avatar-row">
+    <div class="avatar-circle" id="avatarInitial">?</div>
+    <div>
+      <div class="avatar-name" id="avatarName">Loading…</div>
+      <div class="avatar-email" id="avatarEmail"></div>
+    </div>
+  </div>
+
+  <!-- PERSONAL DETAILS -->
+  <div class="section-card">
+    <div class="section-head">Personal details</div>
+    <div class="section-body">
+      <div class="alert" id="detailsAlert"></div>
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label">Full name</label>
+          <input class="field-input" type="text" id="fieldName" placeholder="Your name"/>
+        </div>
+        <div class="field">
+          <label class="field-label">Grade</label>
+          <select class="field-select" id="fieldGrade">
+            <option value="">Select grade</option>
+            <option value="R">Grade R</option>
+            <option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option>
+            <option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option>
+            <option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option>
+            <option value="10">Grade 10</option><option value="11">Grade 11</option>
+            <option value="12">Grade 12 (Matric)</option>
+          </select>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" id="btnSaveDetails" onclick="saveDetails()">Save changes →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL -->
+  <div class="section-card">
+    <div class="section-head">Email address</div>
+    <div class="section-body">
+      <div class="alert" id="emailAlert"></div>
+      <div class="field">
+        <label class="field-label">New email address</label>
+        <input class="field-input" type="email" id="fieldEmail" placeholder="you@email.com"/>
+        <div class="field-hint">A confirmation link will be sent to your new email address.</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" id="btnSaveEmail" onclick="saveEmail()">Update email →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASSWORD -->
+  <div class="section-card">
+    <div class="section-head">Change password</div>
+    <div class="section-body">
+      <div class="alert" id="pwAlert"></div>
+      <div class="field">
+        <label class="field-label">New password</label>
+        <input class="field-input" type="password" id="fieldPw" placeholder="At least 6 characters" oninput="checkPw(this.value)"/>
+        <div class="pw-track"><div class="pw-fill" id="pwFill"></div></div>
+        <span class="pw-label" id="pwLabel"></span>
+      </div>
+      <div class="field">
+        <label class="field-label">Confirm new password</label>
+        <input class="field-input" type="password" id="fieldPwConfirm" placeholder="Repeat password"/>
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" id="btnSavePw" onclick="savePassword()">Update password →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DANGER ZONE -->
+  <div class="section-card danger">
+    <div class="section-head">Danger zone</div>
+    <div class="section-body">
+      <p style="font-size:0.82rem;color:var(--m55);margin-bottom:1rem;">Deleting your account is permanent and cannot be undone. All your data will be removed within 30 days.</p>
+      <button class="btn-danger" onclick="confirmDelete()">Delete my account</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="privacy.html">Privacy</a>
+  <a href="terms.html">Terms</a>
+  <a href="contact.html">Contact</a>
+</footer>
+
+<script>
+const SB_URL='https://inmrsgujgfktapjnekjs.supabase.co';
+const SB_KEY='sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
+
+function getSession(){
+  try{const s=localStorage.getItem('curio_session');if(s){const p=JSON.parse(s);if(p?.access_token&&p?.expires_at>Date.now()/1000)return p;}}catch(e){}
+  return null;
+}
+
+const session=getSession();
+if(!session){window.location.href='login.html';}
+
+// Populate fields from session
+const user=session?.user||{}, meta=user.user_metadata||{};
+const name=meta.full_name||'', email=user.email||'', grade=meta.grade||'';
+const init=name?name[0].toUpperCase():(email?email[0].toUpperCase():'?');
+document.getElementById('avatarInitial').textContent=init;
+document.getElementById('avatarName').textContent=name||'My account';
+document.getElementById('avatarEmail').textContent=email;
+document.getElementById('fieldName').value=name;
+document.getElementById('fieldEmail').value=email;
+if(grade)document.getElementById('fieldGrade').value=grade;
+
+async function sbUpdate(body){
+  const r=await fetch(`${SB_URL}/auth/v1/user`,{method:'PUT',headers:{'apikey':SB_KEY,'Authorization':`Bearer ${session.access_token}`,'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const d=await r.json();if(!r.ok)throw new Error(d.msg||d.message||'Error');return d;
+}
+
+function showAlert(id,msg,type){
+  const el=document.getElementById(id);
+  el.textContent=msg;el.className=`alert ${type} show`;
+  setTimeout(()=>el.className='alert',4000);
+}
+
+async function saveDetails(){
+  const n=document.getElementById('fieldName').value.trim();
+  const g=document.getElementById('fieldGrade').value;
+  const btn=document.getElementById('btnSaveDetails');
+  btn.disabled=true;btn.textContent='Saving…';
+  try{
+    const d=await sbUpdate({data:{full_name:n,grade:g}});
+    // Update session
+    session.user.user_metadata={...meta,full_name:n,grade:g};
+    localStorage.setItem('curio_session',JSON.stringify(session));
+    document.getElementById('avatarInitial').textContent=n?n[0].toUpperCase():init;
+    document.getElementById('avatarName').textContent=n||'My account';
+    localStorage.setItem('curio_grade',g);
+    showAlert('detailsAlert','✓ Details updated successfully!','ok');
+  }catch(e){showAlert('detailsAlert',e.message,'err');}
+  btn.disabled=false;btn.textContent='Save changes →';
+}
+
+async function saveEmail(){
+  const newEmail=document.getElementById('fieldEmail').value.trim();
+  if(!newEmail||newEmail===email){showAlert('emailAlert','Please enter a new email address.','err');return;}
+  const btn=document.getElementById('btnSaveEmail');
+  btn.disabled=true;btn.textContent='Sending…';
+  try{
+    await sbUpdate({email:newEmail});
+    showAlert('emailAlert','✓ Confirmation sent to your new email — click the link to confirm the change.','ok');
+  }catch(e){showAlert('emailAlert',e.message,'err');}
+  btn.disabled=false;btn.textContent='Update email →';
+}
+
+async function savePassword(){
+  const pw=document.getElementById('fieldPw').value;
+  const pw2=document.getElementById('fieldPwConfirm').value;
+  if(!pw||pw.length<6){showAlert('pwAlert','Password must be at least 6 characters.','err');return;}
+  if(pw!==pw2){showAlert('pwAlert','Passwords do not match.','err');return;}
+  const btn=document.getElementById('btnSavePw');
+  btn.disabled=true;btn.textContent='Updating…';
+  try{
+    await sbUpdate({password:pw});
+    showAlert('pwAlert','✓ Password updated successfully!','ok');
+    document.getElementById('fieldPw').value='';
+    document.getElementById('fieldPwConfirm').value='';
+    document.getElementById('pwFill').style.width='0';
+    document.getElementById('pwLabel').textContent='';
+  }catch(e){showAlert('pwAlert',e.message,'err');}
+  btn.disabled=false;btn.textContent='Update password →';
+}
+
+function checkPw(pw){
+  const fill=document.getElementById('pwFill'),lbl=document.getElementById('pwLabel');
+  if(!pw){fill.style.width='0';lbl.textContent='';return;}
+  let score=0;
+  if(pw.length>=6)score++;if(pw.length>=10)score++;
+  if(/[A-Z]/.test(pw))score++;if(/[0-9]/.test(pw))score++;if(/[^a-zA-Z0-9]/.test(pw))score++;
+  const levels=[{w:'20%',bg:'var(--coral)',t:'Too short'},{w:'40%',bg:'#c47c1a',t:'Weak'},{w:'60%',bg:'#c47c1a',t:'Fair'},{w:'80%',bg:'var(--cyan)',t:'Good'},{w:'100%',bg:'#2a8a4a',t:'Strong'}];
+  const l=levels[Math.max(0,score-1)];
+  fill.style.width=l.w;fill.style.background=l.bg;lbl.textContent=l.t;lbl.style.color=l.bg;
+}
+
+function confirmDelete(){
+  if(confirm('Are you absolutely sure? This cannot be undone.\n\nAll your data will be permanently deleted.')){
+    alert('To delete your account, please email hello@curiolearning.co.za from your registered email address. We will process your request within 30 days as required by POPIA.');
+  }
+}
+</script>
+</body>
+</html>
