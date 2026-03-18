@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2405111123009991"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Curio — Exam Papers</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Caveat:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;
+  --cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;
+  --m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);
+  --m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--m03:rgba(247,247,255,0.03);
+  --c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--c06:rgba(109,211,206,0.06);
+  --r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);
+  --h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;--script:'Caveat',cursive;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;}
+body{font-family:var(--b);background:var(--deep);color:var(--moon);min-height:100vh;display:flex;flex-direction:column;}
+a{text-decoration:none;color:inherit;}
+button{font-family:var(--b);cursor:pointer;border:none;background:none;}
+
+/* ── NAV ── */
+nav{
+  height:58px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;
+  background:rgba(26,18,40,0.95);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--m06);
+  position:sticky;top:0;z-index:200;flex-shrink:0;
+}
+.nav-logo{display:flex;align-items:center;gap:0.6rem;font-family:var(--h);font-size:1.2rem;font-weight:800;color:var(--moon);}
+.nav-links{display:flex;gap:0.2rem;list-style:none;}
+.nav-links a{padding:0.38rem 0.8rem;font-size:0.8rem;font-weight:500;color:var(--m30);border-radius:6px;transition:all .15s;display:block;}
+.nav-links a:hover{color:var(--moon);background:var(--m06);}
+.nav-links a.active{color:var(--cyan);}
+.nav-right{display:flex;gap:0.6rem;align-items:center;}
+.btn-ghost{font-size:0.82rem;font-weight:500;color:var(--m55);padding:0.38rem 0.9rem;border-radius:6px;transition:all .15s;}
+.btn-ghost:hover{color:var(--moon);background:var(--m06);}
+.btn-nav{font-size:0.82rem;font-weight:700;color:var(--plum);background:var(--cyan);padding:0.45rem 1.1rem;border-radius:8px;transition:all .2s;font-family:var(--h);}
+.btn-nav:hover{background:var(--moon);}
+.profile-wrap{position:relative;}
+.profile-btn{width:34px;height:34px;border-radius:50%;background:var(--mid);border:2px solid var(--c25);cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--h);font-size:0.82rem;font-weight:700;color:var(--cyan);}
+.profile-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:var(--mid);border:1px solid var(--c12);border-radius:12px;min-width:200px;box-shadow:0 16px 48px rgba(0,0,0,0.5);display:none;flex-direction:column;overflow:hidden;z-index:300;}
+.profile-dropdown.open{display:flex;}
+.profile-dd-head{padding:0.9rem 1rem 0.7rem;border-bottom:1px solid var(--m06);}
+.profile-dd-name{font-family:var(--h);font-size:0.9rem;font-weight:700;color:var(--moon);}
+.profile-dd-email{font-size:0.68rem;color:var(--m30);margin-top:0.1rem;}
+.profile-dd-item{padding:0.6rem 1rem;font-size:0.8rem;color:var(--m55);display:block;transition:background .1s;border:none;background:none;cursor:pointer;text-align:left;width:100%;font-family:var(--b);}
+.profile-dd-item:hover{background:var(--m06);color:var(--moon);}
+.profile-dd-item.danger{color:var(--coral);}
+
+/* ── AD SYSTEM ── */
+.ad-slot{display:none;}
+.ad-slot.ad-on{display:block;}
+.ad-topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0.52rem 2rem;background:linear-gradient(90deg,rgba(109,211,206,0.07),rgba(255,94,91,0.05));border-bottom:1px solid var(--m06);flex-wrap:wrap;}
+.ad-topbar-left{display:flex;align-items:center;gap:0.8rem;}
+.ad-pill{font-size:0.47rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.12rem 0.42rem;border-radius:3px;white-space:nowrap;flex-shrink:0;background:rgba(255,94,91,0.12);color:#FF5E5B;border:1px solid rgba(255,94,91,0.22);}
+.ad-topbar-text{font-size:0.75rem;color:var(--m30);}
+.ad-topbar-text strong{color:var(--moon);font-weight:600;}
+.ad-topbar-right{display:flex;align-items:center;gap:0.6rem;flex-shrink:0;}
+.ad-cta{display:inline-flex;align-items:center;background:var(--cyan);color:var(--plum);padding:0.3rem 0.78rem;border-radius:6px;font-family:var(--h);font-size:0.68rem;font-weight:700;white-space:nowrap;transition:background .15s;text-decoration:none;}
+.ad-cta:hover{background:var(--moon);}
+.ad-x{width:20px;height:20px;border-radius:5px;flex-shrink:0;background:var(--m06);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.55rem;color:var(--m30);padding:0;transition:all .15s;}
+.ad-x:hover{background:var(--m12);color:var(--moon);}
+
+/* ── HERO ── */
+.papers-hero{
+  padding:3.5rem 2rem 2.5rem;
+  border-bottom:1px solid var(--m06);
+  display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;
+  flex-wrap:wrap;
+}
+.hero-left{}
+.hero-eyebrow{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--cyan);margin-bottom:0.5rem;}
+.hero-h{font-family:var(--h);font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-1.5px;line-height:1.05;color:var(--moon);margin-bottom:0.6rem;}
+.hero-h .cy{color:var(--cyan);}
+.hero-sub{font-size:0.88rem;font-weight:300;color:var(--m55);line-height:1.75;max-width:500px;}
+.hero-sub strong{color:var(--moon);font-weight:600;}
+.hero-note{font-family:var(--script);font-size:1.1rem;color:var(--amber);opacity:0.75;margin-top:1rem;display:inline-block;transform:rotate(-1.5deg);}
+.hero-stats{display:flex;gap:2.5rem;flex-shrink:0;}
+.hstat{text-align:center;}
+.hstat-val{font-family:var(--h);font-size:2rem;font-weight:900;color:var(--moon);line-height:1;}
+.hstat-val .cy{color:var(--cyan);}
+.hstat-label{font-size:0.62rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-top:0.2rem;}
+
+/* ── MAIN LAYOUT ── */
+.papers-layout{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  flex:1;
+  min-height:0;
+}
+@media(max-width:720px){.papers-layout{grid-template-columns:1fr;}}
+
+/* ── SIDEBAR ── */
+.papers-sidebar{
+  background:var(--plum);border-right:1px solid var(--m06);
+  padding:1.8rem 1.4rem;
+  position:sticky;top:58px;height:calc(100vh - 58px);
+  overflow-y:auto;display:flex;flex-direction:column;gap:2rem;
+}
+.sidebar-section{}
+.sidebar-label{font-size:0.56rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--m30);margin-bottom:0.7rem;}
+.grade-list{display:flex;flex-direction:column;gap:0.2rem;}
+.grade-btn{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.5rem 0.75rem;border-radius:8px;
+  font-size:0.82rem;font-weight:500;color:var(--m55);
+  cursor:pointer;transition:all .12s;border:none;background:none;text-align:left;
+  font-family:var(--b);width:100%;
+}
+.grade-btn:hover{background:var(--m06);color:var(--moon);}
+.grade-btn.active{background:var(--c12);color:var(--cyan);font-weight:600;}
+.grade-count{font-size:0.6rem;font-weight:700;padding:0.1rem 0.4rem;border-radius:3px;background:var(--mid);color:var(--m30);}
+.grade-btn.active .grade-count{background:var(--c25);color:var(--cyan);}
+
+.subject-pills{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.subj-pill{
+  padding:0.3rem 0.65rem;border-radius:100px;
+  font-size:0.72rem;font-weight:500;color:var(--m30);
+  border:1px solid var(--m06);cursor:pointer;transition:all .12s;
+  background:none;font-family:var(--b);
+}
+.subj-pill:hover{color:var(--moon);border-color:var(--m12);}
+.subj-pill.active{background:var(--c12);border-color:var(--c25);color:var(--cyan);font-weight:600;}
+.subj-pill.all{border-color:var(--m12);color:var(--m55);}
+.subj-pill.all.active{background:var(--mid);border-color:var(--m12);color:var(--moon);}
+
+/* Search */
+.papers-search{
+  width:100%;padding:0.6rem 0.9rem;
+  background:var(--mid);border:1.5px solid var(--m06);border-radius:9px;
+  font-family:var(--b);font-size:0.82rem;color:var(--moon);
+  transition:border-color .15s;
+}
+.papers-search:focus{outline:none;border-color:var(--c25);}
+.papers-search::placeholder{color:var(--m30);}
+
+/* ── MAIN CONTENT ── */
+.papers-main{padding:2rem 2.5rem;overflow-y:auto;}
+
+/* Grade heading */
+.grade-heading{
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:1.5rem;padding-bottom:1rem;
+  border-bottom:1px solid var(--m06);
+}
+.grade-heading-num{
+  font-family:var(--h);font-size:2.5rem;font-weight:900;
+  letter-spacing:-2px;color:var(--plum);
+  background:var(--cyan);padding:0.1rem 0.7rem;border-radius:10px;
+  line-height:1.1;
+}
+.grade-heading-text{}
+.grade-heading-title{font-family:var(--h);font-size:1.1rem;font-weight:800;color:var(--moon);}
+.grade-heading-sub{font-size:0.72rem;color:var(--m30);margin-top:0.1rem;}
+
+/* Subject group */
+.subject-group{margin-bottom:2.5rem;}
+.subject-group-header{
+  display:flex;align-items:center;gap:0.7rem;
+  margin-bottom:1rem;
+}
+.subject-group-title{font-family:var(--h);font-size:0.78rem;font-weight:700;color:var(--m55);text-transform:uppercase;letter-spacing:0.1em;}
+.subject-group-line{flex:1;height:1px;background:var(--m06);}
+.subject-group-count{font-size:0.62rem;font-weight:600;color:var(--m30);}
+
+/* Paper cards grid */
+.papers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0.85rem;}
+
+/* Individual paper card */
+.paper-card{
+  background:var(--card);border:1px solid var(--m06);border-radius:14px;
+  padding:1.2rem;display:flex;flex-direction:column;gap:0.7rem;
+  transition:all .2s;
+}
+.paper-card:hover{border-color:var(--c25);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.25);}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem;}
+.pc-subject-pill{
+  font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;
+  padding:0.15rem 0.45rem;border-radius:3px;
+  background:var(--c12);color:var(--cyan);flex-shrink:0;
+}
+.pc-subject-pill.coral{background:var(--r10);color:var(--coral);}
+.pc-subject-pill.amber{background:rgba(245,200,66,0.1);color:var(--amber);}
+.pc-memo-badge{
+  font-size:0.5rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;
+  padding:0.12rem 0.38rem;border-radius:3px;
+  background:rgba(245,200,66,0.12);color:var(--amber);
+  border:1px solid rgba(245,200,66,0.2);
+}
+.pc-title{font-family:var(--h);font-size:0.88rem;font-weight:700;color:var(--moon);line-height:1.3;}
+.pc-meta{font-size:0.68rem;color:var(--m30);line-height:1.5;}
+.pc-actions{display:flex;gap:0.5rem;margin-top:0.2rem;}
+.pc-btn{
+  flex:1;padding:0.5rem;border-radius:8px;
+  font-family:var(--h);font-size:0.72rem;font-weight:700;
+  text-align:center;transition:all .15s;display:inline-block;
+  text-decoration:none;cursor:pointer;border:none;
+}
+.pc-btn-paper{background:var(--cyan);color:var(--plum);}
+.pc-btn-paper:hover{background:var(--moon);}
+.pc-btn-memo{background:var(--m06);color:var(--m55);border:1px solid var(--m12);}
+.pc-btn-memo:hover{background:var(--m12);color:var(--moon);}
+.pc-btn-memo.has-memo{background:rgba(245,200,66,0.1);color:var(--amber);border-color:rgba(245,200,66,0.2);}
+.pc-btn-memo.has-memo:hover{background:rgba(245,200,66,0.2);}
+
+/* Empty / loading states */
+.papers-loading{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:5rem 2rem;gap:1rem;
+}
+.papers-loading-bloom{animation:spin 3s linear infinite;opacity:0.3;}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.papers-loading-text{font-size:0.82rem;color:var(--m30);font-style:italic;}
+
+.papers-empty{
+  text-align:center;padding:5rem 2rem;
+}
+.papers-empty-icon{font-size:2.5rem;margin-bottom:1rem;opacity:0.5;}
+.papers-empty-title{font-family:var(--h);font-size:1rem;font-weight:700;color:var(--m55);margin-bottom:0.4rem;}
+.papers-empty-sub{font-size:0.8rem;color:var(--m30);line-height:1.7;max-width:340px;margin:0 auto;}
+
+/* Result count bar */
+.results-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.5rem;flex-wrap:wrap;gap:0.5rem;
+}
+.results-count{font-size:0.72rem;color:var(--m30);}
+.results-count strong{color:var(--moon);}
+.clear-btn{font-size:0.7rem;color:var(--cyan);background:none;border:none;cursor:pointer;padding:0;}
+.clear-btn:hover{text-decoration:underline;}
+
+/* No results */
+.no-results{text-align:center;padding:4rem 2rem;color:var(--m30);font-style:italic;font-size:0.85rem;}
+
+/* Subject colour mapping */
+.pc-subject-pill[data-subj="maths"],.pc-subject-pill[data-subj="mathematics"]{background:rgba(245,200,66,0.1);color:var(--amber);}
+.pc-subject-pill[data-subj="science"],.pc-subject-pill[data-subj="physics"],.pc-subject-pill[data-subj="lifesciences"]{background:var(--r10);color:var(--coral);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+      <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+    </svg>
+    curio
+  </a>
+  <ul class="nav-links">
+    <li><a href="papers.html" class="active">Papers</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+    <li><a href="index.html#pricing">Pricing</a></li>
+  </ul>
+  <div class="nav-right" id="navRight">
+    <a href="login.html" class="btn-ghost">Log in</a>
+    <a href="login.html?tab=signup" class="btn-nav">Start free →</a>
+  </div>
+</nav>
+
+<!-- AD: TOP BAR -->
+<div class="ad-slot" id="adTopbar">
+  <div class="ad-topbar">
+    <div class="ad-topbar-left">
+      <span class="ad-pill">Ad</span>
+      <span class="ad-topbar-text"><strong>Remove ads &amp; unlock everything</strong> — Curio Premium from R49/month.</span>
+    </div>
+    <div class="ad-topbar-right">
+      <a href="login.html?tab=signup" class="ad-cta">Go Premium →</a>
+      <button class="ad-x" onclick="dismissAd('adTopbar')" aria-label="Close">✕</button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="papers-hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Free forever · No sign-up required</div>
+    <h1 class="hero-h">Exam papers.<br/><span class="cy">All grades.</span></h1>
+    <p class="hero-sub">Browse and download exam papers for every grade and subject. <strong>Papers and memos are always free</strong> — no account needed, no strings.</p>
+    <span class="hero-note">download, print, practise 🌱</span>
+  </div>
+  <div class="hero-stats" id="heroStats">
+    <div class="hstat"><div class="hstat-val"><span class="cy" id="statPapers">—</span></div><div class="hstat-label">Papers</div></div>
+    <div class="hstat"><div class="hstat-val"><span class="cy" id="statGrades">—</span></div><div class="hstat-label">Grades</div></div>
+    <div class="hstat"><div class="hstat-val"><span class="cy" id="statSubjects">—</span></div><div class="hstat-label">Subjects</div></div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="papers-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="papers-sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Search</div>
+      <input class="papers-search" type="text" id="searchInput" placeholder="e.g. Maths, English…" oninput="applyFilters()"/>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Grade</div>
+      <div class="grade-list" id="gradeList">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Subject</div>
+      <div class="subject-pills" id="subjectPills">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="papers-main" id="papersMain">
+    <div class="papers-loading" id="loadingState">
+      <svg class="papers-loading-bloom" width="48" height="48" viewBox="0 0 64 64" fill="none">
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.6"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.4" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.3" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.3" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.4" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#FF5E5B" fill-opacity="0.6"/>
+      </svg>
+      <span class="papers-loading-text">Loading papers…</span>
+    </div>
+    <div id="papersContent" style="display:none"></div>
+  </main>
+
+</div>
+
+<script>
+const SUPABASE_URL='https://inmrsgujgfktapjnekjs.supabase.co';
+const SUPABASE_KEY='sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
+
+async function sbGet(path){
+  const res=await fetch(`${SUPABASE_URL}/rest/v1/${path}`,{
+    headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}
+  });
+  if(!res.ok)throw new Error(await res.text());
+  return res.json();
+}
+
+// ── SUBJECT DISPLAY NAMES & COLOURS ──
+const SUBJECT_NAMES={
+  english:'English HL',afrikaans:'Afrikaans',maths:'Mathematics',
+  science:'Natural Sciences',social:'Social Sciences',history:'History',
+  geography:'Geography',physics:'Physical Sciences',lifesciences:'Life Sciences',
+  accounting:'Accounting',business:'Business Studies',economics:'Economics',
+  lifeskills:'Life Skills',technology:'Technology',arts:'Arts & Culture',
+};
+const SUBJECT_COLOUR={
+  maths:'amber',mathematics:'amber',
+  science:'coral',physics:'coral',lifesciences:'coral',
+};
+
+// ── STATE ──
+let allPapers=[];
+let selectedGrade='all';
+let selectedSubject='all';
+let searchQuery='';
+
+// ── DEMO PAPERS (shown when DB is empty) ──
+const DEMO_PAPERS=[
+  {id:1,grade:10,subject:'maths',title:'Mathematics — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Algebra & Functions'},
+  {id:2,grade:10,subject:'maths',title:'Mathematics — Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Geometry & Statistics'},
+  {id:3,grade:10,subject:'english',title:'English HL — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Comprehension & Language'},
+  {id:4,grade:10,subject:'english',title:'English HL — Paper 2',has_memo:false,file_url:'#',memo_url:null,topic:'Literature'},
+  {id:5,grade:10,subject:'physics',title:'Physical Sciences — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Mechanics & Waves'},
+  {id:6,grade:11,subject:'maths',title:'Mathematics — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Functions & Algebra'},
+  {id:7,grade:11,subject:'maths',title:'Mathematics — Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Trigonometry & Stats'},
+  {id:8,grade:11,subject:'english',title:'English HL — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Comprehension & Summary'},
+  {id:9,grade:11,subject:'lifesciences',title:'Life Sciences — Paper 1',has_memo:false,file_url:'#',memo_url:null,topic:'DNA & Evolution'},
+  {id:10,grade:12,subject:'maths',title:'Mathematics — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Functions, Sequences & Finance'},
+  {id:11,grade:12,subject:'maths',title:'Mathematics — Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Statistics, Analytical Geometry'},
+  {id:12,grade:12,subject:'english',title:'English HL — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Comprehension, Summary, Language'},
+  {id:13,grade:12,subject:'english',title:'English HL — Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Literature & Poetry'},
+  {id:14,grade:12,subject:'physics',title:'Physical Sciences — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Mechanics, Electricity'},
+  {id:15,grade:12,subject:'physics',title:'Physical Sciences — Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Chemical Change, Organic Chemistry'},
+  {id:16,grade:12,subject:'accounting',title:'Accounting — Full Paper',has_memo:true,file_url:'#',memo_url:'#',topic:'Financial Statements & Analysis'},
+  {id:17,grade:9,subject:'maths',title:'Mathematics — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Algebra & Geometry'},
+  {id:18,grade:9,subject:'english',title:'English HL — Paper 1',has_memo:false,file_url:'#',memo_url:null,topic:'Comprehension & Writing'},
+  {id:19,grade:4,subject:'english',title:'English HL — Term 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Language & Reading'},
+  {id:20,grade:4,subject:'maths',title:'Mathematics — Term 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Number Sense & Operations'},
+];
+
+// ── LOAD ──
+async function loadPapers(){
+  try{
+    const rows=await sbGet('papers?order=grade.asc,subject.asc,title.asc');
+    allPapers=rows&&rows.length>0?rows:DEMO_PAPERS;
+    if(!rows||rows.length===0){
+      console.info('No papers in database yet — showing demo content.');
+    }
+  }catch(e){
+    console.warn('Could not load papers from Supabase, using demo content:',e);
+    allPapers=DEMO_PAPERS;
+  }
+  buildSidebar();
+  applyFilters();
+  updateHeroStats();
+  document.getElementById('loadingState').style.display='none';
+  document.getElementById('papersContent').style.display='block';
+}
+
+// ── SIDEBAR ──
+function buildSidebar(){
+  const grades=[...new Set(allPapers.map(p=>p.grade))].sort((a,b)=>a-b);
+  const subjects=[...new Set(allPapers.map(p=>p.subject))].sort();
+
+  // Grade list
+  const gl=document.getElementById('gradeList');
+  gl.innerHTML=`<button class="grade-btn active" data-grade="all" onclick="setGrade('all',this)">All grades <span class="grade-count">${allPapers.length}</span></button>`
+    +grades.map(g=>{
+      const count=allPapers.filter(p=>p.grade===g).length;
+      return `<button class="grade-btn" data-grade="${g}" onclick="setGrade(${g},this)">Grade ${g} <span class="grade-count">${count}</span></button>`;
+    }).join('');
+
+  // Subject pills
+  const sp=document.getElementById('subjectPills');
+  sp.innerHTML=`<button class="subj-pill all active" data-subj="all" onclick="setSubject('all',this)">All</button>`
+    +subjects.map(s=>`<button class="subj-pill" data-subj="${s}" onclick="setSubject('${s}',this)">${SUBJECT_NAMES[s]||s}</button>`).join('');
+}
+
+function setGrade(g,btn){
+  selectedGrade=g;
+  document.querySelectorAll('.grade-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function setSubject(s,btn){
+  selectedSubject=s;
+  document.querySelectorAll('.subj-pill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+// ── FILTER & RENDER ──
+function applyFilters(){
+  searchQuery=document.getElementById('searchInput').value.toLowerCase().trim();
+
+  let filtered=allPapers.filter(p=>{
+    const matchGrade=selectedGrade==='all'||p.grade===selectedGrade;
+    const matchSubject=selectedSubject==='all'||p.subject===selectedSubject;
+    const matchSearch=!searchQuery
+      ||p.title.toLowerCase().includes(searchQuery)
+      ||(SUBJECT_NAMES[p.subject]||p.subject).toLowerCase().includes(searchQuery)
+      ||String(p.grade).includes(searchQuery)
+      ||(p.topic||'').toLowerCase().includes(searchQuery);
+    return matchGrade&&matchSubject&&matchSearch;
+  });
+
+  renderPapers(filtered);
+}
+
+function renderPapers(papers){
+  const container=document.getElementById('papersContent');
+  if(papers.length===0){
+    container.innerHTML=`<div class="no-results">No papers found for your search. <button class="clear-btn" onclick="clearFilters()">Clear filters</button></div>`;
+    return;
+  }
+
+  // Group: grade → subject → papers
+  const byGrade={};
+  papers.forEach(p=>{
+    if(!byGrade[p.grade])byGrade[p.grade]={};
+    if(!byGrade[p.grade][p.subject])byGrade[p.grade][p.subject]=[];
+    byGrade[p.grade][p.subject].push(p);
+  });
+
+  const totalShown=papers.length;
+  const totalAll=allPapers.length;
+  const isFiltered=selectedGrade!=='all'||selectedSubject!=='all'||searchQuery;
+
+  let html=`<div class="results-bar">
+    <span class="results-count">Showing <strong>${totalShown}</strong>${isFiltered?` of ${totalAll}`:''} paper${totalShown!==1?'s':''}</span>
+    ${isFiltered?`<button class="clear-btn" onclick="clearFilters()">Clear filters</button>`:''}
+  </div>`;
+
+  Object.keys(byGrade).sort((a,b)=>a-b).forEach(grade=>{
+    const gradeSubjects=byGrade[grade];
+    const totalInGrade=Object.values(gradeSubjects).flat().length;
+
+    html+=`<div class="grade-heading">
+      <div class="grade-heading-num">${grade}</div>
+      <div class="grade-heading-text">
+        <div class="grade-heading-title">Grade ${grade}</div>
+        <div class="grade-heading-sub">${totalInGrade} paper${totalInGrade!==1?'s':''}</div>
+      </div>
+    </div>`;
+
+    Object.keys(gradeSubjects).sort().forEach(subject=>{
+      const subjectPapers=gradeSubjects[subject];
+      const subjName=SUBJECT_NAMES[subject]||subject;
+      html+=`<div class="subject-group">
+        <div class="subject-group-header">
+          <span class="subject-group-title">${subjName}</span>
+          <div class="subject-group-line"></div>
+          <span class="subject-group-count">${subjectPapers.length} paper${subjectPapers.length!==1?'s':''}</span>
+        </div>
+        <div class="papers-grid">
+          ${subjectPapers.map(p=>paperCardHTML(p)).join('')}
+        </div>
+      </div>`;
+    });
+  });
+
+  container.innerHTML=html;
+}
+
+function paperCardHTML(p){
+  const subjName=SUBJECT_NAMES[p.subject]||p.subject;
+  const colour=SUBJECT_COLOUR[p.subject]||'';
+  const isDemoLink=p.file_url==='#';
+
+  const paperBtn=isDemoLink
+    ?`<button class="pc-btn pc-btn-paper" onclick="showComingSoon()">Download paper ↓</button>`
+    :`<a href="${p.file_url}" target="_blank" rel="noopener" class="pc-btn pc-btn-paper">Download paper ↓</a>`;
+
+  const memoBtn=p.has_memo&&p.memo_url&&p.memo_url!=='#'
+    ?`<a href="${p.memo_url}" target="_blank" rel="noopener" class="pc-btn pc-btn-memo has-memo">Memo ↓</a>`
+    :p.has_memo&&isDemoLink
+      ?`<button class="pc-btn pc-btn-memo has-memo" onclick="showComingSoon()">Memo ↓</button>`
+      :`<span class="pc-btn pc-btn-memo" style="cursor:default;opacity:0.4">No memo</span>`;
+
+  return `<div class="paper-card">
+    <div class="pc-top">
+      <span class="pc-subject-pill ${colour}" data-subj="${p.subject}">${subjName}</span>
+      ${p.has_memo?'<span class="pc-memo-badge">Memo incl.</span>':''}
+    </div>
+    <div class="pc-title">${p.title}</div>
+    ${p.topic?`<div class="pc-meta">${p.topic}</div>`:''}
+    <div class="pc-actions">
+      ${paperBtn}
+      ${memoBtn}
+    </div>
+  </div>`;
+}
+
+function clearFilters(){
+  selectedGrade='all';selectedSubject='all';searchQuery='';
+  document.getElementById('searchInput').value='';
+  document.querySelectorAll('.grade-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.grade-btn[data-grade="all"]').classList.add('active');
+  document.querySelectorAll('.subj-pill').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.subj-pill[data-subj="all"]').classList.add('active');
+  applyFilters();
+}
+
+function showComingSoon(){
+  alert('📄 This is a demo paper.\n\nAdd real papers via the Admin Panel → Add Paper, paste in a Supabase Storage URL and it will appear here automatically.');
+}
+
+function updateHeroStats(){
+  document.getElementById('statPapers').textContent=allPapers.length;
+  document.getElementById('statGrades').textContent=[...new Set(allPapers.map(p=>p.grade))].length;
+  document.getElementById('statSubjects').textContent=[...new Set(allPapers.map(p=>p.subject))].length;
+}
+
+// ── AUTH NAV ──
+function toggleProfileDD(e){e.stopPropagation();document.getElementById('profileDD')?.classList.toggle('open');}
+document.addEventListener('click',()=>document.getElementById('profileDD')?.classList.remove('open'));
+function doLogout(){localStorage.removeItem('curio_session');renderNav(null);}
+function renderNav(session){
+  const nr=document.getElementById('navRight');if(!nr)return;
+  if(session){
+    const u=session.user||{},name=u.user_metadata?.full_name||'',email=u.email||'';
+    const init=name?name[0].toUpperCase():(email?email[0].toUpperCase():'?');
+    nr.innerHTML=`<div class="profile-wrap"><button class="profile-btn" onclick="toggleProfileDD(event)">${init}</button><div class="profile-dropdown" id="profileDD"><div class="profile-dd-head"><div class="profile-dd-name">${name||'My account'}</div><div class="profile-dd-email">${email}</div></div><a href="quiz.html" class="profile-dd-item">📚 &nbsp;Start a quiz</a><a href="papers.html" class="profile-dd-item">📄 &nbsp;Papers</a><button class="profile-dd-item danger" onclick="doLogout()">Sign out</button></div></div>`;
+  }else{
+    nr.innerHTML=`<a href="login.html" class="btn-ghost">Log in</a><a href="login.html?tab=signup" class="btn-nav">Start free →</a>`;
+  }
+}
+(function(){
+  let s=null;
+  try{
+    const st=localStorage.getItem('curio_session');
+    if(st){const p=JSON.parse(st);if(p?.access_token&&p?.expires_at>Date.now()/1000){s=p;}else{localStorage.removeItem('curio_session');}}
+  }catch(e){localStorage.removeItem('curio_session');}
+  renderNav(s);
+})();
+
+// ── AD SYSTEM ──
+(function initAds(){
+  let isPremium=false;
+  try{const st=localStorage.getItem('curio_session');if(st){const p=JSON.parse(st);isPremium=p?.user?.user_metadata?.is_premium===true;}}catch(e){}
+  if(isPremium)return;
+  if(!sessionStorage.getItem('curio_ad_dismissed_adTopbar')){
+    const el=document.getElementById('adTopbar');if(el)el.classList.add('ad-on');
+  }
+})();
+function dismissAd(id){
+  sessionStorage.setItem('curio_ad_dismissed_'+id,'1');
+  const el=document.getElementById(id);if(!el)return;
+  el.style.transition='opacity .2s,max-height .3s,padding .3s';
+  el.style.overflow='hidden';el.style.maxHeight=el.scrollHeight+'px';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    el.style.opacity='0';el.style.maxHeight='0';
+    el.style.paddingTop='0';el.style.paddingBottom='0';
+  }));
+  setTimeout(()=>el.remove(),320);
+}
+
+// ── INIT ──
+loadPapers();
+</script>
+</body>
+</html>
