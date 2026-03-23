@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Curio — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;
+  --cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;
+  --m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);
+  --m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);
+  --c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);
+  --r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);
+  --h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--b);background:var(--deep);color:var(--moon);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{font-family:var(--b);cursor:pointer;border:none;background:none;}
+
+/* ════════════════════
+   LOGIN SCREEN
+════════════════════ */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--deep);}
+.login-box{width:100%;max-width:360px;}
+.login-logo{display:flex;align-items:center;gap:0.6rem;font-family:var(--h);font-size:1.2rem;font-weight:800;color:var(--moon);margin-bottom:0.5rem;justify-content:center;}
+.login-eyebrow{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--m30);text-align:center;margin-bottom:2rem;}
+.login-card{background:var(--card);border:1px solid var(--m06);border-radius:20px;padding:2rem;}
+.login-label{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.35rem;display:block;}
+.login-input{
+  width:100%;padding:0.75rem 1rem;
+  background:var(--plum);border:1.5px solid var(--m12);border-radius:9px;
+  font-family:var(--b);font-size:0.9rem;color:var(--moon);
+  margin-bottom:1.2rem;transition:border-color .15s;
+}
+.login-input:focus{outline:none;border-color:var(--cyan);}
+.login-input::placeholder{color:var(--m30);}
+.login-btn{
+  width:100%;padding:0.8rem;
+  background:var(--cyan);color:var(--plum);
+  font-family:var(--h);font-size:0.9rem;font-weight:700;
+  border:none;border-radius:10px;cursor:pointer;transition:all .15s;
+}
+.login-btn:hover{background:var(--moon);}
+.login-error{font-size:0.78rem;color:var(--coral);margin-top:0.8rem;display:none;text-align:center;}
+
+/* ════════════════════
+   ADMIN SCREEN
+════════════════════ */
+#admin-screen{display:none;}
+
+/* Nav */
+.admin-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;height:56px;
+  background:var(--plum);border-bottom:1px solid var(--m06);
+  position:sticky;top:0;z-index:100;
+}
+.admin-logo{display:flex;align-items:center;gap:0.55rem;font-family:var(--h);font-size:1.05rem;font-weight:800;color:var(--moon);}
+.admin-logo-badge{font-size:0.5rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:var(--coral);color:var(--moon);padding:0.12rem 0.4rem;border-radius:3px;margin-left:0.3rem;}
+.nav-tabs{display:flex;gap:0.2rem;}
+.nav-tab{
+  padding:0.38rem 0.9rem;font-size:0.78rem;font-weight:600;
+  color:var(--m30);border-radius:6px;cursor:pointer;transition:all .15s;
+}
+.nav-tab:hover{color:var(--moon);background:var(--m06);}
+.nav-tab.active{background:var(--c12);color:var(--cyan);}
+.nav-right{display:flex;align-items:center;gap:0.8rem;}
+.nav-logout{font-size:0.75rem;color:var(--m30);cursor:pointer;transition:color .15s;}
+.nav-logout:hover{color:var(--coral);}
+
+/* Layout */
+.admin-body{max-width:1200px;margin:0 auto;padding:2rem;}
+
+/* Panels */
+.panel{display:none;}
+.panel.active{display:block;}
+
+/* ── DASHBOARD ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem;}
+@media(max-width:700px){.stats-row{grid-template-columns:1fr 1fr;}}
+.stat-card{
+  background:var(--card);border:1px solid var(--m06);border-radius:16px;
+  padding:1.4rem;
+}
+.stat-card.c{background:var(--c12);border-color:var(--c25);}
+.stat-card.r{background:var(--r10);border-color:var(--r20);}
+.stat-label{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--m30);margin-bottom:0.4rem;}
+.stat-card.c .stat-label{color:var(--cyan);}
+.stat-card.r .stat-label{color:var(--coral);}
+.stat-val{font-family:var(--h);font-size:2.2rem;font-weight:900;color:var(--moon);line-height:1;}
+
+.panel-title{font-family:var(--h);font-size:1rem;font-weight:700;color:var(--moon);}
+.panel-sub{font-size:0.75rem;color:var(--m30);margin-top:0.1rem;}
+.panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;}
+
+/* Recent table */
+.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--m06);}
+table{width:100%;border-collapse:collapse;background:var(--card);}
+thead tr{background:var(--plum);}
+th{padding:0.7rem 1rem;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);text-align:left;}
+td{padding:0.75rem 1rem;font-size:0.8rem;color:var(--m80);border-top:1px solid var(--m06);}
+tr:hover td{background:var(--m03);}
+.q-text-cell{color:var(--moon);font-weight:500;max-width:320px;}
+.chip-small{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.15rem 0.45rem;border-radius:3px;}
+.chip-free{background:var(--c12);color:var(--cyan);}
+.chip-premium{background:var(--r10);color:var(--coral);}
+.btn-delete{font-size:0.72rem;color:var(--coral);padding:0.2rem 0.5rem;border-radius:5px;background:var(--r10);border:1px solid var(--r20);cursor:pointer;transition:all .15s;}
+.btn-delete:hover{background:var(--r20);}
+.loading-row td{text-align:center;padding:2.5rem;color:var(--m30);font-style:italic;font-size:0.85rem;}
+.empty-state{text-align:center;padding:3rem;color:var(--m30);}
+.empty-state p{font-size:0.8rem;margin-top:0.4rem;}
+
+/* ── ADD QUESTION FORM ── */
+.form-card{background:var(--card);border:1px solid var(--m06);border-radius:16px;overflow:hidden;margin-bottom:1.5rem;}
+.form-section{padding:1.5rem 1.8rem;border-bottom:1px solid var(--m06);}
+.form-section:last-child{border-bottom:none;}
+.form-section-title{font-family:var(--h);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--m30);margin-bottom:1.2rem;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr;}}
+.form-group{display:flex;flex-direction:column;}
+.form-group.full{grid-column:1/-1;}
+.form-label{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.35rem;}
+.req{color:var(--coral);}
+.form-input,.form-select,.form-textarea{
+  background:var(--plum);border:1.5px solid var(--m12);border-radius:8px;
+  font-family:var(--b);font-size:0.85rem;color:var(--moon);
+  padding:0.65rem 0.9rem;transition:border-color .15s;width:100%;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--cyan);}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--m30);}
+.form-select{cursor:pointer;-webkit-appearance:none;}
+.form-textarea{min-height:100px;resize:vertical;line-height:1.6;}
+.opt-row{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem;}
+.opt-letter{
+  width:30px;height:30px;flex-shrink:0;border-radius:7px;
+  background:var(--mid);display:flex;align-items:center;justify-content:center;
+  font-family:var(--h);font-size:0.7rem;font-weight:700;color:var(--m55);
+}
+.correct-radio{display:flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:var(--m55);cursor:pointer;}
+.correct-radio input{accent-color:var(--cyan);}
+.form-footer{
+  padding:1.2rem 1.8rem;
+  display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;
+  background:var(--deep);border-top:1px solid var(--m06);
+}
+.btn-submit{
+  padding:0.7rem 1.4rem;background:var(--coral);color:var(--moon);
+  font-family:var(--h);font-size:0.82rem;font-weight:700;
+  border:none;border-radius:9px;cursor:pointer;transition:all .15s;
+}
+.btn-submit:hover{background:#ff4a47;}
+.btn-submit:disabled{opacity:0.5;cursor:not-allowed;}
+.btn-secondary-sm{
+  padding:0.65rem 1.1rem;background:var(--m06);color:var(--m55);
+  font-family:var(--h);font-size:0.78rem;font-weight:600;
+  border:1px solid var(--m12);border-radius:9px;cursor:pointer;transition:all .15s;
+}
+.btn-secondary-sm:hover{background:var(--m12);color:var(--moon);}
+.save-status{font-size:0.78rem;}
+.save-status.ok{color:var(--cyan);}
+.save-status.err{color:var(--coral);}
+
+/* Table toolbar */
+.table-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:0.8rem;flex-wrap:wrap;}
+.search-input{
+  background:var(--card);border:1px solid var(--m06);border-radius:8px;
+  padding:0.5rem 0.9rem;font-family:var(--b);font-size:0.8rem;color:var(--moon);
+  min-width:200px;transition:border-color .15s;
+}
+.search-input:focus{outline:none;border-color:var(--c25);}
+.search-input::placeholder{color:var(--m30);}
+.filter-select{
+  background:var(--card);border:1px solid var(--m06);border-radius:8px;
+  padding:0.5rem 0.8rem;font-family:var(--b);font-size:0.78rem;color:var(--m55);
+  cursor:pointer;
+}
+.filter-select:focus{outline:none;}
+.table-count{font-size:0.72rem;color:var(--m30);}
+
+/* var(--m03) is undefined, define it */
+:root{--m03:rgba(247,247,255,0.03);}
+
+/* ── PAPERS PANELS ── */
+.info-box{
+  background:var(--c12);border:1px solid var(--c25);border-radius:12px;
+  padding:1rem 1.2rem;margin-bottom:1.5rem;
+  font-size:0.78rem;color:var(--m80);line-height:1.7;
+}
+.info-box strong{color:var(--cyan);}
+.info-box a{color:var(--cyan);text-decoration:underline;}
+.info-box ol{margin-left:1.2rem;margin-top:0.4rem;}
+.info-box ol li{margin-bottom:0.2rem;}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════
+     LOGIN
+════════════════════ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+      </svg>
+      curio
+    </div>
+    <div class="login-eyebrow">Admin Panel · Restricted Access</div>
+    <div class="login-card">
+      <label class="login-label">Password</label>
+      <input class="login-input" type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <button class="login-btn" onclick="doLogin()">Enter admin →</button>
+      <div class="login-error" id="loginError">Incorrect password. Access denied.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════
+     ADMIN
+════════════════════ -->
+<div id="admin-screen">
+
+  <!-- Nav -->
+  <nav class="admin-nav">
+    <div class="admin-logo">
+      <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+      </svg>
+      curio
+      <span class="admin-logo-badge">Admin</span>
+    </div>
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="switchPanel('dashboard',this)">Dashboard</div>
+      <div class="nav-tab" onclick="switchPanel('add',this)">Add Question</div>
+      <div class="nav-tab" onclick="switchPanel('questions',this)">All Questions</div>
+      <div class="nav-tab" onclick="switchPanel('papers',this)">Papers</div>
+      <div class="nav-tab" onclick="switchPanel('add-paper',this)">Add Paper</div>
+    </div>
+    <div class="nav-right">
+      <a href="formatter.html" target="_blank" style="font-size:0.72rem;font-weight:700;color:var(--cyan);background:var(--c12);border:1px solid var(--c25);padding:0.25rem 0.7rem;border-radius:6px;">✦ Formatter</a>
+      <a href="index.html" style="font-size:0.72rem;color:var(--m30);">← Site</a>
+      <span class="nav-logout" onclick="doLogout()">Sign out</span>
+    </div>
+  </nav>
+
+  <div class="admin-body">
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="panel-header">
+        <div><div class="panel-title">Dashboard</div><div class="panel-sub">Overview of your question bank</div></div>
+        <button class="btn-submit" onclick="switchPanel('add',document.querySelectorAll('.nav-tab')[1])">+ Add Question</button>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card c">
+          <div class="stat-label">Total Questions</div>
+          <div class="stat-val" id="statTotal">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Free Questions</div>
+          <div class="stat-val" id="statFree">—</div>
+        </div>
+        <div class="stat-card r">
+          <div class="stat-label">Premium Questions</div>
+          <div class="stat-val" id="statPremium">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Grades Covered</div>
+          <div class="stat-val" id="statGrades">—</div>
+        </div>
+      </div>
+
+      <!-- Formatter shortcut -->
+      <div style="background:linear-gradient(135deg,var(--c12),rgba(109,211,206,0.04));border:1px solid var(--c25);border-radius:16px;padding:1.4rem 1.8rem;margin-bottom:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--cyan);margin-bottom:0.35rem;">Content Tool</div>
+          <div style="font-family:var(--h);font-size:1rem;font-weight:800;color:var(--moon);margin-bottom:0.25rem;">✦ Material Formatter</div>
+          <div style="font-size:0.78rem;color:var(--m55);line-height:1.6;">Generate a prompt for ChatGPT, paste the output, and download a branded Curio PDF — ready to upload.</div>
+        </div>
+        <a href="formatter.html" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;background:var(--cyan);color:var(--plum);padding:0.75rem 1.5rem;border-radius:10px;font-family:var(--h);font-size:0.85rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:all .15s;" onmouseover="this.style.background='var(--moon)'" onmouseout="this.style.background='var(--cyan)'">Open Formatter →</a>
+      </div>
+      <div class="panel-header">
+        <div><div class="panel-title">Recent Additions</div></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Question</th><th>Grade</th><th>Subject</th><th>Topic</th><th>Type</th></tr></thead>
+          <tbody id="recentBody"><tr class="loading-row"><td colspan="5">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ADD QUESTION -->
+    <div class="panel" id="panel-add">
+      <div class="panel-header">
+        <div><div class="panel-title">Add a Question</div><div class="panel-sub">Fill in all required fields marked with *</div></div>
+      </div>
+      <div class="form-card">
+
+        <!-- Classification -->
+        <div class="form-section">
+          <div class="form-section-title">Classification</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Grade <span class="req">*</span></label>
+              <select class="form-select" id="fGrade">
+                <option value="">Select grade</option>
+                <option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option>
+                <option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option>
+                <option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option>
+                <option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subject <span class="req">*</span></label>
+              <select class="form-select" id="fSubject">
+                <option value="">Select subject</option>
+                <option value="english">English HL</option>
+                <option value="maths">Mathematics</option>
+                <option value="science">Natural Sciences</option>
+                <option value="social">Social Sciences</option>
+                <option value="afrikaans">Afrikaans</option>
+                <option value="lifeskills">Life Skills</option>
+                <option value="history">History</option>
+                <option value="geography">Geography</option>
+                <option value="physics">Physical Sciences</option>
+                <option value="lifesciences">Life Sciences</option>
+                <option value="accounting">Accounting</option>
+                <option value="business">Business Studies</option>
+                <option value="economics">Economics</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Topic ID <span class="req">*</span></label>
+              <input class="form-input" type="text" id="fTopic" placeholder="e.g. parts_of_speech"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Topic Display Name</label>
+              <input class="form-input" type="text" id="fTopicDisplay" placeholder="e.g. Parts of Speech"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question -->
+        <div class="form-section">
+          <div class="form-section-title">Question</div>
+          <div class="form-group full">
+            <label class="form-label">Question Text <span class="req">*</span></label>
+            <textarea class="form-textarea" id="fQuestion" placeholder="Type the full question. Use *word* to highlight key terms in cyan."></textarea>
+          </div>
+        </div>
+
+        <!-- Options -->
+        <div class="form-section">
+          <div class="form-section-title">Answer Options</div>
+          <div class="opt-row"><div class="opt-letter">A</div><input class="form-input" type="text" id="fOptA" placeholder="Option A" style="flex:1"/></div>
+          <div class="opt-row"><div class="opt-letter">B</div><input class="form-input" type="text" id="fOptB" placeholder="Option B" style="flex:1"/></div>
+          <div class="opt-row"><div class="opt-letter">C</div><input class="form-input" type="text" id="fOptC" placeholder="Option C (optional)" style="flex:1"/></div>
+          <div class="opt-row"><div class="opt-letter">D</div><input class="form-input" type="text" id="fOptD" placeholder="Option D (optional)" style="flex:1"/></div>
+          <div style="margin-top:1.2rem;">
+            <label class="form-label" style="margin-bottom:0.6rem;display:block">Correct Answer <span class="req">*</span></label>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+              <label class="correct-radio"><input type="radio" name="correct" value="a"/> A</label>
+              <label class="correct-radio"><input type="radio" name="correct" value="b"/> B</label>
+              <label class="correct-radio"><input type="radio" name="correct" value="c"/> C</label>
+              <label class="correct-radio"><input type="radio" name="correct" value="d"/> D</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Explanation & settings -->
+        <div class="form-section">
+          <div class="form-section-title">Explanation & Settings</div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label class="form-label">Explanation <span class="req">*</span></label>
+              <textarea class="form-textarea" id="fExplanation" placeholder="Explain why the correct answer is right. Write simply and clearly — this is what the student reads after answering."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Access Level</label>
+              <select class="form-select" id="fPremium">
+                <option value="false">Free — available to everyone</option>
+                <option value="true">Premium — paid subscribers only</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Difficulty</label>
+              <select class="form-select" id="fDifficulty">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <button class="btn-submit" id="btnSave" onclick="saveQuestion()">Save Question →</button>
+          <button class="btn-secondary-sm" onclick="clearForm()">Clear form</button>
+          <span class="save-status" id="saveStatus"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALL QUESTIONS -->
+    <div class="panel" id="panel-questions">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">All Questions</div>
+          <div class="panel-sub" id="qCountLabel">Loading questions…</div>
+        </div>
+        <button class="btn-submit" onclick="switchPanel('add',document.querySelectorAll('.nav-tab')[1])">+ Add Question</button>
+      </div>
+      <div class="table-toolbar">
+        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+          <input class="search-input" type="text" placeholder="Search questions…" oninput="filterTable()" id="searchInput"/>
+          <select class="filter-select" onchange="filterTable()" id="filterGrade">
+            <option value="">All grades</option>
+            <option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option>
+            <option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option>
+            <option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option>
+          </select>
+          <select class="filter-select" onchange="filterTable()" id="filterSubject">
+            <option value="">All subjects</option>
+            <option value="english">English HL</option>
+            <option value="maths">Mathematics</option>
+            <option value="science">Natural Sciences</option>
+            <option value="social">Social Sciences</option>
+          </select>
+        </div>
+        <span class="table-count" id="tableCount"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="width:38%">Question</th><th>Grade</th><th>Subject</th><th>Topic</th><th>Correct</th><th>Type</th><th></th></tr></thead>
+          <tbody id="questionsBody"><tr class="loading-row"><td colspan="7">Loading questions…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ADD PAPER -->
+    <div class="panel" id="panel-add-paper">
+      <div class="panel-header">
+        <div><div class="panel-title">Add a Paper</div><div class="panel-sub">Upload a PDF to Supabase Storage first, then paste the URL here</div></div>
+      </div>
+
+      <div class="info-box">
+        <strong>How to add papers:</strong>
+        <ol>
+          <li>Go to your <a href="https://supabase.com/dashboard" target="_blank">Supabase dashboard</a> → Storage → Create a bucket called <strong>papers</strong> (set to Public)</li>
+          <li>Upload your PDF file into the bucket</li>
+          <li>Click the file → Copy the public URL (looks like <code>https://inmrsgujgfktapjnekjs.supabase.co/storage/v1/object/public/papers/filename.pdf</code>)</li>
+          <li>Paste that URL into the Paper URL field below and save</li>
+        </ol>
+      </div>
+
+      <div class="form-card">
+        <div class="form-section">
+          <div class="form-section-title">Classification</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Grade <span class="req">*</span></label>
+              <select class="form-select" id="pfGrade">
+                <option value="">Select grade</option>
+                <option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option>
+                <option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option>
+                <option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option>
+                <option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12 (Matric)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subject <span class="req">*</span></label>
+              <select class="form-select" id="pfSubject">
+                <option value="">Select subject</option>
+                <option value="english">English HL</option>
+                <option value="afrikaans">Afrikaans</option>
+                <option value="maths">Mathematics</option>
+                <option value="maths_lit">Mathematical Literacy</option>
+                <option value="science">Natural Sciences</option>
+                <option value="physics">Physical Sciences</option>
+                <option value="lifesciences">Life Sciences</option>
+                <option value="social">Social Sciences</option>
+                <option value="history">History</option>
+                <option value="geography">Geography</option>
+                <option value="accounting">Accounting</option>
+                <option value="business">Business Studies</option>
+                <option value="economics">Economics</option>
+                <option value="lifeskills">Life Skills</option>
+                <option value="technology">Technology</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Title <span class="req">*</span></label>
+              <input class="form-input" type="text" id="pfTitle" placeholder="e.g. Mathematics — Paper 1"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Topic / Description</label>
+              <input class="form-input" type="text" id="pfTopic" placeholder="e.g. Algebra, Functions & Finance"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title">Files</div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label class="form-label">Paper URL <span class="req">*</span></label>
+              <input class="form-input" type="url" id="pfFileUrl" placeholder="https://inmrsgujgfktapjnekjs.supabase.co/storage/v1/object/public/papers/..."/>
+              <div style="font-size:0.65rem;color:var(--m30);margin-top:0.3rem;">Paste the public URL from Supabase Storage</div>
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Memo URL <span style="font-size:0.6rem;font-weight:400;color:var(--m30)">(optional)</span></label>
+              <input class="form-input" type="url" id="pfMemoUrl" placeholder="https://inmrsgujgfktapjnekjs.supabase.co/storage/v1/object/public/papers/..."/>
+              <div style="font-size:0.65rem;color:var(--m30);margin-top:0.3rem;">Leave blank if no memo available yet</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <button class="btn-submit" id="btnSavePaper" onclick="savePaper()">Save Paper →</button>
+          <button class="btn-secondary-sm" onclick="clearPaperForm()">Clear form</button>
+          <span class="save-status" id="paperStatus"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALL PAPERS -->
+    <div class="panel" id="panel-papers">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">All Papers</div>
+          <div class="panel-sub" id="paperCountLabel">Loading…</div>
+        </div>
+        <button class="btn-submit" onclick="switchPanel('add-paper',document.querySelectorAll('.nav-tab')[3])">+ Add Paper</button>
+      </div>
+      <div class="table-toolbar">
+        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+          <input class="search-input" type="text" placeholder="Search papers…" oninput="filterPapersTable()" id="paperSearchInput"/>
+          <select class="filter-select" onchange="filterPapersTable()" id="filterPaperGrade">
+            <option value="">All grades</option>
+            <option value="1">Gr 1</option><option value="2">Gr 2</option><option value="3">Gr 3</option>
+            <option value="4">Gr 4</option><option value="5">Gr 5</option><option value="6">Gr 6</option>
+            <option value="7">Gr 7</option><option value="8">Gr 8</option><option value="9">Gr 9</option>
+            <option value="10">Gr 10</option><option value="11">Gr 11</option><option value="12">Gr 12</option>
+          </select>
+        </div>
+        <span class="table-count" id="paperTableCount"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="width:35%">Title</th><th>Grade</th><th>Subject</th><th>Topic</th><th>Memo</th><th>Paper URL</th><th></th></tr></thead>
+          <tbody id="papersBody"><tr class="loading-row"><td colspan="7">Loading papers…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL='https://inmrsgujgfktapjnekjs.supabase.co';
+const SUPABASE_KEY='sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
+const ADMIN_PASSWORD='Yoshi@123!Curio';
+
+async function sbFetch(path,options={}){
+  const res=await fetch(`${SUPABASE_URL}/rest/v1/${path}`,{
+    ...options,
+    headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json','Prefer':options.prefer||'',...options.headers}
+  });
+  if(!res.ok){const err=await res.text();throw new Error(err);}
+  const text=await res.text();return text?JSON.parse(text):null;
+}
+async function getQuestions(filters={}){
+  let path='questions?order=id.desc';
+  if(filters.grade)path+=`&grade=eq.${filters.grade}`;
+  if(filters.subject)path+=`&subject=eq.${filters.subject}`;
+  return await sbFetch(path);
+}
+async function insertQuestion(q){return await sbFetch('questions',{method:'POST',prefer:'return=representation',body:JSON.stringify(q)});}
+async function deleteQuestion(id){return await sbFetch(`questions?id=eq.${id}`,{method:'DELETE'});}
+
+function doLogin(){
+  const pw=document.getElementById('loginPassword').value;
+  if(pw===ADMIN_PASSWORD){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('admin-screen').style.display='block';
+    loadDashboard();loadAllQuestions();
+  }else{
+    document.getElementById('loginError').style.display='block';
+  }
+}
+function doLogout(){
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('admin-screen').style.display='none';
+  document.getElementById('loginPassword').value='';
+}
+
+function switchPanel(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(`panel-${name}`).classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(name==='questions')loadAllQuestions();
+  if(name==='dashboard')loadDashboard();
+}
+
+async function loadDashboard(){
+  try{
+    const all=await getQuestions();if(!all)return;
+    const free=all.filter(q=>!q.is_premium).length;
+    const premium=all.filter(q=>q.is_premium).length;
+    const grades=new Set(all.map(q=>q.grade)).size;
+    document.getElementById('statTotal').textContent=all.length;
+    document.getElementById('statFree').textContent=free;
+    document.getElementById('statPremium').textContent=premium;
+    document.getElementById('statGrades').textContent=grades;
+    const recent=all.slice(0,5);
+    const tbody=document.getElementById('recentBody');
+    if(recent.length===0){tbody.innerHTML=`<tr class="loading-row"><td colspan="5">No questions yet — add your first one!</td></tr>`;return;}
+    tbody.innerHTML=recent.map(q=>`<tr><td class="q-text-cell">${q.question_text.substring(0,80)}${q.question_text.length>80?'…':''}</td><td>Grade ${q.grade}</td><td>${q.subject}</td><td>${q.topic}</td><td><span class="chip-small ${q.is_premium?'chip-premium':'chip-free'}">${q.is_premium?'Premium':'Free'}</span></td></tr>`).join('');
+  }catch(e){console.error(e);}
+}
+
+async function saveQuestion(){
+  const grade=document.getElementById('fGrade').value;
+  const subject=document.getElementById('fSubject').value;
+  const topic=document.getElementById('fTopic').value.trim();
+  const question=document.getElementById('fQuestion').value.trim();
+  const optA=document.getElementById('fOptA').value.trim();
+  const optB=document.getElementById('fOptB').value.trim();
+  const optC=document.getElementById('fOptC').value.trim();
+  const optD=document.getElementById('fOptD').value.trim();
+  const correct=document.querySelector('input[name="correct"]:checked')?.value;
+  const explanation=document.getElementById('fExplanation').value.trim();
+  const isPremium=document.getElementById('fPremium').value==='true';
+  if(!grade||!subject||!topic||!question||!optA||!optB||!correct||!explanation){setStatus('Please fill in all required fields.','err');return;}
+  const btn=document.getElementById('btnSave');
+  btn.disabled=true;btn.textContent='Saving…';setStatus('','');
+  try{
+    await insertQuestion({grade:parseInt(grade),subject,topic,question_text:question,option_a:optA,option_b:optB,option_c:optC||null,option_d:optD||null,correct_option:correct,explanation,is_premium:isPremium});
+    setStatus('✓ Question saved!','ok');clearForm();loadDashboard();
+  }catch(e){setStatus('Error saving: '+e.message,'err');console.error(e);}
+  finally{btn.disabled=false;btn.textContent='Save Question →';}
+}
+function setStatus(msg,type){const el=document.getElementById('saveStatus');el.textContent=msg;el.className=`save-status ${type}`;}
+function clearForm(){
+  ['fGrade','fSubject','fTopic','fTopicDisplay','fQuestion','fOptA','fOptB','fOptC','fOptD','fExplanation'].forEach(id=>{
+    const el=document.getElementById(id);if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';
+  });
+  document.querySelectorAll('input[name="correct"]').forEach(r=>r.checked=false);
+  document.getElementById('fPremium').selectedIndex=0;
+}
+
+let allQuestions=[];
+async function loadAllQuestions(){
+  const tbody=document.getElementById('questionsBody');
+  tbody.innerHTML=`<tr class="loading-row"><td colspan="7">Loading…</td></tr>`;
+  try{
+    allQuestions=await getQuestions()||[];
+    document.getElementById('qCountLabel').textContent=`${allQuestions.length} question${allQuestions.length!==1?'s':''} in your database`;
+    renderTable(allQuestions);
+  }catch(e){tbody.innerHTML=`<tr class="loading-row"><td colspan="7">Error loading. Check console.</td></tr>`;console.error(e);}
+}
+function renderTable(data){
+  const tbody=document.getElementById('questionsBody');
+  document.getElementById('tableCount').textContent=`${data.length} question${data.length!==1?'s':''}`;
+  if(data.length===0){tbody.innerHTML=`<tr><td colspan="7"><div class="empty-state">No questions found.<p>Add your first one using the "Add Question" tab.</p></div></td></tr>`;return;}
+  tbody.innerHTML=data.map(q=>`<tr><td class="q-text-cell">${q.question_text.substring(0,90)}${q.question_text.length>90?'…':''}</td><td>Gr ${q.grade}</td><td>${q.subject}</td><td style="font-size:0.72rem;color:var(--m30)">${q.topic}</td><td style="font-weight:700;text-transform:uppercase;font-size:0.75rem;color:var(--cyan)">${q.correct_option}</td><td><span class="chip-small ${q.is_premium?'chip-premium':'chip-free'}">${q.is_premium?'Premium':'Free'}</span></td><td><button class="btn-delete" onclick="deleteQ(${q.id},this)">Delete</button></td></tr>`).join('');
+}
+function filterTable(){
+  const search=document.getElementById('searchInput').value.toLowerCase();
+  const grade=document.getElementById('filterGrade').value;
+  const subject=document.getElementById('filterSubject').value;
+  renderTable(allQuestions.filter(q=>{
+    const ms=!search||q.question_text.toLowerCase().includes(search)||q.topic.toLowerCase().includes(search);
+    const mg=!grade||String(q.grade)===grade;
+    const msub=!subject||q.subject===subject;
+    return ms&&mg&&msub;
+  }));
+}
+async function deleteQ(id,btn){
+  if(!confirm('Delete this question? This cannot be undone.'))return;
+  btn.textContent='…';
+  try{
+    await deleteQuestion(id);
+    allQuestions=allQuestions.filter(q=>q.id!==id);
+    renderTable(allQuestions);loadDashboard();
+  }catch(e){alert('Error deleting: '+e.message);btn.textContent='Delete';}
+}
+
+// ══════════════════════════════════
+// PAPERS CRUD
+// ══════════════════════════════════
+const SUBJECT_NAMES_ADMIN={
+  english:'English HL',afrikaans:'Afrikaans',maths:'Mathematics',maths_lit:'Math Literacy',
+  science:'Natural Sciences',physics:'Physical Sciences',lifesciences:'Life Sciences',
+  social:'Social Sciences',history:'History',geography:'Geography',
+  accounting:'Accounting',business:'Business Studies',economics:'Economics',
+  lifeskills:'Life Skills',technology:'Technology',
+};
+
+async function getPapers(filters={}){
+  let path='papers?order=grade.asc,subject.asc,title.asc';
+  if(filters.grade)path+=`&grade=eq.${filters.grade}`;
+  return await sbFetch(path);
+}
+async function insertPaper(p){return await sbFetch('papers',{method:'POST',prefer:'return=representation',body:JSON.stringify(p)});}
+async function deletePaper(id){return await sbFetch(`papers?id=eq.${id}`,{method:'DELETE'});}
+
+async function savePaper(){
+  const grade=document.getElementById('pfGrade').value;
+  const subject=document.getElementById('pfSubject').value;
+  const title=document.getElementById('pfTitle').value.trim();
+  const topic=document.getElementById('pfTopic').value.trim();
+  const fileUrl=document.getElementById('pfFileUrl').value.trim();
+  const memoUrl=document.getElementById('pfMemoUrl').value.trim();
+
+  if(!grade||!subject||!title||!fileUrl){
+    setPaperStatus('Please fill in grade, subject, title and paper URL.','err');return;
+  }
+
+  const btn=document.getElementById('btnSavePaper');
+  btn.disabled=true;btn.textContent='Saving…';setPaperStatus('','');
+  try{
+    await insertPaper({
+      grade:parseInt(grade),subject,title,topic:topic||null,
+      file_url:fileUrl,
+      memo_url:memoUrl||null,
+      has_memo:!!memoUrl,
+      is_premium:false
+    });
+    setPaperStatus('✓ Paper saved!','ok');
+    clearPaperForm();
+    loadDashboard();
+  }catch(e){
+    setPaperStatus('Error: '+e.message,'err');console.error(e);
+  }finally{
+    btn.disabled=false;btn.textContent='Save Paper →';
+  }
+}
+
+function setPaperStatus(msg,type){
+  const el=document.getElementById('paperStatus');
+  el.textContent=msg;el.className=`save-status ${type}`;
+}
+function clearPaperForm(){
+  ['pfGrade','pfSubject','pfTitle','pfTopic','pfFileUrl','pfMemoUrl'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';
+  });
+}
+
+let allPapersAdmin=[];
+async function loadAllPapers(){
+  const tbody=document.getElementById('papersBody');
+  tbody.innerHTML=`<tr class="loading-row"><td colspan="7">Loading…</td></tr>`;
+  try{
+    allPapersAdmin=await getPapers()||[];
+    document.getElementById('paperCountLabel').textContent=`${allPapersAdmin.length} paper${allPapersAdmin.length!==1?'s':''} in your database`;
+    renderPapersTable(allPapersAdmin);
+  }catch(e){
+    tbody.innerHTML=`<tr class="loading-row"><td colspan="7">Error loading. Check console.</td></tr>`;
+    console.error(e);
+  }
+}
+
+function renderPapersTable(data){
+  const tbody=document.getElementById('papersBody');
+  document.getElementById('paperTableCount').textContent=`${data.length} paper${data.length!==1?'s':''}`;
+  if(data.length===0){
+    tbody.innerHTML=`<tr><td colspan="7"><div class="empty-state">No papers yet.<p>Use "Add Paper" to add your first one.</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML=data.map(p=>`<tr>
+    <td class="q-text-cell">${p.title}</td>
+    <td>Gr ${p.grade}</td>
+    <td>${SUBJECT_NAMES_ADMIN[p.subject]||p.subject}</td>
+    <td style="font-size:0.72rem;color:var(--m30)">${p.topic||'—'}</td>
+    <td><span class="chip-small ${p.has_memo?'chip-free':'chip-premium'}">${p.has_memo?'Yes':'No'}</span></td>
+    <td style="font-size:0.68rem;color:var(--m30);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+      <a href="${p.file_url}" target="_blank" style="color:var(--cyan)" title="${p.file_url}">View ↗</a>
+    </td>
+    <td><button class="btn-delete" onclick="deletePaperRow(${p.id},this)">Delete</button></td>
+  </tr>`).join('');
+}
+
+function filterPapersTable(){
+  const search=document.getElementById('paperSearchInput').value.toLowerCase();
+  const grade=document.getElementById('filterPaperGrade').value;
+  renderPapersTable(allPapersAdmin.filter(p=>{
+    const ms=!search||p.title.toLowerCase().includes(search)||(p.subject||'').includes(search);
+    const mg=!grade||String(p.grade)===grade;
+    return ms&&mg;
+  }));
+}
+
+async function deletePaperRow(id,btn){
+  if(!confirm('Delete this paper? This cannot be undone.'))return;
+  btn.textContent='…';
+  try{
+    await deletePaper(id);
+    allPapersAdmin=allPapersAdmin.filter(p=>p.id!==id);
+    renderPapersTable(allPapersAdmin);
+    loadDashboard();
+  }catch(e){alert('Error: '+e.message);btn.textContent='Delete';}
+}
+
+// ── Extend switchPanel to handle new panels ──
+const _origSwitchPanel=switchPanel;
+function switchPanel(name,btn){
+  _origSwitchPanel(name,btn);
+  if(name==='papers')loadAllPapers();
+}
+
+</script>
+</body>
+</html>
