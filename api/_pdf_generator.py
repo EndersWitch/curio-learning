@@ -18,17 +18,23 @@ LOGO_B64 = None  # injected at runtime from env or static file
 
 def get_logo():
     import base64, os
-    # Try env var first (set in Vercel dashboard)
+    from reportlab.lib.utils import ImageReader
+    # Try env var first (set in Vercel dashboard as CURIO_LOGO_B64)
     b64 = os.environ.get('CURIO_LOGO_B64','')
     if b64:
-        from reportlab.lib.utils import ImageReader
         return ImageReader(BytesIO(base64.b64decode(b64)))
-    # Try static file
-    for path in ['/mnt/user-data/uploads/curio-bloom-logo.png',
-                 'curio-bloom-logo.png', 'public/curio-bloom-logo.png']:
+    # Try paths relative to this file and common Vercel locations
+    this_dir = os.path.dirname(os.path.abspath(__file__))
+    paths = [
+        os.path.join(this_dir, 'curio-bloom-logo.png'),   # api/curio-bloom-logo.png
+        os.path.join(this_dir, '..', 'public', 'curio-bloom-logo.png'),
+        os.path.join(this_dir, '..', 'curio-bloom-logo.png'),
+        '/mnt/user-data/uploads/curio-bloom-logo.png',    # local dev
+    ]
+    for path in paths:
         if os.path.exists(path):
-            from reportlab.lib.utils import ImageReader
-            with open(path,'rb') as f: return ImageReader(BytesIO(f.read()))
+            with open(path,'rb') as f:
+                return ImageReader(BytesIO(f.read()))
     return None
 
 def sanitise(t):

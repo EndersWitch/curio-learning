@@ -250,7 +250,6 @@ tr:hover td{background:var(--m03);}
       <div class="nav-tab" onclick="switchPanel('add-paper',this)">Add Paper</div>
     </div>
     <div class="nav-right">
-      <a href="formatter.html" target="_blank" style="font-size:0.72rem;font-weight:700;color:var(--cyan);background:var(--c12);border:1px solid var(--c25);padding:0.25rem 0.7rem;border-radius:6px;">✦ Formatter</a>
       <a href="index.html" style="font-size:0.72rem;color:var(--m30);">← Site</a>
       <span class="nav-logout" onclick="doLogout()">Sign out</span>
     </div>
@@ -281,16 +280,6 @@ tr:hover td{background:var(--m03);}
           <div class="stat-label">Grades Covered</div>
           <div class="stat-val" id="statGrades">—</div>
         </div>
-      </div>
-
-      <!-- Formatter shortcut -->
-      <div style="background:linear-gradient(135deg,var(--c12),rgba(109,211,206,0.04));border:1px solid var(--c25);border-radius:16px;padding:1.4rem 1.8rem;margin-bottom:2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
-        <div>
-          <div style="font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--cyan);margin-bottom:0.35rem;">Content Tool</div>
-          <div style="font-family:var(--h);font-size:1rem;font-weight:800;color:var(--moon);margin-bottom:0.25rem;">✦ Material Formatter</div>
-          <div style="font-size:0.78rem;color:var(--m55);line-height:1.6;">Generate a prompt for ChatGPT, paste the output, and download a branded Curio PDF — ready to upload.</div>
-        </div>
-        <a href="formatter.html" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;background:var(--cyan);color:var(--plum);padding:0.75rem 1.5rem;border-radius:10px;font-family:var(--h);font-size:0.85rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:all .15s;" onmouseover="this.style.background='var(--moon)'" onmouseout="this.style.background='var(--cyan)'">Open Formatter →</a>
       </div>
       <div class="panel-header">
         <div><div class="panel-title">Recent Additions</div></div>
@@ -615,6 +604,7 @@ function switchPanel(name,btn){
   if(btn)btn.classList.add('active');
   if(name==='questions')loadAllQuestions();
   if(name==='dashboard')loadDashboard();
+  if(name==='papers')loadAllPapers();
 }
 
 async function loadDashboard(){
@@ -818,12 +808,7 @@ async function deletePaperRow(id,btn){
   }catch(e){alert('Error: '+e.message);btn.textContent='Delete';}
 }
 
-// ── Extend switchPanel to handle new panels ──
-const _origSwitchPanel=switchPanel;
-function switchPanel(name,btn){
-  _origSwitchPanel(name,btn);
-  if(name==='papers')loadAllPapers();
-}
+
 
 </script>
 </body>
