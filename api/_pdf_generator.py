@@ -16,26 +16,60 @@ HEADER_H=36*mm;FOOTER_H=18*mm;PAGE_TOP=H-HEADER_H-8*mm;CONT_TOP=H-12*mm-8*mm
 
 LOGO_B64 = None  # injected at runtime from env or static file
 
-def get_logo():
-    import base64, os
-    from reportlab.lib.utils import ImageReader
-    # Try env var first (set in Vercel dashboard as CURIO_LOGO_B64)
-    b64 = os.environ.get('CURIO_LOGO_B64','')
-    if b64:
-        return ImageReader(BytesIO(base64.b64decode(b64)))
-    # Try paths relative to this file and common Vercel locations
-    this_dir = os.path.dirname(os.path.abspath(__file__))
-    paths = [
-        os.path.join(this_dir, 'curio-bloom-logo.png'),   # api/curio-bloom-logo.png
-        os.path.join(this_dir, '..', 'public', 'curio-bloom-logo.png'),
-        os.path.join(this_dir, '..', 'curio-bloom-logo.png'),
-        '/mnt/user-data/uploads/curio-bloom-logo.png',    # local dev
-    ]
-    for path in paths:
-        if os.path.exists(path):
-            with open(path,'rb') as f:
-                return ImageReader(BytesIO(f.read()))
-    return None
+def draw_bloom(c, cx, cy, size):
+    """
+    Draw the Curio Bloom logo natively in ReportLab.
+    Matches the SVG exactly: 5 rotated ellipses + coral centre circle.
+    SVG viewBox 0 0 200 200, centre at (100,100).
+    Petal: cx=100,cy=50 rx=22,ry=42 rotated around (100,100).
+    Unrotated petal centre offset from bloom centre: (0, -50) SVG units.
+    scale = size / 200 (full logo fits in 'size' points).
+    """
+    import math
+    scale = size / 200.0
+    # Petal dimensions in output space
+    pRx = 22 * scale
+    pRy = 42 * scale
+    # Petal centre offset from bloom centre (0, -50) in SVG = (0, +50) in PDF (y flipped)
+    pOff = 50 * scale
+    alphas = [1.0, 0.7, 0.5, 0.5, 0.7]
+    angles_deg = [0, 72, 144, 216, 288]
+    N = 24  # polygon points per petal
+
+    for i, deg in enumerate(angles_deg):
+        rad = math.radians(deg)
+        # Petal centre — rotate offset (0, pOff) by angle
+        # In PDF coords y increases upward, so petal tip starts above centre
+        pcx = cx + pOff * math.sin(rad)
+        pcy = cy + pOff * math.cos(rad)
+
+        a = alphas[i]
+        r = int(109 * a + 43 * (1-a))
+        g = int(211 * a + 30 * (1-a))
+        b = int(206 * a + 63 * (1-a))
+        c.setFillColorRGB(r/255, g/255, b/255)
+
+        # Build ellipse polygon points then draw as filled path
+        pts = []
+        for t in range(N):
+            theta = 2 * math.pi * t / N
+            lx = pRx * math.cos(theta)
+            ly = pRy * math.sin(theta)
+            px = pcx + lx * math.cos(rad) - ly * math.sin(rad)
+            py = pcy + lx * math.sin(rad) + ly * math.cos(rad)
+            pts.append((px, py))
+        # Draw filled polygon using ReportLab path
+        p = c.beginPath()
+        p.moveTo(pts[0][0], pts[0][1])
+        for px, py in pts[1:]:
+            p.lineTo(px, py)
+        p.close()
+        c.drawPath(p, fill=1, stroke=0)
+
+    # Coral centre circle
+    r_circle = 22 * scale
+    c.setFillColor(HexColor('#FF5E5B'))
+    c.circle(cx, cy, r_circle, fill=1, stroke=0)
 
 def sanitise(t):
     r={'\u2022':'-','\u2018':"'",'\u2019':"'",'\u201c':'"','\u201d':'"',
@@ -79,12 +113,11 @@ def generate(data):
     memo=data.get('memo',[])
     is_junior=(data.get('grade_band','4-7')=='4-7')
     total_marks=sum(q.get('marks',1) for q in questions)
-    LOGO=get_logo()
     is_memo_page=[False]
 
     def hdr_full(is_memo):
         c.setFillColor(PLUM);c.rect(0,H-HEADER_H,W,HEADER_H,fill=1,stroke=0)
-        if LOGO: c.drawImage(LOGO,5*mm,H-HEADER_H+3*mm,30*mm,30*mm,preserveAspectRatio=True)
+        draw_bloom(c, 5*mm+15*mm, H-HEADER_H+3*mm+15*mm, 30*mm)
         c.setFillColor(white);c.setFont('Helvetica-Bold',22);c.drawString(42*mm,H-14*mm,'curio learning')
         c.setFillColor(CYAN);c.setFont('Helvetica',10)
         sub=f"{title} \u2014 Marking Memorandum" if is_memo else title
@@ -106,7 +139,7 @@ def generate(data):
 
     def hdr_cont(is_memo):
         bh=12*mm;c.setFillColor(PLUM);c.rect(0,H-bh,W,bh,fill=1,stroke=0)
-        if LOGO: c.drawImage(LOGO,4*mm,H-bh+1*mm,10*mm,10*mm,preserveAspectRatio=True)
+        draw_bloom(c, 4*mm+5*mm, H-bh+1*mm+5*mm, 10*mm)
         c.setFillColor(white);c.setFont('Helvetica-Bold',10);c.drawString(17*mm,H-7*mm,'curio learning')
         c.setFillColor(CYAN);c.setFont('Helvetica',8)
         c.drawString(55*mm,H-7*mm,title+(' \u2014 Marking Memorandum' if is_memo else ''))
