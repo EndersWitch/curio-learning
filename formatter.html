@@ -546,24 +546,45 @@ function formatAndDownload(){
   };
 
   // Call the Vercel serverless API
-  fetch('/api/generate-pdf',{
+  fetch('/api/generate-pdf?type=paper',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify(payload)
   })
   .then(function(res){
-    if(!res.ok) return res.json().then(function(e){throw new Error(e.error||'Server error');});
+    if(!res.ok) return res.json().then(function(e){throw new Error(e.error||'Server error '+res.status);});
     return res.blob();
   })
-  .then(function(blob){
-    var url=URL.createObjectURL(blob);
+  .then(function(paperBlob){
+    // Download question paper immediately
+    var base=(title||'curio-material').replace(/[^a-z0-9]/gi,'-').toLowerCase();
+    var url=URL.createObjectURL(paperBlob);
     var a=document.createElement('a');
-    a.href=url;
-    var fname=(title||'curio-material').replace(/[^a-z0-9]/gi,'-').toLowerCase()+'.pdf';
-    a.download=fname;
-    document.body.appendChild(a);a.click();
-    setTimeout(function(){URL.revokeObjectURL(url);a.remove();},1000);
-    showStatus('✓ PDF downloaded — '+parsed.questions.length+' questions, '+parsed.totalMarks+' marks. Upload to Supabase Storage, then add via Admin → Add Material.','ok');
+    a.href=url; a.download=base+'-paper.pdf';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){URL.revokeObjectURL(url);a.remove();},2000);
+
+    // Now fetch the memo
+    return fetch('/api/generate-pdf?type=memo',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+  })
+  .then(function(res){
+    if(!res.ok) return res.json().then(function(e){throw new Error(e.error||'Memo error '+res.status);});
+    return res.blob();
+  })
+  .then(function(memoBlob){
+    var base=(title||'curio-material').replace(/[^a-z0-9]/gi,'-').toLowerCase();
+    setTimeout(function(){
+      var url=URL.createObjectURL(memoBlob);
+      var a=document.createElement('a');
+      a.href=url; a.download=base+'-memo.pdf';
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){URL.revokeObjectURL(url);a.remove();},2000);
+    },600);
+    showStatus('✓ Two PDFs downloaded — upload both to Supabase Storage → papers bucket, then add via Admin → Add Material.','ok');
   })
   .catch(function(e){showStatus('Error: '+e.message,'err');console.error(e);})
   .finally(function(){btn.disabled=false;btn.textContent='Format & Download PDF →';});
