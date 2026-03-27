@@ -17,59 +17,36 @@ HEADER_H=36*mm;FOOTER_H=18*mm;PAGE_TOP=H-HEADER_H-8*mm;CONT_TOP=H-12*mm-8*mm
 LOGO_B64 = None  # injected at runtime from env or static file
 
 def draw_bloom(c, cx, cy, size):
-    """
-    Draw the Curio Bloom logo natively in ReportLab.
-    Matches the SVG exactly: 5 rotated ellipses + coral centre circle.
-    SVG viewBox 0 0 200 200, centre at (100,100).
-    Petal: cx=100,cy=50 rx=22,ry=42 rotated around (100,100).
-    Unrotated petal centre offset from bloom centre: (0, -50) SVG units.
-    scale = size / 200 (full logo fits in 'size' points).
-    """
+    """Draw Bloom logo matching SVG exactly. Transparent background."""
     import math
     scale = size / 200.0
-    # Petal dimensions in output space
     pRx = 22 * scale
     pRy = 42 * scale
-    # Petal centre offset from bloom centre (0, -50) in SVG = (0, +50) in PDF (y flipped)
-    pOff = 50 * scale
     alphas = [1.0, 0.7, 0.5, 0.5, 0.7]
-    angles_deg = [0, 72, 144, 216, 288]
-    N = 24  # polygon points per petal
-
-    for i, deg in enumerate(angles_deg):
-        rad = math.radians(deg)
-        # Petal centre — rotate offset (0, pOff) by angle
-        # In PDF coords y increases upward, so petal tip starts above centre
-        pcx = cx + pOff * math.sin(rad)
-        pcy = cy + pOff * math.cos(rad)
-
+    N = 32
+    for i, deg in enumerate([0, 72, 144, 216, 288]):
         a = alphas[i]
-        r = int(109 * a + 43 * (1-a))
-        g = int(211 * a + 30 * (1-a))
-        b = int(206 * a + 63 * (1-a))
-        c.setFillColorRGB(r/255, g/255, b/255)
-
-        # Build ellipse polygon points then draw as filled path
+        c.setFillColorRGB(
+            (109*a + 43*(1-a))/255,
+            (211*a + 30*(1-a))/255,
+            (206*a + 63*(1-a))/255
+        )
+        svg_rad = math.radians(deg)
         pts = []
         for t in range(N):
             theta = 2 * math.pi * t / N
-            lx = pRx * math.cos(theta)
-            ly = pRy * math.sin(theta)
-            px = pcx + lx * math.cos(rad) - ly * math.sin(rad)
-            py = pcy + lx * math.sin(rad) + ly * math.cos(rad)
-            pts.append((px, py))
-        # Draw filled polygon using ReportLab path
+            ex = 22 * math.cos(theta)
+            ey = 42 * math.sin(theta) - 50  # relative to SVG centre
+            rot_x = ex * math.cos(svg_rad) - ey * math.sin(svg_rad)
+            rot_y = ex * math.sin(svg_rad) + ey * math.cos(svg_rad)
+            pts.append((cx + rot_x * scale, cy - rot_y * scale))
         p = c.beginPath()
         p.moveTo(pts[0][0], pts[0][1])
-        for px, py in pts[1:]:
-            p.lineTo(px, py)
+        for px, py in pts[1:]: p.lineTo(px, py)
         p.close()
         c.drawPath(p, fill=1, stroke=0)
-
-    # Coral centre circle
-    r_circle = 22 * scale
     c.setFillColor(HexColor('#FF5E5B'))
-    c.circle(cx, cy, r_circle, fill=1, stroke=0)
+    c.circle(cx, cy, 22 * scale, fill=1, stroke=0)
 
 def sanitise(t):
     r={'\u2022':'-','\u2018':"'",'\u2019':"'",'\u201c':'"','\u201d':'"',
