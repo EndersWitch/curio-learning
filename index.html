@@ -626,8 +626,7 @@ footer{
         <div class="grade-selector">
           <span class="grade-selector-label">Grade</span>
           <select class="grade-select" id="gradeSelect" onchange="saveGrade(this.value)">
-            <option value="">—</option><option value="R">R</option>
-            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+            <option value="">—</option>
             <option value="4">4</option><option value="5">5</option><option value="6">6</option>
             <option value="7">7</option><option value="8">8</option><option value="9">9</option>
             <option value="10">10</option><option value="11">11</option><option value="12">12</option>
@@ -637,7 +636,7 @@ footer{
       </div>
     </div>
     <div class="dash-stats">
-      <div class="dash-stat cy"><div class="ds-label">Materials for your grade</div><div class="ds-val" id="dsPapers">—</div><div class="ds-sub">available now</div></div>
+      <div class="dash-stat cy"><div class="ds-label">Papers for your grade</div><div class="ds-val" id="dsPapers">—</div><div class="ds-sub">available now</div></div>
       <div class="dash-stat"><div class="ds-label">Quizzes taken</div><div class="ds-val" id="dsQuizzes">0</div><div class="ds-sub">all time</div></div>
       <div class="dash-stat co"><div class="ds-label">Best quiz score</div><div class="ds-val" id="dsBest">—</div><div class="ds-sub">% correct</div></div>
       <div class="dash-stat am"><div class="ds-label">Day streak</div><div class="ds-val" id="dsStreak">0</div><div class="ds-sub">keep going!</div></div>
@@ -645,18 +644,18 @@ footer{
     <div>
       <div style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--m30);margin-bottom:0.8rem;">Quick actions</div>
       <div class="quick-actions">
-        <a href="papers.html" class="qa-btn"><span class="qa-icon">📄</span><span class="qa-label">Browse materials</span></a>
+        <a href="papers.html" class="qa-btn"><span class="qa-icon">📄</span><span class="qa-label">Browse papers</span></a>
         <a href="quiz.html" class="qa-btn"><span class="qa-icon">📝</span><span class="qa-label">Start a quiz</span></a>
         <a href="deeplearn.html" class="qa-btn"><span class="qa-icon">✦</span><span class="qa-label">Deep Learn</span></a>
         <a href="subscription.html" class="qa-btn"><span class="qa-icon">⭐</span><span class="qa-label">My plan</span></a>
       </div>
     </div>
     <div class="dash-two-col">
-      <div class="dash-panel"><div class="dash-ph"><span class="dash-pt">📄 Recommended materials</span><a href="papers.html" class="dash-pl">View all →</a></div><div class="dash-pb" id="recPapers"><div class="dash-empty">Set your grade above to see recommendations.</div></div></div>
+      <div class="dash-panel"><div class="dash-ph"><span class="dash-pt">📄 Recommended papers</span><a href="papers.html" class="dash-pl">View all →</a></div><div class="dash-pb" id="recPapers"><div class="dash-empty">Set your grade above to see recommendations.</div></div></div>
       <div class="dash-panel"><div class="dash-ph"><span class="dash-pt">📝 Quiz history</span><a href="quiz.html" class="dash-pl">Take a quiz →</a></div><div class="dash-pb" id="quizHistory"><div class="dash-empty">No quizzes yet — <a href="quiz.html">start one →</a></div></div></div>
     </div>
     <div class="dash-two-col">
-      <div class="dash-panel"><div class="dash-ph"><span class="dash-pt">🔥 Study streak</span></div><div class="dash-pb"><div style="font-size:0.72rem;color:var(--m55);margin-bottom:0.7rem;">Days studied this week</div><div class="streak-week" id="streakWeek"></div><div style="font-size:0.7rem;color:var(--m30);margin-top:0.7rem;" id="streakMsg">Study a material or take a quiz to start your streak!</div></div></div>
+      <div class="dash-panel"><div class="dash-ph"><span class="dash-pt">🔥 Study streak</span></div><div class="dash-pb"><div style="font-size:0.72rem;color:var(--m55);margin-bottom:0.7rem;">Days studied this week</div><div class="streak-week" id="streakWeek"></div><div style="font-size:0.7rem;color:var(--m30);margin-top:0.7rem;" id="streakMsg">Open a paper or take a quiz to start your streak!</div></div></div>
       <div class="dash-panel"><div class="dash-ph"><span class="dash-pt">📋 Recent activity</span></div><div class="dash-pb" id="recentActivity"><div class="dash-empty">No activity yet.</div></div></div>
     </div>
     <div class="pu" id="premiumUpsell">
@@ -699,7 +698,7 @@ footer{
   <div class="hero-left">
     <div class="hero-kicker">
       <span class="hero-kicker-dot"></span>
-      for every SA student, Grade R to 12
+      for every SA student, Grade 4 to 12
     </div>
     <h1 class="hero-h1">
       Your<br/>
@@ -707,7 +706,7 @@ footer{
       <span class="squiggle w-cyan">friend.</span>
     </h1>
     <p class="hero-desc">
-      Focused study materials, AI-powered quizzes and deep explanations —
+      Exam papers, AI-powered quizzes and deep explanations —
       <strong>built for South African students.</strong>
       Free to start. Always in your corner.
     </p>
@@ -717,11 +716,9 @@ footer{
     </div>
     <div class="hero-grades">
       <span class="gp on">All grades</span>
-      <span class="gp">R – 3</span>
       <span class="gp">4 – 6</span>
       <span class="gp">7 – 9</span>
       <span class="gp">10 – 12</span>
-      <span class="gp">Matric</span>
     </div>
   </div>
 
@@ -754,11 +751,11 @@ footer{
       </div>
       <div class="hstat">
         <div class="hstat-lbl">Grade range</div>
-        <div class="hstat-val" style="font-size:1.5rem">R – 12</div>
+        <div class="hstat-val" style="font-size:1.5rem">4 – 12</div>
         <div class="hstat-sub">All levels welcome</div>
       </div>
       <div class="hstat">
-        <div class="hstat-lbl">Materials</div>
+        <div class="hstat-lbl">Papers</div>
         <div class="hstat-val" style="color:var(--cyan)">Free</div>
         <div class="hstat-sub">Always, forever</div>
       </div>
@@ -780,14 +777,14 @@ footer{
     </div>
 
     <!-- One tasteful handwritten note -->
-    <span class="hero-script-note">you've got this 🌱</span>
+    <span class="hero-script-note">You've Got This 🌱</span>
 
   </div>
 </section>
 
 <!-- ═══ SUBJECTS CLOUD ═══ -->
 <section class="subjects-section rv">
-  <div class="subjects-label">Every subject · Grade R to 12</div>
+  <div class="subjects-label">Every subject · Grade 4 to 12</div>
   <div class="subject-cloud">
     <span class="sc-word big c">English HL</span>
     <span class="sc-div">·</span>
@@ -803,7 +800,7 @@ footer{
     <span class="sc-div">·</span>
     <span class="sc-word sm">Accounting</span>
     <span class="sc-div">·</span>
-    <span class="sc-word sm c">Afrikaans HL</span>
+    <span class="sc-word sm c">Afrikaans FAL</span>
     <span class="sc-div">·</span>
     <span class="sc-word sm">Business Studies</span>
     <span class="sc-div">·</span>
@@ -820,17 +817,16 @@ footer{
 <!-- ═══ CHAPTER 1: PAPERS ═══ -->
 <section class="ch1 rv" id="papers">
   <div>
-    <span class="ch-num">chapter one</span>
-    <h2 class="ch-h">Topic by topic.<br/>Carefully curated.<br/><span class="cy">Yours to keep.</span></h2>
-    <p class="ch-p">Enhanced study materials for every grade and subject — focused by topic, carefully curated for depth. Comprehension sets, poetry analysis, algebra practice, geography skills. Complete with full memos. Download them, study from them, own them. We never charge for this.</p>
+    <h2 class="ch-h">Exam papers.<br/>Full memos.<br/><span class="cy">Yours to keep.</span></h2>
+    <p class="ch-p">Exam papers for every grade and subject, complete with full marking memos. Download them, study from them, own them. We never charge for this — access to good study material shouldn't depend on who you are or where you come from.</p>
     <span class="tag-pill tag-free">Always free</span>
   </div>
     <div class="plist">
-      <div class="prow"><div class="pbar c"></div><div class="pinfo"><div class="ptitle">English HL — Comprehension · Grade 12</div><div class="pmeta">Reading for meaning · Inferential</div></div><span class="pbadge">Free + Memo</span></div>
-      <div class="prow"><div class="pbar r"></div><div class="pinfo"><div class="ptitle">Mathematics — Algebra · Grade 10</div><div class="pmeta">Equations & expressions · Mixed</div></div><span class="pbadge">Free + Memo</span></div>
-      <div class="prow"><div class="pbar c"></div><div class="pinfo"><div class="ptitle">Life Sciences — Cells & Tissues · Grade 11</div><div class="pmeta">Structure & function · Analytical</div></div><span class="pbadge">Free + Memo</span></div>
-      <div class="prow"><div class="pbar r"></div><div class="pinfo"><div class="ptitle">History — Source Analysis · Grade 11</div><div class="pmeta">SA History · Evaluative</div></div><span class="pbadge">Free + Memo</span></div>
-      <div class="prow"><div class="pbar c"></div><div class="pinfo"><div class="ptitle">Geography — Climate & Weather · Grade 9</div><div class="pmeta">Physical geography · Applied</div></div><span class="pbadge">Free + Memo</span></div>
+      <div class="prow"><div class="pbar c"></div><div class="pinfo"><div class="ptitle">English HL — Paper 1 · Grade 12</div><div class="pmeta">Language in Context · Comprehensive</div></div><span class="pbadge">Free + Memo</span></div>
+      <div class="prow"><div class="pbar r"></div><div class="pinfo"><div class="ptitle">Mathematics — Paper 2 · Grade 12</div><div class="pmeta">Geometry & Statistics · Full paper</div></div><span class="pbadge">Free + Memo</span></div>
+      <div class="prow"><div class="pbar c"></div><div class="pinfo"><div class="ptitle">Life Sciences — Paper 1 · Grade 12</div><div class="pmeta">Biochemistry & Cells · Full paper</div></div><span class="pbadge">Free + Memo</span></div>
+      <div class="prow"><div class="pbar r"></div><div class="pinfo"><div class="ptitle">History — Paper 1 · Grade 11</div><div class="pmeta">SA History · Source-based</div></div><span class="pbadge">Free + Memo</span></div>
+      <div class="prow"><div class="pbar c"></div><div class="pinfo"><div class="ptitle">Geography — Paper 2 · Grade 10</div><div class="pmeta">Human Geography · Full paper</div></div><span class="pbadge">Free + Memo</span></div>
     </div>
 </section>
 
@@ -850,7 +846,6 @@ footer{
     <div class="chat-bubble cb-me">Oh. That actually makes sense now ✨</div>
   </div>
   <div>
-    <span class="ch-num">chapter two</span>
     <h2 class="ch-h">Not just<br/><em><span class="cy">right or wrong.</span></em><br/><span class="cr">Actually explained.</span></h2>
     <p class="ch-p">When you get something wrong, Curio doesn't just mark you down and move on. Deep Learn breaks down the concept from first principles — in plain language, with real examples — until it actually clicks.</p>
     <span class="tag-pill tag-pro">Premium feature</span>
@@ -860,7 +855,6 @@ footer{
 <!-- ═══ CHAPTER 3: QUIZ ═══ -->
 <section class="ch3 rv" id="quiz">
   <div>
-    <span class="ch-num">chapter three</span>
     <h2 class="ch-h">Questions that<br/><span class="cy">actually</span><br/>teach you.</h2>
     <p class="ch-p">Topic-sorted quizzes with instant, meaningful feedback. Build your own custom test. Work at your own pace. Every question is a chance to understand something better.</p>
     <span class="tag-pill tag-pro">Premium feature</span>
@@ -892,7 +886,7 @@ footer{
 <section class="pricing rv" id="pricing">
   <div class="pricing-header">
     <h2 class="pricing-h">Honest pricing.<br/>For <em>every</em> student.</h2>
-    <p class="pricing-note-top">Curated study materials are free, always. Premium unlocks the tools that take you further — for less than a takeaway a month.</p>
+    <p class="pricing-note-top">Papers and memos are free, always. Premium unlocks the tools that take you further — for less than a takeaway a month.</p>
   </div>
   <div class="pricing-cards">
     <div class="pc">
@@ -900,7 +894,7 @@ footer{
       <div class="pc-price"><sup>R</sup>0</div>
       <hr class="pc-div"/>
       <ul class="pc-items">
-        <li class="pc-item"><span class="pci-chk">✓</span>Full study material library</li>
+        <li class="pc-item"><span class="pci-chk">✓</span>Full past paper library</li>
         <li class="pc-item"><span class="pci-chk">✓</span>Download papers as PDF</li>
         <li class="pc-item"><span class="pci-chk">✓</span>Full marking memos</li>
         <li class="pc-item"><span class="pci-chk">✓</span>All grades & subjects</li>
@@ -925,7 +919,7 @@ footer{
     </div>
   </div>
   <div class="heart-note">
-    💛 <strong>No student left behind.</strong> Curio's study materials will always be free — no account needed, no strings attached. Because access to quality study materials shouldn't have a price tag.
+    💛 <strong>No student left behind.</strong> Exam papers and memos will always be free on Curio — no account needed, no strings attached. Because access to good study material shouldn't have a price tag.
   </div>
 </section>
 
@@ -933,8 +927,8 @@ footer{
 <section class="closing">
   <div class="closing-big rv">
     <span class="cy">You've</span><br/>
-    got<br/>
-    <span class="co">this.</span>
+    Got<br/>
+    <span class="co">This.</span>
   </div>
   <div class="closing-right rv rv-delay-1">
     <p>Every student — no matter their school, their background, or their circumstances — deserves a real shot. <strong>Curio is here to give it to you.</strong></p>
@@ -964,7 +958,7 @@ footer{
     <a href="terms.html">Terms</a>
     <a href="contact.html">Contact</a>
   </div>
-  <p class="footer-copy">© 2025 Curio Learning · Made with love for SA students</p>
+  <p class="footer-copy">© 2026 Curio Learning · Made with love for SA students</p>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
