@@ -626,7 +626,8 @@ footer{
         <div class="grade-selector">
           <span class="grade-selector-label">Grade</span>
           <select class="grade-select" id="gradeSelect" onchange="saveGrade(this.value)">
-            <option value="">—</option>
+            <option value="">—</option><option value="R">R</option>
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
             <option value="4">4</option><option value="5">5</option><option value="6">6</option>
             <option value="7">7</option><option value="8">8</option><option value="9">9</option>
             <option value="10">10</option><option value="11">11</option><option value="12">12</option>
@@ -698,7 +699,7 @@ footer{
   <div class="hero-left">
     <div class="hero-kicker">
       <span class="hero-kicker-dot"></span>
-      for every SA student, Grade 4 to 12
+      for every SA student, Grade R to 12
     </div>
     <h1 class="hero-h1">
       Your<br/>
@@ -716,9 +717,11 @@ footer{
     </div>
     <div class="hero-grades">
       <span class="gp on">All grades</span>
+      <span class="gp">R – 3</span>
       <span class="gp">4 – 6</span>
       <span class="gp">7 – 9</span>
       <span class="gp">10 – 12</span>
+      <span class="gp">Matric</span>
     </div>
   </div>
 
@@ -751,7 +754,7 @@ footer{
       </div>
       <div class="hstat">
         <div class="hstat-lbl">Grade range</div>
-        <div class="hstat-val" style="font-size:1.5rem">4 – 12</div>
+        <div class="hstat-val" style="font-size:1.5rem">R – 12</div>
         <div class="hstat-sub">All levels welcome</div>
       </div>
       <div class="hstat">
@@ -777,14 +780,14 @@ footer{
     </div>
 
     <!-- One tasteful handwritten note -->
-    <span class="hero-script-note">You've Got This 🌱</span>
+    <span class="hero-script-note">you've got this 🌱</span>
 
   </div>
 </section>
 
 <!-- ═══ SUBJECTS CLOUD ═══ -->
 <section class="subjects-section rv">
-  <div class="subjects-label">Every subject · Grade 4 to 12</div>
+  <div class="subjects-label">Every subject · Grade R to 12</div>
   <div class="subject-cloud">
     <span class="sc-word big c">English HL</span>
     <span class="sc-div">·</span>
@@ -800,7 +803,7 @@ footer{
     <span class="sc-div">·</span>
     <span class="sc-word sm">Accounting</span>
     <span class="sc-div">·</span>
-    <span class="sc-word sm c">Afrikaans FAL</span>
+    <span class="sc-word sm c">Afrikaans HL</span>
     <span class="sc-div">·</span>
     <span class="sc-word sm">Business Studies</span>
     <span class="sc-div">·</span>
@@ -817,6 +820,7 @@ footer{
 <!-- ═══ CHAPTER 1: PAPERS ═══ -->
 <section class="ch1 rv" id="papers">
   <div>
+    <span class="ch-num">chapter one</span>
     <h2 class="ch-h">Exam papers.<br/>Full memos.<br/><span class="cy">Yours to keep.</span></h2>
     <p class="ch-p">Exam papers for every grade and subject, complete with full marking memos. Download them, study from them, own them. We never charge for this — access to good study material shouldn't depend on who you are or where you come from.</p>
     <span class="tag-pill tag-free">Always free</span>
@@ -846,6 +850,7 @@ footer{
     <div class="chat-bubble cb-me">Oh. That actually makes sense now ✨</div>
   </div>
   <div>
+    <span class="ch-num">chapter two</span>
     <h2 class="ch-h">Not just<br/><em><span class="cy">right or wrong.</span></em><br/><span class="cr">Actually explained.</span></h2>
     <p class="ch-p">When you get something wrong, Curio doesn't just mark you down and move on. Deep Learn breaks down the concept from first principles — in plain language, with real examples — until it actually clicks.</p>
     <span class="tag-pill tag-pro">Premium feature</span>
@@ -855,6 +860,7 @@ footer{
 <!-- ═══ CHAPTER 3: QUIZ ═══ -->
 <section class="ch3 rv" id="quiz">
   <div>
+    <span class="ch-num">chapter three</span>
     <h2 class="ch-h">Questions that<br/><span class="cy">actually</span><br/>teach you.</h2>
     <p class="ch-p">Topic-sorted quizzes with instant, meaningful feedback. Build your own custom test. Work at your own pace. Every question is a chance to understand something better.</p>
     <span class="tag-pill tag-pro">Premium feature</span>
@@ -927,8 +933,8 @@ footer{
 <section class="closing">
   <div class="closing-big rv">
     <span class="cy">You've</span><br/>
-    Got<br/>
-    <span class="co">This.</span>
+    got<br/>
+    <span class="co">this.</span>
   </div>
   <div class="closing-right rv rv-delay-1">
     <p>Every student — no matter their school, their background, or their circumstances — deserves a real shot. <strong>Curio is here to give it to you.</strong></p>
@@ -958,7 +964,7 @@ footer{
     <a href="terms.html">Terms</a>
     <a href="contact.html">Contact</a>
   </div>
-  <p class="footer-copy">© 2026 Curio Learning · Made with love for SA students</p>
+  <p class="footer-copy">© 2025 Curio Learning · Made with love for SA students</p>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
@@ -1033,6 +1039,92 @@ function pick(i,el){
   nx.onclick=last?()=>loadSet(aS,null):()=>{cQ++;renderQ();};
 }
 loadSet(0,null);
+
+
+function saveGrade(v){
+  localStorage.setItem('curio_grade',v);
+  const el=document.getElementById('gradeSaved');
+  if(el){el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1200);}
+  loadRecPapers(v);
+}
+
+async function loadRecPapers(grade){
+  const el=document.getElementById('recPapers');if(!el)return;
+  if(!grade){el.innerHTML='<div class="dash-empty">Set your grade above to see recommendations.</div>';return;}
+  try{
+    const rows=await fetch(`https://inmrsgujgfktapjnekjs.supabase.co/rest/v1/papers?grade=eq.${grade}&order=id.desc&limit=4`,
+      {headers:{'apikey':'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU','Authorization':'Bearer sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU'}})
+      .then(r=>r.json());
+    if(!rows||!rows.length){el.innerHTML='<div class="dash-empty">No papers yet for your grade — <a href="papers.html">browse all →</a></div>';return;}
+    el.innerHTML=rows.map(p=>`<div class="rec-paper"><div class="rec-left"><div class="rec-icon">📄</div><div><div class="rec-title">${p.title}</div><div class="rec-sub">Grade ${p.grade}</div></div></div><a href="${p.file_url}" target="_blank" class="rec-btn">Open ↗</a></div>`).join('');
+  }catch(e){el.innerHTML='<div class="dash-empty">Could not load papers.</div>';}
+}
+
+function initDashboard(session){
+  document.getElementById('landing').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+  const u=session.user||{};
+  const name=(u.user_metadata?.full_name||'').split(' ')[0]||'there';
+  const hr=new Date().getHours();
+  const greeting=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';
+  document.getElementById('dashEyebrow').textContent=greeting+',';
+  document.getElementById('dashHello').innerHTML=name+' <span class="cy">🌱</span>';
+  const now=new Date();
+  document.getElementById('dashDate').textContent=now.toLocaleDateString('en-ZA',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  // Grade
+  const savedGrade=localStorage.getItem('curio_grade')||'';
+  const gs=document.getElementById('gradeSelect');
+  if(gs&&savedGrade)gs.value=savedGrade;
+  loadRecPapers(savedGrade);
+  // Quiz history
+  try{
+    const hist=JSON.parse(localStorage.getItem('curio_quiz_history')||'[]');
+    const qh=document.getElementById('quizHistory');
+    if(hist.length){
+      qh.innerHTML=hist.slice(-3).reverse().map(h=>{
+        const pct=Math.round(h.score/h.total*100);
+        const cls=pct>=70?'g':pct>=40?'o':'r';
+        return `<div class="qhi"><div><div class="qhi-topic">${h.topic}</div><div class="qhi-date">${h.date||''}</div></div><span class="qhi-score ${cls}">${pct}%</span></div>`;
+      }).join('');
+      const best=Math.max(...hist.map(h=>Math.round(h.score/h.total*100)));
+      const el=document.getElementById('dsBest');if(el)el.textContent=best+'%';
+    }
+    const dsQ=document.getElementById('dsQuizzes');if(dsQ)dsQ.textContent=hist.length;
+  }catch(e){}
+  // Streak
+  try{
+    const act=JSON.parse(localStorage.getItem('curio_activity')||'{}');
+    const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const today=new Date();
+    let streak=0,sw='';
+    for(let i=6;i>=0;i--){
+      const d=new Date(today);d.setDate(today.getDate()-i);
+      const key=d.toISOString().slice(0,10);
+      const on=!!act[key];
+      const isToday=i===0;
+      sw+=`<div class="s-day${on?' on':''}${isToday?' today':''}"><span>${days[d.getDay()]}</span><div class="s-dot"></div></div>`;
+      if(on&&i===0)streak++;else if(on&&i>0){const prev=new Date(today);prev.setDate(today.getDate()-(i-1));if(act[prev.toISOString().slice(0,10)])streak++;}
+    }
+    const swEl=document.getElementById('streakWeek');if(swEl)swEl.innerHTML=sw;
+    const realStreak=Object.keys(act).filter(k=>{const d=new Date(k);const diff=(today-d)/864e5;return diff<30;}).length;
+    const svEl=document.getElementById('streakVal');if(svEl)svEl.textContent=realStreak;
+    const dsS=document.getElementById('dsStreak');if(dsS)dsS.textContent=realStreak;
+    const smEl=document.getElementById('streakMsg');
+    if(smEl)smEl.textContent=realStreak>0?`${realStreak} day${realStreak!==1?'s':''} studied — keep it up! 🔥`:'Open a paper or take a quiz to start your streak!';
+  }catch(e){}
+  // Stats
+  try{
+    const act2=JSON.parse(localStorage.getItem('curio_recent_activity')||'[]');
+    const ra=document.getElementById('recentActivity');
+    if(ra&&act2.length){
+      ra.innerHTML=act2.slice(-4).reverse().map(a=>`<div class="qhi"><div class="qhi-topic">${a.text}</div><div class="qhi-date">${a.ts||''}</div></div>`).join('');
+    }
+  }catch(e){}
+  // Hide premium upsell if premium
+  if(u.user_metadata?.is_premium){
+    const pu=document.getElementById('premiumUpsell');if(pu)pu.style.display='none';
+  }
+}
 
 // auth nav
 function toggleProfileDD(e){e.stopPropagation();document.getElementById('profileDD')?.classList.toggle('open');}

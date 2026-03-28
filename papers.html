@@ -102,6 +102,37 @@ nav{
   position:sticky;top:58px;height:calc(100vh - 58px);
   overflow-y:auto;display:flex;flex-direction:column;gap:2rem;
 }
+/* Mobile filter toggle button */
+.mobile-filter-btn{
+  display:none;
+  width:100%;padding:0.75rem 1rem;
+  background:var(--plum);border:1px solid var(--m06);border-radius:10px;
+  font-family:var(--h);font-size:0.82rem;font-weight:700;color:var(--moon);
+  cursor:pointer;text-align:left;
+  align-items:center;justify-content:space-between;
+  margin-bottom:0.5rem;
+}
+.mobile-filter-btn span{font-size:0.75rem;color:var(--cyan);}
+@media(max-width:720px){
+  .papers-layout{grid-template-columns:1fr;}
+  .mobile-filter-btn{display:flex;}
+  .papers-sidebar{
+    position:static;height:auto;
+    border-right:none;border-bottom:1px solid var(--m06);
+    padding:0 1rem;
+    /* collapsed by default on mobile */
+    max-height:0;overflow:hidden;
+    transition:max-height 0.3s ease, padding 0.3s ease;
+  }
+  .papers-sidebar.mobile-open{
+    max-height:600px;
+    padding:1.2rem 1rem;
+  }
+  .papers-main{padding:1.2rem 1rem;}
+  .papers-grid{grid-template-columns:1fr;}
+  .papers-hero{padding:2rem 1rem 1.5rem;}
+  .hero-stats{display:none;}
+}
 .sidebar-section{}
 .sidebar-label{font-size:0.56rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--m30);margin-bottom:0.7rem;}
 .grade-list{display:flex;flex-direction:column;gap:0.2rem;}
@@ -240,8 +271,6 @@ nav{
 /* Subject colour mapping */
 .pc-subject-pill[data-subj="maths"],.pc-subject-pill[data-subj="mathematics"]{background:rgba(245,200,66,0.1);color:var(--amber);}
 .pc-subject-pill[data-subj="science"],.pc-subject-pill[data-subj="physics"],.pc-subject-pill[data-subj="lifesciences"]{background:var(--r10);color:var(--coral);}
-.pc-topic-badge{display:inline-block;font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.15rem 0.5rem;border-radius:4px;background:var(--c12);color:var(--cyan);border:1px solid var(--c25);margin-bottom:0.35rem;}
-.topic-pills{display:flex;flex-wrap:wrap;gap:0.35rem;}
 </style>
 </head>
 <body>
@@ -288,8 +317,8 @@ nav{
 <div class="papers-hero">
   <div class="hero-left">
     <div class="hero-eyebrow">Free forever · No sign-up required</div>
-    <h1 class="hero-h">Study materials.<br/><span class="cy">Every topic.</span></h1>
-    <p class="hero-sub">Browse and download focused study materials for every grade, subject and topic. <strong>Always free</strong> — no account needed, no strings.</p>
+    <h1 class="hero-h">Exam papers.<br/><span class="cy">All grades.</span></h1>
+    <p class="hero-sub">Browse and download exam papers for every grade and subject. <strong>Papers and memos are always free</strong> — no account needed, no strings.</p>
     <span class="hero-note">download, print, practise 🌱</span>
   </div>
   <div class="hero-stats" id="heroStats">
@@ -302,8 +331,13 @@ nav{
 <!-- MAIN LAYOUT -->
 <div class="papers-layout">
 
+  <!-- Mobile filter toggle -->
+  <button class="mobile-filter-btn" id="mobileFilterBtn" onclick="toggleMobileFilters()">
+    🔍 Filter papers <span id="mobileFilterLabel">Tap to filter</span>
+  </button>
+
   <!-- SIDEBAR -->
-  <aside class="papers-sidebar">
+  <aside class="papers-sidebar" id="papersSidebar">
     <div class="sidebar-section">
       <div class="sidebar-label">Search</div>
       <input class="papers-search" type="text" id="searchInput" placeholder="e.g. Maths, English…" oninput="applyFilters()"/>
@@ -320,13 +354,6 @@ nav{
       <div class="sidebar-label">Subject</div>
       <div class="subject-pills" id="subjectPills">
         <!-- populated by JS -->
-      </div>
-    </div>
-
-    <div class="sidebar-section" id="topicSection" style="display:none">
-      <div class="sidebar-label">Topic</div>
-      <div class="topic-pills" id="topicPills">
-        <span class="subj-pill all active" onclick="setTopic(\'\',this)">All topics</span>
       </div>
     </div>
   </aside>
@@ -447,36 +474,16 @@ function setGrade(g,btn){
   document.querySelectorAll('.grade-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   applyFilters();
+  closeMobileFiltersIfMobile();
 }
 function setSubject(s,btn){
   selectedSubject=s;
-  activeTopic='';
   document.querySelectorAll('.subj-pill').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   applyFilters();
 }
 
 // ── FILTER & RENDER ──
-var activeTopic='';
-function setTopic(t,el){
-  activeTopic=t;
-  document.querySelectorAll('#topicPills .subj-pill').forEach(function(x){x.classList.remove('active');});
-  if(el)el.classList.add('active');
-  applyFilters();
-}
-function buildTopicPills(papers){
-  var topics=[...new Set(papers.filter(function(p){return p.topic;}).map(function(p){return p.topic;}))].sort();
-  var sec=document.getElementById('topicSection');
-  var pills=document.getElementById('topicPills');
-  if(!topics.length){if(sec)sec.style.display='none';return;}
-  if(sec)sec.style.display='block';
-  pills.innerHTML='<span class="subj-pill all'+(activeTopic===''?' active':'')+'" onclick="setTopic(\'\',this)">All topics</span>'+
-    topics.map(function(t){
-      var active=activeTopic===t?' active':'';
-      return '<span class="subj-pill'+active+'" onclick="setTopic(\''+t.replace(/'/g,"\'")+'\''+',this)">'+t+'</span>';
-    }).join('');
-}
-
 function applyFilters(){
   searchQuery=document.getElementById('searchInput').value.toLowerCase().trim();
 
@@ -488,12 +495,10 @@ function applyFilters(){
       ||(SUBJECT_NAMES[p.subject]||p.subject).toLowerCase().includes(searchQuery)
       ||String(p.grade).includes(searchQuery)
       ||(p.topic||'').toLowerCase().includes(searchQuery);
-    const matchTopic=!activeTopic||(p.topic||'')===activeTopic;
-    return matchGrade&&matchSubject&&matchSearch&&matchTopic;
+    return matchGrade&&matchSubject&&matchSearch;
   });
 
   renderPapers(filtered);
-  buildTopicPills(filtered);
 }
 
 function renderPapers(papers){
@@ -528,7 +533,7 @@ function renderPapers(papers){
       <div class="grade-heading-num">${grade}</div>
       <div class="grade-heading-text">
         <div class="grade-heading-title">Grade ${grade}</div>
-        <div class="grade-heading-sub">${totalInGrade} material${totalInGrade!==1?'s':''}</div>
+        <div class="grade-heading-sub">${totalInGrade} paper${totalInGrade!==1?'s':''}</div>
       </div>
     </div>`;
 
@@ -539,7 +544,7 @@ function renderPapers(papers){
         <div class="subject-group-header">
           <span class="subject-group-title">${subjName}</span>
           <div class="subject-group-line"></div>
-          <span class="subject-group-count">${subjectPapers.length} material${subjectPapers.length!==1?'s':''}</span>
+          <span class="subject-group-count">${subjectPapers.length} paper${subjectPapers.length!==1?'s':''}</span>
         </div>
         <div class="papers-grid">
           ${subjectPapers.map(p=>paperCardHTML(p)).join('')}
@@ -572,7 +577,7 @@ function paperCardHTML(p){
       ${p.has_memo?'<span class="pc-memo-badge">Memo incl.</span>':''}
     </div>
     <div class="pc-title">${p.title}</div>
-    ${p.topic?`<div class="pc-topic-badge">${p.topic}</div>`:''}
+    ${p.topic?`<div class="pc-meta">${p.topic}</div>`:''}
     <div class="pc-actions">
       ${paperBtn}
       ${memoBtn}
@@ -581,7 +586,7 @@ function paperCardHTML(p){
 }
 
 function clearFilters(){
-  selectedGrade='all';selectedSubject='all';searchQuery='';activeTopic='';
+  selectedGrade='all';selectedSubject='all';searchQuery='';
   document.getElementById('searchInput').value='';
   document.querySelectorAll('.grade-btn').forEach(b=>b.classList.remove('active'));
   document.querySelector('.grade-btn[data-grade="all"]').classList.add('active');
@@ -609,7 +614,7 @@ function renderNav(session){
   if(session){
     const u=session.user||{},name=u.user_metadata?.full_name||'',email=u.email||'';
     const init=name?name[0].toUpperCase():(email?email[0].toUpperCase():'?');
-    nr.innerHTML='<div class="profile-wrap"><button class="profile-btn" onclick="toggleProfileDD(event)">'+init+'</button><div class="profile-dropdown" id="profileDD"><div class="profile-dd-head"><div class="profile-dd-name">'+(name||'My account')+'</div><div class="profile-dd-email">'+email+'</div></div><a href="index.html" class="profile-dd-item">&#127968; &nbsp;Home</a><a href="papers.html" class="profile-dd-item">&#128196; &nbsp;Papers</a><a href="quiz.html" class="profile-dd-item">&#128221; &nbsp;Start a quiz</a><a href="profile.html" class="profile-dd-item">&#128100; &nbsp;Edit profile</a><a href="subscription.html" class="profile-dd-item">&#11088; &nbsp;Manage subscription</a><button class="profile-dd-item danger" onclick="doLogout()">Sign out</button></div></div>';
+    nr.innerHTML=`<div class="profile-wrap"><button class="profile-btn" onclick="toggleProfileDD(event)">${init}</button><div class="profile-dropdown" id="profileDD"><div class="profile-dd-head"><div class="profile-dd-name">${name||'My account'}</div><div class="profile-dd-email">${email}</div></div><a href="quiz.html" class="profile-dd-item">📚 &nbsp;Start a quiz</a><a href="papers.html" class="profile-dd-item">📄 &nbsp;Papers</a><button class="profile-dd-item danger" onclick="doLogout()">Sign out</button></div></div>`;
   }else{
     nr.innerHTML=`<a href="login.html" class="btn-ghost">Log in</a><a href="login.html?tab=signup" class="btn-nav">Start free →</a>`;
   }
@@ -642,6 +647,29 @@ function dismissAd(id){
     el.style.paddingTop='0';el.style.paddingBottom='0';
   }));
   setTimeout(()=>el.remove(),320);
+}
+
+// ── MOBILE FILTER TOGGLE ──
+function toggleMobileFilters(){
+  const sb=document.getElementById('papersSidebar');
+  const btn=document.getElementById('mobileFilterBtn');
+  const lbl=document.getElementById('mobileFilterLabel');
+  if(sb.classList.contains('mobile-open')){
+    sb.classList.remove('mobile-open');
+    if(lbl)lbl.textContent='Tap to filter';
+  }else{
+    sb.classList.add('mobile-open');
+    if(lbl)lbl.textContent='Tap to close ✕';
+  }
+}
+// Close filters after selecting on mobile
+function closeMobileFiltersIfMobile(){
+  if(window.innerWidth<=720){
+    const sb=document.getElementById('papersSidebar');
+    const lbl=document.getElementById('mobileFilterLabel');
+    if(sb){sb.classList.remove('mobile-open');}
+    if(lbl)lbl.textContent='Tap to filter';
+  }
 }
 
 // ── INIT ──
