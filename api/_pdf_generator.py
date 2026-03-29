@@ -192,11 +192,33 @@ def generate_paper(data):
         y -= 8*mm
         pfs = 11 if is_junior else 10
         plh = 5.5*mm if is_junior else 5.0*mm
-        paras = [p.strip() for p in passage.split('\n') if p.strip()]
+        is_poetry = 'poet' in section.lower() or 'verse' in section.lower() or 'stanza' in section.lower() or 'poem' in title.lower() or 'lyric' in section.lower()
+        raw_lines = passage.split('\n')
         p_lines = []
-        for para in paras:
-            p_lines.extend(wrap(para, 'Helvetica', pfs, CW-14*mm))
-        box_h = len(p_lines)*plh + 10*mm
+        for raw_line in raw_lines:
+            stripped = raw_line.strip()
+            if not stripped:
+                # Blank line = stanza break — keep as empty line
+                p_lines.append('')
+            elif is_poetry:
+                # Poetry: preserve each line exactly, only wrap if truly too long
+                if stringWidth(stripped, 'Helvetica', pfs) <= CW-14*mm:
+                    p_lines.append(stripped)
+                else:
+                    p_lines.extend(wrap(stripped, 'Helvetica', pfs, CW-14*mm))
+            else:
+                # Prose: normal word wrap
+                p_lines.extend(wrap(stripped, 'Helvetica', pfs, CW-14*mm))
+        # Remove leading/trailing blank lines
+        while p_lines and p_lines[0] == '': p_lines.pop(0)
+        while p_lines and p_lines[-1] == '': p_lines.pop()
+        # Count blank lines as 1.5x for poetry stanza gaps
+        if is_poetry:
+            blank_count = sum(1 for l in p_lines if not l)
+            text_count = len(p_lines) - blank_count
+            box_h = (text_count * plh) + (blank_count * plh * 1.5) + 10*mm
+        else:
+            box_h = len(p_lines)*plh + 10*mm
         if y - box_h < FOOTER_H+10*mm: y = new_page(); y -= 4*mm
         c.setFillColor(white)
         c.rect(ML, y-box_h, CW, box_h, fill=1, stroke=0)
@@ -207,7 +229,12 @@ def generate_paper(data):
         c.setFillColor(INK); c.setFont('Helvetica', pfs)
         ty = y - 6*mm
         for line in p_lines:
-            c.drawString(ML+5*mm, ty, line); ty -= plh
+            if line:
+                c.drawString(ML+5*mm, ty, line)
+                ty -= plh
+            else:
+                # Blank line = stanza break — extra half-line gap
+                ty -= plh * (1.5 if is_poetry else 1)
         y = y - box_h - 8*mm
 
     # Section header
