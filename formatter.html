@@ -362,7 +362,8 @@ function updatePrompt(){
 'FORMAT:\n' +
 'Source: [one line — either "Original passage (created for Curio Learning, educational use)" or cite the real source]\n' +
 '\n' +
-'[The study text, passage, or problem set here — 3 to 5 paragraphs or the equivalent for ' + subject + ']\n' +
+'[The full text, passage, poem, or problem set goes here]\n' +
+'[CRITICAL FORMATTING RULE: You MUST put one blank line between every paragraph and between every stanza. These blank lines are essential — they appear as visual spaces in the PDF. Never run paragraphs or stanzas together without a blank line between them.]\n' +
 '\n' +
 'QUESTIONS\n' +
 '[Number questions 1 to 15 straight through. No section labels. No headings. Just numbered questions.]\n' +
@@ -381,7 +382,8 @@ function updatePrompt(){
 '- No section labels like "Literal", "Inferential", "Section A", etc.\n' +
 '- Appropriate for ' + gradeLabel + ' South African CAPS curriculum\n' +
 (topic ? '- The content must relate to "' + topic + '"\n' : '') +
-'- Language and difficulty must suit ' + gradeLabel + ' level';
+'- Language and difficulty must suit ' + gradeLabel + ' level' +
+(stype.toLowerCase().includes('poet') ? '\\n- POETRY: preserve every line break exactly. Do not merge poem lines together.' : '');
 
   document.getElementById('promptOutput').textContent = prompt;
 }
@@ -426,14 +428,21 @@ function parseExercise(raw){
     }
   }
 
-  // Passage
+  // Passage — preserve blank lines so poetry stanzas are kept intact
   var passEnd=qStart>-1?qStart:(mStart>-1?mStart:lines.length);
   var passLines=[];
+  var foundContent=false;
   for(var i=0;i<passEnd;i++){
     var l=lines[i].trim();
-    if(!l||/^source:/i.test(l)) continue;
-    passLines.push(l);
+    if(/^source:/i.test(l)) continue;
+    if(!l || l==='[BREAK]'){
+      if(foundContent) passLines.push('');
+    } else {
+      foundContent=true;
+      passLines.push(l);
+    }
   }
+  while(passLines.length && passLines[passLines.length-1]==='') passLines.pop();
   result.passage=passLines.join('\n').trim();
 
   // Questions
