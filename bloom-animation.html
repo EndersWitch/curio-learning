@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=DM+Sans:wght@400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    background: #2B1E3F;
+  }
+
+  .scene {
+    width: 1080px;
+    height: 1080px;
+    background: #2B1E3F;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .stage {
+    width: 380px;
+    height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #wordmark {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    color: #F7F7FF;
+    letter-spacing: 6px;
+    margin-top: 4px;
+    opacity: 0;
+    transform: translateY(16px);
+    line-height: 1;
+  }
+
+  #tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: rgba(109,211,206,0.75);
+    letter-spacing: 4px;
+    margin-top: 10px;
+    opacity: 0;
+    line-height: 1;
+  }
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="stage">
+    <svg overflow="visible" width="340" height="340" viewBox="0 0 200 200">
+      <ellipse id="p0" cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fill-opacity="1.0"
+        style="transform-origin:100px 100px; transform:rotate(0deg) scale(0.01); opacity:0"/>
+      <ellipse id="p1" cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fill-opacity="0.7"
+        style="transform-origin:100px 100px; transform:rotate(72deg) scale(0.01); opacity:0"/>
+      <ellipse id="p2" cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fill-opacity="0.5"
+        style="transform-origin:100px 100px; transform:rotate(144deg) scale(0.01); opacity:0"/>
+      <ellipse id="p3" cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fill-opacity="0.5"
+        style="transform-origin:100px 100px; transform:rotate(216deg) scale(0.01); opacity:0"/>
+      <ellipse id="p4" cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fill-opacity="0.7"
+        style="transform-origin:100px 100px; transform:rotate(288deg) scale(0.01); opacity:0"/>
+      <circle id="core" cx="-140" cy="100" r="22" fill="#FF5E5B"/>
+    </svg>
+  </div>
+
+  <div id="wordmark">curio learning</div>
+  <div id="tagline">your study friend</div>
+</div>
+
+<script>
+  const core     = document.getElementById('core');
+  const petals   = [0,1,2,3,4].map(i => document.getElementById('p'+i));
+  const wordmark = document.getElementById('wordmark');
+  const tagline  = document.getElementById('tagline');
+  const angles   = [0,72,144,216,288];
+
+  function easeOut3(t)  { return 1-Math.pow(1-t,3); }
+  function easeInOut(t) { return t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; }
+  function easeOutBack(t) {
+    const c1=1.70158, c3=c1+1;
+    return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2);
+  }
+  function lerp(a,b,t){ return a+(b-a)*t; }
+
+  function tween(dur,easeFn,tick,done){
+    const s=performance.now();
+    function f(now){
+      const raw=Math.min((now-s)/dur,1);
+      tick(easeFn(raw),raw);
+      if(raw<1) requestAnimationFrame(f);
+      else if(done) done();
+    }
+    requestAnimationFrame(f);
+  }
+
+  function delay(ms,fn){ setTimeout(fn,ms); }
+
+  function reset(){
+    core.setAttribute('cx','-140');
+    core.setAttribute('cy','100');
+    core.setAttribute('r','22');
+    core.style.transform='';
+    petals.forEach((p,i)=>{
+      p.style.transform=`rotate(${angles[i]}deg) scale(0.01)`;
+      p.style.opacity='0';
+    });
+    wordmark.style.opacity='0';
+    wordmark.style.transform='translateY(16px)';
+    wordmark.style.letterSpacing='6px';
+    tagline.style.opacity='0';
+  }
+
+  function play(){
+    reset();
+
+    tween(950, easeInOut, (t)=>{
+      core.setAttribute('cx', lerp(-140,100,t));
+      core.setAttribute('cy', 100+(-Math.sin(t*Math.PI)*22));
+    }, ()=>{
+      core.setAttribute('cy','100');
+
+      tween(200, easeInOut, (t)=>{
+        const sy=lerp(1,0.75,t), sx=lerp(1,1.3,t);
+        core.style.transformOrigin='100px 100px';
+        core.style.transform=`scale(${sx},${sy})`;
+      }, ()=>{
+
+        tween(600, easeOutBack, (t)=>{
+          const sy=lerp(0.75,1,t), sx=lerp(1.3,1,t);
+          core.style.transform=`scale(${sx},${sy})`;
+        }, ()=>{ core.style.transform=''; });
+
+        petals.forEach((p,i)=>{
+          delay(i*60, ()=>{
+            tween(750, easeOutBack, (t)=>{
+              p.style.transform=`rotate(${angles[i]}deg) scale(${lerp(0.01,1,t)})`;
+              p.style.opacity=Math.min(t*3,1);
+            });
+          });
+        });
+
+        delay(950, ()=>{
+          wordmark.style.opacity='1';
+          tween(750, easeOutBack, (t)=>{
+            wordmark.style.letterSpacing=lerp(14,1,t)+'px';
+            wordmark.style.transform=`translateY(${lerp(16,0,t)}px)`;
+          }, ()=>{
+            delay(150, ()=>{
+              tween(700, easeOut3, (t)=>{
+                tagline.style.opacity=t*0.75;
+              });
+            });
+          });
+        });
+      });
+    });
+  }
+
+  delay(600, play);
+</script>
+</body>
+</html>
