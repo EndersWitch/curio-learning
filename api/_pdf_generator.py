@@ -32,12 +32,29 @@ CONT_TOP = H - CONT_H  - 8*mm
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 def sanitise(t):
-    r = {'\u2022':'-','\u2018':"'",'\u2019':"'",'\u201c':'"','\u201d':'"',
-         '\u2014':'--','\u2013':'-','\u2026':'...','\u00a0':' ','\r\n':'\n','\r':'\n'}
     o = str(t)
     o = re.sub(r'[\u2713\u2714\u2705]', '', o)
-    for k, v in r.items(): o = o.replace(k, v)
-    return o.encode('latin-1', 'replace').decode('latin-1')
+    reps = [
+        ('\u2022', '-'), ('\u2018', "'"), ('\u2019', "'"),
+        ('\u201c', '"'), ('\u201d', '"'), ('\u2014', '--'),
+        ('\u2013', '-'), ('\u2026', '...'), ('\u00a0', ' '),
+        ('\r\n', '\n'), ('\r', '\n'),
+        ('\u2192', '->'), ('\u2190', '<-'),
+        ('\u00d7', 'x'), ('\u00f7', '/'),
+        ('\u00b2', '2'), ('\u00b3', '3'),
+        ('\u00bd', '1/2'), ('\u00bc', '1/4'), ('\u00be', '3/4'),
+        ('[BREAK]', '\n\n'),
+    ]
+    for old, new in reps:
+        o = o.replace(old, new)
+    out = []
+    for ch in o:
+        try:
+            ch.encode('latin-1')
+            out.append(ch)
+        except UnicodeEncodeError:
+            out.append('*')
+    return ''.join(out)
 
 def sanitise_memo(t):
     r = {'\u2022':'-','\u2018':"'",'\u2019':"'",'\u201c':'"','\u201d':'"',

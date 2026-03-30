@@ -445,24 +445,28 @@ function parseExercise(raw){
   while(passLines.length && passLines[passLines.length-1]==='') passLines.pop();
   result.passage=passLines.join('\n').trim();
 
-  // Questions
+  // Questions — join multi-line questions first, then extract marks from full text
   var qEnd=mStart>-1?mStart:lines.length;
   if(qStart>-1){
     for(var i=qStart+1;i<qEnd;i++){
       var l=lines[i].trim();
       if(!l) continue;
       if(/^\d+[\.\)]/.test(l)){
-        var mm=l.match(/\((\d+)\)\s*$/);
-        var mk=mm?parseInt(mm[1]):1;
-        result.totalMarks+=mk;
-        result.questions.push({num:result.questions.length+1,text:l,marks:mk});
+        result.questions.push({num:result.questions.length+1,text:l,marks:1});
       } else if(result.questions.length>0){
         result.questions[result.questions.length-1].text+=' '+l;
       }
     }
+    // Re-extract marks from full joined text
+    result.totalMarks=0;
+    result.questions.forEach(function(q){
+      var mm=q.text.match(/\((\d+)\)\s*$/);
+      q.marks=mm?parseInt(mm[1]):1;
+      result.totalMarks+=q.marks;
+    });
   }
 
-  // Memo
+  // Memo — join multi-line answers first
   if(mStart>-1){
     for(var i=mStart+1;i<lines.length;i++){
       var l=lines[i].trim();
