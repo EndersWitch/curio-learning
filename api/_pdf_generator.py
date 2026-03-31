@@ -281,14 +281,68 @@ def generate_paper(data):
             ans_lines = 1 if marks<=1 else 2 if marks<=2 else 3 if marks<=3 else 4
         needed = len(q_lines)*qlh + ans_lines*8*mm + 8*mm
         if y - needed < FOOTER_H+5*mm: y = new_page()
+        # Split question on \n to get main line + sub-lines/bullets
+        q_parts = raw.split('\n')
+        main_text = q_parts[0].strip() if q_parts else raw
+        # Sub-parts: everything after the first line
+        # Marks in brackets at end of last sub-part belong to the question not the sub-line
+        sub_parts_raw = [p.strip() for p in q_parts[1:] if p.strip()]
+        # Move trailing marks from last sub-part to main_text if main_text has no marks
+        import re as _re
+        if sub_parts_raw and not _re.search(r'\(\d+\)\s*$', main_text):
+            last = sub_parts_raw[-1]
+            _marks_match = _re.search(r'\(\d+\)\s*$', last)
+            if _marks_match:
+                sub_parts_raw[-1] = last[:_marks_match.start()].strip()
+                if not sub_parts_raw[-1]:
+                    sub_parts_raw.pop()
+        sub_parts = sub_parts_raw
+
+        main_lines = wrap(main_text, 'Helvetica', qfs, CW-20*mm)
+
+        # Calculate total height including sub-parts
+        sub_heights = []
+        for sp in sub_parts:
+            is_bullet = sp.startswith('*') or sp.startswith('-')
+            sp_text = sp.lstrip('*- ').strip() if is_bullet else sp
+            sp_lines = wrap(sp_text, 'Helvetica', qfs, CW-26*mm)
+            sub_heights.append((is_bullet, sp_text, sp_lines))
+
+        total_sub_h = sum(len(sl)*qlh + 1.5*mm for _, _, sl in sub_heights)
+        needed = len(main_lines)*qlh + 2*mm + total_sub_h + ans_lines*8*mm + 8*mm
+        if y - needed < FOOTER_H+5*mm: y = new_page()
+
+        # Draw question number
         c.setFillColor(PLUM); c.setFont('Helvetica-Bold', qfs)
         c.drawString(ML, y, f'{num}.')
+
+        # Draw main question text
         c.setFillColor(INK); c.setFont('Helvetica', qfs)
-        for i, line in enumerate(q_lines):
+        for i, line in enumerate(main_lines):
             c.drawString(ML+9*mm, y-i*qlh, line)
+
+        # Draw marks on right of first line
         c.setFillColor(CORAL); c.setFont('Helvetica-Bold', qfs)
         c.drawRightString(W-MR, y, f'({marks})')
-        y -= len(q_lines)*qlh + 2*mm
+
+        y -= len(main_lines)*qlh + 2*mm
+
+        # Draw sub-lines and bullet items
+        for is_bullet, sp_text, sp_lines in sub_heights:
+            if is_bullet:
+                # Coral circle bullet — small dot matching the Bloom centre
+                bullet_r = 1.2*mm
+                c.setFillColor(CORAL)
+                c.circle(ML+11*mm, y - qlh*0.35, bullet_r, fill=1, stroke=0)
+                c.setFillColor(INK); c.setFont('Helvetica', qfs)
+                for i, line in enumerate(sp_lines):
+                    c.drawString(ML+15*mm, y - i*qlh, line)
+            else:
+                # Continuation line — indented, same font
+                c.setFillColor(INK); c.setFont('Helvetica', qfs)
+                for i, line in enumerate(sp_lines):
+                    c.drawString(ML+9*mm, y - i*qlh, line)
+            y -= len(sp_lines)*qlh + 1.5*mm
         if is_junior:
             c.setStrokeColor(HexColor('#AAA5B9')); c.setLineWidth(0.4)
             for _ in range(ans_lines):

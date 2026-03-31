@@ -454,13 +454,23 @@ function parseExercise(raw){
       if(/^\d+[\.\)]/.test(l)){
         result.questions.push({num:result.questions.length+1,text:l,marks:1});
       } else if(result.questions.length>0){
-        result.questions[result.questions.length-1].text+=' '+l;
+        // Bullet items (* or -) and answer banks (eats / the / apple) get their own line
+        // Normal sentence continuations join with a space
+        var rawLine=lines[i]; // original line before trim
+        var isBullet=/^\s*[\*\-]\s/.test(rawLine);
+        var isAnswerBank=/\//.test(l)&&l.split('/').length>=2&&!/^\d+[\.\)]/.test(l);
+        var hasLeadingSpaces=/^\s{3,}/.test(rawLine);
+        if(isBullet||isAnswerBank||hasLeadingSpaces){
+          result.questions[result.questions.length-1].text+='\n'+l;
+        } else {
+          result.questions[result.questions.length-1].text+=' '+l;
+        }
       }
     }
     // Re-extract marks from full joined text
     result.totalMarks=0;
     result.questions.forEach(function(q){
-      var mm=q.text.match(/\((\d+)\)\s*$/);
+      var mm=q.text.match(/\((\d+)\)\s*$/m);
       q.marks=mm?parseInt(mm[1]):1;
       result.totalMarks+=q.marks;
     });
@@ -474,7 +484,7 @@ function parseExercise(raw){
       if(/^\d+[\.\)]/.test(l)){
         result.memo.push({num:result.memo.length+1,text:l});
       } else if(result.memo.length>0){
-        result.memo[result.memo.length-1].text+=' '+l;
+        result.memo[result.memo.length-1].text+='\n'+l;
       }
     }
   }
