@@ -10,93 +10,57 @@
   --plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;
   --cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;
   --m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);
-  --m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);
+  --m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--m03:rgba(247,247,255,0.03);
   --c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);
   --r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);
+  --a20:rgba(245,200,66,0.2);--a12:rgba(245,200,66,0.12);
   --h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:var(--b);background:var(--deep);color:var(--moon);min-height:100vh;}
 a{text-decoration:none;color:inherit;}
 button{font-family:var(--b);cursor:pointer;border:none;background:none;}
-
-/* ════════════════════
-   LOGIN SCREEN
-════════════════════ */
 #login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--deep);}
 .login-box{width:100%;max-width:360px;}
 .login-logo{display:flex;align-items:center;gap:0.6rem;font-family:var(--h);font-size:1.2rem;font-weight:800;color:var(--moon);margin-bottom:0.5rem;justify-content:center;}
 .login-eyebrow{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--m30);text-align:center;margin-bottom:2rem;}
 .login-card{background:var(--card);border:1px solid var(--m06);border-radius:20px;padding:2rem;}
 .login-label{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.35rem;display:block;}
-.login-input{
-  width:100%;padding:0.75rem 1rem;
-  background:var(--plum);border:1.5px solid var(--m12);border-radius:9px;
-  font-family:var(--b);font-size:0.9rem;color:var(--moon);
-  margin-bottom:1.2rem;transition:border-color .15s;
-}
+.login-input{width:100%;padding:0.75rem 1rem;background:var(--plum);border:1.5px solid var(--m12);border-radius:9px;font-family:var(--b);font-size:0.9rem;color:var(--moon);margin-bottom:1.2rem;transition:border-color .15s;}
 .login-input:focus{outline:none;border-color:var(--cyan);}
 .login-input::placeholder{color:var(--m30);}
-.login-btn{
-  width:100%;padding:0.8rem;
-  background:var(--cyan);color:var(--plum);
-  font-family:var(--h);font-size:0.9rem;font-weight:700;
-  border:none;border-radius:10px;cursor:pointer;transition:all .15s;
-}
+.login-btn{width:100%;padding:0.8rem;background:var(--cyan);color:var(--plum);font-family:var(--h);font-size:0.9rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:all .15s;}
 .login-btn:hover{background:var(--moon);}
 .login-error{font-size:0.78rem;color:var(--coral);margin-top:0.8rem;display:none;text-align:center;}
-
-/* ════════════════════
-   ADMIN SCREEN
-════════════════════ */
 #admin-screen{display:none;}
-
-/* Nav */
-.admin-nav{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 2rem;height:56px;
-  background:var(--plum);border-bottom:1px solid var(--m06);
-  position:sticky;top:0;z-index:100;
-}
+.admin-nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px;background:var(--plum);border-bottom:1px solid var(--m06);position:sticky;top:0;z-index:100;}
 .admin-logo{display:flex;align-items:center;gap:0.55rem;font-family:var(--h);font-size:1.05rem;font-weight:800;color:var(--moon);}
 .admin-logo-badge{font-size:0.5rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:var(--coral);color:var(--moon);padding:0.12rem 0.4rem;border-radius:3px;margin-left:0.3rem;}
 .nav-tabs{display:flex;gap:0.2rem;}
-.nav-tab{
-  padding:0.38rem 0.9rem;font-size:0.78rem;font-weight:600;
-  color:var(--m30);border-radius:6px;cursor:pointer;transition:all .15s;
-}
+.nav-tab{padding:0.38rem 0.9rem;font-size:0.78rem;font-weight:600;color:var(--m30);border-radius:6px;cursor:pointer;transition:all .15s;}
 .nav-tab:hover{color:var(--moon);background:var(--m06);}
 .nav-tab.active{background:var(--c12);color:var(--cyan);}
+.nav-tab.ai-tab{background:var(--a12);color:var(--amber);}
+.nav-tab.ai-tab:hover{background:var(--a20);color:var(--amber);}
+.nav-tab.ai-tab.active{background:var(--a20);color:var(--amber);}
 .nav-right{display:flex;align-items:center;gap:0.8rem;}
 .nav-logout{font-size:0.75rem;color:var(--m30);cursor:pointer;transition:color .15s;}
 .nav-logout:hover{color:var(--coral);}
-
-/* Layout */
 .admin-body{max-width:1200px;margin:0 auto;padding:2rem;}
-
-/* Panels */
 .panel{display:none;}
 .panel.active{display:block;}
-
-/* ── DASHBOARD ── */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem;}
 @media(max-width:700px){.stats-row{grid-template-columns:1fr 1fr;}}
-.stat-card{
-  background:var(--card);border:1px solid var(--m06);border-radius:16px;
-  padding:1.4rem;
-}
+.stat-card{background:var(--card);border:1px solid var(--m06);border-radius:16px;padding:1.4rem;}
 .stat-card.c{background:var(--c12);border-color:var(--c25);}
 .stat-card.r{background:var(--r10);border-color:var(--r20);}
 .stat-label{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--m30);margin-bottom:0.4rem;}
 .stat-card.c .stat-label{color:var(--cyan);}
 .stat-card.r .stat-label{color:var(--coral);}
 .stat-val{font-family:var(--h);font-size:2.2rem;font-weight:900;color:var(--moon);line-height:1;}
-
 .panel-title{font-family:var(--h);font-size:1rem;font-weight:700;color:var(--moon);}
 .panel-sub{font-size:0.75rem;color:var(--m30);margin-top:0.1rem;}
 .panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;}
-
-/* Recent table */
 .table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--m06);}
 table{width:100%;border-collapse:collapse;background:var(--card);}
 thead tr{background:var(--plum);}
@@ -112,8 +76,6 @@ tr:hover td{background:var(--m03);}
 .loading-row td{text-align:center;padding:2.5rem;color:var(--m30);font-style:italic;font-size:0.85rem;}
 .empty-state{text-align:center;padding:3rem;color:var(--m30);}
 .empty-state p{font-size:0.8rem;margin-top:0.4rem;}
-
-/* ── ADD QUESTION FORM ── */
 .form-card{background:var(--card);border:1px solid var(--m06);border-radius:16px;overflow:hidden;margin-bottom:1.5rem;}
 .form-section{padding:1.5rem 1.8rem;border-bottom:1px solid var(--m06);}
 .form-section:last-child{border-bottom:none;}
@@ -124,82 +86,66 @@ tr:hover td{background:var(--m03);}
 .form-group.full{grid-column:1/-1;}
 .form-label{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.35rem;}
 .req{color:var(--coral);}
-.form-input,.form-select,.form-textarea{
-  background:var(--plum);border:1.5px solid var(--m12);border-radius:8px;
-  font-family:var(--b);font-size:0.85rem;color:var(--moon);
-  padding:0.65rem 0.9rem;transition:border-color .15s;width:100%;
-}
+.form-input,.form-select,.form-textarea{background:var(--plum);border:1.5px solid var(--m12);border-radius:8px;font-family:var(--b);font-size:0.85rem;color:var(--moon);padding:0.65rem 0.9rem;transition:border-color .15s;width:100%;}
 .form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--cyan);}
 .form-input::placeholder,.form-textarea::placeholder{color:var(--m30);}
 .form-select{cursor:pointer;-webkit-appearance:none;}
 .form-textarea{min-height:100px;resize:vertical;line-height:1.6;}
 .opt-row{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem;}
-.opt-letter{
-  width:30px;height:30px;flex-shrink:0;border-radius:7px;
-  background:var(--mid);display:flex;align-items:center;justify-content:center;
-  font-family:var(--h);font-size:0.7rem;font-weight:700;color:var(--m55);
-}
+.opt-letter{width:30px;height:30px;flex-shrink:0;border-radius:7px;background:var(--mid);display:flex;align-items:center;justify-content:center;font-family:var(--h);font-size:0.7rem;font-weight:700;color:var(--m55);}
 .correct-radio{display:flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:var(--m55);cursor:pointer;}
 .correct-radio input{accent-color:var(--cyan);}
-.form-footer{
-  padding:1.2rem 1.8rem;
-  display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;
-  background:var(--deep);border-top:1px solid var(--m06);
-}
-.btn-submit{
-  padding:0.7rem 1.4rem;background:var(--coral);color:var(--moon);
-  font-family:var(--h);font-size:0.82rem;font-weight:700;
-  border:none;border-radius:9px;cursor:pointer;transition:all .15s;
-}
+.form-footer{padding:1.2rem 1.8rem;display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;background:var(--deep);border-top:1px solid var(--m06);}
+.btn-submit{padding:0.7rem 1.4rem;background:var(--coral);color:var(--moon);font-family:var(--h);font-size:0.82rem;font-weight:700;border:none;border-radius:9px;cursor:pointer;transition:all .15s;}
 .btn-submit:hover{background:#ff4a47;}
 .btn-submit:disabled{opacity:0.5;cursor:not-allowed;}
-.btn-secondary-sm{
-  padding:0.65rem 1.1rem;background:var(--m06);color:var(--m55);
-  font-family:var(--h);font-size:0.78rem;font-weight:600;
-  border:1px solid var(--m12);border-radius:9px;cursor:pointer;transition:all .15s;
-}
+.btn-amber{padding:0.7rem 1.6rem;background:var(--amber);color:var(--plum);font-family:var(--h);font-size:0.85rem;font-weight:700;border:none;border-radius:9px;cursor:pointer;transition:all .15s;}
+.btn-amber:hover{filter:brightness(1.1);}
+.btn-amber:disabled{opacity:0.5;cursor:not-allowed;}
+.btn-secondary-sm{padding:0.65rem 1.1rem;background:var(--m06);color:var(--m55);font-family:var(--h);font-size:0.78rem;font-weight:600;border:1px solid var(--m12);border-radius:9px;cursor:pointer;transition:all .15s;}
 .btn-secondary-sm:hover{background:var(--m12);color:var(--moon);}
 .save-status{font-size:0.78rem;}
 .save-status.ok{color:var(--cyan);}
 .save-status.err{color:var(--coral);}
-
-/* Table toolbar */
 .table-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:0.8rem;flex-wrap:wrap;}
-.search-input{
-  background:var(--card);border:1px solid var(--m06);border-radius:8px;
-  padding:0.5rem 0.9rem;font-family:var(--b);font-size:0.8rem;color:var(--moon);
-  min-width:200px;transition:border-color .15s;
-}
+.search-input{background:var(--card);border:1px solid var(--m06);border-radius:8px;padding:0.5rem 0.9rem;font-family:var(--b);font-size:0.8rem;color:var(--moon);min-width:200px;transition:border-color .15s;}
 .search-input:focus{outline:none;border-color:var(--c25);}
 .search-input::placeholder{color:var(--m30);}
-.filter-select{
-  background:var(--card);border:1px solid var(--m06);border-radius:8px;
-  padding:0.5rem 0.8rem;font-family:var(--b);font-size:0.78rem;color:var(--m55);
-  cursor:pointer;
-}
+.filter-select{background:var(--card);border:1px solid var(--m06);border-radius:8px;padding:0.5rem 0.8rem;font-family:var(--b);font-size:0.78rem;color:var(--m55);cursor:pointer;}
 .filter-select:focus{outline:none;}
 .table-count{font-size:0.72rem;color:var(--m30);}
-
-/* var(--m03) is undefined, define it */
-:root{--m03:rgba(247,247,255,0.03);}
-
-/* ── PAPERS PANELS ── */
-.info-box{
-  background:var(--c12);border:1px solid var(--c25);border-radius:12px;
-  padding:1rem 1.2rem;margin-bottom:1.5rem;
-  font-size:0.78rem;color:var(--m80);line-height:1.7;
-}
+.info-box{background:var(--c12);border:1px solid var(--c25);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1.5rem;font-size:0.78rem;color:var(--m80);line-height:1.7;}
 .info-box strong{color:var(--cyan);}
 .info-box a{color:var(--cyan);text-decoration:underline;}
 .info-box ol{margin-left:1.2rem;margin-top:0.4rem;}
 .info-box ol li{margin-bottom:0.2rem;}
+.info-box.amber{background:var(--a12);border-color:var(--a20);}
+.info-box.amber strong{color:var(--amber);}
+/* ── AI GENERATOR ── */
+.gen-config{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;background:var(--card);border:1px solid var(--m06);border-radius:16px;padding:1.5rem 1.8rem;margin-bottom:1.5rem;}
+@media(max-width:700px){.gen-config{grid-template-columns:1fr 1fr;}}
+.gen-config-label{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.35rem;display:block;}
+.gen-config select,.gen-config input{background:var(--plum);border:1.5px solid var(--m12);border-radius:8px;font-family:var(--b);font-size:0.85rem;color:var(--moon);padding:0.65rem 0.9rem;width:100%;-webkit-appearance:none;}
+.gen-config select:focus,.gen-config input:focus{outline:none;border-color:var(--amber);}
+.gen-log{background:var(--card);border:1px solid var(--m06);border-radius:14px;padding:1.2rem 1.5rem;min-height:120px;margin-bottom:1.5rem;font-family:monospace;font-size:0.78rem;color:var(--m55);line-height:1.8;overflow-y:auto;max-height:260px;}
+.gen-log .log-ok{color:var(--cyan);}
+.gen-log .log-err{color:var(--coral);}
+.gen-log .log-info{color:var(--amber);}
+.gen-log .log-dim{color:var(--m30);}
+.gen-result-card{background:var(--card);border:1px solid var(--m06);border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:0.8rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+.gen-result-title{font-family:var(--h);font-size:0.88rem;font-weight:700;color:var(--moon);}
+.gen-result-meta{font-size:0.72rem;color:var(--m30);margin-top:0.2rem;}
+.gen-result-links{display:flex;gap:0.6rem;flex-wrap:wrap;}
+.gen-link{font-size:0.72rem;font-weight:600;padding:0.3rem 0.7rem;border-radius:6px;border:1px solid var(--c25);color:var(--cyan);background:var(--c12);transition:all .15s;}
+.gen-link:hover{background:var(--c25);}
+.gen-link.memo{border-color:var(--a20);color:var(--amber);background:var(--a12);}
+.gen-link.memo:hover{background:var(--a20);}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--m12);border-top-color:var(--amber);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:0.4rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
 </style>
 </head>
 <body>
 
-<!-- ════════════════════
-     LOGIN
-════════════════════ -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">
@@ -223,12 +169,7 @@ tr:hover td{background:var(--m03);}
   </div>
 </div>
 
-<!-- ════════════════════
-     ADMIN
-════════════════════ -->
 <div id="admin-screen">
-
-  <!-- Nav -->
   <nav class="admin-nav">
     <div class="admin-logo">
       <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
@@ -248,6 +189,7 @@ tr:hover td{background:var(--m03);}
       <div class="nav-tab" onclick="switchPanel('questions',this)">All Questions</div>
       <div class="nav-tab" onclick="switchPanel('papers',this)">Papers</div>
       <div class="nav-tab" onclick="switchPanel('add-paper',this)">Add Paper</div>
+      <div class="nav-tab ai-tab" onclick="switchPanel('generate-papers',this)">✦ Generate Papers</div>
     </div>
     <div class="nav-right">
       <a href="index.html" style="font-size:0.72rem;color:var(--m30);">← Site</a>
@@ -264,26 +206,12 @@ tr:hover td{background:var(--m03);}
         <button class="btn-submit" onclick="switchPanel('add',document.querySelectorAll('.nav-tab')[1])">+ Add Question</button>
       </div>
       <div class="stats-row">
-        <div class="stat-card c">
-          <div class="stat-label">Total Questions</div>
-          <div class="stat-val" id="statTotal">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Free Questions</div>
-          <div class="stat-val" id="statFree">—</div>
-        </div>
-        <div class="stat-card r">
-          <div class="stat-label">Premium Questions</div>
-          <div class="stat-val" id="statPremium">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Grades Covered</div>
-          <div class="stat-val" id="statGrades">—</div>
-        </div>
+        <div class="stat-card c"><div class="stat-label">Total Questions</div><div class="stat-val" id="statTotal">—</div></div>
+        <div class="stat-card"><div class="stat-label">Free Questions</div><div class="stat-val" id="statFree">—</div></div>
+        <div class="stat-card r"><div class="stat-label">Premium Questions</div><div class="stat-val" id="statPremium">—</div></div>
+        <div class="stat-card"><div class="stat-label">Grades Covered</div><div class="stat-val" id="statGrades">—</div></div>
       </div>
-      <div class="panel-header">
-        <div><div class="panel-title">Recent Additions</div></div>
-      </div>
+      <div class="panel-header"><div><div class="panel-title">Recent Additions</div></div></div>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Question</th><th>Grade</th><th>Subject</th><th>Topic</th><th>Type</th></tr></thead>
@@ -298,8 +226,6 @@ tr:hover td{background:var(--m03);}
         <div><div class="panel-title">Add a Question</div><div class="panel-sub">Fill in all required fields marked with *</div></div>
       </div>
       <div class="form-card">
-
-        <!-- Classification -->
         <div class="form-section">
           <div class="form-section-title">Classification</div>
           <div class="form-grid">
@@ -307,7 +233,6 @@ tr:hover td{background:var(--m03);}
               <label class="form-label">Grade <span class="req">*</span></label>
               <select class="form-select" id="fGrade">
                 <option value="">Select grade</option>
-                <option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option>
                 <option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option>
                 <option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option>
                 <option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option>
@@ -317,18 +242,12 @@ tr:hover td{background:var(--m03);}
               <label class="form-label">Subject <span class="req">*</span></label>
               <select class="form-select" id="fSubject">
                 <option value="">Select subject</option>
-                <option value="english">English HL</option>
-                <option value="maths">Mathematics</option>
-                <option value="science">Natural Sciences</option>
-                <option value="social">Social Sciences</option>
-                <option value="afrikaans">Afrikaans</option>
-                <option value="lifeskills">Life Skills</option>
-                <option value="history">History</option>
-                <option value="geography">Geography</option>
-                <option value="physics">Physical Sciences</option>
-                <option value="lifesciences">Life Sciences</option>
-                <option value="accounting">Accounting</option>
-                <option value="business">Business Studies</option>
+                <option value="english">English HL</option><option value="maths">Mathematics</option>
+                <option value="science">Natural Sciences</option><option value="social">Social Sciences</option>
+                <option value="afrikaans">Afrikaans</option><option value="lifeskills">Life Skills</option>
+                <option value="history">History</option><option value="geography">Geography</option>
+                <option value="physics">Physical Sciences</option><option value="lifesciences">Life Sciences</option>
+                <option value="accounting">Accounting</option><option value="business">Business Studies</option>
                 <option value="economics">Economics</option>
               </select>
             </div>
@@ -342,8 +261,6 @@ tr:hover td{background:var(--m03);}
             </div>
           </div>
         </div>
-
-        <!-- Question -->
         <div class="form-section">
           <div class="form-section-title">Question</div>
           <div class="form-group full">
@@ -351,8 +268,6 @@ tr:hover td{background:var(--m03);}
             <textarea class="form-textarea" id="fQuestion" placeholder="Type the full question. Use *word* to highlight key terms in cyan."></textarea>
           </div>
         </div>
-
-        <!-- Options -->
         <div class="form-section">
           <div class="form-section-title">Answer Options</div>
           <div class="opt-row"><div class="opt-letter">A</div><input class="form-input" type="text" id="fOptA" placeholder="Option A" style="flex:1"/></div>
@@ -369,14 +284,12 @@ tr:hover td{background:var(--m03);}
             </div>
           </div>
         </div>
-
-        <!-- Explanation & settings -->
         <div class="form-section">
           <div class="form-section-title">Explanation & Settings</div>
           <div class="form-grid">
             <div class="form-group full">
               <label class="form-label">Explanation <span class="req">*</span></label>
-              <textarea class="form-textarea" id="fExplanation" placeholder="Explain why the correct answer is right. Write simply and clearly — this is what the student reads after answering."></textarea>
+              <textarea class="form-textarea" id="fExplanation" placeholder="Explain why the correct answer is right."></textarea>
             </div>
             <div class="form-group">
               <label class="form-label">Access Level</label>
@@ -388,14 +301,11 @@ tr:hover td{background:var(--m03);}
             <div class="form-group">
               <label class="form-label">Difficulty</label>
               <select class="form-select" id="fDifficulty">
-                <option value="easy">Easy</option>
-                <option value="medium" selected>Medium</option>
-                <option value="hard">Hard</option>
+                <option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option>
               </select>
             </div>
           </div>
         </div>
-
         <div class="form-footer">
           <button class="btn-submit" id="btnSave" onclick="saveQuestion()">Save Question →</button>
           <button class="btn-secondary-sm" onclick="clearForm()">Clear form</button>
@@ -407,10 +317,7 @@ tr:hover td{background:var(--m03);}
     <!-- ALL QUESTIONS -->
     <div class="panel" id="panel-questions">
       <div class="panel-header">
-        <div>
-          <div class="panel-title">All Questions</div>
-          <div class="panel-sub" id="qCountLabel">Loading questions…</div>
-        </div>
+        <div><div class="panel-title">All Questions</div><div class="panel-sub" id="qCountLabel">Loading questions…</div></div>
         <button class="btn-submit" onclick="switchPanel('add',document.querySelectorAll('.nav-tab')[1])">+ Add Question</button>
       </div>
       <div class="table-toolbar">
@@ -424,10 +331,8 @@ tr:hover td{background:var(--m03);}
           </select>
           <select class="filter-select" onchange="filterTable()" id="filterSubject">
             <option value="">All subjects</option>
-            <option value="english">English HL</option>
-            <option value="maths">Mathematics</option>
-            <option value="science">Natural Sciences</option>
-            <option value="social">Social Sciences</option>
+            <option value="english">English HL</option><option value="maths">Mathematics</option>
+            <option value="science">Natural Sciences</option><option value="social">Social Sciences</option>
           </select>
         </div>
         <span class="table-count" id="tableCount"></span>
@@ -440,23 +345,19 @@ tr:hover td{background:var(--m03);}
       </div>
     </div>
 
-
     <!-- ADD PAPER -->
     <div class="panel" id="panel-add-paper">
       <div class="panel-header">
         <div><div class="panel-title">Add a Paper</div><div class="panel-sub">Upload a PDF to Supabase Storage first, then paste the URL here</div></div>
       </div>
-
       <div class="info-box">
         <strong>How to add papers:</strong>
         <ol>
-          <li>Go to your <a href="https://supabase.com/dashboard" target="_blank">Supabase dashboard</a> → Storage → Create a bucket called <strong>papers</strong> (set to Public)</li>
-          <li>Upload your PDF file into the bucket</li>
-          <li>Click the file → Copy the public URL (looks like <code>https://inmrsgujgfktapjnekjs.supabase.co/storage/v1/object/public/papers/filename.pdf</code>)</li>
-          <li>Paste that URL into the Paper URL field below and save</li>
+          <li>Go to your <a href="https://supabase.com/dashboard" target="_blank">Supabase dashboard</a> → Storage → bucket <strong>Papers</strong> (Public)</li>
+          <li>Upload your PDF and copy the public URL</li>
+          <li>Paste the URL into the Paper URL field below and save</li>
         </ol>
       </div>
-
       <div class="form-card">
         <div class="form-section">
           <div class="form-section-title">Classification</div>
@@ -465,7 +366,6 @@ tr:hover td{background:var(--m03);}
               <label class="form-label">Grade <span class="req">*</span></label>
               <select class="form-select" id="pfGrade">
                 <option value="">Select grade</option>
-                <option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option>
                 <option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option>
                 <option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option>
                 <option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12 (Matric)</option>
@@ -475,20 +375,13 @@ tr:hover td{background:var(--m03);}
               <label class="form-label">Subject <span class="req">*</span></label>
               <select class="form-select" id="pfSubject">
                 <option value="">Select subject</option>
-                <option value="english">English HL</option>
-                <option value="afrikaans">Afrikaans</option>
-                <option value="maths">Mathematics</option>
-                <option value="maths_lit">Mathematical Literacy</option>
-                <option value="science">Natural Sciences</option>
-                <option value="physics">Physical Sciences</option>
-                <option value="lifesciences">Life Sciences</option>
-                <option value="social">Social Sciences</option>
-                <option value="history">History</option>
-                <option value="geography">Geography</option>
-                <option value="accounting">Accounting</option>
-                <option value="business">Business Studies</option>
-                <option value="economics">Economics</option>
-                <option value="lifeskills">Life Skills</option>
+                <option value="english">English HL</option><option value="afrikaans">Afrikaans</option>
+                <option value="maths">Mathematics</option><option value="maths_lit">Mathematical Literacy</option>
+                <option value="science">Natural Sciences</option><option value="physics">Physical Sciences</option>
+                <option value="lifesciences">Life Sciences</option><option value="social">Social Sciences</option>
+                <option value="history">History</option><option value="geography">Geography</option>
+                <option value="accounting">Accounting</option><option value="business">Business Studies</option>
+                <option value="economics">Economics</option><option value="lifeskills">Life Skills</option>
                 <option value="technology">Technology</option>
               </select>
             </div>
@@ -502,23 +395,19 @@ tr:hover td{background:var(--m03);}
             </div>
           </div>
         </div>
-
         <div class="form-section">
           <div class="form-section-title">Files</div>
           <div class="form-grid">
             <div class="form-group full">
               <label class="form-label">Paper URL <span class="req">*</span></label>
-              <input class="form-input" type="url" id="pfFileUrl" placeholder="https://inmrsgujgfktapjnekjs.supabase.co/storage/v1/object/public/papers/..."/>
-              <div style="font-size:0.65rem;color:var(--m30);margin-top:0.3rem;">Paste the public URL from Supabase Storage</div>
+              <input class="form-input" type="url" id="pfFileUrl" placeholder="https://inmrsgujgfktapjnekjs.supabase.co/storage/v1/object/public/Papers/..."/>
             </div>
             <div class="form-group full">
               <label class="form-label">Memo URL <span style="font-size:0.6rem;font-weight:400;color:var(--m30)">(optional)</span></label>
-              <input class="form-input" type="url" id="pfMemoUrl" placeholder="https://inmrsgujgfktapjnekjs.supabase.co/storage/v1/object/public/papers/..."/>
-              <div style="font-size:0.65rem;color:var(--m30);margin-top:0.3rem;">Leave blank if no memo available yet</div>
+              <input class="form-input" type="url" id="pfMemoUrl" placeholder="https://inmrsgujgfktapjnekjs.supabase.co/storage/v1/object/public/Papers/..."/>
             </div>
           </div>
         </div>
-
         <div class="form-footer">
           <button class="btn-submit" id="btnSavePaper" onclick="savePaper()">Save Paper →</button>
           <button class="btn-secondary-sm" onclick="clearPaperForm()">Clear form</button>
@@ -530,18 +419,14 @@ tr:hover td{background:var(--m03);}
     <!-- ALL PAPERS -->
     <div class="panel" id="panel-papers">
       <div class="panel-header">
-        <div>
-          <div class="panel-title">All Papers</div>
-          <div class="panel-sub" id="paperCountLabel">Loading…</div>
-        </div>
-        <button class="btn-submit" onclick="switchPanel('add-paper',document.querySelectorAll('.nav-tab')[3])">+ Add Paper</button>
+        <div><div class="panel-title">All Papers</div><div class="panel-sub" id="paperCountLabel">Loading…</div></div>
+        <button class="btn-submit" onclick="switchPanel('add-paper',document.querySelectorAll('.nav-tab')[4])">+ Add Paper</button>
       </div>
       <div class="table-toolbar">
         <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
           <input class="search-input" type="text" placeholder="Search papers…" oninput="filterPapersTable()" id="paperSearchInput"/>
           <select class="filter-select" onchange="filterPapersTable()" id="filterPaperGrade">
             <option value="">All grades</option>
-            <option value="1">Gr 1</option><option value="2">Gr 2</option><option value="3">Gr 3</option>
             <option value="4">Gr 4</option><option value="5">Gr 5</option><option value="6">Gr 6</option>
             <option value="7">Gr 7</option><option value="8">Gr 8</option><option value="9">Gr 9</option>
             <option value="10">Gr 10</option><option value="11">Gr 11</option><option value="12">Gr 12</option>
@@ -556,6 +441,69 @@ tr:hover td{background:var(--m03);}
         </table>
       </div>
     </div>
+
+    <!-- ════════════════════
+         GENERATE PAPERS (AI)
+    ════════════════════ -->
+    <div class="panel" id="panel-generate-papers">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">✦ Generate Papers with AI</div>
+          <div class="panel-sub">Bulk-generate CAPS-aligned exam papers using Claude — papers + memos are created, uploaded and saved automatically</div>
+        </div>
+      </div>
+
+      <div class="info-box amber">
+        <strong>How it works:</strong> Claude generates a full CAPS-aligned paper (Section A: Comprehension, Section B: Language, Section C: Writing) plus a complete marking memo. Both are rendered as PDFs via the existing PDF engine, uploaded to Supabase Storage (<code>Papers/gr4-english-hl/</code>), and inserted into your papers table — ready to appear on the Papers page immediately.
+        <br/><br/>
+        <strong>Tip:</strong> Each generation call takes ~30–60 seconds. Start with 1 paper to verify output before generating in bulk.
+      </div>
+
+      <!-- Config row -->
+      <div class="gen-config">
+        <div>
+          <label class="gen-config-label">Grade</label>
+          <select id="genGrade"><option value="4" selected>Grade 4</option></select>
+        </div>
+        <div>
+          <label class="gen-config-label">Subject</label>
+          <select id="genSubject"><option value="english" selected>English HL</option></select>
+        </div>
+        <div>
+          <label class="gen-config-label">Term</label>
+          <select id="genTerm">
+            <option value="Term 1">Term 1</option>
+            <option value="Term 2">Term 2</option>
+            <option value="Term 3">Term 3</option>
+            <option value="Term 4">Term 4</option>
+          </select>
+        </div>
+        <div>
+          <label class="gen-config-label">Papers to generate</label>
+          <select id="genCount">
+            <option value="1" selected>1 paper</option>
+            <option value="2">2 papers</option>
+            <option value="3">3 papers</option>
+            <option value="5">5 papers</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+        <button class="btn-amber" id="btnGenerate" onclick="startGeneration()">✦ Generate Papers</button>
+        <button class="btn-secondary-sm" onclick="clearGenLog()">Clear log</button>
+        <span class="save-status" id="genStatus"></span>
+      </div>
+
+      <!-- Live log -->
+      <div class="gen-log" id="genLog">
+        <span class="log-dim">Generation log will appear here…</span>
+      </div>
+
+      <!-- Result cards -->
+      <div id="genResults"></div>
+    </div>
+
   </div>
 </div>
 
@@ -691,9 +639,6 @@ async function deleteQ(id,btn){
   }catch(e){alert('Error deleting: '+e.message);btn.textContent='Delete';}
 }
 
-// ══════════════════════════════════
-// PAPERS CRUD
-// ══════════════════════════════════
 const SUBJECT_NAMES_ADMIN={
   english:'English HL',afrikaans:'Afrikaans',maths:'Mathematics',maths_lit:'Math Literacy',
   science:'Natural Sciences',physics:'Physical Sciences',lifesciences:'Life Sciences',
@@ -701,7 +646,6 @@ const SUBJECT_NAMES_ADMIN={
   accounting:'Accounting',business:'Business Studies',economics:'Economics',
   lifeskills:'Life Skills',technology:'Technology',
 };
-
 async function getPapers(filters={}){
   let path='papers?order=grade.asc,subject.asc,title.asc';
   if(filters.grade)path+=`&grade=eq.${filters.grade}`;
@@ -717,39 +661,19 @@ async function savePaper(){
   const topic=document.getElementById('pfTopic').value.trim();
   const fileUrl=document.getElementById('pfFileUrl').value.trim();
   const memoUrl=document.getElementById('pfMemoUrl').value.trim();
-
-  if(!grade||!subject||!title||!fileUrl){
-    setPaperStatus('Please fill in grade, subject, title and paper URL.','err');return;
-  }
-
+  if(!grade||!subject||!title||!fileUrl){setPaperStatus('Please fill in grade, subject, title and paper URL.','err');return;}
   const btn=document.getElementById('btnSavePaper');
   btn.disabled=true;btn.textContent='Saving…';setPaperStatus('','');
   try{
-    await insertPaper({
-      grade:parseInt(grade),subject,title,topic:topic||null,
-      file_url:fileUrl,
-      memo_url:memoUrl||null,
-      has_memo:!!memoUrl,
-      is_premium:false
-    });
-    setPaperStatus('✓ Paper saved!','ok');
-    clearPaperForm();
-    loadDashboard();
-  }catch(e){
-    setPaperStatus('Error: '+e.message,'err');console.error(e);
-  }finally{
-    btn.disabled=false;btn.textContent='Save Paper →';
-  }
+    await insertPaper({grade:parseInt(grade),subject,title,topic:topic||null,file_url:fileUrl,memo_url:memoUrl||null,has_memo:!!memoUrl,is_premium:false});
+    setPaperStatus('✓ Paper saved!','ok');clearPaperForm();loadDashboard();
+  }catch(e){setPaperStatus('Error: '+e.message,'err');console.error(e);}
+  finally{btn.disabled=false;btn.textContent='Save Paper →';}
 }
-
-function setPaperStatus(msg,type){
-  const el=document.getElementById('paperStatus');
-  el.textContent=msg;el.className=`save-status ${type}`;
-}
+function setPaperStatus(msg,type){const el=document.getElementById('paperStatus');el.textContent=msg;el.className=`save-status ${type}`;}
 function clearPaperForm(){
   ['pfGrade','pfSubject','pfTitle','pfTopic','pfFileUrl','pfMemoUrl'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';
+    const el=document.getElementById(id);if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';
   });
 }
 
@@ -761,19 +685,12 @@ async function loadAllPapers(){
     allPapersAdmin=await getPapers()||[];
     document.getElementById('paperCountLabel').textContent=`${allPapersAdmin.length} paper${allPapersAdmin.length!==1?'s':''} in your database`;
     renderPapersTable(allPapersAdmin);
-  }catch(e){
-    tbody.innerHTML=`<tr class="loading-row"><td colspan="7">Error loading. Check console.</td></tr>`;
-    console.error(e);
-  }
+  }catch(e){tbody.innerHTML=`<tr class="loading-row"><td colspan="7">Error loading. Check console.</td></tr>`;console.error(e);}
 }
-
 function renderPapersTable(data){
   const tbody=document.getElementById('papersBody');
   document.getElementById('paperTableCount').textContent=`${data.length} paper${data.length!==1?'s':''}`;
-  if(data.length===0){
-    tbody.innerHTML=`<tr><td colspan="7"><div class="empty-state">No papers yet.<p>Use "Add Paper" to add your first one.</p></div></td></tr>`;
-    return;
-  }
+  if(data.length===0){tbody.innerHTML=`<tr><td colspan="7"><div class="empty-state">No papers yet.<p>Use "Add Paper" or "✦ Generate Papers" to add your first one.</p></div></td></tr>`;return;}
   tbody.innerHTML=data.map(p=>`<tr>
     <td class="q-text-cell">${p.title}</td>
     <td>Gr ${p.grade}</td>
@@ -786,7 +703,6 @@ function renderPapersTable(data){
     <td><button class="btn-delete" onclick="deletePaperRow(${p.id},this)">Delete</button></td>
   </tr>`).join('');
 }
-
 function filterPapersTable(){
   const search=document.getElementById('paperSearchInput').value.toLowerCase();
   const grade=document.getElementById('filterPaperGrade').value;
@@ -796,20 +712,101 @@ function filterPapersTable(){
     return ms&&mg;
   }));
 }
-
 async function deletePaperRow(id,btn){
   if(!confirm('Delete this paper? This cannot be undone.'))return;
   btn.textContent='…';
   try{
     await deletePaper(id);
     allPapersAdmin=allPapersAdmin.filter(p=>p.id!==id);
-    renderPapersTable(allPapersAdmin);
-    loadDashboard();
+    renderPapersTable(allPapersAdmin);loadDashboard();
   }catch(e){alert('Error: '+e.message);btn.textContent='Delete';}
 }
 
-
-
+// ════════════════════════════════════
+// AI PAPER GENERATION
+// ════════════════════════════════════
+function genLog(msg,cls=''){
+  const log=document.getElementById('genLog');
+  if(log.querySelector('.log-dim'))log.innerHTML='';
+  const line=document.createElement('div');
+  if(cls)line.className=cls;
+  line.innerHTML=msg;
+  log.appendChild(line);
+  log.scrollTop=log.scrollHeight;
+}
+function clearGenLog(){
+  document.getElementById('genLog').innerHTML='<span class="log-dim">Generation log will appear here…</span>';
+  document.getElementById('genResults').innerHTML='';
+  document.getElementById('genStatus').textContent='';
+  document.getElementById('genStatus').className='save-status';
+}
+async function startGeneration(){
+  const grade=parseInt(document.getElementById('genGrade').value);
+  const subject=document.getElementById('genSubject').value;
+  const term=document.getElementById('genTerm').value;
+  const count=parseInt(document.getElementById('genCount').value);
+  const btn=document.getElementById('btnGenerate');
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span>Generating…';
+  document.getElementById('genStatus').textContent='';
+  document.getElementById('genResults').innerHTML='';
+  genLog(`<span class="log-info">▶ Grade ${grade} ${subject==='english'?'English HL':subject} · ${term} · ${count} paper${count>1?'s':''}</span>`);
+  genLog(`<span class="log-dim">Calling /api/generate-paper-ai — this may take 30–90 seconds…</span>`);
+  try{
+    const resp=await fetch('/api/generate-paper-ai',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({grade,subject,term,count})
+    });
+    if(!resp.ok){
+      const errText=await resp.text();
+      throw new Error(`HTTP ${resp.status}: ${errText}`);
+    }
+    const data=await resp.json();
+    if(data.errors&&data.errors.length){
+      data.errors.forEach(e=>genLog(`<span class="log-err">✗ Paper ${e.paper_number} failed: ${e.error}</span>`));
+    }
+    if(data.results&&data.results.length){
+      data.results.forEach(r=>{
+        genLog(`<span class="log-ok">✓ Paper ${r.paper_number} — ${r.title}</span>`);
+        genLog(`<span class="log-dim">  Supabase ID: ${r.id||'—'}</span>`);
+        appendResult(r);
+      });
+      document.getElementById('genStatus').className='save-status ok';
+      document.getElementById('genStatus').textContent=`✓ ${data.generated} paper${data.generated>1?'s':''} saved`;
+      genLog(`<span class="log-ok">━ Done. ${data.generated}/${count} saved to database. ━</span>`);
+      loadAllPapers();
+    }else{
+      genLog(`<span class="log-err">✗ No papers generated. Check Vercel function logs for details.</span>`);
+      document.getElementById('genStatus').className='save-status err';
+      document.getElementById('genStatus').textContent='Generation failed';
+    }
+  }catch(e){
+    genLog(`<span class="log-err">✗ Error: ${e.message}</span>`);
+    document.getElementById('genStatus').className='save-status err';
+    document.getElementById('genStatus').textContent='Request failed';
+    console.error(e);
+  }finally{
+    btn.disabled=false;
+    btn.innerHTML='✦ Generate Papers';
+  }
+}
+function appendResult(r){
+  const el=document.getElementById('genResults');
+  const card=document.createElement('div');
+  card.className='gen-result-card';
+  card.innerHTML=`
+    <div>
+      <div class="gen-result-title">${r.title}</div>
+      <div class="gen-result-meta">Supabase ID: ${r.id||'—'} · Saved ✓</div>
+    </div>
+    <div class="gen-result-links">
+      <a class="gen-link" href="${r.paper_url}" target="_blank">View Paper ↗</a>
+      <a class="gen-link memo" href="${r.memo_url}" target="_blank">View Memo ↗</a>
+    </div>
+  `;
+  el.appendChild(card);
+}
 </script>
 </body>
 </html>
