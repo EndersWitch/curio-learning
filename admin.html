@@ -751,9 +751,10 @@ async function startGeneration(){
   document.getElementById('genStatus').textContent='';
   document.getElementById('genResults').innerHTML='';
   genLog(`<span class="log-info">▶ Grade ${grade} ${subject==='english'?'English HL':subject} · ${term} · ${count} paper${count>1?'s':''}</span>`);
-  genLog(`<span class="log-dim">Calling /api/generate-paper-ai — this may take 30–90 seconds…</span>`);
+  const EDGE_FN_URL='https://inmrsgujgfktapjnekjs.supabase.co/functions/v1/generate-paper-ai';
+  genLog(`<span class="log-dim">Calling Edge Function — this may take 30–90 seconds…</span>`);
   try{
-    const resp=await fetch('/api/generate_paper_ai',{
+    const resp=await fetch(EDGE_FN_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({grade,subject,term,count})
@@ -777,7 +778,7 @@ async function startGeneration(){
       genLog(`<span class="log-ok">━ Done. ${data.generated}/${count} saved to database. ━</span>`);
       loadAllPapers();
     }else{
-      genLog(`<span class="log-err">✗ No papers generated. Check Vercel function logs for details.</span>`);
+      genLog(`<span class="log-err">✗ No papers generated. Check Supabase Edge Function logs for details.</span>`);
       document.getElementById('genStatus').className='save-status err';
       document.getElementById('genStatus').textContent='Generation failed';
     }
