@@ -753,7 +753,7 @@ async function startGeneration(){
   genLog(`<span class="log-info">▶ Grade ${grade} ${subject==='english'?'English HL':subject} · ${term} · ${count} paper${count>1?'s':''}</span>`);
   genLog(`<span class="log-dim">Calling /api/generate-paper-ai — this may take 30–90 seconds…</span>`);
   try{
-    const resp=await fetch('/api/generate-paper-ai',{
+    const resp=await fetch('/api/generate_paper_ai',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({grade,subject,term,count})
