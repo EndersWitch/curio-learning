@@ -479,12 +479,24 @@ tr:hover td{background:var(--m03);}
           </select>
         </div>
         <div>
-          <label class="gen-config-label">Papers to generate</label>
+          <label class="gen-config-label">Section Type</label>
+          <select id="genSectionType">
+            <option value="Comprehension" selected>Comprehension</option>
+            <option value="Poetry Analysis">Poetry Analysis</option>
+            <option value="Language Practice">Language Practice</option>
+          </select>
+        </div>
+        <div>
+          <label class="gen-config-label">Topic (optional)</label>
+          <input type="text" id="genTopic" placeholder="e.g. Seasons, Family…" style="background:var(--plum);border:1.5px solid var(--m12);border-radius:8px;font-family:var(--b);font-size:0.85rem;color:var(--moon);padding:0.65rem 0.9rem;width:100%;"/>
+        </div>
+        <div>
+          <label class="gen-config-label">How many?</label>
           <select id="genCount">
-            <option value="1" selected>1 paper</option>
-            <option value="2">2 papers</option>
-            <option value="3">3 papers</option>
-            <option value="5">5 papers</option>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="5">5</option>
           </select>
         </div>
       </div>
@@ -741,6 +753,8 @@ function clearGenLog(){
   document.getElementById('genStatus').className='save-status';
 }
 async function startGeneration(){
+  const sectionType=document.getElementById('genSectionType').value;
+  const topic=document.getElementById('genTopic').value.trim();
   const grade=parseInt(document.getElementById('genGrade').value);
   const subject=document.getElementById('genSubject').value;
   const term=document.getElementById('genTerm').value;
@@ -750,14 +764,14 @@ async function startGeneration(){
   btn.innerHTML='<span class="spinner"></span>Generating…';
   document.getElementById('genStatus').textContent='';
   document.getElementById('genResults').innerHTML='';
-  genLog(`<span class="log-info">▶ Grade ${grade} ${subject==='english'?'English HL':subject} · ${term} · ${count} paper${count>1?'s':''}</span>`);
+  genLog(`<span class="log-info">▶ Grade ${grade} English HL · ${term} · ${sectionType}${topic?' · '+topic:''} · ${count} item${count>1?'s':''}</span>`);
   const EDGE_FN_URL='https://inmrsgujgfktapjnekjs.supabase.co/functions/v1/generate-paper-ai';
   genLog(`<span class="log-dim">Calling Edge Function — this may take 30–90 seconds…</span>`);
   try{
     const resp=await fetch(EDGE_FN_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({grade,subject,term,count})
+      body:JSON.stringify({grade,subject,term,section_type:sectionType,topic,count})
     });
     if(!resp.ok){
       const errText=await resp.text();
@@ -769,12 +783,12 @@ async function startGeneration(){
     }
     if(data.results&&data.results.length){
       data.results.forEach(r=>{
-        genLog(`<span class="log-ok">✓ Paper ${r.paper_number} — ${r.title}</span>`);
+        genLog(`<span class="log-ok">✓ ${r.title}</span>`);
         genLog(`<span class="log-dim">  Supabase ID: ${r.id||'—'}</span>`);
         appendResult(r);
       });
       document.getElementById('genStatus').className='save-status ok';
-      document.getElementById('genStatus').textContent=`✓ ${data.generated} paper${data.generated>1?'s':''} saved`;
+      document.getElementById('genStatus').textContent=`✓ ${data.generated} item${data.generated>1?'s':''} saved`;
       genLog(`<span class="log-ok">━ Done. ${data.generated}/${count} saved to database. ━</span>`);
       loadAllPapers();
     }else{
@@ -799,7 +813,7 @@ function appendResult(r){
   card.innerHTML=`
     <div>
       <div class="gen-result-title">${r.title}</div>
-      <div class="gen-result-meta">Supabase ID: ${r.id||'—'} · Saved ✓</div>
+      <div class="gen-result-meta">${r.questions||''} questions · ${r.marks||''} marks · ID ${r.id||'—'}</div>
     </div>
     <div class="gen-result-links">
       <a class="gen-link" href="${r.paper_url}" target="_blank">View Paper ↗</a>
