@@ -460,18 +460,21 @@ tr:hover td{background:var(--m03);}
       </div>
 
       <!-- Config row -->
-      <div class="gen-config">
+      <div class="gen-config" style="grid-template-columns:repeat(3,1fr);">
         <div>
           <label class="gen-config-label">Grade</label>
-          <select id="genGrade"><option value="4" selected>Grade 4</option></select>
-        </div>
-        <div>
-          <label class="gen-config-label">Subject</label>
-          <select id="genSubject"><option value="english" selected>English HL</option></select>
+          <select id="genGrade" onchange="onGenGradeTermChange()">
+            <option value="4" selected>Grade 4</option>
+            <option value="5">Grade 5</option>
+            <option value="6">Grade 6</option>
+            <option value="7">Grade 7</option>
+            <option value="8">Grade 8</option>
+            <option value="9">Grade 9</option>
+          </select>
         </div>
         <div>
           <label class="gen-config-label">Term</label>
-          <select id="genTerm">
+          <select id="genTerm" onchange="onGenGradeTermChange()">
             <option value="Term 1">Term 1</option>
             <option value="Term 2">Term 2</option>
             <option value="Term 3">Term 3</option>
@@ -479,16 +482,16 @@ tr:hover td{background:var(--m03);}
           </select>
         </div>
         <div>
-          <label class="gen-config-label">Section Type</label>
+          <label class="gen-config-label">Section Type <span id="genSectionLoading" style="color:var(--amber);font-size:0.6rem;"></span></label>
           <select id="genSectionType">
             <option value="Comprehension" selected>Comprehension</option>
-            <option value="Poetry Analysis">Poetry Analysis</option>
             <option value="Language Practice">Language Practice</option>
+            <option value="Poetry Analysis">Poetry Analysis</option>
           </select>
         </div>
         <div>
           <label class="gen-config-label">Topic (optional)</label>
-          <input type="text" id="genTopic" placeholder="e.g. Seasons, Family…" style="background:var(--plum);border:1.5px solid var(--m12);border-radius:8px;font-family:var(--b);font-size:0.85rem;color:var(--moon);padding:0.65rem 0.9rem;width:100%;"/>
+          <input type="text" id="genTopic" placeholder="e.g. Seasons, Family, Friendship…" style="background:var(--plum);border:1.5px solid var(--m12);border-radius:8px;font-family:var(--b);font-size:0.85rem;color:var(--moon);padding:0.65rem 0.9rem;width:100%;"/>
         </div>
         <div>
           <label class="gen-config-label">How many?</label>
@@ -498,6 +501,10 @@ tr:hover td{background:var(--m03);}
             <option value="3">3</option>
             <option value="5">5</option>
           </select>
+        </div>
+        <div>
+          <label class="gen-config-label">Curriculum preview</label>
+          <div id="genCurrPreview" style="font-size:0.68rem;color:var(--m30);line-height:1.6;padding-top:0.3rem;">select grade + term to preview</div>
         </div>
       </div>
 
@@ -752,11 +759,54 @@ function clearGenLog(){
   document.getElementById('genStatus').textContent='';
   document.getElementById('genStatus').className='save-status';
 }
+// ════════════════════════════════════
+// SMART CURRICULUM SELECTOR
+// ════════════════════════════════════
+const EDGE_FN = 'https://inmrsgujgfktapjnekjs.supabase.co/functions/v1/generate-paper-ai';
+
+async function onGenGradeTermChange(){
+  const grade = document.getElementById('genGrade').value;
+  const term = document.getElementById('genTerm').value;
+  const loading = document.getElementById('genSectionLoading');
+  const preview = document.getElementById('genCurrPreview');
+  const sectionSel = document.getElementById('genSectionType');
+
+  loading.textContent = 'loading…';
+  try {
+    const resp = await fetch(`${EDGE_FN}?grade=${grade}&term=${term}`);
+    if (!resp.ok) throw new Error('fetch failed');
+    const data = await resp.json();
+
+    // Update section type dropdown
+    const current = sectionSel.value;
+    sectionSel.innerHTML = '';
+    (data.sectionTypes || ['Comprehension','Language Practice','Poetry Analysis']).forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t; opt.textContent = t;
+      if (t === current) opt.selected = true;
+      sectionSel.appendChild(opt);
+    });
+    if (!sectionSel.value) sectionSel.selectedIndex = 0;
+
+    // Update curriculum preview
+    const newSkills = (data.newSkills || []).slice(0,4).join(', ');
+    const grammar = (data.grammarFocus || []).slice(0,4).join(', ');
+    preview.innerHTML = `<span style="color:var(--amber)">New this term:</span> ${newSkills || '—'}<br><span style="color:var(--cyan)">Grammar:</span> ${grammar || '—'}`;
+    loading.textContent = '';
+  } catch(_) {
+    loading.textContent = '';
+    preview.textContent = 'could not load preview';
+  }
+}
+
+// Load on first render
+onGenGradeTermChange();
+
 async function startGeneration(){
   const sectionType=document.getElementById('genSectionType').value;
   const topic=document.getElementById('genTopic').value.trim();
   const grade=parseInt(document.getElementById('genGrade').value);
-  const subject=document.getElementById('genSubject').value;
+  const subject='english';
   const term=document.getElementById('genTerm').value;
   const count=parseInt(document.getElementById('genCount').value);
   const btn=document.getElementById('btnGenerate');
@@ -765,10 +815,9 @@ async function startGeneration(){
   document.getElementById('genStatus').textContent='';
   document.getElementById('genResults').innerHTML='';
   genLog(`<span class="log-info">▶ Grade ${grade} English HL · ${term} · ${sectionType}${topic?' · '+topic:''} · ${count} item${count>1?'s':''}</span>`);
-  const EDGE_FN_URL='https://inmrsgujgfktapjnekjs.supabase.co/functions/v1/generate-paper-ai';
   genLog(`<span class="log-dim">Calling Edge Function — this may take 30–90 seconds…</span>`);
   try{
-    const resp=await fetch(EDGE_FN_URL,{
+    const resp=await fetch(EDGE_FN,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({grade,subject,term,section_type:sectionType,topic,count})
