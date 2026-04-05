@@ -16,17 +16,12 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 .nav-logo{display:flex;align-items:center;gap:0.6rem;font-family:var(--h);font-size:1.2rem;font-weight:800;color:var(--moon);}
 .nav-back{font-size:0.8rem;color:var(--m30);transition:color .15s;}
 .nav-back:hover{color:var(--moon);text-decoration:none;}
-
 .page-wrap{max-width:900px;margin:0 auto;padding:4rem 2rem;}
 .page-eyebrow{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--cyan);margin-bottom:0.5rem;}
 .page-title{font-family:var(--h);font-size:2.4rem;font-weight:800;letter-spacing:-1px;color:var(--moon);margin-bottom:0.5rem;}
 .page-sub{font-size:0.95rem;color:var(--m55);margin-bottom:3rem;max-width:500px;}
-
-/* Two column layout */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;}
 @media(max-width:680px){.contact-grid{grid-template-columns:1fr;}}
-
-/* Contact cards */
 .contact-card{background:var(--card);border:1px solid var(--m06);border-radius:16px;padding:1.8rem;}
 .contact-card-icon{font-size:1.8rem;margin-bottom:0.8rem;}
 .contact-card-title{font-family:var(--h);font-size:1rem;font-weight:700;color:var(--moon);margin-bottom:0.4rem;}
@@ -34,8 +29,6 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 .contact-card-link{display:inline-flex;align-items:center;gap:0.35rem;font-size:0.85rem;font-weight:600;color:var(--cyan);}
 .contact-card-link:hover{opacity:0.8;text-decoration:none;}
 .contact-card.featured{background:var(--c12);border-color:var(--c25);}
-
-/* FAQ section */
 .faq-section{margin-top:3.5rem;}
 .faq-title{font-family:var(--h);font-size:1.2rem;font-weight:800;color:var(--moon);margin-bottom:1.5rem;}
 .faq-item{border-bottom:1px solid var(--m06);padding:1.2rem 0;}
@@ -45,13 +38,15 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 .faq-item.open .faq-q::after{transform:rotate(180deg);}
 .faq-a{font-size:0.85rem;color:var(--m55);line-height:1.7;display:none;}
 .faq-item.open .faq-a{display:block;}
-
 .response-note{background:var(--plum);border:1px solid var(--m06);border-radius:12px;padding:1rem 1.4rem;margin-top:2.5rem;font-size:0.82rem;color:var(--m55);line-height:1.65;}
 .response-note strong{color:var(--moon);}
-
 footer{margin-top:4rem;padding:2rem;border-top:1px solid var(--m06);text-align:center;font-size:0.72rem;color:var(--m30);}
 footer a{color:var(--m30);margin:0 0.8rem;}
 footer a:hover{color:var(--moon);}
+.simple-nav-links{display:flex;gap:.2rem;list-style:none;}
+.simple-nav-links a{padding:.38rem .8rem;font-size:.8rem;font-weight:500;color:rgba(247,247,255,.3);border-radius:6px;transition:all .15s;display:block;text-decoration:none;}
+.simple-nav-links a:hover{color:#F7F7FF;background:rgba(247,247,255,.06);}
+@media(max-width:600px){.simple-nav-links{display:none;}}
 </style>
 </head>
 <body>
@@ -60,115 +55,41 @@ footer a:hover{color:var(--moon);}
     <svg width="24" height="24" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/><circle cx="32" cy="32" r="7" fill="#FF5E5B"/></svg>
     curio
   </a>
-  <a href="index.html" class="nav-back">← Back to home</a>
+  <ul class="simple-nav-links">
+    <li><a href="papers.html">Papers</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+    <li><a href="subjects/index.html">Subjects</a></li>
+    <li><a href="index.html#pricing">Pricing</a></li>
+  </ul>
+  <a href="index.html" class="nav-back">← Home</a>
 </nav>
-
 <div class="page-wrap">
   <div class="page-eyebrow">Get in touch</div>
   <h1 class="page-title">Contact Us</h1>
   <p class="page-sub">We're a small team but we care deeply about every student who uses Curio. We'll get back to you as soon as we can. 🌱</p>
-
   <div class="contact-grid">
-
-    <div class="contact-card featured">
-      <div class="contact-card-icon">✉️</div>
-      <div class="contact-card-title">General enquiries</div>
-      <div class="contact-card-desc">Questions about Curio, how it works, content, or anything else? Drop us an email and we'll respond within 1–2 business days.</div>
-      <a href="mailto:hello@curiolearning.co.za" class="contact-card-link">hello@curiolearning.co.za →</a>
-    </div>
-
-    <div class="contact-card">
-      <div class="contact-card-icon">🛠️</div>
-      <div class="contact-card-title">Technical support</div>
-      <div class="contact-card-desc">Something not working? A bug, a broken page, or a login issue? Let us know and we'll fix it as quickly as possible.</div>
-      <a href="mailto:support@curiolearning.co.za" class="contact-card-link">support@curiolearning.co.za →</a>
-    </div>
-
-    <div class="contact-card">
-      <div class="contact-card-icon">💳</div>
-      <div class="contact-card-title">Billing & subscriptions</div>
-      <div class="contact-card-desc">Questions about your Premium subscription, payment issues, or refund requests — we're here to help.</div>
-      <a href="mailto:hello@curiolearning.co.za" class="contact-card-link">hello@curiolearning.co.za →</a>
-    </div>
-
-    <div class="contact-card">
-      <div class="contact-card-icon">🏫</div>
-      <div class="contact-card-title">Schools & educators</div>
-      <div class="contact-card-desc">Interested in Curio for your school or classroom? We'd love to chat about how we can support your learners.</div>
-      <a href="mailto:hello@curiolearning.co.za" class="contact-card-link">hello@curiolearning.co.za →</a>
-    </div>
-
-    <div class="contact-card">
-      <div class="contact-card-icon">🔒</div>
-      <div class="contact-card-title">Privacy & data requests</div>
-      <div class="contact-card-desc">To exercise your rights under POPIA — access, correction, or deletion of your personal data — contact us directly.</div>
-      <a href="mailto:hello@curiolearning.co.za" class="contact-card-link">hello@curiolearning.co.za →</a>
-    </div>
-
-    <div class="contact-card">
-      <div class="contact-card-icon">📝</div>
-      <div class="contact-card-title">Content & corrections</div>
-      <div class="contact-card-desc">Spotted an error in a paper, question, or memo? We take accuracy seriously — please let us know.</div>
-      <a href="mailto:hello@curiolearning.co.za" class="contact-card-link">hello@curiolearning.co.za →</a>
-    </div>
-
+    <div class="contact-card featured"><div class="contact-card-icon">✉️</div><div class="contact-card-title">General enquiries</div><div class="contact-card-desc">Questions about Curio, how it works, content, or anything else? Drop us an email and we'll respond within 1–2 business days.</div><a href="mailto:hello@curiolearning.co.za" class="contact-card-link">hello@curiolearning.co.za →</a></div>
+    <div class="contact-card"><div class="contact-card-icon">🛠️</div><div class="contact-card-title">Technical support</div><div class="contact-card-desc">Something not working? A bug, a broken page, or a login issue? Let us know and we'll fix it as quickly as possible.</div><a href="mailto:support@curiolearning.co.za" class="contact-card-link">support@curiolearning.co.za →</a></div>
+    <div class="contact-card"><div class="contact-card-icon">💳</div><div class="contact-card-title">Billing &amp; subscriptions</div><div class="contact-card-desc">Questions about your Premium subscription, payment issues, or refund requests — we're here to help.</div><a href="mailto:hello@curiolearning.co.za" class="contact-card-link">hello@curiolearning.co.za →</a></div>
+    <div class="contact-card"><div class="contact-card-icon">🏫</div><div class="contact-card-title">Schools &amp; educators</div><div class="contact-card-desc">Interested in Curio for your school or classroom? We'd love to chat about how we can support your learners.</div><a href="mailto:hello@curiolearning.co.za" class="contact-card-link">hello@curiolearning.co.za →</a></div>
+    <div class="contact-card"><div class="contact-card-icon">🔒</div><div class="contact-card-title">Privacy &amp; data requests</div><div class="contact-card-desc">To exercise your rights under POPIA — access, correction, or deletion of your personal data — contact us directly.</div><a href="mailto:hello@curiolearning.co.za" class="contact-card-link">hello@curiolearning.co.za →</a></div>
+    <div class="contact-card"><div class="contact-card-icon">📝</div><div class="contact-card-title">Content &amp; corrections</div><div class="contact-card-desc">Spotted an error in a paper, question, or memo? We take accuracy seriously — please let us know.</div><a href="mailto:hello@curiolearning.co.za" class="contact-card-link">hello@curiolearning.co.za →</a></div>
   </div>
-
-  <div class="response-note">
-    <strong>📍 Based in South Africa.</strong> We typically respond within 1–2 business days (Monday to Friday, 08:00–17:00 SAST). For urgent issues, include "URGENT" in your subject line.
-  </div>
-
-  <!-- FAQ -->
+  <div class="response-note"><strong>📍 Based in South Africa.</strong> We typically respond within 1–2 business days (Monday to Friday, 08:00–17:00 SAST). For urgent issues, include "URGENT" in your subject line.</div>
   <div class="faq-section">
     <div class="faq-title">Frequently asked questions</div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Are exam papers really free?</div>
-      <div class="faq-a">Yes — always. Exam papers and memos on Curio are free for every student, no account required, no strings attached. We believe access to good study material shouldn't depend on who you are or where you come from.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">How do I cancel my Premium subscription?</div>
-      <div class="faq-a">You can cancel anytime from your account settings. Your Premium access continues until the end of your current billing period. We don't do any lock-in — if you cancel, you cancel.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Can I get a refund?</div>
-      <div class="faq-a">Refunds are considered on a case-by-case basis. If you've had a billing issue or weren't able to access the features you paid for, email us at hello@curiolearning.co.za and we'll make it right.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">My child uses Curio — what data do you collect?</div>
-      <div class="faq-a">We collect only what's necessary: name, email address, and grade. We never sell data, we never share it with advertisers, and we comply with POPIA. See our Privacy Policy for full details.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Which grades and subjects does Curio cover?</div>
-      <div class="faq-a">We're building toward full coverage of Grade R to Grade 12, all CAPS subjects. We're adding content continuously — if you'd like a specific subject or grade prioritised, let us know at hello@curiolearning.co.za.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">How do I report a mistake in a paper or answer?</div>
-      <div class="faq-a">Email us at hello@curiolearning.co.za with the paper name, question number, and what you believe is incorrect. We review every report and update the content if needed. Thank you for helping us keep Curio accurate.</div>
-    </div>
-
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are exam papers really free?</div><div class="faq-a">Yes — always. Exam papers and memos on Curio are free for every student, no account required, no strings attached. We believe access to good study material shouldn't depend on who you are or where you come from.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do I cancel my Premium subscription?</div><div class="faq-a">You can cancel anytime from your account settings. Your Premium access continues until the end of your current billing period. We don't do any lock-in — if you cancel, you cancel.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I get a refund?</div><div class="faq-a">Refunds are considered on a case-by-case basis. If you've had a billing issue or weren't able to access the features you paid for, email us at hello@curiolearning.co.za and we'll make it right.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">My child uses Curio — what data do you collect?</div><div class="faq-a">We collect only what's necessary: name, email address, and grade. We never sell data, we never share it with advertisers, and we comply with POPIA. See our Privacy Policy for full details.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Which grades and subjects does Curio cover?</div><div class="faq-a">We're building toward full coverage of Grade 4 to Grade 12, all CAPS subjects. We're adding content continuously — if you'd like a specific subject or grade prioritised, let us know at hello@curiolearning.co.za.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do I report a mistake in a paper or answer?</div><div class="faq-a">Email us at hello@curiolearning.co.za with the paper name, question number, and what you believe is incorrect. We review every report and update the content if needed.</div></div>
   </div>
 </div>
-
 <footer>
   <p>© 2026 Curio Learning · South Africa</p>
-  <p style="margin-top:0.5rem;">
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms of Service</a>
-    <a href="contact.html">Contact</a>
-  </p>
+  <p style="margin-top:0.5rem;"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="contact.html">Contact</a></p>
 </footer>
-
-<script>
-function toggleFaq(el) {
-  const item = el.closest('.faq-item');
-  item.classList.toggle('open');
-}
-</script>
+<script>function toggleFaq(el){el.closest('.faq-item').classList.toggle('open');}</script>
 </body>
 </html>

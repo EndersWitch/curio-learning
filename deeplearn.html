@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Curio — Deep Learn</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E</svg>"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&family=Caveat:wght@600&display=swap" rel="stylesheet"/>
 <style>
 :root{--plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;--cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);--m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;--script:'Caveat',cursive;}
@@ -25,7 +25,6 @@ nav{position:fixed;top:0;left:0;right:0;height:58px;display:flex;align-items:cen
 .cs-sub{font-size:0.95rem;color:var(--m55);line-height:1.8;margin-bottom:2rem;max-width:420px;margin-left:auto;margin-right:auto;}
 .cs-sub strong{color:var(--moon);font-weight:600;}
 .cs-script{font-family:var(--script);font-size:1.2rem;color:var(--amber);opacity:0.8;margin-bottom:2.5rem;display:block;}
-/* Chat preview mockup */
 .chat-preview{background:var(--card);border:1px solid var(--m06);border-radius:18px;padding:1.5rem;text-align:left;max-width:420px;margin:0 auto 2rem;}
 .chat-msg{margin-bottom:1rem;}
 .chat-msg.user{text-align:right;}
@@ -37,7 +36,6 @@ nav{position:fixed;top:0;left:0;right:0;height:58px;display:flex;align-items:cen
 .chat-msg.user .chat-sender{text-align:right;}
 .chat-blur{filter:blur(4px);opacity:0.4;pointer-events:none;user-select:none;}
 .coming-soon-overlay{background:linear-gradient(to bottom,transparent,var(--deep));height:80px;margin-top:-80px;position:relative;}
-/* CTA */
 .cs-cta{display:inline-flex;align-items:center;gap:0.4rem;background:var(--coral);color:var(--moon);padding:0.85rem 1.8rem;border-radius:10px;font-family:var(--h);font-size:0.88rem;font-weight:700;text-decoration:none;transition:all .15s;margin-right:0.7rem;}
 .cs-cta:hover{background:#ff4a47;transform:translateY(-1px);}
 .cs-soft{display:inline-flex;align-items:center;gap:0.4rem;background:var(--m06);color:var(--m55);padding:0.82rem 1.5rem;border-radius:10px;font-family:var(--h);font-size:0.85rem;font-weight:600;border:1px solid var(--m12);text-decoration:none;transition:all .15s;}
@@ -45,15 +43,19 @@ nav{position:fixed;top:0;left:0;right:0;height:58px;display:flex;align-items:cen
 </style>
 </head>
 <body>
-
 <nav>
   <a href="index.html" class="nav-logo">
     <svg width="24" height="24" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/><circle cx="32" cy="32" r="7" fill="#FF5E5B"/></svg>
     curio
   </a>
-  <a href="index.html" class="nav-back">← Back to home</a>
+  <ul class="simple-nav-links">
+    <li><a href="papers.html">Papers</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+    <li><a href="subjects/index.html">Subjects</a></li>
+    <li><a href="index.html#pricing">Pricing</a></li>
+  </ul>
+  <a href="index.html" class="nav-back">← Home</a>
 </nav>
-
 <div class="coming-soon">
   <div class="cs-bloom">
     <svg width="72" height="72" viewBox="0 0 64 64" fill="none">
@@ -65,13 +67,10 @@ nav{position:fixed;top:0;left:0;right:0;height:58px;display:flex;align-items:cen
       <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
     </svg>
   </div>
-
   <div class="cs-badge">Coming soon</div>
   <h1 class="cs-title">Not just right<br/>or wrong.<br/><span class="co">Actually</span> <span class="cy">explained.</span></h1>
   <p class="cs-sub">Deep Learn is Curio's AI tutor. Ask it anything — it breaks down concepts <strong>from first principles</strong>, in plain language, with real examples, until it actually clicks.</p>
   <span class="cs-script">we're building something special 🌱</span>
-
-  <!-- Blurred chat preview -->
   <div class="chat-preview">
     <div class="chat-msg user">
       <div class="chat-sender">You</div>
@@ -91,12 +90,10 @@ nav{position:fixed;top:0;left:0;right:0;height:58px;display:flex;align-items:cen
     </div>
   </div>
   <div class="coming-soon-overlay"></div>
-
   <div>
     <a href="subscription.html" class="cs-cta">Get early access →</a>
     <a href="index.html" class="cs-soft">← Back home</a>
   </div>
 </div>
-
 </body>
 </html>

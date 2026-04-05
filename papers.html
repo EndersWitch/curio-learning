@@ -102,37 +102,6 @@ nav{
   position:sticky;top:58px;height:calc(100vh - 58px);
   overflow-y:auto;display:flex;flex-direction:column;gap:2rem;
 }
-/* Mobile filter toggle button */
-.mobile-filter-btn{
-  display:none;
-  width:100%;padding:0.75rem 1rem;
-  background:var(--plum);border:1px solid var(--m06);border-radius:10px;
-  font-family:var(--h);font-size:0.82rem;font-weight:700;color:var(--moon);
-  cursor:pointer;text-align:left;
-  align-items:center;justify-content:space-between;
-  margin-bottom:0.5rem;
-}
-.mobile-filter-btn span{font-size:0.75rem;color:var(--cyan);}
-@media(max-width:720px){
-  .papers-layout{grid-template-columns:1fr;}
-  .mobile-filter-btn{display:flex;}
-  .papers-sidebar{
-    position:static;height:auto;
-    border-right:none;border-bottom:1px solid var(--m06);
-    padding:0 1rem;
-    /* collapsed by default on mobile */
-    max-height:0;overflow:hidden;
-    transition:max-height 0.3s ease, padding 0.3s ease;
-  }
-  .papers-sidebar.mobile-open{
-    max-height:600px;
-    padding:1.2rem 1rem;
-  }
-  .papers-main{padding:1.2rem 1rem;}
-  .papers-grid{grid-template-columns:1fr;}
-  .papers-hero{padding:2rem 1rem 1.5rem;}
-  .hero-stats{display:none;}
-}
 .sidebar-section{}
 .sidebar-label{font-size:0.56rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--m30);margin-bottom:0.7rem;}
 .grade-list{display:flex;flex-direction:column;gap:0.2rem;}
@@ -291,6 +260,7 @@ nav{
   <ul class="nav-links">
     <li><a href="papers.html" class="active">Papers</a></li>
     <li><a href="quiz.html">Quiz</a></li>
+    <li><a href="subjects/index.html">Subjects</a></li>
     <li><a href="index.html#pricing">Pricing</a></li>
   </ul>
   <div class="nav-right" id="navRight">
@@ -331,13 +301,8 @@ nav{
 <!-- MAIN LAYOUT -->
 <div class="papers-layout">
 
-  <!-- Mobile filter toggle -->
-  <button class="mobile-filter-btn" id="mobileFilterBtn" onclick="toggleMobileFilters()">
-    🔍 Filter papers <span id="mobileFilterLabel">Tap to filter</span>
-  </button>
-
   <!-- SIDEBAR -->
-  <aside class="papers-sidebar" id="papersSidebar">
+  <aside class="papers-sidebar">
     <div class="sidebar-section">
       <div class="sidebar-label">Search</div>
       <input class="papers-search" type="text" id="searchInput" placeholder="e.g. Maths, English…" oninput="applyFilters()"/>
@@ -474,7 +439,6 @@ function setGrade(g,btn){
   document.querySelectorAll('.grade-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   applyFilters();
-  closeMobileFiltersIfMobile();
 }
 function setSubject(s,btn){
   selectedSubject=s;
@@ -647,29 +611,6 @@ function dismissAd(id){
     el.style.paddingTop='0';el.style.paddingBottom='0';
   }));
   setTimeout(()=>el.remove(),320);
-}
-
-// ── MOBILE FILTER TOGGLE ──
-function toggleMobileFilters(){
-  const sb=document.getElementById('papersSidebar');
-  const btn=document.getElementById('mobileFilterBtn');
-  const lbl=document.getElementById('mobileFilterLabel');
-  if(sb.classList.contains('mobile-open')){
-    sb.classList.remove('mobile-open');
-    if(lbl)lbl.textContent='Tap to filter';
-  }else{
-    sb.classList.add('mobile-open');
-    if(lbl)lbl.textContent='Tap to close ✕';
-  }
-}
-// Close filters after selecting on mobile
-function closeMobileFiltersIfMobile(){
-  if(window.innerWidth<=720){
-    const sb=document.getElementById('papersSidebar');
-    const lbl=document.getElementById('mobileFilterLabel');
-    if(sb){sb.classList.remove('mobile-open');}
-    if(lbl)lbl.textContent='Tap to filter';
-  }
 }
 
 // ── INIT ──
