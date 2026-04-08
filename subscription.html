@@ -6,6 +6,7 @@
 <title>Curio — Subscription</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <style>
 :root{--plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;--cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;--m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);--m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);--h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -19,7 +20,16 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 .page-wrap{max-width:700px;margin:0 auto;padding:3.5rem 2rem;}
 .page-eyebrow{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--cyan);margin-bottom:0.4rem;}
 .page-title{font-family:var(--h);font-size:2rem;font-weight:800;letter-spacing:-1px;color:var(--moon);margin-bottom:0.3rem;}
-.page-sub{font-size:0.88rem;color:var(--m55);margin-bottom:2.5rem;}
+.page-sub{font-size:0.88rem;color:var(--m55);margin-bottom:2rem;}
+
+/* Founder banner */
+.founder-banner{background:linear-gradient(135deg,rgba(245,200,66,0.12),rgba(245,200,66,0.06));border:1px solid rgba(245,200,66,0.25);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+.founder-banner-left{display:flex;align-items:center;gap:0.7rem;}
+.founder-fire{font-size:1.2rem;}
+.founder-text{font-size:0.8rem;color:var(--m80);line-height:1.5;}
+.founder-text strong{color:var(--amber);font-family:var(--h);}
+.founder-slots{font-family:var(--h);font-size:1.4rem;font-weight:900;color:var(--amber);white-space:nowrap;}
+.founder-slots span{font-size:0.65rem;font-weight:600;color:rgba(245,200,66,0.6);display:block;text-align:right;}
 
 /* Status badge */
 .status-badge{display:inline-flex;align-items:center;gap:0.45rem;padding:0.35rem 0.9rem;border-radius:100px;font-size:0.72rem;font-weight:700;margin-bottom:2rem;}
@@ -29,7 +39,7 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 .status-badge.free .status-dot{background:var(--m30);}
 .status-badge.premium .status-dot{background:var(--cyan);}
 
-/* Current plan card */
+/* Plan cards */
 .plan-card{background:var(--card);border:1px solid var(--m06);border-radius:18px;padding:2rem;margin-bottom:1.4rem;}
 .plan-card.premium-card{background:linear-gradient(135deg,var(--mid),var(--card));border-color:var(--c25);}
 .plan-tier{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--m30);margin-bottom:0.4rem;}
@@ -47,12 +57,13 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 /* Buttons */
 .btn-upgrade{display:block;width:100%;padding:0.9rem;background:var(--coral);color:var(--moon);font-family:var(--h);font-size:0.92rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:all .15s;text-align:center;}
 .btn-upgrade:hover{background:#ff4a47;transform:translateY(-1px);}
+.btn-upgrade:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
 .btn-manage{display:block;width:100%;padding:0.85rem;background:var(--m06);color:var(--m55);font-family:var(--h);font-size:0.85rem;font-weight:600;border:1px solid var(--m12);border-radius:10px;cursor:pointer;transition:all .15s;text-align:center;}
 .btn-manage:hover{background:var(--m12);color:var(--moon);}
 .btn-cancel{display:block;width:100%;padding:0.85rem;background:var(--r10);color:var(--coral);font-family:var(--h);font-size:0.85rem;font-weight:600;border:1px solid var(--r20);border-radius:10px;cursor:pointer;transition:all .15s;text-align:center;margin-top:0.7rem;}
 .btn-cancel:hover{background:var(--r20);}
 
-/* Comparison */
+/* Compare */
 .compare-section{margin-top:2.5rem;}
 .compare-title{font-family:var(--h);font-size:1rem;font-weight:700;color:var(--moon);margin-bottom:1.2rem;}
 .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
@@ -69,7 +80,6 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 
 .note{font-size:0.78rem;color:var(--m30);text-align:center;margin-top:1.5rem;line-height:1.65;}
 .note a{color:var(--cyan);}
-
 footer{margin-top:3rem;padding:1.5rem;border-top:1px solid var(--m06);text-align:center;font-size:0.72rem;color:var(--m30);}
 footer a{color:var(--m30);margin:0 0.6rem;}
 footer a:hover{color:var(--moon);}
@@ -89,6 +99,15 @@ footer a:hover{color:var(--moon);}
   <h1 class="page-title">Subscription</h1>
   <p class="page-sub">Manage your Curio plan.</p>
 
+  <!-- Founder slots banner (shown to free users only) -->
+  <div class="founder-banner" id="founderBanner" style="display:none">
+    <div class="founder-banner-left">
+      <span class="founder-fire">🔥</span>
+      <div class="founder-text"><strong>Founder pricing — limited spots</strong><br/>Lock in R49/month before it goes to R99. First 200 subscribers only.</div>
+    </div>
+    <div class="founder-slots"><span id="slotsLeft">—</span><span>spots left</span></div>
+  </div>
+
   <!-- FREE USER VIEW -->
   <div id="freeView">
     <div class="status-badge free"><div class="status-dot"></div>Free plan</div>
@@ -100,13 +119,13 @@ footer a:hover{color:var(--moon);}
         <li><span class="pf-chk">✓</span>Full exam paper library</li>
         <li><span class="pf-chk">✓</span>Download papers as PDF</li>
         <li><span class="pf-chk">✓</span>Full marking memos</li>
-        <li><span class="pf-chk">✓</span>All grades & subjects</li>
+        <li><span class="pf-chk">✓</span>All grades &amp; subjects</li>
         <li><span class="pf-chk grey">—</span><span style="color:var(--m30)">AI-powered quiz mode</span></li>
         <li><span class="pf-chk grey">—</span><span style="color:var(--m30)">Deep Learn explanations</span></li>
-        <li><span class="pf-chk grey">—</span><span style="color:var(--m30)">Progress tracking & streaks</span></li>
+        <li><span class="pf-chk grey">—</span><span style="color:var(--m30)">Progress tracking &amp; streaks</span></li>
         <li><span class="pf-chk grey">—</span><span style="color:var(--m30)">Custom test generator</span></li>
       </ul>
-      <button class="btn-upgrade" onclick="startUpgrade()">Start 7-day free trial — R49/month →</button>
+      <button class="btn-upgrade" id="upgradeBtn" onclick="startUpgrade()">Start 7-day free trial — R49/month →</button>
     </div>
 
     <div class="compare-section">
@@ -118,7 +137,7 @@ footer a:hover{color:var(--moon);}
           <div class="compare-item"><div class="ci-dot"></div>Exam paper library</div>
           <div class="compare-item"><div class="ci-dot"></div>PDF downloads</div>
           <div class="compare-item"><div class="ci-dot"></div>Full memos</div>
-          <div class="compare-item"><div class="ci-dot"></div>All grades & subjects</div>
+          <div class="compare-item"><div class="ci-dot"></div>All grades &amp; subjects</div>
         </div>
         <div class="compare-col hot">
           <div class="compare-col-label">Premium</div>
@@ -127,7 +146,7 @@ footer a:hover{color:var(--moon);}
           <div class="compare-item"><div class="ci-dot"></div>AI-powered quiz mode</div>
           <div class="compare-item"><div class="ci-dot"></div>Deep Learn explanations</div>
           <div class="compare-item"><div class="ci-dot"></div>Custom test generator</div>
-          <div class="compare-item"><div class="ci-dot"></div>Progress tracking & streaks</div>
+          <div class="compare-item"><div class="ci-dot"></div>Progress tracking &amp; streaks</div>
           <div class="compare-item"><div class="ci-dot"></div>Topic-sorted question sets</div>
           <div class="compare-item"><div class="ci-dot"></div>No ads</div>
         </div>
@@ -142,20 +161,19 @@ footer a:hover{color:var(--moon);}
     <div class="plan-card premium-card">
       <div class="plan-tier">Premium</div>
       <div class="plan-price"><sup>R</sup>49<sub>/mo</sub></div>
-      <div class="plan-renew">Your subscription is active. <strong id="renewText">Renews automatically each month.</strong></div>
+      <div class="plan-renew">Your subscription is active. <strong>Renews automatically each month.</strong></div>
       <ul class="plan-features">
         <li><span class="pf-chk">✓</span>Everything in Free</li>
         <li><span class="pf-chk">✓</span>AI-powered quiz mode</li>
         <li><span class="pf-chk">✓</span>Deep Learn explanations</li>
         <li><span class="pf-chk">✓</span>Custom test generator</li>
-        <li><span class="pf-chk">✓</span>Progress tracking & streaks</li>
+        <li><span class="pf-chk">✓</span>Progress tracking &amp; streaks</li>
         <li><span class="pf-chk">✓</span>Topic-sorted question sets</li>
         <li><span class="pf-chk">✓</span>No ads</li>
       </ul>
-      <button class="btn-manage" onclick="managePaystack()">Manage billing via Paystack →</button>
       <button class="btn-cancel" onclick="cancelSubscription()">Cancel subscription</button>
     </div>
-    <p class="note">Need help with billing? <a href="mailto:hello@curiolearning.co.za">hello@curiolearning.co.za</a></p>
+    <p class="note">Need help? <a href="mailto:hello@curiolearning.co.za">hello@curiolearning.co.za</a></p>
   </div>
 </div>
 
@@ -166,31 +184,98 @@ footer a:hover{color:var(--moon);}
 </footer>
 
 <script>
+// ── Config ──────────────────────────────────────────────────────
+const PAYSTACK_PUBLIC_KEY = 'pk_live_6540061572fe506bdb52063847dedb801c38765b';
+const PLAN_CODE = 'PLN_rgv78ij4cj0ky3d';
+const SUPABASE_URL = 'https://inmrsgujgfktapjnekjs.supabase.co';
+const SUPABASE_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
+
+// ── Session ──────────────────────────────────────────────────────
 function getSession(){
   try{const s=localStorage.getItem('curio_session');if(s){const p=JSON.parse(s);if(p?.access_token&&p?.expires_at>Date.now()/1000)return p;}}catch(e){}
   return null;
 }
-const session=getSession();
-if(!session){window.location.href='login.html';}
+const session = getSession();
+if(!session){ window.location.href='login.html'; }
 
-// Check premium status
-const isPremium=session?.user?.user_metadata?.is_premium===true;
-document.getElementById('freeView').style.display=isPremium?'none':'block';
-document.getElementById('premiumView').style.display=isPremium?'block':'none';
+const user = session?.user || {};
+const email = user.email || '';
+const isPremium = user.user_metadata?.is_premium === true;
 
+// Show correct view
+document.getElementById('freeView').style.display = isPremium ? 'none' : 'block';
+document.getElementById('premiumView').style.display = isPremium ? 'block' : 'none';
+
+// ── Load founder slots ───────────────────────────────────────────
+if(!isPremium){
+  fetch(`${SUPABASE_URL}/rest/v1/founder_slots?id=eq.1`,{
+    headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}
+  }).then(r=>r.json()).then(data=>{
+    if(data&&data[0]){
+      const remaining = data[0].total - data[0].claimed;
+      if(remaining > 0){
+        document.getElementById('slotsLeft').textContent = remaining;
+        document.getElementById('founderBanner').style.display = 'flex';
+      }
+    }
+  }).catch(()=>{});
+}
+
+// ── Paystack checkout ────────────────────────────────────────────
 function startUpgrade(){
-  // TODO: Replace with real Paystack payment link once approved
-  alert('⭐ Paystack integration coming very soon!\n\nOnce activated, clicking this button will take you to a secure Paystack checkout.\n\nFor early access, email hello@curiolearning.co.za');
+  const btn = document.getElementById('upgradeBtn');
+  btn.disabled = true;
+  btn.textContent = 'Opening checkout…';
+
+  const handler = PaystackPop.setup({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: email,
+    plan: PLAN_CODE,
+    currency: 'ZAR',
+    ref: 'curio_' + Date.now(),
+    metadata: {
+      user_id: user.id,
+      custom_fields: [
+        { display_name: 'User ID', variable_name: 'user_id', value: user.id }
+      ]
+    },
+    callback: function(response){
+      // Payment successful — update UI optimistically
+      // Webhook will update Supabase in the background
+      btn.textContent = '✓ Payment successful! Activating Premium…';
+      btn.style.background = 'var(--c12)';
+      btn.style.color = 'var(--cyan)';
+
+      // Poll Supabase for is_premium update (webhook usually fires in <5s)
+      let attempts = 0;
+      const poll = setInterval(async ()=>{
+        attempts++;
+        try{
+          const r = await fetch(
+            `${SUPABASE_URL}/rest/v1/profiles?id=eq.${user.id}&select=is_premium`,
+            {headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${session.access_token}`}}
+          );
+          const data = await r.json();
+          if(data&&data[0]?.is_premium){
+            clearInterval(poll);
+            window.location.reload();
+          }
+        }catch(e){}
+        if(attempts > 12) clearInterval(poll); // give up after 60s
+      }, 5000);
+    },
+    onClose: function(){
+      btn.disabled = false;
+      btn.textContent = 'Start 7-day free trial — R49/month →';
+    }
+  });
+  handler.openIframe();
 }
 
-function managePaystack(){
-  // TODO: Replace with Paystack customer portal link
-  alert('Billing is managed via Paystack.\n\nTo update your payment method or view invoices, email hello@curiolearning.co.za and we will assist you within 1 business day.');
-}
-
+// ── Cancel ───────────────────────────────────────────────────────
 function cancelSubscription(){
-  if(confirm('Are you sure you want to cancel your Premium subscription?\n\nYou will retain Premium access until the end of your current billing period.')){
-    alert('To cancel your subscription, please email hello@curiolearning.co.za from your registered email address.\n\nWe will process your cancellation within 1 business day.');
+  if(confirm('Cancel your Premium subscription?\n\nYou will keep Premium access until the end of your current billing period.')){
+    window.location.href = 'mailto:hello@curiolearning.co.za?subject=Cancel%20subscription&body=Please%20cancel%20my%20subscription.%20My%20email%20is%20' + encodeURIComponent(email);
   }
 }
 </script>
