@@ -3,287 +3,420 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Curio — Subscription</title>
+<title>Curio — Premium</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Caveat:wght@600;700&display=swap" rel="stylesheet"/>
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <style>
-:root{--plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;--cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;--m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);--m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);--h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;}
+:root{
+  --plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;--card2:#1f1630;
+  --cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;
+  --m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);
+  --m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);
+  --c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);
+  --r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);
+  --h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;--script:'Caveat',cursive;
+}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:var(--b);background:var(--deep);color:var(--moon);min-height:100vh;}
+body{font-family:var(--b);background:var(--deep);color:var(--moon);min-height:100vh;overflow-x:hidden;}
 a{text-decoration:none;color:inherit;}
 button{font-family:var(--b);cursor:pointer;border:none;background:none;}
-nav{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(26,18,40,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--m06);position:sticky;top:0;z-index:100;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(26,18,40,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--m06);}
 .nav-logo{display:flex;align-items:center;gap:0.6rem;font-family:var(--h);font-size:1.2rem;font-weight:800;color:var(--moon);}
 .nav-back{font-size:0.8rem;color:var(--m30);transition:color .15s;}
 .nav-back:hover{color:var(--moon);}
-.page-wrap{max-width:700px;margin:0 auto;padding:3.5rem 2rem;}
-.page-eyebrow{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--cyan);margin-bottom:0.4rem;}
-.page-title{font-family:var(--h);font-size:2rem;font-weight:800;letter-spacing:-1px;color:var(--moon);margin-bottom:0.3rem;}
-.page-sub{font-size:0.88rem;color:var(--m55);margin-bottom:2rem;}
+.nav-right{display:flex;gap:0.6rem;align-items:center;}
+.profile-wrap{position:relative;}
+.profile-btn{width:34px;height:34px;border-radius:50%;background:var(--mid);border:2px solid var(--c25);display:flex;align-items:center;justify-content:center;font-family:var(--h);font-size:0.82rem;font-weight:700;color:var(--cyan);cursor:pointer;}
+.profile-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:var(--mid);border:1px solid var(--c12);border-radius:12px;min-width:200px;box-shadow:0 16px 48px rgba(0,0,0,0.5);display:none;flex-direction:column;overflow:hidden;z-index:300;}
+.profile-dropdown.open{display:flex;}
+.profile-dd-head{padding:0.9rem 1rem 0.7rem;border-bottom:1px solid var(--m06);}
+.profile-dd-name{font-family:var(--h);font-size:0.9rem;font-weight:700;color:var(--moon);}
+.profile-dd-email{font-size:0.68rem;color:var(--m30);}
+.profile-dd-item{padding:0.6rem 1rem;font-size:0.8rem;color:var(--m55);display:block;transition:background .1s;border:none;background:none;cursor:pointer;text-align:left;width:100%;font-family:var(--b);}
+.profile-dd-item:hover{background:var(--m06);color:var(--moon);}
+.profile-dd-item.danger{color:var(--coral);}
 
-/* Founder banner */
-.founder-banner{background:linear-gradient(135deg,rgba(245,200,66,0.12),rgba(245,200,66,0.06));border:1px solid rgba(245,200,66,0.25);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
-.founder-banner-left{display:flex;align-items:center;gap:0.7rem;}
-.founder-fire{font-size:1.2rem;}
-.founder-text{font-size:0.8rem;color:var(--m80);line-height:1.5;}
-.founder-text strong{color:var(--amber);font-family:var(--h);}
-.founder-slots{font-family:var(--h);font-size:1.4rem;font-weight:900;color:var(--amber);white-space:nowrap;}
-.founder-slots span{font-size:0.65rem;font-weight:600;color:rgba(245,200,66,0.6);display:block;text-align:right;}
+/* LOADING */
+#loadingScreen{position:fixed;inset:0;background:var(--deep);display:flex;align-items:center;justify-content:center;z-index:500;transition:opacity .4s;}
+#loadingScreen.gone{opacity:0;pointer-events:none;}
+.loading-bloom{animation:lspin 1.8s linear infinite;}
+@keyframes lspin{to{transform:rotate(360deg);}}
 
-/* Status badge */
-.status-badge{display:inline-flex;align-items:center;gap:0.45rem;padding:0.35rem 0.9rem;border-radius:100px;font-size:0.72rem;font-weight:700;margin-bottom:2rem;}
-.status-badge.free{background:var(--m06);color:var(--m55);border:1px solid var(--m12);}
-.status-badge.premium{background:var(--c12);color:var(--cyan);border:1px solid var(--c25);}
-.status-dot{width:7px;height:7px;border-radius:50%;}
-.status-badge.free .status-dot{background:var(--m30);}
-.status-badge.premium .status-dot{background:var(--cyan);}
+/* FREE VIEW */
+.hero-free{min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 2rem 4rem;text-align:center;position:relative;}
+.hero-free::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(109,211,206,0.05) 0%,transparent 70%);pointer-events:none;}
+.eyebrow{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:var(--cyan);margin-bottom:1rem;}
+.hero-title{font-family:var(--h);font-size:clamp(2.8rem,6vw,4.8rem);font-weight:900;letter-spacing:-2.5px;line-height:0.95;color:var(--moon);margin-bottom:1.4rem;}
+.hero-title .cy{color:var(--cyan);}
+.hero-sub{font-size:0.98rem;font-weight:300;color:var(--m55);line-height:1.85;max-width:480px;margin:0 auto 2.5rem;}
+.hero-sub strong{color:var(--moon);font-weight:600;}
 
-/* Plan cards */
-.plan-card{background:var(--card);border:1px solid var(--m06);border-radius:18px;padding:2rem;margin-bottom:1.4rem;}
-.plan-card.premium-card{background:linear-gradient(135deg,var(--mid),var(--card));border-color:var(--c25);}
-.plan-tier{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--m30);margin-bottom:0.4rem;}
-.plan-card.premium-card .plan-tier{color:var(--cyan);}
-.plan-price{font-family:var(--h);font-size:3rem;font-weight:900;letter-spacing:-2px;line-height:1;color:var(--moon);margin-bottom:0.2rem;}
-.plan-price sup{font-size:1.3rem;font-weight:700;vertical-align:top;margin-top:0.4rem;}
-.plan-price sub{font-size:1.1rem;color:var(--m30);font-weight:400;}
-.plan-renew{font-size:0.75rem;color:var(--m30);margin-bottom:1.5rem;}
-.plan-renew strong{color:var(--moon);}
-.plan-features{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;}
-.plan-features li{display:flex;align-items:center;gap:0.6rem;font-size:0.82rem;color:var(--m80);}
-.pf-chk{width:18px;height:18px;border-radius:5px;background:var(--c12);border:1px solid var(--c25);display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--cyan);flex-shrink:0;}
-.pf-chk.grey{background:var(--m06);border-color:var(--m12);color:var(--m30);}
+/* FOUNDER BADGE */
+.founder-badge{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.28);border-radius:100px;padding:0.45rem 1rem;margin-bottom:2rem;animation:fpulse 2.5s ease-in-out infinite;}
+@keyframes fpulse{0%,100%{box-shadow:0 0 0 0 rgba(245,200,66,0);}50%{box-shadow:0 0 0 6px rgba(245,200,66,0.07);}}
+.fb-dot{width:7px;height:7px;border-radius:50%;background:var(--amber);}
+.fb-text{font-size:0.74rem;font-weight:700;color:var(--amber);}
+.fb-count{background:rgba(245,200,66,0.18);padding:0.08rem 0.45rem;border-radius:100px;font-family:var(--h);font-size:0.74rem;font-weight:900;color:var(--amber);}
 
-/* Buttons */
-.btn-upgrade{display:block;width:100%;padding:0.9rem;background:var(--coral);color:var(--moon);font-family:var(--h);font-size:0.92rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:all .15s;text-align:center;}
-.btn-upgrade:hover{background:#ff4a47;transform:translateY(-1px);}
-.btn-upgrade:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
-.btn-manage{display:block;width:100%;padding:0.85rem;background:var(--m06);color:var(--m55);font-family:var(--h);font-size:0.85rem;font-weight:600;border:1px solid var(--m12);border-radius:10px;cursor:pointer;transition:all .15s;text-align:center;}
-.btn-manage:hover{background:var(--m12);color:var(--moon);}
-.btn-cancel{display:block;width:100%;padding:0.85rem;background:var(--r10);color:var(--coral);font-family:var(--h);font-size:0.85rem;font-weight:600;border:1px solid var(--r20);border-radius:10px;cursor:pointer;transition:all .15s;text-align:center;margin-top:0.7rem;}
-.btn-cancel:hover{background:var(--r20);}
+/* PRICING CARD */
+.pricing-card{background:linear-gradient(145deg,var(--mid),var(--card2));border:1px solid var(--c25);border-radius:24px;padding:2.5rem;max-width:420px;width:100%;margin:0 auto;position:relative;overflow:hidden;box-shadow:0 0 80px rgba(109,211,206,0.07);}
+.pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--coral),var(--amber));}
+.pc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.4rem;}
+.pc-tier{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--cyan);}
+.pc-trial-tag{font-size:0.68rem;font-weight:700;color:var(--amber);background:rgba(245,200,66,0.12);border:1px solid rgba(245,200,66,0.25);border-radius:100px;padding:0.18rem 0.6rem;}
+.price-display{margin-bottom:1.5rem;}
+.price-big{font-family:var(--h);font-size:4.2rem;font-weight:900;letter-spacing:-3px;line-height:1;color:var(--moon);}
+.price-big sup{font-size:1.5rem;vertical-align:top;margin-top:0.5rem;display:inline-block;color:var(--m55);}
+.price-big sub{font-size:0.95rem;font-weight:400;color:var(--m55);letter-spacing:0;}
+.price-note{font-size:0.72rem;color:var(--m30);margin-top:0.35rem;}
+.price-note strong{color:var(--amber);}
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:0.55rem;margin-bottom:1.8rem;}
+.feat-item{display:flex;align-items:center;gap:0.65rem;font-size:0.82rem;color:var(--m80);}
+.feat-chk{width:20px;height:20px;border-radius:6px;background:var(--c12);border:1px solid var(--c25);display:flex;align-items:center;justify-content:center;font-size:0.58rem;color:var(--cyan);flex-shrink:0;}
+.btn-sub{display:block;width:100%;padding:1rem;background:var(--coral);color:var(--moon);font-family:var(--h);font-size:0.95rem;font-weight:700;border:none;border-radius:12px;cursor:pointer;transition:all .2s;text-align:center;}
+.btn-sub:hover{background:#ff4a47;transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,94,91,0.3);}
+.btn-sub:disabled{opacity:0.6;cursor:not-allowed;transform:none;box-shadow:none;}
+.sub-footnote{font-size:0.7rem;color:var(--m30);text-align:center;margin-top:0.9rem;line-height:1.65;}
+.sub-footnote a{color:var(--cyan);}
 
-/* Compare */
-.compare-section{margin-top:2.5rem;}
-.compare-title{font-family:var(--h);font-size:1rem;font-weight:700;color:var(--moon);margin-bottom:1.2rem;}
+.script-note{font-family:var(--script);font-size:1.1rem;color:var(--amber);opacity:0.7;transform:rotate(-2deg);display:inline-block;margin-top:1.5rem;}
+
+/* COMPARE */
+.compare-wrap{max-width:660px;margin:3rem auto 0;padding:0 2rem 5rem;}
+.compare-label{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--m30);text-align:center;margin-bottom:1.5rem;}
 .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
 @media(max-width:500px){.compare-grid{grid-template-columns:1fr;}}
-.compare-col{background:var(--card);border:1px solid var(--m06);border-radius:14px;padding:1.4rem;}
-.compare-col.hot{border-color:var(--c25);background:linear-gradient(135deg,var(--mid),var(--card));}
-.compare-col-label{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--m30);margin-bottom:0.4rem;}
-.compare-col.hot .compare-col-label{color:var(--cyan);}
-.compare-col-price{font-family:var(--h);font-size:1.6rem;font-weight:900;letter-spacing:-1px;color:var(--moon);margin-bottom:0.8rem;}
-.compare-col-price span{font-size:0.8rem;color:var(--m30);font-weight:400;}
-.compare-item{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--m55);margin-bottom:0.4rem;}
-.ci-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
-.ci-dot.grey{background:var(--m30);}
+.cg-col{background:var(--card);border:1px solid var(--m06);border-radius:16px;padding:1.4rem;}
+.cg-col.hot{background:linear-gradient(145deg,var(--mid),var(--card));border-color:var(--c25);}
+.cg-tier{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--m30);margin-bottom:0.4rem;}
+.cg-col.hot .cg-tier{color:var(--cyan);}
+.cg-price{font-family:var(--h);font-size:1.7rem;font-weight:900;letter-spacing:-1px;color:var(--moon);margin-bottom:1rem;}
+.cg-price span{font-size:0.78rem;color:var(--m30);font-weight:400;letter-spacing:0;}
+.ci{display:flex;align-items:center;gap:0.45rem;font-size:0.76rem;color:var(--m55);margin-bottom:0.42rem;}
+.ci-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
+.ci-dot.g{background:var(--m30);}
+.ci.dim{color:var(--m30);}
 
-.note{font-size:0.78rem;color:var(--m30);text-align:center;margin-top:1.5rem;line-height:1.65;}
-.note a{color:var(--cyan);}
-footer{margin-top:3rem;padding:1.5rem;border-top:1px solid var(--m06);text-align:center;font-size:0.72rem;color:var(--m30);}
-footer a{color:var(--m30);margin:0 0.6rem;}
-footer a:hover{color:var(--moon);}
+/* PREMIUM VIEW */
+.premium-hero{min-height:55vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 2rem 2rem;text-align:center;position:relative;}
+.premium-hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(109,211,206,0.07) 0%,transparent 70%);pointer-events:none;}
+.prem-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--c12);border:1px solid var(--c25);border-radius:100px;padding:0.4rem 1rem;margin-bottom:1.4rem;}
+.prem-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);animation:bpulse 2s ease-in-out infinite;}
+@keyframes bpulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.prem-badge-text{font-size:0.72rem;font-weight:700;color:var(--cyan);}
+.prem-title{font-family:var(--h);font-size:clamp(2rem,5vw,3.4rem);font-weight:900;letter-spacing:-2px;color:var(--moon);line-height:1;margin-bottom:0.8rem;}
+.prem-sub{font-size:0.9rem;font-weight:300;color:var(--m55);line-height:1.8;max-width:400px;margin:0 auto 2.5rem;}
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;max-width:440px;width:100%;margin:0 auto;}
+.qa{display:flex;flex-direction:column;align-items:center;gap:0.45rem;background:var(--card);border:1px solid var(--m06);border-radius:14px;padding:1rem 0.5rem;text-decoration:none;transition:all .2s;}
+.qa:hover{border-color:var(--c25);transform:translateY(-2px);}
+.qa-icon{font-size:1.3rem;}
+.qa-lbl{font-family:var(--h);font-size:0.65rem;font-weight:700;color:var(--moon);text-align:center;}
+
+/* MEMBERSHIP CARD */
+.mem-section{max-width:500px;margin:0 auto;padding:0 2rem 5rem;}
+.mem-card{background:var(--card);border:1px solid var(--m06);border-radius:20px;overflow:hidden;}
+.mem-card-head{background:linear-gradient(135deg,var(--mid),var(--card));border-bottom:1px solid var(--m06);padding:1.4rem 1.8rem;display:flex;align-items:center;justify-content:space-between;}
+.mem-plan-label{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--cyan);margin-bottom:0.3rem;}
+.mem-plan-name{font-family:var(--h);font-size:1.05rem;font-weight:800;color:var(--moon);display:flex;align-items:center;gap:0.5rem;}
+.founder-pill{font-size:0.58rem;font-weight:700;background:rgba(245,200,66,0.12);border:1px solid rgba(245,200,66,0.28);border-radius:100px;padding:0.12rem 0.5rem;color:var(--amber);}
+.mem-status{display:flex;align-items:center;gap:0.4rem;font-size:0.7rem;font-weight:700;color:var(--cyan);background:var(--c12);border:1px solid var(--c25);border-radius:100px;padding:0.28rem 0.75rem;}
+.mem-status-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);}
+.mem-body{padding:0.4rem 1.8rem;}
+.mem-row{display:flex;align-items:center;justify-content:space-between;padding:0.72rem 0;border-bottom:1px solid var(--m06);font-size:0.8rem;}
+.mem-row:last-child{border-bottom:none;}
+.mem-row-k{color:var(--m30);}
+.mem-row-v{color:var(--moon);font-weight:500;}
+.mem-row-v.good{color:var(--cyan);}
+.mem-foot{padding:1.2rem 1.8rem;border-top:1px solid var(--m06);display:flex;flex-direction:column;gap:0.6rem;}
+.btn-cancel{display:block;width:100%;padding:0.82rem;background:transparent;color:var(--coral);font-family:var(--h);font-size:0.82rem;font-weight:600;border:1px solid var(--r20);border-radius:10px;cursor:pointer;transition:all .15s;text-align:center;}
+.btn-cancel:hover{background:var(--r10);}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--mid);border:1px solid var(--c25);border-radius:12px;padding:0.8rem 1.4rem;font-size:0.82rem;color:var(--moon);z-index:999;transition:transform .3s;pointer-events:none;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+footer{padding:2rem 3rem;border-top:1px solid var(--m06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-logo{display:flex;align-items:center;gap:0.55rem;font-family:var(--h);font-size:0.95rem;font-weight:800;color:var(--moon);}
+.footer-copy{font-size:0.68rem;color:var(--m30);}
+.footer-links{display:flex;gap:1.4rem;}
+.footer-links a{font-size:0.7rem;color:var(--m30);transition:color .15s;}
+.footer-links a:hover{color:var(--moon);}
 </style>
 </head>
 <body>
+
+<!-- Loading -->
+<div id="loadingScreen">
+  <svg class="loading-bloom" width="44" height="44" viewBox="0 0 64 64" fill="none">
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.85"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.6" transform="rotate(72 32 32)"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.4" transform="rotate(144 32 32)"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.4" transform="rotate(216 32 32)"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.6" transform="rotate(288 32 32)"/>
+    <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+  </svg>
+</div>
+
 <nav>
   <a href="index.html" class="nav-logo">
-    <svg width="24" height="24" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/><circle cx="32" cy="32" r="7" fill="#FF5E5B"/></svg>
+    <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+      <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+    </svg>
     curio
   </a>
-  <a href="index.html" class="nav-back">← Back to home</a>
+  <a href="index.html" class="nav-back">← Home</a>
+  <div class="nav-right" id="navRight"></div>
 </nav>
 
-<div class="page-wrap">
-  <div class="page-eyebrow">Account</div>
-  <h1 class="page-title">Subscription</h1>
-  <p class="page-sub">Manage your Curio plan.</p>
+<div id="mainPage" style="display:none;padding-top:60px;">
 
-  <!-- Founder slots banner (shown to free users only) -->
-  <div class="founder-banner" id="founderBanner" style="display:none">
-    <div class="founder-banner-left">
-      <span class="founder-fire">🔥</span>
-      <div class="founder-text"><strong>Founder pricing — limited spots</strong><br/>Lock in R49/month before it goes to R99. First 200 subscribers only.</div>
-    </div>
-    <div class="founder-slots"><span id="slotsLeft">—</span><span>spots left</span></div>
-  </div>
+  <!-- FREE -->
+  <div id="freeView" style="display:none">
+    <section class="hero-free">
+      <div class="eyebrow">curio premium</div>
+      <h1 class="hero-title">Unlock your<br/><span class="cy">full potential.</span></h1>
+      <p class="hero-sub">Papers are always free. Premium gives you the AI tools that actually make a difference — <strong>quizzes, deep explanations and personalised feedback.</strong></p>
 
-  <!-- FREE USER VIEW -->
-  <div id="freeView">
-    <div class="status-badge free"><div class="status-dot"></div>Free plan</div>
-    <div class="plan-card">
-      <div class="plan-tier">Free · Forever</div>
-      <div class="plan-price"><sup>R</sup>0</div>
-      <div class="plan-renew">You're on the free plan. Papers and memos are always free.</div>
-      <ul class="plan-features">
-        <li><span class="pf-chk">✓</span>Full exam paper library</li>
-        <li><span class="pf-chk">✓</span>Download papers as PDF</li>
-        <li><span class="pf-chk">✓</span>Full marking memos</li>
-        <li><span class="pf-chk">✓</span>All grades &amp; subjects</li>
-        <li><span class="pf-chk grey">—</span><span style="color:var(--m30)">AI-powered quiz mode</span></li>
-        <li><span class="pf-chk grey">—</span><span style="color:var(--m30)">Deep Learn explanations</span></li>
-        <li><span class="pf-chk grey">—</span><span style="color:var(--m30)">Progress tracking &amp; streaks</span></li>
-        <li><span class="pf-chk grey">—</span><span style="color:var(--m30)">Custom test generator</span></li>
-      </ul>
-      <button class="btn-upgrade" id="upgradeBtn" onclick="startUpgrade()">Start 7-day free trial — R49/month →</button>
-    </div>
+      <div class="founder-badge" id="founderBadge" style="display:none">
+        <div class="fb-dot"></div>
+        <span class="fb-text">🔥 Founder pricing — only <span class="fb-count" id="slotsLeft">—</span> spots left</span>
+      </div>
 
-    <div class="compare-section">
-      <div class="compare-title">What you unlock with Premium</div>
-      <div class="compare-grid">
-        <div class="compare-col">
-          <div class="compare-col-label">Free · Forever</div>
-          <div class="compare-col-price">R0</div>
-          <div class="compare-item"><div class="ci-dot"></div>Exam paper library</div>
-          <div class="compare-item"><div class="ci-dot"></div>PDF downloads</div>
-          <div class="compare-item"><div class="ci-dot"></div>Full memos</div>
-          <div class="compare-item"><div class="ci-dot"></div>All grades &amp; subjects</div>
+      <div class="pricing-card">
+        <div class="pc-top">
+          <div class="pc-tier">Premium</div>
+          <div class="pc-trial-tag">7-day free trial</div>
         </div>
-        <div class="compare-col hot">
-          <div class="compare-col-label">Premium</div>
-          <div class="compare-col-price">R49 <span>/month</span></div>
-          <div class="compare-item"><div class="ci-dot"></div>Everything in Free</div>
-          <div class="compare-item"><div class="ci-dot"></div>AI-powered quiz mode</div>
-          <div class="compare-item"><div class="ci-dot"></div>Deep Learn explanations</div>
-          <div class="compare-item"><div class="ci-dot"></div>Custom test generator</div>
-          <div class="compare-item"><div class="ci-dot"></div>Progress tracking &amp; streaks</div>
-          <div class="compare-item"><div class="ci-dot"></div>Topic-sorted question sets</div>
-          <div class="compare-item"><div class="ci-dot"></div>No ads</div>
+        <div class="price-display">
+          <div class="price-big"><sup>R</sup>49<sub>/mo</sub></div>
+          <div class="price-note">Lock in <strong>founder pricing</strong> before it rises to R99.</div>
+        </div>
+        <ul class="feat-list">
+          <li class="feat-item"><span class="feat-chk">✓</span>Everything free — all papers + memos</li>
+          <li class="feat-item"><span class="feat-chk">✓</span>AI-powered quiz mode</li>
+          <li class="feat-item"><span class="feat-chk">✓</span>Deep Learn explanations</li>
+          <li class="feat-item"><span class="feat-chk">✓</span>Custom test generator</li>
+          <li class="feat-item"><span class="feat-chk">✓</span>Progress tracking &amp; streaks</li>
+          <li class="feat-item"><span class="feat-chk">✓</span>Topic-sorted question sets</li>
+          <li class="feat-item"><span class="feat-chk">✓</span>No ads</li>
+        </ul>
+        <button class="btn-sub" id="subscribeBtn" onclick="startUpgrade()">Start 7-day free trial →</button>
+        <p class="sub-footnote">Cancel anytime · No hidden fees · ZAR incl. VAT<br/>Already subscribed? <a href="#" onclick="location.reload()">Refresh page</a></p>
+      </div>
+      <span style="font-family:var(--script);font-size:1.1rem;color:var(--amber);opacity:.7;transform:rotate(-2deg);display:inline-block;margin-top:1.5rem;">you've got this 🌱</span>
+    </section>
+
+    <div class="compare-wrap">
+      <div class="compare-label">Free vs Premium</div>
+      <div class="compare-grid">
+        <div class="cg-col">
+          <div class="cg-tier">Free · Forever</div>
+          <div class="cg-price">R0</div>
+          <div class="ci"><div class="ci-dot"></div>Full paper library</div>
+          <div class="ci"><div class="ci-dot"></div>PDF downloads</div>
+          <div class="ci"><div class="ci-dot"></div>Full memos</div>
+          <div class="ci"><div class="ci-dot"></div>All grades &amp; subjects</div>
+          <div class="ci dim"><div class="ci-dot g"></div>AI Quiz mode</div>
+          <div class="ci dim"><div class="ci-dot g"></div>Deep Learn</div>
+          <div class="ci dim"><div class="ci-dot g"></div>Custom tests</div>
+        </div>
+        <div class="cg-col hot">
+          <div class="cg-tier">Premium</div>
+          <div class="cg-price">R49 <span>/month</span></div>
+          <div class="ci"><div class="ci-dot"></div>Everything in Free</div>
+          <div class="ci"><div class="ci-dot"></div>AI Quiz mode</div>
+          <div class="ci"><div class="ci-dot"></div>Deep Learn</div>
+          <div class="ci"><div class="ci-dot"></div>Custom test generator</div>
+          <div class="ci"><div class="ci-dot"></div>Progress &amp; streaks</div>
+          <div class="ci"><div class="ci-dot"></div>Topic question sets</div>
+          <div class="ci"><div class="ci-dot"></div>No ads</div>
         </div>
       </div>
     </div>
-    <p class="note">7-day free trial · Cancel anytime · No hidden fees<br/>All prices in South African Rand (ZAR) incl. VAT</p>
   </div>
 
-  <!-- PREMIUM USER VIEW -->
+  <!-- PREMIUM -->
   <div id="premiumView" style="display:none">
-    <div class="status-badge premium"><div class="status-dot"></div>Premium · Active</div>
-    <div class="plan-card premium-card">
-      <div class="plan-tier">Premium</div>
-      <div class="plan-price"><sup>R</sup>49<sub>/mo</sub></div>
-      <div class="plan-renew">Your subscription is active. <strong>Renews automatically each month.</strong></div>
-      <ul class="plan-features">
-        <li><span class="pf-chk">✓</span>Everything in Free</li>
-        <li><span class="pf-chk">✓</span>AI-powered quiz mode</li>
-        <li><span class="pf-chk">✓</span>Deep Learn explanations</li>
-        <li><span class="pf-chk">✓</span>Custom test generator</li>
-        <li><span class="pf-chk">✓</span>Progress tracking &amp; streaks</li>
-        <li><span class="pf-chk">✓</span>Topic-sorted question sets</li>
-        <li><span class="pf-chk">✓</span>No ads</li>
-      </ul>
-      <button class="btn-cancel" onclick="cancelSubscription()">Cancel subscription</button>
+    <section class="premium-hero">
+      <div class="prem-badge"><div class="prem-badge-dot"></div><span class="prem-badge-text">Premium · Active</span></div>
+      <h1 class="prem-title" id="premTitle">You're in. 🌱</h1>
+      <p class="prem-sub">Full access to everything curio has to offer. Let's get to work.</p>
+      <div class="quick-grid">
+        <a href="papers.html" class="qa"><span class="qa-icon">📄</span><span class="qa-lbl">Papers</span></a>
+        <a href="quiz.html" class="qa"><span class="qa-icon">📝</span><span class="qa-lbl">Quiz</span></a>
+        <a href="deeplearn.html" class="qa"><span class="qa-icon">✦</span><span class="qa-lbl">Deep Learn</span></a>
+      </div>
+    </section>
+
+    <div class="mem-section">
+      <div class="mem-card">
+        <div class="mem-card-head">
+          <div>
+            <div class="mem-plan-label">Your plan</div>
+            <div class="mem-plan-name">
+              Curio Premium
+              <span id="founderPill" style="display:none" class="founder-pill">🔥 Founder</span>
+            </div>
+          </div>
+          <div class="mem-status"><div class="mem-status-dot"></div>Active</div>
+        </div>
+        <div class="mem-body">
+          <div class="mem-row"><span class="mem-row-k">Amount</span><span class="mem-row-v good">R49 / month</span></div>
+          <div class="mem-row"><span class="mem-row-k">Billing</span><span class="mem-row-v">Monthly · auto-renews</span></div>
+          <div class="mem-row"><span class="mem-row-k">Member since</span><span class="mem-row-v" id="memberSince">—</span></div>
+          <div class="mem-row"><span class="mem-row-k">AI Quizzes</span><span class="mem-row-v good">✓ Unlocked</span></div>
+          <div class="mem-row"><span class="mem-row-k">Deep Learn</span><span class="mem-row-v good">✓ Unlocked</span></div>
+          <div class="mem-row"><span class="mem-row-k">Custom tests</span><span class="mem-row-v good">✓ Unlocked</span></div>
+        </div>
+        <div class="mem-foot">
+          <button class="btn-cancel" onclick="cancelSub()">Cancel subscription</button>
+        </div>
+      </div>
     </div>
-    <p class="note">Need help? <a href="/cdn-cgi/l/email-protection#b0d8d5dcdcdff0d3c5c2d9dfdcd5d1c2ded9ded79ed3df9ecad1"><span class="__cf_email__" data-cfemail="4c24292020230c2f393e252320292d3e2225222b622f2362362d">[email&#160;protected]</span></a></p>
   </div>
+
 </div>
 
 <footer>
-  <a href="privacy.html">Privacy</a>
-  <a href="terms.html">Terms</a>
-  <a href="contact.html">Contact</a>
+  <div class="footer-logo">
+    <svg width="20" height="20" viewBox="0 0 64 64" fill="none">
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+      <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+    </svg>
+    curio
+  </div>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p class="footer-copy">© 2026 Curio Learning · Made with love for SA students</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ── Config ──────────────────────────────────────────────────────
-const PAYSTACK_PUBLIC_KEY = 'pk_live_REPLACE_WITH_YOUR_PUBLIC_KEY';
-const PLAN_CODE = 'PLN_REPLACE_WITH_YOUR_PLAN_CODE';
-const SUPABASE_URL = 'https://inmrsgujgfktapjnekjs.supabase.co';
-const SUPABASE_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
+<div class="toast" id="toast"></div>
 
-// ── Session ──────────────────────────────────────────────────────
+<script>
+const PAYSTACK_KEY   = 'pk_live_6540061572fe506bdb52063847dedb801c38765b';
+const PLAN_CODE      = 'PLN_rgv78ij4cj0ky3d';
+const SB_URL         = 'https://inmrsgujgfktapjnekjs.supabase.co';
+const SB_KEY         = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
+
+function toast(msg,dur=3500){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur);}
+
 function getSession(){
-  try{const s=localStorage.getItem('curio_session');if(s){const p=JSON.parse(s);if(p?.access_token&&p?.expires_at>Date.now()/1000)return p;}}catch(e){}
-  return null;
+  try{const r=localStorage.getItem('curio_session');if(!r)return null;const p=JSON.parse(r);return p?.access_token?p:null;}catch(e){return null;}
 }
-const session = getSession();
-if(!session){ window.location.href='login.html'; }
 
-const user = session?.user || {};
-const email = user.email || '';
-// ── Fetch live status from Supabase (never trust stale session) ──
-async function initPage(){
-  let isPremium = false;
+function renderNav(s){
+  const nr=document.getElementById('navRight');if(!nr)return;
+  if(s){
+    const u=s.user||{},name=u.user_metadata?.full_name||'',email=u.email||'';
+    const init=name?name[0].toUpperCase():(email?email[0].toUpperCase():'?');
+    nr.innerHTML=`<div class="profile-wrap"><button class="profile-btn" onclick="toggleDD(event)">${init}</button><div class="profile-dropdown" id="profileDD"><div class="profile-dd-head"><div class="profile-dd-name">${name||'My account'}</div><div class="profile-dd-email">${email}</div></div><a href="papers.html" class="profile-dd-item">📄 &nbsp;Papers</a><a href="quiz.html" class="profile-dd-item">📚 &nbsp;Quiz</a><a href="profile.html" class="profile-dd-item">👤 &nbsp;Profile</a><button class="profile-dd-item danger" onclick="doLogout()">Sign out</button></div></div>`;
+  }
+}
+function toggleDD(e){e.stopPropagation();document.getElementById('profileDD')?.classList.toggle('open');}
+document.addEventListener('click',()=>document.getElementById('profileDD')?.classList.remove('open'));
+function doLogout(){localStorage.removeItem('curio_session');window.location.href='index.html';}
+
+(async function(){
+  const session=getSession();
+  if(!session){window.location.href='login.html';return;}
+  renderNav(session);
+
+  const user=session.user||{};
+  const uid=user.id;
+  const email=user.email||'';
+  const name=(user.user_metadata?.full_name||'').split(' ')[0]||'there';
+
+  // Fetch profile — anon key only, RLS USING(true)
+  let profile=null;
   try{
-    const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/profiles?id=eq.${user.id}&select=is_premium`,
-      {headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}}
-    );
-    const data = await r.json();
-    isPremium = data?.[0]?.is_premium === true;
+    const r=await fetch(`${SB_URL}/rest/v1/profiles?id=eq.${uid}&select=is_premium,is_founder,subscription_started_at`,
+      {headers:{'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`}});
+    const d=await r.json();
+    profile=d?.[0]||null;
   }catch(e){}
 
-  document.getElementById('freeView').style.display = isPremium ? 'none' : 'block';
-  document.getElementById('premiumView').style.display = isPremium ? 'block' : 'none';
+  const isPremium=profile?.is_premium===true;
+  const isFounder=profile?.is_founder===true;
+  const startedAt=profile?.subscription_started_at;
 
-  if(!isPremium){
+  // Hide loader
+  const loader=document.getElementById('loadingScreen');
+  loader.classList.add('gone');
+  setTimeout(()=>loader.style.display='none',400);
+  document.getElementById('mainPage').style.display='block';
+
+  if(isPremium){
+    document.getElementById('premiumView').style.display='block';
+    document.getElementById('premTitle').textContent=`You're in, ${name}. 🌱`;
+    if(isFounder)document.getElementById('founderPill').style.display='inline';
+    if(startedAt){
+      const d=new Date(startedAt);
+      document.getElementById('memberSince').textContent=d.toLocaleDateString('en-ZA',{day:'numeric',month:'long',year:'numeric'});
+    }
+  } else {
+    document.getElementById('freeView').style.display='block';
+    // Founder slots
     try{
-      const r2 = await fetch(`${SUPABASE_URL}/rest/v1/founder_slots?id=eq.1`,{
-        headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}
-      });
-      const slots = await r2.json();
-      if(slots?.[0]){
-        const remaining = slots[0].total - slots[0].claimed;
-        if(remaining > 0){
-          document.getElementById('slotsLeft').textContent = remaining;
-          document.getElementById('founderBanner').style.display = 'flex';
-        }
+      const r2=await fetch(`${SB_URL}/rest/v1/founder_slots?id=eq.1`,{headers:{'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`}});
+      const sl=await r2.json();
+      if(sl?.[0]){
+        const rem=sl[0].total-sl[0].claimed;
+        if(rem>0){document.getElementById('slotsLeft').textContent=rem;document.getElementById('founderBadge').style.display='inline-flex';}
       }
     }catch(e){}
   }
-}
-initPage();
 
-// ── Paystack checkout ────────────────────────────────────────────
-function startUpgrade(){
-  const btn = document.getElementById('upgradeBtn');
-  btn.disabled = true;
-  btn.textContent = 'Opening checkout…';
+  // Upgrade
+  window.startUpgrade=function(){
+    const btn=document.getElementById('subscribeBtn');
+    btn.disabled=true;btn.textContent='Opening checkout…';
+    const handler=PaystackPop.setup({
+      key:PAYSTACK_KEY,email,plan:PLAN_CODE,currency:'ZAR',
+      ref:'curio_'+Date.now(),
+      metadata:{user_id:uid,custom_fields:[{display_name:'User ID',variable_name:'user_id',value:uid}]},
+      callback:function(){
+        btn.textContent='✓ Payment confirmed — activating…';
+        btn.style.background='var(--c12)';btn.style.color='var(--cyan)';
+        let tries=0;
+        const poll=setInterval(async()=>{
+          tries++;
+          try{
+            const r=await fetch(`${SB_URL}/rest/v1/profiles?id=eq.${uid}&select=is_premium`,{headers:{'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`}});
+            const d=await r.json();
+            if(d?.[0]?.is_premium){clearInterval(poll);window.location.reload();}
+          }catch(e){}
+          if(tries>12){clearInterval(poll);btn.disabled=false;btn.textContent='Start 7-day free trial →';btn.style.background='';btn.style.color='';}
+        },5000);
+      },
+      onClose:function(){btn.disabled=false;btn.textContent='Start 7-day free trial →';btn.style.background='';btn.style.color='';}
+    });
+    handler.openIframe();
+  };
 
-  const handler = PaystackPop.setup({
-    key: PAYSTACK_PUBLIC_KEY,
-    email: email,
-    plan: PLAN_CODE,
-    currency: 'ZAR',
-    ref: 'curio_' + Date.now(),
-    metadata: {
-      user_id: user.id,
-      custom_fields: [
-        { display_name: 'User ID', variable_name: 'user_id', value: user.id }
-      ]
-    },
-    callback: function(response){
-      // Payment successful — update UI optimistically
-      // Webhook will update Supabase in the background
-      btn.textContent = '✓ Payment successful! Activating Premium…';
-      btn.style.background = 'var(--c12)';
-      btn.style.color = 'var(--cyan)';
-
-      // Poll Supabase for is_premium update (webhook usually fires in <5s)
-      let attempts = 0;
-      const poll = setInterval(async ()=>{
-        attempts++;
-        try{
-          const r = await fetch(
-            `${SUPABASE_URL}/rest/v1/profiles?id=eq.${user.id}&select=is_premium`,
-            {headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${session.access_token}`}}
-          );
-          const data = await r.json();
-          if(data&&data[0]?.is_premium){
-            clearInterval(poll);
-            window.location.reload();
-          }
-        }catch(e){}
-        if(attempts > 12) clearInterval(poll); // give up after 60s
-      }, 5000);
-    },
-    onClose: function(){
-      btn.disabled = false;
-      btn.textContent = 'Start 7-day free trial — R49/month →';
-    }
-  });
-  handler.openIframe();
-}
-
-// ── Cancel ───────────────────────────────────────────────────────
-function cancelSubscription(){
-  if(confirm('Cancel your Premium subscription?\n\nYou will keep Premium access until the e
+  // Cancel
+  window.cancelSub=function(){
+    if(!confirm('Cancel your Premium subscription?\n\nYou keep Premium access until the end of your current billing period.'))return;
+    const sub=encodeURIComponent('Cancel subscription');
+    const body=encodeURIComponent(`Please cancel my Curio Premium subscription.\nAccount email: ${email}`);
+    window.location.href=`mailto:hello@curiolearning.co.za?subject=${sub}&body=${body}`;
+    toast('Email opened — we will cancel within 24 hours.');
+  };
+})();
+</script>
+</body>
+</html>
