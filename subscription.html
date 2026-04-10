@@ -185,8 +185,8 @@ footer a:hover{color:var(--moon);}
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── Config ──────────────────────────────────────────────────────
-const PAYSTACK_PUBLIC_KEY = 'pk_live_6540061572fe506bdb52063847dedb801c38765b';
-const PLAN_CODE = 'PLN_rgv78ij4cj0ky3d';
+const PAYSTACK_PUBLIC_KEY = 'pk_live_REPLACE_WITH_YOUR_PUBLIC_KEY';
+const PLAN_CODE = 'PLN_REPLACE_WITH_YOUR_PLAN_CODE';
 const SUPABASE_URL = 'https://inmrsgujgfktapjnekjs.supabase.co';
 const SUPABASE_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
 
@@ -206,7 +206,7 @@ async function initPage(){
   try{
     const r = await fetch(
       `${SUPABASE_URL}/rest/v1/profiles?id=eq.${user.id}&select=is_premium`,
-      {headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${session.access_token}`}}
+      {headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}}
     );
     const data = await r.json();
     isPremium = data?.[0]?.is_premium === true;
