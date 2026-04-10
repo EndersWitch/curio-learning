@@ -193,7 +193,7 @@ footer{padding:2rem 3rem;border-top:1px solid var(--m06);display:flex;align-item
       <div class="pricing-card">
         <div class="pc-top">
           <div class="pc-tier">Premium</div>
-          <div class="pc-trial-tag">7-day free trial</div>
+          <div class="pc-trial-tag">Cancel anytime</div>
         </div>
         <div class="price-display">
           <div class="price-big"><sup>R</sup>49<sub>/mo</sub></div>
@@ -208,7 +208,7 @@ footer{padding:2rem 3rem;border-top:1px solid var(--m06);display:flex;align-item
           <li class="feat-item"><span class="feat-chk">✓</span>Topic-sorted question sets</li>
           <li class="feat-item"><span class="feat-chk">✓</span>No ads</li>
         </ul>
-        <button class="btn-sub" id="subscribeBtn" onclick="startUpgrade()">Start 7-day free trial →</button>
+        <button class="btn-sub" id="subscribeBtn" onclick="startUpgrade()">Subscribe — R49/month →</button>
         <p class="sub-footnote">Cancel anytime · No hidden fees · ZAR incl. VAT<br/>Already subscribed? <a href="#" onclick="location.reload()">Refresh page</a></p>
       </div>
       <span style="font-family:var(--script);font-size:1.1rem;color:var(--amber);opacity:.7;transform:rotate(-2deg);display:inline-block;margin-top:1.5rem;">you've got this 🌱</span>
@@ -400,10 +400,10 @@ function doLogout(){localStorage.removeItem('curio_session');window.location.hre
             const d=await r.json();
             if(d?.[0]?.is_premium){clearInterval(poll);window.location.reload();}
           }catch(e){}
-          if(tries>12){clearInterval(poll);btn.disabled=false;btn.textContent='Start 7-day free trial →';btn.style.background='';btn.style.color='';}
+          if(tries>12){clearInterval(poll);btn.disabled=false;btn.textContent='Subscribe — R49/month →';btn.style.background='';btn.style.color='';}
         },5000);
       },
-      onClose:function(){btn.disabled=false;btn.textContent='Start 7-day free trial →';btn.style.background='';btn.style.color='';}
+      onClose:function(){btn.disabled=false;btn.textContent='Subscribe — R49/month →';btn.style.background='';btn.style.color='';}
     });
     handler.openIframe();
   };
