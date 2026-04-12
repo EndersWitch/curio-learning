@@ -220,15 +220,33 @@ tr:hover td{background:var(--m03);}
       </div>
     </div>
 
-    <!-- ADD QUESTION -->
+        <!-- ADD QUESTION — Mastery hierarchy aware -->
     <div class="panel" id="panel-add">
       <div class="panel-header">
-        <div><div class="panel-title">Add a Question</div><div class="panel-sub">Fill in all required fields marked with *</div></div>
+        <div>
+          <div class="panel-title">Add a Question</div>
+          <div class="panel-sub">Questions are now structured: Phase → Grade → Subject → Broad Topic → Section Type → (Subtopic → Level)</div>
+        </div>
       </div>
+
+      <!-- Section type info box — updates dynamically -->
+      <div class="info-box" id="sectionTypeInfo" style="display:none"></div>
+
       <div class="form-card">
+
+        <!-- ── STEP 1: HIERARCHY ── -->
         <div class="form-section">
-          <div class="form-section-title">Classification</div>
+          <div class="form-section-title">📚 Step 1 — Content Hierarchy</div>
           <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Phase <span class="req">*</span></label>
+              <select class="form-select" id="fPhase" onchange="onPhaseChange()">
+                <option value="">Select phase</option>
+                <option value="intermediate">Intermediate Phase (Gr 4–6)</option>
+                <option value="senior">Senior Phase (Gr 7–9)</option>
+                <option value="fet">FET Phase (Gr 10–12)</option>
+              </select>
+            </div>
             <div class="form-group">
               <label class="form-label">Grade <span class="req">*</span></label>
               <select class="form-select" id="fGrade">
@@ -252,22 +270,92 @@ tr:hover td{background:var(--m03);}
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">Topic ID <span class="req">*</span></label>
+              <label class="form-label">Broad Topic ID <span class="req">*</span></label>
               <input class="form-input" type="text" id="fTopic" placeholder="e.g. parts_of_speech"/>
+              <span style="font-size:0.62rem;color:var(--m30);margin-top:0.2rem;">Slug — no spaces, use underscores</span>
             </div>
             <div class="form-group">
-              <label class="form-label">Topic Display Name</label>
+              <label class="form-label">Broad Topic Display Name</label>
               <input class="form-input" type="text" id="fTopicDisplay" placeholder="e.g. Parts of Speech"/>
             </div>
           </div>
         </div>
+
+        <!-- ── STEP 2: SECTION TYPE ── -->
         <div class="form-section">
-          <div class="form-section-title">Question</div>
-          <div class="form-group full">
-            <label class="form-label">Question Text <span class="req">*</span></label>
-            <textarea class="form-textarea" id="fQuestion" placeholder="Type the full question. Use *word* to highlight key terms in cyan."></textarea>
+          <div class="form-section-title">🗂 Step 2 — Section Type <span class="req">*</span></div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <select class="form-select" id="fSectionType" onchange="onSectionTypeChange()" style="font-size:0.9rem;padding:0.75rem 1rem;">
+                <option value="">Select section type…</option>
+                <option value="general_practice">🎯 General Practice — mixed, replayable, free broad-topic pool</option>
+                <option value="learning_level">📖 Learning Level — focused subtopic with learning zone before quiz</option>
+                <option value="mastery_challenge">🏆 Mastery Challenge — end-of-topic boss quiz</option>
+              </select>
+            </div>
           </div>
         </div>
+
+        <!-- ── STEP 3: SUBTOPIC + LEVEL (shown for learning_level only) ── -->
+        <div class="form-section" id="subtopicSection" style="display:none">
+          <div class="form-section-title">📂 Step 3 — Subtopic Folder &amp; Level</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Subtopic ID <span class="req">*</span></label>
+              <input class="form-input" type="text" id="fSubtopicId" placeholder="e.g. nouns"/>
+              <span style="font-size:0.62rem;color:var(--m30);margin-top:0.2rem;">e.g. nouns, verbs, adjectives, fractions</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subtopic Display Name</label>
+              <input class="form-input" type="text" id="fSubtopicDisplay" placeholder="e.g. Nouns"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Level ID <span class="req">*</span></label>
+              <input class="form-input" type="text" id="fLevelId" placeholder="e.g. nouns_1"/>
+              <span style="font-size:0.62rem;color:var(--m30);margin-top:0.2rem;">e.g. nouns_1, nouns_2, verbs_1</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Level Display Name</label>
+              <input class="form-input" type="text" id="fLevelDisplay" placeholder="e.g. Nouns I"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Level Order</label>
+              <input class="form-input" type="number" id="fLevelOrder" placeholder="1" min="1" value="1"/>
+              <span style="font-size:0.62rem;color:var(--m30);margin-top:0.2rem;">Sequence within the subtopic folder</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Difficulty Stage</label>
+              <select class="form-select" id="fDifficultyStage">
+                <option value="Starter">Starter</option>
+                <option value="Building">Building</option>
+                <option value="Challenge">Challenge</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── STEP 3b: MASTERY CHALLENGE info (shown for mastery only) ── -->
+        <div class="form-section" id="masterySection" style="display:none">
+          <div class="form-section-title">🏆 Step 3 — Mastery Challenge Settings</div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <div class="info-box" style="margin-bottom:0;">
+                <strong>Mastery Challenge questions</strong> belong to the full broad topic and are served as the end-of-topic boss quiz. They are premium by default. No subtopic or level needed — just tag them to the broad topic and section type.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── QUESTION ── -->
+        <div class="form-section">
+          <div class="form-section-title">❓ Question</div>
+          <div class="form-group full">
+            <label class="form-label">Question Text <span class="req">*</span></label>
+            <textarea class="form-textarea" id="fQuestion" placeholder="Type the full question. Use *word* to highlight key terms.&#10;&#10;Use a blank line to separate the sentence from the question if needed."></textarea>
+          </div>
+        </div>
+
+        <!-- ── OPTIONS ── -->
         <div class="form-section">
           <div class="form-section-title">Answer Options</div>
           <div class="opt-row"><div class="opt-letter">A</div><input class="form-input" type="text" id="fOptA" placeholder="Option A" style="flex:1"/></div>
@@ -284,12 +372,14 @@ tr:hover td{background:var(--m03);}
             </div>
           </div>
         </div>
+
+        <!-- ── EXPLANATION & SETTINGS ── -->
         <div class="form-section">
-          <div class="form-section-title">Explanation & Settings</div>
+          <div class="form-section-title">Explanation &amp; Settings</div>
           <div class="form-grid">
             <div class="form-group full">
               <label class="form-label">Explanation <span class="req">*</span></label>
-              <textarea class="form-textarea" id="fExplanation" placeholder="Explain why the correct answer is right."></textarea>
+              <textarea class="form-textarea" id="fExplanation" placeholder="Explain why the correct answer is right. Be clear — this is shown to learners."></textarea>
             </div>
             <div class="form-group">
               <label class="form-label">Access Level</label>
@@ -301,11 +391,14 @@ tr:hover td{background:var(--m03);}
             <div class="form-group">
               <label class="form-label">Difficulty</label>
               <select class="form-select" id="fDifficulty">
-                <option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option>
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
               </select>
             </div>
           </div>
         </div>
+
         <div class="form-footer">
           <button class="btn-submit" id="btnSave" onclick="saveQuestion()">Save Question →</button>
           <button class="btn-secondary-sm" onclick="clearForm()">Clear form</button>
@@ -314,33 +407,71 @@ tr:hover td{background:var(--m03);}
       </div>
     </div>
 
-    <!-- ALL QUESTIONS -->
+        <!-- ALL QUESTIONS — full hierarchy view -->
     <div class="panel" id="panel-questions">
       <div class="panel-header">
-        <div><div class="panel-title">All Questions</div><div class="panel-sub" id="qCountLabel">Loading questions…</div></div>
+        <div>
+          <div class="panel-title">All Questions</div>
+          <div class="panel-sub" id="qCountLabel">Loading questions…</div>
+        </div>
         <button class="btn-submit" onclick="switchPanel('add',document.querySelectorAll('.nav-tab')[1])">+ Add Question</button>
       </div>
-      <div class="table-toolbar">
-        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
-          <input class="search-input" type="text" placeholder="Search questions…" oninput="filterTable()" id="searchInput"/>
+
+      <!-- Filters -->
+      <div class="table-toolbar" style="flex-direction:column;align-items:flex-start;gap:0.7rem;">
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;width:100%;">
+          <input class="search-input" type="text" placeholder="Search questions…" oninput="filterTable()" id="searchInput" style="flex:1;min-width:180px;"/>
+          <select class="filter-select" onchange="filterTable()" id="filterPhase">
+            <option value="">All phases</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="senior">Senior</option>
+            <option value="fet">FET</option>
+          </select>
           <select class="filter-select" onchange="filterTable()" id="filterGrade">
             <option value="">All grades</option>
-            <option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option>
-            <option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option>
-            <option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option>
+            <option value="4">Gr 4</option><option value="5">Gr 5</option><option value="6">Gr 6</option>
+            <option value="7">Gr 7</option><option value="8">Gr 8</option><option value="9">Gr 9</option>
+            <option value="10">Gr 10</option><option value="11">Gr 11</option><option value="12">Gr 12</option>
           </select>
           <select class="filter-select" onchange="filterTable()" id="filterSubject">
             <option value="">All subjects</option>
             <option value="english">English HL</option><option value="maths">Mathematics</option>
             <option value="science">Natural Sciences</option><option value="social">Social Sciences</option>
+            <option value="afrikaans">Afrikaans</option><option value="lifeskills">Life Skills</option>
           </select>
+          <select class="filter-select" onchange="filterTable()" id="filterSectionType">
+            <option value="">All section types</option>
+            <option value="general_practice">🎯 General Practice</option>
+            <option value="learning_level">📖 Learning Level</option>
+            <option value="mastery_challenge">🏆 Mastery Challenge</option>
+          </select>
+          <select class="filter-select" onchange="filterTable()" id="filterAccess">
+            <option value="">All access</option>
+            <option value="free">Free</option>
+            <option value="premium">Premium</option>
+          </select>
+          <span class="table-count" id="tableCount" style="align-self:center;"></span>
         </div>
-        <span class="table-count" id="tableCount"></span>
       </div>
+
+      <!-- Questions table — hierarchy columns -->
       <div class="table-wrap">
         <table>
-          <thead><tr><th style="width:38%">Question</th><th>Grade</th><th>Subject</th><th>Topic</th><th>Correct</th><th>Type</th><th></th></tr></thead>
-          <tbody id="questionsBody"><tr class="loading-row"><td colspan="7">Loading questions…</td></tr></tbody>
+          <thead>
+            <tr>
+              <th style="width:32%">Question</th>
+              <th>Gr</th>
+              <th>Subject</th>
+              <th>Broad Topic</th>
+              <th>Section</th>
+              <th>Subtopic → Level</th>
+              <th>Access</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="questionsBody">
+            <tr class="loading-row"><td colspan="8">Loading questions…</td></tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -591,71 +722,221 @@ async function loadDashboard(){
   }catch(e){console.error(e);}
 }
 
-async function saveQuestion(){
-  const grade=document.getElementById('fGrade').value;
-  const subject=document.getElementById('fSubject').value;
-  const topic=document.getElementById('fTopic').value.trim();
-  const question=document.getElementById('fQuestion').value.trim();
-  const optA=document.getElementById('fOptA').value.trim();
-  const optB=document.getElementById('fOptB').value.trim();
-  const optC=document.getElementById('fOptC').value.trim();
-  const optD=document.getElementById('fOptD').value.trim();
-  const correct=document.querySelector('input[name="correct"]:checked')?.value;
-  const explanation=document.getElementById('fExplanation').value.trim();
-  const isPremium=document.getElementById('fPremium').value==='true';
-  if(!grade||!subject||!topic||!question||!optA||!optB||!correct||!explanation){setStatus('Please fill in all required fields.','err');return;}
-  const btn=document.getElementById('btnSave');
-  btn.disabled=true;btn.textContent='Saving…';setStatus('','');
-  try{
-    await insertQuestion({grade:parseInt(grade),subject,topic,question_text:question,option_a:optA,option_b:optB,option_c:optC||null,option_d:optD||null,correct_option:correct,explanation,is_premium:isPremium});
-    setStatus('✓ Question saved!','ok');clearForm();loadDashboard();
-  }catch(e){setStatus('Error saving: '+e.message,'err');console.error(e);}
-  finally{btn.disabled=false;btn.textContent='Save Question →';}
-}
-function setStatus(msg,type){const el=document.getElementById('saveStatus');el.textContent=msg;el.className=`save-status ${type}`;}
-function clearForm(){
-  ['fGrade','fSubject','fTopic','fTopicDisplay','fQuestion','fOptA','fOptB','fOptC','fOptD','fExplanation'].forEach(id=>{
-    const el=document.getElementById(id);if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';
+// ════════════════════════════════════
+// SECTION TYPE FORM LOGIC
+// ════════════════════════════════════
+function onPhaseChange(){
+  const phase = document.getElementById('fPhase').value;
+  const gradeEl = document.getElementById('fGrade');
+  const opts = gradeEl.querySelectorAll('option');
+  const ranges = {intermediate:[4,5,6],senior:[7,8,9],fet:[10,11,12]};
+  opts.forEach(o => {
+    if(!o.value) return;
+    o.style.display = (!phase || (ranges[phase]||[]).includes(parseInt(o.value))) ? '' : 'none';
   });
-  document.querySelectorAll('input[name="correct"]').forEach(r=>r.checked=false);
-  document.getElementById('fPremium').selectedIndex=0;
+  gradeEl.value = '';
 }
+
+function onSectionTypeChange(){
+  const st = document.getElementById('fSectionType').value;
+  const sub = document.getElementById('subtopicSection');
+  const mas = document.getElementById('masterySection');
+  const info = document.getElementById('sectionTypeInfo');
+
+  sub.style.display = st === 'learning_level' ? 'block' : 'none';
+  mas.style.display = st === 'mastery_challenge' ? 'block' : 'none';
+
+  if(st === 'general_practice'){
+    info.style.display = 'block';
+    info.className = 'info-box';
+    info.innerHTML = '<strong>🎯 General Practice</strong> — This question joins the broad topic pool. It will be served in randomised 15-question free quizzes. No subtopic or level needed.';
+    document.getElementById('fPremium').value = 'false';
+  } else if(st === 'learning_level'){
+    info.style.display = 'block';
+    info.className = 'info-box';
+    info.innerHTML = '<strong>📖 Learning Level</strong> — Fill in the subtopic folder and level fields below. This question belongs to a focused level inside the topic path.';
+  } else if(st === 'mastery_challenge'){
+    info.style.display = 'block';
+    info.className = 'info-box amber';
+    info.innerHTML = '<strong>🏆 Mastery Challenge</strong> — This question belongs to the end-of-topic boss quiz. Premium by default. No subtopic or level needed — only the broad topic.';
+    document.getElementById('fPremium').value = 'true';
+  } else {
+    info.style.display = 'none';
+  }
+}
+
+// ════════════════════════════════════
+// SAVE QUESTION
+// ════════════════════════════════════
+async function saveQuestion(){
+  const phase     = document.getElementById('fPhase').value;
+  const grade     = document.getElementById('fGrade').value;
+  const subject   = document.getElementById('fSubject').value;
+  const topic     = document.getElementById('fTopic').value.trim();
+  const topicDisp = document.getElementById('fTopicDisplay').value.trim();
+  const sectionType = document.getElementById('fSectionType').value;
+  const question  = document.getElementById('fQuestion').value.trim();
+  const optA = document.getElementById('fOptA').value.trim();
+  const optB = document.getElementById('fOptB').value.trim();
+  const optC = document.getElementById('fOptC').value.trim();
+  const optD = document.getElementById('fOptD').value.trim();
+  const correct = document.querySelector('input[name="correct"]:checked')?.value;
+  const explanation = document.getElementById('fExplanation').value.trim();
+  const isPremium = document.getElementById('fPremium').value === 'true';
+  const difficulty = document.getElementById('fDifficulty').value;
+
+  if(!grade||!subject||!topic||!sectionType||!question||!optA||!optB||!correct||!explanation){
+    setStatus('Please fill in all required fields (marked *).','err'); return;
+  }
+  if(sectionType==='learning_level' && !document.getElementById('fLevelId').value.trim()){
+    setStatus('Learning levels require a Level ID.','err'); return;
+  }
+
+  const payload = {
+    phase: phase||null,
+    grade: parseInt(grade),
+    subject,
+    topic,                                    // broad_topic slug (existing column)
+    broad_topic: topic,
+    broad_topic_display: topicDisp||null,
+    section_type: sectionType,
+    question_text: question,
+    option_a: optA, option_b: optB,
+    option_c: optC||null, option_d: optD||null,
+    correct_option: correct,
+    explanation,
+    is_premium: isPremium,
+    difficulty
+  };
+
+  if(sectionType === 'learning_level'){
+    payload.subtopic_id      = document.getElementById('fSubtopicId').value.trim()||null;
+    payload.subtopic_display = document.getElementById('fSubtopicDisplay').value.trim()||null;
+    payload.level_id         = document.getElementById('fLevelId').value.trim()||null;
+    payload.level_display    = document.getElementById('fLevelDisplay').value.trim()||null;
+    payload.level_order      = parseInt(document.getElementById('fLevelOrder').value)||1;
+  }
+
+  const btn = document.getElementById('btnSave');
+  btn.disabled = true; btn.textContent = 'Saving…'; setStatus('','');
+  try{
+    await insertQuestion(payload);
+    setStatus('✓ Question saved!','ok');
+    clearForm();
+    loadDashboard();
+  }catch(e){ setStatus('Error saving: '+e.message,'err'); console.error(e); }
+  finally{ btn.disabled=false; btn.textContent='Save Question →'; }
+}
+
+function setStatus(msg,type){
+  const el = document.getElementById('saveStatus');
+  el.textContent = msg; el.className = `save-status ${type}`;
+}
+
+function clearForm(){
+  ['fPhase','fGrade','fSubject','fTopic','fTopicDisplay','fSectionType',
+   'fSubtopicId','fSubtopicDisplay','fLevelId','fLevelDisplay',
+   'fQuestion','fOptA','fOptB','fOptC','fOptD','fExplanation'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    if(el.tagName==='SELECT') el.selectedIndex=0; else el.value='';
+  });
+  document.getElementById('fLevelOrder').value = '1';
+  document.getElementById('fDifficultyStage').selectedIndex = 0;
+  document.getElementById('fPremium').selectedIndex = 0;
+  document.querySelectorAll('input[name="correct"]').forEach(r=>r.checked=false);
+  document.getElementById('subtopicSection').style.display = 'none';
+  document.getElementById('masterySection').style.display = 'none';
+  document.getElementById('sectionTypeInfo').style.display = 'none';
+}
+
+// ════════════════════════════════════
+// ALL QUESTIONS
+// ════════════════════════════════════
+const SECTION_TYPE_LABELS = {
+  general_practice: '🎯 General Practice',
+  learning_level:   '📖 Learning Level',
+  mastery_challenge:'🏆 Mastery'
+};
+const SECTION_TYPE_CHIPS = {
+  general_practice: 'chip-free',
+  learning_level:   '',
+  mastery_challenge:'chip-premium'
+};
 
 let allQuestions=[];
 async function loadAllQuestions(){
   const tbody=document.getElementById('questionsBody');
-  tbody.innerHTML=`<tr class="loading-row"><td colspan="7">Loading…</td></tr>`;
+  tbody.innerHTML=`<tr class="loading-row"><td colspan="8">Loading…</td></tr>`;
   try{
     allQuestions=await getQuestions()||[];
     document.getElementById('qCountLabel').textContent=`${allQuestions.length} question${allQuestions.length!==1?'s':''} in your database`;
     renderTable(allQuestions);
-  }catch(e){tbody.innerHTML=`<tr class="loading-row"><td colspan="7">Error loading. Check console.</td></tr>`;console.error(e);}
+  }catch(e){
+    tbody.innerHTML=`<tr class="loading-row"><td colspan="8">Error loading. Check console.</td></tr>`;
+    console.error(e);
+  }
 }
+
 function renderTable(data){
   const tbody=document.getElementById('questionsBody');
   document.getElementById('tableCount').textContent=`${data.length} question${data.length!==1?'s':''}`;
-  if(data.length===0){tbody.innerHTML=`<tr><td colspan="7"><div class="empty-state">No questions found.<p>Add your first one using the "Add Question" tab.</p></div></td></tr>`;return;}
-  tbody.innerHTML=data.map(q=>`<tr><td class="q-text-cell">${q.question_text.substring(0,90)}${q.question_text.length>90?'…':''}</td><td>Gr ${q.grade}</td><td>${q.subject}</td><td style="font-size:0.72rem;color:var(--m30)">${q.topic}</td><td style="font-weight:700;text-transform:uppercase;font-size:0.75rem;color:var(--cyan)">${q.correct_option}</td><td><span class="chip-small ${q.is_premium?'chip-premium':'chip-free'}">${q.is_premium?'Premium':'Free'}</span></td><td><button class="btn-delete" onclick="deleteQ(${q.id},this)">Delete</button></td></tr>`).join('');
+  if(data.length===0){
+    tbody.innerHTML=`<tr><td colspan="8"><div class="empty-state">No questions found.<p>Add your first one using "Add Question".</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML=data.map(q=>{
+    const st = q.section_type||'general_practice';
+    const stLabel = SECTION_TYPE_LABELS[st]||st;
+    const stChip  = SECTION_TYPE_CHIPS[st]||'';
+    const subtopicLevel = q.level_display
+      ? `<span style="color:var(--m30)">${q.subtopic_display||q.subtopic_id||''}</span>${q.subtopic_display?' → ':''}<span style="color:var(--moon)">${q.level_display}</span>`
+      : `<span style="color:var(--m30);font-style:italic;">—</span>`;
+    const broadTopic = q.broad_topic_display || q.broad_topic || q.topic || '—';
+    return `<tr>
+      <td class="q-text-cell">${q.question_text.substring(0,80)}${q.question_text.length>80?'…':''}</td>
+      <td>Gr ${q.grade}</td>
+      <td style="font-size:0.72rem">${SUBJECT_NAMES_ADMIN[q.subject]||q.subject}</td>
+      <td style="font-size:0.72rem;color:var(--m55)">${broadTopic}</td>
+      <td><span class="chip-small ${stChip}" style="font-size:0.56rem;white-space:nowrap;">${stLabel}</span></td>
+      <td style="font-size:0.7rem;">${subtopicLevel}</td>
+      <td><span class="chip-small ${q.is_premium?'chip-premium':'chip-free'}">${q.is_premium?'Premium':'Free'}</span></td>
+      <td><button class="btn-delete" onclick="deleteQ(${q.id},this)">Delete</button></td>
+    </tr>`;
+  }).join('');
 }
+
 function filterTable(){
-  const search=document.getElementById('searchInput').value.toLowerCase();
-  const grade=document.getElementById('filterGrade').value;
-  const subject=document.getElementById('filterSubject').value;
+  const search    = document.getElementById('searchInput').value.toLowerCase();
+  const grade     = document.getElementById('filterGrade').value;
+  const subject   = document.getElementById('filterSubject').value;
+  const phase     = document.getElementById('filterPhase').value;
+  const section   = document.getElementById('filterSectionType').value;
+  const access    = document.getElementById('filterAccess').value;
+
   renderTable(allQuestions.filter(q=>{
-    const ms=!search||q.question_text.toLowerCase().includes(search)||q.topic.toLowerCase().includes(search);
-    const mg=!grade||String(q.grade)===grade;
-    const msub=!subject||q.subject===subject;
-    return ms&&mg&&msub;
+    const ms = !search || q.question_text.toLowerCase().includes(search)
+      || (q.topic||'').toLowerCase().includes(search)
+      || (q.broad_topic||'').toLowerCase().includes(search)
+      || (q.level_display||'').toLowerCase().includes(search)
+      || (q.subtopic_display||'').toLowerCase().includes(search);
+    const mg   = !grade   || String(q.grade)===grade;
+    const msub = !subject || q.subject===subject;
+    const mph  = !phase   || q.phase===phase;
+    const mst  = !section || (q.section_type||'general_practice')===section;
+    const mac  = !access  || (access==='free'?!q.is_premium:q.is_premium);
+    return ms&&mg&&msub&&mph&&mst&&mac;
   }));
 }
+
 async function deleteQ(id,btn){
-  if(!confirm('Delete this question? This cannot be undone.'))return;
+  if(!confirm('Delete this question? This cannot be undone.')) return;
   btn.textContent='…';
   try{
     await deleteQuestion(id);
     allQuestions=allQuestions.filter(q=>q.id!==id);
     renderTable(allQuestions);loadDashboard();
-  }catch(e){alert('Error deleting: '+e.message);btn.textContent='Delete';}
+  }catch(e){ alert('Error deleting: '+e.message); btn.textContent='Delete'; }
 }
 
 const SUBJECT_NAMES_ADMIN={
