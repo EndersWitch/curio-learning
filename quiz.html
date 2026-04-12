@@ -569,7 +569,7 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
     <div class="learn-header">
       <div class="learn-tag-row" id="learnTagRow"></div>
       <div class="learn-title" id="learnTitle">Nouns I</div>
-      <div class="learn-subtitle" id="learnSubtitle">Before you start — here's what you need to know.</div>
+      <div class="learn-subtitle" id="learnSubtitle">Before you start — here\'s what you need to know.</div>
     </div>
 
     <!-- Concept cards — filled dynamically -->
@@ -585,7 +585,7 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
     <div class="start-quiz-cta">
       <div class="sqc-icon">📝</div>
       <div class="sqc-title" id="sqcTitle">Ready to test yourself?</div>
-      <div class="sqc-sub" id="sqcSub">You've covered the concepts. Now let's see what you know.</div>
+      <div class="sqc-sub" id="sqcSub">You\'ve covered the concepts. Now let\'s see what you know.</div>
       <div class="sqc-meta">
         <span class="sqc-meta-item" id="sqcQuestions">📝 — questions</span>
         <span class="sqc-meta-item" id="sqcDifficulty">⚡ —</span>
@@ -747,21 +747,6 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
    Add as many levels as the topic needs.
 ════════════════════════════════════════════════════ */
 
-const PHASE_CONFIG = {
-  intermediate: { label: 'Intermediate Phase', grades: [4,5,6] },
-  senior:       { label: 'Senior Phase',        grades: [7,8,9] },
-  fet:          { label: 'FET Phase',           grades: [10,11,12] }
-};
-
-const SUBJECT_CONFIG = {
-  english:   'English HL',
-  afrikaans: 'Afrikaans FAL',
-  maths:     'Mathematics',
-  science:   'Natural Sciences',
-  social:    'Social Sciences',
-  lifeskills:'Life Skills'
-};
-
 // ── TOPIC CATALOGUE ──────────────────────────────────
 // Each topic contains variable-depth levels.
 // generalPractice is always free and replayable.
@@ -812,7 +797,7 @@ const TOPICS = [
         id: 'pos-nouns-2', type: 'premium',
         subtopic: 'nouns', subtopicDisplay: 'Nouns',
         title: 'Nouns II', label: 'Nouns · Level 2',
-        description: 'Concrete and abstract nouns — what you can and can't touch.',
+        description: 'Concrete and abstract nouns — what you can and can\'t touch.',
         difficulty: 'Building', questionCount: 6,
         learn: {
           concepts: [
@@ -1218,6 +1203,28 @@ function renderTopicGrid(){
       </div>`;
   }).join('');
 }
+
+// ── CONFIG MAPS (required by render functions) ──────
+const PHASE_CONFIG = {
+  intermediate: { label: 'Intermediate Phase', grades: [4,5,6] },
+  senior:       { label: 'Senior Phase',        grades: [7,8,9] },
+  fet:          { label: 'FET Phase',           grades: [10,11,12] }
+};
+const SUBJECT_CONFIG = {
+  english:     'English HL',
+  afrikaans:   'Afrikaans FAL',
+  maths:       'Mathematics',
+  science:     'Natural Sciences',
+  social:      'Social Sciences',
+  lifeskills:  'Life Skills',
+  history:     'History',
+  geography:   'Geography',
+  physics:     'Physical Sciences',
+  lifesciences:'Life Sciences',
+  accounting:  'Accounting',
+  business:    'Business Studies',
+  economics:   'Economics'
+};
 
 // Init browse
 renderGradePills();
