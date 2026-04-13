@@ -750,6 +750,45 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
 // ── TOPIC CATALOGUE ──────────────────────────────────
 // Each topic contains variable-depth levels.
 // generalPractice is always free and replayable.
+// ════════════════════════════════════════════════════
+// SUPABASE CONNECTION
+// ════════════════════════════════════════════════════
+const SB_URL = 'https://inmrsgujgfktapjnekjs.supabase.co';
+const SB_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
+
+async function sbQuestions(filters) {
+  let url = `${SB_URL}/rest/v1/questions?order=id.asc`;
+  if (filters.grade)        url += `&grade=eq.${filters.grade}`;
+  if (filters.subject)      url += `&subject=eq.${filters.subject}`;
+  if (filters.broad_topic)  url += `&broad_topic=eq.${filters.broad_topic}`;
+  if (filters.section_type) url += `&section_type=eq.${filters.section_type}`;
+  if (filters.subtopic_id)  url += `&subtopic_id=eq.${filters.subtopic_id}`;
+  if (filters.level_id)     url += `&level_id=eq.${filters.level_id}`;
+  const res = await fetch(url, {
+    headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+  });
+  if (!res.ok) return [];
+  const rows = await res.json();
+  // Map DB rows → quiz question format
+  return rows.map(r => ({
+    q:       r.question_text,
+    opts:    [r.option_a, r.option_b, r.option_c, r.option_d].filter(Boolean),
+    correct: ['a','b','c','d'].indexOf(r.correct_option),
+    exp:     r.explanation || '',
+    deepLearn: null
+  }));
+}
+
+// ════════════════════════════════════════════════════
+// TOPIC CATALOGUE
+// Structure only — no embedded questions.
+// Questions are fetched live from Supabase.
+//
+// Schema per level:
+//   subtopic, subtopicDisplay — folder grouping
+//   section_type: 'general_practice' | 'learning_level' | 'mastery_challenge'
+//   db: { broad_topic, subtopic_id, level_id } — keys used to fetch questions
+// ════════════════════════════════════════════════════
 const TOPICS = [
   {
     id: 'pos',
@@ -761,88 +800,71 @@ const TOPICS = [
       questionCount: 15, bankSize: 40
     },
     levels: [
-      /* ── SUBTOPIC FOLDER: Nouns ──────────────────────
-         Parts of Speech → Nouns → Nouns I → Nouns II
-      ─────────────────────────────────────────────── */
+      /* ── SUBTOPIC: Nouns ── */
       {
         id: 'pos-nouns-1', type: 'free',
         subtopic: 'nouns', subtopicDisplay: 'Nouns',
         title: 'Nouns I', label: 'Nouns · Level 1',
         description: 'Common and proper nouns — the naming words.',
         difficulty: 'Starter', questionCount: 5,
+        db: { broad_topic: 'parts_of_speech', subtopic_id: 'nouns', level_id: 'nouns_1' },
         learn: {
           concepts: [
             {
               title: 'What is a noun?',
               text: 'A noun is a naming word. It names a person, place, thing, or idea.',
-              example: { label: 'Examples', text: '"The <strong>dog</strong> ran to the <strong>park</strong>." — dog and park are nouns.\n"<strong>Kindness</strong> is important." — kindness is a noun (an idea).' }
+              example: { label: 'Examples', text: '"The <strong>dog</strong> ran to the <strong>park</strong>." — dog and park are nouns.' }
             },
             {
               title: 'Common vs Proper Nouns',
-              text: 'A <strong>common noun</strong> is a general name (dog, city, river). A <strong>proper noun</strong> is a specific name and always starts with a capital letter (Pretoria, Limpopo, John).',
+              text: 'A <strong>common noun</strong> is a general name (dog, city). A <strong>proper noun</strong> is a specific name and always starts with a capital letter (Cape Town, John).',
               example: { label: 'Spot the difference', text: 'Common: "I live in a <strong>city</strong>."  →  Proper: "I live in <strong>Cape Town</strong>."' }
             }
           ],
           tested: ['Identify nouns in a sentence', 'Tell apart common and proper nouns', 'Use capital letters for proper nouns']
-        },
-        questions: [
-          { q: 'Which word is the noun in this sentence?\n\n"The dog ran across the yard."', opts: ['dog','across','ran','yard'], correct: 0, exp: '"Dog" is the noun — it names the animal.', deepLearn: { tag:'Gr4 · English · Nouns', q:'What makes a word a noun?', method:'<div class="dlp-step"><div class="dlp-step-n">1</div><div>Ask: does this word <strong>name</strong> something — a person, place, thing or idea?</div></div><div class="dlp-step"><div class="dlp-step-n">2</div><div>Dog = animal (thing) ✓ → noun. Ran = action → verb, not a noun.</div></div><div class="dlp-rule"></div><div class="dlp-source">CAPS Gr4 English HL — Parts of Speech</div>', concept:'A noun names a person, place, thing or idea.<br/><br/><strong>Types:</strong><br/>• Common: dog, city, book<br/>• Proper: Cape Town, John (always capital)<br/>• Abstract: happiness, courage', practice:'<strong>Find the noun:</strong><br/>1. The girl skipped to school.<br/>2. Cape Town is beautiful.<br/>3. She felt joy.<br/><br/><em>Answers: 1. girl &amp; school &nbsp; 2. Cape Town &nbsp; 3. joy</em>' } },
-          { q: 'Which of these is a proper noun?', opts: ['city','river','Cape Town','mountain'], correct: 2, exp: '"Cape Town" is a proper noun — the specific name of a place. Always starts with a capital letter.', deepLearn: null },
-          { q: 'How many nouns are in this sentence?\n\n"My sister lives in Johannesburg."', opts: ['1','2','3','4'], correct: 1, exp: '2 nouns: "sister" (person) and "Johannesburg" (proper noun / place).', deepLearn: null },
-          { q: 'Which sentence uses a capital letter for a proper noun correctly?', opts: ['I saw a Dog.','She lives in durban.','We visited Cape Town.','The Cat is big.'], correct: 2, exp: '"Cape Town" correctly uses capitals — it is a proper noun.', deepLearn: null },
-          { q: 'Which word is NOT a noun?', opts: ['happiness','quickly','teacher','freedom'], correct: 1, exp: '"Quickly" is an adverb. The others are all nouns.', deepLearn: null }
-        ]
+        }
       },
       {
         id: 'pos-nouns-2', type: 'premium',
         subtopic: 'nouns', subtopicDisplay: 'Nouns',
         title: 'Nouns II', label: 'Nouns · Level 2',
-        description: 'Concrete and abstract nouns — what you can and can\'t touch.',
+        description: 'Concrete and abstract nouns — what you can and cannot touch.',
         difficulty: 'Building', questionCount: 6,
+        db: { broad_topic: 'parts_of_speech', subtopic_id: 'nouns', level_id: 'nouns_2' },
         learn: {
           concepts: [
             {
               title: 'Concrete Nouns',
-              text: 'A <strong>concrete noun</strong> names something you can physically see, touch, hear, smell or taste.',
-              example: { label: 'Examples', text: 'table, dog, rain, music, perfume — you can perceive all of these with your senses.' }
+              text: 'A <strong>concrete noun</strong> names something you can physically perceive — see, touch, hear, smell or taste.',
+              example: { label: 'Examples', text: 'table, dog, rain, music — you can perceive all of these with your senses.' }
             },
             {
               title: 'Abstract Nouns',
-              text: 'An <strong>abstract noun</strong> names something that exists as an idea, feeling, quality or concept — you cannot touch it.',
-              example: { label: 'Examples', text: 'love, freedom, courage, happiness, democracy — these are real, but not physical.' }
+              text: 'An <strong>abstract noun</strong> names an idea, feeling, quality or concept — you cannot touch it.',
+              example: { label: 'Examples', text: 'love, freedom, courage, happiness — real, but not physical.' }
             }
           ],
-          tested: ['Identify concrete nouns', 'Identify abstract nouns', 'Distinguish between concrete and abstract']
-        },
-        questions: []
+          tested: ['Identify concrete nouns', 'Identify abstract nouns', 'Distinguish concrete from abstract']
+        }
       },
-
-      /* ── SUBTOPIC FOLDER: Verbs ──────────────────────
-         Parts of Speech → Verbs → Verbs I → Verbs II
-      ─────────────────────────────────────────────── */
+      /* ── SUBTOPIC: Verbs ── */
       {
         id: 'pos-verbs-1', type: 'free',
         subtopic: 'verbs', subtopicDisplay: 'Verbs',
         title: 'Verbs I', label: 'Verbs · Level 1',
         description: 'Action words and linking verbs — what things do or are.',
         difficulty: 'Starter', questionCount: 5,
+        db: { broad_topic: 'parts_of_speech', subtopic_id: 'verbs', level_id: 'verbs_1' },
         learn: {
           concepts: [
             {
               title: 'What is a verb?',
-              text: 'A verb is a doing or being word. It tells you what the subject does or what state it is in.',
-              example: { label: 'Examples', text: '"The dog <strong>ran</strong>." (action verb)\n"She <strong>is</strong> happy." (linking verb — state of being)' }
+              text: 'A verb is a doing or being word. It tells you what the subject does, or what state it is in.',
+              example: { label: 'Examples', text: '"The dog <strong>ran</strong>." (action verb) — "She <strong>is</strong> happy." (linking verb)' }
             }
           ],
           tested: ['Identify the verb in a sentence', 'Distinguish action from linking verbs', 'Understand every sentence needs a verb']
-        },
-        questions: [
-          { q: 'Which word is the verb?\n\n"She quickly ran to school."', opts: ['She','quickly','ran','school'], correct: 2, exp: '"Ran" is the verb — it shows the action.', deepLearn: null },
-          { q: 'Which sentence has a linking verb?', opts: ['"She jumped."','"He ran fast."','"They are happy."','"I ate lunch."'], correct: 2, exp: '"Are" is a linking verb — it describes a state of being, not an action.', deepLearn: null },
-          { q: 'Which of these is a verb?', opts: ['beautiful','slowly','jumped','teacher'], correct: 2, exp: '"Jumped" is a verb — it shows an action.', deepLearn: null },
-          { q: 'How many verbs are in this sentence?\n\n"She sang and danced at the party."', opts: ['1','2','3','4'], correct: 1, exp: '2 verbs: "sang" and "danced".', deepLearn: null },
-          { q: 'Which verb tense is used here?\n\n"She runs every morning."', opts: ['Past','Present','Future','No tense'], correct: 1, exp: '"Runs" is present tense — it describes something happening regularly now.', deepLearn: null }
-        ]
+        }
       },
       {
         id: 'pos-verbs-2', type: 'premium',
@@ -850,77 +872,68 @@ const TOPICS = [
         title: 'Verbs II', label: 'Verbs · Level 2',
         description: 'Verb tenses — past, present and future.',
         difficulty: 'Building', questionCount: 6,
+        db: { broad_topic: 'parts_of_speech', subtopic_id: 'verbs', level_id: 'verbs_2' },
         learn: {
           concepts: [
             {
               title: 'Verb Tenses',
-              text: 'Verbs change form depending on <strong>when</strong> the action happens. The three main tenses are past, present and future.',
-              example: { label: 'Examples', text: 'Past: She <strong>walked</strong> to school.\nPresent: She <strong>walks</strong> to school.\nFuture: She <strong>will walk</strong> to school.' }
+              text: 'Verbs change form depending on <strong>when</strong> the action happens.',
+              example: { label: 'Examples', text: 'Past: She <strong>walked</strong>. Present: She <strong>walks</strong>. Future: She <strong>will walk</strong>.' }
             }
           ],
           tested: ['Identify past tense verbs', 'Identify present tense verbs', 'Change verbs between tenses']
-        },
-        questions: []
+        }
       },
-
-      /* ── SUBTOPIC FOLDER: Adjectives ─────────────────
-         Parts of Speech → Adjectives → Adjectives I
-      ─────────────────────────────────────────────── */
+      /* ── SUBTOPIC: Adjectives ── */
       {
         id: 'pos-adj-1', type: 'premium',
         subtopic: 'adjectives', subtopicDisplay: 'Adjectives',
         title: 'Adjectives I', label: 'Adjectives · Level 1',
         description: 'Describing words — how nouns look, feel, sound and more.',
         difficulty: 'Building', questionCount: 6,
+        db: { broad_topic: 'parts_of_speech', subtopic_id: 'adjectives', level_id: 'adjectives_1' },
         learn: {
           concepts: [
             {
               title: 'What is an adjective?',
-              text: 'An adjective is a describing word. It tells us more about a noun — its colour, size, shape, number, or quality.',
-              example: { label: 'Examples', text: '"The <strong>tall</strong> tree fell." — tall describes the tree.\n"She wore a <strong>red</strong> dress." — red describes the dress.' }
+              text: 'An adjective is a describing word. It tells us more about a noun.',
+              example: { label: 'Examples', text: '"The <strong>tall</strong> tree fell." — "She wore a <strong>red</strong> dress."' }
             }
           ],
           tested: ['Identify adjectives in sentences', 'Use adjectives to describe nouns', 'Distinguish adjectives from adverbs']
-        },
-        questions: []
+        }
       },
-
-      /* ── SUBTOPIC FOLDER: Adverbs ─────────────────────
-         Parts of Speech → Adverbs → Adverbs I
-      ─────────────────────────────────────────────── */
+      /* ── SUBTOPIC: Adverbs ── */
       {
         id: 'pos-adv-1', type: 'premium',
         subtopic: 'adverbs', subtopicDisplay: 'Adverbs',
         title: 'Adverbs I', label: 'Adverbs · Level 1',
         description: 'Words that describe verbs, adjectives and other adverbs.',
         difficulty: 'Building', questionCount: 6,
+        db: { broad_topic: 'parts_of_speech', subtopic_id: 'adverbs', level_id: 'adverbs_1' },
         learn: {
           concepts: [
             {
               title: 'What is an adverb?',
-              text: 'An adverb describes a verb, an adjective, or another adverb. It tells us <strong>how, when, where</strong> or <strong>to what degree</strong> something happens.',
-              example: { label: 'Examples', text: '"She ran <strong>quickly</strong>." — quickly describes how she ran (verb).\n"He spoke <strong>very</strong> quietly." — very describes quietly (another adverb).' }
+              text: 'An adverb describes a verb, adjective, or another adverb. It tells us how, when, where or to what degree.',
+              example: { label: 'Examples', text: '"She ran <strong>quickly</strong>." — "He spoke <strong>very</strong> quietly."' }
             }
           ],
           tested: ['Identify adverbs in sentences', 'Distinguish adverbs from adjectives', 'Understand adverbs describe verbs']
-        },
-        questions: []
+        }
       },
-
-      /* ── MASTERY CHALLENGE ────────────────────────────
-         All of Parts of Speech — mixed boss quiz
-      ─────────────────────────────────────────────── */
+      /* ── MASTERY CHALLENGE ── */
       {
         id: 'pos-mastery', type: 'mastery',
         subtopic: null, subtopicDisplay: null,
         title: 'Parts of Speech — Mastery Challenge', label: 'Mastery',
         description: 'A comprehensive mixed quiz across all parts of speech. Complete all free levels first.',
         difficulty: 'Challenge', questionCount: 20,
+        db: { broad_topic: 'parts_of_speech', subtopic_id: null, level_id: null },
         learn: {
           concepts: [],
-          tested: ['All parts of speech — nouns, verbs, adjectives, adverbs, pronouns', 'Sentence analysis', 'Mixed difficulty questions']
-        },
-        questions: []
+          tested: ['All parts of speech — nouns, verbs, adjectives, adverbs, pronouns', 'Sentence analysis', 'Mixed difficulty']
+        }
       }
     ]
   },
@@ -936,37 +949,29 @@ const TOPICS = [
     levels: [
       {
         id: 'frac-1', type: 'free',
-        title: 'Fractions I', label: 'Level 1',
-        description: 'What fractions are, naming them, and finding equivalent fractions.',
+        subtopic: 'fractions', subtopicDisplay: 'Fractions',
+        title: 'Fractions I', label: 'Fractions · Level 1',
+        description: 'What fractions are, naming them, and equivalent fractions.',
         difficulty: 'Starter', questionCount: 5,
+        db: { broad_topic: 'fractions', subtopic_id: 'fractions', level_id: 'fractions_1' },
         learn: {
           concepts: [
             {
               title: 'What is a fraction?',
-              text: 'A fraction represents a part of a whole. It has a <strong>numerator</strong> (top number — how many parts you have) and a <strong>denominator</strong> (bottom number — how many equal parts the whole is divided into).',
-              example: { label: 'Example', text: '¾ means: the whole is divided into 4 equal parts, and you have 3 of them.' }
-            },
-            {
-              title: 'Equivalent fractions',
-              text: 'Fractions that look different but mean the same amount. Multiply or divide both the numerator and denominator by the same number.',
-              example: { label: 'Example', text: '½ = ²⁄₄ = ³⁄₆ — all mean the same. Multiply both top and bottom by 2: ½ → ²⁄₄.' }
+              text: 'A fraction represents a part of a whole. It has a <strong>numerator</strong> (top) and a <strong>denominator</strong> (bottom).',
+              example: { label: 'Example', text: '¾ means: the whole is divided into 4 equal parts, and you have 3.' }
             }
           ],
           tested: ['Name the numerator and denominator', 'Compare simple fractions', 'Find equivalent fractions']
-        },
-        questions: [
-          { q: 'Which fraction is equivalent to ²⁄₃?', opts: ['³⁄₄','⁴⁄₆','²⁄₄','⁵⁄₆'], correct: 1, exp: '⁴⁄₆ = ²⁄₃ — multiply both top and bottom of ²⁄₃ by 2.', deepLearn: null },
-          { q: 'What is ⅓ of 12?', opts: ['3','4','6','12'], correct: 1, exp: '12 ÷ 3 = 4. To find ⅓ of a number, divide by 3.', deepLearn: null },
-          { q: 'Which fraction is the largest?', opts: ['½','⅓','¼','⅛'], correct: 0, exp: '½ is the largest. Bigger denominator = smaller pieces.', deepLearn: null },
-          { q: 'Simplify ⁶⁄₈.', opts: ['³⁄₄','²⁄₃','⁴⁄₆','½'], correct: 0, exp: 'Divide both 6 and 8 by 2: 6÷2=3, 8÷2=4. So ⁶⁄₈ = ¾.', deepLearn: null },
-          { q: 'In ¾ — what is the denominator?', opts: ['3','4','7','1'], correct: 1, exp: 'The denominator is the bottom number — 4. It shows how many equal parts the whole is divided into.', deepLearn: null }
-        ]
+        }
       },
       {
         id: 'frac-2', type: 'premium',
-        title: 'Fractions II', label: 'Level 2',
+        subtopic: 'fractions', subtopicDisplay: 'Fractions',
+        title: 'Fractions II', label: 'Fractions · Level 2',
         description: 'Adding and subtracting fractions with different denominators.',
         difficulty: 'Building', questionCount: 8,
+        db: { broad_topic: 'fractions', subtopic_id: 'fractions', level_id: 'fractions_2' },
         learn: {
           concepts: [
             {
@@ -975,89 +980,22 @@ const TOPICS = [
               example: { label: 'Example', text: '¾ + ½ — LCD of 4 and 2 is 4. Convert ½ to ²⁄₄. Then: ¾ + ²⁄₄ = ⁵⁄₄ = 1¼.' }
             }
           ],
-          tested: ['Add fractions with the same denominator', 'Find the LCD', 'Add fractions with different denominators', 'Simplify the answer']
-        },
-        questions: []
+          tested: ['Find the LCD', 'Add fractions with different denominators', 'Simplify the answer']
+        }
       },
       {
         id: 'frac-mastery', type: 'mastery',
+        subtopic: null, subtopicDisplay: null,
         title: 'Fractions — Mastery Challenge', label: 'Mastery',
-        description: 'A comprehensive challenge covering all fraction skills. Complete Levels 1–2 first.',
+        description: 'A comprehensive challenge covering all fraction skills.',
         difficulty: 'Challenge', questionCount: 15,
-        learn: { concepts: [], tested: [] },
-        questions: []
-      }
-    ]
-  },
-  {
-    id: 'human-body',
-    phase: 'intermediate', grade: 4, subject: 'science',
-    name: 'The Human Body',
-    description: 'Organs, systems and how the body works.',
-    generalPractice: {
-      desc: 'General questions on human body organs and their functions.',
-      questionCount: 10, bankSize: 25
-    },
-    levels: [
-      {
-        id: 'body-organs', type: 'free',
-        title: 'Major Organs', label: 'Level 1',
-        description: 'Heart, lungs, kidneys, brain — what each organ does.',
-        difficulty: 'Starter', questionCount: 5,
-        learn: {
-          concepts: [
-            {
-              title: 'The heart and circulatory system',
-              text: 'The heart is a muscle that pumps blood throughout the body. Blood carries oxygen and nutrients to all your cells.',
-              example: { label: 'Key fact', text: 'Your heart beats about 100 000 times every day.' }
-            },
-            {
-              title: 'Lungs and breathing',
-              text: 'The lungs bring oxygen into the body and remove carbon dioxide. When you breathe in, oxygen passes into your blood. When you breathe out, carbon dioxide leaves.',
-              example: null
-            }
-          ],
-          tested: ['Name the major organs', 'Explain the function of the heart', 'Explain the function of the lungs', 'Identify the kidneys\' role']
-        },
-        questions: [
-          { q: 'What is the main function of the heart?', opts: ['Digest food','Pump blood around the body','Filter waste from blood','Control breathing'], correct: 1, exp: 'The heart is a muscle that pumps blood, delivering oxygen and nutrients to every cell.', deepLearn: null },
-          { q: 'Which organ removes waste from blood and produces urine?', opts: ['Liver','Stomach','Kidney','Lungs'], correct: 2, exp: 'The kidneys filter waste from blood and produce urine.', deepLearn: null },
-          { q: 'What do the lungs do?', opts: ['Pump blood','Break down food','Exchange oxygen and carbon dioxide','Produce hormones'], correct: 2, exp: 'The lungs take in oxygen from the air and release carbon dioxide.', deepLearn: null },
-          { q: 'Which system includes the brain and spinal cord?', opts: ['Digestive system','Nervous system','Circulatory system','Skeletal system'], correct: 1, exp: 'The brain and spinal cord make up the central nervous system.', deepLearn: null },
-          { q: 'What does the skeleton do?', opts: ['Pumps blood','Digests food','Supports and protects the body','Produces urine'], correct: 2, exp: 'The skeleton supports the body, protects organs, and allows movement.', deepLearn: null }
-        ]
+        db: { broad_topic: 'fractions', subtopic_id: null, level_id: null },
+        learn: { concepts: [], tested: ['All fraction skills — naming, comparing, adding, simplifying'] }
       }
     ]
   }
 ];
 
-// General practice questions (used for randomised mixed practice)
-const GENERAL_PRACTICE_QUESTIONS = {
-  pos: [
-    { q: 'Which word is the noun?\n\n"The girl skipped to school."', opts: ['girl','skipped','to','quickly'], correct: 0, exp: '"Girl" is the noun — a person.', deepLearn: null },
-    { q: 'Which word is the verb?\n\n"The lion roared loudly."', opts: ['lion','roared','loudly','The'], correct: 1, exp: '"Roared" is the verb — it shows the action.', deepLearn: null },
-    { q: 'What type of word is "beautiful"?', opts: ['Noun','Verb','Adjective','Adverb'], correct: 2, exp: '"Beautiful" is an adjective — a describing word.', deepLearn: null },
-    { q: 'What type of word is "quickly"?', opts: ['Noun','Verb','Adjective','Adverb'], correct: 3, exp: '"Quickly" is an adverb — it describes how something is done.', deepLearn: null },
-    { q: 'Which of these is a proper noun?', opts: ['city','teacher','Johannesburg','school'], correct: 2, exp: '"Johannesburg" is a proper noun — the specific name of a city.', deepLearn: null },
-    { q: 'Which sentence has an adjective?', opts: ['"She ran."','"He ate."','"The big dog barked."','"They left."'], correct: 2, exp: '"Big" is the adjective — it describes the dog.', deepLearn: null },
-    { q: '"She sings beautifully." — What type of word is "beautifully"?', opts: ['Noun','Verb','Adjective','Adverb'], correct: 3, exp: '"Beautifully" is an adverb — it describes how she sings.', deepLearn: null },
-    { q: 'Which word is a pronoun?', opts: ['run','tall','she','desk'], correct: 2, exp: '"She" is a pronoun — it takes the place of a noun.', deepLearn: null }
-  ],
-  fractions: [
-    { q: 'What is ¾ + ½?', opts: ['1','1¼','1½','⁵⁄₆'], correct: 1, exp: 'Convert ½ to ²⁄₄, then add: ¾ + ²⁄₄ = ⁵⁄₄ = 1¼.', deepLearn: null },
-    { q: 'Which fraction is equivalent to ²⁄₃?', opts: ['³⁄₄','⁴⁄₆','²⁄₄','⁵⁄₆'], correct: 1, exp: '⁴⁄₆ = ²⁄₃ — multiply top and bottom by 2.', deepLearn: null },
-    { q: 'What is ⅓ of 12?', opts: ['3','4','6','12'], correct: 1, exp: '12 ÷ 3 = 4.', deepLearn: null },
-    { q: 'Simplify ⁶⁄₈.', opts: ['³⁄₄','²⁄₃','⁴⁄₆','½'], correct: 0, exp: '6÷2=3, 8÷2=4. So ⁶⁄₈ = ¾.', deepLearn: null },
-    { q: 'Which fraction is the largest?', opts: ['½','⅓','¼','⅛'], correct: 0, exp: 'Bigger denominator = smaller pieces. ½ is the largest.', deepLearn: null }
-  ],
-  'human-body': [
-    { q: 'What does the heart do?', opts: ['Digest food','Pump blood','Filter waste','Control breathing'], correct: 1, exp: 'The heart pumps blood around the body.', deepLearn: null },
-    { q: 'Which organ filters waste from blood?', opts: ['Liver','Stomach','Kidney','Lungs'], correct: 2, exp: 'The kidneys filter waste.', deepLearn: null },
-    { q: 'What do lungs do?', opts: ['Pump blood','Break down food','Exchange oxygen/CO₂','Produce hormones'], correct: 2, exp: 'Lungs bring oxygen in and push CO₂ out.', deepLearn: null },
-    { q: 'What system includes the brain?', opts: ['Digestive','Nervous','Circulatory','Skeletal'], correct: 1, exp: 'Brain and spinal cord = nervous system.', deepLearn: null },
-    { q: 'What does the skeleton do?', opts: ['Pumps blood','Digests food','Supports body','Produces urine'], correct: 2, exp: 'The skeleton supports, protects and allows movement.', deepLearn: null }
-  ]
-};
 
 // ════════════════════════════════════════════════════
 // STATE
@@ -1475,45 +1413,75 @@ function renderLearnScreen(level){
   document.getElementById('sqcAccess').textContent = level.type==='free' ? '🔓 Free' : level.type==='mastery' ? '🏆 Mastery' : '✦ Premium';
 }
 
-function startGeneralPractice(){
+async function startGeneralPractice(){
   const topic = state.currentTopic;
   state.currentLevel = null;
   state.isGeneralPractice = true;
 
-  // Get GP questions for this topic
-  const gpQs = GENERAL_PRACTICE_QUESTIONS[topic.id] || [];
+  const btn = document.getElementById('gpBtn');
+  if(btn){ btn.disabled = true; btn.textContent = 'Loading…'; }
 
-  if(!gpQs.length){
-    alert('General practice questions for this topic are being added — check back soon!');
-    return;
+  try {
+    const questions = await sbQuestions({
+      grade: topic.grade,
+      subject: topic.subject,
+      broad_topic: topic.id === 'pos' ? 'parts_of_speech' : topic.id,
+      section_type: 'general_practice'
+    });
+
+    if(!questions.length){
+      alert('General practice questions for this topic are being added — check back soon! 🌱');
+      return;
+    }
+
+    // Shuffle and cap at 15
+    const shuffled = [...questions].sort(() => Math.random()-0.5).slice(0, Math.min(15, questions.length));
+    launchQuiz(shuffled, `${topic.name} — General Practice`);
+  } catch(e) {
+    console.error(e);
+    alert('Could not load questions. Please check your connection and try again.');
+  } finally {
+    if(btn){ btn.disabled = false; btn.textContent = 'Practice now →'; }
   }
-
-  // Shuffle and take up to 15
-  const shuffled = [...gpQs].sort(() => Math.random()-0.5).slice(0, Math.min(15, gpQs.length));
-  launchQuiz(shuffled, `${topic.name} — General Practice`);
 }
 
-function beginQuiz(){
+async function beginQuiz(){
   const level = state.currentLevel;
   const topic = state.currentTopic;
   if(!level) return;
 
-  let questions = level.questions;
+  const btn = document.querySelector('.btn-start');
+  if(btn){ btn.disabled = true; btn.textContent = 'Loading…'; }
 
-  // Fallback to GP questions if level has no questions yet
-  if(!questions || !questions.length){
-    const gpQs = GENERAL_PRACTICE_QUESTIONS[topic.id] || [];
-    if(gpQs.length){
-      questions = [...gpQs].sort(() => Math.random()-0.5).slice(0, Math.min(level.questionCount, gpQs.length));
+  try {
+    let questions = [];
+
+    if(level.db){
+      const filters = {
+        grade: topic.grade,
+        subject: topic.subject,
+        broad_topic: level.db.broad_topic,
+        section_type: level.type === 'mastery' ? 'mastery_challenge' : 'learning_level'
+      };
+      if(level.db.subtopic_id) filters.subtopic_id = level.db.subtopic_id;
+      if(level.db.level_id)    filters.level_id    = level.db.level_id;
+      questions = await sbQuestions(filters);
     }
-  }
 
-  if(!questions || !questions.length){
-    alert('Questions for this level are being added — check back soon! 🌱');
-    return;
-  }
+    if(!questions.length){
+      alert('Questions for this level are being added — check back soon! 🌱');
+      return;
+    }
 
-  launchQuiz(questions, level.title);
+    // Shuffle and cap at the level\'s question count
+    const shuffled = [...questions].sort(() => Math.random()-0.5).slice(0, level.questionCount || questions.length);
+    launchQuiz(shuffled, level.title);
+  } catch(e) {
+    console.error(e);
+    alert('Could not load questions. Please check your connection and try again.');
+  } finally {
+    if(btn){ btn.disabled = false; btn.textContent = 'Start quiz →'; }
+  }
 }
 
 // ════════════════════════════════════════════════════
