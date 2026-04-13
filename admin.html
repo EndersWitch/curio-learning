@@ -189,6 +189,7 @@ tr:hover td{background:var(--m03);}
       <div class="nav-tab" onclick="switchPanel('questions',this)">All Questions</div>
       <div class="nav-tab" onclick="switchPanel('papers',this)">Papers</div>
       <div class="nav-tab" onclick="switchPanel('add-paper',this)">Add Paper</div>
+      <div class="nav-tab" onclick="switchPanel('learn-zones',this)">📚 Learning Zones</div>
       <div class="nav-tab ai-tab" onclick="switchPanel('generate-papers',this)">✦ Generate Papers</div>
     </div>
     <div class="nav-right">
@@ -573,9 +574,190 @@ tr:hover td{background:var(--m03);}
       </div>
     </div>
 
-    <!-- ════════════════════
-         GENERATE PAPERS (AI)
-    ════════════════════ -->
+    <!-- ════════════════════════════════════
+         LEARNING ZONES — manage pre-quiz concept content
+         Stored in quiz_levels table
+    ════════════════════════════════════ -->
+    <div class="panel" id="panel-learn-zones">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">📚 Learning Zones</div>
+          <div class="panel-sub">Manage the concept explanations shown to learners before each quiz level</div>
+        </div>
+        <button class="btn-submit" onclick="showLZForm()">+ Add Learning Zone</button>
+      </div>
+
+      <div class="info-box" style="margin-bottom:1.5rem;">
+        <strong>What is a Learning Zone?</strong> Before a learner starts a quiz level, they see a screen with concept cards, examples and a list of what will be tested. You manage that content here — one record per level (e.g. one for Nouns I, one for Nouns II, etc). Each record maps to a <strong>level_id</strong> which must match the ID used in the quiz.
+      </div>
+
+      <!-- ADD / EDIT FORM (hidden by default) -->
+      <div id="lzFormWrap" style="display:none;margin-bottom:2rem;">
+        <div class="form-card">
+
+          <div class="form-section">
+            <div class="form-section-title">📍 Level Identity</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Phase <span class="req">*</span></label>
+                <select class="form-select" id="lzPhase">
+                  <option value="">Select phase</option>
+                  <option value="intermediate">Intermediate (Gr 4–6)</option>
+                  <option value="senior">Senior (Gr 7–9)</option>
+                  <option value="fet">FET (Gr 10–12)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Grade <span class="req">*</span></label>
+                <select class="form-select" id="lzGrade">
+                  <option value="">Select grade</option>
+                  <option value="4">Grade 4</option><option value="5">Grade 5</option><option value="6">Grade 6</option>
+                  <option value="7">Grade 7</option><option value="8">Grade 8</option><option value="9">Grade 9</option>
+                  <option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Subject <span class="req">*</span></label>
+                <select class="form-select" id="lzSubject">
+                  <option value="">Select subject</option>
+                  <option value="english">English HL</option><option value="maths">Mathematics</option>
+                  <option value="science">Natural Sciences</option><option value="social">Social Sciences</option>
+                  <option value="afrikaans">Afrikaans</option><option value="lifeskills">Life Skills</option>
+                  <option value="history">History</option><option value="geography">Geography</option>
+                  <option value="physics">Physical Sciences</option><option value="lifesciences">Life Sciences</option>
+                  <option value="accounting">Accounting</option><option value="business">Business Studies</option>
+                  <option value="economics">Economics</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Broad Topic ID <span class="req">*</span></label>
+                <input class="form-input" type="text" id="lzBroadTopic" placeholder="e.g. parts_of_speech"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Broad Topic Display</label>
+                <input class="form-input" type="text" id="lzBroadTopicDisplay" placeholder="e.g. Parts of Speech"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Subtopic ID</label>
+                <input class="form-input" type="text" id="lzSubtopicId" placeholder="e.g. nouns"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Subtopic Display</label>
+                <input class="form-input" type="text" id="lzSubtopicDisplay" placeholder="e.g. Nouns"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Level ID <span class="req">*</span></label>
+                <input class="form-input" type="text" id="lzLevelId" placeholder="e.g. nouns_1"/>
+                <span style="font-size:0.62rem;color:var(--m30);margin-top:0.2rem;">Must match the level_id used in quiz.html</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Level Display Name <span class="req">*</span></label>
+                <input class="form-input" type="text" id="lzLevelDisplay" placeholder="e.g. Nouns I"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Level Order</label>
+                <input class="form-input" type="number" id="lzLevelOrder" value="1" min="1"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Difficulty</label>
+                <select class="form-select" id="lzDifficulty">
+                  <option value="Starter">Starter</option>
+                  <option value="Building">Building</option>
+                  <option value="Challenge">Challenge</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Access</label>
+                <select class="form-select" id="lzPremium">
+                  <option value="false">Free</option>
+                  <option value="true">Premium</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Expected Question Count</label>
+                <input class="form-input" type="number" id="lzQuestionCount" value="5" min="1"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- INTRO -->
+          <div class="form-section">
+            <div class="form-section-title">📝 Intro Text <span style="font-size:0.62rem;font-weight:400;color:var(--m30)">(optional — shown at top of learn screen)</span></div>
+            <div class="form-group full">
+              <textarea class="form-textarea" id="lzIntro" placeholder="e.g. Before you start — here is what you need to know about nouns." style="min-height:70px;"></textarea>
+            </div>
+          </div>
+
+          <!-- CONCEPTS — dynamic builder -->
+          <div class="form-section">
+            <div class="form-section-title">💡 Concept Cards</div>
+            <div class="info-box" style="margin-bottom:1rem;font-size:0.74rem;">
+              Each concept card has a <strong>title</strong>, an <strong>explanation</strong>, and an optional <strong>example</strong> (label + text). Add as many as the level needs.
+            </div>
+            <div id="conceptBuilder"></div>
+            <button class="btn-secondary-sm" onclick="addConceptCard()" style="margin-top:0.8rem;">+ Add concept card</button>
+          </div>
+
+          <!-- WHAT WILL BE TESTED -->
+          <div class="form-section">
+            <div class="form-section-title">📋 What Will Be Tested</div>
+            <div class="info-box" style="margin-bottom:1rem;font-size:0.74rem;">
+              One bullet point per line. These appear as the checklist the learner sees before starting.
+            </div>
+            <textarea class="form-textarea" id="lzTested" placeholder="Identify nouns in a sentence&#10;Tell apart common and proper nouns&#10;Use capital letters for proper nouns" style="min-height:120px;"></textarea>
+            <span style="font-size:0.62rem;color:var(--m30);margin-top:0.3rem;display:block;">One item per line</span>
+          </div>
+
+          <div class="form-footer">
+            <button class="btn-submit" id="btnSaveLZ" onclick="saveLearningZone()">Save Learning Zone →</button>
+            <button class="btn-secondary-sm" onclick="hideLZForm()">Cancel</button>
+            <span class="save-status" id="lzStatus"></span>
+            <input type="hidden" id="lzEditId" value=""/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALL LEARNING ZONES TABLE -->
+      <div class="table-toolbar">
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+          <input class="search-input" type="text" placeholder="Search levels…" oninput="filterLZ()" id="lzSearch"/>
+          <select class="filter-select" onchange="filterLZ()" id="lzFilterGrade">
+            <option value="">All grades</option>
+            <option value="4">Gr 4</option><option value="5">Gr 5</option><option value="6">Gr 6</option>
+            <option value="7">Gr 7</option><option value="8">Gr 8</option><option value="9">Gr 9</option>
+            <option value="10">Gr 10</option><option value="11">Gr 11</option><option value="12">Gr 12</option>
+          </select>
+          <select class="filter-select" onchange="filterLZ()" id="lzFilterSubject">
+            <option value="">All subjects</option>
+            <option value="english">English HL</option><option value="maths">Mathematics</option>
+            <option value="science">Natural Sciences</option><option value="social">Social Sciences</option>
+            <option value="afrikaans">Afrikaans</option>
+          </select>
+        </div>
+        <span class="table-count" id="lzCount"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Grade</th>
+              <th>Subject</th>
+              <th>Broad Topic</th>
+              <th>Subtopic</th>
+              <th>Concepts</th>
+              <th>Tested items</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="lzBody">
+            <tr class="loading-row"><td colspan="8">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
     <div class="panel" id="panel-generate-papers">
       <div class="panel-header">
         <div>
@@ -703,6 +885,7 @@ function switchPanel(name,btn){
   if(name==='questions')loadAllQuestions();
   if(name==='dashboard')loadDashboard();
   if(name==='papers')loadAllPapers();
+  if(name==='learn-zones')loadLearningZones();
 }
 
 async function loadDashboard(){
@@ -1152,6 +1335,278 @@ function appendResult(r){
   `;
   el.appendChild(card);
 }
-</script>
+// ════════════════════════════════════
+// LEARNING ZONES
+// ════════════════════════════════════
+let allLZ = [];
+let conceptCount = 0;
+
+// ── Supabase helpers ──
+async function getLearningZones(){
+  return await sbFetch('quiz_levels?order=grade.asc,subject.asc,level_order.asc');
+}
+async function insertLZ(data){
+  return await sbFetch('quiz_levels',{method:'POST',prefer:'return=representation',body:JSON.stringify(data)});
+}
+async function updateLZ(id, data){
+  return await sbFetch(`quiz_levels?id=eq.${id}`,{method:'PATCH',prefer:'return=representation',body:JSON.stringify(data)});
+}
+async function deleteLZRow(id){
+  return await sbFetch(`quiz_levels?id=eq.${id}`,{method:'DELETE'});
+}
+
+// ── Load & render ──
+async function loadLearningZones(){
+  const tbody = document.getElementById('lzBody');
+  tbody.innerHTML = `<tr class="loading-row"><td colspan="8">Loading…</td></tr>`;
+  try {
+    allLZ = await getLearningZones() || [];
+    renderLZTable(allLZ);
+  } catch(e) {
+    tbody.innerHTML = `<tr class="loading-row"><td colspan="8">Error loading. Check console.</td></tr>`;
+    console.error(e);
+  }
+}
+
+function renderLZTable(data){
+  const tbody = document.getElementById('lzBody');
+  document.getElementById('lzCount').textContent = `${data.length} level${data.length!==1?'s':''}`;
+  if(!data.length){
+    tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state">No learning zones yet.<p>Click "+ Add Learning Zone" to create your first one.</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = data.map(lz => {
+    const concepts = Array.isArray(lz.concepts) ? lz.concepts.length : (lz.concepts ? JSON.parse(lz.concepts).length : 0);
+    const tested   = Array.isArray(lz.tested) ? lz.tested.length : 0;
+    return `<tr>
+      <td class="q-text-cell">
+        <div style="font-weight:700;color:var(--moon)">${lz.level_display||lz.level_id}</div>
+        <div style="font-size:0.65rem;color:var(--m30)">${lz.level_id}</div>
+      </td>
+      <td>Gr ${lz.grade}</td>
+      <td style="font-size:0.72rem">${SUBJECT_NAMES_ADMIN[lz.subject]||lz.subject}</td>
+      <td style="font-size:0.72rem;color:var(--m55)">${lz.broad_topic_display||lz.broad_topic||'—'}</td>
+      <td style="font-size:0.72rem;color:var(--m55)">${lz.subtopic_display||lz.subtopic_id||'—'}</td>
+      <td><span class="chip-small chip-free">${concepts} card${concepts!==1?'s':''}</span></td>
+      <td style="font-size:0.72rem;color:var(--m55)">${tested} item${tested!==1?'s':''}</td>
+      <td style="display:flex;gap:0.4rem;">
+        <button class="btn-secondary-sm" style="font-size:0.68rem;padding:0.2rem 0.5rem;" onclick="editLZ('${lz.id}')">Edit</button>
+        <button class="btn-delete" onclick="confirmDeleteLZ('${lz.id}',this)">Delete</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function filterLZ(){
+  const search  = document.getElementById('lzSearch').value.toLowerCase();
+  const grade   = document.getElementById('lzFilterGrade').value;
+  const subject = document.getElementById('lzFilterSubject').value;
+  renderLZTable(allLZ.filter(lz => {
+    const ms = !search || (lz.level_display||'').toLowerCase().includes(search)
+      || (lz.level_id||'').toLowerCase().includes(search)
+      || (lz.broad_topic||'').toLowerCase().includes(search);
+    const mg = !grade   || String(lz.grade)===grade;
+    const ms2= !subject || lz.subject===subject;
+    return ms && mg && ms2;
+  }));
+}
+
+// ── Form show/hide ──
+function showLZForm(){
+  clearLZForm();
+  document.getElementById('lzFormWrap').style.display = 'block';
+  document.getElementById('lzFormWrap').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function hideLZForm(){
+  document.getElementById('lzFormWrap').style.display = 'none';
+  clearLZForm();
+}
+
+// ── Concept card builder ──
+function addConceptCard(data){
+  conceptCount++;
+  const n = conceptCount;
+  const div = document.createElement('div');
+  div.className = 'form-card';
+  div.id = `concept-card-${n}`;
+  div.style.cssText = 'margin-bottom:1rem;border:1px solid var(--c25);';
+  div.innerHTML = `
+    <div class="form-section" style="background:var(--c06);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+        <div class="form-section-title" style="margin:0;">Concept ${n}</div>
+        <button onclick="removeConceptCard(${n})" style="font-size:0.7rem;color:var(--coral);background:var(--r10);border:1px solid var(--r20);padding:0.2rem 0.5rem;border-radius:5px;cursor:pointer;">Remove</button>
+      </div>
+      <div class="form-group full" style="margin-bottom:0.8rem;">
+        <label class="form-label">Concept Title <span class="req">*</span></label>
+        <input class="form-input" type="text" id="cc-title-${n}" placeholder="e.g. What is a noun?" value="${data?.title||''}"/>
+      </div>
+      <div class="form-group full" style="margin-bottom:0.8rem;">
+        <label class="form-label">Explanation <span class="req">*</span></label>
+        <textarea class="form-textarea" id="cc-text-${n}" placeholder="Explain the concept clearly. You can use HTML like <strong>bold</strong>." style="min-height:80px;">${data?.text||''}</textarea>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;">
+        <div class="form-group">
+          <label class="form-label">Example Label <span style="font-weight:400;color:var(--m30)">(optional)</span></label>
+          <input class="form-input" type="text" id="cc-exlabel-${n}" placeholder="e.g. Examples" value="${data?.example?.label||''}"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Example Text <span style="font-weight:400;color:var(--m30)">(optional)</span></label>
+          <input class="form-input" type="text" id="cc-extext-${n}" placeholder="e.g. dog, city, Johannesburg" value="${data?.example?.text||''}"/>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('conceptBuilder').appendChild(div);
+}
+
+function removeConceptCard(n){
+  const el = document.getElementById(`concept-card-${n}`);
+  if(el) el.remove();
+}
+
+function readConceptCards(){
+  const cards = document.querySelectorAll('#conceptBuilder .form-card');
+  const concepts = [];
+  cards.forEach(card => {
+    const id = card.id.replace('concept-card-','');
+    const title  = document.getElementById(`cc-title-${id}`)?.value.trim();
+    const text   = document.getElementById(`cc-text-${id}`)?.value.trim();
+    const exLabel= document.getElementById(`cc-exlabel-${id}`)?.value.trim();
+    const exText = document.getElementById(`cc-extext-${id}`)?.value.trim();
+    if(title && text){
+      const concept = { title, text };
+      if(exLabel || exText) concept.example = { label: exLabel||'Example', text: exText||'' };
+      concepts.push(concept);
+    }
+  });
+  return concepts;
+}
+
+// ── Save ──
+async function saveLearningZone(){
+  const phase       = document.getElementById('lzPhase').value;
+  const grade       = document.getElementById('lzGrade').value;
+  const subject     = document.getElementById('lzSubject').value;
+  const broadTopic  = document.getElementById('lzBroadTopic').value.trim();
+  const broadDisp   = document.getElementById('lzBroadTopicDisplay').value.trim();
+  const subtopicId  = document.getElementById('lzSubtopicId').value.trim();
+  const subtopicDis = document.getElementById('lzSubtopicDisplay').value.trim();
+  const levelId     = document.getElementById('lzLevelId').value.trim();
+  const levelDisp   = document.getElementById('lzLevelDisplay').value.trim();
+  const levelOrder  = parseInt(document.getElementById('lzLevelOrder').value)||1;
+  const difficulty  = document.getElementById('lzDifficulty').value;
+  const isPremium   = document.getElementById('lzPremium').value === 'true';
+  const qCount      = parseInt(document.getElementById('lzQuestionCount').value)||5;
+  const intro       = document.getElementById('lzIntro').value.trim();
+  const testedRaw   = document.getElementById('lzTested').value.trim();
+  const editId      = document.getElementById('lzEditId').value;
+
+  if(!grade||!subject||!broadTopic||!levelId||!levelDisp){
+    setLZStatus('Please fill in all required fields.','err'); return;
+  }
+
+  const concepts = readConceptCards();
+  const tested   = testedRaw ? testedRaw.split('\n').map(s=>s.trim()).filter(Boolean) : [];
+
+  const payload = {
+    phase: phase||null, grade: parseInt(grade), subject,
+    broad_topic: broadTopic, broad_topic_display: broadDisp||null,
+    subtopic_id: subtopicId||null, subtopic_display: subtopicDis||null,
+    level_id: levelId, level_display: levelDisp,
+    level_order: levelOrder, difficulty, is_premium: isPremium,
+    question_count: qCount,
+    intro: intro||null,
+    concepts: concepts.length ? concepts : null,
+    tested: tested.length ? tested : null
+  };
+
+  const btn = document.getElementById('btnSaveLZ');
+  btn.disabled = true; btn.textContent = 'Saving…'; setLZStatus('','');
+
+  try {
+    if(editId){
+      await updateLZ(editId, payload);
+      setLZStatus('✓ Updated!','ok');
+    } else {
+      await insertLZ(payload);
+      setLZStatus('✓ Learning Zone saved!','ok');
+    }
+    hideLZForm();
+    await loadLearningZones();
+  } catch(e) {
+    setLZStatus('Error: '+e.message,'err'); console.error(e);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Save Learning Zone →';
+    document.getElementById('lzEditId').value = '';
+  }
+}
+
+function setLZStatus(msg,type){
+  const el = document.getElementById('lzStatus');
+  el.textContent = msg; el.className = `save-status ${type}`;
+}
+
+// ── Edit ──
+function editLZ(id){
+  const lz = allLZ.find(l => l.id === id);
+  if(!lz) return;
+
+  showLZForm();
+  document.getElementById('lzEditId').value = id;
+  document.getElementById('lzPhase').value             = lz.phase||'';
+  document.getElementById('lzGrade').value             = lz.grade||'';
+  document.getElementById('lzSubject').value           = lz.subject||'';
+  document.getElementById('lzBroadTopic').value        = lz.broad_topic||'';
+  document.getElementById('lzBroadTopicDisplay').value = lz.broad_topic_display||'';
+  document.getElementById('lzSubtopicId').value        = lz.subtopic_id||'';
+  document.getElementById('lzSubtopicDisplay').value   = lz.subtopic_display||'';
+  document.getElementById('lzLevelId').value           = lz.level_id||'';
+  document.getElementById('lzLevelDisplay').value      = lz.level_display||'';
+  document.getElementById('lzLevelOrder').value        = lz.level_order||1;
+  document.getElementById('lzDifficulty').value        = lz.difficulty||'Starter';
+  document.getElementById('lzPremium').value           = lz.is_premium ? 'true' : 'false';
+  document.getElementById('lzQuestionCount').value     = lz.question_count||5;
+  document.getElementById('lzIntro').value             = lz.intro||'';
+
+  // Tested items
+  const tested = Array.isArray(lz.tested) ? lz.tested.join('\n') : '';
+  document.getElementById('lzTested').value = tested;
+
+  // Concept cards
+  document.getElementById('conceptBuilder').innerHTML = '';
+  conceptCount = 0;
+  const concepts = Array.isArray(lz.concepts) ? lz.concepts : (lz.concepts ? JSON.parse(lz.concepts) : []);
+  concepts.forEach(c => addConceptCard(c));
+}
+
+// ── Delete ──
+async function confirmDeleteLZ(id, btn){
+  if(!confirm('Delete this Learning Zone? This cannot be undone.')) return;
+  btn.textContent = '…';
+  try {
+    await deleteLZRow(id);
+    allLZ = allLZ.filter(l => l.id !== id);
+    renderLZTable(allLZ);
+  } catch(e) {
+    alert('Error: '+e.message); btn.textContent = 'Delete';
+  }
+}
+
+// ── Clear form ──
+function clearLZForm(){
+  ['lzPhase','lzGrade','lzSubject','lzBroadTopic','lzBroadTopicDisplay',
+   'lzSubtopicId','lzSubtopicDisplay','lzLevelId','lzLevelDisplay',
+   'lzIntro','lzTested'].forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    if(el.tagName==='SELECT') el.selectedIndex=0; else el.value='';
+  });
+  document.getElementById('lzLevelOrder').value = '1';
+  document.getElementById('lzQuestionCount').value = '5';
+  document.getElementById('lzEditId').value = '';
+  document.getElementById('conceptBuilder').innerHTML = '';
+  conceptCount = 0;
+  setLZStatus('','');
+}
+
 </body>
 </html>
