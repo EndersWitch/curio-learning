@@ -1372,6 +1372,7 @@ async function startLevel(levelId){
 
   // Fetch learning zone from DB; fall back to hardcoded level.learn if nothing found
   const dbLearn = await sbLearningZone(level, topic);
+  state._dbLearnZone = dbLearn; // store so beginQuiz can read question_count
   renderLearnScreen(level, dbLearn);
   showScreen('screen-learn');
 }
@@ -1501,8 +1502,9 @@ async function beginQuiz(){
       return;
     }
 
-    // Shuffle and cap at the level\'s question count
-    const shuffled = [...questions].sort(() => Math.random()-0.5).slice(0, level.questionCount || questions.length);
+    // Cap: prefer DB question_count (from Learning Zone), fall back to hardcoded level.questionCount
+    const cap = (state._dbLearnZone?.question_count) || level.questionCount || questions.length;
+    const shuffled = [...questions].sort(() => Math.random()-0.5).slice(0, cap);
     launchQuiz(shuffled, level.title);
   } catch(e) {
     console.error(e);
