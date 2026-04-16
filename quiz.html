@@ -176,6 +176,9 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
 .path-item.locked{opacity:0.6;cursor:default;}
 .path-item.mastery{border-color:var(--a25);background:linear-gradient(135deg,var(--a15),var(--card2));}
 .path-item.mastery:hover{border-color:var(--amber);}
+.path-item.next-up{opacity:0.5;border-style:dashed;cursor:default;}
+.path-item.next-up:hover{opacity:0.6;transform:none;}
+.pi-next-label{font-size:0.68rem;color:var(--m30);font-style:italic;}
 
 /* Path item icon/node */
 .pi-node{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;}
@@ -665,6 +668,9 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
         </div>
       </div>
 
+      <!-- Unlock notice -->
+      <div id="rcUnlockNotice" style="display:none;margin:0 2rem 1rem;padding:0.8rem 1.1rem;border-radius:10px;background:var(--c12);border:1px solid var(--c25);font-size:0.82rem;color:var(--moon);line-height:1.6;gap:0.6rem;align-items:center;"></div>
+
       <!-- Badge reward (shown on high score or mastery) -->
       <div class="rc-badge-section" id="rcBadgeSection">
         <div class="rc-badge">
@@ -1052,6 +1058,7 @@ let state = {
   userId: null,
   userXp: 0,
   userStreak: 0,
+  userIsPremium: false,
   dbProgress: {}  // { 'topic_id:level_id': { best_score, passed, attempts } }
 };
 
@@ -1068,14 +1075,15 @@ async function loadUserProgress(userId) {
   try {
     // Load XP + streak from profiles
     const pRes = await fetch(
-      `${SB_URL}/rest/v1/profiles?id=eq.${userId}&select=xp,xp_total,streak_days`,
+      `${SB_URL}/rest/v1/profiles?id=eq.${userId}&select=xp,xp_total,streak_days,is_premium,is_founder`,
       { headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` } }
     );
     if (pRes.ok) {
       const rows = await pRes.json();
       if (rows[0]) {
-        state.userXp = rows[0].xp || 0;
-        state.userStreak = rows[0].streak_days || 0;
+        state.userXp        = rows[0].xp || 0;
+        state.userStreak    = rows[0].streak_days || 0;
+        state.userIsPremium = rows[0].is_premium === true || rows[0].is_founder === true;
       }
     }
     // Load level progress via RPC
@@ -1179,7 +1187,8 @@ function renderNav(s){
 })();
 
 function isLoggedIn(){ try { const s=JSON.parse(localStorage.getItem('curio_session')||'{}'); return !!(s?.access_token&&s?.expires_at>Date.now()/1000); } catch(e){ return false; } }
-function isPremium(){ try { const s=JSON.parse(localStorage.getItem('curio_session')||'{}'); return s?.user?.user_metadata?.is_premium===true; } catch(e){ return false; } }
+// isPremium reads from state.userIsPremium loaded from profiles table on login
+function isPremium(){ return state.userIsPremium === true; }
 
 // ════════════════════════════════════════════════════
 // SCREEN SWITCHING
@@ -1380,37 +1389,60 @@ function renderMasteryPath(topic){
 
   let html = '';
 
+  // ── PROGRESSIVE REVEAL ─────────────────────────────────────────────────
+  // Flat ordered list across all subtopics
+  const allNonMastery = [];
+  subtopicOrder.forEach(key => subtopics[key].levels.forEach(l => allNonMastery.push(l)));
+
+  // Frontier = first level not yet passed (or premium-locked)
+  const frontierIdx = allNonMastery.findIndex(l => (l.type==='premium' && !premium) || !levelPassed(l));
+  // Show: all passed + frontier + one peek ahead
+  const visibleCutoff = frontierIdx === -1 ? allNonMastery.length : Math.min(frontierIdx + 2, allNonMastery.length);
+
   subtopicOrder.forEach((key, fi) => {
     const folder = subtopics[key];
     const folderLabel = key === '__general' ? '📚 Levels' : `📂 ${folder.display}`;
+
+    const anyVisible = folder.levels.some(l => allNonMastery.indexOf(l) < visibleCutoff);
+    if (!anyVisible) return;
 
     html += `<div class="path-section">
       <div class="path-section-label">${folderLabel}</div>
       <div class="path-list">`;
 
-    folder.levels.forEach((level, i) => {
-      const locked = level.type==='premium' && !premium;
-      const done = !locked && levelPassed(level);
-      const best = locked ? null : levelBest(level);
-      const isFirstEver = fi===0 && i===0 && !done;
-      html += renderPathItem(level, done, best, level.type, isFirstEver && level.type==='free', locked);
+    folder.levels.forEach((level) => {
+      const gIdx = allNonMastery.indexOf(level);
+      if (gIdx >= visibleCutoff) return; // hidden
+
+      const premiumLocked = level.type==='premium' && !premium;
+      const done = !premiumLocked && levelPassed(level);
+      const best = premiumLocked ? null : levelBest(level);
+      const isFrontier = gIdx === frontierIdx;
+      const softLocked = gIdx === frontierIdx + 1 && !done;
+      const isFirstEver = gIdx === 0 && !done && !premiumLocked;
+
+      html += renderPathItem(level, done, best, level.type, isFirstEver, premiumLocked, softLocked, isFrontier);
     });
 
     html += `</div></div>`;
   });
 
-  // Mastery — unlock only when all free levels passed (premium levels too if premium user)
+  // Mastery — only show when all non-mastery levels are within one step of complete
   if(masteryLevel){
-    const allFreeCompleted = nonMastery.filter(l=>l.type==='free').every(l => levelPassed(l));
-    const allPremiumCompleted = !hasPremium || (premium && nonMastery.filter(l=>l.type==='premium').every(l => levelPassed(l)));
-    const masteryUnlocked = allFreeCompleted && allPremiumCompleted;
-    const done = levelPassed(masteryLevel);
-    const best = levelBest(masteryLevel);
-    html += `<div class="path-section">
-      <div class="path-section-label">🏆 Mastery challenge</div>
-      <div class="path-list">`;
-    html += renderPathItem(masteryLevel, done, best, 'mastery', false, !masteryUnlocked);
-    html += `</div></div>`;
+    const allFreeCompleted  = nonMastery.filter(l=>l.type==='free').every(l => levelPassed(l));
+    const allPremiumDone    = !hasPremium || (premium && nonMastery.filter(l=>l.type==='premium').every(l => levelPassed(l)));
+    const masteryUnlocked   = allFreeCompleted && allPremiumDone;
+    // Show mastery once frontier is at the last non-mastery level or beyond
+    const showMastery = frontierIdx >= allNonMastery.length - 1;
+    if (showMastery || masteryUnlocked) {
+      const done = levelPassed(masteryLevel);
+      const best = levelBest(masteryLevel);
+      html += `<div class="path-section">
+        <div class="path-section-label">🏆 Mastery challenge</div>
+        <div class="path-list">`;
+      html += renderPathItem(masteryLevel, done, best, 'mastery', false, !masteryUnlocked, false, false);
+      html += `</div></div>`;
+    }
   }
 
   container.innerHTML = html;
@@ -1419,14 +1451,16 @@ function renderMasteryPath(topic){
   lockCard.style.display = (!premium && hasPremium) ? 'block' : 'none';
 }
 
-function renderPathItem(level, done, best, type, isFirst, locked){
-  const nodeIcon = locked ? '🔒' : done ? '✓' : type==='mastery' ? '🏆' : type==='premium' ? '✦' : '▸';
-  const nodeClass = locked ? 'locked-node' : done ? 'done' : type;
-  const itemClass = locked ? 'locked' : done ? 'completed' : (isFirst&&!done) ? 'current' : type==='mastery' ? 'mastery' : '';
+function renderPathItem(level, done, best, type, isFirst, locked, softLocked=false, isFrontier=false){
+  const nodeIcon = (locked||softLocked) ? '🔒' : done ? '✓' : type==='mastery' ? '🏆' : type==='premium' ? '✦' : '▸';
+  const nodeClass = (locked||softLocked) ? 'locked-node' : done ? 'done' : type;
+  const itemClass = locked ? 'locked' : softLocked ? 'next-up' : done ? 'completed' : isFrontier ? 'current' : type==='mastery' ? 'mastery' : '';
 
   let actionBtn = '';
   if(locked){
     actionBtn = `<button class="pi-action unlock" onclick="window.location.href='subscription.html'">Unlock →</button>`;
+  } else if(softLocked){
+    actionBtn = `<span class="pi-next-label">Complete the level above to unlock</span>`;
   } else if(done){
     actionBtn = `<button class="pi-action replay" onclick="startLevel('${level.id}')">Replay</button>`;
   } else if(type==='mastery'){
@@ -1441,7 +1475,7 @@ function renderPathItem(level, done, best, type, isFirst, locked){
                     '<span class="pill-tag pill-free">Free</span>';
 
   return `
-    <div class="path-item ${itemClass}${locked?' locked':''}">
+    <div class="path-item ${itemClass}${(locked||softLocked)?' locked':''}">
       <div class="pi-node ${nodeClass}">${nodeIcon}</div>
       <div class="pi-info">
         <div class="pi-label">${level.label}</div>
@@ -1836,6 +1870,27 @@ async function showResults(){
       passEl.innerHTML = passed
         ? `<span class="pass-pill pass">✓ Passed (${threshold}% needed)</span>`
         : `<span class="pass-pill fail">✗ Not yet — need ${threshold}% to pass</span>`;
+    }
+  }
+
+  // ── Unlock notification ──────────────────────────
+  const unlockEl = document.getElementById('rcUnlockNotice');
+  if(unlockEl){
+    if(passed && !state.isGeneralPractice && level && topic){
+      const levelIdx = topic.levels.findIndex(l => l.id === level.id);
+      const nextLevel = topic.levels.slice(levelIdx+1).find(l => l.type !== 'mastery');
+      if(nextLevel){
+        unlockEl.style.display = 'flex';
+        unlockEl.innerHTML = `<span style="font-size:1.1rem">🔓</span> <div><strong>${nextLevel.title}</strong> is now unlocked — keep going!</div>`;
+      } else if(level.type !== 'mastery') {
+        // All levels done — mastery unlocked
+        unlockEl.style.display = 'flex';
+        unlockEl.innerHTML = `<span style="font-size:1.1rem">🏆</span> <div><strong>Mastery Challenge</strong> is now unlocked. You're ready for the boss quiz!</div>`;
+      } else {
+        unlockEl.style.display = 'none';
+      }
+    } else {
+      unlockEl.style.display = 'none';
     }
   }
 
