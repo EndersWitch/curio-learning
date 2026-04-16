@@ -940,7 +940,10 @@ function onSectionTypeChange(){
   } else if(st === 'learning_level'){
     info.style.display = 'block';
     info.className = 'info-box';
-    info.innerHTML = '<strong>📖 Learning Level</strong> — Fill in the subtopic folder and level fields below. This question belongs to a focused level inside the topic path.';
+    info.innerHTML = '<strong>📖 Learning Level</strong> — Pick the level below. All fields will fill in automatically.';
+    // Load the level picker
+    if(!allLevelsCache.length) loadLevelPicker();
+    else rebuildLevelPicker();
   } else if(st === 'mastery_challenge'){
     info.style.display = 'block';
     info.className = 'info-box amber';
@@ -1743,15 +1746,7 @@ document.addEventListener('change', e => {
   }
 });
 
-// Patch onSectionTypeChange to load picker when learning_level is selected
-const _origSectionTypeChange = onSectionTypeChange;
-function onSectionTypeChange() {
-  _origSectionTypeChange();
-  if(document.getElementById('fSectionType').value === 'learning_level') {
-    if(!allLevelsCache.length) loadLevelPicker();
-    else rebuildLevelPicker();
-  }
-}
+// Level picker is now handled inside onSectionTypeChange directly
 
 </script>
 </body>
