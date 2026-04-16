@@ -643,6 +643,11 @@ tr:hover td{background:var(--m03);}
                 <label class="form-label">Level Display Name <span class="req">*</span></label>
                 <input class="form-input" type="text" id="lzLevelDisplay" placeholder="e.g. Nouns I"/>
               </div>
+              <div class="form-group full">
+                <label class="form-label">Level Description <span style="font-size:0.6rem;font-weight:400;color:var(--m30)">(shown on the topic path card)</span></label>
+                <input class="form-input" type="text" id="lzDescription" placeholder="e.g. Common and proper nouns — the naming words."/>
+                <span style="font-size:0.62rem;color:var(--m30);margin-top:0.2rem;">Leave blank to hide the description on the path card.</span>
+              </div>
               <div class="form-group">
                 <label class="form-label">Level Order</label>
                 <input class="form-input" type="number" id="lzLevelOrder" value="1" min="1"/>
@@ -1509,6 +1514,7 @@ async function saveLearningZone(){
   const difficulty  = document.getElementById('lzDifficulty').value;
   const isPremium   = document.getElementById('lzPremium').value === 'true';
   const qCount      = parseInt(document.getElementById('lzQuestionCount').value)||5;
+  const description = document.getElementById('lzDescription')?.value.trim() || null;
   const intro       = document.getElementById('lzIntro').value.trim();
   const testedRaw   = document.getElementById('lzTested').value.trim();
   const editId      = document.getElementById('lzEditId').value;
@@ -1526,6 +1532,7 @@ async function saveLearningZone(){
     subtopic_id: subtopicId||null, subtopic_display: subtopicDis||null,
     level_id: levelId, level_display: levelDisp,
     level_order: levelOrder, difficulty, is_premium: isPremium,
+    description: description||null,
     question_count: qCount,
     intro: intro||null,
     concepts: concepts.length ? concepts : null,
@@ -1578,6 +1585,7 @@ function editLZ(id){
   document.getElementById('lzDifficulty').value        = lz.difficulty||'Starter';
   document.getElementById('lzPremium').value           = lz.is_premium ? 'true' : 'false';
   document.getElementById('lzQuestionCount').value     = lz.question_count||5;
+  document.getElementById('lzDescription').value       = lz.description||'';
   document.getElementById('lzIntro').value             = lz.intro||'';
 
   // Tested items
@@ -1608,7 +1616,7 @@ async function confirmDeleteLZ(id, btn){
 function clearLZForm(){
   ['lzPhase','lzGrade','lzSubject','lzBroadTopic','lzBroadTopicDisplay',
    'lzSubtopicId','lzSubtopicDisplay','lzLevelId','lzLevelDisplay',
-   'lzIntro','lzTested'].forEach(id => {
+   'lzDescription','lzIntro','lzTested'].forEach(id => {
     const el = document.getElementById(id);
     if(!el) return;
     if(el.tagName==='SELECT') el.selectedIndex=0; else el.value='';

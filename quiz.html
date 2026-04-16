@@ -788,14 +788,17 @@ async function fetchDbLevelCounts(topic) {
   // Fetch question_count from quiz_levels for each level in this topic
   // so the path display reflects the real DB value, not the hardcoded one
   try {
-    const url = `${SB_URL}/rest/v1/quiz_levels?grade=eq.${topic.grade}&subject=eq.${topic.subject}&broad_topic=eq.${topic.id === 'pos' ? 'parts_of_speech' : topic.id}&select=level_id,question_count`;
+    const url = `${SB_URL}/rest/v1/quiz_levels?grade=eq.${topic.grade}&subject=eq.${topic.subject}&broad_topic=eq.${topic.id === 'pos' ? 'parts_of_speech' : topic.id}&select=level_id,question_count,description`;
     const res = await fetch(url, { headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` } });
     if (!res.ok) return;
     const rows = await res.json();
     // Attach _dbCount to matching level objects
     rows.forEach(row => {
       const level = topic.levels.find(l => l.db?.level_id === row.level_id);
-      if (level && row.question_count) level._dbCount = row.question_count;
+      if (level) {
+        if (row.question_count) level._dbCount = row.question_count;
+        if (row.description !== undefined) level._dbDescription = row.description; // null = hide, undefined = not set yet
+      }
     });
   } catch(e) { /* silent — hardcoded fallback will show */ }
 }
@@ -1480,7 +1483,7 @@ function renderPathItem(level, done, best, type, isFirst, locked, softLocked=fal
       <div class="pi-info">
         <div class="pi-label">${level.label}</div>
         <div class="pi-title">${level.title}</div>
-        <div class="pi-desc">${level.description}</div>
+        ${(()=>{ const d = level._dbDescription !== undefined ? level._dbDescription : level.description; return (d && !softLocked) ? `<div class="pi-desc">${d}</div>` : ''; })()}
         <div class="pi-meta">
           ${accessTag}
           <span class="pi-meta-item">📝 ${level._dbCount || level.questionCount} questions</span>
