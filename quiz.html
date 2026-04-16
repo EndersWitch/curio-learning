@@ -779,6 +779,22 @@ async function sbQuestions(filters) {
   }));
 }
 
+async function sbLearningZone(level, topic) {
+  // Fetch the learning zone record for this level from quiz_levels
+  if (!level.db) return null;
+  let url = `${SB_URL}/rest/v1/quiz_levels?grade=eq.${topic.grade}&subject=eq.${topic.subject}&broad_topic=eq.${level.db.broad_topic}&level_id=eq.${level.db.level_id}&limit=1`;
+  try {
+    const res = await fetch(url, {
+      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+    });
+    if (!res.ok) return null;
+    const rows = await res.json();
+    return rows[0] || null;
+  } catch(e) {
+    return null;
+  }
+}
+
 // ════════════════════════════════════════════════════
 // TOPIC CATALOGUE
 // Structure only — no embedded questions.
@@ -1329,22 +1345,20 @@ function renderPathItem(level, done, best, type, isFirst, locked){
 // ════════════════════════════════════════════════════
 // SCREEN 3: LEARN
 // ════════════════════════════════════════════════════
-function startLevel(levelId){
+async function startLevel(levelId){
   const topic = state.currentTopic;
   const level = topic.levels.find(l => l.id===levelId);
   if(!level) return;
   state.currentLevel = level;
   state.isGeneralPractice = false;
 
-  // If premium level but not premium, redirect
   if(level.type==='premium' && !isPremium()){
-    if(confirm('This is a Premium level.\n\nUpgrade to Curio Premium to unlock all topic levels, learning zones and mastery challenges.\n\nGo to subscription page?')){
+    if(confirm('This is a Premium level.\n\nUpgrade to unlock all topic levels, learning zones and mastery challenges.\n\nGo to subscription page?')){
       window.location.href='subscription.html';
     }
     return;
   }
 
-  // If mastery but levels not complete
   if(level.type==='mastery'){
     const progress = getProgress();
     const tp = progress[topic.id]||{};
@@ -1356,27 +1370,43 @@ function startLevel(levelId){
     }
   }
 
-  renderLearnScreen(level);
+  // Fetch learning zone from DB; fall back to hardcoded level.learn if nothing found
+  const dbLearn = await sbLearningZone(level, topic);
+  renderLearnScreen(level, dbLearn);
   showScreen('screen-learn');
 }
 
-function renderLearnScreen(level){
+function renderLearnScreen(level, dbLearn){
   const topic = state.currentTopic;
 
+  // Merge: DB content takes priority over hardcoded level.learn fallback
+  const intro    = dbLearn?.intro || null;
+  const concepts = (dbLearn?.concepts && dbLearn.concepts.length)
+    ? dbLearn.concepts
+    : (level.learn?.concepts || []);
+  const tested   = (dbLearn?.tested && dbLearn.tested.length)
+    ? dbLearn.tested
+    : (level.learn?.tested || []);
+  const qCount   = dbLearn?.question_count || level.questionCount || '—';
+  const diff     = dbLearn?.difficulty || level.difficulty || '—';
+
   // Tag row
-  const typeTag = level.type==='mastery' ? '<span class="pill-tag pill-mastery">🏆 Mastery Challenge</span>' :
-                  level.type==='premium' ? '<span class="pill-tag pill-premium">✦ Premium</span>' :
-                  '<span class="pill-tag pill-free">Free</span>';
+  const typeTag = level.type==='mastery'
+    ? '<span class="pill-tag pill-mastery">🏆 Mastery Challenge</span>'
+    : level.type==='premium'
+    ? '<span class="pill-tag pill-premium">✦ Premium</span>'
+    : '<span class="pill-tag pill-free">Free</span>';
   document.getElementById('learnTagRow').innerHTML = `${typeTag}<span class="pill-tag pill-practice">${topic.name}</span>`;
   document.getElementById('learnTitle').textContent = level.title;
-  document.getElementById('learnSubtitle').textContent = level.type==='mastery'
-    ? 'This is the final challenge. You\'ll be tested across everything you\'ve learnt.'
-    : 'Read through the concepts below, then start the quiz when you\'re ready.';
+  document.getElementById('learnSubtitle').textContent = intro ||
+    (level.type==='mastery'
+      ? 'The final challenge — tested across everything you\'ve learnt.'
+      : 'Read through the concepts below, then start the quiz when you\'re ready.');
 
-  // Concepts
+  // Concept cards
   const cl = document.getElementById('conceptList');
-  if(level.learn.concepts.length){
-    cl.innerHTML = level.learn.concepts.map((c, i) => `
+  if(concepts.length){
+    cl.innerHTML = concepts.map((c, i) => `
       <div class="concept-card">
         <div class="cc-header">
           <div class="cc-num">${i+1}</div>
@@ -1387,30 +1417,28 @@ function renderLearnScreen(level){
           ${c.example ? `<div class="cc-example"><div class="cc-example-label">${c.example.label}</div><div class="cc-example-text">${c.example.text.replace(/\n/g,'<br/>')}</div></div>` : ''}
         </div>
       </div>`).join('');
-    cl.style.display = 'flex';
   } else {
-    cl.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--m30);font-style:italic;font-size:0.88rem">Learning zone content coming soon for this level.</div>`;
-    cl.style.display = 'flex';
+    cl.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--m30);font-style:italic;font-size:0.88rem;">Learning zone content for this level coming soon. 🌱</div>`;
   }
 
   // Tested list
   const tc = document.getElementById('testedCard');
-  const tl = document.getElementById('testedList');
-  if(level.learn.tested.length){
-    tl.innerHTML = level.learn.tested.map(t => `<div class="tested-item"><div class="tested-dot"></div>${t}</div>`).join('');
+  if(tested.length){
+    document.getElementById('testedList').innerHTML = tested.map(t =>
+      `<div class="tested-item"><div class="tested-dot"></div>${t}</div>`).join('');
     tc.style.display = 'block';
   } else {
     tc.style.display = 'none';
   }
 
-  // CTA
-  document.getElementById('sqcTitle').textContent = level.type==='mastery' ? 'Ready for the challenge?' : 'Ready to test yourself?';
-  document.getElementById('sqcSub').textContent = level.type==='mastery'
-    ? 'This is a longer, comprehensive quiz. Take your time and think carefully.'
+  // CTA meta
+  document.getElementById('sqcTitle').textContent   = level.type==='mastery' ? 'Ready for the challenge?' : 'Ready to test yourself?';
+  document.getElementById('sqcSub').textContent     = level.type==='mastery'
+    ? 'A longer comprehensive quiz. Take your time and think carefully.'
     : 'You\'ve read through the concepts. Now let\'s see how well you know them.';
-  document.getElementById('sqcQuestions').textContent = `📝 ${level.questionCount} questions`;
-  document.getElementById('sqcDifficulty').textContent = `⚡ ${level.difficulty}`;
-  document.getElementById('sqcAccess').textContent = level.type==='free' ? '🔓 Free' : level.type==='mastery' ? '🏆 Mastery' : '✦ Premium';
+  document.getElementById('sqcQuestions').textContent = `📝 ${qCount} questions`;
+  document.getElementById('sqcDifficulty').textContent = `⚡ ${diff}`;
+  document.getElementById('sqcAccess').textContent  = level.type==='free' ? '🔓 Free' : level.type==='mastery' ? '🏆 Mastery' : '✦ Premium';
 }
 
 async function startGeneralPractice(){
