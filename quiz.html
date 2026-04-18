@@ -176,9 +176,6 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
 .path-item.locked{opacity:0.6;cursor:default;}
 .path-item.mastery{border-color:var(--a25);background:linear-gradient(135deg,var(--a15),var(--card2));}
 .path-item.mastery:hover{border-color:var(--amber);}
-.path-item.next-up{opacity:0.5;border-style:dashed;cursor:default;}
-.path-item.next-up:hover{opacity:0.6;transform:none;}
-.pi-next-label{font-size:0.68rem;color:var(--m30);font-style:italic;}
 
 /* Path item icon/node */
 .pi-node{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;}
@@ -239,24 +236,44 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
 .learn-title{font-family:var(--h);font-size:clamp(1.6rem,4vw,2.2rem);font-weight:900;letter-spacing:-1.2px;color:var(--moon);line-height:1.05;margin-bottom:0.5rem;}
 .learn-subtitle{font-size:0.88rem;color:var(--m55);font-weight:300;line-height:1.75;}
 
-/* Concept cards */
-.concept-list{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
-.concept-card{background:var(--card);border:1px solid var(--m06);border-radius:16px;overflow:hidden;}
-.cc-header{display:flex;align-items:center;gap:0.75rem;padding:1rem 1.2rem;border-bottom:1px solid var(--m06);}
-.cc-num{width:26px;height:26px;border-radius:50%;background:var(--cyan);color:var(--plum);display:flex;align-items:center;justify-content:center;font-family:var(--h);font-size:0.7rem;font-weight:800;flex-shrink:0;}
-.cc-title{font-family:var(--h);font-size:0.92rem;font-weight:700;color:var(--moon);}
-.cc-body{padding:1rem 1.2rem;}
-.cc-text{font-size:0.84rem;color:var(--m80);line-height:1.8;}
-.cc-example{margin-top:0.8rem;background:var(--deep);border-left:3px solid var(--cyan);border-radius:0 8px 8px 0;padding:0.75rem 1rem;}
-.cc-example-label{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--cyan);margin-bottom:0.3rem;}
-.cc-example-text{font-size:0.82rem;color:var(--m80);line-height:1.65;}
-
-/* What will be tested */
+.concept-list{display:flex;flex-direction:column;gap:1.2rem;margin-bottom:2rem;}
+.cc-dyk{background:linear-gradient(135deg,rgba(109,211,206,0.08),var(--card));border:1px solid var(--c25);border-radius:18px;overflow:hidden;position:relative;}
+.cc-dyk::before{content:'💡';position:absolute;right:1rem;top:1rem;font-size:2.2rem;opacity:0.12;pointer-events:none;}
+.cc-dyk-eye{font-size:0.52rem;font-weight:800;text-transform:uppercase;letter-spacing:0.18em;color:var(--cyan);padding:1rem 1.2rem 0;}
+.cc-dyk-title{font-family:var(--h);font-size:1rem;font-weight:800;color:var(--moon);padding:0.2rem 1.2rem 0;line-height:1.2;}
+.cc-dyk-body{padding:0.55rem 1.2rem 0.9rem;font-size:0.84rem;color:var(--m80);line-height:1.8;}
+.cc-dyk-ex{margin:0 1.2rem 1rem;background:var(--deep);border-radius:10px;padding:0.7rem 1rem;}
+.cc-dyk-exlbl{font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--cyan);margin-bottom:0.3rem;}
+.cc-dyk-extxt{font-size:0.82rem;color:var(--m80);line-height:1.65;}
+.cc-spot{background:var(--card);border:1px solid var(--m06);border-radius:18px;overflow:hidden;}
+.cc-spot-hd{background:var(--plum);padding:0.7rem 1.2rem;display:flex;align-items:center;gap:0.6rem;}
+.cc-spot-badge{font-size:0.5rem;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;background:var(--coral);color:var(--moon);padding:0.18rem 0.48rem;border-radius:3px;flex-shrink:0;}
+.cc-spot-htitle{font-family:var(--h);font-size:0.82rem;font-weight:700;color:var(--moon);}
+.cc-spot-body{padding:0.85rem 1.2rem;font-size:0.84rem;color:var(--m80);line-height:1.8;}
+.cc-spot-ex{margin-top:0.65rem;background:var(--deep);border-left:3px solid var(--coral);border-radius:0 8px 8px 0;padding:0.7rem 1rem;}
+.cc-spot-exlbl{font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--coral);margin-bottom:0.3rem;}
+.cc-spot-extxt{font-size:0.84rem;color:var(--moon);line-height:1.65;}
+.cc-rule{background:var(--card);border:2px solid var(--m12);border-radius:18px;overflow:hidden;}
+.cc-rule-top{background:linear-gradient(90deg,var(--mid),var(--card));padding:0.85rem 1.2rem;border-bottom:1px solid var(--m06);}
+.cc-rule-lbl{font-size:0.5rem;font-weight:800;text-transform:uppercase;letter-spacing:0.16em;color:var(--amber);margin-bottom:0.2rem;}
+.cc-rule-title{font-family:var(--h);font-size:0.95rem;font-weight:800;color:var(--moon);}
+.cc-rule-body{padding:0.85rem 1.2rem;font-size:0.84rem;color:var(--m80);line-height:1.8;}
+.cc-rule-ex{margin:0 1.2rem 1rem;background:rgba(245,200,66,0.08);border:1px solid var(--a25);border-radius:10px;padding:0.7rem 1rem;}
+.cc-rule-exlbl{font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:0.3rem;}
+.cc-rule-extxt{font-size:0.82rem;color:var(--m80);line-height:1.65;}
+.cc-tip{background:linear-gradient(135deg,#261c13,var(--card));border:1px solid rgba(245,200,66,0.22);border-radius:18px;overflow:hidden;position:relative;}
+.cc-tip-corner{position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 26px 26px 0;border-color:transparent rgba(245,200,66,0.28) transparent transparent;}
+.cc-tip-eye{font-size:0.52rem;font-weight:800;text-transform:uppercase;letter-spacing:0.18em;color:var(--amber);padding:1rem 1.2rem 0;}
+.cc-tip-title{font-family:var(--script);font-size:1.45rem;font-weight:700;color:var(--amber);padding:0.1rem 1.2rem 0;line-height:1.2;}
+.cc-tip-body{padding:0.5rem 1.2rem 0.9rem;font-size:0.84rem;color:var(--m80);line-height:1.8;}
+.cc-tip-ex{margin:0 1.2rem 1rem;background:rgba(245,200,66,0.05);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:0.7rem 1rem;}
+.cc-tip-exlbl{font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:0.3rem;}
+.cc-tip-extxt{font-size:0.82rem;color:var(--m80);line-height:1.65;}
 .tested-card{background:var(--c06);border:1px solid var(--c25);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:2rem;}
-.tested-label{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--cyan);margin-bottom:0.7rem;}
-.tested-list{display:flex;flex-direction:column;gap:0.4rem;}
-.tested-item{display:flex;align-items:center;gap:0.55rem;font-size:0.82rem;color:var(--m80);}
-.tested-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
+.tested-label{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--cyan);margin-bottom:0.8rem;}
+.tested-chips{display:flex;flex-wrap:wrap;gap:0.45rem;}
+.tested-chip{display:inline-flex;align-items:center;gap:0.35rem;background:var(--c12);border:1px solid var(--c25);border-radius:100px;padding:0.28rem 0.8rem;font-size:0.78rem;color:var(--moon);line-height:1.4;}
+.tested-chip::before{content:'✓';font-size:0.6rem;color:var(--cyan);font-weight:900;}
 
 /* Start quiz CTA */
 .start-quiz-cta{background:linear-gradient(135deg,var(--plum),var(--card2));border:1px solid var(--c25);border-radius:18px;padding:1.8rem;text-align:center;}
@@ -419,10 +436,6 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
 .dlp-upgrade{margin-top:1rem;padding:0.9rem 1rem;border-radius:10px;background:linear-gradient(135deg,var(--mid),var(--card));border:1px solid var(--c25);font-size:0.78rem;color:var(--m55);line-height:1.65;}
 .dlp-upgrade strong{color:var(--moon);}
 .dlp-upgrade a{color:var(--amber);font-weight:600;}
-/* Pass / fail pill */
-.pass-pill{display:inline-block;font-size:0.7rem;font-weight:700;padding:0.22rem 0.75rem;border-radius:100px;font-family:var(--h);}
-.pass-pill.pass{background:var(--c12);color:var(--cyan);border:1px solid var(--c25);}
-.pass-pill.fail{background:var(--r10);color:var(--coral);border:1px solid var(--r20);}
 </style>
 </head>
 <body>
@@ -576,7 +589,7 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
     <div class="learn-header">
       <div class="learn-tag-row" id="learnTagRow"></div>
       <div class="learn-title" id="learnTitle">Nouns I</div>
-      <div class="learn-subtitle" id="learnSubtitle">Before you start — here\'s what you need to know.</div>
+      <div class="learn-subtitle" id="learnSubtitle">Before you start — here's what you need to know.</div>
     </div>
 
     <!-- Concept cards — filled dynamically -->
@@ -592,7 +605,7 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
     <div class="start-quiz-cta">
       <div class="sqc-icon">📝</div>
       <div class="sqc-title" id="sqcTitle">Ready to test yourself?</div>
-      <div class="sqc-sub" id="sqcSub">You\'ve covered the concepts. Now let\'s see what you know.</div>
+      <div class="sqc-sub" id="sqcSub">You've covered the concepts. Now let's see what you know.</div>
       <div class="sqc-meta">
         <span class="sqc-meta-item" id="sqcQuestions">📝 — questions</span>
         <span class="sqc-meta-item" id="sqcDifficulty">⚡ —</span>
@@ -654,23 +667,26 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
 
       <!-- Score header -->
       <div class="rc-header">
-        <!-- Bloom score visualiser — petals light up per 20% -->
-        <div id="rcBloomScore" class="rc-bloom"></div>
+        <div class="rc-bloom">
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none">
+            <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.8"/>
+            <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.55" transform="rotate(72 32 32)"/>
+            <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.4" transform="rotate(144 32 32)"/>
+            <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.4" transform="rotate(216 32 32)"/>
+            <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.55" transform="rotate(288 32 32)"/>
+            <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+          </svg>
+        </div>
         <div class="rc-topic-tag" id="rcTopicTag">—</div>
         <div class="rc-score"><span id="rcScore">0</span><sub>/<span id="rcTotal">0</span></sub></div>
         <div class="rc-pct" id="rcPct">—%</div>
         <div class="rc-msg" id="rcMsg">—</div>
         <p class="rc-sub" id="rcSub"></p>
-        <div id="rcPassIndicator" style="margin:0.5rem 0;"></div>
-        <div id="rcXpEarned" style="display:none;background:var(--a15);color:var(--amber);border:1px solid var(--a25);border-radius:100px;font-family:var(--h);font-size:0.75rem;font-weight:700;padding:0.25rem 0.9rem;margin:0.4rem auto;"></div>
         <div class="rc-stats">
           <div class="rc-stat"><div class="rc-stat-val ok" id="rcCorrect">0</div><div class="rc-stat-lbl">Correct</div></div>
           <div class="rc-stat"><div class="rc-stat-val err" id="rcWrong">0</div><div class="rc-stat-lbl">Incorrect</div></div>
         </div>
       </div>
-
-      <!-- Unlock notice -->
-      <div id="rcUnlockNotice" style="display:none;margin:0 2rem 1rem;padding:0.8rem 1.1rem;border-radius:10px;background:var(--c12);border:1px solid var(--c25);font-size:0.82rem;color:var(--moon);line-height:1.6;gap:0.6rem;align-items:center;"></div>
 
       <!-- Badge reward (shown on high score or mastery) -->
       <div class="rc-badge-section" id="rcBadgeSection">
@@ -752,84 +768,24 @@ nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:cente
    Add as many levels as the topic needs.
 ════════════════════════════════════════════════════ */
 
+const PHASE_CONFIG = {
+  intermediate: { label: 'Intermediate Phase', grades: [4,5,6] },
+  senior:       { label: 'Senior Phase',        grades: [7,8,9] },
+  fet:          { label: 'FET Phase',           grades: [10,11,12] }
+};
+
+const SUBJECT_CONFIG = {
+  english:   'English HL',
+  afrikaans: 'Afrikaans FAL',
+  maths:     'Mathematics',
+  science:   'Natural Sciences',
+  social:    'Social Sciences',
+  lifeskills:'Life Skills'
+};
+
 // ── TOPIC CATALOGUE ──────────────────────────────────
 // Each topic contains variable-depth levels.
 // generalPractice is always free and replayable.
-// ════════════════════════════════════════════════════
-// SUPABASE CONNECTION
-// ════════════════════════════════════════════════════
-const SB_URL = 'https://inmrsgujgfktapjnekjs.supabase.co';
-const SB_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
-
-async function sbQuestions(filters) {
-  let url = `${SB_URL}/rest/v1/questions?order=id.asc`;
-  if (filters.grade)        url += `&grade=eq.${filters.grade}`;
-  if (filters.subject)      url += `&subject=eq.${filters.subject}`;
-  if (filters.broad_topic)  url += `&broad_topic=eq.${filters.broad_topic}`;
-  if (filters.section_type) url += `&section_type=eq.${filters.section_type}`;
-  if (filters.subtopic_id)  url += `&subtopic_id=eq.${filters.subtopic_id}`;
-  if (filters.level_id)     url += `&level_id=eq.${filters.level_id}`;
-  const res = await fetch(url, {
-    headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
-  });
-  if (!res.ok) return [];
-  const rows = await res.json();
-  // Map DB rows → quiz question format
-  return rows.map(r => ({
-    q:       r.question_text,
-    opts:    [r.option_a, r.option_b, r.option_c, r.option_d].filter(Boolean),
-    correct: ['a','b','c','d'].indexOf(r.correct_option),
-    exp:     r.explanation || '',
-    deepLearn: null
-  }));
-}
-
-
-async function fetchDbLevelCounts(topic) {
-  // Fetch question_count from quiz_levels for each level in this topic
-  // so the path display reflects the real DB value, not the hardcoded one
-  try {
-    const url = `${SB_URL}/rest/v1/quiz_levels?grade=eq.${topic.grade}&subject=eq.${topic.subject}&broad_topic=eq.${topic.id === 'pos' ? 'parts_of_speech' : topic.id}&select=level_id,question_count,description`;
-    const res = await fetch(url, { headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` } });
-    if (!res.ok) return;
-    const rows = await res.json();
-    // Attach _dbCount to matching level objects
-    rows.forEach(row => {
-      const level = topic.levels.find(l => l.db?.level_id === row.level_id);
-      if (level) {
-        if (row.question_count) level._dbCount = row.question_count;
-        if (row.description !== undefined) level._dbDescription = row.description; // null = hide, undefined = not set yet
-      }
-    });
-  } catch(e) { /* silent — hardcoded fallback will show */ }
-}
-
-async function sbLearningZone(level, topic) {
-  // Fetch the learning zone record for this level from quiz_levels
-  if (!level.db) return null;
-  let url = `${SB_URL}/rest/v1/quiz_levels?grade=eq.${topic.grade}&subject=eq.${topic.subject}&broad_topic=eq.${level.db.broad_topic}&level_id=eq.${level.db.level_id}&limit=1`;
-  try {
-    const res = await fetch(url, {
-      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
-    });
-    if (!res.ok) return null;
-    const rows = await res.json();
-    return rows[0] || null;
-  } catch(e) {
-    return null;
-  }
-}
-
-// ════════════════════════════════════════════════════
-// TOPIC CATALOGUE
-// Structure only — no embedded questions.
-// Questions are fetched live from Supabase.
-//
-// Schema per level:
-//   subtopic, subtopicDisplay — folder grouping
-//   section_type: 'general_practice' | 'learning_level' | 'mastery_challenge'
-//   db: { broad_topic, subtopic_id, level_id } — keys used to fetch questions
-// ════════════════════════════════════════════════════
 const TOPICS = [
   {
     id: 'pos',
@@ -841,71 +797,88 @@ const TOPICS = [
       questionCount: 15, bankSize: 40
     },
     levels: [
-      /* ── SUBTOPIC: Nouns ── */
+      /* ── SUBTOPIC FOLDER: Nouns ──────────────────────
+         Parts of Speech → Nouns → Nouns I → Nouns II
+      ─────────────────────────────────────────────── */
       {
         id: 'pos-nouns-1', type: 'free',
         subtopic: 'nouns', subtopicDisplay: 'Nouns',
         title: 'Nouns I', label: 'Nouns · Level 1',
         description: 'Common and proper nouns — the naming words.',
         difficulty: 'Starter', questionCount: 5,
-        db: { broad_topic: 'parts_of_speech', subtopic_id: 'nouns', level_id: 'nouns_1' },
         learn: {
           concepts: [
             {
               title: 'What is a noun?',
               text: 'A noun is a naming word. It names a person, place, thing, or idea.',
-              example: { label: 'Examples', text: '"The <strong>dog</strong> ran to the <strong>park</strong>." — dog and park are nouns.' }
+              example: { label: 'Examples', text: '"The <strong>dog</strong> ran to the <strong>park</strong>." — dog and park are nouns.\n"<strong>Kindness</strong> is important." — kindness is a noun (an idea).' }
             },
             {
               title: 'Common vs Proper Nouns',
-              text: 'A <strong>common noun</strong> is a general name (dog, city). A <strong>proper noun</strong> is a specific name and always starts with a capital letter (Cape Town, John).',
+              text: 'A <strong>common noun</strong> is a general name (dog, city, river). A <strong>proper noun</strong> is a specific name and always starts with a capital letter (Pretoria, Limpopo, John).',
               example: { label: 'Spot the difference', text: 'Common: "I live in a <strong>city</strong>."  →  Proper: "I live in <strong>Cape Town</strong>."' }
             }
           ],
           tested: ['Identify nouns in a sentence', 'Tell apart common and proper nouns', 'Use capital letters for proper nouns']
-        }
+        },
+        questions: [
+          { q: 'Which word is the noun in this sentence?\n\n"The dog ran across the yard."', opts: ['dog','across','ran','yard'], correct: 0, exp: '"Dog" is the noun — it names the animal.', deepLearn: { tag:'Gr4 · English · Nouns', q:'What makes a word a noun?', method:'<div class="dlp-step"><div class="dlp-step-n">1</div><div>Ask: does this word <strong>name</strong> something — a person, place, thing or idea?</div></div><div class="dlp-step"><div class="dlp-step-n">2</div><div>Dog = animal (thing) ✓ → noun. Ran = action → verb, not a noun.</div></div><div class="dlp-rule"></div><div class="dlp-source">CAPS Gr4 English HL — Parts of Speech</div>', concept:'A noun names a person, place, thing or idea.<br/><br/><strong>Types:</strong><br/>• Common: dog, city, book<br/>• Proper: Cape Town, John (always capital)<br/>• Abstract: happiness, courage', practice:'<strong>Find the noun:</strong><br/>1. The girl skipped to school.<br/>2. Cape Town is beautiful.<br/>3. She felt joy.<br/><br/><em>Answers: 1. girl &amp; school &nbsp; 2. Cape Town &nbsp; 3. joy</em>' } },
+          { q: 'Which of these is a proper noun?', opts: ['city','river','Cape Town','mountain'], correct: 2, exp: '"Cape Town" is a proper noun — the specific name of a place. Always starts with a capital letter.', deepLearn: null },
+          { q: 'How many nouns are in this sentence?\n\n"My sister lives in Johannesburg."', opts: ['1','2','3','4'], correct: 1, exp: '2 nouns: "sister" (person) and "Johannesburg" (proper noun / place).', deepLearn: null },
+          { q: 'Which sentence uses a capital letter for a proper noun correctly?', opts: ['I saw a Dog.','She lives in durban.','We visited Cape Town.','The Cat is big.'], correct: 2, exp: '"Cape Town" correctly uses capitals — it is a proper noun.', deepLearn: null },
+          { q: 'Which word is NOT a noun?', opts: ['happiness','quickly','teacher','freedom'], correct: 1, exp: '"Quickly" is an adverb. The others are all nouns.', deepLearn: null }
+        ]
       },
       {
         id: 'pos-nouns-2', type: 'premium',
         subtopic: 'nouns', subtopicDisplay: 'Nouns',
         title: 'Nouns II', label: 'Nouns · Level 2',
-        description: 'Concrete and abstract nouns — what you can and cannot touch.',
+        description: 'Concrete and abstract nouns — what you can and can\'t touch.',
         difficulty: 'Building', questionCount: 6,
-        db: { broad_topic: 'parts_of_speech', subtopic_id: 'nouns', level_id: 'nouns_2' },
         learn: {
           concepts: [
             {
               title: 'Concrete Nouns',
-              text: 'A <strong>concrete noun</strong> names something you can physically perceive — see, touch, hear, smell or taste.',
-              example: { label: 'Examples', text: 'table, dog, rain, music — you can perceive all of these with your senses.' }
+              text: 'A <strong>concrete noun</strong> names something you can physically see, touch, hear, smell or taste.',
+              example: { label: 'Examples', text: 'table, dog, rain, music, perfume — you can perceive all of these with your senses.' }
             },
             {
               title: 'Abstract Nouns',
-              text: 'An <strong>abstract noun</strong> names an idea, feeling, quality or concept — you cannot touch it.',
-              example: { label: 'Examples', text: 'love, freedom, courage, happiness — real, but not physical.' }
+              text: 'An <strong>abstract noun</strong> names something that exists as an idea, feeling, quality or concept — you cannot touch it.',
+              example: { label: 'Examples', text: 'love, freedom, courage, happiness, democracy — these are real, but not physical.' }
             }
           ],
-          tested: ['Identify concrete nouns', 'Identify abstract nouns', 'Distinguish concrete from abstract']
-        }
+          tested: ['Identify concrete nouns', 'Identify abstract nouns', 'Distinguish between concrete and abstract']
+        },
+        questions: []
       },
-      /* ── SUBTOPIC: Verbs ── */
+
+      /* ── SUBTOPIC FOLDER: Verbs ──────────────────────
+         Parts of Speech → Verbs → Verbs I → Verbs II
+      ─────────────────────────────────────────────── */
       {
         id: 'pos-verbs-1', type: 'free',
         subtopic: 'verbs', subtopicDisplay: 'Verbs',
         title: 'Verbs I', label: 'Verbs · Level 1',
         description: 'Action words and linking verbs — what things do or are.',
         difficulty: 'Starter', questionCount: 5,
-        db: { broad_topic: 'parts_of_speech', subtopic_id: 'verbs', level_id: 'verbs_1' },
         learn: {
           concepts: [
             {
               title: 'What is a verb?',
-              text: 'A verb is a doing or being word. It tells you what the subject does, or what state it is in.',
-              example: { label: 'Examples', text: '"The dog <strong>ran</strong>." (action verb) — "She <strong>is</strong> happy." (linking verb)' }
+              text: 'A verb is a doing or being word. It tells you what the subject does or what state it is in.',
+              example: { label: 'Examples', text: '"The dog <strong>ran</strong>." (action verb)\n"She <strong>is</strong> happy." (linking verb — state of being)' }
             }
           ],
           tested: ['Identify the verb in a sentence', 'Distinguish action from linking verbs', 'Understand every sentence needs a verb']
-        }
+        },
+        questions: [
+          { q: 'Which word is the verb?\n\n"She quickly ran to school."', opts: ['She','quickly','ran','school'], correct: 2, exp: '"Ran" is the verb — it shows the action.', deepLearn: null },
+          { q: 'Which sentence has a linking verb?', opts: ['"She jumped."','"He ran fast."','"They are happy."','"I ate lunch."'], correct: 2, exp: '"Are" is a linking verb — it describes a state of being, not an action.', deepLearn: null },
+          { q: 'Which of these is a verb?', opts: ['beautiful','slowly','jumped','teacher'], correct: 2, exp: '"Jumped" is a verb — it shows an action.', deepLearn: null },
+          { q: 'How many verbs are in this sentence?\n\n"She sang and danced at the party."', opts: ['1','2','3','4'], correct: 1, exp: '2 verbs: "sang" and "danced".', deepLearn: null },
+          { q: 'Which verb tense is used here?\n\n"She runs every morning."', opts: ['Past','Present','Future','No tense'], correct: 1, exp: '"Runs" is present tense — it describes something happening regularly now.', deepLearn: null }
+        ]
       },
       {
         id: 'pos-verbs-2', type: 'premium',
@@ -913,68 +886,77 @@ const TOPICS = [
         title: 'Verbs II', label: 'Verbs · Level 2',
         description: 'Verb tenses — past, present and future.',
         difficulty: 'Building', questionCount: 6,
-        db: { broad_topic: 'parts_of_speech', subtopic_id: 'verbs', level_id: 'verbs_2' },
         learn: {
           concepts: [
             {
               title: 'Verb Tenses',
-              text: 'Verbs change form depending on <strong>when</strong> the action happens.',
-              example: { label: 'Examples', text: 'Past: She <strong>walked</strong>. Present: She <strong>walks</strong>. Future: She <strong>will walk</strong>.' }
+              text: 'Verbs change form depending on <strong>when</strong> the action happens. The three main tenses are past, present and future.',
+              example: { label: 'Examples', text: 'Past: She <strong>walked</strong> to school.\nPresent: She <strong>walks</strong> to school.\nFuture: She <strong>will walk</strong> to school.' }
             }
           ],
           tested: ['Identify past tense verbs', 'Identify present tense verbs', 'Change verbs between tenses']
-        }
+        },
+        questions: []
       },
-      /* ── SUBTOPIC: Adjectives ── */
+
+      /* ── SUBTOPIC FOLDER: Adjectives ─────────────────
+         Parts of Speech → Adjectives → Adjectives I
+      ─────────────────────────────────────────────── */
       {
         id: 'pos-adj-1', type: 'premium',
         subtopic: 'adjectives', subtopicDisplay: 'Adjectives',
         title: 'Adjectives I', label: 'Adjectives · Level 1',
         description: 'Describing words — how nouns look, feel, sound and more.',
         difficulty: 'Building', questionCount: 6,
-        db: { broad_topic: 'parts_of_speech', subtopic_id: 'adjectives', level_id: 'adjectives_1' },
         learn: {
           concepts: [
             {
               title: 'What is an adjective?',
-              text: 'An adjective is a describing word. It tells us more about a noun.',
-              example: { label: 'Examples', text: '"The <strong>tall</strong> tree fell." — "She wore a <strong>red</strong> dress."' }
+              text: 'An adjective is a describing word. It tells us more about a noun — its colour, size, shape, number, or quality.',
+              example: { label: 'Examples', text: '"The <strong>tall</strong> tree fell." — tall describes the tree.\n"She wore a <strong>red</strong> dress." — red describes the dress.' }
             }
           ],
           tested: ['Identify adjectives in sentences', 'Use adjectives to describe nouns', 'Distinguish adjectives from adverbs']
-        }
+        },
+        questions: []
       },
-      /* ── SUBTOPIC: Adverbs ── */
+
+      /* ── SUBTOPIC FOLDER: Adverbs ─────────────────────
+         Parts of Speech → Adverbs → Adverbs I
+      ─────────────────────────────────────────────── */
       {
         id: 'pos-adv-1', type: 'premium',
         subtopic: 'adverbs', subtopicDisplay: 'Adverbs',
         title: 'Adverbs I', label: 'Adverbs · Level 1',
         description: 'Words that describe verbs, adjectives and other adverbs.',
         difficulty: 'Building', questionCount: 6,
-        db: { broad_topic: 'parts_of_speech', subtopic_id: 'adverbs', level_id: 'adverbs_1' },
         learn: {
           concepts: [
             {
               title: 'What is an adverb?',
-              text: 'An adverb describes a verb, adjective, or another adverb. It tells us how, when, where or to what degree.',
-              example: { label: 'Examples', text: '"She ran <strong>quickly</strong>." — "He spoke <strong>very</strong> quietly."' }
+              text: 'An adverb describes a verb, an adjective, or another adverb. It tells us <strong>how, when, where</strong> or <strong>to what degree</strong> something happens.',
+              example: { label: 'Examples', text: '"She ran <strong>quickly</strong>." — quickly describes how she ran (verb).\n"He spoke <strong>very</strong> quietly." — very describes quietly (another adverb).' }
             }
           ],
           tested: ['Identify adverbs in sentences', 'Distinguish adverbs from adjectives', 'Understand adverbs describe verbs']
-        }
+        },
+        questions: []
       },
-      /* ── MASTERY CHALLENGE ── */
+
+      /* ── MASTERY CHALLENGE ────────────────────────────
+         All of Parts of Speech — mixed boss quiz
+      ─────────────────────────────────────────────── */
       {
         id: 'pos-mastery', type: 'mastery',
         subtopic: null, subtopicDisplay: null,
         title: 'Parts of Speech — Mastery Challenge', label: 'Mastery',
         description: 'A comprehensive mixed quiz across all parts of speech. Complete all free levels first.',
         difficulty: 'Challenge', questionCount: 20,
-        db: { broad_topic: 'parts_of_speech', subtopic_id: null, level_id: null },
         learn: {
           concepts: [],
-          tested: ['All parts of speech — nouns, verbs, adjectives, adverbs, pronouns', 'Sentence analysis', 'Mixed difficulty']
-        }
+          tested: ['All parts of speech — nouns, verbs, adjectives, adverbs, pronouns', 'Sentence analysis', 'Mixed difficulty questions']
+        },
+        questions: []
       }
     ]
   },
@@ -990,29 +972,37 @@ const TOPICS = [
     levels: [
       {
         id: 'frac-1', type: 'free',
-        subtopic: 'fractions', subtopicDisplay: 'Fractions',
-        title: 'Fractions I', label: 'Fractions · Level 1',
-        description: 'What fractions are, naming them, and equivalent fractions.',
+        title: 'Fractions I', label: 'Level 1',
+        description: 'What fractions are, naming them, and finding equivalent fractions.',
         difficulty: 'Starter', questionCount: 5,
-        db: { broad_topic: 'fractions', subtopic_id: 'fractions', level_id: 'fractions_1' },
         learn: {
           concepts: [
             {
               title: 'What is a fraction?',
-              text: 'A fraction represents a part of a whole. It has a <strong>numerator</strong> (top) and a <strong>denominator</strong> (bottom).',
-              example: { label: 'Example', text: '¾ means: the whole is divided into 4 equal parts, and you have 3.' }
+              text: 'A fraction represents a part of a whole. It has a <strong>numerator</strong> (top number — how many parts you have) and a <strong>denominator</strong> (bottom number — how many equal parts the whole is divided into).',
+              example: { label: 'Example', text: '¾ means: the whole is divided into 4 equal parts, and you have 3 of them.' }
+            },
+            {
+              title: 'Equivalent fractions',
+              text: 'Fractions that look different but mean the same amount. Multiply or divide both the numerator and denominator by the same number.',
+              example: { label: 'Example', text: '½ = ²⁄₄ = ³⁄₆ — all mean the same. Multiply both top and bottom by 2: ½ → ²⁄₄.' }
             }
           ],
           tested: ['Name the numerator and denominator', 'Compare simple fractions', 'Find equivalent fractions']
-        }
+        },
+        questions: [
+          { q: 'Which fraction is equivalent to ²⁄₃?', opts: ['³⁄₄','⁴⁄₆','²⁄₄','⁵⁄₆'], correct: 1, exp: '⁴⁄₆ = ²⁄₃ — multiply both top and bottom of ²⁄₃ by 2.', deepLearn: null },
+          { q: 'What is ⅓ of 12?', opts: ['3','4','6','12'], correct: 1, exp: '12 ÷ 3 = 4. To find ⅓ of a number, divide by 3.', deepLearn: null },
+          { q: 'Which fraction is the largest?', opts: ['½','⅓','¼','⅛'], correct: 0, exp: '½ is the largest. Bigger denominator = smaller pieces.', deepLearn: null },
+          { q: 'Simplify ⁶⁄₈.', opts: ['³⁄₄','²⁄₃','⁴⁄₆','½'], correct: 0, exp: 'Divide both 6 and 8 by 2: 6÷2=3, 8÷2=4. So ⁶⁄₈ = ¾.', deepLearn: null },
+          { q: 'In ¾ — what is the denominator?', opts: ['3','4','7','1'], correct: 1, exp: 'The denominator is the bottom number — 4. It shows how many equal parts the whole is divided into.', deepLearn: null }
+        ]
       },
       {
         id: 'frac-2', type: 'premium',
-        subtopic: 'fractions', subtopicDisplay: 'Fractions',
-        title: 'Fractions II', label: 'Fractions · Level 2',
+        title: 'Fractions II', label: 'Level 2',
         description: 'Adding and subtracting fractions with different denominators.',
         difficulty: 'Building', questionCount: 8,
-        db: { broad_topic: 'fractions', subtopic_id: 'fractions', level_id: 'fractions_2' },
         learn: {
           concepts: [
             {
@@ -1021,150 +1011,117 @@ const TOPICS = [
               example: { label: 'Example', text: '¾ + ½ — LCD of 4 and 2 is 4. Convert ½ to ²⁄₄. Then: ¾ + ²⁄₄ = ⁵⁄₄ = 1¼.' }
             }
           ],
-          tested: ['Find the LCD', 'Add fractions with different denominators', 'Simplify the answer']
-        }
+          tested: ['Add fractions with the same denominator', 'Find the LCD', 'Add fractions with different denominators', 'Simplify the answer']
+        },
+        questions: []
       },
       {
         id: 'frac-mastery', type: 'mastery',
-        subtopic: null, subtopicDisplay: null,
         title: 'Fractions — Mastery Challenge', label: 'Mastery',
-        description: 'A comprehensive challenge covering all fraction skills.',
+        description: 'A comprehensive challenge covering all fraction skills. Complete Levels 1–2 first.',
         difficulty: 'Challenge', questionCount: 15,
-        db: { broad_topic: 'fractions', subtopic_id: null, level_id: null },
-        learn: { concepts: [], tested: ['All fraction skills — naming, comparing, adding, simplifying'] }
+        learn: { concepts: [], tested: [] },
+        questions: []
+      }
+    ]
+  },
+  {
+    id: 'human-body',
+    phase: 'intermediate', grade: 4, subject: 'science',
+    name: 'The Human Body',
+    description: 'Organs, systems and how the body works.',
+    generalPractice: {
+      desc: 'General questions on human body organs and their functions.',
+      questionCount: 10, bankSize: 25
+    },
+    levels: [
+      {
+        id: 'body-organs', type: 'free',
+        title: 'Major Organs', label: 'Level 1',
+        description: 'Heart, lungs, kidneys, brain — what each organ does.',
+        difficulty: 'Starter', questionCount: 5,
+        learn: {
+          concepts: [
+            {
+              title: 'The heart and circulatory system',
+              text: 'The heart is a muscle that pumps blood throughout the body. Blood carries oxygen and nutrients to all your cells.',
+              example: { label: 'Key fact', text: 'Your heart beats about 100 000 times every day.' }
+            },
+            {
+              title: 'Lungs and breathing',
+              text: 'The lungs bring oxygen into the body and remove carbon dioxide. When you breathe in, oxygen passes into your blood. When you breathe out, carbon dioxide leaves.',
+              example: null
+            }
+          ],
+          tested: ['Name the major organs', 'Explain the function of the heart', 'Explain the function of the lungs', 'Identify the kidneys\' role']
+        },
+        questions: [
+          { q: 'What is the main function of the heart?', opts: ['Digest food','Pump blood around the body','Filter waste from blood','Control breathing'], correct: 1, exp: 'The heart is a muscle that pumps blood, delivering oxygen and nutrients to every cell.', deepLearn: null },
+          { q: 'Which organ removes waste from blood and produces urine?', opts: ['Liver','Stomach','Kidney','Lungs'], correct: 2, exp: 'The kidneys filter waste from blood and produce urine.', deepLearn: null },
+          { q: 'What do the lungs do?', opts: ['Pump blood','Break down food','Exchange oxygen and carbon dioxide','Produce hormones'], correct: 2, exp: 'The lungs take in oxygen from the air and release carbon dioxide.', deepLearn: null },
+          { q: 'Which system includes the brain and spinal cord?', opts: ['Digestive system','Nervous system','Circulatory system','Skeletal system'], correct: 1, exp: 'The brain and spinal cord make up the central nervous system.', deepLearn: null },
+          { q: 'What does the skeleton do?', opts: ['Pumps blood','Digests food','Supports and protects the body','Produces urine'], correct: 2, exp: 'The skeleton supports the body, protects organs, and allows movement.', deepLearn: null }
+        ]
       }
     ]
   }
 ];
 
+// General practice questions (used for randomised mixed practice)
+const GENERAL_PRACTICE_QUESTIONS = {
+  pos: [
+    { q: 'Which word is the noun?\n\n"The girl skipped to school."', opts: ['girl','skipped','to','quickly'], correct: 0, exp: '"Girl" is the noun — a person.', deepLearn: null },
+    { q: 'Which word is the verb?\n\n"The lion roared loudly."', opts: ['lion','roared','loudly','The'], correct: 1, exp: '"Roared" is the verb — it shows the action.', deepLearn: null },
+    { q: 'What type of word is "beautiful"?', opts: ['Noun','Verb','Adjective','Adverb'], correct: 2, exp: '"Beautiful" is an adjective — a describing word.', deepLearn: null },
+    { q: 'What type of word is "quickly"?', opts: ['Noun','Verb','Adjective','Adverb'], correct: 3, exp: '"Quickly" is an adverb — it describes how something is done.', deepLearn: null },
+    { q: 'Which of these is a proper noun?', opts: ['city','teacher','Johannesburg','school'], correct: 2, exp: '"Johannesburg" is a proper noun — the specific name of a city.', deepLearn: null },
+    { q: 'Which sentence has an adjective?', opts: ['"She ran."','"He ate."','"The big dog barked."','"They left."'], correct: 2, exp: '"Big" is the adjective — it describes the dog.', deepLearn: null },
+    { q: '"She sings beautifully." — What type of word is "beautifully"?', opts: ['Noun','Verb','Adjective','Adverb'], correct: 3, exp: '"Beautifully" is an adverb — it describes how she sings.', deepLearn: null },
+    { q: 'Which word is a pronoun?', opts: ['run','tall','she','desk'], correct: 2, exp: '"She" is a pronoun — it takes the place of a noun.', deepLearn: null }
+  ],
+  fractions: [
+    { q: 'What is ¾ + ½?', opts: ['1','1¼','1½','⁵⁄₆'], correct: 1, exp: 'Convert ½ to ²⁄₄, then add: ¾ + ²⁄₄ = ⁵⁄₄ = 1¼.', deepLearn: null },
+    { q: 'Which fraction is equivalent to ²⁄₃?', opts: ['³⁄₄','⁴⁄₆','²⁄₄','⁵⁄₆'], correct: 1, exp: '⁴⁄₆ = ²⁄₃ — multiply top and bottom by 2.', deepLearn: null },
+    { q: 'What is ⅓ of 12?', opts: ['3','4','6','12'], correct: 1, exp: '12 ÷ 3 = 4.', deepLearn: null },
+    { q: 'Simplify ⁶⁄₈.', opts: ['³⁄₄','²⁄₃','⁴⁄₆','½'], correct: 0, exp: '6÷2=3, 8÷2=4. So ⁶⁄₈ = ¾.', deepLearn: null },
+    { q: 'Which fraction is the largest?', opts: ['½','⅓','¼','⅛'], correct: 0, exp: 'Bigger denominator = smaller pieces. ½ is the largest.', deepLearn: null }
+  ],
+  'human-body': [
+    { q: 'What does the heart do?', opts: ['Digest food','Pump blood','Filter waste','Control breathing'], correct: 1, exp: 'The heart pumps blood around the body.', deepLearn: null },
+    { q: 'Which organ filters waste from blood?', opts: ['Liver','Stomach','Kidney','Lungs'], correct: 2, exp: 'The kidneys filter waste.', deepLearn: null },
+    { q: 'What do lungs do?', opts: ['Pump blood','Break down food','Exchange oxygen/CO₂','Produce hormones'], correct: 2, exp: 'Lungs bring oxygen in and push CO₂ out.', deepLearn: null },
+    { q: 'What system includes the brain?', opts: ['Digestive','Nervous','Circulatory','Skeletal'], correct: 1, exp: 'Brain and spinal cord = nervous system.', deepLearn: null },
+    { q: 'What does the skeleton do?', opts: ['Pumps blood','Digests food','Supports body','Produces urine'], correct: 2, exp: 'The skeleton supports, protects and allows movement.', deepLearn: null }
+  ]
+};
 
 // ════════════════════════════════════════════════════
 // STATE
 // ════════════════════════════════════════════════════
-// ── XP constants ──────────────────────────────────────
-const XP = {
-  BASE: 10, PER_CORRECT: 5, PASS_BONUS: 20,
-  PERFECT_BONUS: 50, FIRST_PASS_BONUS: 30, GP_BASE: 5
-};
-const PASS_THRESHOLD = 60;        // standard levels
-const MASTERY_THRESHOLD = 75;     // mastery challenge
-
 let state = {
   phase: 'intermediate',
   grade: 4,
   subject: 'english',
-  currentTopic: null,
-  currentLevel: null,
+  currentTopic: null,   // full topic object
+  currentLevel: null,   // level object or null for general practice
   isGeneralPractice: false,
-  questions: [], currentQ: 0, score: 0, answered: false, results: [],
-  _dbLearnZone: null,
-  // user / progression (loaded from Supabase on login)
-  userId: null,
-  userXp: 0,
-  userStreak: 0,
-  userIsPremium: false,
-  dbProgress: {}  // { 'topic_id:level_id': { best_score, passed, attempts } }
+  // quiz state
+  questions: [], currentQ: 0, score: 0, answered: false, results: []
 };
 
-// Progress is now stored in Supabase via award_quiz_xp RPC
-
-
-// ════════════════════════════════════════════════════
-// PROGRESSION SYSTEM — XP, pass thresholds, level unlock
-// ════════════════════════════════════════════════════
-
-// Load user progress from Supabase on login
-async function loadUserProgress(userId) {
-  state.userId = userId;
-  try {
-    // Load XP + streak from profiles
-    const pRes = await fetch(
-      `${SB_URL}/rest/v1/profiles?id=eq.${userId}&select=xp,xp_total,streak_days,is_premium,is_founder`,
-      { headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` } }
-    );
-    if (pRes.ok) {
-      const rows = await pRes.json();
-      if (rows[0]) {
-        state.userXp        = rows[0].xp || 0;
-        state.userStreak    = rows[0].streak_days || 0;
-        state.userIsPremium = rows[0].is_premium === true || rows[0].is_founder === true;
-      }
-    }
-    // Load level progress via RPC
-    const lRes = await fetch(
-      `${SB_URL}/rest/v1/rpc/get_user_progress`,
-      {
-        method: 'POST',
-        headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ p_user_id: userId })
-      }
-    );
-    if (lRes.ok) {
-      const rows = await lRes.json();
-      state.dbProgress = {};
-      rows.forEach(r => {
-        state.dbProgress[`${r.topic_id}:${r.level_id}`] = {
-          best_score: r.best_score, passed: r.passed, attempts: r.attempts
-        };
-      });
-    }
-  } catch(e) { console.error('Progress load failed:', e); }
+// Progress stored in localStorage: { topicId: { levelId: { bestScore, completed } } }
+function getProgress() {
+  try { return JSON.parse(localStorage.getItem('curio_mastery') || '{}'); } catch(e) { return {}; }
 }
-
-function getDbProgress(topicId, levelId) {
-  return state.dbProgress[`${topicId}:${levelId}`] || null;
-}
-
-function hasPassedLevel(topicId, levelId) {
-  const p = getDbProgress(topicId, levelId);
-  return p ? p.passed : false;
-}
-
-// Award XP via Supabase RPC
-async function awardXp(topicId, levelId, scorePct, correct, total, sectionType) {
-  if (!state.userId) return null;
-  const threshold = sectionType === 'mastery_challenge' ? MASTERY_THRESHOLD : PASS_THRESHOLD;
-  try {
-    const res = await fetch(`${SB_URL}/rest/v1/rpc/award_quiz_xp`, {
-      method: 'POST',
-      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        p_user_id: state.userId,
-        p_topic_id: topicId,
-        p_level_id: levelId || '',
-        p_score: scorePct,
-        p_correct: correct,
-        p_total: total,
-        p_section_type: sectionType,
-        p_threshold: threshold
-      })
-    });
-    if (!res.ok) return null;
-    const result = await res.json();
-    // Update local state
-    state.userXp += result.xp_earned;
-    if (result.passed && levelId) {
-      const key = `${topicId}:${levelId}`;
-      state.dbProgress[key] = {
-        best_score: Math.max((state.dbProgress[key]?.best_score||0), scorePct),
-        passed: true,
-        attempts: (state.dbProgress[key]?.attempts||0) + 1
-      };
-    }
-    return result;
-  } catch(e) { console.error('XP award failed:', e); return null; }
-}
-
-// Calculate local XP for immediate display (before DB confirms)
-function calcXp(correct, total, sectionType) {
-  const scorePct = Math.round(correct/total*100);
-  const threshold = sectionType === 'mastery_challenge' ? MASTERY_THRESHOLD : PASS_THRESHOLD;
-  const passed = scorePct >= threshold;
-  if (sectionType === 'general_practice') return XP.GP_BASE + (correct * XP.PER_CORRECT);
-  let xp = XP.BASE + (correct * XP.PER_CORRECT);
-  if (passed) xp += XP.PASS_BONUS;
-  if (scorePct === 100) xp += XP.PERFECT_BONUS;
-  return xp;
+function saveProgress(topicId, levelId, score, total) {
+  const p = getProgress();
+  if (!p[topicId]) p[topicId] = {};
+  const pct = Math.round(score/total*100);
+  const existing = p[topicId][levelId];
+  if (!existing || pct > existing.best) {
+    p[topicId][levelId] = { best: pct, completed: pct >= 60 };
+  }
+  localStorage.setItem('curio_mastery', JSON.stringify(p));
 }
 
 // ════════════════════════════════════════════════════
@@ -1187,12 +1144,10 @@ function renderNav(s){
   let s = null;
   try { const st = localStorage.getItem('curio_session'); if(st){ const p=JSON.parse(st); if(p?.access_token&&p?.expires_at>Date.now()/1000) s=p; else localStorage.removeItem('curio_session'); }} catch(e){ localStorage.removeItem('curio_session'); }
   renderNav(s);
-  if(s?.user?.id) loadUserProgress(s.user.id);
 })();
 
 function isLoggedIn(){ try { const s=JSON.parse(localStorage.getItem('curio_session')||'{}'); return !!(s?.access_token&&s?.expires_at>Date.now()/1000); } catch(e){ return false; } }
-// isPremium reads from state.userIsPremium loaded from profiles table on login
-function isPremium(){ return state.userIsPremium === true; }
+function isPremium(){ try { const s=JSON.parse(localStorage.getItem('curio_session')||'{}'); return s?.user?.user_metadata?.is_premium===true; } catch(e){ return false; } }
 
 // ════════════════════════════════════════════════════
 // SCREEN SWITCHING
@@ -1265,11 +1220,11 @@ function renderTopicGrid(){
     grid.innerHTML = `<div class="topic-empty">No topics yet for this grade and subject — coming soon 🌱</div>`;
     return;
   }
+  const progress = getProgress();
   grid.innerHTML = topics.map(t => {
+    const tp = progress[t.id]||{};
+    const completedLevels = t.levels.filter(l => tp[l.id]?.completed).length;
     const totalLevels = t.levels.length;
-    const completedLevels = state.userId
-      ? t.levels.filter(l => hasPassedLevel(t.id, l.db?.level_id || l.id)).length
-      : 0;
     const pct = totalLevels ? Math.round(completedLevels/totalLevels*100) : 0;
     return `
       <div class="topic-card" onclick="openTopic('${t.id}')">
@@ -1284,28 +1239,6 @@ function renderTopicGrid(){
       </div>`;
   }).join('');
 }
-
-// ── CONFIG MAPS (required by render functions) ──────
-const PHASE_CONFIG = {
-  intermediate: { label: 'Intermediate Phase', grades: [4,5,6] },
-  senior:       { label: 'Senior Phase',        grades: [7,8,9] },
-  fet:          { label: 'FET Phase',           grades: [10,11,12] }
-};
-const SUBJECT_CONFIG = {
-  english:     'English HL',
-  afrikaans:   'Afrikaans FAL',
-  maths:       'Mathematics',
-  science:     'Natural Sciences',
-  social:      'Social Sciences',
-  lifeskills:  'Life Skills',
-  history:     'History',
-  geography:   'Geography',
-  physics:     'Physical Sciences',
-  lifesciences:'Life Sciences',
-  accounting:  'Accounting',
-  business:    'Business Studies',
-  economics:   'Economics'
-};
 
 // Init browse
 renderGradePills();
@@ -1345,10 +1278,10 @@ function renderTopicPath(topic){
   document.getElementById('thDesc').textContent = topic.description;
   document.getElementById('thLevels').textContent = topic.levels.length;
 
-  // Progress — from DB
-  const completed = state.userId
-    ? topic.levels.filter(l => hasPassedLevel(topic.id, l.db?.level_id || l.id)).length
-    : 0;
+  // Progress
+  const progress = getProgress();
+  const tp = progress[topic.id]||{};
+  const completed = topic.levels.filter(l => tp[l.id]?.completed).length;
   const pct = topic.levels.length ? Math.round(completed/topic.levels.length*100) : 0;
   document.getElementById('thProgFill').style.width = pct+'%';
   document.getElementById('thProgPct').textContent = pct+'%';
@@ -1357,27 +1290,19 @@ function renderTopicPath(topic){
   document.getElementById('gpTitle').textContent = `${topic.name} — General Practice`;
   document.getElementById('gpDesc').textContent = topic.generalPractice.desc;
 
-  // Mastery path — fetch DB question counts to override hardcoded values
-  fetchDbLevelCounts(topic).then(() => renderMasteryPath(topic));
+  // Mastery path
+  renderMasteryPath(topic);
 }
 
 function renderMasteryPath(topic){
+  const progress = getProgress();
+  const tp = progress[topic.id]||{};
   const premium = isPremium();
   const container = document.getElementById('masteryPath');
 
   const nonMastery = topic.levels.filter(l => l.type !== 'mastery');
   const masteryLevel = topic.levels.find(l => l.type === 'mastery');
   const hasPremium = nonMastery.some(l => l.type === 'premium');
-
-  // Use DB progress if logged in, else localStorage fallback (read-only — no saving to LS anymore)
-  function levelPassed(level) {
-    if (state.userId) return hasPassedLevel(topic.id, level.db?.level_id || level.id);
-    return false; // must be logged in
-  }
-  function levelBest(level) {
-    if (state.userId) return getDbProgress(topic.id, level.db?.level_id || level.id)?.best_score ?? null;
-    return null;
-  }
 
   // Group non-mastery levels by subtopic folder
   const subtopics = {};
@@ -1393,78 +1318,57 @@ function renderMasteryPath(topic){
 
   let html = '';
 
-  // ── PROGRESSIVE REVEAL ─────────────────────────────────────────────────
-  // Flat ordered list across all subtopics
-  const allNonMastery = [];
-  subtopicOrder.forEach(key => subtopics[key].levels.forEach(l => allNonMastery.push(l)));
-
-  // Frontier = first level not yet passed (or premium-locked)
-  const frontierIdx = allNonMastery.findIndex(l => (l.type==='premium' && !premium) || !levelPassed(l));
-  // Show: all passed + frontier + one peek ahead
-  const visibleCutoff = frontierIdx === -1 ? allNonMastery.length : Math.min(frontierIdx + 2, allNonMastery.length);
-
+  // Render each subtopic folder
   subtopicOrder.forEach((key, fi) => {
     const folder = subtopics[key];
+    const hasFree = folder.levels.some(l => l.type==='free');
     const folderLabel = key === '__general' ? '📚 Levels' : `📂 ${folder.display}`;
-
-    const anyVisible = folder.levels.some(l => allNonMastery.indexOf(l) < visibleCutoff);
-    if (!anyVisible) return;
 
     html += `<div class="path-section">
       <div class="path-section-label">${folderLabel}</div>
       <div class="path-list">`;
 
-    folder.levels.forEach((level) => {
-      const gIdx = allNonMastery.indexOf(level);
-      if (gIdx >= visibleCutoff) return; // hidden
-
-      const premiumLocked = level.type==='premium' && !premium;
-      const done = !premiumLocked && levelPassed(level);
-      const best = premiumLocked ? null : levelBest(level);
-      const isFrontier = gIdx === frontierIdx;
-      const softLocked = gIdx === frontierIdx + 1 && !done;
-      const isFirstEver = gIdx === 0 && !done && !premiumLocked;
-
-      html += renderPathItem(level, done, best, level.type, isFirstEver, premiumLocked, softLocked, isFrontier);
+    folder.levels.forEach((level, i) => {
+      const lp = tp[level.id];
+      const locked = level.type==='premium' && !premium;
+      const done = !locked && lp?.completed;
+      const best = locked ? null : lp?.best;
+      // isFirst = first free level of the whole topic (for "current" highlight)
+      const isFirstEver = fi===0 && i===0 && !lp?.completed;
+      html += renderPathItem(level, done, best, level.type, isFirstEver && level.type==='free', locked);
     });
 
     html += `</div></div>`;
   });
 
-  // Mastery — only show when all non-mastery levels are within one step of complete
+  // Mastery challenge
   if(masteryLevel){
-    const allFreeCompleted  = nonMastery.filter(l=>l.type==='free').every(l => levelPassed(l));
-    const allPremiumDone    = !hasPremium || (premium && nonMastery.filter(l=>l.type==='premium').every(l => levelPassed(l)));
-    const masteryUnlocked   = allFreeCompleted && allPremiumDone;
-    // Show mastery once frontier is at the last non-mastery level or beyond
-    const showMastery = frontierIdx >= allNonMastery.length - 1;
-    if (showMastery || masteryUnlocked) {
-      const done = levelPassed(masteryLevel);
-      const best = levelBest(masteryLevel);
-      html += `<div class="path-section">
-        <div class="path-section-label">🏆 Mastery challenge</div>
-        <div class="path-list">`;
-      html += renderPathItem(masteryLevel, done, best, 'mastery', false, !masteryUnlocked, false, false);
-      html += `</div></div>`;
-    }
+    const allFreeCompleted = nonMastery.filter(l=>l.type==='free').every(l => tp[l.id]?.completed);
+    const allPremiumCompleted = !hasPremium || (premium && nonMastery.filter(l=>l.type==='premium').every(l => tp[l.id]?.completed));
+    const masteryUnlocked = allFreeCompleted && allPremiumCompleted;
+    const lp = tp[masteryLevel.id];
+    html += `<div class="path-section">
+      <div class="path-section-label">🏆 Mastery challenge</div>
+      <div class="path-list">`;
+    html += renderPathItem(masteryLevel, lp?.completed, lp?.best, 'mastery', false, !masteryUnlocked);
+    html += `</div></div>`;
   }
 
   container.innerHTML = html;
 
+  // Show premium lock card if not premium and there are premium levels
   const lockCard = document.getElementById('premiumLockCard');
   lockCard.style.display = (!premium && hasPremium) ? 'block' : 'none';
 }
 
-function renderPathItem(level, done, best, type, isFirst, locked, softLocked=false, isFrontier=false){
-  const nodeIcon = (locked||softLocked) ? '🔒' : done ? '✓' : type==='mastery' ? '🏆' : type==='premium' ? '✦' : '▸';
-  const nodeClass = (locked||softLocked) ? 'locked-node' : done ? 'done' : type;
-  const itemClass = locked ? 'locked' : softLocked ? 'next-up' : done ? 'completed' : isFrontier ? 'current' : type==='mastery' ? 'mastery' : '';
+function renderPathItem(level, done, best, type, isFirst, locked){
+  const nodeIcon = locked ? '🔒' : done ? '✓' : type==='mastery' ? '🏆' : type==='premium' ? '✦' : '▸';
+  const nodeClass = locked ? 'locked-node' : done ? 'done' : type;
+  const itemClass = locked ? 'locked' : done ? 'completed' : (isFirst&&!done) ? 'current' : type==='mastery' ? 'mastery' : '';
 
   let actionBtn = '';
   if(locked){
     actionBtn = `<button class="pi-action unlock" onclick="window.location.href='subscription.html'">Unlock →</button>`;
-  } else if(softLocked){
-    actionBtn = `<span class="pi-next-label">Complete the level above to unlock</span>`;
   } else if(done){
     actionBtn = `<button class="pi-action replay" onclick="startLevel('${level.id}')">Replay</button>`;
   } else if(type==='mastery'){
@@ -1479,15 +1383,15 @@ function renderPathItem(level, done, best, type, isFirst, locked, softLocked=fal
                     '<span class="pill-tag pill-free">Free</span>';
 
   return `
-    <div class="path-item ${itemClass}${(locked||softLocked)?' locked':''}">
+    <div class="path-item ${itemClass}${locked?' locked':''}">
       <div class="pi-node ${nodeClass}">${nodeIcon}</div>
       <div class="pi-info">
         <div class="pi-label">${level.label}</div>
         <div class="pi-title">${level.title}</div>
-        ${(()=>{ const d = level._dbDescription !== undefined ? level._dbDescription : level.description; return (d && !softLocked) ? `<div class="pi-desc">${d}</div>` : ''; })()}
+        <div class="pi-desc">${level.description}</div>
         <div class="pi-meta">
           ${accessTag}
-          <span class="pi-meta-item">📝 ${level._dbCount || level.questionCount} questions</span>
+          <span class="pi-meta-item">📝 ${level.questionCount} questions</span>
           <span class="pi-meta-item">⚡ ${level.difficulty}</span>
         </div>
       </div>
@@ -1501,182 +1405,145 @@ function renderPathItem(level, done, best, type, isFirst, locked, softLocked=fal
 // ════════════════════════════════════════════════════
 // SCREEN 3: LEARN
 // ════════════════════════════════════════════════════
+
+async function sbLearningZone(level, topic) {
+  if (!level.db) return null;
+  const url = `${SB_URL}/rest/v1/quiz_levels?grade=eq.${topic.grade}&subject=eq.${topic.subject}&broad_topic=eq.${level.db.broad_topic}&level_id=eq.${level.db.level_id}&limit=1`;
+  try {
+    const res = await fetch(url, { headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` } });
+    if (!res.ok) return null;
+    const rows = await res.json();
+    return rows[0] || null;
+  } catch(e) { return null; }
+}
 async function startLevel(levelId){
-  // Must be logged in to access any level
-  if(!state.userId){
-    if(confirm('You need a free Curio account to start quizzes.\n\nCreate your free account now?'))
-      window.location.href='login.html?tab=signup';
-    return;
-  }
   const topic = state.currentTopic;
   const level = topic.levels.find(l => l.id===levelId);
   if(!level) return;
   state.currentLevel = level;
   state.isGeneralPractice = false;
 
+  // If premium level but not premium, redirect
   if(level.type==='premium' && !isPremium()){
-    if(confirm('This is a Premium level.\n\nUpgrade to unlock all topic levels, learning zones and mastery challenges.\n\nGo to subscription page?')){
+    if(confirm('This is a Premium level.\n\nUpgrade to Curio Premium to unlock all topic levels, learning zones and mastery challenges.\n\nGo to subscription page?')){
       window.location.href='subscription.html';
     }
     return;
   }
 
+  // If mastery but levels not complete
   if(level.type==='mastery'){
+    const progress = getProgress();
+    const tp = progress[topic.id]||{};
     const freeLevels = topic.levels.filter(l => l.type==='free');
-    const allFreeCompleted = freeLevels.every(l => hasPassedLevel(topic.id, l.db?.level_id || l.id));
+    const allFreeCompleted = freeLevels.every(l => tp[l.id]?.completed);
     if(!allFreeCompleted){
       alert('Complete the free levels first before attempting the Mastery Challenge! 🌱');
       return;
     }
   }
 
-  // Fetch learning zone from DB; fall back to hardcoded level.learn if nothing found
   const dbLearn = await sbLearningZone(level, topic);
-  state._dbLearnZone = dbLearn; // store so beginQuiz can read question_count
+  state._dbLearnZone = dbLearn;
   renderLearnScreen(level, dbLearn);
   showScreen('screen-learn');
 }
 
-function renderLearnScreen(level, dbLearn){
+
+function lzHash(str){let h=0;for(let i=0;i<str.length;i++)h=(Math.imul(31,h)+str.charCodeAt(i))|0;return Math.abs(h);}
+function renderConceptCard(concept,index,levelId){
+  const t=(index+lzHash(levelId||'default'))%4;
+  const ex=concept.example;
+  const exFn=(pfx)=>ex?`<div class="${pfx}-ex"><div class="${pfx}-exlbl">${ex.label||'Example'}</div><div class="${pfx}-extxt">${ex.text.replace(/\n/g,'<br/>')}</div></div>`:'';
+  if(t===0)return`<div class="cc-dyk"><div class="cc-dyk-eye">Did you know?</div><div class="cc-dyk-title">${concept.title}</div><div class="cc-dyk-body">${concept.text}</div>${exFn('cc-dyk')}</div>`;
+  if(t===1)return`<div class="cc-spot"><div class="cc-spot-hd"><span class="cc-spot-badge">Spot it</span><span class="cc-spot-htitle">${concept.title}</span></div><div class="cc-spot-body">${concept.text}${ex?`<div class="cc-spot-ex"><div class="cc-spot-exlbl">${ex.label||'Example'}</div><div class="cc-spot-extxt">${ex.text.replace(/\n/g,'<br/>')}</div></div>`:''}</div></div>`;
+  if(t===2)return`<div class="cc-rule"><div class="cc-rule-top"><div class="cc-rule-lbl">The rule</div><div class="cc-rule-title">${concept.title}</div></div><div class="cc-rule-body">${concept.text}</div>${exFn('cc-rule')}</div>`;
+  return`<div class="cc-tip"><div class="cc-tip-corner"></div><div class="cc-tip-eye">Quick tip</div><div class="cc-tip-title">${concept.title}</div><div class="cc-tip-body">${concept.text}</div>${exFn('cc-tip')}</div>`;
+}
+function renderLearnScreen(level, dbLearn=null){
   const topic = state.currentTopic;
 
-  // Merge: DB content takes priority over hardcoded level.learn fallback
+  // Tag row
+  const typeTag = level.type==='mastery' ? '<span class="pill-tag pill-mastery">🏆 Mastery Challenge</span>' :
+                  level.type==='premium' ? '<span class="pill-tag pill-premium">✦ Premium</span>' :
+                  '<span class="pill-tag pill-free">Free</span>';
+  document.getElementById('learnTagRow').innerHTML = `${typeTag}<span class="pill-tag pill-practice">${topic.name}</span>`;
+  document.getElementById('learnTitle').textContent = level.title;
   const intro    = dbLearn?.intro || null;
-  const concepts = (dbLearn?.concepts && dbLearn.concepts.length)
-    ? dbLearn.concepts
-    : (level.learn?.concepts || []);
-  const tested   = (dbLearn?.tested && dbLearn.tested.length)
-    ? dbLearn.tested
-    : (level.learn?.tested || []);
+  const concepts = (dbLearn?.concepts?.length) ? dbLearn.concepts : (level.learn?.concepts || []);
+  const tested   = (dbLearn?.tested?.length) ? dbLearn.tested : (level.learn?.tested || []);
   const qCount   = dbLearn?.question_count || level.questionCount || '—';
   const diff     = dbLearn?.difficulty || level.difficulty || '—';
 
-  // Tag row
-  const typeTag = level.type==='mastery'
-    ? '<span class="pill-tag pill-mastery">🏆 Mastery Challenge</span>'
-    : level.type==='premium'
-    ? '<span class="pill-tag pill-premium">✦ Premium</span>'
-    : '<span class="pill-tag pill-free">Free</span>';
-  document.getElementById('learnTagRow').innerHTML = `${typeTag}<span class="pill-tag pill-practice">${topic.name}</span>`;
-  document.getElementById('learnTitle').textContent = level.title;
   document.getElementById('learnSubtitle').textContent = intro ||
     (level.type==='mastery'
       ? 'The final challenge — tested across everything you\'ve learnt.'
       : 'Read through the concepts below, then start the quiz when you\'re ready.');
 
-  // Concept cards
+  const levelIdForHash = level.db?.level_id || level.id || '';
   const cl = document.getElementById('conceptList');
   if(concepts.length){
-    cl.innerHTML = concepts.map((c, i) => `
-      <div class="concept-card">
-        <div class="cc-header">
-          <div class="cc-num">${i+1}</div>
-          <div class="cc-title">${c.title}</div>
-        </div>
-        <div class="cc-body">
-          <div class="cc-text">${c.text}</div>
-          ${c.example ? `<div class="cc-example"><div class="cc-example-label">${c.example.label}</div><div class="cc-example-text">${c.example.text.replace(/\n/g,'<br/>')}</div></div>` : ''}
-        </div>
-      </div>`).join('');
+    cl.innerHTML = concepts.map((c,i) => renderConceptCard(c,i,levelIdForHash)).join('');
   } else {
     cl.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--m30);font-style:italic;font-size:0.88rem;">Learning zone content for this level coming soon. 🌱</div>`;
   }
-
-  // Tested list
   const tc = document.getElementById('testedCard');
   if(tested.length){
-    document.getElementById('testedList').innerHTML = tested.map(t =>
-      `<div class="tested-item"><div class="tested-dot"></div>${t}</div>`).join('');
-    tc.style.display = 'block';
-  } else {
-    tc.style.display = 'none';
-  }
+    const oldList=document.getElementById('testedList');
+    const chips=`<div class="tested-chips">${tested.map(t=>`<div class="tested-chip">${t}</div>`).join('')}</div>`;
+    if(oldList)oldList.outerHTML=chips;else tc.insertAdjacentHTML('beforeend',chips);
+    tc.style.display='block';
+  } else { tc.style.display='none'; }
 
-  // CTA meta
-  document.getElementById('sqcTitle').textContent   = level.type==='mastery' ? 'Ready for the challenge?' : 'Ready to test yourself?';
-  document.getElementById('sqcSub').textContent     = level.type==='mastery'
-    ? 'A longer comprehensive quiz. Take your time and think carefully.'
+  // CTA
+  document.getElementById('sqcTitle').textContent = level.type==='mastery' ? 'Ready for the challenge?' : 'Ready to test yourself?';
+  document.getElementById('sqcSub').textContent = level.type==='mastery'
+    ? 'This is a longer, comprehensive quiz. Take your time and think carefully.'
     : 'You\'ve read through the concepts. Now let\'s see how well you know them.';
   document.getElementById('sqcQuestions').textContent = `📝 ${qCount} questions`;
   document.getElementById('sqcDifficulty').textContent = `⚡ ${diff}`;
-  document.getElementById('sqcAccess').textContent  = level.type==='free' ? '🔓 Free' : level.type==='mastery' ? '🏆 Mastery' : '✦ Premium';
+  document.getElementById('sqcAccess').textContent = level.type==='free' ? '🔓 Free' : level.type==='mastery' ? '🏆 Mastery' : '✦ Premium';
 }
 
-async function startGeneralPractice(){
-  if(!state.userId){
-    if(confirm('You need a free Curio account to start quizzes.\n\nCreate your free account now?'))
-      window.location.href='login.html?tab=signup';
-    return;
-  }
+function startGeneralPractice(){
   const topic = state.currentTopic;
   state.currentLevel = null;
   state.isGeneralPractice = true;
 
-  const btn = document.getElementById('gpBtn');
-  if(btn){ btn.disabled = true; btn.textContent = 'Loading…'; }
+  // Get GP questions for this topic
+  const gpQs = GENERAL_PRACTICE_QUESTIONS[topic.id] || [];
 
-  try {
-    const questions = await sbQuestions({
-      grade: topic.grade,
-      subject: topic.subject,
-      broad_topic: topic.id === 'pos' ? 'parts_of_speech' : topic.id,
-      section_type: 'general_practice'
-    });
-
-    if(!questions.length){
-      alert('General practice questions for this topic are being added — check back soon! 🌱');
-      return;
-    }
-
-    // Shuffle and cap at 15
-    const shuffled = [...questions].sort(() => Math.random()-0.5).slice(0, Math.min(15, questions.length));
-    launchQuiz(shuffled, `${topic.name} — General Practice`);
-  } catch(e) {
-    console.error(e);
-    alert('Could not load questions. Please check your connection and try again.');
-  } finally {
-    if(btn){ btn.disabled = false; btn.textContent = 'Practice now →'; }
+  if(!gpQs.length){
+    alert('General practice questions for this topic are being added — check back soon!');
+    return;
   }
+
+  // Shuffle and take up to 15
+  const shuffled = [...gpQs].sort(() => Math.random()-0.5).slice(0, Math.min(15, gpQs.length));
+  launchQuiz(shuffled, `${topic.name} — General Practice`);
 }
 
-async function beginQuiz(){
+function beginQuiz(){
   const level = state.currentLevel;
   const topic = state.currentTopic;
   if(!level) return;
 
-  const btn = document.querySelector('.btn-start');
-  if(btn){ btn.disabled = true; btn.textContent = 'Loading…'; }
+  let questions = level.questions;
 
-  try {
-    let questions = [];
-
-    if(level.db){
-      const filters = {
-        grade: topic.grade,
-        subject: topic.subject,
-        broad_topic: level.db.broad_topic,
-        section_type: level.type === 'mastery' ? 'mastery_challenge' : 'learning_level'
-      };
-      if(level.db.subtopic_id) filters.subtopic_id = level.db.subtopic_id;
-      if(level.db.level_id)    filters.level_id    = level.db.level_id;
-      questions = await sbQuestions(filters);
+  // Fallback to GP questions if level has no questions yet
+  if(!questions || !questions.length){
+    const gpQs = GENERAL_PRACTICE_QUESTIONS[topic.id] || [];
+    if(gpQs.length){
+      questions = [...gpQs].sort(() => Math.random()-0.5).slice(0, Math.min(level.questionCount, gpQs.length));
     }
-
-    if(!questions.length){
-      alert('Questions for this level are being added — check back soon! 🌱');
-      return;
-    }
-
-    // Cap: prefer DB question_count (from Learning Zone), fall back to hardcoded level.questionCount
-    const cap = (state._dbLearnZone?.question_count) || level.questionCount || questions.length;
-    const shuffled = [...questions].sort(() => Math.random()-0.5).slice(0, cap);
-    launchQuiz(shuffled, level.title);
-  } catch(e) {
-    console.error(e);
-    alert('Could not load questions. Please check your connection and try again.');
-  } finally {
-    if(btn){ btn.disabled = false; btn.textContent = 'Start quiz →'; }
   }
+
+  if(!questions || !questions.length){
+    alert('Questions for this level are being added — check back soon! 🌱');
+    return;
+  }
+
+  launchQuiz(questions, level.title);
 }
 
 // ════════════════════════════════════════════════════
@@ -1788,29 +1655,18 @@ function exitQuiz(){
 // ════════════════════════════════════════════════════
 // SCREEN 5: RESULTS
 // ════════════════════════════════════════════════════
-async function showResults(){
+function showResults(){
   const total = state.questions.length;
   const wrong = total - state.score;
   const pct = Math.round((state.score/total)*100);
-  const topic = state.currentTopic;
-  const level = state.currentLevel;
-  const sectionType = state.isGeneralPractice ? 'general_practice' : (level?.type === 'mastery' ? 'mastery_challenge' : 'learning_level');
-  const threshold = sectionType === 'mastery_challenge' ? MASTERY_THRESHOLD : PASS_THRESHOLD;
-  const passed = pct >= threshold;
 
-  // Award XP (async — non-blocking)
-  const xpResult = state.userId ? await awardXp(
-    topic?.id || '', level?.db?.level_id || level?.id || '',
-    pct, state.score, total, sectionType
-  ) : null;
+  // Save progress
+  if(state.currentTopic && state.currentLevel && !state.isGeneralPractice){
+    saveProgress(state.currentTopic.id, state.currentLevel.id, state.score, total);
+    // Refresh path after saving
+    setTimeout(() => { if(state.currentTopic) renderMasteryPath(state.currentTopic); }, 100);
+  }
 
-  const xpEarned = xpResult?.xp_earned ?? calcXp(state.score, total, sectionType);
-  const firstPass = xpResult?.first_pass ?? false;
-
-  // Refresh path progress display
-  setTimeout(() => { if(topic) renderMasteryPath(topic); }, 200);
-
-  // ── Basic stats ───────────────────────────────────
   document.getElementById('rcScore').textContent = state.score;
   document.getElementById('rcTotal').textContent = total;
   document.getElementById('rcCorrect').textContent = state.score;
@@ -1818,119 +1674,45 @@ async function showResults(){
   document.getElementById('rcPct').textContent = pct+'%';
 
   const levelLabel = state.isGeneralPractice
-    ? `${topic?.name} — General Practice`
-    : (level?.title || 'Quiz');
-  document.getElementById('rcTopicTag').textContent = `Grade ${topic?.grade||''} · ${levelLabel}`;
+    ? `${state.currentTopic?.name} — General Practice`
+    : (state.currentLevel?.title || 'Quiz');
+  document.getElementById('rcTopicTag').textContent = `Grade ${state.currentTopic?.grade||''} · ${levelLabel}`;
 
-  // ── Message based on pass/fail ───────────────────
   let msg, sub;
-  if(pct===100){ msg='Perfect score! Outstanding! 🌟'; sub='Every single question correct — incredible.'; }
-  else if(pct>=80){ msg='Excellent work!'; sub=`${state.score}/${total} correct. A really strong result.`; }
-  else if(passed){ msg='Good effort — level passed! ✓'; sub=`${state.score}/${total} correct. You cleared the ${threshold}% threshold.`; }
-  else { msg='Keep practising — not quite there yet.'; sub=`${state.score}/${total} correct. You need ${threshold}% to pass. Try again!`; }
+  if(pct===100){ msg='Perfect score! Outstanding! 🌟'; sub='You answered every question correctly.'; }
+  else if(pct>=80){ msg="Excellent work!"; sub=`You got ${state.score} out of ${total}. A strong result.`; }
+  else if(pct>=60){ msg="Good effort — keep going."; sub=`You got ${state.score} out of ${total}. Review the ones you missed.`; }
+  else { msg="This topic needs more practice."; sub=`You got ${state.score} out of ${total}. Read through the explanations and try again.`; }
   document.getElementById('rcMsg').textContent = msg;
   document.getElementById('rcSub').textContent = sub;
 
-  // ── Bloom score visualiser ───────────────────────
-  renderBloomScore(pct);
-
-  // ── XP earned display ────────────────────────────
-  const xpEl = document.getElementById('rcXpEarned');
-  if(xpEl){
-    xpEl.textContent = `+${xpEarned} XP`;
-    xpEl.style.display = 'inline-block';
-    if(firstPass) xpEl.textContent += ' ✦ First pass bonus!';
-  }
-
-  // ── Badge ────────────────────────────────────────
+  // Badge (show on mastery or 100%)
   const badgeSection = document.getElementById('rcBadgeSection');
-  const isMasteryPass = level?.type==='mastery' && passed;
-  if(isMasteryPass){
+  if(state.currentLevel?.type==='mastery' && pct>=60){
     document.getElementById('rcBadgeIcon').textContent = '🏆';
-    document.getElementById('rcBadgeTitle').textContent = `${topic?.name} Mastered!`;
-    document.getElementById('rcBadgeSub').textContent = `${pct}% — you are now a ${topic?.name} pro`;
+    document.getElementById('rcBadgeTitle').textContent = `${state.currentTopic?.name} Mastered!`;
+    document.getElementById('rcBadgeSub').textContent = `${pct}% — topic complete`;
     badgeSection.classList.add('show');
   } else if(pct===100){
     document.getElementById('rcBadgeIcon').textContent = '⭐';
     document.getElementById('rcBadgeTitle').textContent = 'Perfect Score!';
     document.getElementById('rcBadgeSub').textContent = 'Not a single mistake.';
     badgeSection.classList.add('show');
-  } else if(firstPass){
-    document.getElementById('rcBadgeIcon').textContent = '🌱';
-    document.getElementById('rcBadgeTitle').textContent = 'Level Passed!';
-    document.getElementById('rcBadgeSub').textContent = 'First time clearing this level.';
-    badgeSection.classList.add('show');
   } else {
     badgeSection.classList.remove('show');
   }
 
-  // ── Pass / fail indicator ────────────────────────
-  const passEl = document.getElementById('rcPassIndicator');
-  if(passEl){
-    if(state.isGeneralPractice){
-      passEl.style.display = 'none';
-    } else {
-      passEl.style.display = 'block';
-      passEl.innerHTML = passed
-        ? `<span class="pass-pill pass">✓ Passed (${threshold}% needed)</span>`
-        : `<span class="pass-pill fail">✗ Not yet — need ${threshold}% to pass</span>`;
-    }
-  }
+  // Next steps
+  buildNextSteps(pct);
 
-  // ── Unlock notification ──────────────────────────
-  const unlockEl = document.getElementById('rcUnlockNotice');
-  if(unlockEl){
-    if(passed && !state.isGeneralPractice && level && topic){
-      const levelIdx = topic.levels.findIndex(l => l.id === level.id);
-      const nextLevel = topic.levels.slice(levelIdx+1).find(l => l.type !== 'mastery');
-      if(nextLevel){
-        unlockEl.style.display = 'flex';
-        unlockEl.innerHTML = `<span style="font-size:1.1rem">🔓</span> <div><strong>${nextLevel.title}</strong> is now unlocked — keep going!</div>`;
-      } else if(level.type !== 'mastery') {
-        // All levels done — mastery unlocked
-        unlockEl.style.display = 'flex';
-        unlockEl.innerHTML = `<span style="font-size:1.1rem">🏆</span> <div><strong>Mastery Challenge</strong> is now unlocked. You're ready for the boss quiz!</div>`;
-      } else {
-        unlockEl.style.display = 'none';
-      }
-    } else {
-      unlockEl.style.display = 'none';
-    }
-  }
-
-  // ── Next steps ───────────────────────────────────
-  buildNextSteps(pct, passed);
-
-  // ── Premium nudge ────────────────────────────────
+  // Premium nudge
   const nudge = document.getElementById('rcPremiumNudge');
   nudge.className = (wrong > 0 && !isPremium()) ? 'rc-premium-nudge show' : 'rc-premium-nudge';
 
   showScreen('screen-results');
 }
 
-// Bloom visual — lights up petals based on score
-function renderBloomScore(pct) {
-  const el = document.getElementById('rcBloomScore');
-  if(!el) return;
-  // 5 petals — each lights up per 20%
-  const lit = Math.floor(pct / 20); // 0-5
-  const colors = ['#FF5E5B','#F5C842','#6DD3CE','#6DD3CE','#6DD3CE'];
-  // Opacity intensities
-  const opacities = [0.15, 0.15, 0.15, 0.15, 0.15];
-  for(let i=0; i<5; i++) if(i<lit) opacities[i] = 0.85;
-  // Center dot brightens with score
-  const centerOpacity = 0.3 + (pct/100)*0.7;
-  el.innerHTML = `<svg width="80" height="80" viewBox="0 0 64 64" fill="none" style="filter:drop-shadow(0 0 ${4+lit*3}px rgba(109,211,206,${0.2+lit*0.1}))">
-    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="${opacities[0]}" style="transition:all .6s ease"/>
-    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="${opacities[1]}" transform="rotate(72 32 32)" style="transition:all .6s ease .1s"/>
-    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="${opacities[2]}" transform="rotate(144 32 32)" style="transition:all .6s ease .2s"/>
-    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="${opacities[3]}" transform="rotate(216 32 32)" style="transition:all .6s ease .3s"/>
-    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="${opacities[4]}" transform="rotate(288 32 32)" style="transition:all .6s ease .4s"/>
-    <circle cx="32" cy="32" r="7" fill="#FF5E5B" fill-opacity="${centerOpacity}" style="transition:all .6s ease .5s"/>
-  </svg>`;
-}
-
-function buildNextSteps(pct, passed=false){
+function buildNextSteps(pct){
   const topic = state.currentTopic;
   const level = state.currentLevel;
   const items = [];
