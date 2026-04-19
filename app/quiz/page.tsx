@@ -9,8 +9,9 @@ export default async function QuizBrowsePage({
 }) {
   const supabase = createServerClient()
 
-  const { data: { session } } = await supabase.auth.getSession()
-  const userId = session?.user?.id
+  // Session is managed client-side via localStorage (curio_session)
+  // Server components cannot read localStorage; auth-dependent UI renders client-side
+  const userId: string | undefined = undefined
 
   let userProfile: any = null
   let userProgress: string[] = []
@@ -153,7 +154,7 @@ export default async function QuizBrowsePage({
             </div>
           ) : (
             <a
-              href="/login.html"
+              href="/login"
               className="inline-block font-black px-6 py-3 rounded-2xl text-sm transition-all hover:-translate-y-0.5"
               style={{ background: '#FF5E5B', color: '#fff', boxShadow: '0 4px 20px rgba(255,94,91,0.4)' }}
             >

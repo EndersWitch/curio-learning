@@ -81,12 +81,17 @@ export default function HomePage() {
       localStorage.removeItem('curio_session')
     }
 
-    // Reveal observer
+    // Reveal observer — also immediately trigger elements already in viewport
     const ro = new IntersectionObserver(
       (entries) => entries.forEach((x) => { if (x.isIntersecting) x.target.classList.add('in') }),
-      { threshold: 0.07 }
+      { threshold: 0.07, rootMargin: '0px 0px -50px 0px' }
     )
-    document.querySelectorAll('.rv').forEach((el) => ro.observe(el))
+    document.querySelectorAll('.rv').forEach((el) => {
+      ro.observe(el)
+      // Immediately reveal elements already in viewport (above the fold)
+      const rect = el.getBoundingClientRect()
+      if (rect.top < window.innerHeight) (el as HTMLElement).classList.add('in')
+    })
     return () => ro.disconnect()
   }, [])
 
@@ -175,8 +180,6 @@ export default function HomePage() {
 
   const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
   const today = new Date()
-
-  if (!mounted) return null
 
   return (
     <>
@@ -406,9 +409,8 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* ── LANDING (guests) ── */}
-      {!session && (
-        <div id="landing">
+      {/* ── LANDING (guests) ── always in DOM, hidden when logged in */}
+      <div id="landing" style={{ display: session ? 'none' : 'block' }}>
           <section className="hero">
             <div className="hero-left">
               <div className="hero-kicker">
@@ -720,7 +722,6 @@ export default function HomePage() {
             <p className="footer-copy">© 2026 Curio Learning · Made with love for SA students</p>
           </footer>
         </div>
-      )}
     </>
   )
 }

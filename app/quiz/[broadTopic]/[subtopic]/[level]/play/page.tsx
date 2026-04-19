@@ -13,6 +13,7 @@ import {
   isBroadTopicMasteryUnlocked,
 } from '@/lib/progress'
 import { supabase } from '@/lib/supabase'
+import { getLocalSession } from '@/lib/session'
 import type { ShuffledQuestion, QuizResult } from '@/types/quiz'
 
 interface Props {
@@ -34,7 +35,7 @@ export default function QuizPlayPage({ params }: Props) {
   useEffect(() => {
     async function load() {
       try {
-        const { data: { session } } = await supabase.auth.getSession()
+        const session = getLocalSession()
         setUserId(session?.user?.id ?? null)
 
         const { data: lvl, error: lvlErr } = await supabase

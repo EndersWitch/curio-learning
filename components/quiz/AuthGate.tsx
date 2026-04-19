@@ -11,8 +11,8 @@ export default function AuthGate({
 }: AuthGateProps) {
   // Always use the existing login.html page — never /auth/login
   const loginUrl = redirectAfter
-    ? `/login.html?redirect=${encodeURIComponent(redirectAfter)}`
-    : '/login.html'
+    ? `/login?redirect=${encodeURIComponent(redirectAfter)}`
+    : '/login'
 
   return (
     <div className="rounded-3xl p-8 text-center"
@@ -33,7 +33,7 @@ export default function AuthGate({
           style={{ background: '#FF5E5B', boxShadow: '0 4px 16px rgba(255,94,91,0.35)' }}>
           Sign In →
         </a>
-        <a href="/login.html"
+        <a href="/login"
           className="px-6 py-3 rounded-2xl font-black text-sm text-center transition-all hover:opacity-80"
           style={{
             background: 'rgba(255,255,255,0.06)',

@@ -23,8 +23,9 @@ export default async function SubtopicPage({ params }: Props) {
   if (error || !levels || levels.length === 0) notFound()
 
   // Session + progress
-  const { data: { session } } = await supabase.auth.getSession()
-  const userId = session?.user?.id
+  // Session is managed client-side via localStorage (curio_session)
+  // Server components cannot read localStorage; auth-dependent UI renders client-side
+  const userId: string | undefined = undefined
 
   let userProgress: any[] = []
   let userProfile: any = null
