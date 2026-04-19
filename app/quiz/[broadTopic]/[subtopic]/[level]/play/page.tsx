@@ -147,7 +147,7 @@ export default function QuizPlayPage({ params }: Props) {
   // ── Loading state ────────────────────────────────────────────────────
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-cyan-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: "#1a1228" }}>
         <div className="text-center">
           <div className="text-5xl mb-4 animate-bounce">🎯</div>
           <p className="font-semibold text-slate-500 text-sm">Loading your quiz...</p>
@@ -160,11 +160,11 @@ export default function QuizPlayPage({ params }: Props) {
   // ── Error state ──────────────────────────────────────────────────────
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-cyan-50 flex items-center justify-center p-6">
-        <div className="text-center max-w-sm w-full bg-white rounded-3xl border border-slate-100 shadow-xl p-8">
+      <div className="min-h-screen flex items-center justify-center p-6" style={{ background: "#1a1228" }}>
+        <div className="text-center max-w-sm w-full rounded-3xl p-8" style={{ background: "#231935", border: "1px solid rgba(109,211,206,0.15)" }}>
           <div className="text-5xl mb-4">😕</div>
-          <h2 className="text-xl font-black text-slate-800 mb-2">Couldn't load quiz</h2>
-          <p className="text-slate-500 text-sm mb-6 leading-relaxed">{error}</p>
+          <h2 className="text-xl font-black mb-2" style={{ color: "#F7F7FF" }}>Couldn't load quiz</h2>
+          <p className="text-sm mb-6 leading-relaxed" style={{ color: "#9b8ab0" }}>{error}</p>
           <div className="flex flex-col gap-3">
             <button
               onClick={() => window.location.reload()}
@@ -201,9 +201,9 @@ export default function QuizPlayPage({ params }: Props) {
 
   // ── Quiz running state ───────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-cyan-50">
+    <div className="min-h-screen" style={{ background: "#1a1228" }}>
       {/* Top bar */}
-      <div className="bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm sticky top-0 z-30">
+      <div className="backdrop-blur-md sticky top-0 z-30" style={{ background: "rgba(43,30,63,0.95)", borderBottom: "1px solid rgba(109,211,206,0.15)" }}>
         <div className="max-w-2xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
           <button
             onClick={() => {
@@ -211,18 +211,18 @@ export default function QuizPlayPage({ params }: Props) {
                 router.push(learnHref)
               }
             }}
-            className="text-xs font-semibold text-slate-400 hover:text-slate-600 transition-colors flex items-center gap-1"
+            className="text-xs font-semibold transition-colors flex items-center gap-1" style={{ color: "#9b8ab0" }}
           >
             ✕ Exit
           </button>
 
           <div className="flex-1 text-center">
-            <h1 className="font-black text-slate-700 text-sm truncate">
+            <h1 className="font-black text-sm truncate" style={{ color: "#F7F7FF" }}>
               {levelMeta?.title}
             </h1>
           </div>
 
-          <div className="flex items-center gap-1.5 text-xs">
+          <div className="flex items-center gap-1.5 text-xs" style={{ color: "#9b8ab0" }}>
             {levelMeta?.section_type === 'subtopic_mastery' && (
               <span className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-black">🏆 Mastery</span>
             )}

@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { ProgressBar } from '@/components/ui/XPBar'
 
 interface TopicCardProps {
   id: string
@@ -17,44 +16,50 @@ interface TopicCardProps {
   subtopicCount: number
 }
 
-const COLOR_MAP: Record<string, { bg: string; ring: string; badge: string; glow: string }> = {
+// Curio brand colour system — matches the rest of the site exactly
+const COLOR_MAP: Record<string, {
+  headerBg: string
+  headerBorder: string
+  badgeBg: string
+  badgeText: string
+  barBg: string
+  glowColor: string
+}> = {
   coral: {
-    bg: 'from-rose-400 to-orange-400',
-    ring: 'ring-rose-200',
-    badge: 'bg-rose-100 text-rose-700',
-    glow: 'shadow-rose-200',
+    headerBg:    'linear-gradient(135deg, #FF5E5B 0%, #ff8a47 100%)',
+    headerBorder:'#FF5E5B',
+    badgeBg:     'rgba(255,94,91,0.15)',
+    badgeText:   '#FF5E5B',
+    barBg:       'linear-gradient(90deg, #FF5E5B, #ff8a47)',
+    glowColor:   'rgba(255,94,91,0.25)',
   },
   cyan: {
-    bg: 'from-cyan-400 to-teal-400',
-    ring: 'ring-cyan-200',
-    badge: 'bg-cyan-100 text-cyan-700',
-    glow: 'shadow-cyan-200',
+    headerBg:    'linear-gradient(135deg, #6DD3CE 0%, #4ab8c1 100%)',
+    headerBorder:'#6DD3CE',
+    badgeBg:     'rgba(109,211,206,0.15)',
+    badgeText:   '#6DD3CE',
+    barBg:       'linear-gradient(90deg, #6DD3CE, #4ab8c1)',
+    glowColor:   'rgba(109,211,206,0.25)',
   },
   amber: {
-    bg: 'from-amber-400 to-yellow-400',
-    ring: 'ring-amber-200',
-    badge: 'bg-amber-100 text-amber-700',
-    glow: 'shadow-amber-200',
+    headerBg:    'linear-gradient(135deg, #F5C842 0%, #f5a623 100%)',
+    headerBorder:'#F5C842',
+    badgeBg:     'rgba(245,200,66,0.15)',
+    badgeText:   '#c8950a',
+    barBg:       'linear-gradient(90deg, #F5C842, #f5a623)',
+    glowColor:   'rgba(245,200,66,0.25)',
   },
-  violet: {
-    bg: 'from-violet-500 to-purple-500',
-    ring: 'ring-violet-200',
-    badge: 'bg-violet-100 text-violet-700',
-    glow: 'shadow-violet-200',
-  },
-  emerald: {
-    bg: 'from-emerald-400 to-green-500',
-    ring: 'ring-emerald-200',
-    badge: 'bg-emerald-100 text-emerald-700',
-    glow: 'shadow-emerald-200',
-  },
-  blue: {
-    bg: 'from-blue-400 to-indigo-500',
-    ring: 'ring-blue-200',
-    badge: 'bg-blue-100 text-blue-700',
-    glow: 'shadow-blue-200',
+  plum: {
+    headerBg:    'linear-gradient(135deg, #3d2d58 0%, #2B1E3F 100%)',
+    headerBorder:'#6DD3CE',
+    badgeBg:     'rgba(109,211,206,0.1)',
+    badgeText:   '#6DD3CE',
+    barBg:       'linear-gradient(90deg, #6DD3CE, #4ab8c1)',
+    glowColor:   'rgba(109,211,206,0.2)',
   },
 }
+
+const FALLBACK = COLOR_MAP.coral
 
 export default function TopicCard({
   id,
@@ -69,67 +74,100 @@ export default function TopicCard({
   isLocked,
   subtopicCount,
 }: TopicCardProps) {
-  const c = COLOR_MAP[color] ?? COLOR_MAP.violet
+  const c = COLOR_MAP[color] ?? FALLBACK
   const href = isLocked ? '#' : `/quiz/${encodeURIComponent(id)}`
 
   return (
     <Link
       href={href}
-      className={`group block rounded-3xl overflow-hidden border-2 bg-white transition-all duration-300
-        ${isLocked ? 'opacity-70 cursor-not-allowed border-slate-200' : `border-transparent hover:border-violet-300 hover:shadow-xl hover:-translate-y-1 ${c.glow} hover:shadow-lg`}
-      `}
+      className="group block rounded-2xl overflow-hidden transition-all duration-300"
+      style={{
+        background: '#231935',
+        border: `1px solid rgba(255,255,255,0.08)`,
+        cursor: isLocked ? 'not-allowed' : 'pointer',
+        opacity: isLocked ? 0.75 : 1,
+      }}
+      onMouseEnter={e => {
+        if (!isLocked) {
+          (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'
+          ;(e.currentTarget as HTMLElement).style.boxShadow = `0 12px 32px ${c.glowColor}`
+          ;(e.currentTarget as HTMLElement).style.borderColor = c.headerBorder + '60'
+        }
+      }}
+      onMouseLeave={e => {
+        (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'
+        ;(e.currentTarget as HTMLElement).style.boxShadow = 'none'
+        ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.08)'
+      }}
     >
-      {/* Color header */}
-      <div className={`relative h-28 bg-gradient-to-br ${c.bg} p-5 flex items-start justify-between`}>
-        <div className="text-4xl drop-shadow">{icon}</div>
+      {/* Coloured header strip */}
+      <div className="relative h-24 p-4 flex items-start justify-between overflow-hidden"
+        style={{ background: c.headerBg }}>
 
-        <div className="flex flex-col items-end gap-1">
+        <span className="text-3xl drop-shadow-md">{icon}</span>
+
+        <div className="flex flex-col items-end gap-1.5">
           {isPremium && (
-            <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/30 text-white backdrop-blur-sm">
+            <span className="text-xs font-black px-2.5 py-0.5 rounded-full"
+              style={{ background: 'rgba(0,0,0,0.25)', color: '#fff', backdropFilter: 'blur(4px)' }}>
               ✨ Premium
             </span>
           )}
           {isLocked && (
-            <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-black/20 text-white">
+            <span className="text-xs font-black px-2.5 py-0.5 rounded-full"
+              style={{ background: 'rgba(0,0,0,0.35)', color: '#fff' }}>
               🔒 Locked
             </span>
           )}
           {progressPercent === 100 && (
-            <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-white/90 text-emerald-700">
+            <span className="text-xs font-black px-2.5 py-0.5 rounded-full"
+              style={{ background: 'rgba(255,255,255,0.9)', color: '#1a7a4a' }}>
               ✅ Mastered!
             </span>
           )}
         </div>
 
-        {/* Decorative blob */}
-        <div className="absolute bottom-0 right-0 w-20 h-20 rounded-full bg-white/10 translate-x-6 translate-y-6" />
+        {/* Decorative circle */}
+        <div className="absolute -bottom-4 -right-4 w-20 h-20 rounded-full"
+          style={{ background: 'rgba(255,255,255,0.12)' }} />
       </div>
 
-      {/* Content */}
-      <div className="p-5">
-        <div className="flex items-start justify-between mb-1">
-          <h3 className="font-black text-slate-800 text-base leading-tight">{name}</h3>
-        </div>
-        <p className="text-xs text-slate-500 mb-3 line-clamp-2">{description}</p>
+      {/* Card body */}
+      <div className="p-4">
+        {/* Title */}
+        <h3 className="font-black text-base mb-1 leading-tight" style={{ color: '#F7F7FF' }}>
+          {name}
+        </h3>
+        <p className="text-xs mb-3 line-clamp-1" style={{ color: '#9b8ab0' }}>{description}</p>
 
+        {/* Meta row */}
         <div className="flex items-center gap-2 mb-3">
-          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${c.badge}`}>
+          <span className="text-xs font-bold px-2 py-0.5 rounded-full"
+            style={{ background: c.badgeBg, color: c.badgeText }}>
             Gr {grade}
           </span>
-          <span className="text-xs text-slate-400">{subject}</span>
-          <span className="text-xs text-slate-400 ml-auto">{subtopicCount} topics</span>
+          <span className="text-xs" style={{ color: '#9b8ab0' }}>{subject}</span>
+          <span className="text-xs ml-auto" style={{ color: '#9b8ab0' }}>{subtopicCount} levels</span>
         </div>
 
+        {/* Progress bar */}
         {progressPercent > 0 ? (
-          <ProgressBar
-            value={progressPercent}
-            color={`bg-gradient-to-r ${c.bg}`}
-            showPercent
-          />
+          <div>
+            <div className="flex justify-between mb-1">
+              <span className="text-xs font-semibold" style={{ color: '#9b8ab0' }}>Progress</span>
+              <span className="text-xs font-black" style={{ color: c.badgeText === '#c8950a' ? '#F5C842' : c.badgeText }}>
+                {progressPercent}%
+              </span>
+            </div>
+            <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
+              <div className="h-full rounded-full transition-all duration-700"
+                style={{ width: `${progressPercent}%`, background: c.barBg }} />
+            </div>
+          </div>
         ) : (
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-slate-300" />
-            <span className="text-xs text-slate-400">Not started yet</span>
+            <div className="w-2 h-2 rounded-full" style={{ background: 'rgba(255,255,255,0.2)' }} />
+            <span className="text-xs" style={{ color: '#9b8ab0' }}>Not started yet</span>
           </div>
         )}
       </div>

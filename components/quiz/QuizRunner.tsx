@@ -31,23 +31,34 @@ function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)]
 }
 
+// Curio colour tokens
+const CURIO = {
+  bg:       '#1a1228',
+  card:     '#231935',
+  cardBorder:'rgba(109,211,206,0.15)',
+  text:     '#F7F7FF',
+  subtext:  '#9b8ab0',
+  coral:    '#FF5E5B',
+  cyan:     '#6DD3CE',
+  amber:    '#F5C842',
+}
+
 export default function QuizRunner({
   questions, levelId, sectionType, baseXP, passThreshold, onComplete,
 }: QuizRunnerProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [selected, setSelected] = useState<string | null>(null)
-  const [answerState, setAnswerState] = useState<AnswerState>('idle')
+  const [selected, setSelected]         = useState<string | null>(null)
+  const [answerState, setAnswerState]   = useState<AnswerState>('idle')
   const [showExplanation, setShowExplanation] = useState(false)
-  const [startTime] = useState(Date.now())
+  const [startTime]  = useState(Date.now())
   const [scoreDisplay, setScoreDisplay] = useState(0)
-  // Ref for score avoids stale closures in handleNext
-  const scoreRef = useRef(0)
-  // Ref locks feedback message at selection time — prevents flicker on re-render
+  const scoreRef   = useRef(0)
   const feedbackRef = useRef('')
 
-  const current = questions[currentIndex]
+  const current        = questions[currentIndex]
   const progressPercent = ((currentIndex + (answerState !== 'idle' ? 1 : 0)) / questions.length) * 100
-  const isLast = currentIndex === questions.length - 1
+  const isLast         = currentIndex === questions.length - 1
+  const xpPerQ         = Math.max(1, Math.round(baseXP / questions.length))
 
   const handleSelect = useCallback((key: string) => {
     if (answerState !== 'idle') return
@@ -55,20 +66,17 @@ export default function QuizRunner({
     setSelected(key)
     setAnswerState(correct ? 'correct' : 'wrong')
     feedbackRef.current = correct ? pickRandom(CORRECT_MESSAGES) : pickRandom(WRONG_MESSAGES)
-    if (correct) {
-      scoreRef.current += 1
-      setScoreDisplay(scoreRef.current)
-    }
+    if (correct) { scoreRef.current += 1; setScoreDisplay(scoreRef.current) }
   }, [answerState, current])
 
   const handleNext = useCallback(() => {
     if (answerState === 'idle') return
     if (isLast) {
       const finalScore = scoreRef.current
-      const total = questions.length
-      const passed = finalScore / total >= passThreshold
-      const timeTaken = Math.round((Date.now() - startTime) / 1000)
-      const xpEarned = calculateXP({ score: finalScore, total, sectionType, baseXP })
+      const total      = questions.length
+      const passed     = finalScore / total >= passThreshold
+      const timeTaken  = Math.round((Date.now() - startTime) / 1000)
+      const xpEarned   = calculateXP({ score: finalScore, total, sectionType, baseXP })
       onComplete({ score: finalScore, total, passed, xpEarned, timeTaken })
     } else {
       setCurrentIndex(i => i + 1)
@@ -87,137 +95,154 @@ export default function QuizRunner({
         const idx = keyMap[e.key]
         if (idx !== undefined && current.options[idx]) handleSelect(current.options[idx].key)
       } else if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault()
-        handleNext()
+        e.preventDefault(); handleNext()
       }
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [answerState, current, handleSelect, handleNext])
 
-  function getOptionClass(optKey: string): string {
+  // Per-option style resolver
+  function optionStyle(optKey: string): React.CSSProperties {
     if (answerState === 'idle') {
-      return 'bg-white border-slate-200 text-slate-800 hover:border-violet-400 hover:bg-violet-50 hover:shadow-md active:scale-[0.99] cursor-pointer'
+      return {
+        background: 'rgba(255,255,255,0.05)',
+        borderColor: 'rgba(255,255,255,0.12)',
+        color: CURIO.text,
+        cursor: 'pointer',
+      }
     }
     if (optKey === current.correct_key) {
-      return 'bg-emerald-50 border-emerald-500 text-emerald-800 shadow-emerald-100 shadow-md'
+      return { background: 'rgba(52,211,153,0.12)', borderColor: '#34D399', color: '#6ee7b7' }
     }
     if (optKey === selected) {
-      return 'bg-rose-50 border-rose-400 text-rose-700 shadow-rose-100 shadow-md'
+      return { background: 'rgba(255,94,91,0.12)', borderColor: CURIO.coral, color: '#fca5a5' }
     }
-    return 'bg-slate-50 border-slate-200 text-slate-400 opacity-50'
+    return { background: 'rgba(255,255,255,0.02)', borderColor: 'rgba(255,255,255,0.06)', color: CURIO.subtext, opacity: 0.5 }
   }
 
-  const xpPerQ = Math.max(1, Math.round(baseXP / questions.length))
+  function bubbleStyle(optKey: string): React.CSSProperties {
+    if (answerState !== 'idle') {
+      if (optKey === current.correct_key) return { background: '#34D399', color: '#fff' }
+      if (optKey === selected)            return { background: CURIO.coral, color: '#fff' }
+    }
+    return { background: 'rgba(255,255,255,0.10)', color: CURIO.subtext }
+  }
 
   return (
     <div className="w-full max-w-2xl mx-auto select-none">
 
-      {/* Progress strip */}
+      {/* ── Progress strip ── */}
       <div className="flex items-center gap-3 mb-6">
-        <span className="text-sm font-black text-slate-400 tabular-nums min-w-[3.5rem]">
+        <span className="text-sm font-black tabular-nums min-w-[3.5rem]" style={{ color: CURIO.subtext }}>
           {currentIndex + 1}/{questions.length}
         </span>
         <div className="flex-1">
-          <ProgressBar value={progressPercent} color="bg-gradient-to-r from-violet-500 to-cyan-500" />
+          <ProgressBar value={progressPercent} color="bg-gradient-to-r from-[#FF5E5B] to-[#6DD3CE]" />
         </div>
         <XPBadge xp={scoreDisplay * xpPerQ} size="sm" />
       </div>
 
-      {/* Question card */}
-      <div key={`q-${currentIndex}`} className="bg-white rounded-3xl shadow-xl border border-slate-100 p-7 mb-5 animate-fade-slide">
+      {/* ── Question card ── */}
+      <div
+        key={`q-${currentIndex}`}
+        className="rounded-3xl p-7 mb-5 animate-fade-slide"
+        style={{ background: CURIO.card, border: `1px solid ${CURIO.cardBorder}` }}
+      >
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs font-black px-2.5 py-1 rounded-full bg-violet-100 text-violet-700">
+          <span className="text-xs font-black px-2.5 py-1 rounded-full"
+            style={{ background: 'rgba(109,211,206,0.12)', color: CURIO.cyan }}>
             Question {currentIndex + 1}
           </span>
           {sectionType === 'subtopic_mastery' && (
-            <span className="text-xs font-black px-2.5 py-1 rounded-full bg-amber-100 text-amber-700">🏆 Mastery</span>
+            <span className="text-xs font-black px-2.5 py-1 rounded-full"
+              style={{ background: 'rgba(245,200,66,0.12)', color: CURIO.amber }}>
+              🏆 Mastery
+            </span>
           )}
           {sectionType === 'broad_topic_mastery' && (
-            <span className="text-xs font-black px-2.5 py-1 rounded-full bg-purple-100 text-purple-700">👑 Final Boss</span>
+            <span className="text-xs font-black px-2.5 py-1 rounded-full"
+              style={{ background: 'rgba(109,211,206,0.12)', color: CURIO.cyan }}>
+              👑 Final Boss
+            </span>
           )}
         </div>
-        <p className="text-lg md:text-xl font-black text-slate-800 leading-relaxed">
+        <p className="text-lg md:text-xl font-black leading-relaxed" style={{ color: CURIO.text }}>
           {current.question_text}
         </p>
       </div>
 
-      {/* Answer options */}
-      <div key={`opts-${currentIndex}`} className="grid grid-cols-1 gap-3 mb-5 animate-fade-slide" style={{ animationDelay: '60ms' }}>
+      {/* ── Answer options ── */}
+      <div key={`opts-${currentIndex}`} className="grid grid-cols-1 gap-3 mb-5 animate-fade-slide"
+        style={{ animationDelay: '60ms' }}>
         {current.options.map((opt, i) => {
-          const isSelected = opt.key === selected
-          const isCorrect = answerState !== 'idle' && opt.key === current.correct_key
-          const isWrong = answerState === 'wrong' && isSelected
+          const isWrong = answerState === 'wrong' && opt.key === selected
           return (
             <button
               key={opt.key}
               onClick={() => handleSelect(opt.key)}
               disabled={answerState !== 'idle'}
               aria-label={`Option ${String.fromCharCode(65 + i)}: ${opt.text}`}
-              className={`
-                flex items-center gap-4 w-full text-left rounded-2xl border-2 px-5 py-4
-                font-semibold text-base transition-all duration-200
-                disabled:cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400
-                ${isWrong ? 'animate-[wrongShake_0.35s_ease-in-out]' : ''}
-                ${getOptionClass(opt.key)}
-              `}
+              className={`flex items-center gap-4 w-full text-left rounded-2xl border-2 px-5 py-4 font-semibold text-base transition-all duration-200 disabled:cursor-default focus:outline-none ${isWrong ? 'animate-[wrongShake_0.35s_ease-in-out]' : ''}`}
+              style={optionStyle(opt.key)}
             >
-              <span className={`
-                flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sm font-black transition-colors duration-200
-                ${answerState !== 'idle'
-                  ? isCorrect ? 'bg-emerald-500 text-white' : isSelected ? 'bg-rose-400 text-white' : 'bg-slate-200 text-slate-400'
-                  : 'bg-slate-100 text-slate-600'
-                }
-              `}>
+              <span className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sm font-black transition-colors duration-200"
+                style={bubbleStyle(opt.key)}>
                 {String.fromCharCode(65 + i)}
               </span>
               <span className="flex-1 leading-snug">{opt.text}</span>
-              {isCorrect && (
-                <span className="flex-shrink-0 w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center text-sm font-black">✓</span>
+              {answerState !== 'idle' && opt.key === current.correct_key && (
+                <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-black"
+                  style={{ background: '#34D399', color: '#fff' }}>✓</span>
               )}
-              {isWrong && (
-                <span className="flex-shrink-0 w-7 h-7 rounded-full bg-rose-400 text-white flex items-center justify-center text-sm font-black">✗</span>
+              {answerState === 'wrong' && opt.key === selected && (
+                <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-black"
+                  style={{ background: CURIO.coral, color: '#fff' }}>✗</span>
               )}
             </button>
           )
         })}
       </div>
 
-      {/* Feedback bar */}
+      {/* ── Feedback bar ── */}
       {answerState !== 'idle' && (
-        <div className={`rounded-2xl px-5 py-4 mb-4 border-2 animate-fade-slide ${
-          answerState === 'correct' ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200'
-        }`}>
-          <p className={`font-black text-base mb-1 ${answerState === 'correct' ? 'text-emerald-700' : 'text-rose-700'}`}>
+        <div
+          className="rounded-2xl px-5 py-4 mb-4 border-2 animate-fade-slide"
+          style={answerState === 'correct'
+            ? { background: 'rgba(52,211,153,0.08)', borderColor: 'rgba(52,211,153,0.3)' }
+            : { background: 'rgba(255,94,91,0.08)',  borderColor: 'rgba(255,94,91,0.3)' }
+          }
+        >
+          <p className="font-black text-base mb-1"
+            style={{ color: answerState === 'correct' ? '#6ee7b7' : '#fca5a5' }}>
             {feedbackRef.current}
           </p>
           {current.explanation && !showExplanation && (
-            <button
-              onClick={() => setShowExplanation(true)}
-              className="text-xs font-bold text-slate-500 underline underline-offset-2 hover:text-slate-700"
-            >
+            <button onClick={() => setShowExplanation(true)}
+              className="text-xs font-bold underline underline-offset-2 transition-opacity hover:opacity-70"
+              style={{ color: CURIO.subtext }}>
               Show explanation →
             </button>
           )}
           {current.explanation && showExplanation && (
-            <p className="text-sm text-slate-600 mt-2 leading-relaxed border-t border-slate-200 pt-2">
+            <p className="text-sm mt-2 leading-relaxed pt-2"
+              style={{ color: CURIO.subtext, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
               {current.explanation}
             </p>
           )}
         </div>
       )}
 
-      {/* Next / Finish button */}
+      {/* ── Next / Finish button ── */}
       {answerState !== 'idle' && (
-        <button
-          onClick={handleNext}
-          className="w-full py-4 rounded-2xl font-black text-base bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-200 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 active:translate-y-0"
-        >
+        <button onClick={handleNext}
+          className="w-full py-4 rounded-2xl font-black text-base text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
+          style={{ background: CURIO.coral, boxShadow: '0 4px 20px rgba(255,94,91,0.35)' }}>
           {isLast ? '🏁 See My Results' : 'Next Question →'}
         </button>
       )}
 
-      <p className="text-center text-xs text-slate-400 mt-4">
+      <p className="text-center text-xs mt-4" style={{ color: CURIO.subtext }}>
         {answerState === 'idle' ? 'Press 1–4 to answer' : 'Press Enter or Space to continue'}
       </p>
     </div>

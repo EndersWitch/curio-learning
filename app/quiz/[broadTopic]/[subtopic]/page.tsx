@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { toDisplayName } from '@/lib/displayName'
 import { notFound } from 'next/navigation'
 import { createServerClient } from '@/lib/supabase'
 import { isLevelPassed, isSubtopicMasteryUnlocked } from '@/lib/progress'
@@ -53,7 +54,7 @@ export default async function SubtopicPage({ params }: Props) {
     normalIds.length > 0 ? Math.round((passedNormalCount / normalIds.length) * 100) : 0
 
   const totalXP = levels.reduce((sum, l) => sum + (l.xp_reward ?? 0), 0)
-  const subtopicName = subtopicSlug.replace(/_/g, ' ')
+  const subtopicName = toDisplayName(subtopicSlug)
   const subject = levels[0]?.subject ?? ''
   const grade = levels[0]?.grade ?? ''
   const broadTopicName = decodeURIComponent(params.broadTopic)
@@ -61,17 +62,17 @@ export default async function SubtopicPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-cyan-50">
       {/* Hero */}
-      <div className="bg-gradient-to-r from-violet-700 via-indigo-700 to-violet-800 text-white">
+      <div style={{ background: "linear-gradient(135deg, #2B1E3F 0%, #3d2d58 100%)" }} className="text-white">
         <div className="max-w-2xl mx-auto px-6 py-10">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-xs text-violet-300 mb-5 flex-wrap">
             <Link href="/quiz" className="hover:text-white transition-colors">Topics</Link>
             <span>›</span>
             <Link href={`/quiz/${params.broadTopic}`} className="hover:text-white transition-colors">
-              {broadTopicName}
+              {toDisplayName(broadTopicName)}
             </Link>
             <span>›</span>
-            <span className="text-white font-semibold">{subtopicName}</span>
+            <span className="text-white font-semibold">{toDisplayName(subtopicSlug)}</span>
           </nav>
 
           <div className="flex items-start justify-between gap-4">
@@ -80,7 +81,7 @@ export default async function SubtopicPage({ params }: Props) {
                 {subject} · Grade {grade}
               </p>
               <h1 className="text-3xl md:text-4xl font-black mb-2 leading-tight">
-                {subtopicName}
+                {toDisplayName(subtopicSlug)}
               </h1>
               <p className="text-violet-200 text-sm">
                 {normalLevels.length} levels{masteryLevel ? ' + Mastery Challenge' : ''}
@@ -182,7 +183,7 @@ export default async function SubtopicPage({ params }: Props) {
           <div className="mt-6 rounded-3xl bg-gradient-to-r from-emerald-50 to-cyan-50 border-2 border-emerald-200 p-6 text-center">
             <div className="text-3xl mb-2">🎉</div>
             <h3 className="font-black text-emerald-800 text-lg">
-              {subtopicName} Complete!
+              {toDisplayName(subtopicSlug)} Complete!
             </h3>
             <p className="text-sm text-emerald-600 mt-1">
               You've mastered this entire section. Move on to the next subtopic!
@@ -191,7 +192,7 @@ export default async function SubtopicPage({ params }: Props) {
               href={`/quiz/${params.broadTopic}`}
               className="inline-block mt-4 px-6 py-3 rounded-2xl font-black text-sm bg-emerald-600 text-white hover:bg-emerald-700 transition-colors"
             >
-              Back to {broadTopicName} →
+              Back to {toDisplayName(broadTopicName)} →
             </Link>
           </div>
         )}
