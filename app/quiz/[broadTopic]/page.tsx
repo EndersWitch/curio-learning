@@ -1,55 +1,116 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { createServerClient } from '@/lib/supabase'
-import { toDisplayName } from '@/lib/displayName'
-import { isLevelPassed, isSubtopicMasteryUnlocked, isBroadTopicMasteryUnlocked } from '@/lib/progress'
+import { createClient } from '@supabase/supabase-js'
 
-interface Props { params: { broadTopic: string } }
+const sb = createClient(
+  'https://inmrsgujgfktapjnekjs.supabase.co',
+  'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU',
+  { auth: { persistSession: true, autoRefreshToken: true } }
+)
 
-export default async function BroadTopicPage({ params }: Props) {
-  const supabase = createServerClient()
-  const broadTopicSlug = decodeURIComponent(params.broadTopic)
+function toDisplay(slug: string) {
+  return slug
+    .replace(/_/g, ' ')
+    .replace(/\b\w/g, c => c.toUpperCase())
+}
 
-  const { data: levels, error } = await supabase
-    .from('quiz_levels')
-    .select('*')
-    .eq('broad_topic', broadTopicSlug)
-    .order('level_number')
+interface Level {
+  id: string
+  broad_topic: string
+  subtopic_id: string | null
+  subtopic_display: string | null
+  section_type: string
+  level_order: number
+  level_display: string
+  question_count: number
+  description: string | null
+  is_premium: boolean
+}
 
-  if (error || !levels || levels.length === 0) notFound()
+export default function BroadTopicPage() {
+  const params = useParams()
+  const router = useRouter()
+  const broadTopicSlug = decodeURIComponent(params.broadTopic as string)
 
-  let userProgress: any[] = []
-  let userProfile: any    = null
-  const { data: { session } } = await supabase.auth.getSession()
+  const [levels, setLevels] = useState<Level[]>([])
+  const [userProgress, setUserProgress] = useState<string[]>([])
+  const [isPremiumUser, setIsPremiumUser] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [notFound, setNotFound] = useState(false)
 
-  if (session?.user?.id) {
-    const [{ data: prog }, { data: profile }] = await Promise.all([
-      supabase.from('user_progress').select('*').eq('user_id', session.user.id),
-      supabase.from('profiles').select('*').eq('id', session.user.id).single(),
+  useEffect(() => { loadAll() }, [broadTopicSlug])
+
+  async function loadAll() {
+    // Load session + levels in parallel
+    const [sessionResult, levelsResult] = await Promise.all([
+      sb.auth.getSession(),
+      sb.from('quiz_levels')
+        .select('*')
+        .eq('broad_topic', broadTopicSlug)
+        .order('level_order'),
     ])
-    userProgress = prog ?? []
-    userProfile  = profile
-  }
 
-  const isUserPremium = userProfile?.is_premium || userProfile?.is_founder || false
-  const subject = levels[0]?.subject ?? ''
-  const grade   = levels[0]?.grade   ?? ''
+    if (!levelsResult.data || levelsResult.data.length === 0) {
+      setNotFound(true)
+      setLoading(false)
+      return
+    }
+
+    setLevels(levelsResult.data)
+
+    const session = sessionResult.data.session
+    if (session?.user) {
+      const [{ data: prog }, { data: profile }] = await Promise.all([
+        sb.from('user_progress').select('level_id').eq('user_id', session.user.id).eq('passed', true),
+        sb.from('profiles').select('is_premium, is_founder').eq('id', session.user.id).single(),
+      ])
+      setUserProgress((prog ?? []).map((p: any) => p.level_id))
+      setIsPremiumUser(profile?.is_premium || profile?.is_founder || false)
+    }
+
+    setLoading(false)
+  }
 
   // Group by subtopic
-  const subtopicMap = new Map<string, { normalLevels: any[]; masteryLevel: any | null }>()
-  let broadMasteryLevel: any = null
-
+  const subtopicMap = new Map<string, Level[]>()
   for (const level of levels) {
-    if (level.section_type === 'broad_topic_mastery') { broadMasteryLevel = level; continue }
     const key = level.subtopic_id ?? '_general'
-    if (!subtopicMap.has(key)) subtopicMap.set(key, { normalLevels: [], masteryLevel: null })
-    const sub = subtopicMap.get(key)!
-    if (level.section_type === 'subtopic_mastery') sub.masteryLevel = level
-    else sub.normalLevels.push(level)
+    if (!subtopicMap.has(key)) subtopicMap.set(key, [])
+    subtopicMap.get(key)!.push(level)
   }
 
-  const subtopicMasteryIds = [...subtopicMap.values()].map(s => s.masteryLevel?.id).filter(Boolean)
-  const broadMasteryUnlocked = isBroadTopicMasteryUnlocked(userProgress, subtopicMasteryIds)
+  const subject = levels[0]?.subject ?? ''
+  const grade = levels[0]?.grade ?? ''
+
+  if (loading) return (
+    <div className="min-h-screen flex items-center justify-center" style={{ background: '#1a1228' }}>
+      <div className="text-center">
+        <div className="w-12 h-12 rounded-full border-2 border-t-transparent animate-spin mx-auto mb-4"
+          style={{ borderColor: '#6DD3CE', borderTopColor: 'transparent' }} />
+        <p className="text-sm" style={{ color: '#9b8ab0' }}>Loading levels...</p>
+      </div>
+    </div>
+  )
+
+  if (notFound) return (
+    <div className="min-h-screen flex items-center justify-center" style={{ background: '#1a1228' }}>
+      <div className="text-center">
+        <div className="text-5xl mb-4">🔍</div>
+        <h1 className="text-2xl font-black mb-2" style={{ color: '#F7F7FF' }}>Topic Not Found</h1>
+        <p className="text-sm mb-6" style={{ color: '#9b8ab0' }}>
+          We couldn&apos;t find that quiz topic. It may have been moved or doesn&apos;t exist yet.
+        </p>
+        <Link href="/quiz"
+          className="inline-block font-black px-6 py-3 rounded-2xl text-sm"
+          style={{ background: '#6DD3CE', color: '#2B1E3F' }}>
+          ← Browse All Topics
+        </Link>
+      </div>
+    </div>
+  )
 
   return (
     <div className="min-h-screen" style={{ background: '#1a1228' }}>
@@ -66,17 +127,21 @@ export default async function BroadTopicPage({ params }: Props) {
             {subject} · Grade {grade}
           </p>
           <h1 className="text-3xl md:text-4xl font-black" style={{ color: '#F7F7FF' }}>
-            {toDisplayName(broadTopicSlug)}
+            {toDisplay(broadTopicSlug)}
           </h1>
         </div>
       </div>
 
+      {/* Subtopic sections */}
       <div className="max-w-3xl mx-auto px-6 py-8 space-y-6">
+        {[...subtopicMap.entries()].map(([key, subLevels]) => {
+          const displayName = subLevels[0]?.subtopic_display ?? toDisplay(key === '_general' ? 'General Practice' : key)
+          const normalLevels = subLevels.filter(l => l.section_type !== 'broad_topic_mastery')
+          const masteryLevel = subLevels.find(l => l.section_type === 'subtopic_mastery' || l.section_type === 'broad_topic_mastery')
+          const regularLevels = normalLevels.filter(l => l.section_type !== 'subtopic_mastery')
 
-        {/* Subtopic sections */}
-        {[...subtopicMap.entries()].map(([key, sub]) => {
-          const masteryUnlocked = isSubtopicMasteryUnlocked(userProgress, sub.normalLevels.map(l => l.id))
-          const masteryPassed   = sub.masteryLevel ? isLevelPassed(userProgress, sub.masteryLevel.id) : false
+          // Mastery unlocked if all regular levels passed
+          const masteryUnlocked = regularLevels.every(l => userProgress.includes(l.id))
 
           return (
             <div key={key} className="rounded-3xl overflow-hidden"
@@ -86,14 +151,12 @@ export default async function BroadTopicPage({ params }: Props) {
               <div className="px-6 py-4 flex items-center justify-between"
                 style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                 <div>
-                  <h2 className="font-black text-lg" style={{ color: '#F7F7FF' }}>
-                    {toDisplayName(key === '_general' ? 'General Practice' : key)}
-                  </h2>
+                  <h2 className="font-black text-lg" style={{ color: '#F7F7FF' }}>{displayName}</h2>
                   <p className="text-xs mt-0.5" style={{ color: '#9b8ab0' }}>
-                    {sub.normalLevels.length} levels{sub.masteryLevel ? ' + Mastery' : ''}
+                    {regularLevels.length} levels{masteryLevel ? ' + Mastery' : ''}
                   </p>
                 </div>
-                {masteryPassed && (
+                {masteryUnlocked && masteryLevel && userProgress.includes(masteryLevel.id) && (
                   <span className="text-xs font-black px-3 py-1 rounded-full"
                     style={{ background: 'rgba(52,211,153,0.12)', color: '#34D399' }}>
                     ✅ Mastered
@@ -103,92 +166,50 @@ export default async function BroadTopicPage({ params }: Props) {
 
               {/* Level rows */}
               <div className="p-4 space-y-2">
-                {sub.normalLevels.map((level, i) => {
-                  const passed   = isLevelPassed(userProgress, level.id)
-                  const unlocked = i === 0 || isLevelPassed(userProgress, sub.normalLevels[i-1].id)
-                  const locked   = !unlocked || (level.is_premium && !isUserPremium)
+                {regularLevels.map((level, i) => {
+                  const passed = userProgress.includes(level.id)
+                  const unlocked = i === 0 || userProgress.includes(regularLevels[i - 1].id)
+                  const locked = !unlocked || (level.is_premium && !isPremiumUser)
                   return (
                     <LevelRow key={level.id} level={level} passed={passed} locked={locked}
-                      broadTopicSlug={params.broadTopic} subtopicSlug={encodeURIComponent(key)} />
+                      broadTopicSlug={params.broadTopic as string} />
                   )
                 })}
 
-                {sub.masteryLevel && (
+                {/* Mastery row */}
+                {masteryLevel && (
                   <div className="mt-2 pt-2" style={{ borderTop: '1px dashed rgba(245,200,66,0.3)' }}>
-                    <LevelRow level={sub.masteryLevel} passed={isLevelPassed(userProgress, sub.masteryLevel.id)}
-                      locked={!masteryUnlocked || (sub.masteryLevel.is_premium && !isUserPremium)}
-                      broadTopicSlug={params.broadTopic} subtopicSlug={encodeURIComponent(key)} isMastery />
+                    <LevelRow level={masteryLevel} passed={userProgress.includes(masteryLevel.id)}
+                      locked={!masteryUnlocked || (masteryLevel.is_premium && !isPremiumUser)}
+                      broadTopicSlug={params.broadTopic as string} isMastery />
                   </div>
                 )}
               </div>
             </div>
           )
         })}
-
-        {/* Final boss — broad topic mastery */}
-        {broadMasteryLevel && (
-          <div className="rounded-3xl overflow-hidden transition-all duration-300"
-            style={{
-              background: broadMasteryUnlocked
-                ? 'linear-gradient(135deg, #2B1E3F 0%, #3d2d58 100%)'
-                : '#231935',
-              border: broadMasteryUnlocked
-                ? '2px solid rgba(109,211,206,0.4)'
-                : '2px dashed rgba(255,255,255,0.1)',
-              opacity: broadMasteryUnlocked ? 1 : 0.6,
-            }}>
-            <div className="px-6 py-5 flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
-                style={{
-                  background: broadMasteryUnlocked ? 'rgba(109,211,206,0.15)' : 'rgba(255,255,255,0.05)',
-                  border: broadMasteryUnlocked ? '1px solid rgba(109,211,206,0.3)' : '1px solid rgba(255,255,255,0.1)',
-                }}>
-                {broadMasteryUnlocked ? '👑' : '🔒'}
-              </div>
-              <div className="flex-1">
-                <span className="text-xs font-black uppercase tracking-wider"
-                  style={{ color: '#6DD3CE' }}>Final Boss</span>
-                <h3 className="font-black text-xl" style={{ color: '#F7F7FF' }}>
-                  {toDisplayName(broadTopicSlug)} Mastery
-                </h3>
-                <p className="text-sm mt-0.5" style={{ color: '#9b8ab0' }}>
-                  {broadMasteryUnlocked
-                    ? `${broadMasteryLevel.question_count} questions · +${broadMasteryLevel.xp_reward} XP`
-                    : 'Complete all subtopic masteries to unlock'}
-                </p>
-              </div>
-              {broadMasteryUnlocked && (
-                <Link href={`/quiz/${params.broadTopic}/_mastery/${broadMasteryLevel.id}/learn`}
-                  className="flex-shrink-0 px-5 py-3 rounded-2xl font-black text-sm text-white transition-all hover:-translate-y-0.5"
-                  style={{ background: '#FF5E5B', boxShadow: '0 4px 16px rgba(255,94,91,0.35)' }}>
-                  Enter →
-                </Link>
-              )}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   )
 }
 
-function LevelRow({ level, passed, locked, broadTopicSlug, subtopicSlug, isMastery = false }: {
-  level: any; passed: boolean; locked: boolean
-  broadTopicSlug: string; subtopicSlug: string; isMastery?: boolean
+function LevelRow({ level, passed, locked, broadTopicSlug, isMastery = false }: {
+  level: Level; passed: boolean; locked: boolean
+  broadTopicSlug: string; isMastery?: boolean
 }) {
-  const learnHref = `/quiz/${broadTopicSlug}/${subtopicSlug}/${level.id}/learn`
-
-  const rowStyle: React.CSSProperties = locked
-    ? { background: 'rgba(255,255,255,0.02)', cursor: 'not-allowed', opacity: 0.5 }
-    : passed
-    ? { background: 'rgba(52,211,153,0.06)' }
-    : isMastery
-    ? { background: 'rgba(245,200,66,0.06)' }
-    : { background: 'rgba(255,255,255,0.03)' }
+  const href = `/quiz/${broadTopicSlug}/${encodeURIComponent(level.subtopic_id ?? '_general')}/${level.id}/learn`
 
   const inner = (
     <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150"
-      style={rowStyle}>
+      style={locked
+        ? { background: 'rgba(255,255,255,0.02)', cursor: 'not-allowed', opacity: 0.5 }
+        : passed
+        ? { background: 'rgba(52,211,153,0.06)' }
+        : isMastery
+        ? { background: 'rgba(245,200,66,0.06)' }
+        : { background: 'rgba(255,255,255,0.03)' }}>
+
+      {/* Level badge */}
       <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0 border-2"
         style={passed
           ? { background: '#34D399', borderColor: '#34D399', color: '#fff' }
@@ -198,22 +219,27 @@ function LevelRow({ level, passed, locked, broadTopicSlug, subtopicSlug, isMaste
           ? { background: 'rgba(245,200,66,0.12)', borderColor: 'rgba(245,200,66,0.4)', color: '#F5C842' }
           : { background: 'rgba(109,211,206,0.08)', borderColor: 'rgba(109,211,206,0.3)', color: '#6DD3CE' }
         }>
-        {passed ? '✓' : locked ? '🔒' : isMastery ? '🏆' : level.level_number}
+        {passed ? '✓' : locked ? '🔒' : isMastery ? '🏆' : level.level_order}
       </div>
+
+      {/* Title + desc */}
       <div className="flex-1 min-w-0">
-        <p className="font-bold text-sm truncate"
-          style={{ color: locked ? '#9b8ab0' : '#F7F7FF' }}>
-          {level.title}
+        <p className="font-bold text-sm truncate" style={{ color: locked ? '#9b8ab0' : '#F7F7FF' }}>
+          {level.level_display}
         </p>
+        {level.description && (
+          <p className="text-xs truncate mt-0.5" style={{ color: '#9b8ab0' }}>{level.description}</p>
+        )}
       </div>
-      <div className="flex items-center gap-3 text-xs flex-shrink-0" style={{ color: '#9b8ab0' }}>
+
+      {/* Meta */}
+      <div className="flex items-center gap-2 text-xs flex-shrink-0" style={{ color: '#9b8ab0' }}>
         <span>{level.question_count}Q</span>
-        <span className="font-semibold" style={{ color: '#F5C842' }}>+{level.xp_reward} XP</span>
         {!locked && !passed && <span style={{ color: '#6DD3CE' }}>→</span>}
       </div>
     </div>
   )
 
   if (locked) return <div>{inner}</div>
-  return <Link href={learnHref} className="block hover:brightness-110 transition-all">{inner}</Link>
+  return <Link href={href} className="block hover:brightness-110 transition-all">{inner}</Link>
 }
