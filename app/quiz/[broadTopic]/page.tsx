@@ -46,7 +46,6 @@ export default function BroadTopicPage() {
   useEffect(() => { loadAll() }, [broadTopicSlug])
 
   async function loadAll() {
-    // Load session + levels in parallel
     const [sessionResult, levelsResult] = await Promise.all([
       sb.auth.getSession(),
       sb.from('quiz_levels')
@@ -66,7 +65,7 @@ export default function BroadTopicPage() {
     const session = sessionResult.data.session
     if (session?.user) {
       const [{ data: prog }, { data: profile }] = await Promise.all([
-        sb.from('user_progress').select('level_id').eq('user_id', session.user.id).eq('passed', true),
+        sb.from('user_level_progress').select('level_id').eq('user_id', session.user.id).eq('passed', true),
         sb.from('profiles').select('is_premium, is_founder').eq('id', session.user.id).single(),
       ])
       setUserProgress((prog ?? []).map((p: any) => p.level_id))
@@ -76,7 +75,6 @@ export default function BroadTopicPage() {
     setLoading(false)
   }
 
-  // Group by subtopic
   const subtopicMap = new Map<string, Level[]>()
   for (const level of levels) {
     const key = level.subtopic_id ?? '_general'
@@ -103,7 +101,7 @@ export default function BroadTopicPage() {
         <div className="text-5xl mb-4">🔍</div>
         <h1 className="text-2xl font-black mb-2" style={{ color: '#F7F7FF' }}>Topic Not Found</h1>
         <p className="text-sm mb-6" style={{ color: '#9b8ab0' }}>
-          We couldn&apos;t find that quiz topic. It may have been moved or doesn&apos;t exist yet.
+          We couldn&apos;t find that quiz opic. It may have been moved or doesn&apos;t exist yet.
         </p>
         <Link href="/quiz"
           className="inline-block font-black px-6 py-3 rounded-2xl text-sm"
@@ -121,7 +119,7 @@ export default function BroadTopicPage() {
       <div style={{ background: 'linear-gradient(135deg, #2B1E3F 0%, #3d2d58 100%)' }}>
         <div className="max-w-3xl mx-auto px-6 py-10">
           <Link href="/quiz"
-            className="inline-flex items-center gap-1 text-xs font-semibold mb-5 transition-opacity hover:opacity-70"
+            className="inline-flex items-center gap-1 text-xs font-semibold mb-5 transition-opacity hover:oropacity-70"
             style={{ color: '#6DD3CE' }}>
             ← Back to Topics
           </Link>
@@ -141,15 +139,12 @@ export default function BroadTopicPage() {
           const normalLevels = subLevels.filter(l => l.section_type !== 'broad_topic_mastery')
           const masteryLevel = subLevels.find(l => l.section_type === 'subtopic_mastery' || l.section_type === 'broad_topic_mastery')
           const regularLevels = normalLevels.filter(l => l.section_type !== 'subtopic_mastery')
-
-          // Mastery unlocked if all regular levels passed
           const masteryUnlocked = regularLevels.every(l => userProgress.includes(l.id))
 
           return (
             <div key={key} className="rounded-3xl overflow-hidden"
               style={{ background: '#231935', border: '1px solid rgba(109,211,206,0.12)' }}>
 
-              {/* Subtopic header */}
               <div className="px-6 py-4 flex items-center justify-between"
                 style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                 <div>
@@ -166,7 +161,6 @@ export default function BroadTopicPage() {
                 )}
               </div>
 
-              {/* Level rows */}
               <div className="p-4 space-y-2">
                 {regularLevels.map((level, i) => {
                   const passed = userProgress.includes(level.id)
@@ -178,7 +172,6 @@ export default function BroadTopicPage() {
                   )
                 })}
 
-                {/* Mastery row */}
                 {masteryLevel && (
                   <div className="mt-2 pt-2" style={{ borderTop: '1px dashed rgba(245,200,66,0.3)' }}>
                     <LevelRow level={masteryLevel} passed={userProgress.includes(masteryLevel.id)}
@@ -211,7 +204,6 @@ function LevelRow({ level, passed, locked, broadTopicSlug, isMastery = false }: 
         ? { background: 'rgba(245,200,66,0.06)' }
         : { background: 'rgba(255,255,255,0.03)' }}>
 
-      {/* Level badge */}
       <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0 border-2"
         style={passed
           ? { background: '#34D399', borderColor: '#34D399', color: '#fff' }
@@ -221,10 +213,9 @@ function LevelRow({ level, passed, locked, broadTopicSlug, isMastery = false }: 
           ? { background: 'rgba(245,200,66,0.12)', borderColor: 'rgba(245,200,66,0.4)', color: '#F5C842' }
           : { background: 'rgba(109,211,206,0.08)', borderColor: 'rgba(109,211,206,0.3)', color: '#6DD3CE' }
         }>
-        {passed ? '✓' : locked ? '🔒' : isMastery ? '🏆' : level.level_order}
+        {passed ? '✛' : locked ? '🔒' : isMastery ? '🏆' : level.level_order}
       </div>
 
-      {/* Title + desc */}
       <div className="flex-1 min-w-0">
         <p className="font-bold text-sm truncate" style={{ color: locked ? '#9b8ab0' : '#F7F7FF' }}>
           {level.level_display}
@@ -234,7 +225,6 @@ function LevelRow({ level, passed, locked, broadTopicSlug, isMastery = false }: 
         )}
       </div>
 
-      {/* Meta */}
       <div className="flex items-center gap-2 text-xs flex-shrink-0" style={{ color: '#9b8ab0' }}>
         <span>{level.question_count}Q</span>
         {!locked && !passed && <span style={{ color: '#6DD3CE' }}>→</span>}
