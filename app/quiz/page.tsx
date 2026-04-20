@@ -1,36 +1,68 @@
-import { createServerClient } from '@/lib/supabase'
+import { cookies } from 'next/headers'
+import { createClient } from '@supabase/supabase-js'
 import { toDisplayName } from '@/lib/displayName'
 import TopicCard from '@/components/quiz/TopicCard'
+
+const SUPABASE_URL = 'https://inmrsgujgfktapjnekjs.supabase.co'
+const SUPABASE_ANON_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU'
 
 export default async function QuizBrowsePage({
   searchParams,
 }: {
   searchParams: { grade?: string; subject?: string }
 }) {
-  const supabase = createServerClient()
-
-  // Session is managed client-side via localStorage (curio_session)
-  // Server components cannot read localStorage; auth-dependent UI renders client-side
-  const userId: string | undefined = undefined
-
+  // ── Read session from Supabase auth cookie ──────────────────────────────
+  // Supabase stores session in a cookie named sb-<ref>-auth-token
+  // We extract the access token and use it to fetch the user's profile
+  let userId: string | null = null
   let userProfile: any = null
   let userProgress: string[] = []
 
-  if (userId) {
-    const [{ data: profile }, { data: progress }] = await Promise.all([
-      supabase.from('profiles').select('*').eq('id', userId).single(),
-      supabase.from('user_progress').select('level_id').eq('user_id', userId).eq('passed', true),
-    ])
-    userProfile = profile
-    userProgress = (progress ?? []).map((p: any) => p.level_id)
+  const cookieStore = cookies()
+  const allCookies = cookieStore.getAll()
+
+  for (const c of allCookies) {
+    if (c.name.includes('auth-token')) {
+      try {
+        // Cookie value may be a JSON array or object depending on Supabase version
+        const raw = decodeURIComponent(c.value)
+        const parsed = JSON.parse(raw)
+        const token = Array.isArray(parsed)
+          ? parsed[0]?.access_token
+          : parsed?.access_token
+
+        if (token) {
+          // Create an authenticated client with this token
+          const authClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: { persistSession: false, autoRefreshToken: false },
+            global: { headers: { Authorization: `Bearer ${token}` } },
+          })
+          const { data: { user } } = await authClient.auth.getUser()
+          if (user?.id) {
+            userId = user.id
+            const [{ data: profile }, { data: progress }] = await Promise.all([
+              authClient.from('profiles').select('*').eq('id', user.id).single(),
+              authClient.from('user_progress').select('level_id').eq('user_id', user.id).eq('passed', true),
+            ])
+            userProfile = profile
+            userProgress = (progress ?? []).map((p: any) => p.level_id)
+          }
+        }
+      } catch {}
+      break
+    }
   }
 
-  // Fetch all levels to derive broad topics
-  const { data: levelRows } = await supabase
+  // ── Fetch all quiz levels ───────────────────────────────────────────────
+  const anonClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  })
+
+  const { data: levelRows } = await anonClient
     .from('quiz_levels')
     .select('broad_topic, subject, grade, id, is_premium, section_type')
 
-  // Aggregate unique broad topics
+  // ── Aggregate into unique broad topics ─────────────────────────────────
   const topicMap = new Map<string, {
     slug: string
     subject: string
@@ -53,64 +85,53 @@ export default async function QuizBrowsePage({
     const t = topicMap.get(row.broad_topic)!
     t.level_ids.push(row.id)
     if (row.is_premium) t.is_premium = true
-    // Use lowest grade if multiple rows
     if (row.grade && row.grade < t.grade) t.grade = row.grade
   }
 
   let topics = Array.from(topicMap.values())
-
-  if (searchParams.grade) {
-    topics = topics.filter(t => t.grade === Number(searchParams.grade))
-  }
-  if (searchParams.subject) {
-    topics = topics.filter(t =>
-      t.subject.toLowerCase().includes(searchParams.subject!.toLowerCase())
-    )
-  }
+  if (searchParams.grade) topics = topics.filter(t => t.grade === Number(searchParams.grade))
+  if (searchParams.subject) topics = topics.filter(t => t.subject.toLowerCase().includes(searchParams.subject!.toLowerCase()))
 
   function topicProgress(levelIds: string[]): number {
     if (!levelIds.length) return 0
-    const passed = levelIds.filter(id => userProgress.includes(id)).length
-    return Math.round((passed / levelIds.length) * 100)
+    return Math.round((levelIds.filter(id => userProgress.includes(id)).length / levelIds.length) * 100)
   }
 
-  // Subject → icon + Curio colour name
   const SUBJECT_META: Record<string, { icon: string; color: string }> = {
-    'english hl':          { icon: '📚', color: 'coral' },
-    'afrikaans fal':       { icon: '🦁', color: 'cyan' },
-    'afrikaans hl':        { icon: '🦁', color: 'cyan' },
-    'english fal':         { icon: '📖', color: 'plum' },
-    'mathematics':         { icon: '🔢', color: 'amber' },
-    'natural sciences':    { icon: '🔬', color: 'cyan' },
-    'life sciences':       { icon: '🧬', color: 'cyan' },
-    'physical sciences':   { icon: '⚛️',  color: 'plum' },
-    'social sciences':     { icon: '🌍', color: 'coral' },
-    'accounting':          { icon: '📊', color: 'amber' },
-    'geography':           { icon: '🗺️', color: 'cyan' },
-    'history':             { icon: '📜', color: 'coral' },
-    'life orientation':    { icon: '🌱', color: 'cyan' },
-    'business studies':    { icon: '💼', color: 'amber' },
-    'economics':           { icon: '📈', color: 'amber' },
-    'technology':          { icon: '⚙️',  color: 'plum' },
+    'english hl':        { icon: '📚', color: 'coral' },
+    'afrikaans fal':     { icon: '🦁', color: 'cyan' },
+    'afrikaans hl':      { icon: '🦁', color: 'cyan' },
+    'english fal':       { icon: '📖', color: 'plum' },
+    'mathematics':       { icon: '🔢', color: 'amber' },
+    'natural sciences':  { icon: '🔬', color: 'cyan' },
+    'life sciences':     { icon: '🧬', color: 'cyan' },
+    'physical sciences': { icon: '⚛️',  color: 'plum' },
+    'social sciences':   { icon: '🌍', color: 'coral' },
+    'accounting':        { icon: '📊', color: 'amber' },
+    'geography':         { icon: '🗺️', color: 'cyan' },
+    'history':           { icon: '📜', color: 'coral' },
+    'life orientation':  { icon: '🌱', color: 'cyan' },
+    'business studies':  { icon: '💼', color: 'amber' },
+    'economics':         { icon: '📈', color: 'amber' },
+    'technology':        { icon: '⚙️',  color: 'plum' },
   }
 
   const grades = [4,5,6,7,8,9,10,11,12]
+  const isPremiumUser = userProfile?.is_premium || userProfile?.is_founder || false
 
   return (
     <div className="min-h-screen" style={{ background: '#1a1228' }}>
 
-      {/* ── Hero ─────────────────────────────────────────────── */}
+      {/* Hero */}
       <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #2B1E3F 0%, #3d2d58 100%)' }}>
-        {/* Decorative blobs */}
         <div className="absolute top-0 right-0 w-80 h-80 rounded-full opacity-10"
           style={{ background: '#6DD3CE', transform: 'translate(30%, -30%)' }} />
         <div className="absolute bottom-0 left-0 w-56 h-56 rounded-full opacity-10"
           style={{ background: '#FF5E5B', transform: 'translate(-30%, 30%)' }} />
 
         <div className="relative max-w-4xl mx-auto px-6 py-14">
-          {/* Bloom logo + wordmark */}
           <div className="flex items-center gap-3 mb-5">
-            <svg width="36" height="36" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="36" height="36" viewBox="0 0 200 200" fill="none">
               <ellipse cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE"/>
               <ellipse cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fillOpacity="0.7" transform="rotate(72 100 100)"/>
               <ellipse cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fillOpacity="0.5" transform="rotate(144 100 100)"/>
@@ -128,24 +149,16 @@ export default async function QuizBrowsePage({
           </h1>
           <p className="text-lg mb-7 max-w-xl" style={{ color: '#c4b8d8' }}>
             Choose a topic, learn the concepts, then prove what you know.
-            Every question makes you smarter!
           </p>
 
-          {/* Auth / XP pill */}
           {userProfile ? (
             <div className="inline-flex items-center gap-3 rounded-2xl px-4 py-2.5 text-sm"
               style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}>
               <span>⚡</span>
               <span className="font-black" style={{ color: '#F5C842' }}>
-                {(userProfile.total_xp ?? 0).toLocaleString()} XP
+                {(userProfile.xp_total ?? userProfile.xp ?? 0).toLocaleString()} XP
               </span>
-              {(userProfile.streak ?? 0) > 0 && (
-                <>
-                  <span style={{ color: 'rgba(255,255,255,0.3)' }}>·</span>
-                  <span style={{ color: '#F7F7FF' }}>🔥 {userProfile.streak} day streak</span>
-                </>
-              )}
-              {userProfile.is_premium && (
+              {isPremiumUser && (
                 <>
                   <span style={{ color: 'rgba(255,255,255,0.3)' }}>·</span>
                   <span style={{ color: '#F5C842' }}>✨ Premium</span>
@@ -153,8 +166,7 @@ export default async function QuizBrowsePage({
               )}
             </div>
           ) : (
-            <a
-              href="/login"
+            <a href="/login"
               className="inline-block font-black px-6 py-3 rounded-2xl text-sm transition-all hover:-translate-y-0.5"
               style={{ background: '#FF5E5B', color: '#fff', boxShadow: '0 4px 20px rgba(255,94,91,0.4)' }}
             >
@@ -164,19 +176,14 @@ export default async function QuizBrowsePage({
         </div>
       </div>
 
-      {/* ── Grade filter bar ─────────────────────────────────── */}
+      {/* Grade filter */}
       <div className="max-w-4xl mx-auto px-6 py-5">
         <div className="flex flex-wrap gap-2 items-center">
-          <span className="text-xs font-black uppercase tracking-widest mr-1" style={{ color: '#6DD3CE' }}>
-            Grade:
-          </span>
-          <a href="/quiz"
-            className="text-xs font-bold px-3 py-1.5 rounded-full border transition-colors"
+          <span className="text-xs font-black uppercase tracking-widest mr-1" style={{ color: '#6DD3CE' }}>Grade:</span>
+          <a href="/quiz" className="text-xs font-bold px-3 py-1.5 rounded-full border transition-colors"
             style={!searchParams.grade
               ? { background: '#6DD3CE', color: '#2B1E3F', borderColor: '#6DD3CE' }
-              : { background: 'transparent', color: '#c4b8d8', borderColor: 'rgba(255,255,255,0.15)' }
-            }
-          >
+              : { background: 'transparent', color: '#c4b8d8', borderColor: 'rgba(255,255,255,0.15)' }}>
             All
           </a>
           {grades.map(g => (
@@ -184,16 +191,14 @@ export default async function QuizBrowsePage({
               className="text-xs font-bold px-3 py-1.5 rounded-full border transition-colors"
               style={searchParams.grade === String(g)
                 ? { background: '#6DD3CE', color: '#2B1E3F', borderColor: '#6DD3CE' }
-                : { background: 'transparent', color: '#c4b8d8', borderColor: 'rgba(255,255,255,0.15)' }
-              }
-            >
+                : { background: 'transparent', color: '#c4b8d8', borderColor: 'rgba(255,255,255,0.15)' }}>
               Gr {g}
             </a>
           ))}
         </div>
       </div>
 
-      {/* ── Topics grid ──────────────────────────────────────── */}
+      {/* Topics grid */}
       <div className="max-w-4xl mx-auto px-6 pb-16">
         {topics.length === 0 ? (
           <div className="text-center py-20">
@@ -204,13 +209,12 @@ export default async function QuizBrowsePage({
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {topics.map(topic => {
-              const subjectKey = Object.keys(SUBJECT_META).find(k =>
-                topic.subject.toLowerCase().includes(k)
-              )
+              const subjectKey = Object.keys(SUBJECT_META).find(k => topic.subject.toLowerCase().includes(k))
               const icon  = subjectKey ? SUBJECT_META[subjectKey].icon  : '📖'
               const color = subjectKey ? SUBJECT_META[subjectKey].color : 'coral'
               const progress = topicProgress(topic.level_ids)
-              const isLocked = topic.is_premium && !userProfile?.is_premium && !userProfile?.is_founder
+              // Only lock if topic requires premium AND user is not premium
+              const isLocked = topic.is_premium && !isPremiumUser
 
               return (
                 <TopicCard
