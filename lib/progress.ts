@@ -98,32 +98,15 @@ export async function saveQuizResult(params: {
     { onConflict: 'user_id,topic_id,level_id' }
   )
 
-  // Award XP on profiles — add to xp and xp_total
+  // Award XP via existing RPC
   if (result.xpEarned > 0) {
-    // Try the existing RPC first, fall back to direct update
-    const { error: rpcError } = await sb.rpc('award_quiz_xp', {
-      p_user_id: userId,
-      p_xp: result.xpEarned,
-    })
-    if (rpcError) {
-      // Fallback: direct increment
-      await sb.rpc('increment_xp', { uid: userId, amount: result.xpEarned })
-        .then(() => {})
-        .catch(() => {
-          // Last resort — just update xp column directly
-          sb.from('profiles')
-            .select('xp, xp_total')
-            .eq('id', userId)
-            .single()
-            .then(({ data: prof }) => {
-              if (prof) {
-                sb.from('profiles').update({
-                  xp:       (prof.xp ?? 0) + result.xpEarned,
-                  xp_total: (prof.xp_total ?? 0) + result.xpEarned,
-                }).eq('id', userId)
-              }
-            })
-        })
+    try {
+      await sb.rpc('award_quiz_xp', {
+        p_user_id: userId,
+        p_xp: result.xpEarned,
+      })
+    } catch {
+      // XP award failed silently — not fatal
     }
   }
 }
