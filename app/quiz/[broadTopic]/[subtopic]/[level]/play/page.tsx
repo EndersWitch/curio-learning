@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
+import { createClient } from '@supabase/supabase-js'
 import QuizRunner from '@/components/quiz/QuizRunner'
 import ResultsScreen from '@/components/quiz/ResultsScreen'
 import { fetchLevelQuestions } from '@/lib/questions'
@@ -12,9 +13,13 @@ import {
   isSubtopicMasteryUnlocked,
   isBroadTopicMasteryUnlocked,
 } from '@/lib/progress'
-import { supabase } from '@/lib/supabase'
-import { getLocalSession } from '@/lib/session'
 import type { ShuffledQuestion, QuizResult } from '@/types/quiz'
+
+const sb = createClient(
+  'https://inmrsgujgfktapjnekjs.supabase.co',
+  'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU',
+  { auth: { persistSession: true, autoRefreshToken: true } }
+)
 
 interface Props {
   params: { broadTopic: string; subtopic: string; level: string }
@@ -22,23 +27,26 @@ interface Props {
 
 export default function QuizPlayPage({ params }: Props) {
   const router = useRouter()
-  const [questions, setQuestions] = useState<ShuffledQuestion[]>([])
-  const [levelMeta, setLevelMeta] = useState<any>(null)
-  const [result, setResult] = useState<QuizResult | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [userId, setUserId] = useState<string | null>(null)
-  const [masteryUnlocked, setMasteryUnlocked] = useState(false)
+  const [questions, setQuestions]     = useState<ShuffledQuestion[]>([])
+  const [levelMeta, setLevelMeta]     = useState<any>(null)
+  const [result, setResult]           = useState<QuizResult | null>(null)
+  const [loading, setLoading]         = useState(true)
+  const [error, setError]             = useState<string | null>(null)
+  const [userId, setUserId]           = useState<string | null>(null)
+  const [masteryUnlocked, setMasteryUnlocked]           = useState(false)
   const [broadMasteryUnlocked, setBroadMasteryUnlocked] = useState(false)
-  const [nextLevelHref, setNextLevelHref] = useState<string | undefined>()
+  const [nextLevelHref, setNextLevelHref]               = useState<string | undefined>()
 
   useEffect(() => {
     async function load() {
       try {
-        const session = getLocalSession()
-        setUserId(session?.user?.id ?? null)
+        // Get user from Supabase auth (works with persistSession: true)
+        const { data: { session } } = await sb.auth.getSession()
+        const uid = session?.user?.id ?? null
+        setUserId(uid)
 
-        const { data: lvl, error: lvlErr } = await supabase
+        // Fetch level metadata
+        const { data: lvl, error: lvlErr } = await sb
           .from('quiz_levels')
           .select('*')
           .eq('id', params.level)
@@ -47,6 +55,7 @@ export default function QuizPlayPage({ params }: Props) {
         if (lvlErr || !lvl) throw new Error('This level could not be found.')
         setLevelMeta(lvl)
 
+        // Fetch questions
         const qs = await fetchLevelQuestions(params.level)
         if (qs.length === 0) throw new Error('No questions are available for this level yet.')
         setQuestions(qs)
@@ -64,23 +73,28 @@ export default function QuizPlayPage({ params }: Props) {
     if (!userId || !levelMeta) return
 
     try {
-      // 1. Persist the result
-      await saveQuizResult({ userId, levelId: params.level, result: res })
+      // Save result to user_level_progress
+      await saveQuizResult({
+        userId,
+        levelId: params.level,
+        topicId: levelMeta.broad_topic ?? undefined,
+        result: res,
+      })
 
-      // 2. Re-fetch fresh progress (includes the result we just saved)
+      // Re-fetch fresh progress
       const allProgress = await getUserProgress(userId)
 
-      // 3. Check subtopic mastery unlock
-      if (levelMeta.subtopic_id && levelMeta.section_type === 'level') {
-        const { data: subtopicLevels } = await supabase
+      // Check subtopic mastery unlock
+      if (levelMeta.subtopic_id && levelMeta.section_type === 'learning_level') {
+        const { data: subtopicLevels } = await sb
           .from('quiz_levels')
-          .select('id, section_type, level_number')
+          .select('id, section_type, level_order')
           .eq('subtopic_id', levelMeta.subtopic_id)
-          .order('level_number')
+          .order('level_order')
 
         if (subtopicLevels) {
           const normalIds = subtopicLevels
-            .filter((l: any) => l.section_type === 'level')
+            .filter((l: any) => l.section_type === 'learning_level')
             .map((l: any) => l.id)
 
           const subtopicMasteryLevel = subtopicLevels.find(
@@ -88,18 +102,15 @@ export default function QuizPlayPage({ params }: Props) {
           )
 
           if (isSubtopicMasteryUnlocked(allProgress, normalIds)) {
-            // Only announce if mastery wasn't already unlocked before this attempt
             const masteryWasAlreadyPassed = subtopicMasteryLevel
               ? isLevelPassed(allProgress, subtopicMasteryLevel.id)
               : false
             if (!masteryWasAlreadyPassed) setMasteryUnlocked(true)
           }
 
-          // Determine next level href
+          // Next level href
           if (res.passed) {
-            const sorted = [...subtopicLevels].sort(
-              (a: any, b: any) => a.level_number - b.level_number
-            )
+            const sorted = [...subtopicLevels].sort((a: any, b: any) => a.level_order - b.level_order)
             const idx = sorted.findIndex((l: any) => l.id === params.level)
             if (idx >= 0 && idx < sorted.length - 1) {
               const next = sorted[idx + 1]
@@ -107,16 +118,15 @@ export default function QuizPlayPage({ params }: Props) {
                 `/quiz/${params.broadTopic}/${params.subtopic}/${next.id}/learn`
               )
             } else {
-              // Last level in subtopic — point back to subtopic overview
-              setNextLevelHref(`/quiz/${params.broadTopic}/${params.subtopic}`)
+              setNextLevelHref(`/quiz/${params.broadTopic}`)
             }
           }
         }
       }
 
-      // 4. Check broad topic mastery unlock (only after a subtopic_mastery pass)
+      // Check broad topic mastery unlock (after subtopic_mastery pass)
       if (levelMeta.section_type === 'subtopic_mastery' && res.passed) {
-        const { data: allSubtopicMasteries } = await supabase
+        const { data: allSubtopicMasteries } = await sb
           .from('quiz_levels')
           .select('id')
           .eq('broad_topic', levelMeta.broad_topic)
@@ -128,55 +138,48 @@ export default function QuizPlayPage({ params }: Props) {
             setBroadMasteryUnlocked(true)
           }
         }
-        // After subtopic mastery, go to broad topic overview
         setNextLevelHref(`/quiz/${params.broadTopic}`)
       }
 
-      // 5. After broad topic mastery, go to browse
       if (levelMeta.section_type === 'broad_topic_mastery' && res.passed) {
-        setNextLevelHref(`/quiz`)
+        setNextLevelHref('/quiz')
       }
 
     } catch (e) {
-      // Non-fatal — result is already shown
       console.error('[QuizPlay] Failed to save/check progress:', e)
     }
   }, [userId, levelMeta, params])
 
   const learnHref = `/quiz/${params.broadTopic}/${params.subtopic}/${params.level}/learn`
 
-  // ── Loading state ────────────────────────────────────────────────────
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: "#1a1228" }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ background: '#1a1228' }}>
         <div className="text-center">
           <div className="text-5xl mb-4 animate-bounce">🎯</div>
-          <p className="font-semibold text-slate-500 text-sm">Loading your quiz...</p>
-          <p className="text-xs text-slate-400 mt-1">Shuffling questions just for you</p>
+          <p className="font-semibold text-sm" style={{ color: '#9b8ab0' }}>Loading your quiz...</p>
+          <p className="text-xs mt-1" style={{ color: '#6b5f7a' }}>Shuffling questions just for you</p>
         </div>
       </div>
     )
   }
 
-  // ── Error state ──────────────────────────────────────────────────────
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-6" style={{ background: "#1a1228" }}>
-        <div className="text-center max-w-sm w-full rounded-3xl p-8" style={{ background: "#231935", border: "1px solid rgba(109,211,206,0.15)" }}>
+      <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#1a1228' }}>
+        <div className="text-center max-w-sm w-full rounded-3xl p-8" style={{ background: '#231935', border: '1px solid rgba(109,211,206,0.15)' }}>
           <div className="text-5xl mb-4">😕</div>
-          <h2 className="text-xl font-black mb-2" style={{ color: "#F7F7FF" }}>Couldn't load quiz</h2>
-          <p className="text-sm mb-6 leading-relaxed" style={{ color: "#9b8ab0" }}>{error}</p>
+          <h2 className="text-xl font-black mb-2" style={{ color: '#F7F7FF' }}>Couldn't load quiz</h2>
+          <p className="text-sm mb-6 leading-relaxed" style={{ color: '#9b8ab0' }}>{error}</p>
           <div className="flex flex-col gap-3">
-            <button
-              onClick={() => window.location.reload()}
-              className="py-3 rounded-2xl font-black text-sm bg-violet-600 text-white hover:bg-violet-700 transition-colors"
-            >
+            <button onClick={() => window.location.reload()}
+              className="py-3 rounded-2xl font-black text-sm text-white"
+              style={{ background: '#6DD3CE', color: '#2B1E3F' }}>
               Try Again
             </button>
-            <button
-              onClick={() => router.back()}
-              className="py-3 rounded-2xl font-semibold text-sm text-slate-500 hover:text-slate-700 transition-colors"
-            >
+            <button onClick={() => router.back()}
+              className="py-3 rounded-2xl font-semibold text-sm"
+              style={{ color: '#9b8ab0' }}>
               ← Go Back
             </button>
           </div>
@@ -185,13 +188,12 @@ export default function QuizPlayPage({ params }: Props) {
     )
   }
 
-  // ── Results state ────────────────────────────────────────────────────
   if (result) {
     return (
       <ResultsScreen
         result={result}
-        levelTitle={levelMeta?.title ?? 'Quiz Complete'}
-        sectionType={levelMeta?.section_type ?? 'level'}
+        levelTitle={levelMeta?.level_display ?? 'Quiz Complete'}
+        sectionType={levelMeta?.section_type ?? 'learning_level'}
         retryHref={learnHref}
         nextHref={nextLevelHref}
         masteryUnlocked={masteryUnlocked}
@@ -200,11 +202,11 @@ export default function QuizPlayPage({ params }: Props) {
     )
   }
 
-  // ── Quiz running state ───────────────────────────────────────────────
   return (
-    <div className="min-h-screen" style={{ background: "#1a1228" }}>
+    <div className="min-h-screen" style={{ background: '#1a1228' }}>
       {/* Top bar */}
-      <div className="backdrop-blur-md sticky top-0 z-30" style={{ background: "rgba(43,30,63,0.95)", borderBottom: "1px solid rgba(109,211,206,0.15)" }}>
+      <div className="backdrop-blur-md sticky top-0 z-30"
+        style={{ background: 'rgba(43,30,63,0.95)', borderBottom: '1px solid rgba(109,211,206,0.15)' }}>
         <div className="max-w-2xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
           <button
             onClick={() => {
@@ -212,23 +214,29 @@ export default function QuizPlayPage({ params }: Props) {
                 router.push(learnHref)
               }
             }}
-            className="text-xs font-semibold transition-colors flex items-center gap-1" style={{ color: "#9b8ab0" }}
-          >
+            className="text-xs font-semibold transition-colors flex items-center gap-1"
+            style={{ color: '#9b8ab0' }}>
             ✕ Exit
           </button>
 
           <div className="flex-1 text-center">
-            <h1 className="font-black text-sm truncate" style={{ color: "#F7F7FF" }}>
-              {levelMeta?.title}
+            <h1 className="font-black text-sm truncate" style={{ color: '#F7F7FF' }}>
+              {levelMeta?.level_display}
             </h1>
           </div>
 
-          <div className="flex items-center gap-1.5 text-xs" style={{ color: "#9b8ab0" }}>
+          <div className="flex items-center gap-1.5 text-xs" style={{ color: '#9b8ab0' }}>
             {levelMeta?.section_type === 'subtopic_mastery' && (
-              <span className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-black">🏆 Mastery</span>
+              <span className="px-2 py-0.5 rounded-full font-black"
+                style={{ background: 'rgba(245,200,66,0.12)', color: '#F5C842' }}>
+                🏆 Mastery
+              </span>
             )}
             {levelMeta?.section_type === 'broad_topic_mastery' && (
-              <span className="px-2 py-0.5 rounded-full bg-violet-100 text-violet-700 font-black">👑 Final</span>
+              <span className="px-2 py-0.5 rounded-full font-black"
+                style={{ background: 'rgba(109,211,206,0.12)', color: '#6DD3CE' }}>
+                🎓 Final
+              </span>
             )}
           </div>
         </div>
@@ -239,9 +247,9 @@ export default function QuizPlayPage({ params }: Props) {
         <QuizRunner
           questions={questions}
           levelId={params.level}
-          sectionType={levelMeta?.section_type ?? 'level'}
-          baseXP={levelMeta?.xp_reward ?? 50}
-          passThreshold={levelMeta?.pass_threshold ?? 0.6}
+          sectionType={levelMeta?.section_type ?? 'learning_level'}
+          baseXP={50}
+          passThreshold={0.6}
           onComplete={handleComplete}
         />
       </div>
