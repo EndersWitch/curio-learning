@@ -1,6 +1,5 @@
 import type { LearningConcept, QuizLevel } from '@/types/quiz'
 
-// Shape of concepts as stored in the DB JSONB column
 interface DbConcept {
   title?: string
   text?: string
@@ -17,11 +16,11 @@ export function buildLearningZone(level: QuizLevel): LearningConcept[] {
     cards.push({ type: 'key_rule', title: '📖 Topic Overview', content: level.description })
   }
 
-  // Concept cards — map DB shape { title, text, example } → LearningConcept { type, title, content, example }
+  // Concept cards — map DB shape { title, text, example } → LearningConcept
   if (level.concepts && level.concepts.length > 0) {
     for (const raw of level.concepts as unknown as DbConcept[]) {
-      // raw may already be a proper LearningConcept (with 'type' and 'content') from old data
       const asAny = raw as any
+      // Already a proper LearningConcept (has type + content)
       if (asAny.type && asAny.content) {
         cards.push(asAny as LearningConcept)
         continue
@@ -49,14 +48,23 @@ export function buildLearningZone(level: QuizLevel): LearningConcept[] {
     })
   }
 
-  // Difficulty indicator
+  // Difficulty indicator — map YOUR actual DB values
   if (level.difficulty) {
     const diffMap: Record<string, string> = {
-      easy: '🟢 This is a beginner level — take it slow and steady!',
-      medium: '🟡 This level has a bit more challenge — think carefully!',
-      hard: '🔴 This is a tough one — give it your best shot!',
+      // DB values
+      'Starter':   '🟢 This is a beginner level — take it slow and steady!',
+      'Building':  '🟡 This level builds on what you know — think carefully!',
+      'Challenge': '🔴 This is a tough one — give it your best shot!',
+      // Legacy values (just in case)
+      'easy':   '🟢 This is a beginner level — take it slow and steady!',
+      'medium': '🟡 This level has a bit more challenge — think carefully!',
+      'hard':   '🔴 This is a tough one — give it your best shot!',
     }
-    cards.push({ type: 'tip', title: '💡 Difficulty', content: diffMap[level.difficulty] ?? '' })
+    const diffText = diffMap[level.difficulty]
+    // Only add card if we have a matching label — skip unknown values
+    if (diffText) {
+      cards.push({ type: 'tip', title: '💡 Difficulty', content: diffText })
+    }
   }
 
   // Fallback if nothing to show
@@ -71,11 +79,6 @@ export function buildLearningZone(level: QuizLevel): LearningConcept[] {
       title: '💡 Quick Tip',
       content: 'If you\'re not sure, try to eliminate the obviously wrong answers first — your instincts are often right!',
     })
-    cards.push({
-      type: 'what_tested',
-      title: '🎯 What to Expect',
-      content: `${level.question_count} multiple-choice questions. You need to pass to unlock the next level.`,
-    })
   }
 
   return cards
@@ -85,11 +88,11 @@ export const CARD_STYLES: Record<
   LearningConcept['type'],
   { bg: string; border: string; icon: string; label: string }
 > = {
-  key_rule:          { bg: 'bg-violet-50',  border: 'border-violet-300',  icon: '📕', label: 'Key Rule' },
-  did_you_know:      { bg: 'bg-cyan-50',    border: 'border-cyan-300',    icon: '✨', label: 'Did You Know?' },
-  example:           { bg: 'bg-amber-50',   border: 'border-amber-300',   icon: '📝', label: 'Example' },
-  tip:               { bg: 'bg-emerald-50', border: 'border-emerald-300', icon: '💡', label: 'Quick Tip' },
-  common_mistake:    { bg: 'bg-rose-50',    border: 'border-rose-300',    icon: '⚠️', label: 'Common Mistake' },
-  spot_difference:   { bg: 'bg-orange-50',  border: 'border-orange-300',  icon: '🔍', label: 'Spot the Difference' },
-  what_tested:       { bg: 'bg-indigo-50',  border: 'border-indigo-300',  icon: '🎯', label: 'What You\'ll Be Tested On' },
+  key_rule:        { bg: 'bg-violet-50',  border: 'border-violet-300',  icon: '📕', label: 'Key Rule' },
+  did_you_know:    { bg: 'bg-cyan-50',    border: 'border-cyan-300',    icon: '✨', label: 'Did You Know?' },
+  example:         { bg: 'bg-amber-50',   border: 'border-amber-300',   icon: '📝', label: 'Example' },
+  tip:             { bg: 'bg-emerald-50', border: 'border-emerald-300', icon: '💡', label: 'Quick Tip' },
+  common_mistake:  { bg: 'bg-rose-50',    border: 'border-rose-300',    icon: '⚠️', label: 'Common Mistake' },
+  spot_difference: { bg: 'bg-orange-50',  border: 'border-orange-300',  icon: '🔍', label: 'Spot the Difference' },
+  what_tested:     { bg: 'bg-indigo-50',  border: 'border-indigo-300',  icon: '🎯', label: 'What You\'ll Be Tested On' },
 }
