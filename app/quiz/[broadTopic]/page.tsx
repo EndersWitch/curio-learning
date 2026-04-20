@@ -27,6 +27,8 @@ interface Level {
   level_display: string
   question_count: number
   description: string | null
+  subject: string | null
+  grade: number | null
   is_premium: boolean
 }
 
