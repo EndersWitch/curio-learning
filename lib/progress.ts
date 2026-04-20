@@ -23,7 +23,7 @@ interface ProgressRow {
 /**
  * Fetch all progress records for current user from the real table
  */
-export async function getUserProgress(userId: string): Promise<ProgressRow[]> {
+export async function getUserProgress(userId: string): Promise<any[]> {
   const { data } = await sb
     .from('user_level_progress')
     .select('*')
@@ -34,7 +34,7 @@ export async function getUserProgress(userId: string): Promise<ProgressRow[]> {
 /**
  * Check if a specific level is passed
  */
-export function isLevelPassed(progress: ProgressRow[], levelId: string): boolean {
+export function isLevelPassed(progress: { level_id: string; passed: boolean }[], levelId: string): boolean {
   return progress.some((p) => p.level_id === levelId && p.passed)
 }
 
@@ -42,7 +42,7 @@ export function isLevelPassed(progress: ProgressRow[], levelId: string): boolean
  * Subtopic mastery unlocked = all normal levels in subtopic passed
  */
 export function isSubtopicMasteryUnlocked(
-  progress: ProgressRow[],
+  progress: { level_id: string; passed: boolean }[],
   normalLevelIds: string[]
 ): boolean {
   return normalLevelIds.every((id) => isLevelPassed(progress, id))
@@ -52,7 +52,7 @@ export function isSubtopicMasteryUnlocked(
  * Broad topic mastery unlocked = all subtopic masteries passed
  */
 export function isBroadTopicMasteryUnlocked(
-  progress: ProgressRow[],
+  progress: { level_id: string; passed: boolean }[],
   subtopicMasteryIds: string[]
 ): boolean {
   return subtopicMasteryIds.every((id) => isLevelPassed(progress, id))
