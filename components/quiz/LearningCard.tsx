@@ -7,72 +7,58 @@ interface LearningCardProps {
   index: number
 }
 
-// Dark-theme card styles that match Curio's #231935 card background
 const CARD_STYLES: Record<
   LearningConcept['type'],
   { accent: string; iconBg: string; labelColor: string; borderColor: string; icon: string; label: string }
 > = {
-  key_rule: {
-    accent:      '#6DD3CE',
-    iconBg:      'rgba(109,211,206,0.12)',
-    labelColor:  '#6DD3CE',
-    borderColor: 'rgba(109,211,206,0.25)',
-    icon:        '🔑',
-    label:       'Key Rule',
-  },
-  did_you_know: {
-    accent:      '#F5C842',
-    iconBg:      'rgba(245,200,66,0.12)',
-    labelColor:  '#F5C842',
-    borderColor: 'rgba(245,200,66,0.25)',
-    icon:        '✨',
-    label:       'Did You Know?',
-  },
-  example: {
-    accent:      '#FF5E5B',
-    iconBg:      'rgba(255,94,91,0.12)',
-    labelColor:  '#FF5E5B',
-    borderColor: 'rgba(255,94,91,0.25)',
-    icon:        '📝',
-    label:       'Example',
-  },
-  tip: {
-    accent:      '#6DD3CE',
-    iconBg:      'rgba(109,211,206,0.10)',
-    labelColor:  '#6DD3CE',
-    borderColor: 'rgba(109,211,206,0.2)',
-    icon:        '💡',
-    label:       'Quick Tip',
-  },
-  common_mistake: {
-    accent:      '#FF5E5B',
-    iconBg:      'rgba(255,94,91,0.12)',
-    labelColor:  '#FF5E5B',
-    borderColor: 'rgba(255,94,91,0.3)',
-    icon:        '⚠️',
-    label:       'Common Mistake',
-  },
-  spot_difference: {
-    accent:      '#F5C842',
-    iconBg:      'rgba(245,200,66,0.10)',
-    labelColor:  '#F5C842',
-    borderColor: 'rgba(245,200,66,0.2)',
-    icon:        '🔍',
-    label:       'Spot the Difference',
-  },
-  what_tested: {
-    accent:      '#c4b8d8',
-    iconBg:      'rgba(196,184,216,0.10)',
-    labelColor:  '#c4b8d8',
-    borderColor: 'rgba(196,184,216,0.2)',
-    icon:        '🎯',
-    label:       "What You'll Be Tested On",
-  },
+  key_rule:        { accent: '#6DD3CE', iconBg: 'rgba(109,211,206,0.12)', labelColor: '#6DD3CE', borderColor: 'rgba(109,211,206,0.25)', icon: '📕', label: 'Key Rule' },
+  did_you_know:    { accent: '#F5C842', iconBg: 'rgba(245,200,66,0.12)',  labelColor: '#F5C842', borderColor: 'rgba(245,200,66,0.25)',  icon: '✨', label: 'Did You Know?' },
+  example:         { accent: '#FF5E5B', iconBg: 'rgba(255,94,91,0.12)',  labelColor: '#FF5E5B', borderColor: 'rgba(255,94,91,0.25)',  icon: '📝', label: 'Example' },
+  tip:             { accent: '#6DD3CE', iconBg: 'rgba(109,211,206,0.10)', labelColor: '#6DD3CE', borderColor: 'rgba(109,211,206,0.2)', icon: '💡', label: 'Quick Tip' },
+  common_mistake:  { accent: '#FF5E5B', iconBg: 'rgba(255,94,91,0.12)',  labelColor: '#FF5E5B', borderColor: 'rgba(255,94,91,0.3)',  icon: '⚠️', label: 'Common Mistake' },
+  spot_difference: { accent: '#F5C842', iconBg: 'rgba(245,200,66,0.10)', labelColor: '#F5C842', borderColor: 'rgba(245,200,66,0.2)', icon: '🔍', label: 'Spot the Difference' },
+  what_tested:     { accent: '#c4b8d8', iconBg: 'rgba(196,184,216,0.10)', labelColor: '#c4b8d8', borderColor: 'rgba(196,184,216,0.2)', icon: '🎯', label: "What You'll Be Tested On" },
+}
+
+// Render <strong> and *asterisk* as rich text
+function RichText({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
+  const parts: { content: string; bold?: boolean; cyan?: boolean }[] = []
+  let remaining = text ?? ''
+  while (remaining.length > 0) {
+    const strongStart    = remaining.indexOf('<strong>')
+    const asteriskStart  = remaining.indexOf('*')
+    const next = Math.min(
+      strongStart >= 0 ? strongStart : Infinity,
+      asteriskStart >= 0 ? asteriskStart : Infinity
+    )
+    if (next === Infinity) { parts.push({ content: remaining }); break }
+    if (next > 0) parts.push({ content: remaining.slice(0, next) })
+    if (strongStart >= 0 && strongStart === next) {
+      const end = remaining.indexOf('</strong>', strongStart)
+      if (end < 0) { parts.push({ content: remaining }); break }
+      parts.push({ content: remaining.slice(strongStart + 8, end), bold: true })
+      remaining = remaining.slice(end + 9)
+    } else {
+      const closeAsterisk = remaining.indexOf('*', asteriskStart + 1)
+      if (closeAsterisk < 0) { parts.push({ content: remaining }); break }
+      parts.push({ content: remaining.slice(asteriskStart + 1, closeAsterisk), cyan: true })
+      remaining = remaining.slice(closeAsterisk + 1)
+    }
+  }
+  return (
+    <span className={className} style={style}>
+      {parts.map((p, i) =>
+        p.bold ? <strong key={i} style={{ fontWeight: 700, color: '#F7F7FF' }}>{p.content}</strong>
+        : p.cyan ? <span key={i} style={{ color: '#6DD3CE', fontWeight: 600 }}>{p.content}</span>
+        : <span key={i}>{p.content}</span>
+      )}
+    </span>
+  )
 }
 
 export default function LearningCard({ concept, index }: LearningCardProps) {
   const s = CARD_STYLES[concept.type] ?? CARD_STYLES.key_rule
-  const lines = concept.content.split('\n').filter(Boolean)
+  const lines = (concept.content ?? '').split('\n').filter(Boolean)
 
   return (
     <div
@@ -99,31 +85,33 @@ export default function LearningCard({ concept, index }: LearningCardProps) {
         {concept.title}
       </h3>
 
-      {/* Content */}
+      {/* Content — rich text, bullet list if multiple lines */}
       {lines.length > 1 ? (
         <ul className="space-y-2 mt-1">
           {lines.map((line, i) => (
             <li key={i} className="flex items-start gap-2.5 text-sm" style={{ color: '#c4b8d8' }}>
               <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5"
                 style={{ background: s.accent, minWidth: '6px' }} />
-              <span>{line}</span>
+              <RichText text={line} />
             </li>
           ))}
         </ul>
       ) : (
         <p className="text-sm leading-relaxed" style={{ color: '#c4b8d8' }}>
-          {concept.content}
+          <RichText text={concept.content ?? ''} />
         </p>
       )}
 
-      {/* Optional example block */}
+      {/* Example block */}
       {concept.example && (
         <div className="mt-3 rounded-xl p-3"
           style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
           <span className="text-xs font-black uppercase tracking-wide" style={{ color: s.labelColor }}>
             Example
           </span>
-          <p className="text-sm mt-1 italic" style={{ color: '#c4b8d8' }}>{concept.example}</p>
+          <p className="text-sm mt-1 italic" style={{ color: '#c4b8d8' }}>
+            <RichText text={concept.example} />
+          </p>
         </div>
       )}
     </div>

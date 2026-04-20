@@ -17,7 +17,7 @@ interface QuizRunnerProps {
 type AnswerState = 'idle' | 'correct' | 'wrong'
 
 const CORRECT_MESSAGES = [
-  'Great job! 🎉', 'Correct! ✨', 'Well done! 🌟',
+  'Great job! 🎉', 'Correct! ✨', 'Well done! 🎯',
   'Nailed it! 🚀', 'Brilliant! 💫', 'You got it! 🎯', 'Superstar! ⭐',
 ]
 const WRONG_MESSAGES = [
@@ -31,16 +31,55 @@ function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)]
 }
 
+// Render text with <strong> tags and *asterisk* → cyan highlight
+function RichText({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
+  // Parse: <strong>...</strong> and *...*
+  const parts: { content: string; bold?: boolean; cyan?: boolean }[] = []
+  let remaining = text
+  while (remaining.length > 0) {
+    const strongStart = remaining.indexOf('<strong>')
+    const asteriskStart = remaining.indexOf('*')
+    const next = Math.min(
+      strongStart >= 0 ? strongStart : Infinity,
+      asteriskStart >= 0 ? asteriskStart : Infinity
+    )
+    if (next === Infinity) { parts.push({ content: remaining }); break }
+    if (next > 0) parts.push({ content: remaining.slice(0, next) })
+    if (strongStart >= 0 && strongStart === next) {
+      const end = remaining.indexOf('</strong>', strongStart)
+      if (end < 0) { parts.push({ content: remaining }); break }
+      parts.push({ content: remaining.slice(strongStart + 8, end), bold: true })
+      remaining = remaining.slice(end + 9)
+    } else {
+      // asterisk
+      const closeAsterisk = remaining.indexOf('*', asteriskStart + 1)
+      if (closeAsterisk < 0) { parts.push({ content: remaining }); break }
+      parts.push({ content: remaining.slice(asteriskStart + 1, closeAsterisk), cyan: true })
+      remaining = remaining.slice(closeAsterisk + 1)
+    }
+  }
+
+  return (
+    <span className={className} style={style}>
+      {parts.map((p, i) =>
+        p.bold ? <strong key={i} style={{ fontWeight: 700, color: '#F7F7FF' }}>{p.content}</strong>
+        : p.cyan ? <span key={i} style={{ color: '#6DD3CE', fontWeight: 600 }}>{p.content}</span>
+        : <span key={i}>{p.content}</span>
+      )}
+    </span>
+  )
+}
+
 // Curio colour tokens
 const CURIO = {
-  bg:       '#1a1228',
-  card:     '#231935',
-  cardBorder:'rgba(109,211,206,0.15)',
-  text:     '#F7F7FF',
-  subtext:  '#9b8ab0',
-  coral:    '#FF5E5B',
-  cyan:     '#6DD3CE',
-  amber:    '#F5C842',
+  bg:         '#1a1228',
+  card:       '#231935',
+  cardBorder: 'rgba(109,211,206,0.15)',
+  text:       '#F7F7FF',
+  subtext:    '#9b8ab0',
+  coral:      '#FF5E5B',
+  cyan:       '#6DD3CE',
+  amber:      '#F5C842',
 }
 
 export default function QuizRunner({
@@ -49,16 +88,15 @@ export default function QuizRunner({
   const [currentIndex, setCurrentIndex] = useState(0)
   const [selected, setSelected]         = useState<string | null>(null)
   const [answerState, setAnswerState]   = useState<AnswerState>('idle')
-  const [showExplanation, setShowExplanation] = useState(false)
   const [startTime]  = useState(Date.now())
   const [scoreDisplay, setScoreDisplay] = useState(0)
-  const scoreRef   = useRef(0)
+  const scoreRef    = useRef(0)
   const feedbackRef = useRef('')
 
-  const current        = questions[currentIndex]
+  const current         = questions[currentIndex]
   const progressPercent = ((currentIndex + (answerState !== 'idle' ? 1 : 0)) / questions.length) * 100
-  const isLast         = currentIndex === questions.length - 1
-  const xpPerQ         = Math.max(1, Math.round(baseXP / questions.length))
+  const isLast          = currentIndex === questions.length - 1
+  const xpPerQ          = Math.max(1, Math.round(baseXP / questions.length))
 
   const handleSelect = useCallback((key: string) => {
     if (answerState !== 'idle') return
@@ -82,7 +120,6 @@ export default function QuizRunner({
       setCurrentIndex(i => i + 1)
       setSelected(null)
       setAnswerState('idle')
-      setShowExplanation(false)
       feedbackRef.current = ''
     }
   }, [isLast, answerState, questions.length, passThreshold, startTime, sectionType, baseXP, onComplete])
@@ -102,15 +139,9 @@ export default function QuizRunner({
     return () => window.removeEventListener('keydown', handler)
   }, [answerState, current, handleSelect, handleNext])
 
-  // Per-option style resolver
   function optionStyle(optKey: string): React.CSSProperties {
     if (answerState === 'idle') {
-      return {
-        background: 'rgba(255,255,255,0.05)',
-        borderColor: 'rgba(255,255,255,0.12)',
-        color: CURIO.text,
-        cursor: 'pointer',
-      }
+      return { background: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.12)', color: CURIO.text, cursor: 'pointer' }
     }
     if (optKey === current.correct_key) {
       return { background: 'rgba(52,211,153,0.12)', borderColor: '#34D399', color: '#6ee7b7' }
@@ -132,7 +163,7 @@ export default function QuizRunner({
   return (
     <div className="w-full max-w-2xl mx-auto select-none">
 
-      {/* ── Progress strip ── */}
+      {/* Progress strip */}
       <div className="flex items-center gap-3 mb-6">
         <span className="text-sm font-black tabular-nums min-w-[3.5rem]" style={{ color: CURIO.subtext }}>
           {currentIndex + 1}/{questions.length}
@@ -143,12 +174,9 @@ export default function QuizRunner({
         <XPBadge xp={scoreDisplay * xpPerQ} size="sm" />
       </div>
 
-      {/* ── Question card ── */}
-      <div
-        key={`q-${currentIndex}`}
-        className="rounded-3xl p-7 mb-5 animate-fade-slide"
-        style={{ background: CURIO.card, border: `1px solid ${CURIO.cardBorder}` }}
-      >
+      {/* Question card */}
+      <div key={`q-${currentIndex}`} className="rounded-3xl p-7 mb-5 animate-fade-slide"
+        style={{ background: CURIO.card, border: `1px solid ${CURIO.cardBorder}` }}>
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs font-black px-2.5 py-1 rounded-full"
             style={{ background: 'rgba(109,211,206,0.12)', color: CURIO.cyan }}>
@@ -163,16 +191,16 @@ export default function QuizRunner({
           {sectionType === 'broad_topic_mastery' && (
             <span className="text-xs font-black px-2.5 py-1 rounded-full"
               style={{ background: 'rgba(109,211,206,0.12)', color: CURIO.cyan }}>
-              👑 Final Boss
+              🎓 Final Boss
             </span>
           )}
         </div>
-        <p className="text-lg md:text-xl font-black leading-relaxed" style={{ color: CURIO.text }}>
-          {current.question_text}
-        </p>
+        <RichText text={current.question_text}
+          className="text-lg md:text-xl font-black leading-relaxed"
+          style={{ color: CURIO.text }} />
       </div>
 
-      {/* ── Answer options ── */}
+      {/* Answer options */}
       <div key={`opts-${currentIndex}`} className="grid grid-cols-1 gap-3 mb-5 animate-fade-slide"
         style={{ animationDelay: '60ms' }}>
         {current.options.map((opt, i) => {
@@ -190,7 +218,9 @@ export default function QuizRunner({
                 style={bubbleStyle(opt.key)}>
                 {String.fromCharCode(65 + i)}
               </span>
-              <span className="flex-1 leading-snug">{opt.text}</span>
+              <span className="flex-1 leading-snug">
+                <RichText text={opt.text} />
+              </span>
               {answerState !== 'idle' && opt.key === current.correct_key && (
                 <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-black"
                   style={{ background: '#34D399', color: '#fff' }}>✓</span>
@@ -204,36 +234,28 @@ export default function QuizRunner({
         })}
       </div>
 
-      {/* ── Feedback bar ── */}
+      {/* Feedback bar — always shows explanation immediately when answered */}
       {answerState !== 'idle' && (
-        <div
-          className="rounded-2xl px-5 py-4 mb-4 border-2 animate-fade-slide"
+        <div className="rounded-2xl px-5 py-4 mb-4 border-2 animate-fade-slide"
           style={answerState === 'correct'
             ? { background: 'rgba(52,211,153,0.08)', borderColor: 'rgba(52,211,153,0.3)' }
-            : { background: 'rgba(255,94,91,0.08)',  borderColor: 'rgba(255,94,91,0.3)' }
-          }
-        >
-          <p className="font-black text-base mb-1"
+            : { background: 'rgba(255,94,91,0.08)', borderColor: 'rgba(255,94,91,0.3)' }
+          }>
+          <p className="font-black text-base mb-2"
             style={{ color: answerState === 'correct' ? '#6ee7b7' : '#fca5a5' }}>
             {feedbackRef.current}
           </p>
-          {current.explanation && !showExplanation && (
-            <button onClick={() => setShowExplanation(true)}
-              className="text-xs font-bold underline underline-offset-2 transition-opacity hover:opacity-70"
-              style={{ color: CURIO.subtext }}>
-              Show explanation →
-            </button>
-          )}
-          {current.explanation && showExplanation && (
-            <p className="text-sm mt-2 leading-relaxed pt-2"
+          {/* Explanation always visible immediately — no button */}
+          {current.explanation && (
+            <p className="text-sm leading-relaxed pt-2"
               style={{ color: CURIO.subtext, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-              {current.explanation}
+              <RichText text={current.explanation} />
             </p>
           )}
         </div>
       )}
 
-      {/* ── Next / Finish button ── */}
+      {/* Next / Finish button */}
       {answerState !== 'idle' && (
         <button onClick={handleNext}
           className="w-full py-4 rounded-2xl font-black text-base text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"

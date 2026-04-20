@@ -18,7 +18,7 @@ interface ResultsScreenProps {
 const PASS_MESSAGES = [
   "You absolutely smashed it! 🚀",
   "Outstanding work! You're on fire! 🔥",
-  "That was brilliant! Keep it up! 🌟",
+  "That was brilliant! Keep it up! 🎯",
   "Wow! You're a real star! ⭐",
   "Incredible effort! So proud of you! 🎊",
 ]
@@ -31,6 +31,48 @@ const FAIL_MESSAGES = [
 const CONFETTI_COLORS = ['#FF5E5B','#6DD3CE','#F5C842','#A855F7','#34D399','#FB923C']
 
 interface Particle { id:number; left:number; top:number; color:string; duration:number; delay:number; size:number }
+
+// Bloom SVG with 5 petals that light up based on score %
+// Each 20% = 1 petal lights up (lit = cyan glow, unlit = dim)
+function BloomScore({ percent, passed }: { percent: number; passed: boolean }) {
+  const litPetals = Math.round(percent / 20) // 0-5
+  const petalAngles = [0, 72, 144, 216, 288]
+
+  return (
+    <div className="relative flex items-center justify-center" style={{ width: 160, height: 160 }}>
+      <svg width="160" height="160" viewBox="0 0 200 200" fill="none">
+        {petalAngles.map((angle, i) => {
+          const isLit = i < litPetals
+          return (
+            <ellipse
+              key={i}
+              cx="100" cy="50" rx="22" ry="42"
+              fill={isLit ? '#6DD3CE' : '#2B1E3F'}
+              fillOpacity={isLit ? 1 : 0.5}
+              stroke={isLit ? '#6DD3CE' : 'rgba(109,211,206,0.2)'}
+              strokeWidth={isLit ? 1.5 : 0.5}
+              transform={`rotate(${angle} 100 100)`}
+              style={{
+                filter: isLit ? 'drop-shadow(0 0 8px rgba(109,211,206,0.7))' : 'none',
+                transition: `fill 0.4s ease ${i * 0.12}s, filter 0.4s ease ${i * 0.12}s`,
+              }}
+            />
+          )
+        })}
+        {/* Centre circle */}
+        <circle cx="100" cy="100" r="22"
+          fill={passed ? '#FF5E5B' : '#3d2d58'}
+          style={{ filter: passed ? 'drop-shadow(0 0 8px rgba(255,94,91,0.6))' : 'none', transition: 'fill 0.3s ease' }}
+        />
+      </svg>
+      {/* Score text overlaid */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <span className="text-2xl font-black" style={{ color: passed ? '#fff' : '#9b8ab0' }}>{percent}%</span>
+        <span className="text-xs font-semibold mt-0.5" style={{ color: 'rgba(255,255,255,0.5)' }}>{Math.round(percent/20*5)}/5</span>
+      </div>
+    </div>
+  )
+}
 
 export default function ResultsScreen({
   result, levelTitle, sectionType, retryHref, nextHref, masteryUnlocked, broadMasteryUnlocked,
@@ -46,9 +88,13 @@ export default function ResultsScreen({
   const [particles, setParticles] = useState<Particle[]>([])
   const [showConfetti, setShowConfetti] = useState(false)
   const [xpAnimated, setXpAnimated]   = useState(false)
+  const [bloomVisible, setBloomVisible] = useState(false)
 
   useEffect(() => {
-    if (!passed) return
+    // Slight delay so bloom animation is visible on mount
+    const t0 = setTimeout(() => setBloomVisible(true), 100)
+    if (!passed) return () => clearTimeout(t0)
+
     setParticles(Array.from({ length: 36 }, (_, i) => ({
       id: i,
       left:     Math.random() * 100,
@@ -61,17 +107,14 @@ export default function ResultsScreen({
     setShowConfetti(true)
     const t1 = setTimeout(() => setShowConfetti(false), 3500)
     const t2 = setTimeout(() => setXpAnimated(true), 400)
-    return () => { clearTimeout(t1); clearTimeout(t2) }
+    return () => { clearTimeout(t0); clearTimeout(t1); clearTimeout(t2) }
   }, [passed])
 
   const isMastery = sectionType === 'subtopic_mastery' || sectionType === 'broad_topic_mastery'
   const minutes   = Math.floor(timeTaken / 60)
   const seconds   = timeTaken % 60
   const timeLabel = minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`
-
-  // Score ring colour
   const ringColor  = percent >= 80 ? '#34D399' : percent >= 60 ? '#F5C842' : '#FF5E5B'
-  const scoreColor = percent >= 80 ? '#6ee7b7' : percent >= 60 ? '#fde68a' : '#fca5a5'
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-5"
@@ -93,17 +136,26 @@ export default function ResultsScreen({
 
       <div className="w-full max-w-md">
 
-        {/* ── Hero score card ── */}
+        {/* ── Hero card with Bloom ── */}
         <div className="rounded-3xl p-8 mb-4 text-center"
           style={{ background: '#231935', border: `2px solid ${ringColor}40` }}>
 
-          {/* Score ring */}
-          <div className="w-32 h-32 mx-auto mb-5 rounded-full flex flex-col items-center justify-center"
-            style={{ background: '#2B1E3F', boxShadow: `0 0 0 6px ${ringColor}40, 0 0 0 3px ${ringColor}` }}>
-            <span className="text-4xl font-black" style={{ color: ringColor }}>{percent}%</span>
-            <span className="text-xs font-semibold mt-0.5" style={{ color: '#9b8ab0' }}>
-              {score}/{total}
-            </span>
+          {/* Animated Bloom */}
+          <div className="flex justify-center mb-5"
+            style={{ opacity: bloomVisible ? 1 : 0, transform: bloomVisible ? 'scale(1)' : 'scale(0.7)', transition: 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)' }}>
+            <BloomScore percent={percent} passed={passed} />
+          </div>
+
+          {/* Petal legend */}
+          <div className="flex justify-center gap-1 mb-4">
+            {[0,1,2,3,4].map(i => (
+              <div key={i} className="w-2 h-2 rounded-full transition-all duration-500"
+                style={{
+                  background: i < Math.round(percent/20) ? '#6DD3CE' : 'rgba(109,211,206,0.15)',
+                  transitionDelay: `${i * 0.12}s`,
+                  boxShadow: i < Math.round(percent/20) ? '0 0 6px rgba(109,211,206,0.6)' : 'none',
+                }} />
+            ))}
           </div>
 
           {/* Pass/fail badge */}
@@ -124,12 +176,12 @@ export default function ResultsScreen({
           style={{ background: '#231935', border: '1px solid rgba(255,255,255,0.08)' }}>
           <div className="grid grid-cols-3 gap-0 divide-x" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
             {[
-              { val: String(score),     label: 'Correct' },
-              { val: String(total - score), label: 'Missed' },
-              { val: timeLabel,         label: 'Time' },
-            ].map(({ val, label }) => (
+              { val: String(score),       label: 'Correct', color: '#34D399' },
+              { val: String(total-score), label: 'Missed',  color: '#FF5E5B' },
+              { val: timeLabel,           label: 'Time',    color: '#9b8ab0' },
+            ].map(({ val, label, color }) => (
               <div key={label} className="text-center px-3">
-                <div className="text-2xl font-black" style={{ color: '#F7F7FF' }}>{val}</div>
+                <div className="text-2xl font-black" style={{ color }}>{val}</div>
                 <div className="text-xs mt-0.5" style={{ color: '#9b8ab0' }}>{label}</div>
               </div>
             ))}
@@ -160,9 +212,7 @@ export default function ResultsScreen({
             </div>
             <div>
               <p className="font-black text-sm" style={{ color: '#F5C842' }}>Subtopic Mastery Unlocked!</p>
-              <p className="text-xs mt-0.5" style={{ color: '#9b8ab0' }}>
-                All levels cleared — take the mastery challenge!
-              </p>
+              <p className="text-xs mt-0.5" style={{ color: '#9b8ab0' }}>All levels cleared — take the mastery challenge!</p>
             </div>
           </div>
         )}
@@ -172,13 +222,11 @@ export default function ResultsScreen({
             style={{ background: '#231935', border: '1px solid rgba(109,211,206,0.35)' }}>
             <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"
               style={{ background: 'rgba(109,211,206,0.12)', border: '1px solid rgba(109,211,206,0.3)' }}>
-              👑
+              🎓
             </div>
             <div>
               <p className="font-black text-sm" style={{ color: '#6DD3CE' }}>Final Mastery Unlocked!</p>
-              <p className="text-xs mt-0.5" style={{ color: '#9b8ab0' }}>
-                All subtopics mastered — the final boss awaits!
-              </p>
+              <p className="text-xs mt-0.5" style={{ color: '#9b8ab0' }}>All subtopics mastered — the final boss awaits!</p>
             </div>
           </div>
         )}
@@ -188,7 +236,7 @@ export default function ResultsScreen({
             style={{ background: 'linear-gradient(135deg, #2B1E3F 0%, #3d2d58 100%)',
               border: '2px solid rgba(109,211,206,0.3)' }}>
             <div className="text-2xl mb-1">
-              {sectionType === 'broad_topic_mastery' ? '👑' : '🏆'}
+              {sectionType === 'broad_topic_mastery' ? '🎓' : '🏆'}
             </div>
             <p className="font-black text-base" style={{ color: '#6DD3CE' }}>
               {sectionType === 'broad_topic_mastery' ? 'Ultimate Topic Champion!' : 'Subtopic Champion!'}
@@ -201,7 +249,7 @@ export default function ResultsScreen({
           </div>
         )}
 
-        {/* ── Action buttons ── */}
+        {/* ── Actions ── */}
         <div className="flex flex-col gap-3">
           {passed && nextHref && (
             <Link href={nextHref}
