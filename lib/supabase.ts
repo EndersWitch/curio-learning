@@ -1,26 +1,18 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  || 'https://inmrsgujgfktapjnekjs.supabase.co'
+// Single shared instance — all pages must import from here
+// so they all read/write the same localStorage session key
+const supabaseUrl = 'https://inmrsgujgfktapjnekjs.supabase.co'
+const supabaseAnonKey = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU'
 
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  || 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU'
-
-/**
- * Single Supabase client for data queries.
- * NOTE: Curio uses manual session management (curio_session in localStorage),
- * NOT Supabase's built-in auth. Do not call supabase.auth.getSession() —
- * use getLocalSession() from lib/session.ts instead.
- */
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+export const sb = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
-    // Disable auto-refresh / storage management — we handle sessions ourselves
-    persistSession: false,
-    autoRefreshToken: false,
+    persistSession: true,
+    autoRefreshToken: true,
+    storageKey: 'curio-supabase-auth', // explicit stable key
   },
 })
 
-/** Alias for server components — same client, no difference in this setup */
-export function createServerClient() {
-  return supabase
-}
+// Keep legacy export name working
+export const supabase = sb
+export function createServerClient() { return sb }

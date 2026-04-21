@@ -3,37 +3,22 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
-import { createClient } from '@supabase/supabase-js'
-
-const sb = createClient(
-  'https://inmrsgujgfktapjnekjs.supabase.co',
-  'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU',
-  { auth: { persistSession: true, autoRefreshToken: true } }
-)
+import { sb } from '@/lib/supabase'
 
 function toDisplay(slug: string) {
   return slug.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
 }
 
 interface Level {
-  id: string
-  broad_topic: string
-  subtopic_id: string | null
-  subtopic_display: string | null
-  section_type: string
-  level_order: number
-  level_display: string
-  question_count: number
-  description: string | null
-  subject: string | null
-  grade: number | null
-  is_premium: boolean
+  id: string; broad_topic: string; subtopic_id: string | null
+  subtopic_display: string | null; section_type: string; level_order: number
+  level_display: string; question_count: number; description: string | null
+  subject: string | null; grade: number | null; is_premium: boolean
 }
 
 export default function BroadTopicPage() {
   const params = useParams()
   const broadTopicSlug = decodeURIComponent(params.broadTopic as string)
-
   const [levels, setLevels] = useState<Level[]>([])
   const [userProgress, setUserProgress] = useState<string[]>([])
   const [isPremiumUser, setIsPremiumUser] = useState(false)
@@ -71,7 +56,6 @@ export default function BroadTopicPage() {
     if (!subtopicMap.has(key)) subtopicMap.set(key, [])
     subtopicMap.get(key)!.push(level)
   }
-
   const subject = levels[0]?.subject ?? ''
   const grade = levels[0]?.grade ?? ''
 
@@ -90,7 +74,6 @@ export default function BroadTopicPage() {
       <div className="text-center">
         <div className="text-5xl mb-4">🔍</div>
         <h1 className="text-2xl font-black mb-2" style={{ color: '#F7F7FF' }}>Topic Not Found</h1>
-        <p className="text-sm mb-6" style={{ color: '#9b8ab0' }}>We couldn&apos;t find that quiz topic.</p>
         <Link href="/quiz" className="inline-block font-black px-6 py-3 rounded-2xl text-sm"
           style={{ background: '#6DD3CE', color: '#2B1E3F' }}>← Browse All Topics</Link>
       </div>
@@ -101,8 +84,7 @@ export default function BroadTopicPage() {
     <div className="min-h-screen" style={{ background: '#1a1228' }}>
       <div style={{ background: 'linear-gradient(135deg, #2B1E3F 0%, #3d2d58 100%)' }}>
         <div className="max-w-3xl mx-auto px-6 py-10">
-          <Link href="/quiz"
-            className="inline-flex items-center gap-1 text-xs font-semibold mb-5 transition-opacity hover:opacity-70"
+          <Link href="/quiz" className="inline-flex items-center gap-1 text-xs font-semibold mb-5 transition-opacity hover:opacity-70"
             style={{ color: '#6DD3CE' }}>← Back to Topics</Link>
           <p className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: '#6DD3CE' }}>
             {subject} · Grade {grade}
@@ -119,7 +101,6 @@ export default function BroadTopicPage() {
           const regularLevels = subLevels.filter(l => l.section_type !== 'subtopic_mastery' && l.section_type !== 'broad_topic_mastery')
           const masteryLevel = subLevels.find(l => l.section_type === 'subtopic_mastery' || l.section_type === 'broad_topic_mastery')
           const masteryUnlocked = regularLevels.every(l => userProgress.includes(l.id))
-
           return (
             <div key={key} className="rounded-3xl overflow-hidden"
               style={{ background: '#231935', border: '1px solid rgba(109,211,206,0.12)' }}>
@@ -136,7 +117,6 @@ export default function BroadTopicPage() {
                     style={{ background: 'rgba(52,211,153,0.12)', color: '#34D399' }}>✅ Mastered</span>
                 )}
               </div>
-
               <div className="p-4 space-y-2">
                 {regularLevels.map((level, i) => {
                   const passed = userProgress.includes(level.id)
@@ -167,14 +147,12 @@ function LevelRow({ level, passed, locked, broadTopicSlug, isMastery = false }: 
   const href = `/quiz/${broadTopicSlug}/${encodeURIComponent(level.subtopic_id ?? '_general')}/${level.id}/learn`
   const inner = (
     <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150"
-      style={locked
-        ? { background: 'rgba(255,255,255,0.02)', cursor: 'not-allowed', opacity: 0.5 }
+      style={locked ? { background: 'rgba(255,255,255,0.02)', cursor: 'not-allowed', opacity: 0.5 }
         : passed ? { background: 'rgba(52,211,153,0.06)' }
         : isMastery ? { background: 'rgba(245,200,66,0.06)' }
         : { background: 'rgba(255,255,255,0.03)' }}>
       <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0 border-2"
-        style={passed
-          ? { background: '#34D399', borderColor: '#34D399', color: '#fff' }
+        style={passed ? { background: '#34D399', borderColor: '#34D399', color: '#fff' }
           : locked ? { background: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.1)', color: '#9b8ab0' }
           : isMastery ? { background: 'rgba(245,200,66,0.12)', borderColor: 'rgba(245,200,66,0.4)', color: '#F5C842' }
           : { background: 'rgba(109,211,206,0.08)', borderColor: 'rgba(109,211,206,0.3)', color: '#6DD3CE' }}>
