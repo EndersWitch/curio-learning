@@ -1,26 +1,19 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getLocalSession, clearLocalSession, type CurioSession } from './session'
+import { sb } from '@/lib/supabase'
 
 interface AuthState {
   userId: string | null
-  session: CurioSession | null
   isLoggedIn: boolean
   isPremium: boolean
   isFounder: boolean
   loading: boolean
 }
 
-/**
- * Reads auth state from localStorage (curio_session).
- * Curio does NOT use Supabase's own session persistence —
- * the login page manually stores the session token.
- */
 export function useAuth(): AuthState {
   const [state, setState] = useState<AuthState>({
     userId: null,
-    session: null,
     isLoggedIn: false,
     isPremium: false,
     isFounder: false,
@@ -28,21 +21,50 @@ export function useAuth(): AuthState {
   })
 
   useEffect(() => {
-    const s = getLocalSession()
-
-    if (!s) {
-      setState(prev => ({ ...prev, loading: false }))
-      return
-    }
-
-    setState({
-      userId: s.user.id,
-      session: s,
-      isLoggedIn: true,
-      isPremium: s.user.user_metadata?.is_premium || false,
-      isFounder: false,
-      loading: false,
+    // Get current session
+    sb.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        setState(prev => ({ ...prev, loading: false }))
+        return
+      }
+      // Fetch premium/founder status from profiles
+      sb.from('profiles')
+        .select('is_premium, is_founder')
+        .eq('id', session.user.id)
+        .single()
+        .then(({ data: profile }) => {
+          setState({
+            userId: session.user.id,
+            isLoggedIn: true,
+            isPremium: profile?.is_premium || false,
+            isFounder: profile?.is_founder || false,
+            loading: false,
+          })
+        })
     })
+
+    // Listen for auth changes (login/logout)
+    const { data: { subscription } } = sb.auth.onAuthStateChange((_event, session) => {
+      if (!session) {
+        setState({ userId: null, isLoggedIn: false, isPremium: false, isFounder: false, loading: false })
+        return
+      }
+      sb.from('profiles')
+        .select('is_premium, is_founder')
+        .eq('id', session.user.id)
+        .single()
+        .then(({ data: profile }) => {
+          setState({
+            userId: session.user.id,
+            isLoggedIn: true,
+            isPremium: profile?.is_premium || false,
+            isFounder: profile?.is_founder || false,
+            loading: false,
+          })
+        })
+    })
+
+    return () => subscription.unsubscribe()
   }, [])
 
   return state
