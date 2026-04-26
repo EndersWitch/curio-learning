@@ -68,9 +68,9 @@ export default function HomePage() {
 
     /// Load session via Supabase auth
     sb.auth.getSession().then(({ data: { session: s } }) => {
-      if (s) {
-        setSession(s.user as any)
-        loadDashboard(s.user as any)
+      if (s?.user) {
+        setSession(s as any)
+        loadDashboard(s as any)
       }
     })
 
