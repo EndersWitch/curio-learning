@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@supabase/supabase-js'
+import { sb } from '@/lib/supabase'
 import QuizRunner from '@/components/quiz/QuizRunner'
 import ResultsScreen from '@/components/quiz/ResultsScreen'
 import { fetchLevelQuestions } from '@/lib/questions'
@@ -14,12 +14,6 @@ import {
   isBroadTopicMasteryUnlocked,
 } from '@/lib/progress'
 import type { ShuffledQuestion, QuizResult } from '@/types/quiz'
-
-const sb = createClient(
-  'https://inmrsgujgfktapjnekjs.supabase.co',
-  'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU',
-  { auth: { persistSession: true, autoRefreshToken: true } }
-)
 
 interface Props {
   params: { broadTopic: string; subtopic: string; level: string }
