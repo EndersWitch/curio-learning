@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Bloom from '@/components/Bloom'
+import { sb } from '@/lib/supabase'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Session {
@@ -65,21 +66,13 @@ export default function HomePage() {
   useEffect(() => {
     setMounted(true)
 
-    // Load session
-    try {
-      const raw = localStorage.getItem('curio_session')
-      if (raw) {
-        const s: Session = JSON.parse(raw)
-        if (s?.access_token && s?.expires_at > Date.now() / 1000) {
-          setSession(s)
-          loadDashboard(s)
-        } else {
-          localStorage.removeItem('curio_session')
-        }
+    /// Load session via Supabase auth
+    sb.auth.getSession().then(({ data: { session: s } }) => {
+      if (s) {
+        setSession(s.user as any)
+        loadDashboard(s.user as any)
       }
-    } catch {
-      localStorage.removeItem('curio_session')
-    }
+    })
 
     // Reveal observer — also immediately trigger elements already in viewport
     const ro = new IntersectionObserver(
@@ -148,8 +141,8 @@ export default function HomePage() {
     fetchRecPapers(v)
   }
 
-  function doLogout() {
-    localStorage.removeItem('curio_session')
+  async function doLogout() {
+    await sb.auth.signOut()
     setSession(null)
   }
 
