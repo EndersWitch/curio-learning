@@ -63,7 +63,7 @@ export default function QuizBrowsePage() {
     if (session?.user) {
       const [{ data: profile }, { data: progress }] = await Promise.all([
         sb.from('profiles').select('*').eq('id', session.user.id).single(),
-        sb.from('user_progress').select('level_id').eq('user_id', session.user.id).eq('passed', true),
+        sb.from('user_level_progress').select('level_id').eq('user_id', session.user.id).eq('passed', true),
       ])
       setUserProfile(profile)
       setUserProgress((progress ?? []).map((p: any) => p.level_id))
@@ -194,7 +194,7 @@ export default function QuizBrowsePage() {
             {[...Array(6)].map((_, i) => (
               <div key={i} className="rounded-2xl animate-pulse"
                 style={{ background: '#231935', height: '160px' }} />
-            ))}
+             ))}
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-20">
