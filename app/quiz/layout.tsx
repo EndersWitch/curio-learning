@@ -12,7 +12,7 @@ export default function QuizLayout({ children }: { children: React.ReactNode }) 
     <AuthProvider>
       <div className="min-h-screen" style={{ background: '#1a1228' }}>
         <QuizNav />
-        <main>{children}</main>
+        <main style={{ paddingTop: '60px' }}>{children}</main>
       </div>
     </AuthProvider>
   )

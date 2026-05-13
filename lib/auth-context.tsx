@@ -3,15 +3,13 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { sb } from '@/lib/supabase'
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
 export interface CurioUser {
   id: string
   email: string
   fullName: string
   grade: string | null
-  isPremium: boolean   // profiles.is_premium
-  isFounder: boolean   // profiles.is_founder
+  isPremium: boolean
+  isFounder: boolean
 }
 
 interface AuthState {
@@ -19,34 +17,44 @@ interface AuthState {
   loading: boolean
 }
 
-// ─── Context ──────────────────────────────────────────────────────────────────
-
 const AuthContext = createContext<AuthState>({ user: null, loading: true })
 
 export function useAuth() {
   return useContext(AuthContext)
 }
 
-// ─── Provider ─────────────────────────────────────────────────────────────────
-// Wrap the quiz layout with this so every quiz page gets auth for free.
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<AuthState>({ user: null, loading: true })
 
-  async function loadUser(userId: string, email: string) {
-    // Always fetch fresh from DB — no local cache, no stale data
+  async function loadUser(session: any) {
+    if (!session?.user) {
+      setState({ user: null, loading: false })
+      return
+    }
+
+    const userId = session.user.id
+    const email = session.user.email ?? ''
+
+    // Always fetch fresh from DB — no stale data
     const { data: profile } = await sb
       .from('profiles')
       .select('is_premium, is_founder, full_name, grade')
       .eq('id', userId)
       .single()
 
+    // Name priority: profiles.full_name → user_metadata.full_name → email prefix
+    const metaName = session.user.user_metadata?.full_name ?? ''
+    const fullName =
+      (profile?.full_name && profile.full_name.trim()) ||
+      (metaName && metaName.trim()) ||
+      email.split('@')[0]
+
     setState({
       loading: false,
       user: {
         id: userId,
         email,
-        fullName: profile?.full_name ?? email.split('@')[0],
+        fullName,
         grade: profile?.grade ?? null,
         isPremium: profile?.is_premium === true,
         isFounder: profile?.is_founder === true,
@@ -55,22 +63,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    // Check session on mount
-    sb.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user) {
-        loadUser(session.user.id, session.user.email ?? '')
-      } else {
-        setState({ user: null, loading: false })
-      }
-    })
+    sb.auth.getSession().then(({ data: { session } }) => loadUser(session))
 
-    // Listen for login/logout
     const { data: { subscription } } = sb.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
-        loadUser(session.user.id, session.user.email ?? '')
-      } else {
-        setState({ user: null, loading: false })
-      }
+      loadUser(session)
     })
 
     return () => subscription.unsubscribe()

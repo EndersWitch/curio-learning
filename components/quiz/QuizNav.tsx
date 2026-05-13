@@ -1,88 +1,84 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
 
 export default function QuizNav() {
   const { user, loading } = useAuth()
+  const ddRef = useRef<HTMLDivElement>(null)
+
+  // Close dropdown when clicking outside — same as homepage
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ddRef.current && !ddRef.current.contains(e.target as Node)) {
+        ddRef.current.classList.remove('open')
+      }
+    }
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [])
 
   async function doLogout() {
     await sb.auth.signOut()
     window.location.href = '/'
   }
 
+  const initial = user?.fullName?.[0]?.toUpperCase() ?? '?'
+
   return (
-    <header
-      style={{ background: '#2B1E3F', borderBottom: '1px solid rgba(109,211,206,0.15)' }}
-      className="sticky top-0 z-40">
-      <div className="max-w-4xl mx-auto px-5 h-14 flex items-center justify-between gap-4">
+    <nav className="curio-nav">
+      <a href="/" className="nav-logo">
+        <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.7" transform="rotate(72 32 32)"/>
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.5" transform="rotate(144 32 32)"/>
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.5" transform="rotate(216 32 32)"/>
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.7" transform="rotate(288 32 32)"/>
+          <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+        </svg>
+        curio
+      </a>
 
-        <a href="/" className="flex items-center gap-2.5 no-underline">
-          <svg width="28" height="28" viewBox="0 0 200 200" fill="none">
-            <ellipse cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE"/>
-            <ellipse cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fillOpacity="0.7" transform="rotate(72 100 100)"/>
-            <ellipse cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fillOpacity="0.5" transform="rotate(144 100 100)"/>
-            <ellipse cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fillOpacity="0.5" transform="rotate(216 100 100)"/>
-            <ellipse cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fillOpacity="0.7" transform="rotate(288 100 100)"/>
-            <circle cx="100" cy="100" r="22" fill="#FF5E5B"/>
-          </svg>
-          <span className="font-black text-sm tracking-tight" style={{ color: '#F7F7FF' }}>
-            curio <span style={{ color: '#6DD3CE' }}>learning</span>
-          </span>
-        </a>
+      <ul className="nav-links">
+        <li><a href="/papers.html">Papers</a></li>
+        <li><a href="/quiz">Quiz</a></li>
+        <li><a href="/subjects">Subjects</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+      </ul>
 
-        <div className="flex items-center gap-3">
-          {loading ? (
-            <div className="w-20 h-7 rounded-full animate-pulse" style={{ background: 'rgba(255,255,255,0.1)' }} />
-          ) : user ? (
-            <div className="flex items-center gap-2">
-              {user.isPremium || user.isFounder ? (
-                <span className="hidden sm:block text-xs px-2 py-0.5 rounded-full font-bold"
-                  style={{ background: 'rgba(245,200,66,0.15)', color: '#F5C842' }}>
-                  ✨ Premium
-                </span>
-              ) : null}
-              <span className="hidden sm:block text-xs font-semibold" style={{ color: '#c4b8d8' }}>
-                {user.fullName}
-              </span>
-              <div className="relative">
-                <button
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black"
-                  style={{ background: '#FF5E5B', color: '#fff' }}
-                  onClick={() => document.getElementById('quizNavDD')?.classList.toggle('open')}>
-                  {user.fullName[0]?.toUpperCase() ?? '?'}
-                </button>
-                <div id="quizNavDD"
-                  style={{
-                    position: 'absolute', top: 'calc(100% + 8px)', right: 0,
-                    background: '#3d2d58', border: '1px solid rgba(109,211,206,0.2)',
-                    borderRadius: '12px', minWidth: '180px', boxShadow: '0 16px 48px rgba(0,0,0,0.5)',
-                    display: 'none', flexDirection: 'column', overflow: 'hidden', zIndex: 300,
-                  }}
-                  className="[&.open]:flex">
-                  <div style={{ padding: '0.8rem 1rem 0.6rem', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                    <div className="text-xs font-black" style={{ color: '#F7F7FF' }}>{user.fullName}</div>
-                    <div className="text-xs" style={{ color: '#9b8ab0' }}>{user.email}</div>
-                  </div>
-                  <a href="/" style={{ padding: '0.6rem 1rem', fontSize: '0.8rem', color: '#c4b8d8', display: 'block' }}
-                    className="hover:bg-white/5 transition-colors">🏠 Home</a>
-                  <a href="/papers.html" style={{ padding: '0.6rem 1rem', fontSize: '0.8rem', color: '#c4b8d8', display: 'block' }}
-                    className="hover:bg-white/5 transition-colors">📄 Papers</a>
-                  <button onClick={doLogout}
-                    style={{ padding: '0.6rem 1rem', fontSize: '0.8rem', color: '#FF5E5B', display: 'block', width: '100%', textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer' }}
-                    className="hover:bg-white/5 transition-colors">Sign out</button>
-                </div>
+      <div className="nav-right">
+        {loading ? (
+          <div style={{ width: 80, height: 28, borderRadius: 6, background: 'rgba(255,255,255,0.08)' }} />
+        ) : user ? (
+          <div className="profile-wrap" ref={ddRef}>
+            <button
+              className="profile-btn"
+              onClick={(e) => {
+                e.stopPropagation()
+                ddRef.current?.classList.toggle('open')
+              }}>
+              {initial}
+            </button>
+            <div className="profile-dropdown" id="profileDD">
+              <div className="profile-dd-head">
+                <div className="profile-dd-name">{user.fullName}</div>
+                <div className="profile-dd-email">{user.email}</div>
               </div>
+              <a href="/papers.html" className="profile-dd-item">📄 &nbsp;Papers</a>
+              <a href="/quiz" className="profile-dd-item">📝 &nbsp;Start a quiz</a>
+              <a href="/profile" className="profile-dd-item">👤 &nbsp;Edit profile</a>
+              <a href="/subscription" className="profile-dd-item">⭐ &nbsp;Manage subscription</a>
+              <button className="profile-dd-item danger" onClick={doLogout}>Sign out</button>
             </div>
-          ) : (
-            <a href="/login"
-              className="text-xs font-black px-4 py-2 rounded-xl transition-all hover:opacity-90"
-              style={{ background: '#FF5E5B', color: '#fff', boxShadow: '0 2px 12px rgba(255,94,91,0.35)' }}>
-              Sign In
-            </a>
-          )}
-        </div>
+          </div>
+        ) : (
+          <>
+            <a href="/login" className="btn-ghost">Log in</a>
+            <a href="/login?tab=signup" className="btn-nav">Start free →</a>
+          </>
+        )}
       </div>
-    </header>
+    </nav>
   )
 }

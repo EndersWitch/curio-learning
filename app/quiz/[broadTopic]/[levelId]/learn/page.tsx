@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
@@ -11,9 +11,9 @@ import type { QuizLevel } from '@/types/quiz'
 
 export default function LearnPage() {
   const params = useParams()
-  const router = useRouter()
   const broadTopic = params.broadTopic as string
-  const levelId = decodeURIComponent(params.levelId as string)
+  // levelId in URL is the quiz_levels UUID (primary key)
+  const levelUUID = params.levelId as string
   const { user, loading: authLoading } = useAuth()
   const isPremium = user?.isPremium || user?.isFounder || false
 
@@ -24,22 +24,21 @@ export default function LearnPage() {
   useEffect(() => {
     if (authLoading) return
     loadLevel()
-  }, [authLoading, levelId])
+  }, [authLoading, levelUUID])
 
   async function loadLevel() {
+    // Fetch by UUID id — the primary key
     const { data, error } = await sb
       .from('quiz_levels')
       .select('*')
-      .eq('level_id', levelId)
+      .eq('id', levelUUID)
       .single()
 
     if (error || !data) { setLoading(false); return }
 
-    // Check access
+    // Premium gate — only block if level is premium AND user is not premium
     if (data.is_premium && !isPremium) {
-      setAccessDenied(true)
-      setLoading(false)
-      return
+      setAccessDenied(true); setLoading(false); return
     }
 
     setLevel(data as QuizLevel)
@@ -61,15 +60,10 @@ export default function LearnPage() {
         <p className="text-sm mb-5" style={{ color: '#9b8ab0' }}>
           This level is available with Curio Premium — R49/month.
         </p>
-        <a href="/subscription"
-          className="inline-block px-6 py-3 rounded-xl font-black text-sm mb-3"
-          style={{ background: '#F5C842', color: '#2B1E3F' }}>
-          Get Premium →
-        </a>
+        <a href="/subscription" className="inline-block px-6 py-3 rounded-xl font-black text-sm mb-3"
+          style={{ background: '#F5C842', color: '#2B1E3F' }}>Get Premium →</a>
         <div>
-          <Link href={`/quiz/${broadTopic}`} className="text-sm" style={{ color: '#6DD3CE' }}>
-            ← Back
-          </Link>
+          <Link href={`/quiz/${broadTopic}`} className="text-sm" style={{ color: '#6DD3CE' }}>← Back</Link>
         </div>
       </div>
     </div>
@@ -85,19 +79,15 @@ export default function LearnPage() {
   )
 
   const cards = buildLearningZone(level)
-  const playHref = `/quiz/${broadTopic}/${encodeURIComponent(levelId)}/play`
+  const playHref = `/quiz/${broadTopic}/${levelUUID}/play`
 
   return (
     <div className="min-h-screen" style={{ background: '#1a1228' }}>
-
-      {/* Header */}
       <div style={{ background: 'linear-gradient(135deg, #2B1E3F 0%, #3d2d58 100%)' }}>
         <div className="max-w-2xl mx-auto px-6 py-10">
           <Link href={`/quiz/${broadTopic}`}
             className="inline-flex items-center gap-1 text-xs font-semibold mb-4 hover:opacity-70 transition-opacity"
-            style={{ color: '#6DD3CE' }}>
-            ← Back
-          </Link>
+            style={{ color: '#6DD3CE' }}>← Back</Link>
           <p className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: '#6DD3CE' }}>
             Level {level.level_number} · {level.question_count} questions
           </p>
@@ -106,7 +96,6 @@ export default function LearnPage() {
       </div>
 
       <div className="max-w-2xl mx-auto px-6 py-8">
-        {/* Learning zone divider */}
         <div className="flex items-center gap-3 mb-5">
           <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.08)' }} />
           <span className="text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full"
@@ -116,14 +105,10 @@ export default function LearnPage() {
           <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.08)' }} />
         </div>
 
-        {/* Cards */}
         <div className="space-y-4 mb-8">
-          {cards.map((card, i) => (
-            <LearningCard key={i} concept={card} index={i} />
-          ))}
+          {cards.map((card, i) => <LearningCard key={i} concept={card} index={i} />)}
         </div>
 
-        {/* Start CTA */}
         <div className="rounded-2xl p-7 text-center"
           style={{ background: '#231935', border: '1px solid rgba(109,211,206,0.15)' }}>
           <div className="text-4xl mb-3">🚀</div>
