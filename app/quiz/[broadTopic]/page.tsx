@@ -7,6 +7,9 @@ import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
 
 interface Level {
+  broad_topic_display: string | null
+  subject?: string
+  grade?: number
   id: string
   level_id: string
   level_display: string
