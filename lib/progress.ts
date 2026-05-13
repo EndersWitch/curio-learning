@@ -1,11 +1,5 @@
-import { createClient } from '@supabase/supabase-js'
+import { sb } from '@/lib/supabase'
 import type { QuizResult } from '@/types/quiz'
-
-const sb = createClient(
-  'https://inmrsgujgfktapjnekjs.supabase.co',
-  'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU',
-  { auth: { persistSession: true, autoRefreshToken: true } }
-)
 
 // Actual DB row shape for user_level_progress
 interface ProgressRow {
