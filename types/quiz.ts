@@ -44,11 +44,30 @@ export interface QuizLevel {
   difficulty?: 'easy' | 'medium' | 'hard'
 }
 
+export type CardType =
+  | 'key_rule'        // 📕 Core concept / rule — cyan border, structured
+  | 'did_you_know'    // ✨ Interesting fact — amber, sparkle feel
+  | 'example'         // 📝 Worked example — coral, concrete
+  | 'tip'             // 💡 Quick tip / shortcut — emerald, bright
+  | 'common_mistake'  // ⚠️ Watch out! — red, flip-reveal
+  | 'spot_difference' // 🔍 Compare two things — split panel
+  | 'what_tested'     // 🎯 Exam checklist — indigo, checklist
+  | 'try_it'          // 🎮 Mini challenge — violet, game feel
+  | 'real_world'      // 🌍 Real-world connection — teal, story card
+  | 'memory_trick'    // 🧠 Mnemonic / memory aid — purple, brain
+  | 'watch_out'       // 🚨 Critical warning — red flashing border
+  | 'fun_fact'        // 🎉 Fun / surprising fact — playful, confetti feel
+  | 'step_by_step'    // 🪜 Numbered steps — ordered process
+  | 'definition'      // 📖 Formal definition — dictionary style
+
 export interface LearningConcept {
-  type: 'key_rule' | 'did_you_know' | 'example' | 'tip' | 'common_mistake' | 'spot_difference' | 'what_tested'
+  type: CardType
   title: string
   content: string
   example?: string
+  // For spot_difference: sideA and sideB labels
+  sideA?: string
+  sideB?: string
 }
 
 export interface Question {
