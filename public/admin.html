@@ -1441,36 +1441,90 @@ function hideLZForm(){
 }
 
 // ── Concept card builder ──
+// ── Card type definitions (mirrors LearningCard.tsx) ──
+const CARD_TYPES = [
+  { value:'key_rule',        icon:'📕', label:'Key Rule',             color:'#6DD3CE', desc:'Core concept or rule the learner must know' },
+  { value:'did_you_know',    icon:'✨', label:'Did You Know?',        color:'#F5C842', desc:'Interesting fact — sparks curiosity' },
+  { value:'example',         icon:'📝', label:'Example',              color:'#FF5E5B', desc:'Worked example showing the concept in action' },
+  { value:'tip',             icon:'💡', label:'Quick Tip',            color:'#6DD3CE', desc:'Shortcut, trick or helpful hint' },
+  { value:'common_mistake',  icon:'⚠️', label:'Common Mistake',       color:'#FF5E5B', desc:'Flip card — shows the mistake then the fix on tap' },
+  { value:'spot_difference', icon:'🔍', label:'Spot the Difference',  color:'#F5C842', desc:'Split panel comparison — content goes Left\nRight split by newline midpoint' },
+  { value:'what_tested',     icon:'🎯', label:'What You\'ll Be Tested On', color:'#c4b8d8', desc:'Exam checklist — one item per line, learners can tap to mark off' },
+  { value:'try_it',          icon:'🎮', label:'Try It!',              color:'#a78bfa', desc:'Mini challenge — learner reads the prompt then reveals the answer' },
+  { value:'real_world',      icon:'🌍', label:'Real World',           color:'#6DD3CE', desc:'Story or context connecting to real life' },
+  { value:'memory_trick',    icon:'🧠', label:'Memory Trick',         color:'#a78bfa', desc:'Mnemonic or trick to help remember a rule' },
+  { value:'watch_out',       icon:'🚨', label:'Watch Out!',           color:'#FF5E5B', desc:'Critical warning — examiners love to test this' },
+  { value:'fun_fact',        icon:'🎉', label:'Fun Fact!',            color:'#F5C842', desc:'Playful and surprising — keeps energy up' },
+  { value:'step_by_step',    icon:'🪜', label:'Step by Step',         color:'#6DD3CE', desc:'Numbered steps — one step per line' },
+  { value:'definition',      icon:'📖', label:'Definition',           color:'#c4b8d8', desc:'Formal dictionary-style definition of a term' },
+];
+
+function getCardTypeMeta(val){ return CARD_TYPES.find(t=>t.value===val) || CARD_TYPES[0]; }
+
+function buildTypeSelector(n, selectedVal){
+  const opts = CARD_TYPES.map(t =>
+    `<option value="${t.value}" ${selectedVal===t.value?'selected':''}>${t.icon} ${t.label}</option>`
+  ).join('');
+  return `<select class="form-input" id="cc-type-${n}" onchange="onCardTypeChange(${n})" style="font-size:0.82rem;cursor:pointer;">${opts}</select>`;
+}
+
+function onCardTypeChange(n){
+  const val = document.getElementById(`cc-type-${n}`)?.value;
+  const meta = getCardTypeMeta(val);
+  const badge = document.getElementById(`cc-badge-${n}`);
+  const desc  = document.getElementById(`cc-desc-${n}`);
+  const sideARow = document.getElementById(`cc-side-row-${n}`);
+  if(badge){ badge.textContent = `${meta.icon} ${meta.label}`; badge.style.color = meta.color; badge.style.borderColor = meta.color+'55'; }
+  if(desc) desc.textContent = meta.desc;
+  if(sideARow) sideARow.style.display = val==='spot_difference' ? 'grid' : 'none';
+}
+
 function addConceptCard(data){
   conceptCount++;
   const n = conceptCount;
+  const selectedType = data?.type || 'key_rule';
+  const meta = getCardTypeMeta(selectedType);
+  // Normalise legacy data formats
+  let exText = '';
+  if(typeof data?.example === 'string') exText = data.example;
+  else if(data?.example?.text) exText = (data.example.label ? data.example.label+': ' : '') + data.example.text;
+  const contentVal = data?.content || data?.text || '';
   const div = document.createElement('div');
   div.className = 'form-card';
   div.id = `concept-card-${n}`;
-  div.style.cssText = 'margin-bottom:1rem;border:1px solid var(--c25);';
+  div.style.cssText = `margin-bottom:1rem;border:1.5px solid ${meta.color}33;border-radius:12px;`;
   div.innerHTML = `
-    <div class="form-section" style="background:var(--c06);">
+    <div class="form-section" style="background:var(--c06);border-radius:10px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-        <div class="form-section-title" style="margin:0;">Concept ${n}</div>
+        <span id="cc-badge-${n}" style="font-size:0.75rem;font-weight:900;letter-spacing:0.06em;padding:0.2rem 0.6rem;border-radius:20px;border:1px solid ${meta.color}55;color:${meta.color};">${meta.icon} ${meta.label}</span>
         <button onclick="removeConceptCard(${n})" style="font-size:0.7rem;color:var(--coral);background:var(--r10);border:1px solid var(--r20);padding:0.2rem 0.5rem;border-radius:5px;cursor:pointer;">Remove</button>
       </div>
       <div class="form-group full" style="margin-bottom:0.8rem;">
-        <label class="form-label">Concept Title <span class="req">*</span></label>
-        <input class="form-input" type="text" id="cc-title-${n}" placeholder="e.g. What is a noun?" value="${data?.title||''}"/>
+        <label class="form-label">Card Type <span class="req">*</span></label>
+        ${buildTypeSelector(n, selectedType)}
+        <div id="cc-desc-${n}" style="margin-top:0.3rem;font-size:0.72rem;color:var(--m40);line-height:1.4;">${meta.desc}</div>
       </div>
       <div class="form-group full" style="margin-bottom:0.8rem;">
-        <label class="form-label">Explanation <span class="req">*</span></label>
-        <textarea class="form-textarea" id="cc-text-${n}" placeholder="Explain the concept clearly. You can use HTML like <strong>bold</strong>." style="min-height:80px;">${data?.text||''}</textarea>
+        <label class="form-label">Title <span class="req">*</span></label>
+        <input class="form-input" type="text" id="cc-title-${n}" placeholder="e.g. What is a noun?" value="${(data?.title||'').replace(/"/g,'&quot;')}"/>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;">
+      <div class="form-group full" style="margin-bottom:0.8rem;">
+        <label class="form-label">Content <span class="req">*</span> <span style="font-weight:400;color:var(--m30)">— use &lt;strong&gt; for bold, *word* for cyan highlight, new line for bullet/step</span></label>
+        <textarea class="form-textarea" id="cc-text-${n}" placeholder="Explain the concept clearly." style="min-height:90px;">${contentVal.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
+      </div>
+      <div id="cc-side-row-${n}" style="display:${selectedType==='spot_difference'?'grid':'none'};grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:0.8rem;">
         <div class="form-group">
-          <label class="form-label">Example Label <span style="font-weight:400;color:var(--m30)">(optional)</span></label>
-          <input class="form-input" type="text" id="cc-exlabel-${n}" placeholder="e.g. Examples" value="${data?.example?.label||''}"/>
+          <label class="form-label">Left Panel Label</label>
+          <input class="form-input" type="text" id="cc-sidea-${n}" placeholder="e.g. ❌ Wrong" value="${(data?.sideA||'').replace(/"/g,'&quot;')}"/>
         </div>
         <div class="form-group">
-          <label class="form-label">Example Text <span style="font-weight:400;color:var(--m30)">(optional)</span></label>
-          <input class="form-input" type="text" id="cc-extext-${n}" placeholder="e.g. dog, city, Johannesburg" value="${data?.example?.text||''}"/>
+          <label class="form-label">Right Panel Label</label>
+          <input class="form-input" type="text" id="cc-sideb-${n}" placeholder="e.g. ✅ Right" value="${(data?.sideB||'').replace(/"/g,'&quot;')}"/>
         </div>
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Example / Answer <span style="font-weight:400;color:var(--m30)">(optional — shown below content, or as the revealed answer for Try It)</span></label>
+        <input class="form-input" type="text" id="cc-extext-${n}" placeholder="e.g. cat → cats, box → boxes" value="${exText.replace(/"/g,'&quot;')}"/>
       </div>
     </div>`;
   document.getElementById('conceptBuilder').appendChild(div);
@@ -1485,14 +1539,18 @@ function readConceptCards(){
   const cards = document.querySelectorAll('#conceptBuilder .form-card');
   const concepts = [];
   cards.forEach(card => {
-    const id = card.id.replace('concept-card-','');
-    const title  = document.getElementById(`cc-title-${id}`)?.value.trim();
-    const text   = document.getElementById(`cc-text-${id}`)?.value.trim();
-    const exLabel= document.getElementById(`cc-exlabel-${id}`)?.value.trim();
-    const exText = document.getElementById(`cc-extext-${id}`)?.value.trim();
+    const id    = card.id.replace('concept-card-','');
+    const type  = document.getElementById(`cc-type-${id}`)?.value?.trim() || 'key_rule';
+    const title = document.getElementById(`cc-title-${id}`)?.value.trim();
+    const text  = document.getElementById(`cc-text-${id}`)?.value.trim();
+    const exText= document.getElementById(`cc-extext-${id}`)?.value.trim();
+    const sideA = document.getElementById(`cc-sidea-${id}`)?.value.trim();
+    const sideB = document.getElementById(`cc-sideb-${id}`)?.value.trim();
     if(title && text){
-      const concept = { title, text };
-      if(exLabel || exText) concept.example = { label: exLabel||'Example', text: exText||'' };
+      const concept = { type, title, content: text };
+      if(exText) concept.example = exText;
+      if(sideA) concept.sideA = sideA;
+      if(sideB) concept.sideB = sideB;
       concepts.push(concept);
     }
   });
