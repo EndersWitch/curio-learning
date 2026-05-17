@@ -1449,7 +1449,6 @@ const CARD_TYPES = [
   { value:'tip',             icon:'💡', label:'Quick Tip',            color:'#6DD3CE', desc:'Shortcut, trick or helpful hint' },
   { value:'common_mistake',  icon:'⚠️', label:'Common Mistake',       color:'#FF5E5B', desc:'Flip card — shows the mistake then the fix on tap' },
   { value:'spot_difference', icon:'🔍', label:'Spot the Difference',  color:'#F5C842', desc:'Split panel comparison — content goes Left\nRight split by newline midpoint' },
-  { value:'what_tested',     icon:'🎯', label:'What You\'ll Be Tested On', color:'#c4b8d8', desc:'Exam checklist — one item per line, learners can tap to mark off' },
   { value:'try_it',          icon:'🎮', label:'Try It!',              color:'#a78bfa', desc:'Mini challenge — learner reads the prompt then reveals the answer' },
   { value:'real_world',      icon:'🌍', label:'Real World',           color:'#6DD3CE', desc:'Story or context connecting to real life' },
   { value:'memory_trick',    icon:'🧠', label:'Memory Trick',         color:'#a78bfa', desc:'Mnemonic or trick to help remember a rule' },
@@ -1524,7 +1523,7 @@ function addConceptCard(data){
       </div>
       <div class="form-group full">
         <label class="form-label">Example / Answer <span style="font-weight:400;color:var(--m30)">(optional — shown below content, or as the revealed answer for Try It)</span></label>
-        <input class="form-input" type="text" id="cc-extext-${n}" placeholder="e.g. cat → cats, box → boxes" value="${exText.replace(/"/g,'&quot;')}"/>
+        <textarea class="form-textarea" id="cc-extext-${n}" placeholder="e.g. cat → cats, box → boxes&#10;One example per line if needed" style="min-height:60px;">${exText.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
       </div>
     </div>`;
   document.getElementById('conceptBuilder').appendChild(div);
