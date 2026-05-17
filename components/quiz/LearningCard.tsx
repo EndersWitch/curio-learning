@@ -73,19 +73,34 @@ function ContentBlock({ text, accentColor, textColor = '#c4b8d8' }: {
   )
 }
 
-// ── Example block ──
+// ── Example block — supports multiple lines ──
 function ExampleBlock({ text, accentColor }: { text: string; accentColor: string }) {
+  const lines = (text ?? '').split('\n').filter(Boolean)
   return (
     <div className="mt-3 rounded-xl p-3" style={{
       background: 'rgba(255,255,255,0.04)',
       border: '1px solid rgba(255,255,255,0.08)',
     }}>
       <span className="text-xs font-black uppercase tracking-wide" style={{ color: accentColor }}>
-        Example
+        {lines.length > 1 ? 'Examples' : 'Example'}
       </span>
-      <p className="text-sm mt-1 italic" style={{ color: '#c4b8d8' }}>
-        <RichText text={text} />
-      </p>
+      {lines.length > 1 ? (
+        <ul className="mt-1 space-y-1">
+          {lines.map((line, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm italic" style={{ color: '#c4b8d8' }}>
+              <span className="flex-shrink-0 mt-1.5" style={{
+                width: 5, height: 5, borderRadius: '50%',
+                background: accentColor, minWidth: 5, display: 'inline-block',
+              }} />
+              <RichText text={line} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-sm mt-1 italic" style={{ color: '#c4b8d8' }}>
+          <RichText text={text} />
+        </p>
+      )}
     </div>
   )
 }
@@ -164,16 +179,30 @@ function ExampleCard({ concept, index }: LearningCardProps) {
           {concept.title}
         </h3>
         <ContentBlock text={concept.content} accentColor="#FF5E5B" />
-        {concept.example && (
-          <div className="mt-3 rounded-xl p-4" style={{
-            background: 'rgba(255,94,91,0.06)',
-            border: '1px solid rgba(255,94,91,0.2)',
-          }}>
-            <p className="text-sm font-mono" style={{ color: '#ffa09e' }}>
-              <RichText text={concept.example} />
-            </p>
-          </div>
-        )}
+        {concept.example && (() => {
+          const exLines = concept.example!.split('\n').filter(Boolean)
+          return (
+            <div className="mt-3 rounded-xl p-4" style={{
+              background: 'rgba(255,94,91,0.06)',
+              border: '1px solid rgba(255,94,91,0.2)',
+            }}>
+              {exLines.length > 1 ? (
+                <ul className="space-y-1">
+                  {exLines.map((l, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm font-mono" style={{ color: '#ffa09e' }}>
+                      <span style={{ marginTop: 2 }}>·</span>
+                      <RichText text={l} />
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-sm font-mono" style={{ color: '#ffa09e' }}>
+                  <RichText text={concept.example!} />
+                </p>
+              )}
+            </div>
+          )
+        })()}
       </div>
     </div>
   )
