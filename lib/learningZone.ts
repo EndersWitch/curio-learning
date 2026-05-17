@@ -128,7 +128,7 @@ export const CARD_META: Record<CardType, { icon: string; label: string; descript
   tip:             { icon: '💡', label: 'Quick Tip',            color: '#6DD3CE', description: 'Shortcut, trick or helpful hint' },
   common_mistake:  { icon: '⚠️', label: 'Common Mistake',      color: '#FF5E5B', description: 'Flip card — shows the mistake then the fix' },
   spot_difference: { icon: '🔍', label: 'Spot the Difference', color: '#F5C842', description: 'Side-by-side comparison of two things' },
-  // what_tested is auto-generated from the `tested` array — not manually selectable in admin
+  what_tested:     { icon: '🎯', label: "What You'll Be Tested On", color: '#c4b8d8', description: 'Auto-generated from the tested array — not selectable in admin' },
   try_it:          { icon: '🎮', label: 'Try It!',              color: '#a78bfa', description: 'Mini challenge — learner attempts before seeing the answer' },
   real_world:      { icon: '🌍', label: 'Real World',           color: '#6DD3CE', description: 'Story or context connecting to real life' },
   memory_trick:    { icon: '🧠', label: 'Memory Trick',         color: '#a78bfa', description: 'Mnemonic or trick to help remember a rule' },
