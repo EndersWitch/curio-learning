@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>curio learning — Quiz Formatter</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;
+  --cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;
+  --m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);
+  --m30:rgba(247,247,255,0.3);--m12:rgba(247,247,255,0.12);
+  --m06:rgba(247,247,255,0.06);--m03:rgba(247,247,255,0.03);
+  --c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--c06:rgba(109,211,206,0.06);
+  --r10:rgba(255,94,91,0.1);--r20:rgba(255,94,91,0.2);
+  --a10:rgba(245,200,66,0.1);--a25:rgba(245,200,66,0.25);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--deep);color:var(--moon);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{font-family:'DM Sans',sans-serif;cursor:pointer;border:none;}
+
+/* NAV */
+nav{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;
+  background:rgba(26,18,40,0.95);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--m06);position:sticky;top:0;z-index:100;}
+.nav-logo{display:flex;align-items:center;gap:0.6rem;font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;color:var(--moon);}
+.nav-badge{font-size:0.48rem;font-weight:700;text-transform:uppercase;background:var(--cyan);color:var(--plum);padding:0.12rem 0.45rem;border-radius:3px;margin-left:0.3rem;}
+.nav-back{font-size:0.78rem;color:var(--m30);transition:color .15s;}
+.nav-back:hover{color:var(--moon);}
+
+/* PAGE */
+.page-wrap{max-width:1200px;margin:0 auto;padding:2.5rem 2rem 4rem;}
+.page-eyebrow{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--cyan);margin-bottom:0.4rem;}
+.page-title{font-family:'Poppins',sans-serif;font-size:1.9rem;font-weight:800;letter-spacing:-1px;color:var(--moon);margin-bottom:0.3rem;}
+.page-sub{font-size:0.85rem;color:var(--m55);max-width:640px;line-height:1.7;margin-bottom:2rem;}
+
+/* FORMAT SPEC CARD */
+.spec-card{background:var(--card);border:1px solid var(--m06);border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:2rem;}
+.spec-title{font-family:'Poppins',sans-serif;font-size:0.78rem;font-weight:700;color:var(--amber);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+@media(max-width:700px){.spec-grid{grid-template-columns:1fr;}}
+.spec-section h4{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.5rem;}
+.spec-code{background:var(--deep);border:1px solid var(--m12);border-radius:8px;padding:0.8rem 1rem;font-family:monospace;font-size:0.72rem;color:var(--m80);line-height:1.8;white-space:pre;overflow-x:auto;}
+.spec-code .tag{color:var(--cyan);}
+.spec-code .val{color:var(--amber);}
+.spec-code .comment{color:var(--m30);}
+
+/* MAIN LAYOUT */
+.layout{display:grid;grid-template-columns:1fr 340px;gap:1.5rem;align-items:start;}
+@media(max-width:960px){.layout{grid-template-columns:1fr;}}
+
+/* PASTE CARD */
+.paste-card{background:var(--card);border:1px solid var(--m06);border-radius:16px;overflow:hidden;}
+.card-head{padding:0.9rem 1.3rem;border-bottom:1px solid var(--m06);display:flex;align-items:center;justify-content:space-between;gap:0.8rem;flex-wrap:wrap;}
+.card-title{font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:700;color:var(--moon);}
+.card-hint{font-size:0.7rem;color:var(--m30);}
+.paste-area{width:100%;min-height:520px;padding:1.3rem;background:var(--plum);border:none;
+  font-family:monospace;font-size:0.78rem;color:var(--m80);line-height:1.85;resize:vertical;outline:none;}
+.paste-area::placeholder{color:var(--m30);}
+
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:1rem;position:sticky;top:74px;}
+.panel{background:var(--card);border:1px solid var(--m06);border-radius:14px;overflow:hidden;}
+.panel-head{padding:0.8rem 1.1rem;border-bottom:1px solid var(--m06);}
+.panel-title{font-family:'Poppins',sans-serif;font-size:0.78rem;font-weight:700;color:var(--moon);}
+.panel-sub{font-size:0.68rem;color:var(--m30);margin-top:0.15rem;}
+.panel-body{padding:1.1rem;}
+
+.field{display:flex;flex-direction:column;gap:0.3rem;margin-bottom:0.9rem;}
+.field:last-child{margin-bottom:0;}
+.field-label{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);}
+.field-select,.field-input{width:100%;padding:0.6rem 0.9rem;background:var(--plum);border:1.5px solid var(--m12);
+  border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.82rem;color:var(--moon);
+  -webkit-appearance:none;transition:border-color .15s;}
+.field-select:focus,.field-input:focus{outline:none;border-color:var(--cyan);}
+
+.btn-parse{width:100%;padding:0.85rem;background:var(--coral);color:var(--moon);
+  font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:700;
+  border:none;border-radius:9px;cursor:pointer;transition:all .15s;margin-bottom:0.7rem;}
+.btn-parse:hover{background:#ff4a47;transform:translateY(-1px);}
+.btn-parse:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+.btn-save{width:100%;padding:0.85rem;background:var(--c12);color:var(--cyan);
+  font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:700;
+  border:1.5px solid var(--c25);border-radius:9px;cursor:pointer;transition:all .15s;display:none;}
+.btn-save:hover{background:var(--c25);}
+.btn-save:disabled{opacity:0.5;cursor:not-allowed;}
+.btn-save.saving{background:var(--c25);}
+
+.status-msg{font-size:0.76rem;padding:0.65rem 0.9rem;border-radius:8px;display:none;line-height:1.5;margin-top:0.5rem;}
+.status-msg.ok{display:block;background:var(--c12);color:var(--cyan);border:1px solid var(--c25);}
+.status-msg.err{display:block;background:var(--r10);color:#ff9a98;border:1px solid var(--r20);}
+.status-msg.warn{display:block;background:var(--a10);color:var(--amber);border:1px solid var(--a25);}
+
+/* PREVIEW */
+.preview-card{background:var(--card);border:1px solid var(--m06);border-radius:16px;overflow:hidden;margin-top:1.5rem;display:none;}
+.preview-card.show{display:block;}
+.preview-body{padding:1.3rem;}
+
+.preview-section{margin-bottom:1.5rem;}
+.preview-section:last-child{margin-bottom:0;}
+.preview-section-label{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;
+  color:var(--cyan);padding-bottom:0.4rem;border-bottom:1px solid var(--m06);margin-bottom:0.9rem;}
+
+/* Level preview */
+.lz-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-bottom:0.9rem;}
+@media(max-width:600px){.lz-meta{grid-template-columns:1fr 1fr;}}
+.lz-meta-item{background:var(--plum);border-radius:8px;padding:0.5rem 0.7rem;}
+.lz-meta-item .k{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--m30);}
+.lz-meta-item .v{font-size:0.78rem;color:var(--moon);font-weight:600;margin-top:0.1rem;}
+
+.intro-box{background:var(--c06);border-left:3px solid var(--cyan);border-radius:0 8px 8px 0;
+  padding:0.7rem 1rem;font-size:0.78rem;color:var(--m80);line-height:1.7;margin-bottom:0.9rem;}
+
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:0.9rem;}
+@media(max-width:600px){.cards-grid{grid-template-columns:1fr;}}
+.concept-chip{background:var(--plum);border-radius:8px;padding:0.55rem 0.8rem;}
+.concept-chip .ct{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--m30);}
+.concept-chip .cv{font-size:0.75rem;color:var(--moon);margin-top:0.1rem;}
+
+.tested-list{display:flex;flex-direction:column;gap:0.3rem;}
+.tested-item{font-size:0.78rem;color:var(--m80);padding:0.35rem 0.7rem;
+  background:var(--plum);border-radius:6px;display:flex;align-items:flex-start;gap:0.5rem;}
+.tested-item::before{content:"✓";color:var(--cyan);font-weight:700;font-size:0.7rem;flex-shrink:0;margin-top:0.1rem;}
+
+/* Questions preview */
+.q-list{display:flex;flex-direction:column;gap:0.6rem;}
+.q-item{background:var(--plum);border-radius:10px;padding:0.8rem 1rem;border-left:3px solid transparent;}
+.q-item.starter{border-left-color:var(--cyan);}
+.q-item.building{border-left-color:var(--amber);}
+.q-item.challenge{border-left-color:var(--coral);}
+.q-num{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.3rem;display:flex;align-items:center;gap:0.5rem;}
+.diff-badge{padding:0.1rem 0.5rem;border-radius:4px;font-size:0.58rem;font-weight:700;}
+.diff-badge.starter{background:var(--c12);color:var(--cyan);}
+.diff-badge.building{background:var(--a10);color:var(--amber);}
+.diff-badge.challenge{background:var(--r10);color:var(--coral);}
+.q-text{font-size:0.8rem;color:var(--moon);line-height:1.6;margin-bottom:0.5rem;white-space:pre-wrap;}
+.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:0.25rem;}
+.q-opt{font-size:0.73rem;color:var(--m55);padding:0.25rem 0.5rem;border-radius:5px;}
+.q-opt.correct{color:var(--cyan);background:var(--c06);font-weight:600;}
+.q-explain{font-size:0.72rem;color:var(--m30);margin-top:0.4rem;padding-top:0.4rem;border-top:1px solid var(--m06);line-height:1.5;}
+
+/* Summary counts */
+.summary-row{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.8rem;}
+.count-pill{font-size:0.68rem;font-weight:700;padding:0.2rem 0.65rem;border-radius:4px;}
+.count-lz{background:var(--c12);color:var(--cyan);border:1px solid var(--c25);}
+.count-q{background:var(--a10);color:var(--amber);border:1px solid var(--a25);}
+.count-err{background:var(--r10);color:var(--coral);border:1px solid var(--r20);}
+
+/* Error list */
+.err-list{display:flex;flex-direction:column;gap:0.3rem;}
+.err-item{font-size:0.75rem;color:#ff9a98;padding:0.35rem 0.7rem;background:var(--r10);border-radius:6px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <svg width="26" height="26" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".7" transform="rotate(72 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".5" transform="rotate(144 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".5" transform="rotate(216 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".7" transform="rotate(288 32 32)"/>
+      <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+    </svg>
+    curio learning
+    <span class="nav-badge">Quiz Formatter</span>
+  </div>
+  <a class="nav-back" href="/admin.html">← Back to Admin</a>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="page-eyebrow">Content Tools</div>
+  <div class="page-title">Quiz Formatter</div>
+  <div class="page-sub">Paste a formatted quiz level below. The formatter will parse the learning zone and all questions, show you a preview, then save everything to Supabase in one click.</div>
+
+  <!-- FORMAT REFERENCE -->
+  <div class="spec-card">
+    <div class="spec-title">📋 Input Format Reference <span style="font-size:0.62rem;font-weight:400;color:var(--m30)">— use this format in all quiz content you generate</span></div>
+    <div class="spec-grid">
+      <div class="spec-section">
+        <h4>Learning Zone Block</h4>
+        <div class="spec-code"><span class="tag">@@LEVEL</span>
+<span class="comment"># Identity</span>
+<span class="tag">PHASE:</span> <span class="val">intermediate</span>
+<span class="tag">GRADE:</span> <span class="val">4</span>
+<span class="tag">SUBJECT:</span> <span class="val">english</span>
+<span class="tag">BROAD_TOPIC_ID:</span> <span class="val">parts_of_speech</span>
+<span class="tag">BROAD_TOPIC_DISPLAY:</span> <span class="val">Parts of Speech</span>
+<span class="tag">SUBTOPIC_ID:</span> <span class="val">verbs</span>
+<span class="tag">SUBTOPIC_DISPLAY:</span> <span class="val">Verbs</span>
+<span class="tag">LEVEL_ID:</span> <span class="val">verbs_4</span>
+<span class="tag">LEVEL_DISPLAY:</span> <span class="val">Verbs IV</span>
+<span class="tag">LEVEL_DESC:</span> <span class="val">Past tense — actions that already happened.</span>
+<span class="tag">LEVEL_ORDER:</span> <span class="val">4</span>
+<span class="tag">DIFFICULTY:</span> <span class="val">Building</span>
+<span class="tag">ACCESS:</span> <span class="val">Premium</span>
+<span class="tag">QUESTION_COUNT:</span> <span class="val">10</span>
+<span class="tag">INTRO:</span> <span class="val">In this level we learn about the past tense...</span>
+
+<span class="comment"># Concept Cards — repeat @@CARD blocks</span>
+<span class="tag">@@CARD</span>
+<span class="tag">TYPE:</span> <span class="val">definition</span>
+<span class="tag">TITLE:</span> <span class="val">What is past tense?</span>
+<span class="tag">CONTENT:</span> <span class="val">The &lt;strong&gt;past tense&lt;/strong&gt; tells us about actions
+that have &lt;strong&gt;already happened&lt;/strong&gt;.</span>
+<span class="tag">EXAMPLE:</span> <span class="val">She walked to school.
+The dog barked loudly.</span>
+<span class="tag">@@ENDCARD</span>
+
+<span class="comment"># spot_difference cards also have SIDE_A and SIDE_B</span>
+<span class="tag">@@CARD</span>
+<span class="tag">TYPE:</span> <span class="val">spot_difference</span>
+<span class="tag">TITLE:</span> <span class="val">Present vs Past</span>
+<span class="tag">SIDE_A:</span> <span class="val">Present Tense</span>
+<span class="tag">SIDE_B:</span> <span class="val">Past Tense</span>
+<span class="tag">CONTENT:</span> <span class="val">walk | walked
+cook | cooked</span>
+<span class="tag">EXAMPLE:</span> <span class="val">Today she cooks. Yesterday she cooked.</span>
+<span class="tag">@@ENDCARD</span>
+
+<span class="comment"># What Will Be Tested</span>
+<span class="tag">TESTED:</span>
+<span class="val">Understand what past tense means
+Identify past tense verbs in sentences
+Choose the correct past tense verb</span>
+<span class="tag">@@ENDLEVEL</span></div>
+      </div>
+      <div class="spec-section">
+        <h4>Questions Block</h4>
+        <div class="spec-code"><span class="tag">@@QUESTIONS</span>
+
+<span class="tag">@@Q</span>
+<span class="tag">DIFFICULTY:</span> <span class="val">Starter</span>
+<span class="tag">QUESTION:</span>
+<span class="val">Which sentence is in the past tense?</span>
+<span class="tag">A:</span> <span class="val">The boy plays soccer.</span>
+<span class="tag">B:</span> <span class="val">She walks to school.</span>
+<span class="tag">C:</span> <span class="val">The dog barked at the gate.</span>
+<span class="tag">D:</span> <span class="val">We eat dinner together.</span>
+<span class="tag">CORRECT:</span> <span class="val">C</span>
+<span class="tag">EXPLAIN:</span>
+<span class="val">*Barked* is past tense because the action
+already happened.</span>
+<span class="tag">@@ENDQ</span>
+
+<span class="comment"># For True/False — just use A and B, no C or D</span>
+<span class="tag">@@Q</span>
+<span class="tag">DIFFICULTY:</span> <span class="val">Starter</span>
+<span class="tag">QUESTION:</span>
+<span class="val">True or False:
+Past tense tells us about actions happening now.</span>
+<span class="tag">A:</span> <span class="val">True</span>
+<span class="tag">B:</span> <span class="val">False</span>
+<span class="tag">CORRECT:</span> <span class="val">B</span>
+<span class="tag">EXPLAIN:</span>
+<span class="val">This is false. Past tense tells us about
+actions that have *already happened*.</span>
+<span class="tag">@@ENDQ</span>
+
+<span class="tag">@@ENDQUESTIONS</span>
+
+<span class="comment"># Valid DIFFICULTY values: Starter / Building / Challenge
+# Valid TYPE values: definition / example / spot_difference
+#   step_by_step / common_mistake / try_it / key_rule
+# *word* renders as cyan highlight in the quiz
+# &lt;strong&gt; renders as bold</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <!-- PASTE AREA -->
+    <div>
+      <div class="paste-card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Paste Quiz Content</div>
+            <div class="card-hint">Paste the full @@LEVEL … @@ENDLEVEL and @@QUESTIONS … @@ENDQUESTIONS blocks</div>
+          </div>
+          <button class="btn-parse" id="btnClear" style="padding:0.4rem 0.9rem;background:var(--m06);color:var(--m30);font-size:0.72rem;font-weight:700;border-radius:7px;font-family:'Poppins',sans-serif;width:auto;margin-bottom:0;" onclick="clearAll()">Clear</button>
+        </div>
+        <textarea class="paste-area" id="pasteArea" placeholder="Paste your @@LEVEL ... @@ENDLEVEL and @@QUESTIONS ... @@ENDQUESTIONS blocks here..."></textarea>
+      </div>
+
+      <!-- PREVIEW -->
+      <div class="preview-card" id="previewCard">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Preview</div>
+            <div class="card-hint">Check everything looks correct before saving</div>
+          </div>
+          <div class="summary-row" id="summaryRow"></div>
+        </div>
+        <div class="preview-body" id="previewBody"></div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Parse &amp; Save</div>
+          <div class="panel-sub">Check then commit to Supabase</div>
+        </div>
+        <div class="panel-body">
+          <button class="btn-parse" id="btnParse" onclick="doParse()">Parse Content →</button>
+          <button class="btn-save" id="btnSave" onclick="doSave()">Save to Supabase ↑</button>
+          <div class="status-msg" id="statusMsg"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Save Options</div>
+          <div class="panel-sub">Applied when saving questions</div>
+        </div>
+        <div class="panel-body">
+          <div class="field">
+            <div class="field-label">Section Type</div>
+            <select class="field-select" id="optSectionType">
+              <option value="learning_level" selected>📖 Learning Level</option>
+              <option value="general_practice">🎯 General Practice</option>
+              <option value="mastery_challenge">🏆 Mastery Challenge</option>
+            </select>
+          </div>
+          <div class="field">
+            <div class="field-label">Skip Learning Zone</div>
+            <select class="field-select" id="optSkipLZ">
+              <option value="no" selected>No — save learning zone too</option>
+              <option value="yes">Yes — questions only</option>
+            </select>
+          </div>
+          <div class="field">
+            <div class="field-label">Skip Questions</div>
+            <select class="field-select" id="optSkipQ">
+              <option value="no" selected>No — save questions too</option>
+              <option value="yes">Yes — learning zone only</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Quick Tips</div>
+        </div>
+        <div class="panel-body" style="font-size:0.74rem;color:var(--m55);line-height:1.7;display:flex;flex-direction:column;gap:0.5rem;">
+          <div><span style="color:var(--cyan);">*word*</span> → cyan highlight in quiz</div>
+          <div><span style="color:var(--cyan);">&lt;strong&gt;word&lt;/strong&gt;</span> → bold</div>
+          <div><span style="color:var(--cyan);">@@CARD</span> blocks go inside <span style="color:var(--cyan);">@@LEVEL</span></div>
+          <div><span style="color:var(--cyan);">TESTED:</span> takes one item per line, ends at <span style="color:var(--cyan);">@@ENDLEVEL</span></div>
+          <div><span style="color:var(--cyan);">QUESTION:</span> and <span style="color:var(--cyan);">EXPLAIN:</span> can span multiple lines</div>
+          <div>True/False = omit C and D options</div>
+          <div>Saving a level that already exists will <span style="color:var(--amber);">update</span> it (PATCH by level_id)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Supabase ──────────────────────────────────────────────────────────────────
+const SB_URL = 'https://inmrsgujgfktapjnekjs.supabase.co';
+const SB_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
+
+async function sbFetch(path, options = {}) {
+  const res = await fetch(`${SB_URL}/rest/v1/${path}`, {
+    method: options.method || 'GET',
+    headers: {
+      'apikey': SB_KEY,
+      'Authorization': `Bearer ${SB_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': options.prefer || ''
+    },
+    body: options.body || undefined
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Supabase error ${res.status}: ${err}`);
+  }
+  if (res.status === 204) return null;
+  return await res.json();
+}
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let parsedLevel = null;
+let parsedQuestions = [];
+let parseErrors = [];
+
+// ── Parser ────────────────────────────────────────────────────────────────────
+
+function parseContent(raw) {
+  parsedLevel = null;
+  parsedQuestions = [];
+  parseErrors = [];
+
+  // Normalise line endings
+  const text = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  // ── Parse @@LEVEL block ──
+  const levelMatch = text.match(/@@LEVEL([\s\S]*?)@@ENDLEVEL/i);
+  if (levelMatch) {
+    parsedLevel = parseLevelBlock(levelMatch[1]);
+  }
+
+  // ── Parse @@QUESTIONS block ──
+  const qMatch = text.match(/@@QUESTIONS([\s\S]*?)@@ENDQUESTIONS/i);
+  if (qMatch) {
+    parsedQuestions = parseQuestionsBlock(qMatch[1]);
+  }
+
+  if (!parsedLevel && !parsedQuestions.length) {
+    parseErrors.push('No @@LEVEL or @@QUESTIONS blocks found. Check your format.');
+  }
+
+  return { level: parsedLevel, questions: parsedQuestions, errors: parseErrors };
+}
+
+function parseLevelBlock(raw) {
+  const lz = {};
+
+  // ── Extract cards first (before stripping) ──
+  lz.concepts = [];
+  const cardBlocks = [...raw.matchAll(/@@CARD([\s\S]*?)@@ENDCARD/gi)];
+  cardBlocks.forEach(m => {
+    const card = parseCardBlock(m[1]);
+    if (card) lz.concepts.push(card);
+  });
+
+  // Remove card blocks to simplify key parsing
+  const stripped = raw.replace(/@@CARD[\s\S]*?@@ENDCARD/gi, '');
+  const lines = stripped.split('\n');
+
+  // Multi-line field collector
+  let currentKey = null;
+  let currentVal = [];
+
+  const flush = () => {
+    if (!currentKey) return;
+    const k = currentKey;
+    const v = currentVal.join('\n').trim();
+    applyLevelField(lz, k, v);
+    currentKey = null;
+    currentVal = [];
+  };
+
+  const SINGLE_LINE_KEYS = ['PHASE','GRADE','SUBJECT','BROAD_TOPIC_ID','BROAD_TOPIC_DISPLAY',
+    'SUBTOPIC_ID','SUBTOPIC_DISPLAY','LEVEL_ID','LEVEL_DISPLAY','LEVEL_DESC',
+    'LEVEL_ORDER','DIFFICULTY','ACCESS','QUESTION_COUNT'];
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const keyMatch = line.match(/^([A-Z_]+):\s*(.*)/);
+
+    if (keyMatch) {
+      const key = keyMatch[1];
+      const rest = keyMatch[2];
+
+      if (SINGLE_LINE_KEYS.includes(key)) {
+        flush();
+        applyLevelField(lz, key, rest.trim());
+      } else if (key === 'INTRO' || key === 'TESTED') {
+        flush();
+        currentKey = key;
+        if (rest.trim()) currentVal.push(rest.trim());
+      } else {
+        // Unknown key — just flush
+        flush();
+        applyLevelField(lz, key, rest.trim());
+      }
+    } else {
+      if (currentKey) currentVal.push(line);
+    }
+  }
+  flush();
+
+  // Validate
+  if (!lz.level_id) parseErrors.push('LEVEL: Missing LEVEL_ID');
+  if (!lz.grade) parseErrors.push('LEVEL: Missing GRADE');
+  if (!lz.subject) parseErrors.push('LEVEL: Missing SUBJECT');
+
+  return lz;
+}
+
+function applyLevelField(lz, key, val) {
+  switch (key) {
+    case 'PHASE':              lz.phase = val.toLowerCase(); break;
+    case 'GRADE':              lz.grade = parseInt(val); break;
+    case 'SUBJECT':            lz.subject = val.toLowerCase(); break;
+    case 'BROAD_TOPIC_ID':     lz.broad_topic = val; break;
+    case 'BROAD_TOPIC_DISPLAY':lz.broad_topic_display = val; break;
+    case 'SUBTOPIC_ID':        lz.subtopic_id = val; break;
+    case 'SUBTOPIC_DISPLAY':   lz.subtopic_display = val; break;
+    case 'LEVEL_ID':           lz.level_id = val; break;
+    case 'LEVEL_DISPLAY':      lz.level_display = val; break;
+    case 'LEVEL_DESC':         lz.description = val; break;
+    case 'LEVEL_ORDER':        lz.level_order = parseInt(val) || 1; break;
+    case 'DIFFICULTY':         lz.difficulty = val; break;
+    case 'ACCESS':             lz.is_premium = val.toLowerCase() === 'premium'; break;
+    case 'QUESTION_COUNT':     lz.question_count = parseInt(val) || 10; break;
+    case 'INTRO':              lz.intro = val; break;
+    case 'TESTED':             lz.tested = val ? val.split('\n').map(s=>s.trim()).filter(Boolean) : []; break;
+  }
+}
+
+function parseCardBlock(raw) {
+  const card = {};
+  const lines = raw.split('\n');
+
+  let currentKey = null;
+  let currentVal = [];
+
+  const flush = () => {
+    if (!currentKey) return;
+    const k = currentKey;
+    const v = currentVal.join('\n').trim();
+    switch(k) {
+      case 'TYPE':    card.type = v; break;
+      case 'TITLE':   card.title = v; break;
+      case 'SIDE_A':  card.sideA = v; break;
+      case 'SIDE_B':  card.sideB = v; break;
+      case 'CONTENT': card.content = v; break;
+      case 'EXAMPLE': card.example = v; break;
+    }
+    currentKey = null;
+    currentVal = [];
+  };
+
+  const SINGLE_LINE_CARD_KEYS = ['TYPE','TITLE','SIDE_A','SIDE_B'];
+
+  for (const line of lines) {
+    const keyMatch = line.match(/^([A-Z_]+):\s*(.*)/);
+    if (keyMatch) {
+      const key = keyMatch[1];
+      const rest = keyMatch[2];
+      if (SINGLE_LINE_CARD_KEYS.includes(key)) {
+        flush();
+        switch(key) {
+          case 'TYPE':   card.type = rest.trim(); break;
+          case 'TITLE':  card.title = rest.trim(); break;
+          case 'SIDE_A': card.sideA = rest.trim(); break;
+          case 'SIDE_B': card.sideB = rest.trim(); break;
+        }
+      } else {
+        flush();
+        currentKey = key;
+        if (rest.trim()) currentVal.push(rest.trim());
+      }
+    } else {
+      if (currentKey) currentVal.push(line);
+    }
+  }
+  flush();
+
+  if (!card.title || !card.content) return null;
+  return card;
+}
+
+function parseQuestionsBlock(raw) {
+  const questions = [];
+  const qBlocks = [...raw.matchAll(/@@Q([\s\S]*?)@@ENDQ/gi)];
+
+  qBlocks.forEach((m, idx) => {
+    const q = parseQuestionBlock(m[1], idx + 1);
+    if (q) questions.push(q);
+  });
+
+  return questions;
+}
+
+function parseQuestionBlock(raw, num) {
+  const q = {};
+  const lines = raw.split('\n');
+
+  let currentKey = null;
+  let currentVal = [];
+
+  const flush = () => {
+    if (!currentKey) return;
+    const k = currentKey;
+    const v = currentVal.join('\n').trim();
+    switch(k) {
+      case 'DIFFICULTY': q.difficulty = v; break;
+      case 'QUESTION':   q.question_text = v; break;
+      case 'A':          q.option_a = v; break;
+      case 'B':          q.option_b = v; break;
+      case 'C':          q.option_c = v; break;
+      case 'D':          q.option_d = v; break;
+      case 'CORRECT':    q.correct_option = v.toUpperCase(); break;
+      case 'EXPLAIN':    q.explanation = v; break;
+    }
+    currentKey = null;
+    currentVal = [];
+  };
+
+  const SINGLE_LINE_Q_KEYS = ['DIFFICULTY','A','B','C','D','CORRECT'];
+
+  for (const line of lines) {
+    const keyMatch = line.match(/^([A-Z_]+):\s*(.*)/);
+    if (keyMatch) {
+      const key = keyMatch[1];
+      const rest = keyMatch[2];
+      if (SINGLE_LINE_Q_KEYS.includes(key)) {
+        flush();
+        switch(key) {
+          case 'DIFFICULTY': q.difficulty = rest.trim(); break;
+          case 'A': q.option_a = rest.trim(); break;
+          case 'B': q.option_b = rest.trim(); break;
+          case 'C': q.option_c = rest.trim(); break;
+          case 'D': q.option_d = rest.trim(); break;
+          case 'CORRECT': q.correct_option = rest.trim().toUpperCase(); break;
+        }
+      } else {
+        flush();
+        currentKey = key;
+        if (rest.trim()) currentVal.push(rest.trim());
+      }
+    } else {
+      if (currentKey) currentVal.push(line);
+    }
+  }
+  flush();
+
+  // Validate
+  if (!q.question_text) { parseErrors.push(`Q${num}: Missing QUESTION text`); return null; }
+  if (!q.option_a || !q.option_b) { parseErrors.push(`Q${num}: Missing options A or B`); return null; }
+  if (!q.correct_option) { parseErrors.push(`Q${num}: Missing CORRECT answer`); return null; }
+  if (!q.explanation) { parseErrors.push(`Q${num}: Missing EXPLAIN text`); return null; }
+
+  return q;
+}
+
+// ── Render Preview ─────────────────────────────────────────────────────────────
+
+function renderPreview(level, questions, errors) {
+  const previewCard = document.getElementById('previewCard');
+  const previewBody = document.getElementById('previewBody');
+  const summaryRow  = document.getElementById('summaryRow');
+
+  // Summary pills
+  let summaryHTML = '';
+  if (level) summaryHTML += `<span class="count-pill count-lz">1 Learning Zone</span>`;
+  if (questions.length) summaryHTML += `<span class="count-pill count-q">${questions.length} Question${questions.length!==1?'s':''}</span>`;
+  if (errors.length) summaryHTML += `<span class="count-pill count-err">${errors.length} Error${errors.length!==1?'s':''}</span>`;
+  summaryRow.innerHTML = summaryHTML;
+
+  let html = '';
+
+  // Errors
+  if (errors.length) {
+    html += `<div class="preview-section">
+      <div class="preview-section-label">⚠ Parse Errors</div>
+      <div class="err-list">${errors.map(e=>`<div class="err-item">${esc(e)}</div>`).join('')}</div>
+    </div>`;
+  }
+
+  // Level Zone
+  if (level) {
+    html += `<div class="preview-section">
+      <div class="preview-section-label">Learning Zone — ${esc(level.level_display || level.level_id || '—')}</div>
+      <div class="lz-meta">
+        <div class="lz-meta-item"><div class="k">Level ID</div><div class="v">${esc(level.level_id||'—')}</div></div>
+        <div class="lz-meta-item"><div class="k">Grade</div><div class="v">${level.grade||'—'}</div></div>
+        <div class="lz-meta-item"><div class="k">Subject</div><div class="v">${esc(level.subject||'—')}</div></div>
+        <div class="lz-meta-item"><div class="k">Difficulty</div><div class="v">${esc(level.difficulty||'—')}</div></div>
+        <div class="lz-meta-item"><div class="k">Access</div><div class="v">${level.is_premium?'Premium':'Free'}</div></div>
+        <div class="lz-meta-item"><div class="k">Order</div><div class="v">${level.level_order||'—'}</div></div>
+      </div>`;
+
+    if (level.description) {
+      html += `<div style="font-size:0.75rem;color:var(--m55);margin-bottom:0.7rem;font-style:italic;">${esc(level.description)}</div>`;
+    }
+
+    if (level.intro) {
+      html += `<div class="intro-box">${esc(level.intro)}</div>`;
+    }
+
+    if (level.concepts && level.concepts.length) {
+      html += `<div style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.5rem;">${level.concepts.length} Concept Card${level.concepts.length!==1?'s':''}</div>`;
+      html += `<div class="cards-grid">`;
+      level.concepts.forEach(c => {
+        html += `<div class="concept-chip">
+          <div class="ct">${esc(c.type||'card')}</div>
+          <div class="cv">${esc(c.title||'Untitled')}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    if (level.tested && level.tested.length) {
+      html += `<div style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.5rem;">What Will Be Tested</div>`;
+      html += `<div class="tested-list">${level.tested.map(t=>`<div class="tested-item">${esc(t)}</div>`).join('')}</div>`;
+    }
+
+    html += `</div>`;
+  }
+
+  // Questions
+  if (questions.length) {
+    html += `<div class="preview-section">
+      <div class="preview-section-label">Quiz Questions (${questions.length})</div>
+      <div class="q-list">`;
+
+    questions.forEach((q, i) => {
+      const diff = (q.difficulty||'').toLowerCase();
+      html += `<div class="q-item ${diff}">
+        <div class="q-num">Q${i+1} <span class="diff-badge ${diff}">${esc(q.difficulty||'—')}</span></div>
+        <div class="q-text">${esc(q.question_text)}</div>
+        <div class="q-opts">
+          ${renderOpt('A', q.option_a, q.correct_option)}
+          ${renderOpt('B', q.option_b, q.correct_option)}
+          ${q.option_c ? renderOpt('C', q.option_c, q.correct_option) : ''}
+          ${q.option_d ? renderOpt('D', q.option_d, q.correct_option) : ''}
+        </div>
+        <div class="q-explain">${esc(q.explanation)}</div>
+      </div>`;
+    });
+
+    html += `</div></div>`;
+  }
+
+  previewBody.innerHTML = html;
+  previewCard.classList.add('show');
+  previewBody.style.display = 'block';
+}
+
+function renderOpt(letter, text, correct) {
+  if (!text) return '';
+  const isCorrect = correct === letter;
+  return `<div class="q-opt ${isCorrect?'correct':''}">${letter}. ${esc(text)}</div>`;
+}
+
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── UI Actions ─────────────────────────────────────────────────────────────────
+
+function setStatus(msg, type) {
+  const el = document.getElementById('statusMsg');
+  el.textContent = msg;
+  el.className = `status-msg ${type}`;
+}
+
+function doParse() {
+  const raw = document.getElementById('pasteArea').value.trim();
+  if (!raw) { setStatus('Nothing to parse — paste your content first.', 'err'); return; }
+
+  const result = parseContent(raw);
+  renderPreview(result.level, result.questions, result.errors);
+
+  if (result.errors.length) {
+    setStatus(`Parsed with ${result.errors.length} error${result.errors.length!==1?'s':''} — check the preview.`, 'warn');
+    document.getElementById('btnSave').style.display = 'none';
+  } else if (result.level || result.questions.length) {
+    const lzCount = result.level ? 1 : 0;
+    setStatus(`✓ Parsed: ${lzCount} learning zone, ${result.questions.length} question${result.questions.length!==1?'s':''}. Ready to save.`, 'ok');
+    document.getElementById('btnSave').style.display = 'block';
+  } else {
+    setStatus('Nothing recognised — check your format.', 'err');
+    document.getElementById('btnSave').style.display = 'none';
+  }
+}
+
+async function doSave() {
+  const btn = document.getElementById('btnSave');
+  const skipLZ = document.getElementById('optSkipLZ').value === 'yes';
+  const skipQ  = document.getElementById('optSkipQ').value === 'yes';
+  const sectionType = document.getElementById('optSectionType').value;
+
+  btn.disabled = true;
+  btn.textContent = 'Saving…';
+  btn.classList.add('saving');
+  setStatus('Saving…', 'warn');
+
+  try {
+    let saved = [];
+
+    // ── Save Learning Zone ──
+    if (parsedLevel && !skipLZ) {
+      const lzPayload = {
+        phase:              parsedLevel.phase || null,
+        grade:              parsedLevel.grade,
+        subject:            parsedLevel.subject,
+        broad_topic:        parsedLevel.broad_topic || null,
+        broad_topic_display:parsedLevel.broad_topic_display || null,
+        subtopic_id:        parsedLevel.subtopic_id || null,
+        subtopic_display:   parsedLevel.subtopic_display || null,
+        level_id:           parsedLevel.level_id,
+        level_display:      parsedLevel.level_display || null,
+        description:        parsedLevel.description || null,
+        level_order:        parsedLevel.level_order || 1,
+        difficulty:         parsedLevel.difficulty || 'Starter',
+        is_premium:         parsedLevel.is_premium || false,
+        question_count:     parsedLevel.question_count || 10,
+        intro:              parsedLevel.intro || null,
+        concepts:           parsedLevel.concepts && parsedLevel.concepts.length ? parsedLevel.concepts : null,
+        tested:             parsedLevel.tested && parsedLevel.tested.length ? parsedLevel.tested : null,
+        section_type:       'learning_level'
+      };
+
+      // Check if level_id already exists → PATCH, else POST
+      const existing = await sbFetch(`quiz_levels?level_id=eq.${encodeURIComponent(parsedLevel.level_id)}&grade=eq.${parsedLevel.grade}&subject=eq.${parsedLevel.subject}`);
+      if (existing && existing.length > 0) {
+        await sbFetch(`quiz_levels?id=eq.${existing[0].id}`, {
+          method: 'PATCH',
+          prefer: 'return=representation',
+          body: JSON.stringify(lzPayload)
+        });
+        saved.push('Learning zone updated (existing record patched)');
+      } else {
+        await sbFetch('quiz_levels', {
+          method: 'POST',
+          prefer: 'return=representation',
+          body: JSON.stringify(lzPayload)
+        });
+        saved.push('Learning zone created');
+      }
+    }
+
+    // ── Save Questions ──
+    if (parsedQuestions.length && !skipQ) {
+      const lz = parsedLevel || {};
+      let qSaved = 0;
+      for (const q of parsedQuestions) {
+        const qPayload = {
+          phase:              lz.phase || null,
+          grade:              lz.grade || null,
+          subject:            lz.subject || null,
+          topic:              lz.broad_topic || null,
+          broad_topic:        lz.broad_topic || null,
+          broad_topic_display:lz.broad_topic_display || null,
+          section_type:       sectionType,
+          subtopic_id:        lz.subtopic_id || null,
+          subtopic_display:   lz.subtopic_display || null,
+          level_id:           lz.level_id || null,
+          level_display:      lz.level_display || null,
+          level_order:        lz.level_order || 1,
+          question_text:      q.question_text,
+          option_a:           q.option_a,
+          option_b:           q.option_b,
+          option_c:           q.option_c || null,
+          option_d:           q.option_d || null,
+          correct_option:     q.correct_option,
+          explanation:        q.explanation,
+          difficulty:         q.difficulty || 'Starter',
+          is_premium:         lz.is_premium || false
+        };
+        await sbFetch('questions', {
+          method: 'POST',
+          prefer: 'return=representation',
+          body: JSON.stringify(qPayload)
+        });
+        qSaved++;
+      }
+      saved.push(`${qSaved} question${qSaved!==1?'s':''} saved`);
+    }
+
+    setStatus('✓ Done! ' + saved.join(' · '), 'ok');
+    btn.textContent = '✓ Saved!';
+    setTimeout(() => {
+      btn.textContent = 'Save to Supabase ↑';
+      btn.disabled = false;
+      btn.classList.remove('saving');
+    }, 3000);
+
+  } catch (e) {
+    setStatus('Error: ' + e.message, 'err');
+    btn.textContent = 'Save to Supabase ↑';
+    btn.disabled = false;
+    btn.classList.remove('saving');
+    console.error(e);
+  }
+}
+
+function clearAll() {
+  document.getElementById('pasteArea').value = '';
+  document.getElementById('previewCard').classList.remove('show');
+  document.getElementById('previewBody').innerHTML = '';
+  document.getElementById('summaryRow').innerHTML = '';
+  document.getElementById('btnSave').style.display = 'none';
+  setStatus('', '');
+  parsedLevel = null;
+  parsedQuestions = [];
+  parseErrors = [];
+}
+</script>
+</body>
+</html>
