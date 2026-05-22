@@ -31,15 +31,37 @@ export function shuffleQuestion(q: Question): ShuffledQuestion {
 
 /**
  * Fetch questions for a quiz_levels row.
- * The questions table stores the quiz_levels UUID in its level_id column.
- * quizLevelUUID = the quiz_levels.id (UUID primary key)
+ * Supports two storage patterns:
+ *   - Legacy: questions.level_id = quiz_levels.id (UUID)
+ *   - New:    questions.level_id = quiz_levels.level_id (string e.g. "verbs_4")
+ * Tries UUID first. If nothing found, fetches the quiz_levels row to get its
+ * string level_id and tries that instead.
  */
 export async function fetchLevelQuestions(quizLevelUUID: string): Promise<ShuffledQuestion[]> {
-  const { data, error } = await sb
+  // Try UUID match first (legacy questions)
+  const { data: byUUID } = await sb
     .from('questions')
     .select('*')
     .eq('level_id', quizLevelUUID)
 
-  if (error || !data || data.length === 0) return []
-  return shuffle(data as Question[]).map(shuffleQuestion)
+  if (byUUID && byUUID.length > 0) {
+    return shuffle(byUUID as Question[]).map(shuffleQuestion)
+  }
+
+  // Fall back: look up the string level_id from quiz_levels, then match on that
+  const { data: lvl } = await sb
+    .from('quiz_levels')
+    .select('level_id')
+    .eq('id', quizLevelUUID)
+    .single()
+
+  if (!lvl?.level_id) return []
+
+  const { data: byString } = await sb
+    .from('questions')
+    .select('*')
+    .eq('level_id', lvl.level_id)
+
+  if (!byString || byString.length === 0) return []
+  return shuffle(byString as Question[]).map(shuffleQuestion)
 }

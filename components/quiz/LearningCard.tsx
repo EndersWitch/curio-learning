@@ -237,8 +237,25 @@ function TipCard({ concept, index }: LearningCardProps) {
 }
 
 // ⚠️ COMMON MISTAKE — flip reveal! Front shows warning, click to see the fix
+// The fix text comes from concept.example if present.
+// Fallback: if content contains lines starting with "Fix:", those lines become the fix side.
 function CommonMistakeCard({ concept, index }: LearningCardProps) {
   const [flipped, setFlipped] = useState(false)
+
+  // Split content into mistake lines and fix lines
+  // Lines from "Fix:" onwards are the fix; everything before is the mistake
+  const allLines = (concept.content ?? '').split('\n').filter(Boolean)
+  const fixStartIdx = allLines.findIndex(l => l.trim().toLowerCase().startsWith('fix:'))
+  const mistakeLines = fixStartIdx >= 0 ? allLines.slice(0, fixStartIdx) : allLines
+  const fixLinesFromContent = fixStartIdx >= 0 ? allLines.slice(fixStartIdx) : []
+
+  // Fix text: prefer explicit example field, fall back to Fix: lines from content
+  const fixText = concept.example
+    ? concept.example
+    : fixLinesFromContent.join('\n')
+
+  const mistakeText = mistakeLines.join('\n')
+
   return (
     <div
       className="rounded-2xl cursor-pointer transition-all duration-300 select-none"
@@ -263,7 +280,7 @@ function CommonMistakeCard({ concept, index }: LearningCardProps) {
           <h3 className="font-black text-base mb-2 leading-tight" style={{ color: '#F7F7FF' }}>
             {concept.title}
           </h3>
-          <ContentBlock text={concept.content} accentColor="#FF5E5B" />
+          <ContentBlock text={mistakeText} accentColor="#FF5E5B" />
         </div>
       ) : (
         <div className="p-5">
@@ -278,15 +295,15 @@ function CommonMistakeCard({ concept, index }: LearningCardProps) {
           <h3 className="font-black text-base mb-2 leading-tight" style={{ color: '#F7F7FF' }}>
             {concept.title}
           </h3>
-          {concept.example && (
+          {fixText ? (
             <div className="rounded-xl p-3" style={{
               background: 'rgba(109,211,206,0.06)',
               border: '1px solid rgba(109,211,206,0.2)',
             }}>
-              <p className="text-sm" style={{ color: '#c4b8d8' }}>
-                <RichText text={concept.example} />
-              </p>
+              <ContentBlock text={fixText} accentColor="#6DD3CE" textColor="#c4b8d8" />
             </div>
+          ) : (
+            <p className="text-sm" style={{ color: 'rgba(109,211,206,0.5)' }}>No fix provided.</p>
           )}
         </div>
       )}
@@ -294,14 +311,24 @@ function CommonMistakeCard({ concept, index }: LearningCardProps) {
   )
 }
 
+
 // 🔍 SPOT THE DIFFERENCE — split panel comparison
+// Content format: each line is "left | right" — the | separates the two columns.
+// Lines without a | are treated as a header/description row spanning both sides.
 function SpotDifferenceCard({ concept, index }: LearningCardProps) {
   const lines = (concept.content ?? '').split('\n').filter(Boolean)
-  const midpoint = Math.ceil(lines.length / 2)
-  const leftLines  = lines.slice(0, midpoint)
-  const rightLines = lines.slice(midpoint)
   const sideALabel = concept.sideA ?? '❌ Wrong'
   const sideBLabel = concept.sideB ?? '✅ Right'
+
+  // Parse each line: if it contains |, split into [left, right]. Otherwise it's a header.
+  const rows: Array<{ left: string; right: string } | { header: string }> = lines.map(line => {
+    const pipeIdx = line.indexOf('|')
+    if (pipeIdx >= 0) {
+      return { left: line.slice(0, pipeIdx).trim(), right: line.slice(pipeIdx + 1).trim() }
+    }
+    return { header: line.trim() }
+  })
+
   return (
     <div className="rounded-2xl overflow-hidden transition-all duration-200 hover:scale-[1.01]" style={{
       background: '#231935',
@@ -319,24 +346,46 @@ function SpotDifferenceCard({ concept, index }: LearningCardProps) {
         <h3 className="font-black text-base mb-4 leading-tight" style={{ color: '#F7F7FF' }}>
           {concept.title}
         </h3>
-        <div className="grid grid-cols-2 gap-3">
-          <div className="rounded-xl p-3" style={{ background: 'rgba(255,94,91,0.08)', border: '1px solid rgba(255,94,91,0.2)' }}>
-            <div className="text-xs font-black mb-2" style={{ color: '#FF5E5B' }}>{sideALabel}</div>
-            {leftLines.map((l, i) => (
-              <p key={i} className="text-xs mb-1" style={{ color: '#c4b8d8' }}>
-                <RichText text={l} />
-              </p>
-            ))}
+
+        {/* Column headers */}
+        <div className="grid grid-cols-2 gap-3 mb-2">
+          <div className="rounded-t-xl px-3 pt-2.5 pb-1.5" style={{ background: 'rgba(255,94,91,0.08)', border: '1px solid rgba(255,94,91,0.2)', borderBottom: 'none' }}>
+            <div className="text-xs font-black" style={{ color: '#FF5E5B' }}>{sideALabel}</div>
           </div>
-          <div className="rounded-xl p-3" style={{ background: 'rgba(109,211,206,0.08)', border: '1px solid rgba(109,211,206,0.2)' }}>
-            <div className="text-xs font-black mb-2" style={{ color: '#6DD3CE' }}>{sideBLabel}</div>
-            {rightLines.map((l, i) => (
-              <p key={i} className="text-xs mb-1" style={{ color: '#c4b8d8' }}>
-                <RichText text={l} />
-              </p>
-            ))}
+          <div className="rounded-t-xl px-3 pt-2.5 pb-1.5" style={{ background: 'rgba(109,211,206,0.08)', border: '1px solid rgba(109,211,206,0.2)', borderBottom: 'none' }}>
+            <div className="text-xs font-black" style={{ color: '#6DD3CE' }}>{sideBLabel}</div>
           </div>
         </div>
+
+        {/* Rows */}
+        <div className="flex flex-col gap-1">
+          {rows.map((row, i) => {
+            if ('header' in row) {
+              // Span full width — description or intro line
+              return (
+                <div key={i} className="text-xs px-1 py-0.5" style={{ color: 'rgba(196,184,216,0.6)', fontStyle: 'italic' }}>
+                  <RichText text={row.header} />
+                </div>
+              )
+            }
+            return (
+              <div key={i} className="grid grid-cols-2 gap-3">
+                <div className="rounded-xl px-3 py-2" style={{ background: 'rgba(255,94,91,0.05)', border: '1px solid rgba(255,94,91,0.15)' }}>
+                  <p className="text-sm font-semibold" style={{ color: '#c4b8d8' }}>
+                    <RichText text={row.left} />
+                  </p>
+                </div>
+                <div className="rounded-xl px-3 py-2" style={{ background: 'rgba(109,211,206,0.05)', border: '1px solid rgba(109,211,206,0.15)' }}>
+                  <p className="text-sm font-semibold" style={{ color: '#c4b8d8' }}>
+                    <RichText text={row.right} />
+                  </p>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {concept.example && <ExampleBlock text={concept.example} accentColor="#F5C842" />}
       </div>
     </div>
   )
