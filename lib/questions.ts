@@ -11,15 +11,26 @@ export function shuffle<T>(arr: T[]): T[] {
 }
 
 export function shuffleQuestion(q: Question): ShuffledQuestion {
+  // correct_option may be uppercase ("A","B","C","D") — normalise to lowercase
+  const correctKey = (q.correct_option ?? '').toLowerCase()
+
   const raw = [
     { key: 'a', text: q.option_a },
     { key: 'b', text: q.option_b },
     { key: 'c', text: q.option_c },
     { key: 'd', text: q.option_d },
-  ]
-  const correctText = raw.find(o => o.key === q.correct_option)!.text
+  ].filter(o => o.text != null) // drop null options (True/False only has a+b)
+
+  const correctOption = raw.find(o => o.key === correctKey)
+  if (!correctOption) {
+    // Should never happen — but fail gracefully rather than crash
+    console.warn(`[shuffleQuestion] correct_option "${q.correct_option}" not found in options for question id ${q.id}`)
+  }
+  const correctText = correctOption?.text ?? ''
+
   const shuffled = shuffle(raw)
-  const newCorrectKey = shuffled.find(o => o.text === correctText)!.key
+  const newCorrectKey = shuffled.find(o => o.text === correctText)?.key ?? correctKey
+
   return {
     id: String(q.id),
     question_text: q.question_text,
