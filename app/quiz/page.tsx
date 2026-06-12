@@ -67,12 +67,14 @@ export default function QuizBrowsePage() {
 
     if (error || !data) { setLoading(false); return }
 
-    // Group into topics
+    // Group into topics — keyed by grade+subject+topic so the same topic name
+    // in different grades/subjects doesn't collapse into one card
     const map = new Map<string, Topic>()
     for (const row of data) {
       if (!row.broad_topic) continue
-      if (!map.has(row.broad_topic)) {
-        map.set(row.broad_topic, {
+      const key = `${row.grade}|${row.subject}|${row.broad_topic}`
+      if (!map.has(key)) {
+        map.set(key, {
           broad_topic: row.broad_topic,
           broad_topic_display: row.broad_topic_display || row.broad_topic.replace(/_/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
           subject: row.subject || '',
@@ -82,7 +84,7 @@ export default function QuizBrowsePage() {
           free_level_count: 0,
         })
       }
-      const t = map.get(row.broad_topic)!
+      const t = map.get(key)!
       t.level_count++
       if (!row.is_premium) t.free_level_count++
     }

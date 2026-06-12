@@ -31,8 +31,8 @@ const SETS = [
   {
     topic: 'Mathematics · Grade 6',
     questions: [
-      { q: 'What is ¾ + ½?', opts: ['1','1¼','1½','⁵⁄₄'], correct: 1, ok: 'Correct! Convert ½ to ²⁄₄, then ¾ + ²⁄₄ = ⁵⁄₄ = 1¼.', err: 'Answer is 1¼. Convert ½ to ²⁄₄ then add.' },
-      { q: 'Which fraction equals ²⁄₄?', opts: ['³⁄₄','⁴⁄₆','²⁄₄','⁵⁄₆'], correct: 1, ok: 'Correct! ⁴⁄₆ = ²⁄₄ — multiply both by 2.', err: '⁴⁄₆ equals ²⁄₄. Multiply top and bottom by 2.' },
+      { q: 'What is ¾ + ½?', opts: ['1','1¼','1½','1¾'], correct: 1, ok: 'Correct! Convert ½ to ²⁄₄, then ¾ + ²⁄₄ = ⁵⁄₄ = 1¼.', err: 'Answer is 1¼. Convert ½ to ²⁄₄ then add.' },
+      { q: 'Which fraction equals ²⁄₄?', opts: ['³⁄₄','⁴⁄₈','²⁄₆','⁵⁄₆'], correct: 1, ok: 'Correct! ⁴⁄₈ = ²⁄₄ — multiply top and bottom by 2.', err: '⁴⁄₈ equals ²⁄₄. Multiply top and bottom by 2.' },
     ],
   },
   {
@@ -114,10 +114,15 @@ export default function HomePage() {
         days.push(on)
       }
       setStreakDays(days)
-      const realStreak = Object.keys(act).filter((k) => {
-        const diff = (Date.now() - new Date(k).getTime()) / 864e5
-        return diff < 30
-      }).length
+      // Real streak = consecutive active days ending today (or yesterday)
+      let realStreak = 0
+      const cursor = new Date(today)
+      const todayKey = cursor.toISOString().slice(0, 10)
+      if (!act[todayKey]) cursor.setDate(cursor.getDate() - 1) // streak survives until today is missed for a full day
+      while (act[cursor.toISOString().slice(0, 10)]) {
+        realStreak++
+        cursor.setDate(cursor.getDate() - 1)
+      }
       setStreak(realStreak)
     } catch {}
   }

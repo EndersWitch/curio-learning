@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<script src="/auth.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Curio — Premium</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
@@ -161,7 +162,7 @@ footer{padding:2rem 3rem;border-top:1px solid var(--m06);display:flex;align-item
 </div>
 
 <nav>
-  <a href="index.html" class="nav-logo">
+  <a href="/" class="nav-logo">
     <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
       <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
       <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
@@ -172,7 +173,7 @@ footer{padding:2rem 3rem;border-top:1px solid var(--m06);display:flex;align-item
     </svg>
     curio
   </a>
-  <a href="index.html" class="nav-back">← Home</a>
+  <a href="/" class="nav-back">← Home</a>
   <div class="nav-right" id="navRight"></div>
 </nav>
 
@@ -250,8 +251,8 @@ footer{padding:2rem 3rem;border-top:1px solid var(--m06);display:flex;align-item
       <h1 class="prem-title" id="premTitle">You're in. 🌱</h1>
       <p class="prem-sub">Full access to everything curio has to offer. Let's get to work.</p>
       <div class="quick-grid">
-        <a href="papers.html" class="qa"><span class="qa-icon">📄</span><span class="qa-lbl">Papers</span></a>
-        <a href="quiz.html" class="qa"><span class="qa-icon">📝</span><span class="qa-lbl">Quiz</span></a>
+        <a href="/papers" class="qa"><span class="qa-icon">📄</span><span class="qa-lbl">Papers</span></a>
+        <a href="/quiz" class="qa"><span class="qa-icon">📝</span><span class="qa-lbl">Quiz</span></a>
         <a href="deeplearn.html" class="qa"><span class="qa-icon">✦</span><span class="qa-lbl">Deep Learn</span></a>
       </div>
     </section>
@@ -298,9 +299,9 @@ footer{padding:2rem 3rem;border-top:1px solid var(--m06);display:flex;align-item
     curio
   </div>
   <div class="footer-links">
-    <a href="privacy.html">Privacy</a>
-    <a href="terms.html">Terms</a>
-    <a href="contact.html">Contact</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/contact">Contact</a>
   </div>
   <p class="footer-copy">© 2026 Curio Learning · Made with love for SA students</p>
 </footer>
@@ -315,44 +316,42 @@ const SB_KEY         = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
 
 function toast(msg,dur=3500){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur);}
 
-function getSession(){
-  try{const r=localStorage.getItem('curio_session');if(!r)return null;const p=JSON.parse(r);return p?.access_token?p:null;}catch(e){return null;}
-}
-
-function renderNav(s){
+function renderNav(user){
   const nr=document.getElementById('navRight');if(!nr)return;
-  if(s){
-    const u=s.user||{},name=u.user_metadata?.full_name||'',email=u.email||'';
+  if(user){
+    const name=user.fullName||'',email=user.email||'';
     const init=name?name[0].toUpperCase():(email?email[0].toUpperCase():'?');
-    nr.innerHTML=`<div class="profile-wrap"><button class="profile-btn" onclick="toggleDD(event)">${init}</button><div class="profile-dropdown" id="profileDD"><div class="profile-dd-head"><div class="profile-dd-name">${name||'My account'}</div><div class="profile-dd-email">${email}</div></div><a href="papers.html" class="profile-dd-item">📄 &nbsp;Papers</a><a href="quiz.html" class="profile-dd-item">📚 &nbsp;Quiz</a><a href="profile.html" class="profile-dd-item">👤 &nbsp;Profile</a><button class="profile-dd-item danger" onclick="doLogout()">Sign out</button></div></div>`;
+    nr.innerHTML=`<div class="profile-wrap"><button class="profile-btn" onclick="toggleDD(event)">${init}</button><div class="profile-dropdown" id="profileDD"><div class="profile-dd-head"><div class="profile-dd-name">${name||'My account'}</div><div class="profile-dd-email">${email}</div></div><a href="/papers" class="profile-dd-item">📄 &nbsp;Papers</a><a href="/quiz" class="profile-dd-item">📚 &nbsp;Quiz</a><a href="/profile" class="profile-dd-item">👤 &nbsp;Profile</a><button class="profile-dd-item danger" onclick="curioSignOut()">Sign out</button></div></div>`;
   }
 }
 function toggleDD(e){e.stopPropagation();document.getElementById('profileDD')?.classList.toggle('open');}
 document.addEventListener('click',()=>document.getElementById('profileDD')?.classList.remove('open'));
-function doLogout(){localStorage.removeItem('curio_session');window.location.href='index.html';}
 
-(async function(){
-  const session=getSession();
-  if(!session){window.location.href='login.html';return;}
-  renderNav(session);
+initCurioAuth({
+  onLoggedOut:()=>{window.location.href='/login';},
+  onLoggedIn:(user)=>initPage(user),
+});
 
-  const user=session.user||{};
+async function initPage(user){
+  renderNav(user);
+
   const uid=user.id;
   const email=user.email||'';
-  const name=(user.user_metadata?.full_name||'').split(' ')[0]||'there';
+  const name=(user.fullName||'').split(' ')[0]||'there';
 
-  // Fetch profile — anon key only, RLS USING(true)
-  let profile=null;
+  // Premium status comes fresh from the DB via auth.js
+  const isPremium=user.isPremium;
+  const isFounder=user.isFounder;
+
+  // Subscription start date
+  let startedAt=null;
   try{
-    const r=await fetch(`${SB_URL}/rest/v1/profiles?id=eq.${uid}&select=is_premium,is_founder,subscription_started_at`,
+    const r=await fetch(`${SB_URL}/rest/v1/profiles?id=eq.${uid}&select=subscription_started_at`,
       {headers:{'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`}});
     const d=await r.json();
-    profile=d?.[0]||null;
+    startedAt=d?.[0]?.subscription_started_at||null;
   }catch(e){}
 
-  const isPremium=profile?.is_premium===true;
-  const isFounder=profile?.is_founder===true;
-  const startedAt=profile?.subscription_started_at;
 
   // Hide loader
   const loader=document.getElementById('loadingScreen');
@@ -416,7 +415,7 @@ function doLogout(){localStorage.removeItem('curio_session');window.location.hre
     window.location.href=`mailto:hello@curiolearning.co.za?subject=${sub}&body=${body}`;
     toast('Email opened — we will cancel within 24 hours.');
   };
-})();
+}
 </script>
 </body>
 </html>

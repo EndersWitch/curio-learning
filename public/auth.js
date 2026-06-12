@@ -51,7 +51,11 @@ window.initCurioAuth = async function (callbacks = {}) {
     }
   })
 
+  // Expose the client so pages can call auth methods (updateUser, signOut, etc.)
+  window.curioSb = _sb
+
   async function fetchAndBroadcast(session) {
+    window.curioSession = session || null
     if (!session?.user) {
       window.curioUser = null
       callbacks.onLoggedOut?.()

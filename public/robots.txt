@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /formatter
+Disallow: /formatter.html
+Disallow: /quiz-formatter
+Disallow: /quiz-formatter.html
+Disallow: /profile
+Disallow: /profile.html
+
+Sitemap: https://www.curiolearning.co.za/sitemap.xml

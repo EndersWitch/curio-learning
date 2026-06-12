@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<script src="/auth.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Curio — Edit Profile</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E</svg>"/>
@@ -61,17 +62,17 @@ footer a:hover{color:var(--moon);}
 </head>
 <body>
 <nav>
-  <a href="index.html" class="nav-logo">
+  <a href="/" class="nav-logo">
     <svg width="24" height="24" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/><circle cx="32" cy="32" r="7" fill="#FF5E5B"/></svg>
     curio
   </a>
   <ul class="simple-nav-links">
-    <li><a href="papers.html">Papers</a></li>
-    <li><a href="quiz.html">Quiz</a></li>
-    <li><a href="subjects/index.html">Subjects</a></li>
-    <li><a href="index.html#pricing">Pricing</a></li>
+    <li><a href="/papers">Papers</a></li>
+    <li><a href="/quiz">Quiz</a></li>
+    <li><a href="/subjects">Subjects</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
   </ul>
-  <a href="index.html" class="nav-back">← Home</a>
+  <a href="/" class="nav-back">← Home</a>
 </nav>
 <div class="page-wrap">
   <div class="page-eyebrow">Account</div>
@@ -124,31 +125,77 @@ footer a:hover{color:var(--moon);}
     </div>
   </div>
 </div>
-<footer><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></footer>
+<footer><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></footer>
 <script>
-const SB_URL='https://inmrsgujgfktapjnekjs.supabase.co';
-const SB_KEY='sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
-function getSession(){try{const s=localStorage.getItem('curio_session');if(s){const p=JSON.parse(s);if(p?.access_token&&p?.expires_at>Date.now()/1000)return p;}}catch(e){}return null;}
-const session=getSession();
-if(!session){window.location.href='login.html';}
-const user=session?.user||{},meta=user.user_metadata||{};
-const name=meta.full_name||'',email=user.email||'',grade=meta.grade||'';
-const init=name?name[0].toUpperCase():(email?email[0].toUpperCase():'?');
-document.getElementById('avatarInitial').textContent=init;
-document.getElementById('avatarName').textContent=name||'My account';
-document.getElementById('avatarEmail').textContent=email;
-document.getElementById('fieldName').value=name;
-document.getElementById('fieldEmail').value=email;
-if(grade)document.getElementById('fieldGrade').value=grade;
-async function sbUpdate(body){const r=await fetch(`${SB_URL}/auth/v1/user`,{method:'PUT',headers:{'apikey':SB_KEY,'Authorization':`Bearer ${session.access_token}`,'Content-Type':'application/json'},body:JSON.stringify(body)});const d=await r.json();if(!r.ok)throw new Error(d.msg||d.message||'Error');return d;}
 function showAlert(id,msg,type){const el=document.getElementById(id);el.textContent=msg;el.className=`alert ${type} show`;setTimeout(()=>el.className='alert',4000);}
-async function saveDetails(){const n=document.getElementById('fieldName').value.trim();const g=document.getElementById('fieldGrade').value;const btn=document.getElementById('btnSaveDetails');btn.disabled=true;btn.textContent='Saving…';try{await sbUpdate({data:{full_name:n,grade:g}});session.user.user_metadata={...meta,full_name:n,grade:g};localStorage.setItem('curio_session',JSON.stringify(session));document.getElementById('avatarInitial').textContent=n?n[0].toUpperCase():init;document.getElementById('avatarName').textContent=n||'My account';localStorage.setItem('curio_grade',g);showAlert('detailsAlert','✓ Details updated successfully!','ok');}catch(e){showAlert('detailsAlert',e.message,'err');}btn.disabled=false;btn.textContent='Save changes →';}
-async function saveEmail(){const newEmail=document.getElementById('fieldEmail').value.trim();if(!newEmail||newEmail===email){showAlert('emailAlert','Please enter a new email address.','err');return;}const btn=document.getElementById('btnSaveEmail');btn.disabled=true;btn.textContent='Sending…';try{await sbUpdate({email:newEmail});showAlert('emailAlert','✓ Confirmation sent to your new email — click the link to confirm the change.','ok');}catch(e){showAlert('emailAlert',e.message,'err');}btn.disabled=false;btn.textContent='Update email →';}
-async function savePassword(){const pw=document.getElementById('fieldPw').value;const pw2=document.getElementById('fieldPwConfirm').value;if(!pw||pw.length<6){showAlert('pwAlert','Password must be at least 6 characters.','err');return;}if(pw!==pw2){showAlert('pwAlert','Passwords do not match.','err');return;}const btn=document.getElementById('btnSavePw');btn.disabled=true;btn.textContent='Updating…';try{await sbUpdate({password:pw});showAlert('pwAlert','✓ Password updated successfully!','ok');document.getElementById('fieldPw').value='';document.getElementById('fieldPwConfirm').value='';document.getElementById('pwFill').style.width='0';document.getElementById('pwLabel').textContent='';}catch(e){showAlert('pwAlert',e.message,'err');}btn.disabled=false;btn.textContent='Update password →';}
 function checkPw(pw){const fill=document.getElementById('pwFill'),lbl=document.getElementById('pwLabel');if(!pw){fill.style.width='0';lbl.textContent='';return;}let score=0;if(pw.length>=6)score++;if(pw.length>=10)score++;if(/[A-Z]/.test(pw))score++;if(/[0-9]/.test(pw))score++;if(/[^a-zA-Z0-9]/.test(pw))score++;const levels=[{w:'20%',bg:'var(--coral)',t:'Too short'},{w:'40%',bg:'#c47c1a',t:'Weak'},{w:'60%',bg:'#c47c1a',t:'Fair'},{w:'80%',bg:'var(--cyan)',t:'Good'},{w:'100%',bg:'#2a8a4a',t:'Strong'}];const l=levels[Math.max(0,score-1)];fill.style.width=l.w;fill.style.background=l.bg;lbl.textContent=l.t;lbl.style.color=l.bg;}
-function confirmDelete(){if(confirm('Are you absolutely sure? This cannot be undone.
+function confirmDelete(){if(confirm('Are you absolutely sure? This cannot be undone.\n\nAll your data will be permanently deleted.')){alert('To delete your account, please email hello@curiolearning.co.za from your registered email address. We will process your request within 30 days as required by POPIA.');}}
 
-All your data will be permanently deleted.')){alert('To delete your account, please email hello@curiolearning.co.za from your registered email address. We will process your request within 30 days as required by POPIA.');}}
+let _email='';
+
+initCurioAuth({
+  onLoggedOut:()=>{window.location.href='/login';},
+  onLoggedIn:(user)=>{
+    _email=user.email||'';
+    const name=user.fullName||'',grade=user.grade||'';
+    const init=name?name[0].toUpperCase():(_email?_email[0].toUpperCase():'?');
+    document.getElementById('avatarInitial').textContent=init;
+    document.getElementById('avatarName').textContent=name||'My account';
+    document.getElementById('avatarEmail').textContent=_email;
+    document.getElementById('fieldName').value=name;
+    document.getElementById('fieldEmail').value=_email;
+    if(grade)document.getElementById('fieldGrade').value=grade;
+  },
+});
+
+async function saveDetails(){
+  const n=document.getElementById('fieldName').value.trim();
+  const g=document.getElementById('fieldGrade').value;
+  const btn=document.getElementById('btnSaveDetails');
+  btn.disabled=true;btn.textContent='Saving…';
+  try{
+    const {error}=await curioSb.auth.updateUser({data:{full_name:n,grade:g}});
+    if(error)throw error;
+    // Keep profiles table in sync — it is the source of truth for the rest of the site
+    const uid=window.curioUser?.id;
+    if(uid)await curioSb.from('profiles').update({full_name:n,grade:g}).eq('id',uid);
+    localStorage.setItem('curio_grade',g);
+    document.getElementById('avatarInitial').textContent=n?n[0].toUpperCase():'?';
+    document.getElementById('avatarName').textContent=n||'My account';
+    showAlert('detailsAlert','✓ Details updated successfully!','ok');
+  }catch(e){showAlert('detailsAlert',e.message,'err');}
+  btn.disabled=false;btn.textContent='Save changes →';
+}
+
+async function saveEmail(){
+  const newEmail=document.getElementById('fieldEmail').value.trim();
+  if(!newEmail||newEmail===_email){showAlert('emailAlert','Please enter a new email address.','err');return;}
+  const btn=document.getElementById('btnSaveEmail');
+  btn.disabled=true;btn.textContent='Sending…';
+  try{
+    const {error}=await curioSb.auth.updateUser({email:newEmail});
+    if(error)throw error;
+    showAlert('emailAlert','✓ Confirmation sent to your new email — click the link to confirm the change.','ok');
+  }catch(e){showAlert('emailAlert',e.message,'err');}
+  btn.disabled=false;btn.textContent='Update email →';
+}
+
+async function savePassword(){
+  const pw=document.getElementById('fieldPw').value;
+  const pw2=document.getElementById('fieldPwConfirm').value;
+  if(!pw||pw.length<6){showAlert('pwAlert','Password must be at least 6 characters.','err');return;}
+  if(pw!==pw2){showAlert('pwAlert','Passwords do not match.','err');return;}
+  const btn=document.getElementById('btnSavePw');
+  btn.disabled=true;btn.textContent='Updating…';
+  try{
+    const {error}=await curioSb.auth.updateUser({password:pw});
+    if(error)throw error;
+    showAlert('pwAlert','✓ Password updated successfully!','ok');
+    document.getElementById('fieldPw').value='';document.getElementById('fieldPwConfirm').value='';
+    document.getElementById('pwFill').style.width='0';document.getElementById('pwLabel').textContent='';
+  }catch(e){showAlert('pwAlert',e.message,'err');}
+  btn.disabled=false;btn.textContent='Update password →';
+}
 </script>
 </body>
 </html>

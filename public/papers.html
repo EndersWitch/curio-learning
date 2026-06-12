@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2405111123009991"
-     crossorigin="anonymous"></script>
 <meta charset="UTF-8"/>
+<script src="/auth.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Curio — Exam Papers</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Caveat:wght@600;700&display=swap" rel="stylesheet"/>
@@ -246,7 +245,7 @@ nav{
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">
+  <a href="/" class="nav-logo">
     <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
       <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
       <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
@@ -258,14 +257,14 @@ nav{
     curio
   </a>
   <ul class="nav-links">
-    <li><a href="papers.html" class="active">Papers</a></li>
-    <li><a href="quiz.html">Quiz</a></li>
-    <li><a href="subjects/index.html">Subjects</a></li>
-    <li><a href="index.html#pricing">Pricing</a></li>
+    <li><a href="/papers" class="active">Papers</a></li>
+    <li><a href="/quiz">Quiz</a></li>
+    <li><a href="/subjects">Subjects</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
   </ul>
   <div class="nav-right" id="navRight">
-    <a href="login.html" class="btn-ghost">Log in</a>
-    <a href="login.html?tab=signup" class="btn-nav">Start free →</a>
+    <a href="/login" class="btn-ghost">Log in</a>
+    <a href="/login?tab=signup" class="btn-nav">Start free →</a>
   </div>
 </nav>
 
@@ -277,7 +276,7 @@ nav{
       <span class="ad-topbar-text"><strong>Remove ads &amp; unlock everything</strong> — Curio Premium from R49/month.</span>
     </div>
     <div class="ad-topbar-right">
-      <a href="login.html?tab=signup" class="ad-cta">Go Premium →</a>
+      <a href="/login?tab=signup" class="ad-cta">Go Premium →</a>
       <button class="ad-x" onclick="dismissAd('adTopbar')" aria-label="Close">✕</button>
     </div>
   </div>
@@ -569,38 +568,34 @@ function updateHeroStats(){
   document.getElementById('statSubjects').textContent=[...new Set(allPapers.map(p=>p.subject))].length;
 }
 
-// ── AUTH NAV ──
+// ── AUTH NAV (Supabase via /auth.js — same session as the rest of the site) ──
 function toggleProfileDD(e){e.stopPropagation();document.getElementById('profileDD')?.classList.toggle('open');}
 document.addEventListener('click',()=>document.getElementById('profileDD')?.classList.remove('open'));
-function doLogout(){localStorage.removeItem('curio_session');renderNav(null);}
-function renderNav(session){
+function renderNav(user){
   const nr=document.getElementById('navRight');if(!nr)return;
-  if(session){
-    const u=session.user||{},name=u.user_metadata?.full_name||'',email=u.email||'';
+  if(user){
+    const name=user.fullName||'',email=user.email||'';
     const init=name?name[0].toUpperCase():(email?email[0].toUpperCase():'?');
-    nr.innerHTML=`<div class="profile-wrap"><button class="profile-btn" onclick="toggleProfileDD(event)">${init}</button><div class="profile-dropdown" id="profileDD"><div class="profile-dd-head"><div class="profile-dd-name">${name||'My account'}</div><div class="profile-dd-email">${email}</div></div><a href="quiz.html" class="profile-dd-item">📚 &nbsp;Start a quiz</a><a href="papers.html" class="profile-dd-item">📄 &nbsp;Papers</a><button class="profile-dd-item danger" onclick="doLogout()">Sign out</button></div></div>`;
+    nr.innerHTML=`<div class="profile-wrap"><button class="profile-btn" onclick="toggleProfileDD(event)">${init}</button><div class="profile-dropdown" id="profileDD"><div class="profile-dd-head"><div class="profile-dd-name">${name||'My account'}</div><div class="profile-dd-email">${email}</div></div><a href="/quiz" class="profile-dd-item">📚 &nbsp;Start a quiz</a><a href="/papers" class="profile-dd-item">📄 &nbsp;Papers</a><a href="/profile" class="profile-dd-item">👤 &nbsp;Edit profile</a><a href="/subscription" class="profile-dd-item">⭐ &nbsp;Subscription</a><button class="profile-dd-item danger" onclick="curioSignOut()">Sign out</button></div></div>`;
   }else{
-    nr.innerHTML=`<a href="login.html" class="btn-ghost">Log in</a><a href="login.html?tab=signup" class="btn-nav">Start free →</a>`;
+    nr.innerHTML=`<a href="/login" class="btn-ghost">Log in</a><a href="/login?tab=signup" class="btn-nav">Start free →</a>`;
   }
 }
-(function(){
-  let s=null;
-  try{
-    const st=localStorage.getItem('curio_session');
-    if(st){const p=JSON.parse(st);if(p?.access_token&&p?.expires_at>Date.now()/1000){s=p;}else{localStorage.removeItem('curio_session');}}
-  }catch(e){localStorage.removeItem('curio_session');}
-  renderNav(s);
-})();
 
-// ── AD SYSTEM ──
-(function initAds(){
-  let isPremium=false;
-  try{const st=localStorage.getItem('curio_session');if(st){const p=JSON.parse(st);isPremium=p?.user?.user_metadata?.is_premium===true;}}catch(e){}
-  if(isPremium)return;
+// ── AD SYSTEM (non-premium only — premium status comes fresh from the DB) ──
+function enableAds(){
+  // Curio promo bar
   if(!sessionStorage.getItem('curio_ad_dismissed_adTopbar')){
     const el=document.getElementById('adTopbar');if(el)el.classList.add('ad-on');
   }
-})();
+  // Google AdSense — loaded only for non-premium visitors
+  if(!document.getElementById('curio-adsense')){
+    const s=document.createElement('script');
+    s.id='curio-adsense';s.async=true;s.crossOrigin='anonymous';
+    s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2405111123009991';
+    document.head.appendChild(s);
+  }
+}
 function dismissAd(id){
   sessionStorage.setItem('curio_ad_dismissed_'+id,'1');
   const el=document.getElementById(id);if(!el)return;
@@ -612,6 +607,11 @@ function dismissAd(id){
   }));
   setTimeout(()=>el.remove(),320);
 }
+
+initCurioAuth({
+  onLoggedIn:(user)=>{renderNav(user);if(!user.isPremium&&!user.isFounder)enableAds();},
+  onLoggedOut:()=>{renderNav(null);enableAds();},
+});
 
 // ── INIT ──
 loadPapers();
