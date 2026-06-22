@@ -51,7 +51,25 @@ export default function QuizNav() {
         {loading ? (
           <div style={{ width: 80, height: 28, borderRadius: 6, background: 'rgba(255,255,255,0.08)' }} />
         ) : user ? (
-          <div className="profile-wrap" ref={ddRef}>
+          <div className="profile-wrap" ref={ddRef} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+            {user.streakDays > 0 && (
+              <span title="Day streak" style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
+                fontSize: '0.78rem', fontWeight: 700, color: '#F5C842',
+                background: 'rgba(245,200,66,0.12)', border: '1px solid rgba(245,200,66,0.25)',
+                borderRadius: 999, padding: '0.3rem 0.65rem',
+              }}>
+                🔥 {user.streakDays}
+              </span>
+            )}
+            <span title="Total XP" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
+              fontSize: '0.78rem', fontWeight: 700, color: '#6DD3CE',
+              background: 'rgba(109,211,206,0.12)', border: '1px solid rgba(109,211,206,0.25)',
+              borderRadius: 999, padding: '0.3rem 0.65rem',
+            }}>
+              ⚡ {user.totalXp.toLocaleString()} XP
+            </span>
             <button
               className="profile-btn"
               onClick={(e) => {

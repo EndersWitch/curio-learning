@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import type { QuizResult } from '@/types/quiz'
 import { XPBadge } from '@/components/ui/XPBar'
+import { useAuth } from '@/lib/auth-context'
 
 interface ResultsScreenProps {
   result: QuizResult
@@ -79,6 +80,9 @@ export default function ResultsScreen({
 }: ResultsScreenProps) {
   const { score, total, passed, xpEarned, timeTaken } = result
   const percent = Math.round((score / total) * 100)
+  const { refreshUser } = useAuth()
+
+  useEffect(() => { refreshUser() }, [])
 
   const messageRef = useRef(
     passed

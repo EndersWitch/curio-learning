@@ -55,13 +55,16 @@ export default function HomePage() {
   const [answered, setAnswered] = useState(false)
   const [chosen, setChosen] = useState<number | null>(null)
 
-  // Dashboard state
+  // Dashboard state — all sourced from Supabase, nothing cached locally
   const [recPapers, setRecPapers] = useState<any[]>([])
   const [quizHistory, setQuizHistory] = useState<any[]>([])
   const [savedGrade, setSavedGrade] = useState('')
   const [streak, setStreak] = useState(0)
   const [streakDays, setStreakDays] = useState<boolean[]>([])
   const [gradeJustSaved, setGradeJustSaved] = useState(false)
+  const [totalXp, setTotalXp] = useState(0)
+  const [quizzesTaken, setQuizzesTaken] = useState(0)
+  const [bestScoreOverall, setBestScoreOverall] = useState<number | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -88,43 +91,80 @@ export default function HomePage() {
     return () => ro.disconnect()
   }, [])
 
-  function loadDashboard(s: Session) {
-    // Grade
-    const grade = localStorage.getItem('curio_grade') || ''
+  async function loadDashboard(s: Session) {
+    const userId = (s as any).user.id as string
+
+    // Profile — grade, XP, streak all live server-side. Nothing cached locally.
+    const { data: profile } = await sb
+      .from('profiles')
+      .select('grade, xp_total, streak_days, streak_last_date')
+      .eq('id', userId)
+      .single()
+
+    const grade = profile?.grade || ''
     setSavedGrade(grade)
     if (grade) fetchRecPapers(grade)
+    setTotalXp(profile?.xp_total ?? 0)
 
-    // Quiz history
-    try {
-      const hist = JSON.parse(localStorage.getItem('curio_quiz_history') || '[]')
-      setQuizHistory(hist.slice(-3).reverse())
-    } catch {}
+    const streakCount = profile?.streak_days ?? 0
+    setStreak(streakCount)
 
-    // Streak
-    try {
-      const act = JSON.parse(localStorage.getItem('curio_activity') || '{}')
-      const today = new Date()
-      const days: boolean[] = []
-      let s = 0
-      for (let i = 6; i >= 0; i--) {
-        const d = new Date(today)
-        d.setDate(today.getDate() - i)
-        const key = d.toISOString().slice(0, 10)
-        const on = !!act[key]
-        days.push(on)
+    // Best-effort weekly streak strip derived from streak_days/streak_last_date —
+    // there's no per-day activity log, so we mark the most recent `streakCount`
+    // consecutive days up to streak_last_date as active.
+    const today = new Date()
+    const lastActive = profile?.streak_last_date ? new Date(profile.streak_last_date + 'T00:00:00') : null
+    const activeDates = new Set<string>()
+    if (lastActive) {
+      for (let i = 0; i < streakCount; i++) {
+        const d = new Date(lastActive)
+        d.setDate(lastActive.getDate() - i)
+        activeDates.add(d.toISOString().slice(0, 10))
       }
-      setStreakDays(days)
-      // Real streak = consecutive active days ending today (or yesterday)
-      let realStreak = 0
-      const cursor = new Date(today)
-      const todayKey = cursor.toISOString().slice(0, 10)
-      if (!act[todayKey]) cursor.setDate(cursor.getDate() - 1) // streak survives until today is missed for a full day
-      while (act[cursor.toISOString().slice(0, 10)]) {
-        realStreak++
-        cursor.setDate(cursor.getDate() - 1)
-      }
-      setStreak(realStreak)
-    } catch {}
+    }
+    const days: boolean[] = []
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(today)
+      d.setDate(today.getDate() - i)
+      days.push(activeDates.has(d.toISOString().slice(0, 10)))
+    }
+    setStreakDays(days)
+
+    // Quiz history — straight from user_level_progress (server), most recent first.
+    // Fetch everything (it's one row per level per user — small) so the stat
+    // cards reflect the full picture, then show only the latest 3 in the panel.
+    const { data: progressRows } = await sb
+      .from('user_level_progress')
+      .select('topic_id, level_id, best_score, passed, attempts, last_attempted_at')
+      .eq('user_id', userId)
+      .order('last_attempted_at', { ascending: false })
+
+    setQuizzesTaken(progressRows?.length ?? 0)
+    setBestScoreOverall(
+      progressRows && progressRows.length > 0
+        ? Math.max(...progressRows.map((r) => r.best_score))
+        : null
+    )
+
+    if (progressRows && progressRows.length > 0) {
+      const recent = progressRows.slice(0, 3)
+      const levelIds = recent.map((r) => r.level_id)
+      const { data: levels } = await sb
+        .from('quiz_levels')
+        .select('level_id, level_display, broad_topic_display')
+        .in('level_id', levelIds)
+      const levelMap = new Map((levels ?? []).map((l: any) => [l.level_id, l]))
+
+      setQuizHistory(recent.map((r) => ({
+        topic: levelMap.get(r.level_id)?.level_display ?? levelMap.get(r.level_id)?.broad_topic_display ?? r.level_id,
+        score: r.best_score,
+        total: 100,
+        date: r.last_attempted_at ? new Date(r.last_attempted_at).toLocaleDateString('en-ZA', { day: 'numeric', month: 'short' }) : '',
+        attempts: r.attempts,
+      })))
+    } else {
+      setQuizHistory([])
+    }
   }
 
   async function fetchRecPapers(grade: string) {
@@ -138,12 +178,14 @@ export default function HomePage() {
     } catch {}
   }
 
-  function saveGrade(v: string) {
-    localStorage.setItem('curio_grade', v)
+  async function saveGrade(v: string) {
     setSavedGrade(v)
     setGradeJustSaved(true)
     setTimeout(() => setGradeJustSaved(false), 1200)
     fetchRecPapers(v)
+    if (session?.user) {
+      await sb.from('profiles').update({ grade: v }).eq('id', (session as any).user.id)
+    }
   }
 
   async function doLogout() {
@@ -172,9 +214,7 @@ export default function HomePage() {
   const initial = session?.user?.user_metadata?.full_name?.[0]?.toUpperCase() || session?.user?.email?.[0]?.toUpperCase() || '?'
   const hr = new Date().getHours()
   const greeting = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening'
-  const bestScore = quizHistory.length
-    ? Math.max(...quizHistory.map((h: any) => Math.round((h.score / h.total) * 100)))
-    : null
+  const bestScore = bestScoreOverall
 
   const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
   const today = new Date()
@@ -268,6 +308,11 @@ export default function HomePage() {
 
             {/* Stats */}
             <div className="dash-stats">
+              <div className="dash-stat am">
+                <div className="ds-label">Total XP</div>
+                <div className="ds-val">⚡ {totalXp.toLocaleString()}</div>
+                <div className="ds-sub">earned all time</div>
+              </div>
               <div className="dash-stat cy">
                 <div className="ds-label">Papers for your grade</div>
                 <div className="ds-val">{recPapers.length > 0 ? recPapers.length : '—'}</div>
@@ -275,7 +320,7 @@ export default function HomePage() {
               </div>
               <div className="dash-stat">
                 <div className="ds-label">Quizzes taken</div>
-                <div className="ds-val">{quizHistory.length}</div>
+                <div className="ds-val">{quizzesTaken}</div>
                 <div className="ds-sub">all time</div>
               </div>
               <div className="dash-stat co">

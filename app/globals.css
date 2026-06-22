@@ -256,7 +256,7 @@ footer { padding: 2rem 3rem; border-top: 1px solid var(--m06); display: flex; al
 .streak-fire { font-size: 1.1rem; }
 .streak-val { font-family: var(--h); font-size: 1rem; font-weight: 900; color: var(--amber); }
 .streak-lbl { font-size: 0.62rem; color: rgba(245,200,66,0.6); font-weight: 600; }
-.dash-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+.dash-stats { display: grid; grid-template-columns: repeat(5,1fr); gap: 1rem; }
 .dash-stat { background: var(--card); border: 1px solid var(--m06); border-radius: 14px; padding: 1.2rem 1.3rem; }
 .dash-stat.cy { background: var(--c12); border-color: var(--c25); }
 .dash-stat.co { background: var(--r10); border-color: var(--r20); }
@@ -417,6 +417,9 @@ select.field-input { cursor: pointer; }
 @media (max-width: 700px) {
   .dash-stats { grid-template-columns: 1fr 1fr; }
   .pricing-header { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+@media (min-width: 701px) and (max-width: 980px) {
+  .dash-stats { grid-template-columns: repeat(3,1fr); }
 }
 @media (max-width: 600px) {
   .pricing-cards { grid-template-columns: 1fr; }

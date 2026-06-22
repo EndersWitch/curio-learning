@@ -10,21 +10,24 @@ export interface CurioUser {
   grade: string | null
   isPremium: boolean
   isFounder: boolean
+  totalXp: number
+  streakDays: number
 }
 
 interface AuthState {
   user: CurioUser | null
   loading: boolean
+  refreshUser: () => Promise<void>
 }
 
-const AuthContext = createContext<AuthState>({ user: null, loading: true })
+const AuthContext = createContext<AuthState>({ user: null, loading: true, refreshUser: async () => {} })
 
 export function useAuth() {
   return useContext(AuthContext)
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<AuthState>({ user: null, loading: true })
+  const [state, setState] = useState<Omit<AuthState, 'refreshUser'>>({ user: null, loading: true })
 
   async function loadUser(session: any) {
     if (!session?.user) {
@@ -35,10 +38,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const userId = session.user.id
     const email = session.user.email ?? ''
 
-    // Always fetch fresh from DB — no stale data
+    // Always fetch fresh from DB — no stale data, nothing cached locally
     const { data: profile } = await sb
       .from('profiles')
-      .select('is_premium, is_founder, full_name, grade')
+      .select('is_premium, is_founder, full_name, grade, xp_total, streak_days')
       .eq('id', userId)
       .single()
 
@@ -58,8 +61,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         grade: profile?.grade ?? null,
         isPremium: profile?.is_premium === true,
         isFounder: profile?.is_founder === true,
+        totalXp: profile?.xp_total ?? 0,
+        streakDays: profile?.streak_days ?? 0,
       },
     })
+  }
+
+  async function refreshUser() {
+    const { data: { session } } = await sb.auth.getSession()
+    await loadUser(session)
   }
 
   useEffect(() => {
@@ -72,5 +82,5 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => subscription.unsubscribe()
   }, [])
 
-  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ ...state, refreshUser }}>{children}</AuthContext.Provider>
 }

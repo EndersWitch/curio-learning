@@ -53,55 +53,45 @@ export function isBroadTopicMasteryUnlocked(
 }
 
 /**
- * Save quiz result to user_level_progress (real table) and award XP on profiles
+ * Save a quiz attempt entirely server-side via the `award_quiz_xp` RPC.
+ *
+ * The RPC (SECURITY DEFINER, checks auth.uid() = p_user_id) is the single
+ * source of truth: it computes XP from the score, upserts
+ * `user_level_progress`, and bumps `profiles.xp` / `xp_total` / streak —
+ * all atomically in one transaction. Nothing about XP, progress, or streaks
+ * is computed or stored on the client.
+ *
+ * Returns the server-confirmed outcome so the UI can reflect what actually
+ * happened (never trust the locally-estimated xpEarned for display).
  */
 export async function saveQuizResult(params: {
   userId: string
-  levelId: string
-  topicId?: string
+  topicId: string      // quiz_levels.broad_topic (slug)
+  levelId: string       // quiz_levels.level_id (slug, NOT the row uuid)
+  sectionType: string
+  passThresholdPercent: number // 0-100
   result: QuizResult
-}): Promise<void> {
-  const { userId, levelId, topicId, result } = params
-  const now = new Date().toISOString()
+}): Promise<{ xpEarned: number; passed: boolean; firstPass: boolean }> {
+  const { userId, topicId, levelId, sectionType, passThresholdPercent, result } = params
+  const scorePercent = Math.round((result.score / result.total) * 100)
 
-  // Fetch existing record to handle best_score and attempts properly
-  const { data: existing } = await sb
-    .from('user_level_progress')
-    .select('best_score, attempts, passed')
-    .eq('user_id', userId)
-    .eq('level_id', levelId)
-    .single()
+  const { data, error } = await sb.rpc('award_quiz_xp', {
+    p_user_id: userId,
+    p_topic_id: topicId,
+    p_level_id: levelId,
+    p_score: scorePercent,
+    p_correct: result.score,
+    p_total: result.total,
+    p_section_type: sectionType,
+    p_threshold: passThresholdPercent,
+  })
 
-  const prevBest    = existing?.best_score ?? 0
-  const prevAttempts = existing?.attempts ?? 0
-  const wasAlreadyPassed = existing?.passed ?? false
+  if (error) throw error
 
-  await sb.from('user_level_progress').upsert(
-    {
-      user_id:            userId,
-      level_id:           levelId,
-      topic_id:           topicId ?? null,
-      best_score:         Math.max(prevBest, result.score),
-      attempts:           prevAttempts + 1,
-      passed:             wasAlreadyPassed || result.passed,
-      xp_earned:          result.xpEarned,
-      last_attempted_at:  now,
-      // Only set first_passed_at if this is the first pass
-      ...(result.passed && !wasAlreadyPassed ? { first_passed_at: now } : {}),
-    },
-    { onConflict: 'user_id,topic_id,level_id' }
-  )
-
-  // Award XP via existing RPC
-  if (result.xpEarned > 0) {
-    try {
-      await sb.rpc('award_quiz_xp', {
-        p_user_id: userId,
-        p_xp: result.xpEarned,
-      })
-    } catch {
-      // XP award failed silently — not fatal
-    }
+  return {
+    xpEarned: data?.xp_earned ?? 0,
+    passed: data?.passed ?? result.passed,
+    firstPass: data?.first_pass ?? false,
   }
 }
 

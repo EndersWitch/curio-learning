@@ -23,6 +23,7 @@ export default function PlayPage() {
   const [levelMeta, setLevelMeta] = useState<any>(null)
   const [result, setResult] = useState<QuizResult | null>(null)
   const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [accessDenied, setAccessDenied] = useState(false)
 
@@ -62,19 +63,32 @@ export default function PlayPage() {
   }
 
   const handleComplete = useCallback(async (res: QuizResult) => {
-    setResult(res)
-    if (!user || !levelMeta) return
+    if (!user || !levelMeta) {
+      setResult(res)
+      return
+    }
+    setSaving(true)
     try {
-      await saveQuizResult({
+      // Server is the sole source of truth for XP, pass/fail and progress —
+      // nothing here is trusted from the client-side estimate.
+      const server = await saveQuizResult({
         userId: user.id,
-        levelId: levelUUID,
-        topicId: levelMeta.broad_topic ?? undefined,
+        topicId: levelMeta.broad_topic,
+        levelId: levelMeta.level_id,
+        sectionType: levelMeta.section_type ?? 'learning_level',
+        passThresholdPercent: 60,
         result: res,
       })
+      setResult({ ...res, xpEarned: server.xpEarned, passed: server.passed })
     } catch (e) {
       console.error('[QuizPlay] save failed:', e)
+      // Fall back to showing the local result so the user isn't stuck,
+      // but XP could not be confirmed by the server.
+      setResult({ ...res, xpEarned: 0 })
+    } finally {
+      setSaving(false)
     }
-  }, [user, levelMeta, levelUUID])
+  }, [user, levelMeta])
 
   if (loading || authLoading) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: '#1a1228' }}>
@@ -107,6 +121,15 @@ export default function PlayPage() {
         <button onClick={() => window.location.reload()}
           className="w-full py-3 rounded-xl font-black text-sm"
           style={{ background: '#6DD3CE', color: '#2B1E3F' }}>Try Again</button>
+      </div>
+    </div>
+  )
+
+  if (saving) return (
+    <div className="min-h-screen flex items-center justify-center" style={{ background: '#1a1228' }}>
+      <div className="text-center">
+        <div className="text-4xl mb-3 animate-bounce">⚡</div>
+        <p className="text-sm" style={{ color: '#9b8ab0' }}>Saving your XP...</p>
       </div>
     </div>
   )
