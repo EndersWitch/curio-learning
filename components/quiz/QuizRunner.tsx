@@ -82,6 +82,40 @@ const CURIO = {
   amber:      '#F5C842',
 }
 
+interface Burst { id: number; bx: number; by: number; color: string; size: number; delay: number }
+
+const BURST_COLORS = ['#34D399', '#6DD3CE', '#F5C842', '#FFFFFF']
+
+function CorrectBurst() {
+  const [particles] = useState<Burst[]>(() =>
+    Array.from({ length: 14 }, (_, i) => {
+      const angle = (i / 14) * Math.PI * 2 + Math.random() * 0.4
+      const dist  = 50 + Math.random() * 50
+      return {
+        id: i,
+        bx: Math.cos(angle) * dist,
+        by: Math.sin(angle) * dist,
+        color: BURST_COLORS[i % BURST_COLORS.length],
+        size: 5 + Math.random() * 5,
+        delay: Math.random() * 0.08,
+      }
+    })
+  )
+  return (
+    <span className="absolute inset-0 pointer-events-none flex items-center justify-center" aria-hidden="true">
+      {particles.map(p => (
+        <span key={p.id}
+          className="absolute rounded-full animate-burst"
+          style={{
+            '--bx': `${p.bx}px`, '--by': `${p.by}px`,
+            background: p.color, width: p.size, height: p.size,
+            animationDelay: `${p.delay}s`,
+          } as React.CSSProperties} />
+      ))}
+    </span>
+  )
+}
+
 export default function QuizRunner({
   questions, levelId, sectionType, baseXP, passThreshold, onComplete,
 }: QuizRunnerProps) {
@@ -90,6 +124,7 @@ export default function QuizRunner({
   const [answerState, setAnswerState]   = useState<AnswerState>('idle')
   const [startTime]  = useState(Date.now())
   const [scoreDisplay, setScoreDisplay] = useState(0)
+  const [xpBump, setXpBump]             = useState(false)
   const scoreRef    = useRef(0)
   const feedbackRef = useRef('')
 
@@ -104,7 +139,12 @@ export default function QuizRunner({
     setSelected(key)
     setAnswerState(correct ? 'correct' : 'wrong')
     feedbackRef.current = correct ? pickRandom(CORRECT_MESSAGES) : pickRandom(WRONG_MESSAGES)
-    if (correct) { scoreRef.current += 1; setScoreDisplay(scoreRef.current) }
+    if (correct) {
+      scoreRef.current += 1
+      setScoreDisplay(scoreRef.current)
+      setXpBump(true)
+      setTimeout(() => setXpBump(false), 450)
+    }
   }, [answerState, current])
 
   const handleNext = useCallback(() => {
@@ -171,7 +211,9 @@ export default function QuizRunner({
         <div className="flex-1">
           <ProgressBar value={progressPercent} color="bg-gradient-to-r from-[#FF5E5B] to-[#6DD3CE]" />
         </div>
-        <XPBadge xp={scoreDisplay * xpPerQ} size="sm" />
+        <span className={xpBump ? 'animate-xp-bump inline-block' : 'inline-block'}>
+          <XPBadge xp={scoreDisplay * xpPerQ} size="sm" />
+        </span>
       </div>
 
       {/* Question card */}
@@ -204,17 +246,24 @@ export default function QuizRunner({
       <div key={`opts-${currentIndex}`} className="grid grid-cols-1 gap-3 mb-5 animate-fade-slide"
         style={{ animationDelay: '60ms' }}>
         {current.options.map((opt, i) => {
-          const isWrong = answerState === 'wrong' && opt.key === selected
+          const isSelectedWrong   = answerState === 'wrong'   && opt.key === selected
+          const isSelectedCorrect = answerState === 'correct' && opt.key === selected
+          const isRevealedCorrect = answerState === 'wrong'   && opt.key === current.correct_key
           return (
             <button
               key={opt.key}
               onClick={() => handleSelect(opt.key)}
               disabled={answerState !== 'idle'}
               aria-label={`Option ${String.fromCharCode(65 + i)}: ${opt.text}`}
-              className={`flex items-center gap-4 w-full text-left rounded-2xl border-2 px-5 py-4 font-semibold text-base transition-all duration-200 disabled:cursor-default focus:outline-none ${isWrong ? 'animate-[wrongShake_0.35s_ease-in-out]' : ''}`}
+              className={`relative overflow-visible flex items-center gap-4 w-full text-left rounded-2xl border-2 px-5 py-4 font-semibold text-base transition-all duration-200 disabled:cursor-default focus:outline-none active:scale-[0.97]
+                ${isSelectedWrong ? 'animate-wrong-bump' : ''}
+                ${isSelectedCorrect ? 'animate-correct-bounce animate-ring-pulse' : ''}
+                ${isRevealedCorrect ? 'animate-pulse-soft' : ''}
+                ${answerState === 'idle' ? 'hover:-translate-y-0.5 hover:scale-[1.01]' : ''}`}
               style={optionStyle(opt.key)}
             >
-              <span className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sm font-black transition-colors duration-200"
+              {isSelectedCorrect && <CorrectBurst />}
+              <span className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-sm font-black transition-colors duration-200 ${isSelectedCorrect ? 'animate-pop-in' : ''}`}
                 style={bubbleStyle(opt.key)}>
                 {String.fromCharCode(65 + i)}
               </span>
@@ -222,11 +271,11 @@ export default function QuizRunner({
                 <RichText text={opt.text} />
               </span>
               {answerState !== 'idle' && opt.key === current.correct_key && (
-                <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-black"
+                <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-black animate-pop-in"
                   style={{ background: '#34D399', color: '#fff' }}>✓</span>
               )}
               {answerState === 'wrong' && opt.key === selected && (
-                <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-black"
+                <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-black animate-wiggle"
                   style={{ background: CURIO.coral, color: '#fff' }}>✗</span>
               )}
             </button>
@@ -236,7 +285,7 @@ export default function QuizRunner({
 
       {/* Feedback bar — always shows explanation immediately when answered */}
       {answerState !== 'idle' && (
-        <div className="rounded-2xl px-5 py-4 mb-4 border-2 animate-fade-slide"
+        <div className={`rounded-2xl px-5 py-4 mb-4 border-2 ${answerState === 'correct' ? 'animate-celebrate' : 'animate-wrong-bump'}`}
           style={answerState === 'correct'
             ? { background: 'rgba(52,211,153,0.08)', borderColor: 'rgba(52,211,153,0.3)' }
             : { background: 'rgba(255,94,91,0.08)', borderColor: 'rgba(255,94,91,0.3)' }
@@ -258,7 +307,7 @@ export default function QuizRunner({
       {/* Next / Finish button */}
       {answerState !== 'idle' && (
         <button onClick={handleNext}
-          className="w-full py-4 rounded-2xl font-black text-base text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
+          className="w-full py-4 rounded-2xl font-black text-base text-white transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-95 animate-pop-in"
           style={{ background: CURIO.coral, boxShadow: '0 4px 20px rgba(255,94,91,0.35)' }}>
           {isLast ? '🏁 See My Results' : 'Next Question →'}
         </button>
