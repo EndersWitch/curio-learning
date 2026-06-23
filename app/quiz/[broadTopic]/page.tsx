@@ -200,11 +200,13 @@ function LevelRow({ level, isPremium, broadTopic, progress }: {
         <p className="font-bold text-sm" style={{ color: locked ? '#9b8ab0' : '#F7F7FF' }}>
           {level.level_display}
         </p>
-        <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+        {level.description && (
+          <p className="text-xs mt-0.5 truncate" style={{ color: '#9b8ab0' }}>
+            {level.description}
+          </p>
+        )}
+        <div className="flex items-center gap-2 mt-1 flex-wrap">
           {diff && <span className="text-xs" style={{ color: diff.color }}>{diff.label}</span>}
-          {level.description && !diff && !progress && (
-            <span className="text-xs truncate" style={{ color: '#9b8ab0' }}>{level.description}</span>
-          )}
           {progress && (
             <>
               <span className="text-xs font-bold" style={{ color: completed ? '#34D399' : '#9b8ab0' }}>

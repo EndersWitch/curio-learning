@@ -39,25 +39,32 @@ function questionXp(difficulty?: string): number {
   return DIFFICULTY_XP[difficulty ?? ''] ?? 3
 }
 
-// Render text with <strong> tags and *asterisk* → cyan highlight
+// Render text with <strong>, <em> tags and *asterisk* → cyan highlight
 function RichText({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
-  // Parse: <strong>...</strong> and *...*
-  const parts: { content: string; bold?: boolean; cyan?: boolean }[] = []
+  // Parse: <strong>...</strong>, <em>...</em> and *...*
+  const parts: { content: string; bold?: boolean; italic?: boolean; cyan?: boolean }[] = []
   let remaining = text
   while (remaining.length > 0) {
     const strongStart = remaining.indexOf('<strong>')
+    const emStart = remaining.indexOf('<em>')
     const asteriskStart = remaining.indexOf('*')
     const next = Math.min(
       strongStart >= 0 ? strongStart : Infinity,
+      emStart >= 0 ? emStart : Infinity,
       asteriskStart >= 0 ? asteriskStart : Infinity
     )
     if (next === Infinity) { parts.push({ content: remaining }); break }
     if (next > 0) parts.push({ content: remaining.slice(0, next) })
     if (strongStart >= 0 && strongStart === next) {
       const end = remaining.indexOf('</strong>', strongStart)
-      if (end < 0) { parts.push({ content: remaining }); break }
+      if (end < 0) { parts.push({ content: remaining.slice(strongStart + 8) }); break }
       parts.push({ content: remaining.slice(strongStart + 8, end), bold: true })
       remaining = remaining.slice(end + 9)
+    } else if (emStart >= 0 && emStart === next) {
+      const end = remaining.indexOf('</em>', emStart)
+      if (end < 0) { parts.push({ content: remaining.slice(emStart + 4) }); break }
+      parts.push({ content: remaining.slice(emStart + 4, end), italic: true })
+      remaining = remaining.slice(end + 5)
     } else {
       // asterisk
       const closeAsterisk = remaining.indexOf('*', asteriskStart + 1)
@@ -71,6 +78,7 @@ function RichText({ text, className, style }: { text: string; className?: string
     <span className={className} style={style}>
       {parts.map((p, i) =>
         p.bold ? <strong key={i} style={{ fontWeight: 700, color: '#F7F7FF' }}>{p.content}</strong>
+        : p.italic ? <em key={i} style={{ fontStyle: 'italic' }}>{p.content}</em>
         : p.cyan ? <span key={i} style={{ color: '#6DD3CE', fontWeight: 600 }}>{p.content}</span>
         : <span key={i}>{p.content}</span>
       )}
