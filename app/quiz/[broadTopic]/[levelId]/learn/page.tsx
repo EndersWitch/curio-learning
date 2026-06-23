@@ -89,9 +89,9 @@ export default function LearnPage() {
             className="inline-flex items-center gap-1 text-xs font-semibold mb-4 hover:opacity-70 transition-opacity"
             style={{ color: '#6DD3CE' }}>← Back</Link>
           <p className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: '#6DD3CE' }}>
-            Level {level.level_number} · {level.question_count} questions
+            Level {(level as any).level_order} · {level.question_count} questions
           </p>
-          <h1 className="text-2xl font-black" style={{ color: '#F7F7FF' }}>{level.title}</h1>
+          <h1 className="text-2xl font-black" style={{ color: '#F7F7FF' }}>{(level as any).level_display}</h1>
         </div>
       </div>
 

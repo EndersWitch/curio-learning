@@ -6,6 +6,13 @@ import Link from 'next/link'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
 
+interface LevelProgress {
+  best_score: number
+  passed: boolean
+  xp_earned: number
+  attempts: number
+}
+
 interface Level {
   id: string                      // UUID — used in URLs
   level_id: string                // slug e.g. "nouns_1"
@@ -41,10 +48,12 @@ export default function BroadTopicPage() {
   const isPremium = user?.isPremium || user?.isFounder || false
 
   const [levels, setLevels] = useState<Level[]>([])
+  const [progressMap, setProgressMap] = useState<Map<string, LevelProgress>>(new Map())
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
 
   useEffect(() => { loadLevels() }, [broadTopic])
+  useEffect(() => { if (!authLoading) loadProgress() }, [authLoading, user?.id, broadTopic])
 
   async function loadLevels() {
     const { data, error } = await sb
@@ -58,6 +67,17 @@ export default function BroadTopicPage() {
     }
     setLevels(data)
     setLoading(false)
+  }
+
+  async function loadProgress() {
+    if (!user) { setProgressMap(new Map()); return }
+    const { data } = await sb
+      .from('user_level_progress')
+      .select('level_id, best_score, passed, xp_earned, attempts')
+      .eq('user_id', user.id)
+      .eq('topic_id', broadTopic)
+
+    setProgressMap(new Map((data ?? []).map((r: any) => [r.level_id, r])))
   }
 
   if (loading || authLoading) return <LoadingScreen />
@@ -122,6 +142,7 @@ export default function BroadTopicPage() {
                     level={level}
                     isPremium={isPremium}
                     broadTopic={params.broadTopic as string}
+                    progress={progressMap.get(level.level_id)}
                   />
                 ))}
               </div>
@@ -151,33 +172,48 @@ export default function BroadTopicPage() {
   )
 }
 
-function LevelRow({ level, isPremium, broadTopic }: {
-  level: Level; isPremium: boolean; broadTopic: string
+function LevelRow({ level, isPremium, broadTopic, progress }: {
+  level: Level; isPremium: boolean; broadTopic: string; progress?: LevelProgress
 }) {
   const locked = level.is_premium && !isPremium
   // URL uses UUID id — so learn/play pages can fetch by id directly
   const href = `/quiz/${broadTopic}/${level.id}/learn`
   const diff = difficultyBadge(level.difficulty)
+  const completed = progress?.passed ?? false
 
   const inner = (
     <div className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all"
       style={locked
         ? { background: 'rgba(255,255,255,0.02)', opacity: 0.6, cursor: 'not-allowed' }
+        : completed
+        ? { background: 'rgba(52,211,153,0.06)', border: '1px solid rgba(52,211,153,0.2)' }
         : { background: 'rgba(255,255,255,0.04)' }}>
       <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0"
         style={locked
           ? { background: 'rgba(255,255,255,0.04)', color: '#9b8ab0', border: '2px solid rgba(255,255,255,0.08)' }
+          : completed
+          ? { background: '#34D399', color: '#fff', border: '2px solid #34D399' }
           : { background: 'rgba(109,211,206,0.1)', color: '#6DD3CE', border: '2px solid rgba(109,211,206,0.25)' }}>
-        {locked ? '🔒' : level.level_order}
+        {locked ? '🔒' : completed ? '✓' : level.level_order}
       </div>
       <div className="flex-1 min-w-0">
         <p className="font-bold text-sm" style={{ color: locked ? '#9b8ab0' : '#F7F7FF' }}>
           {level.level_display}
         </p>
-        <div className="flex items-center gap-2 mt-0.5">
+        <div className="flex items-center gap-2 mt-0.5 flex-wrap">
           {diff && <span className="text-xs" style={{ color: diff.color }}>{diff.label}</span>}
-          {level.description && !diff && (
+          {level.description && !diff && !progress && (
             <span className="text-xs truncate" style={{ color: '#9b8ab0' }}>{level.description}</span>
+          )}
+          {progress && (
+            <>
+              <span className="text-xs font-bold" style={{ color: completed ? '#34D399' : '#9b8ab0' }}>
+                Best: {progress.best_score}%
+              </span>
+              <span className="text-xs font-bold" style={{ color: '#F5C842' }}>
+                ⚡ {progress.xp_earned} XP
+              </span>
+            </>
           )}
         </div>
       </div>
@@ -185,6 +221,8 @@ function LevelRow({ level, isPremium, broadTopic }: {
         <div className="text-xs" style={{ color: '#9b8ab0' }}>{level.question_count}Q</div>
         {locked
           ? <div className="text-xs" style={{ color: '#F5C842' }}>Premium 🔒</div>
+          : completed
+          ? <div className="text-xs font-bold" style={{ color: '#34D399' }}>Replay ↻</div>
           : <div className="text-xs font-bold" style={{ color: '#6DD3CE' }}>→</div>}
       </div>
     </div>

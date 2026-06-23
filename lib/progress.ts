@@ -84,6 +84,10 @@ export async function saveQuizResult(params: {
     p_total: result.total,
     p_section_type: sectionType,
     p_threshold: passThresholdPercent,
+    // Question ids of the ones answered correctly — the RPC looks up each
+    // question's real difficulty server-side and weights XP accordingly
+    // (Starter/Building/Challenge). Never trust a client-computed XP total.
+    p_correct_question_ids: result.correctQuestionIds.map(Number),
   })
 
   if (error) throw error

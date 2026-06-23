@@ -31,6 +31,14 @@ function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)]
 }
 
+// Mirrors the server-side weighting in the award_quiz_xp RPC — used here only
+// for a live preview during play. The actual award is always recomputed and
+// confirmed server-side from the real difficulty column, never trusted from the client.
+const DIFFICULTY_XP: Record<string, number> = { Starter: 1, Building: 3, Challenge: 5 }
+function questionXp(difficulty?: string): number {
+  return DIFFICULTY_XP[difficulty ?? ''] ?? 3
+}
+
 // Render text with <strong> tags and *asterisk* → cyan highlight
 function RichText({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
   // Parse: <strong>...</strong> and *...*
@@ -124,14 +132,16 @@ export default function QuizRunner({
   const [answerState, setAnswerState]   = useState<AnswerState>('idle')
   const [startTime]  = useState(Date.now())
   const [scoreDisplay, setScoreDisplay] = useState(0)
+  const [xpDisplay, setXpDisplay]       = useState(0)
   const [xpBump, setXpBump]             = useState(false)
-  const scoreRef    = useRef(0)
-  const feedbackRef = useRef('')
+  const scoreRef      = useRef(0)
+  const xpRef         = useRef(0)
+  const correctIdsRef = useRef<string[]>([])
+  const feedbackRef   = useRef('')
 
   const current         = questions[currentIndex]
   const progressPercent = ((currentIndex + (answerState !== 'idle' ? 1 : 0)) / questions.length) * 100
   const isLast          = currentIndex === questions.length - 1
-  const xpPerQ          = Math.max(1, Math.round(baseXP / questions.length))
 
   const handleSelect = useCallback((key: string) => {
     if (answerState !== 'idle') return
@@ -142,6 +152,9 @@ export default function QuizRunner({
     if (correct) {
       scoreRef.current += 1
       setScoreDisplay(scoreRef.current)
+      correctIdsRef.current.push(current.id)
+      xpRef.current += questionXp(current.difficulty)
+      setXpDisplay(xpRef.current)
       setXpBump(true)
       setTimeout(() => setXpBump(false), 450)
     }
@@ -155,7 +168,7 @@ export default function QuizRunner({
       const passed     = finalScore / total >= passThreshold
       const timeTaken  = Math.round((Date.now() - startTime) / 1000)
       const xpEarned   = calculateXP({ score: finalScore, total, sectionType, baseXP })
-      onComplete({ score: finalScore, total, passed, xpEarned, timeTaken })
+      onComplete({ score: finalScore, total, passed, xpEarned, timeTaken, correctQuestionIds: correctIdsRef.current })
     } else {
       setCurrentIndex(i => i + 1)
       setSelected(null)
@@ -212,7 +225,7 @@ export default function QuizRunner({
           <ProgressBar value={progressPercent} color="bg-gradient-to-r from-[#FF5E5B] to-[#6DD3CE]" />
         </div>
         <span className={xpBump ? 'animate-xp-bump inline-block' : 'inline-block'}>
-          <XPBadge xp={scoreDisplay * xpPerQ} size="sm" />
+          <XPBadge xp={xpDisplay} size="sm" />
         </span>
       </div>
 
@@ -224,6 +237,12 @@ export default function QuizRunner({
             style={{ background: 'rgba(109,211,206,0.12)', color: CURIO.cyan }}>
             Question {currentIndex + 1}
           </span>
+          {current.difficulty && (
+            <span className="text-xs font-black px-2.5 py-1 rounded-full"
+              style={{ background: 'rgba(245,200,66,0.1)', color: CURIO.amber }}>
+              ⚡ +{questionXp(current.difficulty)} XP · {current.difficulty}
+            </span>
+          )}
           {sectionType === 'subtopic_mastery' && (
             <span className="text-xs font-black px-2.5 py-1 rounded-full"
               style={{ background: 'rgba(245,200,66,0.12)', color: CURIO.amber }}>

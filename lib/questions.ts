@@ -37,6 +37,7 @@ export function shuffleQuestion(q: Question): ShuffledQuestion {
     options: shuffled,
     correct_key: newCorrectKey,
     explanation: q.explanation,
+    difficulty: q.difficulty,
   }
 }
 

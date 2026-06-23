@@ -86,6 +86,7 @@ export interface Question {
   correct_option: 'a' | 'b' | 'c' | 'd'
   explanation?: string
   is_premium: boolean
+  difficulty?: string // 'Starter' | 'Building' | 'Challenge'
 }
 
 export interface ShuffledQuestion {
@@ -94,6 +95,7 @@ export interface ShuffledQuestion {
   options: { key: string; text: string }[]
   correct_key: string
   explanation?: string
+  difficulty?: string // 'Starter' | 'Building' | 'Challenge'
 }
 
 export interface UserProgress {
@@ -136,4 +138,5 @@ export interface QuizResult {
   timeTaken: number
   newMasteryUnlocked?: string
   nextLevelId?: string
+  correctQuestionIds: string[]
 }
