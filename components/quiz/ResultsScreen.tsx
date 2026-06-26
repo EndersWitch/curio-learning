@@ -34,12 +34,14 @@ const CONFETTI_COLORS = ['#FF5E5B','#6DD3CE','#F5C842','#A855F7','#34D399','#FB9
 interface Particle { id:number; left:number; top:number; color:string; duration:number; delay:number; size:number }
 
 // Drives the pop-in + sequential petal reveal + percent count-up timing.
-// Shared by the bloom SVG and the petal legend dots so they stay in sync.
+// Shared by the bloom SVG, the score text, and the petal legend dots so
+// everything stays in sync.
 function useBloomReveal(percent: number) {
   const litPetals = Math.round(percent / 20) // 0-5
 
   const [popped, setPopped]       = useState(false)
   const [revealed, setRevealed]   = useState(0)
+  const [pulseIndex, setPulseIndex] = useState<number | null>(null)
   const [displayPercent, setDisplayPercent] = useState(0)
   const [centerActive, setCenterActive] = useState(false)
   const [centerBump, setCenterBump]     = useState(false)
@@ -52,7 +54,11 @@ function useBloomReveal(percent: number) {
     timers.push(setTimeout(() => setPopped(true), 50))
 
     for (let i = 1; i <= litPetals; i++) {
-      timers.push(setTimeout(() => setRevealed(i), START_DELAY + i * PETAL_STEP))
+      timers.push(setTimeout(() => {
+        setRevealed(i)
+        setPulseIndex(i - 1)
+        timers.push(setTimeout(() => setPulseIndex(null), 420))
+      }, START_DELAY + i * PETAL_STEP))
     }
 
     const centerDelay = START_DELAY + (litPetals + 1) * PETAL_STEP
@@ -75,17 +81,24 @@ function useBloomReveal(percent: number) {
     return () => { timers.forEach(clearTimeout); cancelAnimationFrame(raf) }
   }, [percent, litPetals])
 
-  return { popped, revealed, displayPercent, centerActive, centerBump }
+  return { popped, revealed, pulseIndex, displayPercent, centerActive, centerBump }
 }
 
-// Bloom SVG with 5 petals that light up one-by-one based on score %.
+// Bloom SVG with 5 petals that light up one-by-one based on score % — purely
+// decorative now, no overlaid text (that's rendered separately for legibility).
 // Pops in on mount, then each petal lights up in sequence with a glow + punch,
-// the percentage counts up in sync, and the centre pops once the reveal finishes.
+// and the centre pops once the reveal finishes.
+//
+// NOTE: rotation MUST stay on a plain SVG attribute (on a wrapping <g>, never
+// combined with a CSS `transition` on the same element) — adding a CSS
+// `transition`/`transform` to an element that also has an SVG `transform`
+// attribute makes the browser drop the attribute-based transform entirely,
+// which is what made every petal collapse into one unrotated stack before.
 function BloomScore({ percent, passed, reveal }: {
   percent: number; passed: boolean; reveal: ReturnType<typeof useBloomReveal>
 }) {
   const petalAngles = [0, 72, 144, 216, 288]
-  const { popped, revealed, displayPercent, centerActive, centerBump } = reveal
+  const { popped, revealed, pulseIndex, centerActive, centerBump } = reveal
 
   return (
     <div className="relative flex items-center justify-center" style={{ width: 160, height: 160 }}>
@@ -97,41 +110,36 @@ function BloomScore({ percent, passed, reveal }: {
         }}>
         {petalAngles.map((angle, i) => {
           const isLit = i < revealed
-          const justLit = i === revealed - 1
+          const pulsing = i === pulseIndex
           return (
-            <ellipse
-              key={i}
-              cx="100" cy="50" rx="22" ry="42"
-              fill={isLit ? '#6DD3CE' : '#2B1E3F'}
-              fillOpacity={isLit ? 1 : 0.5}
-              stroke={isLit ? '#6DD3CE' : 'rgba(109,211,206,0.2)'}
-              strokeWidth={isLit ? 1.5 : 0.5}
-              transform={`rotate(${angle} 100 100) scale(${justLit ? 1.22 : 1})`}
-              style={{
-                transformOrigin: '100px 50px',
-                filter: isLit ? 'drop-shadow(0 0 10px rgba(109,211,206,0.85))' : 'none',
-                transition: 'fill 0.35s ease, filter 0.35s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1)',
-              }}
-            />
+            <g key={i} transform={`rotate(${angle} 100 100)`}>
+              <ellipse
+                cx="100" cy="50" rx="22" ry="42"
+                fill={isLit ? '#6DD3CE' : '#2B1E3F'}
+                fillOpacity={isLit ? 1 : 0.5}
+                stroke={isLit ? '#6DD3CE' : 'rgba(109,211,206,0.2)'}
+                strokeWidth={isLit ? 1.5 : 0.5}
+                style={{
+                  transform: `scale(${pulsing ? 1.22 : 1})`,
+                  transformOrigin: '100px 50px',
+                  filter: isLit ? 'drop-shadow(0 0 10px rgba(109,211,206,0.85))' : 'none',
+                  transition: 'fill 0.35s ease, filter 0.35s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1)',
+                }}
+              />
+            </g>
           )
         })}
         {/* Centre circle */}
         <circle cx="100" cy="100" r="22"
           fill={passed && centerActive ? '#FF5E5B' : '#3d2d58'}
-          transform={`scale(${centerBump ? 1.28 : 1})`}
           style={{
+            transform: `scale(${centerBump ? 1.28 : 1})`,
             transformOrigin: '100px 100px',
             filter: passed && centerActive ? 'drop-shadow(0 0 12px rgba(255,94,91,0.85))' : 'none',
             transition: 'fill 0.3s ease, filter 0.3s ease, transform 0.45s cubic-bezier(0.34,1.56,0.64,1)',
           }}
         />
       </svg>
-      {/* Score text overlaid */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center"
-        style={{ opacity: popped ? 1 : 0, transition: 'opacity 0.3s ease 0.2s' }}>
-        <span className="text-2xl font-black tabular-nums" style={{ color: passed ? '#fff' : '#9b8ab0' }}>{displayPercent}%</span>
-        <span className="text-xs font-semibold mt-0.5 tabular-nums" style={{ color: 'rgba(255,255,255,0.5)' }}>{revealed}/5</span>
-      </div>
     </div>
   )
 }
@@ -203,10 +211,20 @@ export default function ResultsScreen({
         <div className="rounded-3xl p-8 mb-4 text-center"
           style={{ background: '#231935', border: `2px solid ${ringColor}40` }}>
 
-          {/* Animated Bloom — pop-in + sequential petal reveal */}
-          <div className="flex justify-center mb-5">
+          {/* Animated Bloom — purely decorative, pop-in + sequential petal reveal */}
+          <div className="flex justify-center mb-3">
             <BloomScore percent={percent} passed={passed} reveal={reveal} />
           </div>
+
+          {/* Score — its own clearly legible block, not overlaid on the bloom */}
+          <div className="mb-1">
+            <span className="text-5xl font-black tabular-nums" style={{ color: '#F7F7FF' }}>
+              {reveal.displayPercent}%
+            </span>
+          </div>
+          <p className="text-sm font-bold mb-4" style={{ color: '#9b8ab0' }}>
+            {score}/{total} correct
+          </p>
 
           {/* Petal legend — lights up in sync with the bloom above */}
           <div className="flex justify-center gap-1 mb-4">
