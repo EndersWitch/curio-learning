@@ -33,17 +33,71 @@ const CONFETTI_COLORS = ['#FF5E5B','#6DD3CE','#F5C842','#A855F7','#34D399','#FB9
 
 interface Particle { id:number; left:number; top:number; color:string; duration:number; delay:number; size:number }
 
-// Bloom SVG with 5 petals that light up based on score %
-// Each 20% = 1 petal lights up (lit = cyan glow, unlit = dim)
-function BloomScore({ percent, passed }: { percent: number; passed: boolean }) {
+// Drives the pop-in + sequential petal reveal + percent count-up timing.
+// Shared by the bloom SVG and the petal legend dots so they stay in sync.
+function useBloomReveal(percent: number) {
   const litPetals = Math.round(percent / 20) // 0-5
+
+  const [popped, setPopped]       = useState(false)
+  const [revealed, setRevealed]   = useState(0)
+  const [displayPercent, setDisplayPercent] = useState(0)
+  const [centerActive, setCenterActive] = useState(false)
+  const [centerBump, setCenterBump]     = useState(false)
+
+  useEffect(() => {
+    const PETAL_STEP = 320
+    const START_DELAY = 450
+    const timers: ReturnType<typeof setTimeout>[] = []
+
+    timers.push(setTimeout(() => setPopped(true), 50))
+
+    for (let i = 1; i <= litPetals; i++) {
+      timers.push(setTimeout(() => setRevealed(i), START_DELAY + i * PETAL_STEP))
+    }
+
+    const centerDelay = START_DELAY + (litPetals + 1) * PETAL_STEP
+    timers.push(setTimeout(() => {
+      setCenterActive(true)
+      setCenterBump(true)
+      timers.push(setTimeout(() => setCenterBump(false), 450))
+    }, centerDelay))
+
+    // Count the percentage up in sync with the petal reveal
+    let raf: number
+    const start = performance.now()
+    function tick() {
+      const t = Math.min(1, (performance.now() - start) / centerDelay)
+      setDisplayPercent(Math.round(t * percent))
+      if (t < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+
+    return () => { timers.forEach(clearTimeout); cancelAnimationFrame(raf) }
+  }, [percent, litPetals])
+
+  return { popped, revealed, displayPercent, centerActive, centerBump }
+}
+
+// Bloom SVG with 5 petals that light up one-by-one based on score %.
+// Pops in on mount, then each petal lights up in sequence with a glow + punch,
+// the percentage counts up in sync, and the centre pops once the reveal finishes.
+function BloomScore({ percent, passed, reveal }: {
+  percent: number; passed: boolean; reveal: ReturnType<typeof useBloomReveal>
+}) {
   const petalAngles = [0, 72, 144, 216, 288]
+  const { popped, revealed, displayPercent, centerActive, centerBump } = reveal
 
   return (
     <div className="relative flex items-center justify-center" style={{ width: 160, height: 160 }}>
-      <svg width="160" height="160" viewBox="0 0 200 200" fill="none">
+      <svg width="160" height="160" viewBox="0 0 200 200" fill="none"
+        style={{
+          transform: popped ? 'scale(1)' : 'scale(0)',
+          opacity: popped ? 1 : 0,
+          transition: 'transform 0.55s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease',
+        }}>
         {petalAngles.map((angle, i) => {
-          const isLit = i < litPetals
+          const isLit = i < revealed
+          const justLit = i === revealed - 1
           return (
             <ellipse
               key={i}
@@ -52,24 +106,31 @@ function BloomScore({ percent, passed }: { percent: number; passed: boolean }) {
               fillOpacity={isLit ? 1 : 0.5}
               stroke={isLit ? '#6DD3CE' : 'rgba(109,211,206,0.2)'}
               strokeWidth={isLit ? 1.5 : 0.5}
-              transform={`rotate(${angle} 100 100)`}
+              transform={`rotate(${angle} 100 100) scale(${justLit ? 1.22 : 1})`}
               style={{
-                filter: isLit ? 'drop-shadow(0 0 8px rgba(109,211,206,0.7))' : 'none',
-                transition: `fill 0.4s ease ${i * 0.12}s, filter 0.4s ease ${i * 0.12}s`,
+                transformOrigin: '100px 50px',
+                filter: isLit ? 'drop-shadow(0 0 10px rgba(109,211,206,0.85))' : 'none',
+                transition: 'fill 0.35s ease, filter 0.35s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1)',
               }}
             />
           )
         })}
         {/* Centre circle */}
         <circle cx="100" cy="100" r="22"
-          fill={passed ? '#FF5E5B' : '#3d2d58'}
-          style={{ filter: passed ? 'drop-shadow(0 0 8px rgba(255,94,91,0.6))' : 'none', transition: 'fill 0.3s ease' }}
+          fill={passed && centerActive ? '#FF5E5B' : '#3d2d58'}
+          transform={`scale(${centerBump ? 1.28 : 1})`}
+          style={{
+            transformOrigin: '100px 100px',
+            filter: passed && centerActive ? 'drop-shadow(0 0 12px rgba(255,94,91,0.85))' : 'none',
+            transition: 'fill 0.3s ease, filter 0.3s ease, transform 0.45s cubic-bezier(0.34,1.56,0.64,1)',
+          }}
         />
       </svg>
       {/* Score text overlaid */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-2xl font-black" style={{ color: passed ? '#fff' : '#9b8ab0' }}>{percent}%</span>
-        <span className="text-xs font-semibold mt-0.5" style={{ color: 'rgba(255,255,255,0.5)' }}>{Math.round(percent/20*5)}/5</span>
+      <div className="absolute inset-0 flex flex-col items-center justify-center"
+        style={{ opacity: popped ? 1 : 0, transition: 'opacity 0.3s ease 0.2s' }}>
+        <span className="text-2xl font-black tabular-nums" style={{ color: passed ? '#fff' : '#9b8ab0' }}>{displayPercent}%</span>
+        <span className="text-xs font-semibold mt-0.5 tabular-nums" style={{ color: 'rgba(255,255,255,0.5)' }}>{revealed}/5</span>
       </div>
     </div>
   )
@@ -80,6 +141,7 @@ export default function ResultsScreen({
 }: ResultsScreenProps) {
   const { score, total, passed, xpEarned, timeTaken } = result
   const percent = Math.round((score / total) * 100)
+  const reveal = useBloomReveal(percent)
   const { refreshUser } = useAuth()
 
   useEffect(() => { refreshUser() }, [])
@@ -92,12 +154,9 @@ export default function ResultsScreen({
   const [particles, setParticles] = useState<Particle[]>([])
   const [showConfetti, setShowConfetti] = useState(false)
   const [xpAnimated, setXpAnimated]   = useState(false)
-  const [bloomVisible, setBloomVisible] = useState(false)
 
   useEffect(() => {
-    // Slight delay so bloom animation is visible on mount
-    const t0 = setTimeout(() => setBloomVisible(true), 100)
-    if (!passed) return () => clearTimeout(t0)
+    if (!passed) return
 
     setParticles(Array.from({ length: 36 }, (_, i) => ({
       id: i,
@@ -111,7 +170,7 @@ export default function ResultsScreen({
     setShowConfetti(true)
     const t1 = setTimeout(() => setShowConfetti(false), 3500)
     const t2 = setTimeout(() => setXpAnimated(true), 400)
-    return () => { clearTimeout(t0); clearTimeout(t1); clearTimeout(t2) }
+    return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [passed])
 
   const isMastery = sectionType === 'subtopic_mastery' || sectionType === 'broad_topic_mastery'
@@ -144,20 +203,18 @@ export default function ResultsScreen({
         <div className="rounded-3xl p-8 mb-4 text-center"
           style={{ background: '#231935', border: `2px solid ${ringColor}40` }}>
 
-          {/* Animated Bloom */}
-          <div className="flex justify-center mb-5"
-            style={{ opacity: bloomVisible ? 1 : 0, transform: bloomVisible ? 'scale(1)' : 'scale(0.7)', transition: 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)' }}>
-            <BloomScore percent={percent} passed={passed} />
+          {/* Animated Bloom — pop-in + sequential petal reveal */}
+          <div className="flex justify-center mb-5">
+            <BloomScore percent={percent} passed={passed} reveal={reveal} />
           </div>
 
-          {/* Petal legend */}
+          {/* Petal legend — lights up in sync with the bloom above */}
           <div className="flex justify-center gap-1 mb-4">
             {[0,1,2,3,4].map(i => (
-              <div key={i} className="w-2 h-2 rounded-full transition-all duration-500"
+              <div key={i} className="w-2 h-2 rounded-full transition-all duration-300"
                 style={{
-                  background: i < Math.round(percent/20) ? '#6DD3CE' : 'rgba(109,211,206,0.15)',
-                  transitionDelay: `${i * 0.12}s`,
-                  boxShadow: i < Math.round(percent/20) ? '0 0 6px rgba(109,211,206,0.6)' : 'none',
+                  background: i < reveal.revealed ? '#6DD3CE' : 'rgba(109,211,206,0.15)',
+                  boxShadow: i < reveal.revealed ? '0 0 6px rgba(109,211,206,0.6)' : 'none',
                 }} />
             ))}
           </div>

@@ -75,6 +75,12 @@ export async function saveQuizResult(params: {
   const { userId, topicId, levelId, sectionType, passThresholdPercent, result } = params
   const scorePercent = Math.round((result.score / result.total) * 100)
 
+  // Streaks are a "what day was it for the student" concept, not a database
+  // server concept — pass the client's own local calendar date so the streak
+  // doesn't fall a day behind/ahead of the server's UTC clock near midnight.
+  const now = new Date()
+  const localDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`
+
   const { data, error } = await sb.rpc('award_quiz_xp', {
     p_user_id: userId,
     p_topic_id: topicId,
@@ -88,6 +94,7 @@ export async function saveQuizResult(params: {
     // question's real difficulty server-side and weights XP accordingly
     // (Starter/Building/Challenge). Never trust a client-computed XP total.
     p_correct_question_ids: result.correctQuestionIds.map(Number),
+    p_local_date: localDate,
   })
 
   if (error) throw error

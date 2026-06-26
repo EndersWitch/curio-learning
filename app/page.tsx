@@ -19,6 +19,12 @@ interface Session {
 const SUPABASE_URL = 'https://inmrsgujgfktapjnekjs.supabase.co'
 const SUPABASE_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU'
 
+// Local-calendar-date key (YYYY-MM-DD) — never use .toISOString() for this,
+// it converts to UTC and rolls the date back a day for UTC+ timezones.
+function localDateKey(d: Date): string {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
+
 // ─── Quiz demo data ────────────────────────────────────────────────────────────
 const SETS = [
   {
@@ -112,21 +118,30 @@ export default function HomePage() {
     // Best-effort weekly streak strip derived from streak_days/streak_last_date —
     // there's no per-day activity log, so we mark the most recent `streakCount`
     // consecutive days up to streak_last_date as active.
+    //
+    // IMPORTANT: stick to local-calendar-date string keys throughout (never
+    // .toISOString(), which converts to UTC and silently rolls the date back
+    // a day for anyone east of UTC — that's what made "today" show as
+    // yesterday's box lighting up instead).
     const today = new Date()
-    const lastActive = profile?.streak_last_date ? new Date(profile.streak_last_date + 'T00:00:00') : null
+    // streak_last_date is a plain YYYY-MM-DD from Postgres — parse it as
+    // calendar-date components, not as a UTC instant.
+    const lastActive = profile?.streak_last_date
+      ? (() => { const [y, m, d] = profile.streak_last_date.split('-').map(Number); return new Date(y, m - 1, d) })()
+      : null
     const activeDates = new Set<string>()
     if (lastActive) {
       for (let i = 0; i < streakCount; i++) {
         const d = new Date(lastActive)
         d.setDate(lastActive.getDate() - i)
-        activeDates.add(d.toISOString().slice(0, 10))
+        activeDates.add(localDateKey(d))
       }
     }
     const days: boolean[] = []
     for (let i = 6; i >= 0; i--) {
       const d = new Date(today)
       d.setDate(today.getDate() - i)
-      days.push(activeDates.has(d.toISOString().slice(0, 10)))
+      days.push(activeDates.has(localDateKey(d)))
     }
     setStreakDays(days)
 
