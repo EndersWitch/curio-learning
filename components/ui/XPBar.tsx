@@ -12,7 +12,7 @@ export function XPBadge({ xp, animate = false, size = 'md' }: XPBadgeProps) {
   const [displayed, setDisplayed] = useState(animate ? 0 : xp)
 
   useEffect(() => {
-    if (!animate) return
+    if (!animate) { setDisplayed(xp); return }
     let start = 0
     const step = Math.ceil(xp / 30)
     const interval = setInterval(() => {
