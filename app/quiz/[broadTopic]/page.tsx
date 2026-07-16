@@ -159,7 +159,7 @@ export default function BroadTopicPage() {
               <Lock size={14} /> {premiumCount} level{premiumCount !== 1 ? 's' : ''} locked
             </p>
             <p className="text-xs mb-3" style={{ color: '#9b8ab0' }}>
-              Unlock everything with Curio Premium — R49/month
+              Get the rest with Curio Premium for R49/month
             </p>
             <a href="/subscription"
               className="inline-block px-5 py-2.5 rounded-xl font-black text-sm"

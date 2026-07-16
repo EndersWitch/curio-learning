@@ -13,7 +13,7 @@ function friendlyError(msg: string) {
   if (m.includes('already registered') || m.includes('already exists'))
     return 'An account with this email already exists. Try signing in instead.'
   if (m.includes('email not confirmed') || m.includes('not confirmed'))
-    return 'Check your inbox — click the verification link we sent you before signing in.'
+    return 'Check your inbox. Click the verification link we sent you before signing in.'
   if (m.includes('email')) return 'Please enter a valid email address.'
   if (m.includes('password')) return 'Password must be at least 6 characters.'
   if (m.includes('rate limit') || m.includes('too many'))
@@ -144,10 +144,10 @@ export default function LoginPage() {
             <span className="cy">Deep</span> <span className="co">learning.</span>
           </h2>
           <p className="bp-sub">
-            Everything you need to <strong>actually prepare</strong> for exams — free to start, always.
+            Everything you need to <strong>actually prepare</strong> for exams, free to start, always.
           </p>
           <ul className="bp-features">
-            {['Exam papers & memos — free forever','AI-powered topic quizzes','Deep Learn explanations','Grades 4 – 12 · every subject'].map((f) => (
+            {['Exam papers & memos, free forever','AI-powered topic quizzes','Deep Learn explanations','Grades 4 – 12 · every subject'].map((f) => (
               <li key={f} className="bp-feature"><span className="bp-chk"><Check size={11} /></span>{f}</li>
             ))}
           </ul>

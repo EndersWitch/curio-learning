@@ -31,15 +31,15 @@ const SETS = [
   {
     topic: 'English HL · Grade 4',
     questions: [
-      { q: 'Which word is the verb in:\n"The girl quickly ran to school."', opts: ['girl','quickly','ran','school'], correct: 2, ok: 'Correct! "Ran" is the verb — it shows the action.', err: '"Ran" is the verb. Verbs are doing/action words.' },
-      { q: 'What type of word is "beautiful" in:\n"She wore a beautiful dress."', opts: ['Verb','Noun','Adverb','Adjective'], correct: 3, ok: 'Correct! "Beautiful" is an adjective — it describes the noun.', err: '"Beautiful" is an adjective. Adjectives describe nouns.' },
+      { q: 'Which word is the verb in:\n"The girl quickly ran to school."', opts: ['girl','quickly','ran','school'], correct: 2, ok: 'Correct! "Ran" is the verb. It shows the action.', err: '"Ran" is the verb. Verbs are doing/action words.' },
+      { q: 'What type of word is "beautiful" in:\n"She wore a beautiful dress."', opts: ['Verb','Noun','Adverb','Adjective'], correct: 3, ok: 'Correct! "Beautiful" is an adjective. It describes the noun.', err: '"Beautiful" is an adjective. Adjectives describe nouns.' },
     ],
   },
   {
     topic: 'Mathematics · Grade 6',
     questions: [
       { q: 'What is ¾ + ½?', opts: ['1','1¼','1½','1¾'], correct: 1, ok: 'Correct! Convert ½ to ²⁄₄, then ¾ + ²⁄₄ = ⁵⁄₄ = 1¼.', err: 'Answer is 1¼. Convert ½ to ²⁄₄ then add.' },
-      { q: 'Which fraction equals ²⁄₄?', opts: ['³⁄₄','⁴⁄₈','²⁄₆','⁵⁄₆'], correct: 1, ok: 'Correct! ⁴⁄₈ = ²⁄₄ — multiply top and bottom by 2.', err: '⁴⁄₈ equals ²⁄₄. Multiply top and bottom by 2.' },
+      { q: 'Which fraction equals ²⁄₄?', opts: ['³⁄₄','⁴⁄₈','²⁄₆','⁵⁄₆'], correct: 1, ok: 'Correct! ⁴⁄₈ = ²⁄₄. Multiply top and bottom by 2.', err: '⁴⁄₈ equals ²⁄₄. Multiply top and bottom by 2.' },
     ],
   },
   {
@@ -405,7 +405,7 @@ export default function HomePage() {
                       </div>
                     )
                   }) : (
-                    <div className="dash-empty">No quizzes yet — <a href="/quiz">start one →</a></div>
+                    <div className="dash-empty">No quizzes yet. <a href="/quiz">Start one →</a></div>
                   )}
                 </div>
               </div>
@@ -430,7 +430,7 @@ export default function HomePage() {
                     })}
                   </div>
                   <div style={{ fontSize: '0.7rem', color: 'var(--m30)', marginTop: '0.7rem' }}>
-                    {streak > 0 ? `${streak} day${streak !== 1 ? 's' : ''} studied — keep it up!` : 'Open a paper or take a quiz to start your streak!'}
+                    {streak > 0 ? `${streak} day${streak !== 1 ? 's' : ''} studied. Keep it up!` : 'Open a paper or take a quiz to start your streak!'}
                   </div>
                 </div>
               </div>
@@ -447,7 +447,7 @@ export default function HomePage() {
               <div className="pu">
                 <div>
                   <div className="pu-ey">Curio Premium</div>
-                  <div className="pu-title">Unlock the full Curio experience.</div>
+                  <div className="pu-title">Ready for more than papers?</div>
                   <div className="pu-sub">You&apos;re on the free plan. Upgrade to access AI quizzes, Deep Learn, custom tests and more.</div>
                   <div className="pu-feats">
                     <span className="pu-feat">AI Quizzes</span>
@@ -479,7 +479,7 @@ export default function HomePage() {
                 <span className="squiggle w-cyan">friend.</span>
               </h1>
               <p className="hero-desc">
-                Exam papers, AI-powered quizzes and deep explanations —{' '}
+                Exam papers, AI-powered quizzes and deep explanations,{' '}
                 <strong>built for South African students.</strong> Free to start. Always in your corner.
               </p>
               <div className="hero-actions">
@@ -572,18 +572,18 @@ export default function HomePage() {
               </h2>
               <p className="ch-p">
                 Exam papers for every grade and subject, complete with full marking memos. Download them,
-                study from them, own them. We never charge for this — access to good study material
+                study from them, own them. We never charge for this. Access to good study material
                 shouldn&apos;t depend on who you are or where you come from.
               </p>
               <span className="tag-pill tag-free">Always free</span>
             </div>
             <div className="plist">
               {[
-                { bar: 'c', title: 'English HL — Paper 1 · Grade 12', meta: 'Language in Context · Comprehensive' },
-                { bar: 'r', title: 'Mathematics — Paper 2 · Grade 12', meta: 'Geometry & Statistics · Full paper' },
-                { bar: 'c', title: 'Life Sciences — Paper 1 · Grade 12', meta: 'Biochemistry & Cells · Full paper' },
-                { bar: 'r', title: 'History — Paper 1 · Grade 11', meta: 'SA History · Source-based' },
-                { bar: 'c', title: 'Geography — Paper 2 · Grade 10', meta: 'Human Geography · Full paper' },
+                { bar: 'c', title: 'English HL · Paper 1 · Grade 12', meta: 'Language in Context · Comprehensive' },
+                { bar: 'r', title: 'Mathematics · Paper 2 · Grade 12', meta: 'Geometry & Statistics · Full paper' },
+                { bar: 'c', title: 'Life Sciences · Paper 1 · Grade 12', meta: 'Biochemistry & Cells · Full paper' },
+                { bar: 'r', title: 'History · Paper 1 · Grade 11', meta: 'SA History · Source-based' },
+                { bar: 'c', title: 'Geography · Paper 2 · Grade 10', meta: 'Human Geography · Full paper' },
               ].map((p, i) => (
                 <div className="prow" key={i}>
                   <div className={`pbar ${p.bar}`} />
@@ -605,9 +605,9 @@ export default function HomePage() {
               <span className="chat-label">curio</span>
               <div className="chat-bubble cb-them">
                 Let&apos;s build it up from scratch.<br /><br />
-                <strong>Plants are the only living things that make their own food</strong> — using sunlight, water, and CO₂ from the air.<br /><br />
-                Here&apos;s the key: the oxygen they release as a by-product is every breath you&apos;ve ever taken. Every human, every animal — all of it comes from photosynthesis.<br /><br />
-                So when your exam asks "why is it important?" — it&apos;s not just a plant thing.{' '}
+                <strong>Plants are the only living things that make their own food,</strong> using sunlight, water, and CO₂ from the air.<br /><br />
+                Here&apos;s the key: the oxygen they release as a by-product is every breath you&apos;ve ever taken. Every human, every animal, all of it comes from photosynthesis.<br /><br />
+                So when your exam asks "why is it important?" it&apos;s not just a plant thing.{' '}
                 <strong>It&apos;s the foundation of all life on Earth.</strong>
               </div>
               <span className="chat-label" style={{ alignSelf: 'flex-end' }}>you</span>
@@ -620,7 +620,7 @@ export default function HomePage() {
               </h2>
               <p className="ch-p">
                 When you get something wrong, Curio doesn&apos;t just mark you down and move on. Deep Learn
-                breaks down the concept from first principles — in plain language, with real examples —
+                breaks down the concept from first principles, in plain language, with real examples,
                 until it actually clicks.
               </p>
               <span className="tag-pill tag-pro">Premium feature</span>
@@ -645,7 +645,7 @@ export default function HomePage() {
                     className={`ttab${activeSet === i ? ' on' : ''}`}
                     onClick={() => loadSet(i)}
                   >
-                    <span className="ttab-label">{s.topic.split(' · ')[0]} — {s.topic.split(' · ')[0] === 'English HL' ? 'Parts of Speech' : s.topic.split(' · ')[0] === 'Mathematics' ? 'Fractions' : 'Human Body'}</span>
+                    <span className="ttab-label">{s.topic.split(' · ')[0]} · {s.topic.split(' · ')[0] === 'English HL' ? 'Parts of Speech' : s.topic.split(' · ')[0] === 'Mathematics' ? 'Fractions' : 'Human Body'}</span>
                     <span className="ttab-grade">Grade {s.topic.split('Grade ')[1]}</span>
                   </div>
                 ))}
@@ -700,7 +700,7 @@ export default function HomePage() {
             <div className="pricing-header">
               <h2 className="pricing-h">Honest pricing.<br />For <em>every</em> student.</h2>
               <p className="pricing-note-top">
-                Papers and memos are free, always. Premium unlocks the tools that take you further —
+                Papers and memos are free, always. Premium adds the AI quizzes and explanations,
                 for less than a takeaway a month.
               </p>
             </div>
@@ -734,13 +734,13 @@ export default function HomePage() {
                     <li key={f} className="pc-item"><span className="pci-chk"><Check size={10} /></span>{f}</li>
                   ))}
                 </ul>
-                <a href="/login?tab=signup" className="pc-btn pc-btn-pro">Subscribe — R49/month →</a>
+                <a href="/login?tab=signup" className="pc-btn pc-btn-pro">Subscribe for R49/month →</a>
               </div>
             </div>
             <div className="heart-note">
               <Heart size={16} className="heart-note-icon" />
-              <span><strong>No student left behind.</strong> Exam papers and memos will always be free on Curio —
-              no account needed, no strings attached. Because access to good study material shouldn&apos;t
+              <span><strong>No student left behind.</strong> Exam papers and memos will always be free on Curio.
+              No account needed, no strings attached. Because access to good study material shouldn&apos;t
               have a price tag.</span>
             </div>
           </section>
@@ -752,7 +752,7 @@ export default function HomePage() {
             </div>
             <div className="closing-right rv rv-delay-1">
               <p>
-                Every student — no matter their school, their background, or their circumstances —
+                Every student, no matter their school, their background, or their circumstances,
                 deserves a real shot. <strong>Curio is here to give it to you.</strong>
               </p>
               <p>Free to start. No card needed. Just you and the work.</p>

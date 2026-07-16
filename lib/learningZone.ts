@@ -92,12 +92,12 @@ export function buildLearningZone(level: QuizLevel): LearningConcept[] {
   // Difficulty card
   if (level.difficulty) {
     const diffMap: Record<string, { content: string; type: CardType }> = {
-      Starter:   { type: 'tip', content: 'Beginner level — take it slow and steady!' },
-      Building:  { type: 'tip', content: 'Building on what you know — think carefully!' },
-      Challenge: { type: 'watch_out', content: 'Tough one — read every question twice before answering!' },
-      easy:      { type: 'tip', content: 'Beginner level — take it slow and steady!' },
-      medium:    { type: 'tip', content: 'A bit more challenging — think carefully!' },
-      hard:      { type: 'watch_out', content: 'Tough one — read every question twice before answering!' },
+      Starter:   { type: 'tip', content: 'Beginner level. Take it slow and steady!' },
+      Building:  { type: 'tip', content: 'Building on what you know. Think carefully!' },
+      Challenge: { type: 'watch_out', content: 'Tough one. Read every question twice before answering!' },
+      easy:      { type: 'tip', content: 'Beginner level. Take it slow and steady!' },
+      medium:    { type: 'tip', content: 'A bit more challenging. Think carefully!' },
+      hard:      { type: 'watch_out', content: 'Tough one. Read every question twice before answering!' },
     }
     const d = diffMap[level.difficulty]
     if (d) cards.push({ type: d.type, title: 'Difficulty Level', content: d.content })
@@ -113,7 +113,7 @@ export function buildLearningZone(level: QuizLevel): LearningConcept[] {
     cards.push({
       type: 'tip',
       title: 'Quick Tip',
-      content: 'If you\'re not sure, try to eliminate the obviously wrong answers first — your instincts are often right!',
+      content: 'If you\'re not sure, try to eliminate the obviously wrong answers first. Your instincts are often right!',
     })
   }
 

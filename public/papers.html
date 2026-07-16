@@ -5,7 +5,7 @@
 <script src="/auth.js"></script>
 <script src="/icons.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Curio — Exam Papers</title>
+<title>Curio · Exam Papers</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -275,7 +275,7 @@ nav{
   <div class="ad-topbar">
     <div class="ad-topbar-left">
       <span class="ad-pill">Ad</span>
-      <span class="ad-topbar-text"><strong>Remove ads &amp; unlock everything</strong> — Curio Premium from R49/month.</span>
+      <span class="ad-topbar-text"><strong>Remove ads and add AI quizzes and Deep Learn</strong> with Curio Premium, from R49/month.</span>
     </div>
     <div class="ad-topbar-right">
       <a href="/login?tab=signup" class="ad-cta">Go Premium →</a>
@@ -289,7 +289,7 @@ nav{
   <div class="hero-left">
     <div class="hero-eyebrow">Free forever · No sign-up required</div>
     <h1 class="hero-h">Exam papers.<br/><span class="cy">All grades.</span></h1>
-    <p class="hero-sub">Browse and download exam papers for every grade and subject. <strong>Papers and memos are always free</strong> — no account needed, no strings.</p>
+    <p class="hero-sub">Browse and download exam papers for every grade and subject. <strong>Papers and memos are always free,</strong> no account needed, no strings.</p>
   </div>
   <div class="hero-stats" id="heroStats">
     <div class="hstat"><div class="hstat-val"><span class="cy" id="statPapers">—</span></div><div class="hstat-label">Papers</div></div>
@@ -374,26 +374,26 @@ let searchQuery='';
 
 // ── DEMO PAPERS (shown when DB is empty) ──
 const DEMO_PAPERS=[
-  {id:1,grade:10,subject:'maths',title:'Mathematics — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Algebra & Functions'},
-  {id:2,grade:10,subject:'maths',title:'Mathematics — Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Geometry & Statistics'},
-  {id:3,grade:10,subject:'english',title:'English HL — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Comprehension & Language'},
-  {id:4,grade:10,subject:'english',title:'English HL — Paper 2',has_memo:false,file_url:'#',memo_url:null,topic:'Literature'},
-  {id:5,grade:10,subject:'physics',title:'Physical Sciences — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Mechanics & Waves'},
-  {id:6,grade:11,subject:'maths',title:'Mathematics — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Functions & Algebra'},
-  {id:7,grade:11,subject:'maths',title:'Mathematics — Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Trigonometry & Stats'},
-  {id:8,grade:11,subject:'english',title:'English HL — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Comprehension & Summary'},
-  {id:9,grade:11,subject:'lifesciences',title:'Life Sciences — Paper 1',has_memo:false,file_url:'#',memo_url:null,topic:'DNA & Evolution'},
-  {id:10,grade:12,subject:'maths',title:'Mathematics — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Functions, Sequences & Finance'},
-  {id:11,grade:12,subject:'maths',title:'Mathematics — Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Statistics, Analytical Geometry'},
-  {id:12,grade:12,subject:'english',title:'English HL — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Comprehension, Summary, Language'},
-  {id:13,grade:12,subject:'english',title:'English HL — Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Literature & Poetry'},
-  {id:14,grade:12,subject:'physics',title:'Physical Sciences — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Mechanics, Electricity'},
-  {id:15,grade:12,subject:'physics',title:'Physical Sciences — Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Chemical Change, Organic Chemistry'},
-  {id:16,grade:12,subject:'accounting',title:'Accounting — Full Paper',has_memo:true,file_url:'#',memo_url:'#',topic:'Financial Statements & Analysis'},
-  {id:17,grade:9,subject:'maths',title:'Mathematics — Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Algebra & Geometry'},
-  {id:18,grade:9,subject:'english',title:'English HL — Paper 1',has_memo:false,file_url:'#',memo_url:null,topic:'Comprehension & Writing'},
-  {id:19,grade:4,subject:'english',title:'English HL — Term 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Language & Reading'},
-  {id:20,grade:4,subject:'maths',title:'Mathematics — Term 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Number Sense & Operations'},
+  {id:1,grade:10,subject:'maths',title:'Mathematics · Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Algebra & Functions'},
+  {id:2,grade:10,subject:'maths',title:'Mathematics · Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Geometry & Statistics'},
+  {id:3,grade:10,subject:'english',title:'English HL · Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Comprehension & Language'},
+  {id:4,grade:10,subject:'english',title:'English HL · Paper 2',has_memo:false,file_url:'#',memo_url:null,topic:'Literature'},
+  {id:5,grade:10,subject:'physics',title:'Physical Sciences · Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Mechanics & Waves'},
+  {id:6,grade:11,subject:'maths',title:'Mathematics · Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Functions & Algebra'},
+  {id:7,grade:11,subject:'maths',title:'Mathematics · Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Trigonometry & Stats'},
+  {id:8,grade:11,subject:'english',title:'English HL · Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Comprehension & Summary'},
+  {id:9,grade:11,subject:'lifesciences',title:'Life Sciences · Paper 1',has_memo:false,file_url:'#',memo_url:null,topic:'DNA & Evolution'},
+  {id:10,grade:12,subject:'maths',title:'Mathematics · Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Functions, Sequences & Finance'},
+  {id:11,grade:12,subject:'maths',title:'Mathematics · Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Statistics, Analytical Geometry'},
+  {id:12,grade:12,subject:'english',title:'English HL · Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Comprehension, Summary, Language'},
+  {id:13,grade:12,subject:'english',title:'English HL · Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Literature & Poetry'},
+  {id:14,grade:12,subject:'physics',title:'Physical Sciences · Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Mechanics, Electricity'},
+  {id:15,grade:12,subject:'physics',title:'Physical Sciences · Paper 2',has_memo:true,file_url:'#',memo_url:'#',topic:'Chemical Change, Organic Chemistry'},
+  {id:16,grade:12,subject:'accounting',title:'Accounting · Full Paper',has_memo:true,file_url:'#',memo_url:'#',topic:'Financial Statements & Analysis'},
+  {id:17,grade:9,subject:'maths',title:'Mathematics · Paper 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Algebra & Geometry'},
+  {id:18,grade:9,subject:'english',title:'English HL · Paper 1',has_memo:false,file_url:'#',memo_url:null,topic:'Comprehension & Writing'},
+  {id:19,grade:4,subject:'english',title:'English HL · Term 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Language & Reading'},
+  {id:20,grade:4,subject:'maths',title:'Mathematics · Term 1',has_memo:true,file_url:'#',memo_url:'#',topic:'Number Sense & Operations'},
 ];
 
 // ── LOAD ──
@@ -402,7 +402,7 @@ async function loadPapers(){
     const rows=await sbGet('papers?order=grade.asc,subject.asc,title.asc');
     allPapers=rows&&rows.length>0?rows:DEMO_PAPERS;
     if(!rows||rows.length===0){
-      console.info('No papers in database yet — showing demo content.');
+      console.info('No papers in database yet, showing demo content.');
     }
   }catch(e){
     console.warn('Could not load papers from Supabase, using demo content:',e);

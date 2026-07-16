@@ -127,7 +127,7 @@ export default function QuizBrowsePage() {
                 </>
               ) : (
                 <>
-                  <span style={{ color: '#9b8ab0' }}>Not signed in —</span>
+                  <span style={{ color: '#9b8ab0' }}>Not signed in.</span>
                   <a href="/login" className="font-bold" style={{ color: '#6DD3CE' }}>Sign in to track progress</a>
                 </>
               )}
@@ -172,7 +172,7 @@ export default function QuizBrowsePage() {
           <div className="text-center py-20">
             <Search size={40} style={{ color: '#4a3a63', margin: '0 auto 0.75rem' }} />
             <p className="font-black text-lg" style={{ color: '#F7F7FF' }}>No topics yet for this grade</p>
-            <p className="text-sm mt-1" style={{ color: '#9b8ab0' }}>More are being added — check back soon!</p>
+            <p className="text-sm mt-1" style={{ color: '#9b8ab0' }}>More are being added. Check back soon!</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

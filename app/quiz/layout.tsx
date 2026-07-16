@@ -4,7 +4,7 @@ import QuizNav from '@/components/quiz/QuizNav'
 
 export const metadata: Metadata = {
   title: 'Quiz | curio learning',
-  description: 'CAPS-aligned quiz for South African learners — Grades 4 to 12.',
+  description: 'CAPS-aligned quiz for South African learners, Grades 4 to 12.',
 }
 
 export default function QuizLayout({ children }: { children: React.ReactNode }) {

@@ -25,7 +25,7 @@ const PASS_MESSAGES = [
   'Incredible effort! So proud of you!',
 ]
 const FAIL_MESSAGES = [
-  "So close! Let's try again — you've got this!",
+  "So close! Let's try again. You've got this!",
   "Don't give up! Every attempt makes you stronger!",
   'Nice try! Review the learning zone and go again!',
   "Almost there! One more go and you'll nail it!",
@@ -292,7 +292,7 @@ export default function ResultsScreen({
             </div>
             <div>
               <p className="font-black text-sm" style={{ color: '#F5C842' }}>Subtopic Mastery Unlocked!</p>
-              <p className="text-xs mt-0.5" style={{ color: '#9b8ab0' }}>All levels cleared — take the mastery challenge!</p>
+              <p className="text-xs mt-0.5" style={{ color: '#9b8ab0' }}>All levels cleared. Take the mastery challenge!</p>
             </div>
           </div>
         )}
@@ -306,7 +306,7 @@ export default function ResultsScreen({
             </div>
             <div>
               <p className="font-black text-sm" style={{ color: '#6DD3CE' }}>Final Mastery Unlocked!</p>
-              <p className="text-xs mt-0.5" style={{ color: '#9b8ab0' }}>All subtopics mastered — the final boss awaits!</p>
+              <p className="text-xs mt-0.5" style={{ color: '#9b8ab0' }}>All subtopics mastered. The final boss awaits!</p>
             </div>
           </div>
         )}
@@ -352,7 +352,7 @@ export default function ResultsScreen({
               ? { background: 'rgba(255,255,255,0.06)', color: '#F7F7FF', border: '2px solid rgba(255,255,255,0.12)' }
               : { background: '#FF5E5B', color: '#fff' }
             }>
-            <RefreshCw size={16} /> {passed ? 'Try Again' : 'Try Again — You Can Do It!'}
+            <RefreshCw size={16} /> {passed ? 'Try Again' : 'Try Again, You Can Do It!'}
           </Link>
         </div>
 

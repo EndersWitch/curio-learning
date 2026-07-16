@@ -59,7 +59,7 @@ export default function LearnPage() {
         <Lock size={40} style={{ color: '#F5C842', margin: '0 auto 0.75rem' }} />
         <h2 className="text-xl font-black mb-2" style={{ color: '#F7F7FF' }}>Premium Level</h2>
         <p className="text-sm mb-5" style={{ color: '#9b8ab0' }}>
-          This level is available with Curio Premium — R49/month.
+          This level is available with Curio Premium for R49/month.
         </p>
         <a href="/subscription" className="inline-block px-6 py-3 rounded-xl font-black text-sm mb-3"
           style={{ background: '#F5C842', color: '#2B1E3F' }}>Get Premium →</a>

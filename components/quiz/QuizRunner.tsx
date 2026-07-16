@@ -22,7 +22,7 @@ const CORRECT_MESSAGES = [
   'Nailed it!', 'Brilliant!', 'You got it!', 'Superstar!',
 ]
 const WRONG_MESSAGES = [
-  'Not quite — check the answer below',
+  'Not quite. Check the answer below',
   'Keep going! Every mistake teaches you something',
   "Oops! Let's learn from this",
   'Almost! Look at the correct answer',

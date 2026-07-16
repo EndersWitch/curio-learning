@@ -19,7 +19,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.curiolearning.co.za'),
   title: {
-    default: 'curio learning — CAPS-aligned exam prep for Grades 4–12',
+    default: 'curio learning · CAPS-aligned exam prep for Grades 4–12',
     template: '%s · curio learning',
   },
   description:
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
     locale: 'en_ZA',
     url: 'https://www.curiolearning.co.za',
     siteName: 'curio learning',
-    title: 'curio learning — CAPS-aligned exam prep for Grades 4–12',
+    title: 'curio learning · CAPS-aligned exam prep for Grades 4–12',
     description:
       'Free CAPS-aligned exam papers, memos and interactive quizzes for South African learners, Grades 4–12.',
   },
   twitter: {
     card: 'summary',
-    title: 'curio learning — CAPS-aligned exam prep for Grades 4–12',
+    title: 'curio learning · CAPS-aligned exam prep for Grades 4–12',
     description:
       'Free CAPS-aligned exam papers, memos and interactive quizzes for South African learners.',
   },

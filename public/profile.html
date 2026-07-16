@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <script src="/auth.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Curio — Edit Profile</title>
+<title>Curio · Edit Profile</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E</svg>"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
@@ -175,7 +175,7 @@ async function saveEmail(){
   try{
     const {error}=await curioSb.auth.updateUser({email:newEmail});
     if(error)throw error;
-    showAlert('emailAlert','Confirmation sent to your new email — click the link to confirm the change.','ok');
+    showAlert('emailAlert','Confirmation sent to your new email. Click the link to confirm the change.','ok');
   }catch(e){showAlert('emailAlert',e.message,'err');}
   btn.disabled=false;btn.textContent='Update email →';
 }
