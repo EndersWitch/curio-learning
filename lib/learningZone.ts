@@ -68,9 +68,9 @@ export function buildLearningZone(level: QuizLevel): LearningConcept[] {
 
   // Intro / overview card
   if (level.intro) {
-    cards.push({ type: 'key_rule', title: '📖 What You\'re Learning', content: level.intro })
+    cards.push({ type: 'key_rule', title: 'What You\'re Learning', content: level.intro })
   } else if (level.description) {
-    cards.push({ type: 'key_rule', title: '📖 Topic Overview', content: level.description })
+    cards.push({ type: 'key_rule', title: 'Topic Overview', content: level.description })
   }
 
   // Concept cards
@@ -92,12 +92,12 @@ export function buildLearningZone(level: QuizLevel): LearningConcept[] {
   // Difficulty card
   if (level.difficulty) {
     const diffMap: Record<string, { content: string; type: CardType }> = {
-      Starter:   { type: 'tip', content: '🟢 Beginner level — take it slow and steady!' },
-      Building:  { type: 'tip', content: '🟡 Building on what you know — think carefully!' },
-      Challenge: { type: 'watch_out', content: '🔴 Tough one — read every question twice before answering!' },
-      easy:      { type: 'tip', content: '🟢 Beginner level — take it slow and steady!' },
-      medium:    { type: 'tip', content: '🟡 A bit more challenging — think carefully!' },
-      hard:      { type: 'watch_out', content: '🔴 Tough one — read every question twice before answering!' },
+      Starter:   { type: 'tip', content: 'Beginner level — take it slow and steady!' },
+      Building:  { type: 'tip', content: 'Building on what you know — think carefully!' },
+      Challenge: { type: 'watch_out', content: 'Tough one — read every question twice before answering!' },
+      easy:      { type: 'tip', content: 'Beginner level — take it slow and steady!' },
+      medium:    { type: 'tip', content: 'A bit more challenging — think carefully!' },
+      hard:      { type: 'watch_out', content: 'Tough one — read every question twice before answering!' },
     }
     const d = diffMap[level.difficulty]
     if (d) cards.push({ type: d.type, title: 'Difficulty Level', content: d.content })
@@ -107,7 +107,7 @@ export function buildLearningZone(level: QuizLevel): LearningConcept[] {
   if (cards.length === 0) {
     cards.push({
       type: 'key_rule',
-      title: '📖 Getting Ready',
+      title: 'Getting Ready',
       content: `You're about to answer ${level.question_count} questions. Read each one carefully before choosing your answer.`,
     })
     cards.push({

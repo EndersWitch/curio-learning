@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import type { ShuffledQuestion, QuizResult } from '@/types/quiz'
 import { ProgressBar, XPBadge } from '@/components/ui/XPBar'
 import { calculateXP } from '@/lib/progress'
+import { Zap, Trophy, GraduationCap, ArrowRight, Check, X } from '@/components/icons'
 
 interface QuizRunnerProps {
   questions: ShuffledQuestion[]
@@ -17,14 +18,14 @@ interface QuizRunnerProps {
 type AnswerState = 'idle' | 'correct' | 'wrong'
 
 const CORRECT_MESSAGES = [
-  'Great job! 🎉', 'Correct! ✨', 'Well done! 🎯',
-  'Nailed it! 🚀', 'Brilliant! 💫', 'You got it! 🎯', 'Superstar! ⭐',
+  'Great job!', 'Correct!', 'Well done!',
+  'Nailed it!', 'Brilliant!', 'You got it!', 'Superstar!',
 ]
 const WRONG_MESSAGES = [
-  'Not quite — check the answer below 👇',
-  "Keep going! Every mistake teaches 💪",
-  "Oops! Let's learn from this 📚",
-  'Almost! Look at the correct answer 🔍',
+  'Not quite — check the answer below',
+  'Keep going! Every mistake teaches you something',
+  "Oops! Let's learn from this",
+  'Almost! Look at the correct answer',
 ]
 
 function pickRandom<T>(arr: T[]): T {
@@ -246,21 +247,21 @@ export default function QuizRunner({
             Question {currentIndex + 1}
           </span>
           {current.difficulty && (
-            <span className="text-xs font-black px-2.5 py-1 rounded-full"
+            <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded-full"
               style={{ background: 'rgba(245,200,66,0.1)', color: CURIO.amber }}>
-              ⚡ +{questionXp(current.difficulty)} XP · {current.difficulty}
+              <Zap size={12} /> +{questionXp(current.difficulty)} XP · {current.difficulty}
             </span>
           )}
           {sectionType === 'subtopic_mastery' && (
-            <span className="text-xs font-black px-2.5 py-1 rounded-full"
+            <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded-full"
               style={{ background: 'rgba(245,200,66,0.12)', color: CURIO.amber }}>
-              🏆 Mastery
+              <Trophy size={12} /> Mastery
             </span>
           )}
           {sectionType === 'broad_topic_mastery' && (
-            <span className="text-xs font-black px-2.5 py-1 rounded-full"
+            <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded-full"
               style={{ background: 'rgba(109,211,206,0.12)', color: CURIO.cyan }}>
-              🎓 Final Boss
+              <GraduationCap size={12} /> Final Boss
             </span>
           )}
         </div>
@@ -298,12 +299,12 @@ export default function QuizRunner({
                 <RichText text={opt.text} />
               </span>
               {answerState !== 'idle' && opt.key === current.correct_key && (
-                <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-black animate-pop-in"
-                  style={{ background: '#34D399', color: '#fff' }}>✓</span>
+                <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center animate-pop-in"
+                  style={{ background: '#34D399', color: '#fff' }}><Check size={15} /></span>
               )}
               {answerState === 'wrong' && opt.key === selected && (
-                <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-black animate-wiggle"
-                  style={{ background: CURIO.coral, color: '#fff' }}>✗</span>
+                <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center animate-wiggle"
+                  style={{ background: CURIO.coral, color: '#fff' }}><X size={15} /></span>
               )}
             </button>
           )
@@ -334,9 +335,9 @@ export default function QuizRunner({
       {/* Next / Finish button */}
       {answerState !== 'idle' && (
         <button onClick={handleNext}
-          className="w-full py-4 rounded-2xl font-black text-base text-white transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-95 animate-pop-in"
-          style={{ background: CURIO.coral, boxShadow: '0 4px 20px rgba(255,94,91,0.35)' }}>
-          {isLast ? '🏁 See My Results' : 'Next Question →'}
+          className="w-full py-4 rounded-2xl font-black text-base text-white transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-95 animate-pop-in inline-flex items-center justify-center gap-2"
+          style={{ background: CURIO.coral }}>
+          {isLast ? 'See My Results' : 'Next Question'} <ArrowRight size={18} />
         </button>
       )}
 

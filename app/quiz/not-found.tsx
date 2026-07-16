@@ -1,19 +1,21 @@
 import Link from 'next/link'
+import { Search, ChevronLeft } from '@/components/icons'
 
 export default function QuizNotFound() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-cyan-50 flex items-center justify-center p-6">
+    <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#1a1228' }}>
       <div className="text-center max-w-sm">
-        <div className="text-6xl mb-4">🔍</div>
-        <h2 className="text-2xl font-black text-slate-800 mb-2">Topic Not Found</h2>
-        <p className="text-slate-500 text-sm mb-6">
-          We couldn't find that quiz topic. It may have been moved or doesn't exist yet.
+        <Search size={40} style={{ color: '#4a3a63', margin: '0 auto 1rem' }} />
+        <h2 className="text-2xl font-black mb-2" style={{ color: '#F7F7FF' }}>Topic Not Found</h2>
+        <p className="text-sm mb-6" style={{ color: '#9b8ab0' }}>
+          We couldn&apos;t find that quiz topic. It may have been moved or doesn&apos;t exist yet.
         </p>
         <Link
           href="/quiz"
-          className="inline-block px-6 py-3 rounded-2xl font-black text-sm bg-violet-600 text-white hover:bg-violet-700 transition-colors shadow-lg shadow-violet-200"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-black text-sm text-white transition-colors"
+          style={{ background: '#6DD3CE', color: '#2B1E3F' }}
         >
-          ← Browse All Topics
+          <ChevronLeft size={15} /> Browse All Topics
         </Link>
       </div>
     </div>

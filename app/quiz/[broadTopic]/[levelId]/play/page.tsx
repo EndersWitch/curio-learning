@@ -9,6 +9,7 @@ import ResultsScreen from '@/components/quiz/ResultsScreen'
 import { fetchLevelQuestions } from '@/lib/questions'
 import { saveQuizResult } from '@/lib/progress'
 import type { ShuffledQuestion, QuizResult } from '@/types/quiz'
+import { Target, Zap, Lock, AlertTriangle, X } from '@/components/icons'
 
 export default function PlayPage() {
   const params = useParams()
@@ -93,7 +94,7 @@ export default function PlayPage() {
   if (loading || authLoading) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: '#1a1228' }}>
       <div className="text-center">
-        <div className="text-4xl mb-3 animate-bounce">🎯</div>
+        <Target size={36} className="mb-3 animate-bounce" style={{ color: '#6DD3CE', margin: '0 auto 0.75rem' }} />
         <p className="text-sm" style={{ color: '#9b8ab0' }}>Loading your quiz...</p>
       </div>
     </div>
@@ -102,7 +103,7 @@ export default function PlayPage() {
   if (accessDenied) return (
     <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#1a1228' }}>
       <div className="text-center max-w-sm">
-        <div className="text-5xl mb-3">🔒</div>
+        <Lock size={40} style={{ color: '#F5C842', margin: '0 auto 0.75rem' }} />
         <h2 className="text-xl font-black mb-2" style={{ color: '#F7F7FF' }}>Premium Level</h2>
         <p className="text-sm mb-5" style={{ color: '#9b8ab0' }}>Upgrade to access this level.</p>
         <a href="/subscription" className="inline-block px-6 py-3 rounded-xl font-black text-sm"
@@ -115,8 +116,8 @@ export default function PlayPage() {
     <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#1a1228' }}>
       <div className="text-center max-w-sm rounded-2xl p-8"
         style={{ background: '#231935', border: '1px solid rgba(109,211,206,0.15)' }}>
-        <div className="text-4xl mb-3">😕</div>
-        <h2 className="text-xl font-black mb-2" style={{ color: '#F7F7FF' }}>Couldn't load quiz</h2>
+        <AlertTriangle size={36} style={{ color: '#FF5E5B', margin: '0 auto 0.75rem' }} />
+        <h2 className="text-xl font-black mb-2" style={{ color: '#F7F7FF' }}>Couldn&apos;t load quiz</h2>
         <p className="text-sm mb-5" style={{ color: '#9b8ab0' }}>{error}</p>
         <button onClick={() => window.location.reload()}
           className="w-full py-3 rounded-xl font-black text-sm"
@@ -128,7 +129,7 @@ export default function PlayPage() {
   if (saving) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: '#1a1228' }}>
       <div className="text-center">
-        <div className="text-4xl mb-3 animate-bounce">⚡</div>
+        <Zap size={36} className="animate-bounce" style={{ color: '#F5C842', margin: '0 auto 0.75rem' }} />
         <p className="text-sm" style={{ color: '#9b8ab0' }}>Saving your XP...</p>
       </div>
     </div>
@@ -153,8 +154,8 @@ export default function PlayPage() {
         <div className="max-w-2xl mx-auto px-6 py-3 flex items-center justify-between">
           <button
             onClick={() => { if (confirm('Leave quiz? Progress will be lost.')) router.push(learnHref) }}
-            className="text-xs font-semibold" style={{ color: '#9b8ab0' }}>
-            ✕ Exit
+            className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: '#9b8ab0' }}>
+            <X size={13} /> Exit
           </button>
           <h1 className="font-black text-sm truncate" style={{ color: '#F7F7FF' }}>
             {levelMeta?.level_display}

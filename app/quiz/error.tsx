@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import { AlertTriangle, RefreshCw, ChevronLeft } from '@/components/icons'
 
 export default function QuizError({
   error,
@@ -16,27 +17,30 @@ export default function QuizError({
   }, [error])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-cyan-50 flex items-center justify-center p-6">
-      <div className="text-center max-w-sm w-full">
-        <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-rose-100 flex items-center justify-center text-3xl">
-          😕
+    <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#1a1228' }}>
+      <div className="text-center max-w-sm w-full rounded-3xl p-8" style={{ background: '#231935', border: '1px solid rgba(255,94,91,0.2)' }}>
+        <div className="w-16 h-16 mx-auto mb-5 rounded-full flex items-center justify-center"
+          style={{ background: 'rgba(255,94,91,0.12)', color: '#FF5E5B' }}>
+          <AlertTriangle size={28} />
         </div>
-        <h2 className="text-2xl font-black text-slate-800 mb-2">Something went wrong</h2>
-        <p className="text-slate-500 text-sm mb-6 leading-relaxed">
+        <h2 className="text-xl font-black mb-2" style={{ color: '#F7F7FF' }}>Something went wrong</h2>
+        <p className="text-sm mb-6 leading-relaxed" style={{ color: '#9b8ab0' }}>
           {error.message ?? 'An unexpected error occurred. Your progress has been saved.'}
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button
             onClick={reset}
-            className="px-6 py-3 rounded-2xl font-black text-sm bg-violet-600 text-white hover:bg-violet-700 transition-colors shadow-lg shadow-violet-200"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-black text-sm text-white transition-colors"
+            style={{ background: '#FF5E5B' }}
           >
-            Try Again
+            <RefreshCw size={15} /> Try Again
           </button>
           <Link
             href="/quiz"
-            className="px-6 py-3 rounded-2xl font-black text-sm bg-white text-slate-700 border-2 border-slate-200 hover:border-violet-300 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-black text-sm transition-colors"
+            style={{ background: 'rgba(255,255,255,0.06)', color: '#F7F7FF', border: '1px solid rgba(255,255,255,0.12)' }}
           >
-            ← Back to Topics
+            <ChevronLeft size={15} /> Back to Topics
           </Link>
         </div>
       </div>

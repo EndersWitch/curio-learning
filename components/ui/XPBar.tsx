@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { Zap } from '@/components/icons'
 
 interface XPBadgeProps {
   xp: number
@@ -33,11 +34,14 @@ export function XPBadge({ xp, animate = false, size = 'md' }: XPBadgeProps) {
     lg: 'text-base px-4 py-1.5',
   }
 
+  const iconSizes = { sm: 11, md: 13, lg: 15 }
+
   return (
     <span
-      className={`inline-flex items-center gap-1 font-bold rounded-full bg-amber-400 text-amber-900 ${sizes[size]}`}
+      className={`inline-flex items-center gap-1 font-bold rounded-full ${sizes[size]}`}
+      style={{ background: '#F5C842', color: '#2B1E3F' }}
     >
-      ⚡ {displayed} XP
+      <Zap size={iconSizes[size]} /> {displayed} XP
     </span>
   )
 }
@@ -51,19 +55,19 @@ interface ProgressBarProps {
 
 export function ProgressBar({
   value,
-  color = 'bg-violet-500',
+  color = 'bg-[#6DD3CE]',
   label,
   showPercent = false,
 }: ProgressBarProps) {
   return (
     <div className="w-full">
       {(label || showPercent) && (
-        <div className="flex justify-between mb-1 text-xs font-medium text-slate-500">
+        <div className="flex justify-between mb-1 text-xs font-medium" style={{ color: '#9b8ab0' }}>
           {label && <span>{label}</span>}
           {showPercent && <span>{Math.round(value)}%</span>}
         </div>
       )}
-      <div className="w-full h-3 bg-slate-200 rounded-full overflow-hidden">
+      <div className="w-full h-3 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
         <div
           className={`h-full rounded-full transition-all duration-700 ease-out ${color}`}
           style={{ width: `${Math.min(100, Math.max(0, value))}%` }}

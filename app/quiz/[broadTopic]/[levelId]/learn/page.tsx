@@ -8,6 +8,7 @@ import { sb } from '@/lib/supabase'
 import LearningCard from '@/components/quiz/LearningCard'
 import { buildLearningZone } from '@/lib/learningZone'
 import type { QuizLevel } from '@/types/quiz'
+import { Lock, BookOpen, ArrowRight } from '@/components/icons'
 
 export default function LearnPage() {
   const params = useParams()
@@ -55,7 +56,7 @@ export default function LearnPage() {
   if (accessDenied) return (
     <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#1a1228' }}>
       <div className="text-center max-w-sm">
-        <div className="text-5xl mb-3">🔒</div>
+        <Lock size={40} style={{ color: '#F5C842', margin: '0 auto 0.75rem' }} />
         <h2 className="text-xl font-black mb-2" style={{ color: '#F7F7FF' }}>Premium Level</h2>
         <p className="text-sm mb-5" style={{ color: '#9b8ab0' }}>
           This level is available with Curio Premium — R49/month.
@@ -98,9 +99,9 @@ export default function LearnPage() {
       <div className="max-w-2xl mx-auto px-6 py-8">
         <div className="flex items-center gap-3 mb-5">
           <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.08)' }} />
-          <span className="text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full"
+          <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full"
             style={{ color: '#6DD3CE', background: 'rgba(109,211,206,0.08)', border: '1px solid rgba(109,211,206,0.2)' }}>
-            📖 Learning Zone
+            <BookOpen size={13} /> Learning Zone
           </span>
           <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.08)' }} />
         </div>
@@ -111,15 +112,14 @@ export default function LearnPage() {
 
         <div className="rounded-2xl p-7 text-center"
           style={{ background: '#231935', border: '1px solid rgba(109,211,206,0.15)' }}>
-          <div className="text-4xl mb-3">🚀</div>
           <h2 className="text-xl font-black mb-2" style={{ color: '#F7F7FF' }}>Ready to quiz?</h2>
           <p className="text-sm mb-6" style={{ color: '#9b8ab0' }}>
             {level.question_count} questions · You can retry as many times as you like
           </p>
           <Link href={playHref}
-            className="inline-block w-full py-4 rounded-2xl font-black text-lg text-white"
-            style={{ background: '#FF5E5B', boxShadow: '0 6px 24px rgba(255,94,91,0.35)' }}>
-            Let's Go! →
+            className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-black text-lg text-white"
+            style={{ background: '#FF5E5B' }}>
+            Let&apos;s Go <ArrowRight size={20} />
           </Link>
         </div>
       </div>

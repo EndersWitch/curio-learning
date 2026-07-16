@@ -5,6 +5,7 @@ import Link from 'next/link'
 import type { QuizResult } from '@/types/quiz'
 import { XPBadge } from '@/components/ui/XPBar'
 import { useAuth } from '@/lib/auth-context'
+import { Trophy, GraduationCap, Home, RefreshCw, Check, X } from '@/components/icons'
 
 interface ResultsScreenProps {
   result: QuizResult
@@ -17,19 +18,19 @@ interface ResultsScreenProps {
 }
 
 const PASS_MESSAGES = [
-  "You absolutely smashed it! 🚀",
-  "Outstanding work! You're on fire! 🔥",
-  "That was brilliant! Keep it up! 🎯",
-  "Wow! You're a real star! ⭐",
-  "Incredible effort! So proud of you! 🎊",
+  'You absolutely smashed it!',
+  "Outstanding work! You're on fire!",
+  'That was brilliant! Keep it up!',
+  "Wow! You're a real star!",
+  'Incredible effort! So proud of you!',
 ]
 const FAIL_MESSAGES = [
-  "So close! Let's try again — you've got this! 💪",
-  "Don't give up! Every attempt makes you stronger! 🏋️",
-  "Nice try! Review the learning zone and go again! 📚",
-  "Almost there! One more go and you'll nail it! 🎯",
+  "So close! Let's try again — you've got this!",
+  "Don't give up! Every attempt makes you stronger!",
+  'Nice try! Review the learning zone and go again!',
+  "Almost there! One more go and you'll nail it!",
 ]
-const CONFETTI_COLORS = ['#FF5E5B','#6DD3CE','#F5C842','#A855F7','#34D399','#FB923C']
+const CONFETTI_COLORS = ['#FF5E5B', '#6DD3CE', '#F5C842', '#34D399']
 
 interface Particle { id:number; left:number; top:number; color:string; duration:number; delay:number; size:number }
 
@@ -239,9 +240,9 @@ export default function ResultsScreen({
 
           {/* Pass/fail badge */}
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full font-black text-sm mb-4 text-white"
-            style={{ background: passed ? '#34D399' : '#FF5E5B',
-              boxShadow: passed ? '0 4px 16px rgba(52,211,153,0.35)' : '0 4px 16px rgba(255,94,91,0.35)' }}>
-            {passed ? '🎉 Passed!' : '😤 Not Passed'}
+            style={{ background: passed ? '#34D399' : '#FF5E5B' }}>
+            {passed ? <Check size={16} /> : <X size={16} />}
+            {passed ? 'Passed!' : 'Not Passed'}
           </div>
 
           <h2 className="text-xl font-black mb-1 leading-tight" style={{ color: '#F7F7FF' }}>
@@ -285,9 +286,9 @@ export default function ResultsScreen({
         {masteryUnlocked && !broadMasteryUnlocked && (
           <div className="rounded-3xl p-5 mb-4 flex items-center gap-4"
             style={{ background: '#231935', border: '1px solid rgba(245,200,66,0.35)' }}>
-            <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"
-              style={{ background: 'rgba(245,200,66,0.15)', border: '1px solid rgba(245,200,66,0.3)' }}>
-              🏆
+            <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+              style={{ background: 'rgba(245,200,66,0.15)', border: '1px solid rgba(245,200,66,0.3)', color: '#F5C842' }}>
+              <Trophy size={22} />
             </div>
             <div>
               <p className="font-black text-sm" style={{ color: '#F5C842' }}>Subtopic Mastery Unlocked!</p>
@@ -299,9 +300,9 @@ export default function ResultsScreen({
         {broadMasteryUnlocked && (
           <div className="rounded-3xl p-5 mb-4 flex items-center gap-4"
             style={{ background: '#231935', border: '1px solid rgba(109,211,206,0.35)' }}>
-            <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"
-              style={{ background: 'rgba(109,211,206,0.12)', border: '1px solid rgba(109,211,206,0.3)' }}>
-              🎓
+            <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+              style={{ background: 'rgba(109,211,206,0.12)', border: '1px solid rgba(109,211,206,0.3)', color: '#6DD3CE' }}>
+              <GraduationCap size={22} />
             </div>
             <div>
               <p className="font-black text-sm" style={{ color: '#6DD3CE' }}>Final Mastery Unlocked!</p>
@@ -314,8 +315,8 @@ export default function ResultsScreen({
           <div className="rounded-3xl p-5 mb-4 text-center"
             style={{ background: 'linear-gradient(135deg, #2B1E3F 0%, #3d2d58 100%)',
               border: '2px solid rgba(109,211,206,0.3)' }}>
-            <div className="text-2xl mb-1">
-              {sectionType === 'broad_topic_mastery' ? '🎓' : '🏆'}
+            <div className="flex justify-center mb-1" style={{ color: '#6DD3CE' }}>
+              {sectionType === 'broad_topic_mastery' ? <GraduationCap size={26} /> : <Trophy size={26} />}
             </div>
             <p className="font-black text-base" style={{ color: '#6DD3CE' }}>
               {sectionType === 'broad_topic_mastery' ? 'Ultimate Topic Champion!' : 'Subtopic Champion!'}
@@ -333,25 +334,25 @@ export default function ResultsScreen({
           {passed && nextHref && (
             <Link href={nextHref}
               className="w-full py-4 rounded-2xl font-black text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
-              style={{ background: '#FF5E5B', boxShadow: '0 4px 20px rgba(255,94,91,0.35)' }}>
+              style={{ background: '#FF5E5B' }}>
               Next Level →
             </Link>
           )}
           {passed && !nextHref && (
             <Link href="/quiz"
-              className="w-full py-4 rounded-2xl font-black text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
-              style={{ background: '#FF5E5B', boxShadow: '0 4px 20px rgba(255,94,91,0.35)' }}>
-              🏠 Browse More Topics
+              className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-black text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
+              style={{ background: '#FF5E5B' }}>
+              <Home size={18} /> Browse More Topics
             </Link>
           )}
 
           <Link href={retryHref}
-            className="w-full py-4 rounded-2xl font-black text-base text-center transition-all duration-200"
+            className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-black text-base text-center transition-all duration-200"
             style={passed
               ? { background: 'rgba(255,255,255,0.06)', color: '#F7F7FF', border: '2px solid rgba(255,255,255,0.12)' }
-              : { background: '#FF5E5B', color: '#fff', boxShadow: '0 4px 20px rgba(255,94,91,0.35)' }
+              : { background: '#FF5E5B', color: '#fff' }
             }>
-            {passed ? '🔄 Try Again' : '🔄 Try Again — You Can Do It!'}
+            <RefreshCw size={16} /> {passed ? 'Try Again' : 'Try Again — You Can Do It!'}
           </Link>
         </div>
 

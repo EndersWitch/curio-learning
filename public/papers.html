@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8"/>
 <script src="/auth.js"></script>
+<script src="/icons.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Curio — Exam Papers</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Caveat:wght@600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
 <style>
 :root{
   --plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;
@@ -14,7 +15,7 @@
   --m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--m03:rgba(247,247,255,0.03);
   --c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--c06:rgba(109,211,206,0.06);
   --r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);
-  --h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;--script:'Caveat',cursive;
+  --h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{font-size:16px;}
@@ -50,6 +51,8 @@ nav{
 .profile-dd-item{padding:0.6rem 1rem;font-size:0.8rem;color:var(--m55);display:block;transition:background .1s;border:none;background:none;cursor:pointer;text-align:left;width:100%;font-family:var(--b);}
 .profile-dd-item:hover{background:var(--m06);color:var(--moon);}
 .profile-dd-item.danger{color:var(--coral);}
+.profile-dd-item.dd-item-icon{display:flex;align-items:center;gap:0.55rem;}
+.profile-dd-item.dd-item-icon svg{color:var(--m30);flex-shrink:0;}
 
 /* ── AD SYSTEM ── */
 .ad-slot{display:none;}
@@ -78,7 +81,6 @@ nav{
 .hero-h .cy{color:var(--cyan);}
 .hero-sub{font-size:0.88rem;font-weight:300;color:var(--m55);line-height:1.75;max-width:500px;}
 .hero-sub strong{color:var(--moon);font-weight:600;}
-.hero-note{font-family:var(--script);font-size:1.1rem;color:var(--amber);opacity:0.75;margin-top:1rem;display:inline-block;transform:rotate(-1.5deg);}
 .hero-stats{display:flex;gap:2.5rem;flex-shrink:0;}
 .hstat{text-align:center;}
 .hstat-val{font-family:var(--h);font-size:2rem;font-weight:900;color:var(--moon);line-height:1;}
@@ -277,7 +279,7 @@ nav{
     </div>
     <div class="ad-topbar-right">
       <a href="/login?tab=signup" class="ad-cta">Go Premium →</a>
-      <button class="ad-x" onclick="dismissAd('adTopbar')" aria-label="Close">✕</button>
+      <button class="ad-x" onclick="dismissAd('adTopbar')" aria-label="Close">&times;</button>
     </div>
   </div>
 </div>
@@ -288,7 +290,6 @@ nav{
     <div class="hero-eyebrow">Free forever · No sign-up required</div>
     <h1 class="hero-h">Exam papers.<br/><span class="cy">All grades.</span></h1>
     <p class="hero-sub">Browse and download exam papers for every grade and subject. <strong>Papers and memos are always free</strong> — no account needed, no strings.</p>
-    <span class="hero-note">download, print, practise 🌱</span>
   </div>
   <div class="hero-stats" id="heroStats">
     <div class="hstat"><div class="hstat-val"><span class="cy" id="statPapers">—</span></div><div class="hstat-label">Papers</div></div>
@@ -559,7 +560,7 @@ function clearFilters(){
 }
 
 function showComingSoon(){
-  alert('📄 This is a demo paper.\n\nAdd real papers via the Admin Panel → Add Paper, paste in a Supabase Storage URL and it will appear here automatically.');
+  alert('This is a demo paper.\n\nAdd real papers via the Admin Panel → Add Paper, paste in a Supabase Storage URL and it will appear here automatically.');
 }
 
 function updateHeroStats(){
@@ -576,7 +577,7 @@ function renderNav(user){
   if(user){
     const name=user.fullName||'',email=user.email||'';
     const init=name?name[0].toUpperCase():(email?email[0].toUpperCase():'?');
-    nr.innerHTML=`<div class="profile-wrap"><button class="profile-btn" onclick="toggleProfileDD(event)">${init}</button><div class="profile-dropdown" id="profileDD"><div class="profile-dd-head"><div class="profile-dd-name">${name||'My account'}</div><div class="profile-dd-email">${email}</div></div><a href="/quiz" class="profile-dd-item">📚 &nbsp;Start a quiz</a><a href="/papers" class="profile-dd-item">📄 &nbsp;Papers</a><a href="/profile" class="profile-dd-item">👤 &nbsp;Edit profile</a><a href="/subscription" class="profile-dd-item">⭐ &nbsp;Subscription</a><button class="profile-dd-item danger" onclick="curioSignOut()">Sign out</button></div></div>`;
+    nr.innerHTML=`<div class="profile-wrap"><button class="profile-btn" onclick="toggleProfileDD(event)">${init}</button><div class="profile-dropdown" id="profileDD"><div class="profile-dd-head"><div class="profile-dd-name">${name||'My account'}</div><div class="profile-dd-email">${email}</div></div><a href="/quiz" class="profile-dd-item dd-item-icon">${ICONS.penLine()} Start a quiz</a><a href="/papers" class="profile-dd-item dd-item-icon">${ICONS.fileText()} Papers</a><a href="/profile" class="profile-dd-item dd-item-icon">${ICONS.user()} Edit profile</a><a href="/subscription" class="profile-dd-item dd-item-icon">${ICONS.star()} Subscription</a><button class="profile-dd-item danger" onclick="curioSignOut()">Sign out</button></div></div>`;
   }else{
     nr.innerHTML=`<a href="/login" class="btn-ghost">Log in</a><a href="/login?tab=signup" class="btn-nav">Start free →</a>`;
   }

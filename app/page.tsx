@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Bloom from '@/components/Bloom'
 import { sb } from '@/lib/supabase'
+import { Flame, Zap, FileText, PenLine, User, Star, Check, Brain, Heart, ListChecks } from '@/components/icons'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Session {
@@ -265,10 +266,10 @@ export default function HomePage() {
                   <div className="profile-dd-name">{session.user.user_metadata?.full_name || 'My account'}</div>
                   <div className="profile-dd-email">{session.user.email}</div>
                 </div>
-                <a href="/papers" className="profile-dd-item">📄 &nbsp;Papers</a>
-                <a href="/quiz" className="profile-dd-item">📝 &nbsp;Start a quiz</a>
-                <a href="/profile" className="profile-dd-item">👤 &nbsp;Edit profile</a>
-                <a href="/subscription" className="profile-dd-item">⭐ &nbsp;Manage subscription</a>
+                <a href="/papers" className="profile-dd-item dd-item-icon"><FileText size={15} /> Papers</a>
+                <a href="/quiz" className="profile-dd-item dd-item-icon"><PenLine size={15} /> Start a quiz</a>
+                <a href="/profile" className="profile-dd-item dd-item-icon"><User size={15} /> Edit profile</a>
+                <a href="/subscription" className="profile-dd-item dd-item-icon"><Star size={15} /> Manage subscription</a>
                 <button className="profile-dd-item danger" onClick={doLogout}>Sign out</button>
               </div>
             </div>
@@ -289,16 +290,14 @@ export default function HomePage() {
             <div className="dash-greeting">
               <div>
                 <div className="dash-eyebrow">{greeting},</div>
-                <h1 className="dash-hello">
-                  {name} <span className="cy">🌱</span>
-                </h1>
+                <h1 className="dash-hello">{name}</h1>
                 <div className="dash-date">
                   {today.toLocaleDateString('en-ZA', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
                 </div>
               </div>
               <div className="dash-greeting-right">
                 <div className="streak-badge">
-                  <span className="streak-fire">🔥</span>
+                  <Flame size={18} className="streak-fire" />
                   <div>
                     <div className="streak-val">{streak}</div>
                     <div className="streak-lbl">day streak</div>
@@ -316,7 +315,7 @@ export default function HomePage() {
                       <option key={g} value={String(g)}>{g}</option>
                     ))}
                   </select>
-                  <span className={`grade-saved${gradeJustSaved ? ' show' : ''}`}>✓</span>
+                  <span className={`grade-saved${gradeJustSaved ? ' show' : ''}`}><Check size={13} /></span>
                 </div>
               </div>
             </div>
@@ -325,7 +324,7 @@ export default function HomePage() {
             <div className="dash-stats">
               <div className="dash-stat am">
                 <div className="ds-label">Total XP</div>
-                <div className="ds-val">⚡ {totalXp.toLocaleString()}</div>
+                <div className="ds-val ds-val-icon"><Zap size={22} />{totalXp.toLocaleString()}</div>
                 <div className="ds-sub">earned all time</div>
               </div>
               <div className="dash-stat cy">
@@ -356,10 +355,10 @@ export default function HomePage() {
                 Quick actions
               </div>
               <div className="quick-actions">
-                <a href="/papers" className="qa-btn"><span className="qa-icon">📄</span><span className="qa-label">Browse papers</span></a>
-                <a href="/quiz" className="qa-btn"><span className="qa-icon">📝</span><span className="qa-label">Start a quiz</span></a>
-                <a href="/deeplearn" className="qa-btn"><span className="qa-icon">🧠</span><span className="qa-label">Deep Learn</span></a>
-                <a href="/subscription" className="qa-btn"><span className="qa-icon">⭐</span><span className="qa-label">My plan</span></a>
+                <a href="/papers" className="qa-btn"><FileText size={22} className="qa-icon" /><span className="qa-label">Browse papers</span></a>
+                <a href="/quiz" className="qa-btn"><PenLine size={22} className="qa-icon" /><span className="qa-label">Start a quiz</span></a>
+                <a href="/deeplearn" className="qa-btn"><Brain size={22} className="qa-icon" /><span className="qa-label">Deep Learn</span></a>
+                <a href="/subscription" className="qa-btn"><Star size={22} className="qa-icon" /><span className="qa-label">My plan</span></a>
               </div>
             </div>
 
@@ -367,14 +366,14 @@ export default function HomePage() {
             <div className="dash-two-col">
               <div className="dash-panel">
                 <div className="dash-ph">
-                  <span className="dash-pt">📄 Recommended papers</span>
+                  <span className="dash-pt dash-pt-icon"><FileText size={16} /> Recommended papers</span>
                   <a href="/papers" className="dash-pl">View all →</a>
                 </div>
                 <div className="dash-pb">
                   {recPapers.length > 0 ? recPapers.map((p: any) => (
                     <div className="rec-paper" key={p.id}>
                       <div className="rec-left">
-                        <div className="rec-icon">📄</div>
+                        <div className="rec-icon"><FileText size={15} /></div>
                         <div>
                           <div className="rec-title">{p.title}</div>
                           <div className="rec-sub">Grade {p.grade}</div>
@@ -389,7 +388,7 @@ export default function HomePage() {
               </div>
               <div className="dash-panel">
                 <div className="dash-ph">
-                  <span className="dash-pt">📝 Quiz history</span>
+                  <span className="dash-pt dash-pt-icon"><PenLine size={16} /> Quiz history</span>
                   <a href="/quiz" className="dash-pl">Take a quiz →</a>
                 </div>
                 <div className="dash-pb">
@@ -414,7 +413,7 @@ export default function HomePage() {
 
             <div className="dash-two-col">
               <div className="dash-panel">
-                <div className="dash-ph"><span className="dash-pt">🔥 Study streak</span></div>
+                <div className="dash-ph"><span className="dash-pt dash-pt-icon"><Flame size={16} /> Study streak</span></div>
                 <div className="dash-pb">
                   <div style={{ fontSize: '0.72rem', color: 'var(--m55)', marginBottom: '0.7rem' }}>Days studied this week</div>
                   <div className="streak-week">
@@ -431,12 +430,12 @@ export default function HomePage() {
                     })}
                   </div>
                   <div style={{ fontSize: '0.7rem', color: 'var(--m30)', marginTop: '0.7rem' }}>
-                    {streak > 0 ? `${streak} day${streak !== 1 ? 's' : ''} studied — keep it up! 🔥` : 'Open a paper or take a quiz to start your streak!'}
+                    {streak > 0 ? `${streak} day${streak !== 1 ? 's' : ''} studied — keep it up!` : 'Open a paper or take a quiz to start your streak!'}
                   </div>
                 </div>
               </div>
               <div className="dash-panel">
-                <div className="dash-ph"><span className="dash-pt">📋 Recent activity</span></div>
+                <div className="dash-ph"><span className="dash-pt dash-pt-icon"><ListChecks size={16} /> Recent activity</span></div>
                 <div className="dash-pb">
                   <div className="dash-empty">No activity yet.</div>
                 </div>
@@ -541,7 +540,6 @@ export default function HomePage() {
                   <span className="hsc-pill">+ more</span>
                 </div>
               </div>
-              <span className="hero-script-note">you&apos;ve got this 🌱</span>
             </div>
           </section>
 
@@ -603,17 +601,17 @@ export default function HomePage() {
           <section className="ch2 rv">
             <div className="chat">
               <span className="chat-label" style={{ alignSelf: 'flex-end' }}>you</span>
-              <div className="chat-bubble cb-me">Why does photosynthesis matter? I keep forgetting 😕</div>
+              <div className="chat-bubble cb-me">Why does photosynthesis matter? I keep forgetting.</div>
               <span className="chat-label">curio</span>
               <div className="chat-bubble cb-them">
-                Let&apos;s build it up from scratch. 🌿<br /><br />
+                Let&apos;s build it up from scratch.<br /><br />
                 <strong>Plants are the only living things that make their own food</strong> — using sunlight, water, and CO₂ from the air.<br /><br />
                 Here&apos;s the key: the oxygen they release as a by-product is every breath you&apos;ve ever taken. Every human, every animal — all of it comes from photosynthesis.<br /><br />
                 So when your exam asks "why is it important?" — it&apos;s not just a plant thing.{' '}
                 <strong>It&apos;s the foundation of all life on Earth.</strong>
               </div>
               <span className="chat-label" style={{ alignSelf: 'flex-end' }}>you</span>
-              <div className="chat-bubble cb-me">Oh. That actually makes sense now ✓</div>
+              <div className="chat-bubble cb-me">Oh. That actually makes sense now.</div>
             </div>
             <div>
               <h2 className="ch-h">
@@ -713,7 +711,7 @@ export default function HomePage() {
                 <hr className="pc-div" />
                 <ul className="pc-items">
                   {['Full past paper library','Download papers as PDF','Full marking memos','All grades & subjects'].map((f) => (
-                    <li key={f} className="pc-item"><span className="pci-chk">✓</span>{f}</li>
+                    <li key={f} className="pc-item"><span className="pci-chk"><Check size={10} /></span>{f}</li>
                   ))}
                 </ul>
                 <a href="/login?tab=signup" className="pc-btn pc-btn-free">Get started free</a>
@@ -733,16 +731,17 @@ export default function HomePage() {
                     'Progress tracking & streaks',
                     'Topic-sorted question sets',
                   ].map((f) => (
-                    <li key={f} className="pc-item"><span className="pci-chk">✓</span>{f}</li>
+                    <li key={f} className="pc-item"><span className="pci-chk"><Check size={10} /></span>{f}</li>
                   ))}
                 </ul>
                 <a href="/login?tab=signup" className="pc-btn pc-btn-pro">Subscribe — R49/month →</a>
               </div>
             </div>
             <div className="heart-note">
-              💛 <strong>No student left behind.</strong> Exam papers and memos will always be free on Curio —
+              <Heart size={16} className="heart-note-icon" />
+              <span><strong>No student left behind.</strong> Exam papers and memos will always be free on Curio —
               no account needed, no strings attached. Because access to good study material shouldn&apos;t
-              have a price tag.
+              have a price tag.</span>
             </div>
           </section>
 
@@ -757,7 +756,6 @@ export default function HomePage() {
                 deserves a real shot. <strong>Curio is here to give it to you.</strong>
               </p>
               <p>Free to start. No card needed. Just you and the work.</p>
-              <span className="closing-script">we believe in you 🌱</span>
               <div>
                 <a href="/login?tab=signup" className="btn-primary" style={{ display: 'inline-flex', marginTop: '0.5rem' }}>
                   Create your free account →

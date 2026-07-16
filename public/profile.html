@@ -162,7 +162,7 @@ async function saveDetails(){
     localStorage.setItem('curio_grade',g);
     document.getElementById('avatarInitial').textContent=n?n[0].toUpperCase():'?';
     document.getElementById('avatarName').textContent=n||'My account';
-    showAlert('detailsAlert','✓ Details updated successfully!','ok');
+    showAlert('detailsAlert','Details updated successfully!','ok');
   }catch(e){showAlert('detailsAlert',e.message,'err');}
   btn.disabled=false;btn.textContent='Save changes →';
 }
@@ -175,7 +175,7 @@ async function saveEmail(){
   try{
     const {error}=await curioSb.auth.updateUser({email:newEmail});
     if(error)throw error;
-    showAlert('emailAlert','✓ Confirmation sent to your new email — click the link to confirm the change.','ok');
+    showAlert('emailAlert','Confirmation sent to your new email — click the link to confirm the change.','ok');
   }catch(e){showAlert('emailAlert',e.message,'err');}
   btn.disabled=false;btn.textContent='Update email →';
 }
@@ -190,7 +190,7 @@ async function savePassword(){
   try{
     const {error}=await curioSb.auth.updateUser({password:pw});
     if(error)throw error;
-    showAlert('pwAlert','✓ Password updated successfully!','ok');
+    showAlert('pwAlert','Password updated successfully!','ok');
     document.getElementById('fieldPw').value='';document.getElementById('fieldPwConfirm').value='';
     document.getElementById('pwFill').style.width='0';document.getElementById('pwLabel').textContent='';
   }catch(e){showAlert('pwAlert',e.message,'err');}

@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
+import { Lock, Search, Check, Zap } from '@/components/icons'
 
 interface LevelProgress {
   best_score: number
@@ -34,9 +35,9 @@ interface Level {
 function difficultyBadge(d: string | null) {
   if (!d) return null
   const map: Record<string, { label: string; color: string }> = {
-    'Starter':   { label: '🟢 Starter',   color: '#34D399' },
-    'Building':  { label: '🟡 Building',  color: '#F5C842' },
-    'Challenge': { label: '🔴 Challenge', color: '#FF5E5B' },
+    'Starter':   { label: 'Starter',   color: '#34D399' },
+    'Building':  { label: 'Building',  color: '#F5C842' },
+    'Challenge': { label: 'Challenge', color: '#FF5E5B' },
   }
   return map[d] ?? null
 }
@@ -115,7 +116,7 @@ export default function BroadTopicPage() {
           <p className="text-sm mt-1" style={{ color: '#9b8ab0' }}>
             {levels.length} level{levels.length !== 1 ? 's' : ''} · {levels.filter(l => !l.is_premium).length} free
             {!isPremium && premiumCount > 0 && (
-              <span style={{ color: '#F5C842' }}> · {premiumCount} premium 🔒</span>
+              <span className="inline-flex items-center gap-1" style={{ color: '#F5C842' }}> · {premiumCount} premium <Lock size={11} /></span>
             )}
           </p>
         </div>
@@ -154,8 +155,8 @@ export default function BroadTopicPage() {
         {!isPremium && premiumCount > 0 && (
           <div className="rounded-2xl p-5 text-center"
             style={{ background: 'rgba(245,200,66,0.06)', border: '1px solid rgba(245,200,66,0.2)' }}>
-            <p className="font-black text-sm mb-1" style={{ color: '#F5C842' }}>
-              🔒 {premiumCount} level{premiumCount !== 1 ? 's' : ''} locked
+            <p className="inline-flex items-center gap-1.5 justify-center font-black text-sm mb-1" style={{ color: '#F5C842' }}>
+              <Lock size={14} /> {premiumCount} level{premiumCount !== 1 ? 's' : ''} locked
             </p>
             <p className="text-xs mb-3" style={{ color: '#9b8ab0' }}>
               Unlock everything with Curio Premium — R49/month
@@ -194,7 +195,7 @@ function LevelRow({ level, isPremium, broadTopic, progress }: {
           : completed
           ? { background: '#34D399', color: '#fff', border: '2px solid #34D399' }
           : { background: 'rgba(109,211,206,0.1)', color: '#6DD3CE', border: '2px solid rgba(109,211,206,0.25)' }}>
-        {locked ? '🔒' : completed ? '✓' : level.level_order}
+        {locked ? <Lock size={15} /> : completed ? <Check size={16} /> : level.level_order}
       </div>
       <div className="flex-1 min-w-0">
         <p className="font-bold text-sm" style={{ color: locked ? '#9b8ab0' : '#F7F7FF' }}>
@@ -206,14 +207,19 @@ function LevelRow({ level, isPremium, broadTopic, progress }: {
           </p>
         )}
         <div className="flex items-center gap-2 mt-1 flex-wrap">
-          {diff && <span className="text-xs" style={{ color: diff.color }}>{diff.label}</span>}
+          {diff && (
+            <span className="inline-flex items-center gap-1 text-xs" style={{ color: diff.color }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: diff.color, display: 'inline-block' }} />
+              {diff.label}
+            </span>
+          )}
           {progress && (
             <>
               <span className="text-xs font-bold" style={{ color: completed ? '#34D399' : '#9b8ab0' }}>
                 Best: {progress.best_score}%
               </span>
-              <span className="text-xs font-bold" style={{ color: '#F5C842' }}>
-                ⚡ {progress.xp_earned} XP
+              <span className="inline-flex items-center gap-1 text-xs font-bold" style={{ color: '#F5C842' }}>
+                <Zap size={11} /> {progress.xp_earned} XP
               </span>
             </>
           )}
@@ -222,7 +228,7 @@ function LevelRow({ level, isPremium, broadTopic, progress }: {
       <div className="flex-shrink-0 text-right">
         <div className="text-xs" style={{ color: '#9b8ab0' }}>{level.question_count}Q</div>
         {locked
-          ? <div className="text-xs" style={{ color: '#F5C842' }}>Premium 🔒</div>
+          ? <div className="inline-flex items-center gap-1 text-xs" style={{ color: '#F5C842' }}>Premium <Lock size={11} /></div>
           : completed
           ? <div className="text-xs font-bold" style={{ color: '#34D399' }}>Replay ↻</div>
           : <div className="text-xs font-bold" style={{ color: '#6DD3CE' }}>→</div>}
@@ -250,7 +256,7 @@ function NotFoundScreen() {
   return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: '#1a1228' }}>
       <div className="text-center">
-        <div className="text-5xl mb-3">🔍</div>
+        <Search size={40} style={{ color: '#4a3a63', margin: '0 auto 0.75rem' }} />
         <h1 className="text-xl font-black mb-2" style={{ color: '#F7F7FF' }}>Topic Not Found</h1>
         <Link href="/quiz" className="inline-block px-5 py-2.5 rounded-xl font-black text-sm mt-2"
           style={{ background: '#6DD3CE', color: '#2B1E3F' }}>← All Topics</Link>

@@ -50,13 +50,6 @@ const config: Config = {
         '4xl': '2rem',
         '5xl': '2.5rem',
       },
-      boxShadow: {
-        'glow-violet':  '0 0 0 3px rgba(139, 92, 246, 0.35)',
-        'glow-emerald': '0 0 0 3px rgba(52, 211, 153, 0.35)',
-        'glow-coral':   '0 0 0 3px rgba(255, 94, 91, 0.35)',
-        'card':         '0 2px 12px 0 rgba(0,0,0,0.06)',
-        'card-hover':   '0 8px 32px 0 rgba(0,0,0,0.12)',
-      },
       animation: {
         'fade-slide':  'fadeSlideIn 0.4s ease-out both',
         'celebrate':   'celebratePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both',

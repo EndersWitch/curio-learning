@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
+import { Flame, Zap, FileText, PenLine, User, Star } from '@/components/icons'
 
 export default function QuizNav() {
   const { user, loading } = useAuth()
@@ -59,7 +60,7 @@ export default function QuizNav() {
                 background: 'rgba(245,200,66,0.12)', border: '1px solid rgba(245,200,66,0.25)',
                 borderRadius: 999, padding: '0.3rem 0.65rem',
               }}>
-                🔥 {user.streakDays}
+                <Flame size={14} /> {user.streakDays}
               </span>
             )}
             <span title="Total XP" style={{
@@ -68,7 +69,7 @@ export default function QuizNav() {
               background: 'rgba(109,211,206,0.12)', border: '1px solid rgba(109,211,206,0.25)',
               borderRadius: 999, padding: '0.3rem 0.65rem',
             }}>
-              ⚡ {user.totalXp.toLocaleString()} XP
+              <Zap size={14} /> {user.totalXp.toLocaleString()} XP
             </span>
             <button
               className="profile-btn"
@@ -83,10 +84,10 @@ export default function QuizNav() {
                 <div className="profile-dd-name">{user.fullName}</div>
                 <div className="profile-dd-email">{user.email}</div>
               </div>
-              <a href="/papers.html" className="profile-dd-item">📄 &nbsp;Papers</a>
-              <a href="/quiz" className="profile-dd-item">📝 &nbsp;Start a quiz</a>
-              <a href="/profile" className="profile-dd-item">👤 &nbsp;Edit profile</a>
-              <a href="/subscription" className="profile-dd-item">⭐ &nbsp;Manage subscription</a>
+              <a href="/papers.html" className="profile-dd-item dd-item-icon"><FileText size={15} /> Papers</a>
+              <a href="/quiz" className="profile-dd-item dd-item-icon"><PenLine size={15} /> Start a quiz</a>
+              <a href="/profile" className="profile-dd-item dd-item-icon"><User size={15} /> Edit profile</a>
+              <a href="/subscription" className="profile-dd-item dd-item-icon"><Star size={15} /> Manage subscription</a>
               <button className="profile-dd-item danger" onClick={doLogout}>Sign out</button>
             </div>
           </div>

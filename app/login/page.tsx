@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Bloom from '@/components/Bloom'
 import { sb } from '@/lib/supabase'
+import { Check } from '@/components/icons'
 
 function friendlyError(msg: string) {
   if (!msg) return 'Something went wrong. Please try again.'
@@ -12,7 +13,7 @@ function friendlyError(msg: string) {
   if (m.includes('already registered') || m.includes('already exists'))
     return 'An account with this email already exists. Try signing in instead.'
   if (m.includes('email not confirmed') || m.includes('not confirmed'))
-    return '📧 Check your inbox — click the verification link we sent you before signing in.'
+    return 'Check your inbox — click the verification link we sent you before signing in.'
   if (m.includes('email')) return 'Please enter a valid email address.'
   if (m.includes('password')) return 'Password must be at least 6 characters.'
   if (m.includes('rate limit') || m.includes('too many'))
@@ -79,7 +80,7 @@ export default function LoginPage() {
     } catch (e: any) {
       const msg = e.message || ''
       if (msg.toLowerCase().includes('email not confirmed') || msg.toLowerCase().includes('not confirmed')) {
-        setAlert({ msg: '📧 <strong>Email not verified yet.</strong><br/>Check your inbox for the confirmation email we sent when you signed up, and click the link to verify your account before signing in.', type: 'warn' })
+        setAlert({ msg: '<strong>Email not verified yet.</strong><br/>Check your inbox for the confirmation email we sent when you signed up, and click the link to verify your account before signing in.', type: 'warn' })
       } else {
         setAlert({ msg: friendlyError(msg), type: 'err' })
       }
@@ -147,10 +148,9 @@ export default function LoginPage() {
           </p>
           <ul className="bp-features">
             {['Exam papers & memos — free forever','AI-powered topic quizzes','Deep Learn explanations','Grades 4 – 12 · every subject'].map((f) => (
-              <li key={f} className="bp-feature"><span className="bp-chk">✓</span>{f}</li>
+              <li key={f} className="bp-feature"><span className="bp-chk"><Check size={11} /></span>{f}</li>
             ))}
           </ul>
-          <span className="bp-script">let&apos;s do this 🌱</span>
           <div className="bp-stats">
             <div className="bp-stat"><div className="bp-stat-val cy">30+</div><div className="bp-stat-lbl">Subjects</div></div>
             <div className="bp-stat"><div className="bp-stat-val">R0</div><div className="bp-stat-lbl">To start</div></div>
@@ -302,11 +302,11 @@ export default function LoginPage() {
           {/* SUCCESS */}
           {success && (
             <div className="success-screen show">
-              <div className="success-icon">✓</div>
+              <div className="success-icon"><Check size={24} /></div>
               <div className="success-title">{success.title}</div>
               <p className="success-sub">Your account has been created.</p>
               <div className="email-note">
-                <strong>📧 Check your email.</strong><br />
+                <strong>Check your email.</strong><br />
                 We sent a confirmation link to <strong>{success.email}</strong>.<br />
                 Click the link in that email to verify your account, then come back to sign in.
               </div>
