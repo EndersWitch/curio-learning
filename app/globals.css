@@ -206,12 +206,22 @@ button { font-family: var(--b); cursor: pointer; border: none; background: none;
 .closing-right strong { color: var(--moon); font-weight: 600; }
 
 /* FOOTER */
-footer { padding: 2rem 3rem; border-top: 1px solid var(--m06); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-.footer-logo { display: flex; align-items: center; gap: 0.55rem; font-family: var(--h); font-size: 0.95rem; font-weight: 800; color: var(--moon); }
+.site-footer { background: var(--plum); border-top: 1px solid var(--m06); margin-top: auto; }
+.footer-grid { max-width: 1200px; margin: 0 auto; padding: 3.5rem 3rem 2.5rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem; }
+.footer-col { display: flex; flex-direction: column; gap: 0.65rem; }
+.footer-col-title { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--cyan); margin-bottom: 0.4rem; }
+.footer-col a { font-size: 0.82rem; color: var(--m55); transition: color .15s; display: flex; align-items: center; gap: 0.55rem; }
+.footer-col a:hover { color: var(--moon); }
+.footer-col a svg { flex-shrink: 0; color: var(--m30); transition: color .15s; }
+.footer-col a:hover svg { color: var(--cyan); }
+.footer-divider { max-width: 1200px; margin: 0 auto; height: 1px; background: var(--m06); }
+.footer-bottom { max-width: 1200px; margin: 0 auto; padding: 2rem 3rem; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; text-align: center; }
+.footer-logo { display: flex; align-items: center; gap: 0.5rem; font-family: var(--h); font-size: 1rem; font-weight: 800; color: var(--moon); }
 .footer-copy { font-size: 0.68rem; color: var(--m30); }
-.footer-links { display: flex; gap: 1.4rem; }
-.footer-links a { font-size: 0.7rem; color: var(--m30); transition: color .15s; }
-.footer-links a:hover { color: var(--moon); }
+@media (max-width: 760px) {
+  .footer-grid { grid-template-columns: repeat(2, 1fr); padding: 2.5rem 1.5rem 2rem; gap: 2rem; }
+  .footer-bottom { padding: 1.5rem; }
+}
 
 /* REVEAL ANIMATION */
 .rv { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }

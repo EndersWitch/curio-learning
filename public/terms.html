@@ -6,6 +6,7 @@
 <title>Curio · Terms of Service</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="/footer.css" rel="stylesheet"/>
 <style>
 :root{--plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;--cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);--m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -28,9 +29,6 @@ ul li{font-size:0.9rem;color:var(--m55);margin-bottom:0.4rem;}
 strong{color:var(--moon);font-weight:600;}
 .highlight-box{background:rgba(255,94,91,0.08);border:1px solid rgba(255,94,91,0.2);border-radius:12px;padding:1.2rem 1.4rem;margin:1.5rem 0;}
 .highlight-box p{color:var(--moon);margin:0;font-size:0.88rem;}
-footer{margin-top:4rem;padding:2rem;border-top:1px solid var(--m06);text-align:center;font-size:0.72rem;color:var(--m30);}
-footer a{color:var(--m30);margin:0 0.8rem;}
-footer a:hover{color:var(--moon);}
 .simple-nav-links{display:flex;gap:.2rem;list-style:none;}
 .simple-nav-links a{padding:.38rem .8rem;font-size:.8rem;font-weight:500;color:rgba(247,247,255,.3);border-radius:6px;transition:all .15s;display:block;text-decoration:none;}
 .simple-nav-links a:hover{color:#F7F7FF;background:rgba(247,247,255,.06);}
@@ -71,9 +69,48 @@ footer a:hover{color:var(--moon);}
   <h2>13. Changes to These Terms</h2><p>We may update these Terms of Service from time to time. We will notify you of material changes by email or by a prominent notice on our website. Your continued use of the Platform after changes are posted constitutes your acceptance of the updated terms.</p>
   <h2>14. Contact</h2><p>For questions about these Terms of Service:<br/><strong>Email:</strong> <a href="mailto:hello@curiolearning.co.za">hello@curiolearning.co.za</a><br/><strong>Website:</strong> <a href="https://curiolearning.co.za">curiolearning.co.za</a></p>
 </div>
-<footer>
-  <p>© 2026 Curio Learning · South Africa</p>
-  <p style="margin-top:0.5rem;"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/contact">Contact</a></p>
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-col-title">Study</div>
+      <a href="/papers">Papers</a>
+      <a href="/quiz">Quiz</a>
+      <a href="/subjects">Subjects</a>
+      <a href="/deeplearn">Deep Learn</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Account</div>
+      <a href="/login">Log In / Sign Up</a>
+      <a href="/profile">My Profile</a>
+      <a href="/subscription">Subscription</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Support</div>
+      <a href="/contact">Contact Us</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Follow Us</div>
+      <a href="https://www.facebook.com/share/18qLm3rkG3/" target="_blank" rel="noopener noreferrer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</a>
+      <a href="https://www.instagram.com/curiolearning.co.za?igsh=MXU0MXExdDE5NDR2cQ==" target="_blank" rel="noopener noreferrer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg> Instagram</a>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <a href="/" class="footer-logo">
+      <svg width="20" height="20" viewBox="0 0 64 64" fill="none">
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+      </svg>
+      curio
+    </a>
+    <p class="footer-copy">© 2026 Curio Learning · Made with love for SA students</p>
+  </div>
 </footer>
 </body>
 </html>

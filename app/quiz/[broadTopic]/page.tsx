@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
 import { Lock, Search, Check, Zap } from '@/components/icons'
+import Footer from '@/components/Footer'
 
 interface LevelProgress {
   best_score: number
@@ -169,6 +170,7 @@ export default function BroadTopicPage() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   )
 }

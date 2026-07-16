@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Bloom from '@/components/Bloom'
+import Footer from '@/components/Footer'
 import { sb } from '@/lib/supabase'
 import { Flame, Zap, FileText, PenLine, User, Star, Check, Brain, Heart, ListChecks } from '@/components/icons'
 
@@ -463,6 +464,7 @@ export default function HomePage() {
               </div>
             )}
           </div>
+          <Footer />
         </div>
       )}
 
@@ -764,19 +766,7 @@ export default function HomePage() {
             </div>
           </section>
 
-          {/* ── FOOTER ── */}
-          <footer>
-            <div className="footer-logo">
-              <Bloom size={20} />
-              curio
-            </div>
-            <div className="footer-links">
-              <a href="/privacy">Privacy</a>
-              <a href="/terms">Terms</a>
-              <a href="/contact">Contact</a>
-            </div>
-            <p className="footer-copy">© 2026 Curio Learning · Made with love for SA students</p>
-          </footer>
+          <Footer />
         </div>
     </>
   )

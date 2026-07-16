@@ -7,6 +7,7 @@
 <title>Curio · Edit Profile</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E</svg>"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="/footer.css" rel="stylesheet"/>
 <style>
 :root{--plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;--cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;--m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);--m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);--h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -55,9 +56,6 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 .pw-label{font-size:0.62rem;font-weight:600;}
 .section-card.danger{border-color:var(--r20);}
 .section-card.danger .section-head{color:var(--coral);border-color:var(--r20);}
-footer{margin-top:3rem;padding:1.5rem;border-top:1px solid var(--m06);text-align:center;font-size:0.72rem;color:var(--m30);}
-footer a{color:var(--m30);margin:0 0.6rem;}
-footer a:hover{color:var(--moon);}
 </style>
 </head>
 <body>
@@ -125,7 +123,49 @@ footer a:hover{color:var(--moon);}
     </div>
   </div>
 </div>
-<footer><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></footer>
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-col-title">Study</div>
+      <a href="/papers">Papers</a>
+      <a href="/quiz">Quiz</a>
+      <a href="/subjects">Subjects</a>
+      <a href="/deeplearn">Deep Learn</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Account</div>
+      <a href="/login">Log In / Sign Up</a>
+      <a href="/profile">My Profile</a>
+      <a href="/subscription">Subscription</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Support</div>
+      <a href="/contact">Contact Us</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Follow Us</div>
+      <a href="https://www.facebook.com/share/18qLm3rkG3/" target="_blank" rel="noopener noreferrer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</a>
+      <a href="https://www.instagram.com/curiolearning.co.za?igsh=MXU0MXExdDE5NDR2cQ==" target="_blank" rel="noopener noreferrer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg> Instagram</a>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <a href="/" class="footer-logo">
+      <svg width="20" height="20" viewBox="0 0 64 64" fill="none">
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+      </svg>
+      curio
+    </a>
+    <p class="footer-copy">© 2026 Curio Learning · Made with love for SA students</p>
+  </div>
+</footer>
 <script>
 function showAlert(id,msg,type){const el=document.getElementById(id);el.textContent=msg;el.className=`alert ${type} show`;setTimeout(()=>el.className='alert',4000);}
 function checkPw(pw){const fill=document.getElementById('pwFill'),lbl=document.getElementById('pwLabel');if(!pw){fill.style.width='0';lbl.textContent='';return;}let score=0;if(pw.length>=6)score++;if(pw.length>=10)score++;if(/[A-Z]/.test(pw))score++;if(/[0-9]/.test(pw))score++;if(/[^a-zA-Z0-9]/.test(pw))score++;const levels=[{w:'20%',bg:'var(--coral)',t:'Too short'},{w:'40%',bg:'#c47c1a',t:'Weak'},{w:'60%',bg:'#c47c1a',t:'Fair'},{w:'80%',bg:'var(--cyan)',t:'Good'},{w:'100%',bg:'#2a8a4a',t:'Strong'}];const l=levels[Math.max(0,score-1)];fill.style.width=l.w;fill.style.background=l.bg;lbl.textContent=l.t;lbl.style.color=l.bg;}

@@ -7,6 +7,7 @@ import {
   BookOpen, Calculator, FlaskConical, Globe, TrendingUp,
   Landmark, Heart, Briefcase, Cog, Lock, Star, Search, type IconProps,
 } from '@/components/icons'
+import Footer from '@/components/Footer'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -182,6 +183,7 @@ export default function QuizBrowsePage() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   )
 }

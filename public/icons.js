@@ -36,5 +36,7 @@ const ICONS = (function () {
     gradCap:   (s = 15) => svg(s, '<path d="M2 9 12 4l10 5-10 5z"/><path d="M6 11.5V17c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/><path d="M22 9v6"/>'),
     target:    (s = 15) => svg(s, '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.8"/><circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/>'),
     sprout:    (s = 15) => svg(s, '<path d="M7 20h10M12 20v-8"/><path d="M12 12c0-3.5-2.5-6-7-6 0 4.5 2.5 6.5 7 6z"/><path d="M12 10c0-3 2-5 6-5 0 3.5-2 5.5-6 5z"/>'),
+    facebook:  (s = 18) => svg(s, '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>'),
+    instagram: (s = 18) => svg(s, '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>'),
   };
 })();
