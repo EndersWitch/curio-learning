@@ -193,7 +193,7 @@ export default function QuizBrowsePage() {
 function TopicCard({ topic, isPremium }: { topic: Topic; isPremium: boolean }) {
   const Icon = subjectIcon(topic.subject)
   const hasLockedLevels = topic.free_level_count < topic.level_count
-  const href = `/quiz/${encodeURIComponent(topic.broad_topic)}`
+  const href = `/quiz/${encodeURIComponent(topic.broad_topic)}?grade=${topic.grade}&subject=${encodeURIComponent(topic.subject)}`
 
   return (
     <a href={href}

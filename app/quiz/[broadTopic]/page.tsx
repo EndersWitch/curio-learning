@@ -58,11 +58,21 @@ export default function BroadTopicPage() {
   useEffect(() => { if (!authLoading) loadProgress() }, [authLoading, user?.id, broadTopic])
 
   async function loadLevels() {
-    const { data, error } = await sb
+    // broad_topic slugs (e.g. "parts_of_speech") are reused across grades/subjects —
+    // grade+subject from the link disambiguate which one the user actually picked.
+    const sp = new URLSearchParams(window.location.search)
+    const gradeParam = sp.get('grade')
+    const subjectParam = sp.get('subject')
+
+    let query = sb
       .from('quiz_levels')
       .select('*')
       .eq('broad_topic', broadTopic)
-      .order('level_order')
+
+    if (gradeParam) query = query.eq('grade', Number(gradeParam))
+    if (subjectParam) query = query.eq('subject', subjectParam)
+
+    const { data, error } = await query.order('level_order')
 
     if (error || !data || data.length === 0) {
       setNotFound(true); setLoading(false); return

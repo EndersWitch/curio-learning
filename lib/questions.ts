@@ -60,10 +60,12 @@ export async function fetchLevelQuestions(quizLevelUUID: string): Promise<Shuffl
     return shuffle(byUUID as Question[]).map(shuffleQuestion)
   }
 
-  // Fall back: look up the string level_id from quiz_levels, then match on that
+  // Fall back: look up the string level_id from quiz_levels, then match on that.
+  // level_id strings (e.g. "parts_of_speech_1") are reused across grades, so we
+  // must also filter by grade/subject or different grades' questions will mix.
   const { data: lvl } = await sb
     .from('quiz_levels')
-    .select('level_id')
+    .select('level_id, grade, subject')
     .eq('id', quizLevelUUID)
     .single()
 
@@ -73,6 +75,8 @@ export async function fetchLevelQuestions(quizLevelUUID: string): Promise<Shuffl
     .from('questions')
     .select('*')
     .eq('level_id', lvl.level_id)
+    .eq('grade', lvl.grade)
+    .eq('subject', lvl.subject)
 
   if (!byString || byString.length === 0) return []
   return shuffle(byString as Question[]).map(shuffleQuestion)
