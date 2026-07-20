@@ -76,6 +76,7 @@ export default function PlayPage() {
         userId: user.id,
         topicId: levelMeta.broad_topic,
         levelId: levelMeta.level_id,
+        grade: levelMeta.grade,
         sectionType: levelMeta.section_type ?? 'learning_level',
         passThresholdPercent: 60,
         result: res,

@@ -68,11 +68,12 @@ export async function saveQuizResult(params: {
   userId: string
   topicId: string      // quiz_levels.broad_topic (slug)
   levelId: string       // quiz_levels.level_id (slug, NOT the row uuid)
+  grade: number         // quiz_levels.grade — level_id slugs are reused across grades, so this disambiguates progress rows
   sectionType: string
   passThresholdPercent: number // 0-100
   result: QuizResult
 }): Promise<{ xpEarned: number; passed: boolean; firstPass: boolean }> {
-  const { userId, topicId, levelId, sectionType, passThresholdPercent, result } = params
+  const { userId, topicId, levelId, grade, sectionType, passThresholdPercent, result } = params
   const scorePercent = Math.round((result.score / result.total) * 100)
 
   // Streaks are a "what day was it for the student" concept, not a database
@@ -85,6 +86,7 @@ export async function saveQuizResult(params: {
     p_user_id: userId,
     p_topic_id: topicId,
     p_level_id: levelId,
+    p_grade: grade,
     p_score: scorePercent,
     p_correct: result.score,
     p_total: result.total,

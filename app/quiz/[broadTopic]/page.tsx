@@ -55,7 +55,9 @@ export default function BroadTopicPage() {
   const [notFound, setNotFound] = useState(false)
 
   useEffect(() => { loadLevels() }, [broadTopic])
-  useEffect(() => { if (!authLoading) loadProgress() }, [authLoading, user?.id, broadTopic])
+  // Wait for levels so we know which grade's progress to load — level_id slugs
+  // (e.g. "nouns_1") are reused across grades, so progress must be grade-scoped too.
+  useEffect(() => { if (!authLoading && levels.length > 0) loadProgress() }, [authLoading, user?.id, levels])
 
   async function loadLevels() {
     // broad_topic slugs (e.g. "parts_of_speech") are reused across grades/subjects —
@@ -83,11 +85,13 @@ export default function BroadTopicPage() {
 
   async function loadProgress() {
     if (!user) { setProgressMap(new Map()); return }
+    const grade = levels[0]?.grade
     const { data } = await sb
       .from('user_level_progress')
       .select('level_id, best_score, passed, xp_earned, attempts')
       .eq('user_id', user.id)
       .eq('topic_id', broadTopic)
+      .eq('grade', grade)
 
     setProgressMap(new Map((data ?? []).map((r: any) => [r.level_id, r])))
   }
