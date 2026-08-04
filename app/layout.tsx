@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Poppins, DM_Sans } from 'next/font/google'
 import './globals.css'
 import AdGate from '@/components/AdGate'
+import { AccountDrawerProvider } from '@/components/AccountDrawerProvider'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -51,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${poppins.variable} ${dmSans.variable}`}>
       <body className="font-body antialiased">
-        {children}
+        <AccountDrawerProvider>{children}</AccountDrawerProvider>
         <AdGate />
       </body>
     </html>

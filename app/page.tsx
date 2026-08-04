@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Bloom from '@/components/Bloom'
 import Footer from '@/components/Footer'
 import { sb } from '@/lib/supabase'
+import { useAccountDrawer } from '@/components/AccountDrawerProvider'
 import { Flame, Zap, FileText, PenLine, User, Star, Check, Brain, Heart, ListChecks } from '@/components/icons'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -55,6 +56,7 @@ const SETS = [
 export default function HomePage() {
   const [session, setSession] = useState<Session | null>(null)
   const [mounted, setMounted] = useState(false)
+  const { openDrawer } = useAccountDrawer()
 
   // Quiz state
   const [activeSet, setActiveSet] = useState(0)
@@ -98,6 +100,16 @@ export default function HomePage() {
     })
     return () => ro.disconnect()
   }, [])
+
+  useEffect(() => {
+    // Static pages (papers, subscription, subjects/*, etc.) link to /profile,
+    // which next.config.js redirects here with ?account=1 — pop the drawer
+    // open so "Edit profile" still feels like one action from anywhere.
+    if (new URLSearchParams(window.location.search).get('account') === '1') {
+      openDrawer()
+      window.history.replaceState(null, '', '/')
+    }
+  }, [openDrawer])
 
   async function loadDashboard(s: Session) {
     const userId = (s as any).user.id as string
@@ -269,7 +281,12 @@ export default function HomePage() {
                 </div>
                 <a href="/papers" className="profile-dd-item dd-item-icon"><FileText size={15} /> Papers</a>
                 <a href="/quiz" className="profile-dd-item dd-item-icon"><PenLine size={15} /> Start a quiz</a>
-                <a href="/profile" className="profile-dd-item dd-item-icon"><User size={15} /> Edit profile</a>
+                <button
+                  className="profile-dd-item dd-item-icon"
+                  onClick={() => { document.getElementById('profileDD')?.classList.remove('open'); openDrawer() }}
+                >
+                  <User size={15} /> Edit profile
+                </button>
                 <a href="/subscription" className="profile-dd-item dd-item-icon"><Star size={15} /> Manage subscription</a>
                 <button className="profile-dd-item danger" onClick={doLogout}>Sign out</button>
               </div>

@@ -10,6 +10,7 @@ import { fetchLevelQuestions } from '@/lib/questions'
 import { saveQuizResult } from '@/lib/progress'
 import type { ShuffledQuestion, QuizResult } from '@/types/quiz'
 import { Target, Zap, Lock, AlertTriangle, X } from '@/components/icons'
+import { HoldToConfirm } from '@/components/interior/hold-to-confirm'
 
 export default function PlayPage() {
   const params = useParams()
@@ -153,11 +154,16 @@ export default function PlayPage() {
       <div className="sticky top-0 z-30 backdrop-blur-md"
         style={{ background: 'rgba(43,30,63,0.95)', borderBottom: '1px solid rgba(109,211,206,0.15)' }}>
         <div className="max-w-2xl mx-auto px-6 py-3 flex items-center justify-between">
-          <button
-            onClick={() => { if (confirm('Leave quiz? Progress will be lost.')) router.push(learnHref) }}
-            className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: '#9b8ab0' }}>
-            <X size={13} /> Exit
-          </button>
+          <HoldToConfirm
+            size="sm"
+            duration={900}
+            confirmLabel="Leaving…"
+            onConfirm={() => router.push(learnHref)}
+          >
+            <span className="inline-flex items-center gap-1" style={{ color: '#9b8ab0' }}>
+              <X size={12} /> Hold to exit
+            </span>
+          </HoldToConfirm>
           <h1 className="font-black text-sm truncate" style={{ color: '#F7F7FF' }}>
             {levelMeta?.level_display}
           </h1>

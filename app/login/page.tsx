@@ -1,9 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Bloom from '@/components/Bloom'
 import { sb } from '@/lib/supabase'
-import { Check } from '@/components/icons'
+import { Check, Eye, EyeOff } from '@/components/icons'
+import { SegmentedControl } from '@/components/interior/segmented-control'
+import { FloatingLabelInput } from '@/components/interior/floating-label'
+import { PasswordStrength } from '@/components/interior/password-strength'
+import { LoadingButton } from '@/components/interior/loading-button'
 
 function friendlyError(msg: string) {
   if (!msg) return 'Something went wrong. Please try again.'
@@ -23,15 +27,21 @@ function friendlyError(msg: string) {
 
 type Tab = 'login' | 'signup' | 'forgot'
 
+function EyeToggle({ shown, onToggle }: { shown: boolean; onToggle: () => void }) {
+  return (
+    <button type="button" onClick={onToggle} tabIndex={-1} className="grid place-items-center" style={{ width: 32, height: 32, color: 'rgba(247,247,255,0.3)' }}>
+      {shown ? <EyeOff size={16} /> : <Eye size={16} />}
+    </button>
+  )
+}
+
 export default function LoginPage() {
   const [tab, setTab] = useState<Tab>('login')
   const [alert, setAlert] = useState<{ msg: string; type: string } | null>(null)
-  const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState<{ title: string; email: string } | null>(null)
   const [showPw, setShowPw] = useState(false)
   const [showPw2, setShowPw2] = useState(false)
   const [showPw3, setShowPw3] = useState(false)
-  const [pwStrength, setPwStrength] = useState<{ width: string; color: string; label: string } | null>(null)
 
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPw, setLoginPw] = useState('')
@@ -43,6 +53,9 @@ export default function LoginPage() {
   const [forgotEmail, setForgotEmail] = useState('')
   const [confirmError, setConfirmError] = useState(false)
 
+  const loginBtnRef = useRef<HTMLButtonElement>(null)
+  const signupBtnRef = useRef<HTMLButtonElement>(null)
+
   useEffect(() => {
     sb.auth.getSession().then(({ data: { session } }) => {
       if (session) window.location.href = '/'
@@ -51,73 +64,64 @@ export default function LoginPage() {
     if (params.get('tab') === 'signup') setTab('signup')
   }, [])
 
-  function checkPwStrength(pw: string) {
-    if (!pw) { setPwStrength(null); return }
-    let score = 0
-    if (pw.length >= 6) score++
-    if (pw.length >= 10) score++
-    if (/[A-Z]/.test(pw)) score++
-    if (/[0-9]/.test(pw)) score++
-    if (/[^a-zA-Z0-9]/.test(pw)) score++
-    const levels = [
-      { width: '20%', color: 'var(--coral)', label: 'Too short' },
-      { width: '40%', color: '#c47c1a', label: 'Weak' },
-      { width: '60%', color: '#c47c1a', label: 'Fair' },
-      { width: '80%', color: 'var(--cyan)', label: 'Good' },
-      { width: '100%', color: '#2a9a5a', label: 'Strong' },
-    ]
-    setPwStrength(levels[Math.max(0, score - 1)])
-  }
-
   async function doLogin() {
     setAlert(null)
-    if (!loginEmail || !loginPw) { setAlert({ msg: 'Please fill in your email and password.', type: 'err' }); return }
-    setLoading(true)
-    try {
-      const { error } = await sb.auth.signInWithPassword({ email: loginEmail, password: loginPw })
-      if (error) throw error
-      window.location.href = '/'
-    } catch (e: any) {
-      const msg = e.message || ''
+    if (!loginEmail || !loginPw) {
+      setAlert({ msg: 'Please fill in your email and password.', type: 'err' })
+      throw new Error('Missing fields')
+    }
+    const { error } = await sb.auth.signInWithPassword({ email: loginEmail, password: loginPw })
+    if (error) {
+      const msg = error.message || ''
       if (msg.toLowerCase().includes('email not confirmed') || msg.toLowerCase().includes('not confirmed')) {
         setAlert({ msg: '<strong>Email not verified yet.</strong><br/>Check your inbox for the confirmation email we sent when you signed up, and click the link to verify your account before signing in.', type: 'warn' })
       } else {
         setAlert({ msg: friendlyError(msg), type: 'err' })
       }
-      setLoading(false)
+      throw error
     }
+    window.location.href = '/'
   }
 
   async function doSignup() {
     setAlert(null); setConfirmError(false)
-    if (!signupEmail || !signupPw) { setAlert({ msg: 'Please fill in your email and password.', type: 'err' }); return }
-    if (signupPw.length < 6) { setAlert({ msg: 'Password must be at least 6 characters.', type: 'err' }); return }
-    if (signupPw !== signupConfirm) { setAlert({ msg: 'Passwords do not match. Please check and try again.', type: 'err' }); setConfirmError(true); return }
-    setLoading(true)
-    try {
-      const { error } = await sb.auth.signUp({
-        email: signupEmail,
-        password: signupPw,
-        options: { data: { full_name: signupName, grade: signupGrade } }
-      })
-      if (error) throw error
-      setSuccess({ title: `Welcome${signupName ? ', ' + signupName.split(' ')[0] : ''}!`, email: signupEmail })
-    } catch (e: any) {
-      setAlert({ msg: friendlyError(e.message), type: 'err' })
-      setLoading(false)
+    if (!signupEmail || !signupPw) {
+      setAlert({ msg: 'Please fill in your email and password.', type: 'err' })
+      throw new Error('Missing fields')
     }
+    if (signupPw.length < 6) {
+      setAlert({ msg: 'Password must be at least 6 characters.', type: 'err' })
+      throw new Error('Weak password')
+    }
+    if (signupPw !== signupConfirm) {
+      setAlert({ msg: 'Passwords do not match. Please check and try again.', type: 'err' })
+      setConfirmError(true)
+      throw new Error('Password mismatch')
+    }
+    const { error } = await sb.auth.signUp({
+      email: signupEmail,
+      password: signupPw,
+      options: { data: { full_name: signupName, grade: signupGrade } },
+    })
+    if (error) {
+      setAlert({ msg: friendlyError(error.message), type: 'err' })
+      throw error
+    }
+    setSuccess({ title: `Welcome${signupName ? ', ' + signupName.split(' ')[0] : ''}!`, email: signupEmail })
   }
 
   async function doForgot() {
     setAlert(null)
-    if (!forgotEmail) { setAlert({ msg: 'Please enter your email address.', type: 'err' }); return }
-    try {
-      const { error } = await sb.auth.resetPasswordForEmail(forgotEmail)
-      if (error) throw error
-      setAlert({ msg: 'Reset link sent! Check your inbox.', type: 'ok' })
-    } catch (e: any) {
-      setAlert({ msg: friendlyError(e.message), type: 'err' })
+    if (!forgotEmail) {
+      setAlert({ msg: 'Please enter your email address.', type: 'err' })
+      throw new Error('Missing email')
     }
+    const { error } = await sb.auth.resetPasswordForEmail(forgotEmail)
+    if (error) {
+      setAlert({ msg: friendlyError(error.message), type: 'err' })
+      throw error
+    }
+    setAlert({ msg: 'Reset link sent! Check your inbox.', type: 'ok' })
   }
 
   const tabTitles: Record<Tab, { eyebrow: string; title: React.ReactNode; sub: string }> = {
@@ -182,9 +186,16 @@ export default function LoginPage() {
           </div>
 
           {tab !== 'forgot' && !success && (
-            <div className="tab-row">
-              <button className={`tab-btn${tab === 'login' ? ' active' : ''}`} onClick={() => { setTab('login'); setAlert(null) }}>Sign in</button>
-              <button className={`tab-btn${tab === 'signup' ? ' active' : ''}`} onClick={() => { setTab('signup'); setAlert(null) }}>Create account</button>
+            <div style={{ marginBottom: '1.6rem' }}>
+              <SegmentedControl
+                label="Sign in or create an account"
+                value={tab}
+                onValueChange={(v) => { setTab(v as Tab); setAlert(null) }}
+                options={[
+                  { value: 'login', label: 'Sign in' },
+                  { value: 'signup', label: 'Create account' },
+                ]}
+              />
             </div>
           )}
 
@@ -196,29 +207,30 @@ export default function LoginPage() {
           {tab === 'login' && !success && (
             <>
               <div className="field">
-                <label className="field-label">Email address</label>
-                <input className="field-input" type="email" placeholder="you@email.com" value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && doLogin()} />
+                <FloatingLabelInput
+                  label="Email address"
+                  type="email"
+                  value={loginEmail}
+                  onChange={setLoginEmail}
+                  onKeyDown={(e) => e.key === 'Enter' && loginBtnRef.current?.click()}
+                />
               </div>
               <div className="field">
-                <label className="field-label">Password</label>
-                <div className="field-wrap">
-                  <input className="field-input has-eye" type={showPw ? 'text' : 'password'}
-                    placeholder="••••••••" value={loginPw}
-                    onChange={(e) => setLoginPw(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && doLogin()} />
-                  <button type="button" className={`eye-btn${showPw ? ' showing' : ''}`} onClick={() => setShowPw(!showPw)} tabIndex={-1}>
-                    <EyeIcon open /><EyeIcon />
-                  </button>
-                </div>
+                <FloatingLabelInput
+                  label="Password"
+                  type={showPw ? 'text' : 'password'}
+                  value={loginPw}
+                  onChange={setLoginPw}
+                  onKeyDown={(e) => e.key === 'Enter' && loginBtnRef.current?.click()}
+                  trailing={<EyeToggle shown={showPw} onToggle={() => setShowPw(!showPw)} />}
+                />
                 <button className="forgot-link" onClick={() => { setTab('forgot'); setAlert(null) }}>
                   Forgot password?
                 </button>
               </div>
-              <button className="btn-submit" disabled={loading} onClick={doLogin}>
-                {loading ? 'Please wait…' : 'Sign in →'}
-              </button>
+              <LoadingButton ref={loginBtnRef} onAction={doLogin} pendingLabel="Signing in…" successLabel="Welcome back" errorLabel="Try again">
+                Sign in
+              </LoadingButton>
               <div className="switch-link">
                 No account yet? <a href="#" onClick={(e) => { e.preventDefault(); setTab('signup'); setAlert(null) }}>Create one free</a>
               </div>
@@ -229,42 +241,30 @@ export default function LoginPage() {
           {tab === 'signup' && !success && (
             <>
               <div className="field">
-                <label className="field-label">Your name</label>
-                <input className="field-input" type="text" placeholder="First name is fine" value={signupName} onChange={(e) => setSignupName(e.target.value)} />
+                <FloatingLabelInput label="Your name" value={signupName} onChange={setSignupName} />
               </div>
               <div className="field">
-                <label className="field-label">Email address</label>
-                <input className="field-input" type="email" placeholder="you@email.com" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} />
+                <FloatingLabelInput label="Email address" type="email" value={signupEmail} onChange={setSignupEmail} />
               </div>
               <div className="field">
-                <label className="field-label">Password</label>
-                <div className="field-wrap">
-                  <input className="field-input has-eye" type={showPw2 ? 'text' : 'password'}
-                    placeholder="At least 6 characters" value={signupPw}
-                    onChange={(e) => { setSignupPw(e.target.value); checkPwStrength(e.target.value) }} />
-                  <button type="button" className={`eye-btn${showPw2 ? ' showing' : ''}`} onClick={() => setShowPw2(!showPw2)} tabIndex={-1}>
-                    <EyeIcon open /><EyeIcon />
-                  </button>
-                </div>
-                {pwStrength && (
-                  <div className="pw-strength show">
-                    <div className="pw-bar-track">
-                      <div className="pw-bar-fill" style={{ width: pwStrength.width, background: pwStrength.color }} />
-                    </div>
-                    <span className="pw-label" style={{ color: pwStrength.color }}>{pwStrength.label}</span>
-                  </div>
-                )}
+                <FloatingLabelInput
+                  label="Password"
+                  type={showPw2 ? 'text' : 'password'}
+                  value={signupPw}
+                  onChange={setSignupPw}
+                  trailing={<EyeToggle shown={showPw2} onToggle={() => setShowPw2(!showPw2)} />}
+                />
+                <PasswordStrength value={signupPw} showRules={false} />
               </div>
               <div className="field">
-                <label className="field-label">Confirm password</label>
-                <div className="field-wrap">
-                  <input className={`field-input has-eye${confirmError ? ' error' : ''}`} type={showPw3 ? 'text' : 'password'}
-                    placeholder="Repeat your password" value={signupConfirm}
-                    onChange={(e) => setSignupConfirm(e.target.value)} />
-                  <button type="button" className={`eye-btn${showPw3 ? ' showing' : ''}`} onClick={() => setShowPw3(!showPw3)} tabIndex={-1}>
-                    <EyeIcon open /><EyeIcon />
-                  </button>
-                </div>
+                <FloatingLabelInput
+                  label="Confirm password"
+                  type={showPw3 ? 'text' : 'password'}
+                  value={signupConfirm}
+                  onChange={setSignupConfirm}
+                  invalid={confirmError}
+                  trailing={<EyeToggle shown={showPw3} onToggle={() => setShowPw3(!showPw3)} />}
+                />
               </div>
               <div className="field">
                 <label className="field-label">Your grade</label>
@@ -276,9 +276,9 @@ export default function LoginPage() {
                 </select>
                 <div className="field-hint">Helps us show you the most relevant content.</div>
               </div>
-              <button className="btn-submit" disabled={loading} onClick={doSignup}>
-                {loading ? 'Please wait…' : 'Create free account →'}
-              </button>
+              <LoadingButton ref={signupBtnRef} onAction={doSignup} pendingLabel="Creating account…" successLabel="Account created" errorLabel="Try again">
+                Create free account
+              </LoadingButton>
               <div className="switch-link">
                 Already have an account? <a href="#" onClick={(e) => { e.preventDefault(); setTab('login'); setAlert(null) }}>Sign in</a>
               </div>
@@ -289,10 +289,11 @@ export default function LoginPage() {
           {tab === 'forgot' && !success && (
             <>
               <div className="field">
-                <label className="field-label">Email address</label>
-                <input className="field-input" type="email" placeholder="you@email.com" value={forgotEmail} onChange={(e) => setForgotEmail(e.target.value)} />
+                <FloatingLabelInput label="Email address" type="email" value={forgotEmail} onChange={setForgotEmail} />
               </div>
-              <button className="btn-submit" onClick={doForgot}>Send reset link →</button>
+              <LoadingButton onAction={doForgot} pendingLabel="Sending…" successLabel="Link sent" errorLabel="Try again">
+                Send reset link
+              </LoadingButton>
               <div className="switch-link">
                 <a href="#" onClick={(e) => { e.preventDefault(); setTab('login'); setAlert(null) }}>← Back to sign in</a>
               </div>
@@ -316,18 +317,5 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-  )
-}
-
-function EyeIcon({ open }: { open?: boolean }) {
-  return open ? (
-    <svg className="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
-    </svg>
-  ) : (
-    <svg className="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
-      <line x1="1" y1="1" x2="23" y2="23" />
-    </svg>
   )
 }

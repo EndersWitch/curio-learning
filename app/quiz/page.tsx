@@ -8,6 +8,7 @@ import {
   Landmark, Heart, Briefcase, Cog, Lock, Star, Search, type IconProps,
 } from '@/components/icons'
 import Footer from '@/components/Footer'
+import { SkeletonSwap } from '@/components/interior/skeleton-swap'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -162,26 +163,31 @@ export default function QuizBrowsePage() {
 
       {/* Topics grid */}
       <div className="max-w-4xl mx-auto px-6 pb-16">
-        {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="rounded-2xl animate-pulse"
-                style={{ background: '#231935', height: '140px' }} />
-            ))}
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="text-center py-20">
-            <Search size={40} style={{ color: '#4a3a63', margin: '0 auto 0.75rem' }} />
-            <p className="font-black text-lg" style={{ color: '#F7F7FF' }}>No topics yet for this grade</p>
-            <p className="text-sm mt-1" style={{ color: '#9b8ab0' }}>More are being added. Check back soon!</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filtered.map(topic => (
-              <TopicCard key={topic.broad_topic} topic={topic} isPremium={isPremium} />
-            ))}
-          </div>
-        )}
+        <SkeletonSwap
+          ready={!loading}
+          label="Topics"
+          skeleton={
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="rounded-2xl" style={{ background: '#231935', height: '140px' }} />
+              ))}
+            </div>
+          }
+        >
+          {filtered.length === 0 ? (
+            <div className="text-center py-20">
+              <Search size={40} style={{ color: '#4a3a63', margin: '0 auto 0.75rem' }} />
+              <p className="font-black text-lg" style={{ color: '#F7F7FF' }}>No topics yet for this grade</p>
+              <p className="text-sm mt-1" style={{ color: '#9b8ab0' }}>More are being added. Check back soon!</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filtered.map(topic => (
+                <TopicCard key={`${topic.grade}-${topic.broad_topic}`} topic={topic} isPremium={isPremium} />
+              ))}
+            </div>
+          )}
+        </SkeletonSwap>
       </div>
       <Footer />
     </div>

@@ -14,7 +14,6 @@ const nextConfig = {
       // Clean URLs → static HTML files in /public
       { source: '/papers', destination: '/papers.html' },
       { source: '/subscription', destination: '/subscription.html' },
-      { source: '/profile', destination: '/profile.html' },
       { source: '/contact', destination: '/contact.html' },
       { source: '/privacy', destination: '/privacy.html' },
       { source: '/terms', destination: '/terms.html' },
@@ -33,6 +32,9 @@ const nextConfig = {
       { source: '/index.html', destination: '/', permanent: true },
       { source: '/login.html', destination: '/login', permanent: true },
       { source: '/quiz.html', destination: '/quiz', permanent: true },
+      // Profile is now an overlay drawer on the home page, not its own page
+      { source: '/profile', destination: '/?account=1', permanent: false },
+      { source: '/profile.html', destination: '/?account=1', permanent: false },
     ]
   },
 }

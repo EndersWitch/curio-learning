@@ -3,17 +3,19 @@
 import { useEffect, useRef } from 'react'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
+import { useAccountDrawer } from '@/components/AccountDrawerProvider'
 import { Flame, Zap, FileText, PenLine, User, Star } from '@/components/icons'
 
 export default function QuizNav() {
   const { user, loading } = useAuth()
+  const { openDrawer } = useAccountDrawer()
   const ddRef = useRef<HTMLDivElement>(null)
 
   // Close dropdown when clicking outside — same as homepage
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (ddRef.current && !ddRef.current.contains(e.target as Node)) {
-        ddRef.current.classList.remove('open')
+        document.getElementById('profileDD')?.classList.remove('open')
       }
     }
     document.addEventListener('click', handleClick)
@@ -75,7 +77,7 @@ export default function QuizNav() {
               className="profile-btn"
               onClick={(e) => {
                 e.stopPropagation()
-                ddRef.current?.classList.toggle('open')
+                document.getElementById('profileDD')?.classList.toggle('open')
               }}>
               {initial}
             </button>
@@ -86,7 +88,12 @@ export default function QuizNav() {
               </div>
               <a href="/papers.html" className="profile-dd-item dd-item-icon"><FileText size={15} /> Papers</a>
               <a href="/quiz" className="profile-dd-item dd-item-icon"><PenLine size={15} /> Start a quiz</a>
-              <a href="/profile" className="profile-dd-item dd-item-icon"><User size={15} /> Edit profile</a>
+              <button
+                className="profile-dd-item dd-item-icon"
+                onClick={() => { document.getElementById('profileDD')?.classList.remove('open'); openDrawer() }}
+              >
+                <User size={15} /> Edit profile
+              </button>
               <a href="/subscription" className="profile-dd-item dd-item-icon"><Star size={15} /> Manage subscription</a>
               <button className="profile-dd-item danger" onClick={doLogout}>Sign out</button>
             </div>

@@ -41,6 +41,7 @@ import {
   Briefcase as BriefcaseIcon,
   Cog as CogIcon,
   TrendingUp as TrendingUpIcon,
+  EyeOff as EyeOffIcon,
   type LucideProps,
 } from 'lucide-react'
 
@@ -111,3 +112,4 @@ export const Landmark = withDefaultStroke(LandmarkIcon)
 export const Briefcase = withDefaultStroke(BriefcaseIcon)
 export const Cog = withDefaultStroke(CogIcon)
 export const TrendingUp = withDefaultStroke(TrendingUpIcon)
+export const EyeOff = withDefaultStroke(EyeOffIcon)
