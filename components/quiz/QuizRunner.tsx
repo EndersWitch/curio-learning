@@ -78,9 +78,9 @@ function RichText({ text, className, style }: { text: string; className?: string
   return (
     <span className={className} style={style}>
       {parts.map((p, i) =>
-        p.bold ? <strong key={i} style={{ fontWeight: 700, color: '#211A13' }}>{p.content}</strong>
+        p.bold ? <strong key={i} style={{ fontWeight: 700, color: 'var(--ink)' }}>{p.content}</strong>
         : p.italic ? <em key={i} style={{ fontStyle: 'italic' }}>{p.content}</em>
-        : p.cyan ? <span key={i} style={{ color: '#B8451F', fontWeight: 600 }}>{p.content}</span>
+        : p.cyan ? <span key={i} style={{ color: 'var(--rust)', fontWeight: 600 }}>{p.content}</span>
         : <span key={i}>{p.content}</span>
       )}
     </span>
@@ -89,19 +89,19 @@ function RichText({ text, className, style }: { text: string; className?: string
 
 // Curio colour tokens
 const CURIO = {
-  bg:         '#F6F0E2',
-  card:       '#FBF8EF',
-  cardBorder: 'rgba(184,69,31,0.18)',
-  text:       '#211A13',
-  subtext:    'rgba(33,26,19,0.55)',
-  coral:      '#9C3428',
-  cyan:       '#B8451F',
-  amber:      '#A9752A',
+  bg:         'var(--paper)',
+  card:       'var(--paper-raised)',
+  cardBorder: 'rgba(var(--rust-rgb),0.18)',
+  text:       'var(--ink)',
+  subtext:    'rgba(var(--ink-rgb),0.55)',
+  coral:      'var(--brick)',
+  cyan:       'var(--rust)',
+  amber:      'var(--ochre)',
 }
 
 interface Burst { id: number; bx: number; by: number; color: string; size: number; delay: number }
 
-const BURST_COLORS = ['#3F6B3D', '#B8451F', '#A9752A', '#211A13']
+const BURST_COLORS = ['var(--moss)', 'var(--rust)', 'var(--ochre)', 'var(--ink)']
 
 function CorrectBurst() {
   const [particles] = useState<Burst[]>(() =>
@@ -203,23 +203,23 @@ export default function QuizRunner({
 
   function optionStyle(optKey: string): React.CSSProperties {
     if (answerState === 'idle') {
-      return { background: '#FBF8EF', borderColor: 'rgba(33,26,19,0.15)', color: CURIO.text, cursor: 'pointer' }
+      return { background: 'var(--paper-raised)', borderColor: 'rgba(var(--ink-rgb),0.15)', color: CURIO.text, cursor: 'pointer' }
     }
     if (optKey === current.correct_key) {
-      return { background: 'rgba(63,107,61,0.12)', borderColor: '#3F6B3D', color: '#3F6B3D' }
+      return { background: 'rgba(var(--moss-rgb),0.12)', borderColor: 'var(--moss)', color: 'var(--moss)' }
     }
     if (optKey === selected) {
-      return { background: 'rgba(156,52,40,0.1)', borderColor: CURIO.coral, color: CURIO.coral }
+      return { background: 'rgba(var(--brick-rgb),0.1)', borderColor: CURIO.coral, color: CURIO.coral }
     }
-    return { background: 'rgba(33,26,19,0.02)', borderColor: 'rgba(33,26,19,0.08)', color: CURIO.subtext, opacity: 0.5 }
+    return { background: 'rgba(var(--ink-rgb),0.02)', borderColor: 'rgba(var(--ink-rgb),0.08)', color: CURIO.subtext, opacity: 0.5 }
   }
 
   function bubbleStyle(optKey: string): React.CSSProperties {
     if (answerState !== 'idle') {
-      if (optKey === current.correct_key) return { background: '#3F6B3D', color: '#F6F0E2' }
-      if (optKey === selected)            return { background: CURIO.coral, color: '#F6F0E2' }
+      if (optKey === current.correct_key) return { background: 'var(--moss)', color: 'var(--paper)' }
+      if (optKey === selected)            return { background: CURIO.coral, color: 'var(--paper)' }
     }
-    return { background: 'rgba(33,26,19,0.08)', color: CURIO.subtext }
+    return { background: 'rgba(var(--ink-rgb),0.08)', color: CURIO.subtext }
   }
 
   return (
@@ -231,7 +231,7 @@ export default function QuizRunner({
           {currentIndex + 1}/{questions.length}
         </span>
         <div className="flex-1">
-          <ProgressBar value={progressPercent} color="bg-[#B8451F]" />
+          <ProgressBar value={progressPercent} color="bg-[var(--rust)]" />
         </div>
         <span className={xpBump ? 'animate-xp-bump inline-block' : 'inline-block'}>
           <XPBadge xp={xpDisplay} size="sm" />
@@ -243,24 +243,24 @@ export default function QuizRunner({
         style={{ background: CURIO.card, border: `1px solid ${CURIO.cardBorder}` }}>
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs font-black px-2.5 py-1 rounded-full"
-            style={{ background: 'rgba(184,69,31,0.1)', color: CURIO.cyan }}>
+            style={{ background: 'rgba(var(--rust-rgb),0.1)', color: CURIO.cyan }}>
             Question {currentIndex + 1}
           </span>
           {current.difficulty && (
             <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded-full"
-              style={{ background: 'rgba(169,117,42,0.12)', color: CURIO.amber }}>
+              style={{ background: 'rgba(var(--ochre-rgb),0.12)', color: CURIO.amber }}>
               <Zap size={12} /> +{questionXp(current.difficulty)} XP · {current.difficulty}
             </span>
           )}
           {sectionType === 'subtopic_mastery' && (
             <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded-full"
-              style={{ background: 'rgba(169,117,42,0.14)', color: CURIO.amber }}>
+              style={{ background: 'rgba(var(--ochre-rgb),0.14)', color: CURIO.amber }}>
               <Trophy size={12} /> Mastery
             </span>
           )}
           {sectionType === 'broad_topic_mastery' && (
             <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded-full"
-              style={{ background: 'rgba(184,69,31,0.1)', color: CURIO.cyan }}>
+              style={{ background: 'rgba(var(--rust-rgb),0.1)', color: CURIO.cyan }}>
               <GraduationCap size={12} /> Final Boss
             </span>
           )}
@@ -300,7 +300,7 @@ export default function QuizRunner({
               </span>
               {answerState !== 'idle' && opt.key === current.correct_key && (
                 <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center animate-pop-in"
-                  style={{ background: '#3F6B3D', color: '#F6F0E2' }}><Check size={15} /></span>
+                  style={{ background: 'var(--moss)', color: 'var(--paper)' }}><Check size={15} /></span>
               )}
               {answerState === 'wrong' && opt.key === selected && (
                 <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center animate-wiggle"
@@ -315,17 +315,17 @@ export default function QuizRunner({
       {answerState !== 'idle' && (
         <div className={`rounded-2xl px-5 py-4 mb-4 border-2 ${answerState === 'correct' ? 'animate-celebrate' : 'animate-wrong-bump'}`}
           style={answerState === 'correct'
-            ? { background: 'rgba(63,107,61,0.08)', borderColor: 'rgba(63,107,61,0.3)' }
-            : { background: 'rgba(156,52,40,0.08)', borderColor: 'rgba(156,52,40,0.3)' }
+            ? { background: 'rgba(var(--moss-rgb),0.08)', borderColor: 'rgba(var(--moss-rgb),0.3)' }
+            : { background: 'rgba(var(--brick-rgb),0.08)', borderColor: 'rgba(var(--brick-rgb),0.3)' }
           }>
           <p className="font-black text-base mb-2"
-            style={{ color: answerState === 'correct' ? '#3F6B3D' : '#9C3428' }}>
+            style={{ color: answerState === 'correct' ? 'var(--moss)' : 'var(--brick)' }}>
             {feedbackRef.current}
           </p>
           {/* Explanation always visible immediately — no button */}
           {current.explanation && (
             <p className="text-sm leading-relaxed pt-2"
-              style={{ color: CURIO.subtext, borderTop: '1px solid rgba(33,26,19,0.1)' }}>
+              style={{ color: CURIO.subtext, borderTop: '1px solid rgba(var(--ink-rgb),0.1)' }}>
               <RichText text={current.explanation} />
             </p>
           )}

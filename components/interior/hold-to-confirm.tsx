@@ -187,7 +187,7 @@ export function HoldToConfirm({
 
   const committed = phase === 'committed'
   const seconds = Math.round(duration / 100) / 10
-  const fillColor = tone === 'coral' ? '#9C3428' : '#B8451F'
+  const fillColor = tone === 'coral' ? 'var(--brick)' : 'var(--rust)'
 
   const swept = useMotionValue(0)
   const clipPath = useTransform(swept, (v) => `inset(0 ${(1 - v) * 100}% 0 0)`)
@@ -231,9 +231,9 @@ export function HoldToConfirm({
         WebkitTouchCallout: 'none',
         height: dims.height,
         borderRadius: dims.borderRadius,
-        border: '1px solid rgba(33,26,19,0.15)',
-        background: '#FBF8EF',
-        color: '#211A13',
+        border: '1px solid rgba(var(--ink-rgb),0.15)',
+        background: 'var(--paper-raised)',
+        color: 'var(--ink)',
         fontFamily: 'var(--h)',
         fontSize: dims.fontSize,
         fontWeight: dims.fontWeight,
@@ -246,7 +246,7 @@ export function HoldToConfirm({
 
       <motion.span
         aria-hidden
-        style={{ clipPath, background: fillColor, color: '#F6F0E2', paddingLeft: dims.padX, paddingRight: dims.padX }}
+        style={{ clipPath, background: fillColor, color: 'var(--paper)', paddingLeft: dims.padX, paddingRight: dims.padX }}
         className="absolute inset-0 grid place-items-center"
       >
         <Faces committed={committed} confirmLabel={confirmLabel}>{children}</Faces>

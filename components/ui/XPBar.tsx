@@ -39,7 +39,7 @@ export function XPBadge({ xp, animate = false, size = 'md' }: XPBadgeProps) {
   return (
     <span
       className={`inline-flex items-center gap-1 font-bold rounded-full ${sizes[size]}`}
-      style={{ background: '#A9752A', color: '#F6F0E2' }}
+      style={{ background: 'var(--ochre)', color: 'var(--paper)' }}
     >
       <Zap size={iconSizes[size]} /> {displayed} XP
     </span>
@@ -55,19 +55,19 @@ interface ProgressBarProps {
 
 export function ProgressBar({
   value,
-  color = 'bg-[#B8451F]',
+  color = 'bg-[var(--rust)]',
   label,
   showPercent = false,
 }: ProgressBarProps) {
   return (
     <div className="w-full">
       {(label || showPercent) && (
-        <div className="flex justify-between mb-1 text-xs font-medium" style={{ color: 'rgba(33,26,19,0.55)' }}>
+        <div className="flex justify-between mb-1 text-xs font-medium" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
           {label && <span>{label}</span>}
           {showPercent && <span>{Math.round(value)}%</span>}
         </div>
       )}
-      <div className="w-full h-3 rounded-full overflow-hidden" style={{ background: 'rgba(33,26,19,0.08)' }}>
+      <div className="w-full h-3 rounded-full overflow-hidden" style={{ background: 'rgba(var(--ink-rgb),0.08)' }}>
         <div
           className={`h-full rounded-full transition-all duration-700 ease-out ${color}`}
           style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
@@ -85,7 +85,7 @@ export function StreakBadge({ streak }: StreakBadgeProps) {
   if (streak < 1) return null
   return (
     <span className="inline-flex items-center gap-1.5 font-bold text-sm px-3 py-1 rounded-full"
-      style={{ background: '#F4ECDD', color: '#A9752A', border: '1px solid rgba(169,117,42,0.3)' }}>
+      style={{ background: '#F4ECDD', color: 'var(--ochre)', border: '1px solid rgba(var(--ochre-rgb),0.3)' }}>
       <Flame size={13} /> {streak} day streak
     </span>
   )
@@ -98,13 +98,13 @@ interface LevelPillProps {
 
 export function LevelPill({ level, xp }: LevelPillProps) {
   return (
-    <div className="flex items-center gap-2 rounded-lg px-3 py-1.5" style={{ background: '#FBF8EF', border: '1px solid rgba(33,26,19,0.15)' }}>
-      <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black" style={{ background: '#B8451F', color: '#F6F0E2' }}>
+    <div className="flex items-center gap-2 rounded-lg px-3 py-1.5" style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--ink-rgb),0.15)' }}>
+      <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black" style={{ background: 'var(--rust)', color: 'var(--paper)' }}>
         {level}
       </div>
       <div>
-        <div className="text-xs font-bold" style={{ color: '#211A13' }}>Level {level}</div>
-        <div className="text-xs" style={{ color: 'rgba(33,26,19,0.4)' }}>{xp.toLocaleString()} XP</div>
+        <div className="text-xs font-bold" style={{ color: 'var(--ink)' }}>Level {level}</div>
+        <div className="text-xs" style={{ color: 'rgba(var(--ink-rgb),0.4)' }}>{xp.toLocaleString()} XP</div>
       </div>
     </div>
   )

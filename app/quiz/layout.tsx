@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function QuizLayout({ children }: { children: React.ReactNode }) {
   return (
     <AuthProvider>
-      <div className="min-h-screen" style={{ background: '#F6F0E2' }}>
+      <div className="min-h-screen" style={{ background: 'var(--paper)' }}>
         <QuizNav />
         <main style={{ paddingTop: '60px' }}>{children}</main>
       </div>

@@ -150,8 +150,8 @@ export const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(f
 
   const palette =
     variant === 'solid'
-      ? { bg: '#B8451F', hoverBg: '#8F3417', text: '#F6F0E2' }
-      : { bg: 'rgba(33,26,19,0.06)', hoverBg: 'rgba(33,26,19,0.12)', text: '#211A13' }
+      ? { bg: 'var(--rust)', hoverBg: 'var(--rust-dark)', text: 'var(--paper)' }
+      : { bg: 'rgba(var(--ink-rgb),0.06)', hoverBg: 'rgba(var(--ink-rgb),0.12)', text: 'var(--ink)' }
 
   return (
     <>

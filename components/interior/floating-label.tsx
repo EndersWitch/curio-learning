@@ -138,8 +138,8 @@ export function FloatingLabelInput({
     [ref, inputRef],
   )
 
-  const borderColor = invalid ? '#9C3428' : focused ? '#B8451F' : 'rgba(33,26,19,0.15)'
-  const bg = '#FBF8EF'
+  const borderColor = invalid ? 'var(--brick)' : focused ? 'var(--rust)' : 'rgba(var(--ink-rgb),0.15)'
+  const bg = 'var(--paper-raised)'
 
   return (
     <div className={`w-full ${className}`}>
@@ -179,7 +179,7 @@ export function FloatingLabelInput({
               padding: trailing ? '0 40px 0 14px' : '0 14px',
               fontFamily: 'var(--b)',
               fontSize: '0.88rem',
-              color: '#211A13',
+              color: 'var(--ink)',
             }}
           />
           {trailing ? (
@@ -201,12 +201,12 @@ export function FloatingLabelInput({
             top: 32,
             fontSize: '0.82rem',
             lineHeight: '16px',
-            color: invalid ? '#9C3428' : raised ? 'rgba(33,26,19,0.7)' : 'rgba(33,26,19,0.4)',
+            color: invalid ? 'var(--brick)' : raised ? 'rgba(var(--ink-rgb),0.7)' : 'rgba(var(--ink-rgb),0.4)',
           }}
           className="block cursor-text select-none"
         >
           {label}
-          {required ? <span aria-hidden style={{ marginLeft: 2, color: 'rgba(33,26,19,0.35)' }}>*</span> : null}
+          {required ? <span aria-hidden style={{ marginLeft: 2, color: 'rgba(var(--ink-rgb),0.35)' }}>*</span> : null}
         </motion.label>
       </div>
 
@@ -214,7 +214,7 @@ export function FloatingLabelInput({
         <p
           id={hintId}
           className="mt-1.5"
-          style={{ fontSize: '0.68rem', lineHeight: '16px', color: invalid ? '#9C3428' : 'rgba(33,26,19,0.35)' }}
+          style={{ fontSize: '0.68rem', lineHeight: '16px', color: invalid ? 'var(--brick)' : 'rgba(var(--ink-rgb),0.35)' }}
         >
           {hint}
         </p>

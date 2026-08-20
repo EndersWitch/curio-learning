@@ -38,7 +38,7 @@ export default function ProgressionPath({
   return (
     <div className="space-y-3 relative">
       {/* Vertical connector line */}
-      <div className="absolute left-[1.9rem] top-10 bottom-10 w-px" style={{ background: 'rgba(33,26,19,0.15)' }} />
+      <div className="absolute left-[1.9rem] top-10 bottom-10 w-px" style={{ background: 'rgba(var(--ink-rgb),0.15)' }} />
 
       {levels.map((level, i) => {
         const passed = isLevelPassed(userProgress, level.id)
@@ -56,12 +56,12 @@ export default function ProgressionPath({
               className="w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center border transition-all duration-200"
               style={
                 passed
-                  ? { background: '#3F6B3D', borderColor: '#3F6B3D', color: '#F6F0E2' }
+                  ? { background: 'var(--moss)', borderColor: 'var(--moss)', color: 'var(--paper)' }
                   : locked
-                  ? { background: '#EAE0C6', borderColor: 'rgba(33,26,19,0.15)', color: 'rgba(33,26,19,0.35)' }
+                  ? { background: 'var(--paper-dim)', borderColor: 'rgba(var(--ink-rgb),0.15)', color: 'rgba(var(--ink-rgb),0.35)' }
                   : isMastery
-                  ? { background: '#A9752A', borderColor: '#A9752A', color: '#F6F0E2' }
-                  : { background: '#FBF8EF', borderColor: '#B8451F', color: '#B8451F' }
+                  ? { background: 'var(--ochre)', borderColor: 'var(--ochre)', color: 'var(--paper)' }
+                  : { background: 'var(--paper-raised)', borderColor: 'var(--rust)', color: 'var(--rust)' }
               }
             >
               <NodeIcon size={16} />
@@ -71,7 +71,7 @@ export default function ProgressionPath({
             {locked ? (
               <div
                 className={`flex-1 rounded-lg border p-4 ${isMastery ? 'border-dashed' : ''}`}
-                style={{ background: '#EAE0C6', borderColor: 'rgba(33,26,19,0.15)', opacity: 0.75 }}
+                style={{ background: 'var(--paper-dim)', borderColor: 'rgba(var(--ink-rgb),0.15)', opacity: 0.75 }}
               >
                 <LevelCardContent level={level} passed={passed} locked />
               </div>
@@ -81,10 +81,10 @@ export default function ProgressionPath({
                 className="flex-1 rounded-lg border p-4 transition-all duration-200 hover:-translate-y-0.5"
                 style={
                   passed
-                    ? { background: '#EEF3ED', borderColor: 'rgba(63,107,61,0.3)' }
+                    ? { background: '#EEF3ED', borderColor: 'rgba(var(--moss-rgb),0.3)' }
                     : isMastery
-                    ? { background: '#F4ECDD', borderColor: 'rgba(169,117,42,0.3)' }
-                    : { background: '#FBF8EF', borderColor: 'rgba(33,26,19,0.15)' }
+                    ? { background: '#F4ECDD', borderColor: 'rgba(var(--ochre-rgb),0.3)' }
+                    : { background: 'var(--paper-raised)', borderColor: 'rgba(var(--ink-rgb),0.15)' }
                 }
               >
                 <LevelCardContent level={level} passed={passed} locked={false} />
@@ -117,10 +117,10 @@ function LevelCardContent({
             className="text-xs font-black px-2 py-0.5 rounded"
             style={
               isMastery
-                ? { background: '#F4ECDD', color: '#A9752A' }
+                ? { background: '#F4ECDD', color: 'var(--ochre)' }
                 : level.section_type === 'general_practice'
-                ? { background: 'rgba(184,69,31,0.1)', color: '#B8451F' }
-                : { background: 'rgba(33,26,19,0.06)', color: 'rgba(33,26,19,0.6)' }
+                ? { background: 'rgba(var(--rust-rgb),0.1)', color: 'var(--rust)' }
+                : { background: 'rgba(var(--ink-rgb),0.06)', color: 'rgba(var(--ink-rgb),0.6)' }
             }
           >
             {isMastery
@@ -132,28 +132,28 @@ function LevelCardContent({
               : `Level ${level.level_number}`}
           </span>
           {level.is_premium && (
-            <span className="text-xs font-semibold px-1.5 py-0.5 rounded" style={{ background: '#F4ECDD', color: '#A9752A' }}>
+            <span className="text-xs font-semibold px-1.5 py-0.5 rounded" style={{ background: '#F4ECDD', color: 'var(--ochre)' }}>
               Premium
             </span>
           )}
         </div>
         <h4
           className="font-black text-sm mt-0.5 truncate"
-          style={{ color: locked ? 'rgba(33,26,19,0.35)' : '#211A13' }}
+          style={{ color: locked ? 'rgba(var(--ink-rgb),0.35)' : 'var(--ink)' }}
         >
           {level.title}
         </h4>
         {level.description && (
-          <p className="text-xs truncate mt-0.5 hidden sm:block" style={{ color: 'rgba(33,26,19,0.35)' }}>
+          <p className="text-xs truncate mt-0.5 hidden sm:block" style={{ color: 'rgba(var(--ink-rgb),0.35)' }}>
             {level.description}
           </p>
         )}
       </div>
 
-      <div className="flex-shrink-0 text-right text-xs space-y-0.5" style={{ color: 'rgba(33,26,19,0.35)' }}>
+      <div className="flex-shrink-0 text-right text-xs space-y-0.5" style={{ color: 'rgba(var(--ink-rgb),0.35)' }}>
         <div>{level.question_count} Qs</div>
-        <div className="font-semibold" style={{ color: '#A9752A' }}>+{level.xp_reward} XP</div>
-        {passed && <div className="font-black" style={{ color: '#3F6B3D' }}>Done</div>}
+        <div className="font-semibold" style={{ color: 'var(--ochre)' }}>+{level.xp_reward} XP</div>
+        {passed && <div className="font-black" style={{ color: 'var(--moss)' }}>Done</div>}
       </div>
     </div>
   )

@@ -17,14 +17,14 @@ export default function Bloom({ size = 26, className = '' }: BloomProps) {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <g fill="none" stroke="#B8451F" strokeWidth="2" strokeLinejoin="round">
+      <g fill="none" stroke="var(--rust)" strokeWidth="2" strokeLinejoin="round">
         <path d={PETAL_D} transform="rotate(0 32 32)" />
         <path d={PETAL_D} transform="rotate(72 32 32)" />
         <path d={PETAL_D} transform="rotate(144 32 32)" />
         <path d={PETAL_D} transform="rotate(216 32 32)" />
         <path d={PETAL_D} transform="rotate(288 32 32)" />
       </g>
-      <circle cx="32" cy="32" r="4.5" fill="#A9752A" />
+      <circle cx="32" cy="32" r="4.5" fill="var(--ochre)" />
     </svg>
   )
 }

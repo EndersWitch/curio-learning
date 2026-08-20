@@ -3,6 +3,8 @@ import { Fraunces, Work_Sans } from 'next/font/google'
 import './globals.css'
 import AdGate from '@/components/AdGate'
 import { AccountDrawerProvider } from '@/components/AccountDrawerProvider'
+import { ThemeProvider } from '@/components/ThemeProvider'
+import { themeBootScript } from '@/lib/theme'
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -52,10 +54,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${workSans.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${workSans.variable}`} suppressHydrationWarning>
       <body className="font-body antialiased">
-        <AccountDrawerProvider>{children}</AccountDrawerProvider>
-        <AdGate />
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+        <ThemeProvider>
+          <AccountDrawerProvider>{children}</AccountDrawerProvider>
+          <AdGate />
+        </ThemeProvider>
       </body>
     </html>
   )

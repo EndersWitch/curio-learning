@@ -18,8 +18,8 @@ function Section({ title, danger, children }: { title: string; danger?: boolean;
     <div
       className="mb-4"
       style={{
-        background: '#FBF8EF',
-        border: `1px solid ${danger ? 'rgba(156,52,40,0.25)' : 'rgba(33,26,19,0.08)'}`,
+        background: 'var(--paper-raised)',
+        border: `1px solid ${danger ? 'rgba(var(--brick-rgb),0.25)' : 'rgba(var(--ink-rgb),0.08)'}`,
         borderRadius: 6,
         overflow: 'hidden',
       }}
@@ -27,13 +27,13 @@ function Section({ title, danger, children }: { title: string; danger?: boolean;
       <div
         style={{
           padding: '0.85rem 1.2rem',
-          borderBottom: `1px solid ${danger ? 'rgba(156,52,40,0.25)' : 'rgba(33,26,19,0.08)'}`,
+          borderBottom: `1px solid ${danger ? 'rgba(var(--brick-rgb),0.25)' : 'rgba(var(--ink-rgb),0.08)'}`,
           fontFamily: 'var(--h)',
           fontSize: '0.68rem',
           fontWeight: 700,
           textTransform: 'uppercase',
           letterSpacing: '0.1em',
-          color: danger ? '#9C3428' : 'rgba(33,26,19,0.55)',
+          color: danger ? 'var(--brick)' : 'rgba(var(--ink-rgb),0.55)',
         }}
       >
         {title}
@@ -53,9 +53,9 @@ function AlertBanner({ notice }: { notice: Notice }) {
         borderRadius: 8,
         fontSize: '0.76rem',
         lineHeight: 1.5,
-        background: notice.type === 'ok' ? 'rgba(63,107,61,0.12)' : 'rgba(156,52,40,0.1)',
-        color: notice.type === 'ok' ? '#3F6B3D' : '#9C3428',
-        border: `1px solid ${notice.type === 'ok' ? 'rgba(63,107,61,0.3)' : 'rgba(156,52,40,0.25)'}`,
+        background: notice.type === 'ok' ? 'rgba(var(--moss-rgb),0.12)' : 'rgba(var(--brick-rgb),0.1)',
+        color: notice.type === 'ok' ? 'var(--moss)' : 'var(--brick)',
+        border: `1px solid ${notice.type === 'ok' ? 'rgba(var(--moss-rgb),0.3)' : 'rgba(var(--brick-rgb),0.25)'}`,
       }}
     >
       {notice.msg}
@@ -70,7 +70,7 @@ function EyeToggle({ shown, onToggle }: { shown: boolean; onToggle: () => void }
       onClick={onToggle}
       tabIndex={-1}
       className="grid place-items-center"
-      style={{ width: 32, height: 32, color: 'rgba(33,26,19,0.35)' }}
+      style={{ width: 32, height: 32, color: 'rgba(var(--ink-rgb),0.35)' }}
     >
       {shown ? <EyeOff size={16} /> : <Eye size={16} />}
     </button>
@@ -183,30 +183,30 @@ export default function AccountDrawer({ open, onOpenChange }: { open: boolean; o
       width={400}
     >
       {loading ? (
-        <div className="py-10 text-center" style={{ color: 'rgba(33,26,19,0.4)', fontSize: '0.8rem' }}>
+        <div className="py-10 text-center" style={{ color: 'rgba(var(--ink-rgb),0.4)', fontSize: '0.8rem' }}>
           Loading your account…
         </div>
       ) : (
         <>
           <div
             className="mb-5 flex items-center gap-3"
-            style={{ padding: '1rem', background: '#FBF8EF', border: '1px solid rgba(33,26,19,0.08)', borderRadius: 6 }}
+            style={{ padding: '1rem', background: 'var(--paper-raised)', border: '1px solid rgba(var(--ink-rgb),0.08)', borderRadius: 6 }}
           >
             <div
               className="grid shrink-0 place-items-center"
               style={{
                 width: 48, height: 48, borderRadius: '50%',
-                background: '#211A13', border: 'none',
-                fontFamily: 'var(--h)', fontWeight: 700, fontSize: '1.1rem', color: '#F6F0E2',
+                background: 'var(--ink)', border: 'none',
+                fontFamily: 'var(--h)', fontWeight: 700, fontSize: '1.1rem', color: 'var(--paper)',
               }}
             >
               {initial}
             </div>
             <div className="min-w-0">
-              <div className="truncate" style={{ fontFamily: 'var(--h)', fontWeight: 700, fontSize: '0.92rem', color: '#211A13' }}>
+              <div className="truncate" style={{ fontFamily: 'var(--h)', fontWeight: 700, fontSize: '0.92rem', color: 'var(--ink)' }}>
                 {name || 'My account'}
               </div>
-              <div className="truncate" style={{ fontSize: '0.7rem', color: 'rgba(33,26,19,0.4)' }}>{currentEmail}</div>
+              <div className="truncate" style={{ fontSize: '0.7rem', color: 'rgba(var(--ink-rgb),0.4)' }}>{currentEmail}</div>
             </div>
           </div>
 
@@ -216,16 +216,16 @@ export default function AccountDrawer({ open, onOpenChange }: { open: boolean; o
               <FloatingLabelInput label="Full name" value={name} onChange={setName} />
             </div>
             <div className="mb-4">
-              <label className="mb-1.5 block" style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(33,26,19,0.4)' }}>
+              <label className="mb-1.5 block" style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'rgba(var(--ink-rgb),0.4)' }}>
                 Grade
               </label>
               <select
                 value={grade}
                 onChange={(e) => setGrade(e.target.value)}
                 style={{
-                  width: '100%', padding: '0.72rem 1rem', background: '#FBF8EF',
-                  border: '1.5px solid rgba(33,26,19,0.15)', borderRadius: 4,
-                  fontFamily: 'var(--b)', fontSize: '0.85rem', color: '#211A13',
+                  width: '100%', padding: '0.72rem 1rem', background: 'var(--paper-raised)',
+                  border: '1.5px solid rgba(var(--ink-rgb),0.15)', borderRadius: 4,
+                  fontFamily: 'var(--b)', fontSize: '0.85rem', color: 'var(--ink)',
                 }}
               >
                 <option value="">Select grade</option>
@@ -244,7 +244,7 @@ export default function AccountDrawer({ open, onOpenChange }: { open: boolean; o
             <div className="mb-2">
               <FloatingLabelInput label="New email address" type="email" value={newEmail} onChange={setNewEmail} />
             </div>
-            <p className="mb-4" style={{ fontSize: '0.68rem', color: 'rgba(33,26,19,0.4)' }}>
+            <p className="mb-4" style={{ fontSize: '0.68rem', color: 'rgba(var(--ink-rgb),0.4)' }}>
               A confirmation link will be sent to your new email address.
             </p>
             <LoadingButton onAction={saveEmail} successLabel="Sent" errorLabel="Couldn't update">
@@ -280,7 +280,7 @@ export default function AccountDrawer({ open, onOpenChange }: { open: boolean; o
 
           <Section title="Danger zone" danger>
             <AlertBanner notice={deleteNotice} />
-            <p className="mb-4" style={{ fontSize: '0.78rem', color: 'rgba(33,26,19,0.6)', lineHeight: 1.6 }}>
+            <p className="mb-4" style={{ fontSize: '0.78rem', color: 'rgba(var(--ink-rgb),0.6)', lineHeight: 1.6 }}>
               Deleting your account is permanent and cannot be undone. All your data will be removed within 30 days.
             </p>
             <HoldToConfirm onConfirm={requestDelete} confirmLabel="Instructions sent below">

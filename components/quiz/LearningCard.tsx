@@ -15,9 +15,9 @@ interface LearningCardProps {
 // Every card type maps onto the same visual accent — cyan for neutral/
 // instructional content, amber for highlights, coral for warnings. Color is
 // a secondary cue; the icon + label are what actually distinguish types.
-const NEUTRAL = 'rgba(33,26,19,0.55)'
-const CARD_BG = '#FBF8EF'
-const CARD_BORDER = 'rgba(33,26,19,0.12)'
+const NEUTRAL = 'rgba(var(--ink-rgb),0.55)'
+const CARD_BG = 'var(--paper-raised)'
+const CARD_BORDER = 'rgba(var(--ink-rgb),0.12)'
 
 // ── Rich text renderer — supports <strong>, <em>, *cyan*, and \n as line breaks ──
 function RichText({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
@@ -54,9 +54,9 @@ function RichText({ text, className, style }: { text: string; className?: string
   return (
     <span className={className} style={style}>
       {parts.map((p, i) =>
-        p.bold ? <strong key={i} style={{ fontWeight: 700, color: '#211A13' }}>{p.content}</strong>
+        p.bold ? <strong key={i} style={{ fontWeight: 700, color: 'var(--ink)' }}>{p.content}</strong>
         : p.italic ? <em key={i} style={{ fontStyle: 'italic' }}>{p.content}</em>
-        : p.cyan ? <span key={i} style={{ color: '#B8451F', fontWeight: 600 }}>{p.content}</span>
+        : p.cyan ? <span key={i} style={{ color: 'var(--rust)', fontWeight: 600 }}>{p.content}</span>
         : <span key={i}>{p.content}</span>
       )}
     </span>
@@ -64,7 +64,7 @@ function RichText({ text, className, style }: { text: string; className?: string
 }
 
 // ── Shared multi-line content renderer ──
-function ContentBlock({ text, accentColor, textColor = 'rgba(33,26,19,0.6)' }: {
+function ContentBlock({ text, accentColor, textColor = 'rgba(var(--ink-rgb),0.6)' }: {
   text: string
   accentColor: string
   textColor?: string
@@ -97,8 +97,8 @@ function ExampleBlock({ text, accentColor }: { text: string; accentColor: string
   const lines = (text ?? '').split('\n').filter(Boolean)
   return (
     <div className="mt-3 rounded-xl p-3" style={{
-      background: 'rgba(33,26,19,0.035)',
-      border: '1px solid rgba(33,26,19,0.1)',
+      background: 'rgba(var(--ink-rgb),0.035)',
+      border: '1px solid rgba(var(--ink-rgb),0.1)',
     }}>
       <span className="text-xs font-black uppercase tracking-wide" style={{ color: accentColor }}>
         {lines.length > 1 ? 'Examples' : 'Example'}
@@ -106,7 +106,7 @@ function ExampleBlock({ text, accentColor }: { text: string; accentColor: string
       {lines.length > 1 ? (
         <ul className="mt-1 space-y-1">
           {lines.map((line, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm italic" style={{ color: 'rgba(33,26,19,0.6)' }}>
+            <li key={i} className="flex items-start gap-2 text-sm italic" style={{ color: 'rgba(var(--ink-rgb),0.6)' }}>
               <span className="flex-shrink-0 mt-1.5" style={{
                 width: 5, height: 5, borderRadius: '50%',
                 background: accentColor, minWidth: 5, display: 'inline-block',
@@ -116,7 +116,7 @@ function ExampleBlock({ text, accentColor }: { text: string; accentColor: string
           ))}
         </ul>
       ) : (
-        <p className="text-sm mt-1 italic" style={{ color: 'rgba(33,26,19,0.6)' }}>
+        <p className="text-sm mt-1 italic" style={{ color: 'rgba(var(--ink-rgb),0.6)' }}>
           <RichText text={text} />
         </p>
       )}
@@ -167,10 +167,10 @@ function CardShell({
 // ══════════════════════════════════════════════════════════════
 
 function KeyRuleCard({ concept, index }: LearningCardProps) {
-  const accent = '#B8451F'
+  const accent = 'var(--rust)'
   return (
     <CardShell icon={<BookMarked size={16} />} label="Key Rule" accentColor={accent} index={index}>
-      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
+      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
       <ContentBlock text={concept.content} accentColor={accent} />
       {concept.example && <ExampleBlock text={concept.example} accentColor={accent} />}
     </CardShell>
@@ -178,10 +178,10 @@ function KeyRuleCard({ concept, index }: LearningCardProps) {
 }
 
 function DidYouKnowCard({ concept, index }: LearningCardProps) {
-  const accent = '#A9752A'
+  const accent = 'var(--ochre)'
   return (
     <CardShell icon={<Lightbulb size={16} />} label="Did You Know?" accentColor={accent} index={index}>
-      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
+      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
       <ContentBlock text={concept.content} accentColor={accent} />
       {concept.example && <ExampleBlock text={concept.example} accentColor={accent} />}
     </CardShell>
@@ -189,26 +189,26 @@ function DidYouKnowCard({ concept, index }: LearningCardProps) {
 }
 
 function ExampleCard({ concept, index }: LearningCardProps) {
-  const accent = '#B8451F'
+  const accent = 'var(--rust)'
   return (
     <CardShell icon={<PenLine size={16} />} label="Example" accentColor={accent} index={index}>
-      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
+      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
       <ContentBlock text={concept.content} accentColor={accent} />
       {concept.example && (() => {
         const exLines = concept.example!.split('\n').filter(Boolean)
         return (
-          <div className="mt-3 rounded-xl p-4" style={{ background: 'rgba(33,26,19,0.035)', border: '1px solid rgba(33,26,19,0.1)' }}>
+          <div className="mt-3 rounded-xl p-4" style={{ background: 'rgba(var(--ink-rgb),0.035)', border: '1px solid rgba(var(--ink-rgb),0.1)' }}>
             {exLines.length > 1 ? (
               <ul className="space-y-1">
                 {exLines.map((l, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm font-mono" style={{ color: 'rgba(33,26,19,0.6)' }}>
+                  <li key={i} className="flex items-start gap-2 text-sm font-mono" style={{ color: 'rgba(var(--ink-rgb),0.6)' }}>
                     <span style={{ marginTop: 2 }}>·</span>
                     <RichText text={l} />
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-sm font-mono" style={{ color: 'rgba(33,26,19,0.6)' }}>
+              <p className="text-sm font-mono" style={{ color: 'rgba(var(--ink-rgb),0.6)' }}>
                 <RichText text={concept.example!} />
               </p>
             )}
@@ -220,10 +220,10 @@ function ExampleCard({ concept, index }: LearningCardProps) {
 }
 
 function TipCard({ concept, index }: LearningCardProps) {
-  const accent = '#B8451F'
+  const accent = 'var(--rust)'
   return (
     <CardShell icon={<Zap size={16} />} label="Quick Tip" accentColor={accent} index={index}>
-      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
+      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
       <ContentBlock text={concept.content} accentColor={accent} />
       {concept.example && <ExampleBlock text={concept.example} accentColor={accent} />}
     </CardShell>
@@ -243,7 +243,7 @@ function CommonMistakeCard({ concept, index }: LearningCardProps) {
   const fixText = concept.example ? concept.example : fixLinesFromContent.join('\n')
   const mistakeText = mistakeLines.join('\n')
 
-  const accent = flipped ? '#B8451F' : '#9C3428'
+  const accent = flipped ? 'var(--rust)' : 'var(--brick)'
 
   return (
     <CardShell
@@ -254,18 +254,18 @@ function CommonMistakeCard({ concept, index }: LearningCardProps) {
       onClick={() => setFlipped(f => !f)}
       minHeight={140}
     >
-      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
+      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
       {!flipped ? (
         <>
           <ContentBlock text={mistakeText} accentColor={accent} />
-          <p className="text-xs mt-3" style={{ color: 'rgba(156,52,40,0.6)' }}>Tap to see the fix →</p>
+          <p className="text-xs mt-3" style={{ color: 'rgba(var(--brick-rgb),0.6)' }}>Tap to see the fix →</p>
         </>
       ) : fixText ? (
-        <div className="rounded-xl p-3" style={{ background: 'rgba(184,69,31,0.06)', border: '1px solid rgba(184,69,31,0.2)' }}>
-          <ContentBlock text={fixText} accentColor={accent} textColor="rgba(33,26,19,0.6)" />
+        <div className="rounded-xl p-3" style={{ background: 'rgba(var(--rust-rgb),0.06)', border: '1px solid rgba(var(--rust-rgb),0.2)' }}>
+          <ContentBlock text={fixText} accentColor={accent} textColor="rgba(var(--ink-rgb),0.6)" />
         </div>
       ) : (
-        <p className="text-sm" style={{ color: 'rgba(184,69,31,0.5)' }}>No fix provided.</p>
+        <p className="text-sm" style={{ color: 'rgba(var(--rust-rgb),0.5)' }}>No fix provided.</p>
       )}
     </CardShell>
   )
@@ -274,7 +274,7 @@ function CommonMistakeCard({ concept, index }: LearningCardProps) {
 // Split-panel comparison — each content line is "left | right"; lines
 // without a | are treated as a header/description row spanning both sides.
 function SpotDifferenceCard({ concept, index }: LearningCardProps) {
-  const accent = '#A9752A'
+  const accent = 'var(--ochre)'
   const lines = (concept.content ?? '').split('\n').filter(Boolean)
   const sideALabel = concept.sideA ?? 'Wrong'
   const sideBLabel = concept.sideB ?? 'Right'
@@ -287,16 +287,16 @@ function SpotDifferenceCard({ concept, index }: LearningCardProps) {
 
   return (
     <CardShell icon={<Search size={16} />} label="Spot the Difference" accentColor={accent} index={index}>
-      <h3 className="font-black text-base mb-4 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
+      <h3 className="font-black text-base mb-4 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
 
       <div className="grid grid-cols-2 gap-3 mb-2">
-        <div className="rounded-t-xl px-3 pt-2.5 pb-1.5 flex items-center gap-1.5" style={{ background: 'rgba(156,52,40,0.08)', border: '1px solid rgba(156,52,40,0.2)', borderBottom: 'none' }}>
-          <X size={12} style={{ color: '#9C3428' }} />
-          <div className="text-xs font-black" style={{ color: '#9C3428' }}>{sideALabel}</div>
+        <div className="rounded-t-xl px-3 pt-2.5 pb-1.5 flex items-center gap-1.5" style={{ background: 'rgba(var(--brick-rgb),0.08)', border: '1px solid rgba(var(--brick-rgb),0.2)', borderBottom: 'none' }}>
+          <X size={12} style={{ color: 'var(--brick)' }} />
+          <div className="text-xs font-black" style={{ color: 'var(--brick)' }}>{sideALabel}</div>
         </div>
-        <div className="rounded-t-xl px-3 pt-2.5 pb-1.5 flex items-center gap-1.5" style={{ background: 'rgba(184,69,31,0.08)', border: '1px solid rgba(184,69,31,0.2)', borderBottom: 'none' }}>
-          <Check size={12} style={{ color: '#B8451F' }} />
-          <div className="text-xs font-black" style={{ color: '#B8451F' }}>{sideBLabel}</div>
+        <div className="rounded-t-xl px-3 pt-2.5 pb-1.5 flex items-center gap-1.5" style={{ background: 'rgba(var(--rust-rgb),0.08)', border: '1px solid rgba(var(--rust-rgb),0.2)', borderBottom: 'none' }}>
+          <Check size={12} style={{ color: 'var(--rust)' }} />
+          <div className="text-xs font-black" style={{ color: 'var(--rust)' }}>{sideBLabel}</div>
         </div>
       </div>
 
@@ -311,11 +311,11 @@ function SpotDifferenceCard({ concept, index }: LearningCardProps) {
           }
           return (
             <div key={i} className="grid grid-cols-2 gap-3">
-              <div className="rounded-xl px-3 py-2" style={{ background: 'rgba(156,52,40,0.05)', border: '1px solid rgba(156,52,40,0.15)' }}>
-                <p className="text-sm font-semibold" style={{ color: 'rgba(33,26,19,0.6)' }}><RichText text={row.left} /></p>
+              <div className="rounded-xl px-3 py-2" style={{ background: 'rgba(var(--brick-rgb),0.05)', border: '1px solid rgba(var(--brick-rgb),0.15)' }}>
+                <p className="text-sm font-semibold" style={{ color: 'rgba(var(--ink-rgb),0.6)' }}><RichText text={row.left} /></p>
               </div>
-              <div className="rounded-xl px-3 py-2" style={{ background: 'rgba(184,69,31,0.05)', border: '1px solid rgba(184,69,31,0.15)' }}>
-                <p className="text-sm font-semibold" style={{ color: 'rgba(33,26,19,0.6)' }}><RichText text={row.right} /></p>
+              <div className="rounded-xl px-3 py-2" style={{ background: 'rgba(var(--rust-rgb),0.05)', border: '1px solid rgba(var(--rust-rgb),0.15)' }}>
+                <p className="text-sm font-semibold" style={{ color: 'rgba(var(--ink-rgb),0.6)' }}><RichText text={row.right} /></p>
               </div>
             </div>
           )
@@ -328,12 +328,12 @@ function SpotDifferenceCard({ concept, index }: LearningCardProps) {
 }
 
 function WhatTestedCard({ concept, index }: LearningCardProps) {
-  const accent = '#B8451F'
+  const accent = 'var(--rust)'
   const [checked, setChecked] = useState<Record<number, boolean>>({})
   const lines = (concept.content ?? '').split('\n').filter(Boolean)
   return (
     <CardShell icon={<ListChecks size={16} />} label="What You'll Be Tested On" accentColor={accent} index={index}>
-      <h3 className="font-black text-base mb-3 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
+      <h3 className="font-black text-base mb-3 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
       <div className="space-y-2">
         {lines.map((line, i) => (
           <button
@@ -341,20 +341,20 @@ function WhatTestedCard({ concept, index }: LearningCardProps) {
             onClick={() => setChecked(c => ({ ...c, [i]: !c[i] }))}
             className="w-full flex items-start gap-3 text-left rounded-xl px-3 py-2.5 transition-all"
             style={{
-              background: checked[i] ? 'rgba(184,69,31,0.08)' : 'rgba(33,26,19,0.03)',
-              border: `1px solid ${checked[i] ? 'rgba(184,69,31,0.25)' : 'rgba(33,26,19,0.08)'}`,
+              background: checked[i] ? 'rgba(var(--rust-rgb),0.08)' : 'rgba(var(--ink-rgb),0.03)',
+              border: `1px solid ${checked[i] ? 'rgba(var(--rust-rgb),0.25)' : 'rgba(var(--ink-rgb),0.08)'}`,
             }}
           >
             <div className="flex-shrink-0 mt-0.5 flex items-center justify-center"
               style={{
                 width: 18, height: 18, borderRadius: 5,
-                background: checked[i] ? accent : 'rgba(33,26,19,0.08)',
-                border: checked[i] ? 'none' : '1px solid rgba(33,26,19,0.18)',
-                transition: 'all 0.2s', color: '#F6F0E2',
+                background: checked[i] ? accent : 'rgba(var(--ink-rgb),0.08)',
+                border: checked[i] ? 'none' : '1px solid rgba(var(--ink-rgb),0.18)',
+                transition: 'all 0.2s', color: 'var(--paper)',
               }}>
               {checked[i] && <Check size={11} />}
             </div>
-            <span className="text-sm" style={{ color: checked[i] ? accent : 'rgba(33,26,19,0.6)', transition: 'color 0.2s' }}>
+            <span className="text-sm" style={{ color: checked[i] ? accent : 'rgba(var(--ink-rgb),0.6)', transition: 'color 0.2s' }}>
               <RichText text={line} />
             </span>
           </button>
@@ -370,26 +370,26 @@ function WhatTestedCard({ concept, index }: LearningCardProps) {
 }
 
 function TryItCard({ concept, index }: LearningCardProps) {
-  const accent = '#A9752A'
+  const accent = 'var(--ochre)'
   const [revealed, setRevealed] = useState(false)
   return (
     <CardShell icon={<Eye size={16} />} label="Try It!" accentColor={accent} index={index}>
-      <h3 className="font-black text-base mb-3 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
-      <div className="rounded-xl p-4 mb-4" style={{ background: 'rgba(33,26,19,0.035)', border: '1px solid rgba(33,26,19,0.1)' }}>
+      <h3 className="font-black text-base mb-3 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
+      <div className="rounded-xl p-4 mb-4" style={{ background: 'rgba(var(--ink-rgb),0.035)', border: '1px solid rgba(var(--ink-rgb),0.1)' }}>
         <ContentBlock text={concept.content} accentColor={accent} />
       </div>
       {!revealed ? (
         <button
           onClick={() => setRevealed(true)}
           className="w-full py-2.5 rounded-xl font-black text-sm transition-all hover:opacity-90 active:scale-[0.98]"
-          style={{ background: accent, color: '#F6F0E2' }}
+          style={{ background: accent, color: 'var(--paper)' }}
         >
           Reveal Answer →
         </button>
       ) : (
-        <div className="rounded-xl p-3 animate-in" style={{ background: 'rgba(184,69,31,0.08)', border: '1px solid rgba(184,69,31,0.25)' }}>
-          <div className="text-xs font-black mb-1" style={{ color: '#B8451F' }}>Answer</div>
-          <p className="text-sm" style={{ color: 'rgba(33,26,19,0.6)' }}><RichText text={concept.example ?? concept.content} /></p>
+        <div className="rounded-xl p-3 animate-in" style={{ background: 'rgba(var(--rust-rgb),0.08)', border: '1px solid rgba(var(--rust-rgb),0.25)' }}>
+          <div className="text-xs font-black mb-1" style={{ color: 'var(--rust)' }}>Answer</div>
+          <p className="text-sm" style={{ color: 'rgba(var(--ink-rgb),0.6)' }}><RichText text={concept.example ?? concept.content} /></p>
         </div>
       )}
     </CardShell>
@@ -397,11 +397,11 @@ function TryItCard({ concept, index }: LearningCardProps) {
 }
 
 function RealWorldCard({ concept, index }: LearningCardProps) {
-  const accent = '#B8451F'
+  const accent = 'var(--rust)'
   return (
     <CardShell icon={<Globe size={16} />} label="Real World" accentColor={accent} index={index}>
-      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
-      <div className="rounded-xl p-3 mb-1" style={{ background: 'rgba(33,26,19,0.035)', border: '1px solid rgba(33,26,19,0.1)' }}>
+      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
+      <div className="rounded-xl p-3 mb-1" style={{ background: 'rgba(var(--ink-rgb),0.035)', border: '1px solid rgba(var(--ink-rgb),0.1)' }}>
         <ContentBlock text={concept.content} accentColor={accent} />
       </div>
       {concept.example && <ExampleBlock text={concept.example} accentColor={accent} />}
@@ -410,15 +410,15 @@ function RealWorldCard({ concept, index }: LearningCardProps) {
 }
 
 function MemoryTrickCard({ concept, index }: LearningCardProps) {
-  const accent = '#A9752A'
+  const accent = 'var(--ochre)'
   return (
     <CardShell icon={<Brain size={16} />} label="Memory Trick" accentColor={accent} index={index}>
-      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
-      <div className="rounded-xl p-4" style={{ background: 'rgba(33,26,19,0.035)', border: '1px dashed rgba(33,26,19,0.18)' }}>
+      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
+      <div className="rounded-xl p-4" style={{ background: 'rgba(var(--ink-rgb),0.035)', border: '1px dashed rgba(var(--ink-rgb),0.18)' }}>
         <ContentBlock text={concept.content} accentColor={accent} />
       </div>
       {concept.example && (
-        <div className="mt-3 text-sm italic text-center" style={{ color: 'rgba(169,117,42,0.7)' }}>
+        <div className="mt-3 text-sm italic text-center" style={{ color: 'rgba(var(--ochre-rgb),0.7)' }}>
           &quot;{concept.example}&quot;
         </div>
       )}
@@ -427,10 +427,10 @@ function MemoryTrickCard({ concept, index }: LearningCardProps) {
 }
 
 function WatchOutCard({ concept, index }: LearningCardProps) {
-  const accent = '#9C3428'
+  const accent = 'var(--brick)'
   return (
     <CardShell icon={<AlertTriangle size={16} />} label="Watch Out!" accentColor={accent} index={index}>
-      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
+      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
       <ContentBlock text={concept.content} accentColor={accent} />
       {concept.example && <ExampleBlock text={concept.example} accentColor={accent} />}
     </CardShell>
@@ -438,10 +438,10 @@ function WatchOutCard({ concept, index }: LearningCardProps) {
 }
 
 function FunFactCard({ concept, index }: LearningCardProps) {
-  const accent = '#A9752A'
+  const accent = 'var(--ochre)'
   return (
     <CardShell icon={<Star size={16} />} label="Fun Fact!" accentColor={accent} index={index}>
-      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
+      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
       <ContentBlock text={concept.content} accentColor={accent} />
       {concept.example && <ExampleBlock text={concept.example} accentColor={accent} />}
     </CardShell>
@@ -449,20 +449,20 @@ function FunFactCard({ concept, index }: LearningCardProps) {
 }
 
 function StepByStepCard({ concept, index }: LearningCardProps) {
-  const accent = '#B8451F'
+  const accent = 'var(--rust)'
   const steps = (concept.content ?? '').split('\n').filter(Boolean)
   return (
     <CardShell icon={<Layers size={16} />} label="Step by Step" accentColor={accent} index={index}>
-      <h3 className="font-black text-base mb-4 leading-tight" style={{ color: '#211A13' }}>{concept.title}</h3>
+      <h3 className="font-black text-base mb-4 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
       <div className="space-y-3">
         {steps.map((step, i) => (
           <div key={i} className="flex items-start gap-3">
             <div className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-black"
-              style={{ background: accent, color: '#F6F0E2', minWidth: 28 }}>
+              style={{ background: accent, color: 'var(--paper)', minWidth: 28 }}>
               {i + 1}
             </div>
             <div className="flex-1 pt-0.5">
-              <p className="text-sm" style={{ color: 'rgba(33,26,19,0.6)' }}><RichText text={step} /></p>
+              <p className="text-sm" style={{ color: 'rgba(var(--ink-rgb),0.6)' }}><RichText text={step} /></p>
             </div>
           </div>
         ))}
@@ -475,7 +475,7 @@ function StepByStepCard({ concept, index }: LearningCardProps) {
 function DefinitionCard({ concept, index }: LearningCardProps) {
   return (
     <CardShell icon={<BookOpen size={16} />} label="Definition" accentColor={NEUTRAL} index={index}>
-      <h3 className="font-black text-xl mb-1" style={{ color: '#211A13', fontStyle: 'italic' }}>{concept.title}</h3>
+      <h3 className="font-black text-xl mb-1" style={{ color: 'var(--ink)', fontStyle: 'italic' }}>{concept.title}</h3>
       <div className="mb-3" style={{ height: 2, width: 32, background: NEUTRAL, borderRadius: 1 }} />
       <ContentBlock text={concept.content} accentColor={NEUTRAL} />
       {concept.example && (

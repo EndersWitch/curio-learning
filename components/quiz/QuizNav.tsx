@@ -6,6 +6,7 @@ import { sb } from '@/lib/supabase'
 import { useAccountDrawer } from '@/components/AccountDrawerProvider'
 import { Flame, Zap, FileText, PenLine, User, Star } from '@/components/icons'
 import Bloom from '@/components/Bloom'
+import ThemeToggle from '@/components/ThemeToggle'
 
 export default function QuizNav() {
   const { user, loading } = useAuth()
@@ -46,14 +47,14 @@ export default function QuizNav() {
 
       <div className="nav-right">
         {loading ? (
-          <div style={{ width: 80, height: 28, borderRadius: 4, background: 'rgba(33,26,19,0.06)' }} />
+          <div style={{ width: 80, height: 28, borderRadius: 4, background: 'rgba(var(--ink-rgb),0.06)' }} />
         ) : user ? (
           <div className="profile-wrap" ref={ddRef} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
             {user.streakDays > 0 && (
               <span title="Day streak" style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
-                fontSize: '0.78rem', fontWeight: 700, color: '#A9752A',
-                background: 'rgba(169,117,42,0.12)', border: '1px solid rgba(169,117,42,0.3)',
+                fontSize: '0.78rem', fontWeight: 700, color: 'var(--ochre)',
+                background: 'rgba(var(--ochre-rgb),0.12)', border: '1px solid rgba(var(--ochre-rgb),0.3)',
                 borderRadius: 4, padding: '0.3rem 0.65rem',
               }}>
                 <Flame size={14} /> {user.streakDays}
@@ -61,8 +62,8 @@ export default function QuizNav() {
             )}
             <span title="Total XP" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
-              fontSize: '0.78rem', fontWeight: 700, color: '#B8451F',
-              background: 'rgba(184,69,31,0.1)', border: '1px solid rgba(184,69,31,0.3)',
+              fontSize: '0.78rem', fontWeight: 700, color: 'var(--rust)',
+              background: 'rgba(var(--rust-rgb),0.1)', border: '1px solid rgba(var(--rust-rgb),0.3)',
               borderRadius: 4, padding: '0.3rem 0.65rem',
             }}>
               <Zap size={14} /> {user.totalXp.toLocaleString()} XP
@@ -89,6 +90,10 @@ export default function QuizNav() {
                 <User size={15} /> Edit profile
               </button>
               <a href="/subscription" className="profile-dd-item dd-item-icon"><Star size={15} /> Manage subscription</a>
+              <div className="profile-dd-item dd-item-theme">
+                <span>Theme</span>
+                <ThemeToggle />
+              </div>
               <button className="profile-dd-item danger" onClick={doLogout}>Sign out</button>
             </div>
           </div>

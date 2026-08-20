@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Bloom from '@/components/Bloom'
 import Footer from '@/components/Footer'
+import ThemeToggle from '@/components/ThemeToggle'
 import { sb } from '@/lib/supabase'
 import { useAccountDrawer } from '@/components/AccountDrawerProvider'
 import { Flame, Zap, FileText, PenLine, User, Star, Check, Brain, Heart, ListChecks } from '@/components/icons'
@@ -288,6 +289,10 @@ export default function HomePage() {
                   <User size={15} /> Edit profile
                 </button>
                 <a href="/subscription" className="profile-dd-item dd-item-icon"><Star size={15} /> Manage subscription</a>
+                <div className="profile-dd-item dd-item-theme">
+                  <span>Theme</span>
+                  <ThemeToggle />
+                </div>
                 <button className="profile-dd-item danger" onClick={doLogout}>Sign out</button>
               </div>
             </div>
@@ -516,14 +521,14 @@ export default function HomePage() {
             <div className="hero-right">
               <div className="bloom-hero">
                 <svg width="120" height="120" viewBox="0 0 64 64" fill="none">
-                  <g fill="none" stroke="#B8451F" strokeWidth="2" strokeLinejoin="round">
+                  <g fill="none" stroke="var(--rust)" strokeWidth="2" strokeLinejoin="round">
                     <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(0 32 32)" />
                     <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(72 32 32)" />
                     <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(144 32 32)" />
                     <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(216 32 32)" />
                     <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(288 32 32)" />
                   </g>
-                  <circle cx="32" cy="32" r="4.5" fill="#A9752A" />
+                  <circle cx="32" cy="32" r="4.5" fill="var(--ochre)" />
                 </svg>
               </div>
               <div className="hero-stat-row">

@@ -30,7 +30,7 @@ const FAIL_MESSAGES = [
   'Nice try! Review the learning zone and go again!',
   "Almost there! One more go and you'll nail it!",
 ]
-const CONFETTI_COLORS = ['#B8451F', '#B8451F', '#A9752A', '#3F6B3D']
+const CONFETTI_COLORS = ['var(--rust)', 'var(--rust)', 'var(--ochre)', 'var(--moss)']
 
 interface Particle { id:number; left:number; top:number; color:string; duration:number; delay:number; size:number }
 
@@ -116,15 +116,15 @@ function BloomScore({ percent, passed, reveal }: {
             <g key={i} transform={`rotate(${angle} 100 100)`}>
               <path
                 d="M100,92 C64,86 64,26 100,8 C136,26 136,86 100,92 Z"
-                fill={isLit ? '#B8451F' : '#EAE0C6'}
+                fill={isLit ? 'var(--rust)' : 'var(--paper-dim)'}
                 fillOpacity={isLit ? 1 : 0.5}
-                stroke={isLit ? '#B8451F' : 'rgba(184,69,31,0.2)'}
+                stroke={isLit ? 'var(--rust)' : 'rgba(var(--rust-rgb),0.2)'}
                 strokeWidth={isLit ? 1.5 : 0.5}
                 strokeLinejoin="round"
                 style={{
                   transform: `scale(${pulsing ? 1.22 : 1})`,
                   transformOrigin: '100px 50px',
-                  filter: isLit ? 'drop-shadow(0 0 10px rgba(184,69,31,0.85))' : 'none',
+                  filter: isLit ? 'drop-shadow(0 0 10px rgba(var(--rust-rgb),0.85))' : 'none',
                   transition: 'fill 0.35s ease, filter 0.35s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1)',
                 }}
               />
@@ -133,7 +133,7 @@ function BloomScore({ percent, passed, reveal }: {
         })}
         {/* Centre circle */}
         <circle cx="100" cy="100" r="14"
-          fill={passed && centerActive ? '#A9752A' : '#EAE0C6'}
+          fill={passed && centerActive ? 'var(--ochre)' : 'var(--paper-dim)'}
           style={{
             transform: `scale(${centerBump ? 1.28 : 1})`,
             transformOrigin: '100px 100px',
@@ -187,11 +187,11 @@ export default function ResultsScreen({
   const minutes   = Math.floor(timeTaken / 60)
   const seconds   = timeTaken % 60
   const timeLabel = minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`
-  const ringColor  = percent >= 80 ? '#3F6B3D' : percent >= 60 ? '#A9752A' : '#9C3428'
+  const ringColor  = percent >= 80 ? 'var(--moss)' : percent >= 60 ? 'var(--ochre)' : 'var(--brick)'
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-5"
-      style={{ background: '#F6F0E2' }}>
+      style={{ background: 'var(--paper)' }}>
 
       {/* Confetti */}
       {showConfetti && (
@@ -211,7 +211,7 @@ export default function ResultsScreen({
 
         {/* ── Hero card with Bloom ── */}
         <div className="rounded-3xl p-8 mb-4 text-center"
-          style={{ background: '#FBF8EF', border: `2px solid ${ringColor}40` }}>
+          style={{ background: 'var(--paper-raised)', border: `2px solid ${ringColor}40` }}>
 
           {/* Animated Bloom — purely decorative, pop-in + sequential petal reveal */}
           <div className="flex justify-center mb-3">
@@ -220,11 +220,11 @@ export default function ResultsScreen({
 
           {/* Score — its own clearly legible block, not overlaid on the bloom */}
           <div className="mb-1">
-            <span className="text-5xl font-black tabular-nums" style={{ color: '#211A13' }}>
+            <span className="text-5xl font-black tabular-nums" style={{ color: 'var(--ink)' }}>
               {reveal.displayPercent}%
             </span>
           </div>
-          <p className="text-sm font-bold mb-4" style={{ color: 'rgba(33,26,19,0.55)' }}>
+          <p className="text-sm font-bold mb-4" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
             {score}/{total} correct
           </p>
 
@@ -233,37 +233,37 @@ export default function ResultsScreen({
             {[0,1,2,3,4].map(i => (
               <div key={i} className="w-2 h-2 rounded-full transition-all duration-300"
                 style={{
-                  background: i < reveal.revealed ? '#B8451F' : 'rgba(184,69,31,0.15)',
-                  boxShadow: i < reveal.revealed ? '0 0 6px rgba(184,69,31,0.6)' : 'none',
+                  background: i < reveal.revealed ? 'var(--rust)' : 'rgba(var(--rust-rgb),0.15)',
+                  boxShadow: i < reveal.revealed ? '0 0 6px rgba(var(--rust-rgb),0.6)' : 'none',
                 }} />
             ))}
           </div>
 
           {/* Pass/fail badge */}
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full font-black text-sm mb-4 text-white"
-            style={{ background: passed ? '#3F6B3D' : '#9C3428' }}>
+            style={{ background: passed ? 'var(--moss)' : 'var(--brick)' }}>
             {passed ? <Check size={16} /> : <X size={16} />}
             {passed ? 'Passed!' : 'Not Passed'}
           </div>
 
-          <h2 className="text-xl font-black mb-1 leading-tight" style={{ color: '#211A13' }}>
+          <h2 className="text-xl font-black mb-1 leading-tight" style={{ color: 'var(--ink)' }}>
             {messageRef.current}
           </h2>
-          <p className="text-sm" style={{ color: 'rgba(33,26,19,0.55)' }}>{levelTitle}</p>
+          <p className="text-sm" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>{levelTitle}</p>
         </div>
 
         {/* ── Stats ── */}
         <div className="rounded-3xl p-5 mb-4"
-          style={{ background: '#FBF8EF', border: '1px solid rgba(33,26,19,0.1)' }}>
-          <div className="grid grid-cols-3 gap-0 divide-x" style={{ borderColor: 'rgba(33,26,19,0.1)' }}>
+          style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--ink-rgb),0.1)' }}>
+          <div className="grid grid-cols-3 gap-0 divide-x" style={{ borderColor: 'rgba(var(--ink-rgb),0.1)' }}>
             {[
-              { val: String(score),       label: 'Correct', color: '#3F6B3D' },
-              { val: String(total-score), label: 'Missed',  color: '#9C3428' },
-              { val: timeLabel,           label: 'Time',    color: 'rgba(33,26,19,0.55)' },
+              { val: String(score),       label: 'Correct', color: 'var(--moss)' },
+              { val: String(total-score), label: 'Missed',  color: 'var(--brick)' },
+              { val: timeLabel,           label: 'Time',    color: 'rgba(var(--ink-rgb),0.55)' },
             ].map(({ val, label, color }) => (
               <div key={label} className="text-center px-3">
                 <div className="text-2xl font-black" style={{ color }}>{val}</div>
-                <div className="text-xs mt-0.5" style={{ color: 'rgba(33,26,19,0.55)' }}>{label}</div>
+                <div className="text-xs mt-0.5" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>{label}</div>
               </div>
             ))}
           </div>
@@ -272,10 +272,10 @@ export default function ResultsScreen({
         {/* ── XP earned ── */}
         {xpEarned > 0 && (
           <div className="rounded-3xl p-5 mb-4 flex items-center justify-between"
-            style={{ background: '#FBF8EF', border: '1px solid rgba(169,117,42,0.25)' }}>
+            style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--ochre-rgb),0.25)' }}>
             <div>
-              <p className="font-black text-sm" style={{ color: '#211A13' }}>XP Earned</p>
-              <p className="text-xs mt-0.5" style={{ color: 'rgba(33,26,19,0.55)' }}>
+              <p className="font-black text-sm" style={{ color: 'var(--ink)' }}>XP Earned</p>
+              <p className="text-xs mt-0.5" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
                 {passed ? 'Keep it up!' : 'Every attempt counts!'}
               </p>
             </div>
@@ -286,28 +286,28 @@ export default function ResultsScreen({
         {/* ── Mastery unlocks ── */}
         {masteryUnlocked && !broadMasteryUnlocked && (
           <div className="rounded-3xl p-5 mb-4 flex items-center gap-4"
-            style={{ background: '#FBF8EF', border: '1px solid rgba(169,117,42,0.35)' }}>
+            style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--ochre-rgb),0.35)' }}>
             <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-              style={{ background: 'rgba(169,117,42,0.15)', border: '1px solid rgba(169,117,42,0.3)', color: '#A9752A' }}>
+              style={{ background: 'rgba(var(--ochre-rgb),0.15)', border: '1px solid rgba(var(--ochre-rgb),0.3)', color: 'var(--ochre)' }}>
               <Trophy size={22} />
             </div>
             <div>
-              <p className="font-black text-sm" style={{ color: '#A9752A' }}>Subtopic Mastery Unlocked!</p>
-              <p className="text-xs mt-0.5" style={{ color: 'rgba(33,26,19,0.55)' }}>All levels cleared. Take the mastery challenge!</p>
+              <p className="font-black text-sm" style={{ color: 'var(--ochre)' }}>Subtopic Mastery Unlocked!</p>
+              <p className="text-xs mt-0.5" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>All levels cleared. Take the mastery challenge!</p>
             </div>
           </div>
         )}
 
         {broadMasteryUnlocked && (
           <div className="rounded-3xl p-5 mb-4 flex items-center gap-4"
-            style={{ background: '#FBF8EF', border: '1px solid rgba(184,69,31,0.35)' }}>
+            style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--rust-rgb),0.35)' }}>
             <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-              style={{ background: 'rgba(184,69,31,0.12)', border: '1px solid rgba(184,69,31,0.3)', color: '#B8451F' }}>
+              style={{ background: 'rgba(var(--rust-rgb),0.12)', border: '1px solid rgba(var(--rust-rgb),0.3)', color: 'var(--rust)' }}>
               <GraduationCap size={22} />
             </div>
             <div>
-              <p className="font-black text-sm" style={{ color: '#B8451F' }}>Final Mastery Unlocked!</p>
-              <p className="text-xs mt-0.5" style={{ color: 'rgba(33,26,19,0.55)' }}>All subtopics mastered. The final boss awaits!</p>
+              <p className="font-black text-sm" style={{ color: 'var(--rust)' }}>Final Mastery Unlocked!</p>
+              <p className="text-xs mt-0.5" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>All subtopics mastered. The final boss awaits!</p>
             </div>
           </div>
         )}
@@ -315,14 +315,14 @@ export default function ResultsScreen({
         {isMastery && passed && (
           <div className="rounded-3xl p-5 mb-4 text-center"
             style={{ background: '#F4ECDD',
-              border: '2px solid rgba(169,117,42,0.3)' }}>
-            <div className="flex justify-center mb-1" style={{ color: '#B8451F' }}>
+              border: '2px solid rgba(var(--ochre-rgb),0.3)' }}>
+            <div className="flex justify-center mb-1" style={{ color: 'var(--rust)' }}>
               {sectionType === 'broad_topic_mastery' ? <GraduationCap size={26} /> : <Trophy size={26} />}
             </div>
-            <p className="font-black text-base" style={{ color: '#B8451F' }}>
+            <p className="font-black text-base" style={{ color: 'var(--rust)' }}>
               {sectionType === 'broad_topic_mastery' ? 'Ultimate Topic Champion!' : 'Subtopic Champion!'}
             </p>
-            <p className="text-xs mt-1" style={{ color: 'rgba(33,26,19,0.55)' }}>
+            <p className="text-xs mt-1" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
               {sectionType === 'broad_topic_mastery'
                 ? 'You have completely mastered this entire topic.'
                 : 'This subtopic is fully mastered. On to the next!'}
@@ -335,14 +335,14 @@ export default function ResultsScreen({
           {passed && nextHref && (
             <Link href={nextHref}
               className="w-full py-4 rounded-2xl font-black text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
-              style={{ background: '#B8451F' }}>
+              style={{ background: 'var(--rust)' }}>
               Next Level →
             </Link>
           )}
           {passed && !nextHref && (
             <Link href="/quiz"
               className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-black text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
-              style={{ background: '#B8451F' }}>
+              style={{ background: 'var(--rust)' }}>
               <Home size={18} /> Browse More Topics
             </Link>
           )}
@@ -350,15 +350,15 @@ export default function ResultsScreen({
           <Link href={retryHref}
             className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-black text-base text-center transition-all duration-200"
             style={passed
-              ? { background: 'rgba(33,26,19,0.06)', color: '#211A13', border: '2px solid rgba(33,26,19,0.15)' }
-              : { background: '#B8451F', color: '#fff' }
+              ? { background: 'rgba(var(--ink-rgb),0.06)', color: 'var(--ink)', border: '2px solid rgba(var(--ink-rgb),0.15)' }
+              : { background: 'var(--rust)', color: '#fff' }
             }>
             <RefreshCw size={16} /> {passed ? 'Try Again' : 'Try Again, You Can Do It!'}
           </Link>
         </div>
 
         {!passed && (
-          <p className="text-center text-xs mt-4 leading-relaxed" style={{ color: 'rgba(33,26,19,0.55)' }}>
+          <p className="text-center text-xs mt-4 leading-relaxed" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
             You need {Math.ceil(total * 0.6)} correct to pass.
             Review the learning zone before retrying!
           </p>

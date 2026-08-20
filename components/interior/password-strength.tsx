@@ -50,10 +50,10 @@ export type PasswordStrengthProps = {
 }
 
 const TONES = {
-  none: { bar: 'rgba(33,26,19,0.15)', text: 'rgba(33,26,19,0.4)' },
-  danger: { bar: '#9C3428', text: '#9C3428' },
-  caution: { bar: '#A9752A', text: '#A9752A' },
-  safe: { bar: '#3F6B3D', text: '#3F6B3D' },
+  none: { bar: 'rgba(var(--ink-rgb),0.15)', text: 'rgba(var(--ink-rgb),0.4)' },
+  danger: { bar: 'var(--brick)', text: 'var(--brick)' },
+  caution: { bar: 'var(--ochre)', text: 'var(--ochre)' },
+  safe: { bar: 'var(--moss)', text: 'var(--moss)' },
 } as const
 
 function toneFor(score: number, max: number) {
@@ -81,7 +81,7 @@ export function PasswordStrength({
     <div className={`w-full ${className}`} style={{ marginTop: '0.5rem' }}>
       <div className="grid" style={{ gridTemplateColumns: `repeat(${max}, minmax(0, 1fr))`, gap: 5 }}>
         {Array.from({ length: max }, (_, i) => (
-          <div key={i} className="relative overflow-hidden" style={{ height: 4, borderRadius: 2, background: 'rgba(33,26,19,0.1)' }}>
+          <div key={i} className="relative overflow-hidden" style={{ height: 4, borderRadius: 2, background: 'rgba(var(--ink-rgb),0.1)' }}>
             <motion.span
               className="absolute inset-0 origin-left"
               style={{ borderRadius: 2, background: tone.bar }}
@@ -96,7 +96,7 @@ export function PasswordStrength({
       <div className="mt-1.5 flex items-center justify-between gap-3">
         <span style={{ fontSize: '0.7rem', fontWeight: 600, color: tone.text }}>{label}</span>
         {guessable ? (
-          <span style={{ fontSize: '0.65rem', color: '#A9752A' }}>Commonly guessed</span>
+          <span style={{ fontSize: '0.65rem', color: 'var(--ochre)' }}>Commonly guessed</span>
         ) : null}
       </div>
 
@@ -106,22 +106,22 @@ export function PasswordStrength({
             <li key={rule.id} className="flex items-center" style={{ gap: 6 }}>
               <span
                 className="relative grid shrink-0 place-items-center"
-                style={{ width: 13, height: 13, borderRadius: 3, border: '1px solid rgba(33,26,19,0.18)' }}
+                style={{ width: 13, height: 13, borderRadius: 3, border: '1px solid rgba(var(--ink-rgb),0.18)' }}
               >
                 <motion.span
                   className="absolute inset-0"
-                  style={{ borderRadius: 2, background: '#B8451F' }}
+                  style={{ borderRadius: 2, background: 'var(--rust)' }}
                   initial={false}
                   animate={{ opacity: rule.met ? 1 : 0 }}
                   transition={reduced ? INSTANT : CROSSFADE}
                 />
                 {rule.met ? (
                   <svg width="8" height="8" viewBox="0 0 12 12" fill="none" className="relative">
-                    <path d="M2 6.2 4.7 8.9 10 3.3" stroke="#F6F0E2" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M2 6.2 4.7 8.9 10 3.3" stroke="var(--paper)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 ) : null}
               </span>
-              <span style={{ fontSize: '0.68rem', color: rule.met ? '#211A13' : 'rgba(33,26,19,0.4)' }}>{rule.label}</span>
+              <span style={{ fontSize: '0.68rem', color: rule.met ? 'var(--ink)' : 'rgba(var(--ink-rgb),0.4)' }}>{rule.label}</span>
             </li>
           ))}
         </ul>

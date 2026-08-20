@@ -292,7 +292,7 @@ export function Drawer({
     >
       <motion.div
         aria-hidden
-        style={{ opacity: drawer.veil, background: 'rgba(33,26,19,0.4)' }}
+        style={{ opacity: drawer.veil, background: 'rgba(var(--ink-rgb),0.4)' }}
         onClick={dismissOnScrimClick ? drawer.close : undefined}
         className="absolute inset-0"
       />
@@ -306,10 +306,10 @@ export function Drawer({
           maxWidth: 'calc(100% - 32px)',
           touchAction: 'pan-y',
           [side]: 0,
-          background: '#FBF8EF',
-          borderLeft: side === 'right' ? '1px solid rgba(33,26,19,0.12)' : undefined,
-          borderRight: side === 'left' ? '1px solid rgba(33,26,19,0.12)' : undefined,
-          boxShadow: '0 16px 56px rgba(33,26,19,0.18)',
+          background: 'var(--paper-raised)',
+          borderLeft: side === 'right' ? '1px solid rgba(var(--ink-rgb),0.12)' : undefined,
+          borderRight: side === 'left' ? '1px solid rgba(var(--ink-rgb),0.12)' : undefined,
+          boxShadow: '0 16px 56px rgba(var(--ink-rgb),0.18)',
           ...edgeRadius,
         }}
         className={`absolute inset-y-0 flex flex-col outline-none ${drawer.dragging ? 'select-none' : ''} ${className}`}
@@ -317,15 +317,15 @@ export function Drawer({
       >
         <header
           onPointerDown={drawer.gripProps.onPointerDown}
-          style={{ borderBottom: '1px solid rgba(33,26,19,0.08)' }}
+          style={{ borderBottom: '1px solid rgba(var(--ink-rgb),0.08)' }}
           className={`flex select-none items-start gap-3 px-5 py-4 ${drawer.dragging ? 'cursor-grabbing' : 'cursor-grab'}`}
         >
           <div className="min-w-0 flex-1">
-            <h2 id={titleId} className="truncate" style={{ fontFamily: 'var(--h)', fontSize: '0.95rem', fontWeight: 700, color: '#211A13' }}>
+            <h2 id={titleId} className="truncate" style={{ fontFamily: 'var(--h)', fontSize: '0.95rem', fontWeight: 700, color: 'var(--ink)' }}>
               {title}
             </h2>
             {description ? (
-              <p className="mt-0.5 truncate" style={{ fontSize: '0.72rem', color: 'rgba(33,26,19,0.55)' }}>
+              <p className="mt-0.5 truncate" style={{ fontSize: '0.72rem', color: 'rgba(var(--ink-rgb),0.55)' }}>
                 {description}
               </p>
             ) : null}
@@ -336,9 +336,9 @@ export function Drawer({
             onClick={drawer.close}
             aria-label={closeLabel}
             className="-mr-1 grid size-7 shrink-0 place-items-center outline-none transition-colors duration-150"
-            style={{ borderRadius: 4, color: 'rgba(33,26,19,0.4)' }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(33,26,19,0.08)'; e.currentTarget.style.color = '#211A13' }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(33,26,19,0.4)' }}
+            style={{ borderRadius: 4, color: 'rgba(var(--ink-rgb),0.4)' }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(var(--ink-rgb),0.08)'; e.currentTarget.style.color = 'var(--ink)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(var(--ink-rgb),0.4)' }}
           >
             <X size={14} />
           </button>
@@ -346,7 +346,7 @@ export function Drawer({
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-4">{children}</div>
 
         {footer ? (
-          <div className="px-5 py-4" style={{ borderTop: '1px solid rgba(33,26,19,0.08)' }}>
+          <div className="px-5 py-4" style={{ borderTop: '1px solid rgba(var(--ink-rgb),0.08)' }}>
             {footer}
           </div>
         ) : null}

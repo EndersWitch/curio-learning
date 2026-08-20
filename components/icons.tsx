@@ -42,6 +42,8 @@ import {
   Cog as CogIcon,
   TrendingUp as TrendingUpIcon,
   EyeOff as EyeOffIcon,
+  Sun as SunIcon,
+  Moon as MoonIcon,
   type LucideProps,
 } from 'lucide-react'
 
@@ -113,3 +115,5 @@ export const Briefcase = withDefaultStroke(BriefcaseIcon)
 export const Cog = withDefaultStroke(CogIcon)
 export const TrendingUp = withDefaultStroke(TrendingUpIcon)
 export const EyeOff = withDefaultStroke(EyeOffIcon)
+export const Sun = withDefaultStroke(SunIcon)
+export const Moon = withDefaultStroke(MoonIcon)
