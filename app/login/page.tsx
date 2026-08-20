@@ -165,12 +165,12 @@ export default function LoginPage() {
           <p className="bp-note">© 2026 Curio Learning · Built for SA students</p>
         </div>
         <svg className="bp-bloom" width="400" height="400" viewBox="0 0 64 64" fill="none">
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" />
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.7" transform="rotate(72 32 32)" />
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.5" transform="rotate(144 32 32)" />
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.5" transform="rotate(216 32 32)" />
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.7" transform="rotate(288 32 32)" />
-          <circle cx="32" cy="32" r="7" fill="#F6F0E2" />
+          <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" fill="#B8451F" transform="rotate(0 32 32)" />
+          <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" fill="#B8451F" transform="rotate(72 32 32)" />
+          <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" fill="#B8451F" transform="rotate(144 32 32)" />
+          <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" fill="#B8451F" transform="rotate(216 32 32)" />
+          <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" fill="#B8451F" transform="rotate(288 32 32)" />
+          <circle cx="32" cy="32" r="4.5" fill="#F6F0E2" />
         </svg>
       </div>
 

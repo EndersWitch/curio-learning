@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1080">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=DM+Sans:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -11,13 +11,13 @@
     width: 1080px;
     height: 1080px;
     overflow: hidden;
-    background: #2B1E3F;
+    background: #F6F0E2;
   }
 
   .scene {
     width: 1080px;
     height: 1080px;
-    background: #2B1E3F;
+    background: #F6F0E2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,10 +34,11 @@
   }
 
   #wordmark {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-style: italic;
     font-size: 52px;
-    color: #F7F7FF;
+    color: #211A13;
     letter-spacing: 6px;
     margin-top: 4px;
     opacity: 0;
@@ -46,10 +47,10 @@
   }
 
   #tagline {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Work Sans', system-ui, sans-serif;
     font-weight: 400;
     font-size: 22px;
-    color: rgba(109,211,206,0.75);
+    color: rgba(184,69,31,0.8);
     letter-spacing: 4px;
     margin-top: 10px;
     opacity: 0;
@@ -61,17 +62,17 @@
 <div class="scene">
   <div class="stage">
     <svg overflow="visible" width="340" height="340" viewBox="0 0 200 200">
-      <ellipse id="p0" cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fill-opacity="1.0"
+      <path id="p0" d="M100,92 C64,86 64,26 100,8 C136,26 136,86 100,92 Z" fill="#B8451F" fill-opacity="1.0"
         style="transform-origin:100px 100px; transform:rotate(0deg) scale(0.01); opacity:0"/>
-      <ellipse id="p1" cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fill-opacity="0.7"
+      <path id="p1" d="M100,92 C64,86 64,26 100,8 C136,26 136,86 100,92 Z" fill="#B8451F" fill-opacity="0.7"
         style="transform-origin:100px 100px; transform:rotate(72deg) scale(0.01); opacity:0"/>
-      <ellipse id="p2" cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fill-opacity="0.5"
+      <path id="p2" d="M100,92 C64,86 64,26 100,8 C136,26 136,86 100,92 Z" fill="#B8451F" fill-opacity="0.5"
         style="transform-origin:100px 100px; transform:rotate(144deg) scale(0.01); opacity:0"/>
-      <ellipse id="p3" cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fill-opacity="0.5"
+      <path id="p3" d="M100,92 C64,86 64,26 100,8 C136,26 136,86 100,92 Z" fill="#B8451F" fill-opacity="0.5"
         style="transform-origin:100px 100px; transform:rotate(216deg) scale(0.01); opacity:0"/>
-      <ellipse id="p4" cx="100" cy="50" rx="22" ry="42" fill="#6DD3CE" fill-opacity="0.7"
+      <path id="p4" d="M100,92 C64,86 64,26 100,8 C136,26 136,86 100,92 Z" fill="#B8451F" fill-opacity="0.7"
         style="transform-origin:100px 100px; transform:rotate(288deg) scale(0.01); opacity:0"/>
-      <circle id="core" cx="-140" cy="100" r="22" fill="#FF5E5B"/>
+      <circle id="core" cx="-140" cy="100" r="14" fill="#A9752A"/>
     </svg>
   </div>
 
@@ -110,7 +111,7 @@
   function reset(){
     core.setAttribute('cx','-140');
     core.setAttribute('cy','100');
-    core.setAttribute('r','22');
+    core.setAttribute('r','14');
     core.style.transform='';
     petals.forEach((p,i)=>{
       p.style.transform=`rotate(${angles[i]}deg) scale(0.01)`;

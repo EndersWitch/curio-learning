@@ -516,12 +516,14 @@ export default function HomePage() {
             <div className="hero-right">
               <div className="bloom-hero">
                 <svg width="120" height="120" viewBox="0 0 64 64" fill="none">
-                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.85" />
-                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.6" transform="rotate(72 32 32)" />
-                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.4" transform="rotate(144 32 32)" />
-                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.4" transform="rotate(216 32 32)" />
-                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.6" transform="rotate(288 32 32)" />
-                  <circle cx="32" cy="32" r="7" fill="#211A13" />
+                  <g fill="none" stroke="#B8451F" strokeWidth="2" strokeLinejoin="round">
+                    <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(0 32 32)" />
+                    <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(72 32 32)" />
+                    <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(144 32 32)" />
+                    <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(216 32 32)" />
+                    <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(288 32 32)" />
+                  </g>
+                  <circle cx="32" cy="32" r="4.5" fill="#A9752A" />
                 </svg>
               </div>
               <div className="hero-stat-row">

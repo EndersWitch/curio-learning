@@ -5,6 +5,7 @@ import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
 import { useAccountDrawer } from '@/components/AccountDrawerProvider'
 import { Flame, Zap, FileText, PenLine, User, Star } from '@/components/icons'
+import Bloom from '@/components/Bloom'
 
 export default function QuizNav() {
   const { user, loading } = useAuth()
@@ -32,14 +33,7 @@ export default function QuizNav() {
   return (
     <nav className="curio-nav">
       <a href="/" className="nav-logo">
-        <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F"/>
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.7" transform="rotate(72 32 32)"/>
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.5" transform="rotate(144 32 32)"/>
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.5" transform="rotate(216 32 32)"/>
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.7" transform="rotate(288 32 32)"/>
-          <circle cx="32" cy="32" r="7" fill="#211A13"/>
-        </svg>
+        <Bloom size={26} />
         curio
       </a>
 

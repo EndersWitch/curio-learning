@@ -114,12 +114,13 @@ function BloomScore({ percent, passed, reveal }: {
           const pulsing = i === pulseIndex
           return (
             <g key={i} transform={`rotate(${angle} 100 100)`}>
-              <ellipse
-                cx="100" cy="50" rx="22" ry="42"
+              <path
+                d="M100,92 C64,86 64,26 100,8 C136,26 136,86 100,92 Z"
                 fill={isLit ? '#B8451F' : '#EAE0C6'}
                 fillOpacity={isLit ? 1 : 0.5}
                 stroke={isLit ? '#B8451F' : 'rgba(184,69,31,0.2)'}
                 strokeWidth={isLit ? 1.5 : 0.5}
+                strokeLinejoin="round"
                 style={{
                   transform: `scale(${pulsing ? 1.22 : 1})`,
                   transformOrigin: '100px 50px',
@@ -131,8 +132,8 @@ function BloomScore({ percent, passed, reveal }: {
           )
         })}
         {/* Centre circle */}
-        <circle cx="100" cy="100" r="22"
-          fill={passed && centerActive ? '#B8451F' : '#EAE0C6'}
+        <circle cx="100" cy="100" r="14"
+          fill={passed && centerActive ? '#A9752A' : '#EAE0C6'}
           style={{
             transform: `scale(${centerBump ? 1.28 : 1})`,
             transformOrigin: '100px 100px',
