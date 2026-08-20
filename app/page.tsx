@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Bloom from '@/components/Bloom'
 import Footer from '@/components/Footer'
@@ -58,6 +58,18 @@ export default function HomePage() {
   const [session, setSession] = useState<Session | null>(null)
   const [mounted, setMounted] = useState(false)
   const { openDrawer } = useAccountDrawer()
+  const ddRef = useRef<HTMLDivElement>(null)
+
+  // Close the profile dropdown when clicking anywhere outside it.
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ddRef.current && !ddRef.current.contains(e.target as Node)) {
+        document.getElementById('profileDD')?.classList.remove('open')
+      }
+    }
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [])
 
   // Quiz state
   const [activeSet, setActiveSet] = useState(0)
@@ -265,7 +277,7 @@ export default function HomePage() {
         </ul>
         <div className="nav-right">
           {session ? (
-            <div className="profile-wrap">
+            <div className="profile-wrap" ref={ddRef}>
               <button
                 className="profile-btn"
                 onClick={(e) => {
