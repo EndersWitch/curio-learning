@@ -6,19 +6,19 @@
 <script src="/icons.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Curio · Premium</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%23B8451F'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%23B8451F' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%23B8451F' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%23B8451F' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%23B8451F' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23B8451F'/%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="/footer.css" rel="stylesheet"/>
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <style>
 :root{
-  --plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;--card2:#1f1630;
-  --cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;
-  --m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);
-  --m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);
-  --c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);
-  --r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);
-  --h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;
+  --plum:#EAE0C6;--deep:#F6F0E2;--mid:#F0E6CE;--card:#FBF8EF;--card2:#FBF8EF;
+  --cyan:#B8451F;--coral:#B8451F;--moon:#211A13;--amber:#A9752A;
+  --m80:rgba(33,26,19,0.8);--m55:rgba(33,26,19,0.55);--m30:rgba(33,26,19,0.3);
+  --m12:rgba(33,26,19,0.12);--m06:rgba(33,26,19,0.06);
+  --c25:rgba(184,69,31,0.25);--c12:rgba(184,69,31,0.12);
+  --r20:rgba(184,69,31,0.2);--r10:rgba(184,69,31,0.10);
+  --h:'Fraunces',Georgia,serif;--b:'Work Sans',system-ui,sans-serif;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:var(--b);background:var(--deep);color:var(--moon);min-height:100vh;overflow-x:hidden;}
@@ -26,7 +26,7 @@ a{text-decoration:none;color:inherit;}
 button{font-family:var(--b);cursor:pointer;border:none;background:none;}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(26,18,40,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--m06);}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(246,240,226,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--m06);}
 .nav-logo{display:flex;align-items:center;gap:0.6rem;font-family:var(--h);font-size:1.2rem;font-weight:800;color:var(--moon);}
 .nav-back{font-size:0.8rem;color:var(--m30);transition:color .15s;}
 .nav-back:hover{color:var(--moon);}
@@ -52,7 +52,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 
 /* FREE VIEW */
 .hero-free{min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 2rem 4rem;text-align:center;position:relative;}
-.hero-free::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(109,211,206,0.05) 0%,transparent 70%);pointer-events:none;}
+.hero-free::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(184,69,31,0.05) 0%,transparent 70%);pointer-events:none;}
 .eyebrow{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:var(--cyan);margin-bottom:1rem;}
 .hero-title{font-family:var(--h);font-size:clamp(2.8rem,6vw,4.8rem);font-weight:900;letter-spacing:-2.5px;line-height:0.95;color:var(--moon);margin-bottom:1.4rem;}
 .hero-title .cy{color:var(--cyan);}
@@ -60,17 +60,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .hero-sub strong{color:var(--moon);font-weight:600;}
 
 /* FOUNDER BADGE */
-.founder-badge{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.28);border-radius:100px;padding:0.45rem 1rem;margin-bottom:2rem;animation:fpulse 2.5s ease-in-out infinite;}
-@keyframes fpulse{0%,100%{box-shadow:0 0 0 0 rgba(245,200,66,0);}50%{box-shadow:0 0 0 6px rgba(245,200,66,0.07);}}
+.founder-badge{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(169,117,42,0.1);border:1px solid rgba(169,117,42,0.28);border-radius:100px;padding:0.45rem 1rem;margin-bottom:2rem;animation:fpulse 2.5s ease-in-out infinite;}
+@keyframes fpulse{0%,100%{box-shadow:0 0 0 0 rgba(169,117,42,0);}50%{box-shadow:0 0 0 6px rgba(169,117,42,0.07);}}
 .fb-dot{width:7px;height:7px;border-radius:50%;background:var(--amber);}
 .fb-text{font-size:0.74rem;font-weight:700;color:var(--amber);}
-.fb-count{background:rgba(245,200,66,0.18);padding:0.08rem 0.45rem;border-radius:100px;font-family:var(--h);font-size:0.74rem;font-weight:900;color:var(--amber);}
+.fb-count{background:rgba(169,117,42,0.18);padding:0.08rem 0.45rem;border-radius:100px;font-family:var(--h);font-size:0.74rem;font-weight:900;color:var(--amber);}
 
 /* PRICING CARD */
 .pricing-card{background:var(--mid);border:1px solid var(--m06);border-top:2px solid var(--cyan);border-radius:24px;padding:2.5rem;max-width:420px;width:100%;margin:0 auto;position:relative;}
 .pc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.4rem;}
 .pc-tier{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--cyan);}
-.pc-trial-tag{font-size:0.68rem;font-weight:700;color:var(--amber);background:rgba(245,200,66,0.12);border:1px solid rgba(245,200,66,0.25);border-radius:100px;padding:0.18rem 0.6rem;}
+.pc-trial-tag{font-size:0.68rem;font-weight:700;color:var(--amber);background:rgba(169,117,42,0.12);border:1px solid rgba(169,117,42,0.25);border-radius:100px;padding:0.18rem 0.6rem;}
 .price-display{margin-bottom:1.5rem;}
 .price-big{font-family:var(--h);font-size:4.2rem;font-weight:900;letter-spacing:-3px;line-height:1;color:var(--moon);}
 .price-big sup{font-size:1.5rem;vertical-align:top;margin-top:0.5rem;display:inline-block;color:var(--m55);}
@@ -81,7 +81,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .feat-item{display:flex;align-items:center;gap:0.65rem;font-size:0.82rem;color:var(--m80);}
 .feat-chk{width:20px;height:20px;border-radius:6px;background:var(--c12);border:1px solid var(--c25);display:flex;align-items:center;justify-content:center;font-size:0.58rem;color:var(--cyan);flex-shrink:0;}
 .btn-sub{display:block;width:100%;padding:1rem;background:var(--coral);color:var(--moon);font-family:var(--h);font-size:0.95rem;font-weight:700;border:none;border-radius:12px;cursor:pointer;transition:all .2s;text-align:center;}
-.btn-sub:hover{background:#ff4a47;transform:translateY(-2px);}
+.btn-sub:hover{background:#8F3417;transform:translateY(-2px);}
 .btn-sub:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
 .sub-footnote{font-size:0.7rem;color:var(--m30);text-align:center;margin-top:0.9rem;line-height:1.65;}
 .sub-footnote a{color:var(--cyan);}
@@ -104,7 +104,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 
 /* PREMIUM VIEW */
 .premium-hero{min-height:55vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 2rem 2rem;text-align:center;position:relative;}
-.premium-hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(109,211,206,0.07) 0%,transparent 70%);pointer-events:none;}
+.premium-hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(184,69,31,0.07) 0%,transparent 70%);pointer-events:none;}
 .prem-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--c12);border:1px solid var(--c25);border-radius:100px;padding:0.4rem 1rem;margin-bottom:1.4rem;}
 .prem-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);animation:bpulse 2s ease-in-out infinite;}
 @keyframes bpulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
@@ -123,7 +123,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .mem-card-head{background:linear-gradient(135deg,var(--mid),var(--card));border-bottom:1px solid var(--m06);padding:1.4rem 1.8rem;display:flex;align-items:center;justify-content:space-between;}
 .mem-plan-label{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--cyan);margin-bottom:0.3rem;}
 .mem-plan-name{font-family:var(--h);font-size:1.05rem;font-weight:800;color:var(--moon);display:flex;align-items:center;gap:0.5rem;}
-.founder-pill{font-size:0.58rem;font-weight:700;background:rgba(245,200,66,0.12);border:1px solid rgba(245,200,66,0.28);border-radius:100px;padding:0.12rem 0.5rem;color:var(--amber);}
+.founder-pill{font-size:0.58rem;font-weight:700;background:rgba(169,117,42,0.12);border:1px solid rgba(169,117,42,0.28);border-radius:100px;padding:0.12rem 0.5rem;color:var(--amber);}
 .mem-status{display:flex;align-items:center;gap:0.4rem;font-size:0.7rem;font-weight:700;color:var(--cyan);background:var(--c12);border:1px solid var(--c25);border-radius:100px;padding:0.28rem 0.75rem;}
 .mem-status-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);}
 .mem-body{padding:0.4rem 1.8rem;}
@@ -147,24 +147,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 <!-- Loading -->
 <div id="loadingScreen">
   <svg class="loading-bloom" width="44" height="44" viewBox="0 0 64 64" fill="none">
-    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.85"/>
-    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.6" transform="rotate(72 32 32)"/>
-    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.4" transform="rotate(144 32 32)"/>
-    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.4" transform="rotate(216 32 32)"/>
-    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.6" transform="rotate(288 32 32)"/>
-    <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.85"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.6" transform="rotate(72 32 32)"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.4" transform="rotate(144 32 32)"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.4" transform="rotate(216 32 32)"/>
+    <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.6" transform="rotate(288 32 32)"/>
+    <circle cx="32" cy="32" r="7" fill="#B8451F"/>
   </svg>
 </div>
 
 <nav>
   <a href="/" class="nav-logo">
     <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
-      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
-      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
-      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
-      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
-      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
-      <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+      <circle cx="32" cy="32" r="7" fill="#B8451F"/>
     </svg>
     curio
   </a>
@@ -311,12 +311,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   <div class="footer-bottom">
     <a href="/" class="footer-logo">
       <svg width="20" height="20" viewBox="0 0 64 64" fill="none">
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
-        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#B8451F"/>
       </svg>
       curio
     </a>

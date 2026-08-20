@@ -1,19 +1,21 @@
 import type { Metadata } from 'next'
-import { Poppins, DM_Sans } from 'next/font/google'
+import { Fraunces, Work_Sans } from 'next/font/google'
 import './globals.css'
 import AdGate from '@/components/AdGate'
 import { AccountDrawerProvider } from '@/components/AccountDrawerProvider'
 
-const poppins = Poppins({
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800', '900'],
-  variable: '--font-poppins',
+  weight: ['400', '500', '600', '700', '900'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
   display: 'swap',
 })
 
-const dmSans = DM_Sans({
+const workSans = Work_Sans({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-worksans',
   display: 'swap',
 })
 
@@ -50,7 +52,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${workSans.variable}`}>
       <body className="font-body antialiased">
         <AccountDrawerProvider>{children}</AccountDrawerProvider>
         <AdGate />

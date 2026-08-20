@@ -29,7 +29,7 @@ type Tab = 'login' | 'signup' | 'forgot'
 
 function EyeToggle({ shown, onToggle }: { shown: boolean; onToggle: () => void }) {
   return (
-    <button type="button" onClick={onToggle} tabIndex={-1} className="grid place-items-center" style={{ width: 32, height: 32, color: 'rgba(247,247,255,0.3)' }}>
+    <button type="button" onClick={onToggle} tabIndex={-1} className="grid place-items-center" style={{ width: 32, height: 32, color: 'rgba(33,26,19,0.35)' }}>
       {shown ? <EyeOff size={16} /> : <Eye size={16} />}
     </button>
   )
@@ -165,12 +165,12 @@ export default function LoginPage() {
           <p className="bp-note">© 2026 Curio Learning · Built for SA students</p>
         </div>
         <svg className="bp-bloom" width="400" height="400" viewBox="0 0 64 64" fill="none">
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" />
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.7" transform="rotate(72 32 32)" />
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.5" transform="rotate(144 32 32)" />
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.5" transform="rotate(216 32 32)" />
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.7" transform="rotate(288 32 32)" />
-          <circle cx="32" cy="32" r="7" fill="#FF5E5B" />
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" />
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.7" transform="rotate(72 32 32)" />
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.5" transform="rotate(144 32 32)" />
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.5" transform="rotate(216 32 32)" />
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.7" transform="rotate(288 32 32)" />
+          <circle cx="32" cy="32" r="7" fill="#F6F0E2" />
         </svg>
       </div>
 

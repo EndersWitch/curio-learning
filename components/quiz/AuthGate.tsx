@@ -1,5 +1,7 @@
 'use client'
 
+import { Lock } from '@/components/icons'
+
 interface AuthGateProps {
   message?: string
   redirectAfter?: string
@@ -15,30 +17,32 @@ export default function AuthGate({
     : '/login'
 
   return (
-    <div className="rounded-3xl p-8 text-center"
+    <div className="rounded-lg p-8 text-center"
       style={{
-        background: 'linear-gradient(135deg, #2B1E3F 0%, #3d2d58 100%)',
-        border: '2px solid rgba(109,211,206,0.2)',
+        background: '#FBF8EF',
+        border: '1px solid rgba(33,26,19,0.15)',
       }}>
-      <div className="text-4xl mb-3">🔐</div>
-      <h3 className="font-black text-lg mb-2" style={{ color: '#F7F7FF' }}>
+      <div className="w-12 h-12 mx-auto mb-3 rounded-full flex items-center justify-center" style={{ background: 'rgba(184,69,31,0.1)', color: '#B8451F' }}>
+        <Lock size={22} />
+      </div>
+      <h3 className="font-black text-lg mb-2" style={{ color: '#211A13' }}>
         Sign In to Continue
       </h3>
-      <p className="text-sm mb-6 max-w-xs mx-auto" style={{ color: '#c4b8d8' }}>
+      <p className="text-sm mb-6 max-w-xs mx-auto" style={{ color: 'rgba(33,26,19,0.6)' }}>
         {message}
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <a href={loginUrl}
-          className="px-6 py-3 rounded-2xl font-black text-sm text-white text-center transition-all hover:opacity-90"
-          style={{ background: '#FF5E5B', boxShadow: '0 4px 16px rgba(255,94,91,0.35)' }}>
+          className="px-6 py-3 rounded-lg font-black text-sm text-center transition-all hover:opacity-90"
+          style={{ background: '#B8451F', color: '#F6F0E2' }}>
           Sign In →
         </a>
         <a href="/login"
-          className="px-6 py-3 rounded-2xl font-black text-sm text-center transition-all hover:opacity-80"
+          className="px-6 py-3 rounded-lg font-black text-sm text-center transition-all hover:opacity-80"
           style={{
-            background: 'rgba(255,255,255,0.06)',
-            color: '#F7F7FF',
-            border: '1px solid rgba(255,255,255,0.15)',
+            background: 'transparent',
+            color: '#211A13',
+            border: '1px solid rgba(33,26,19,0.18)',
           }}>
           Create Free Account
         </a>

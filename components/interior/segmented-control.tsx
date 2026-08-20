@@ -58,11 +58,11 @@ export function SegmentedControl({ options, label, value, defaultValue, onValueC
       role="radiogroup"
       aria-label={label}
       className={`relative inline-block w-full select-none ${className}`}
-      style={{ borderRadius: 10, background: '#2B1E3F', padding: 3, border: '1px solid rgba(247,247,255,0.08)' }}
+      style={{ borderRadius: 5, background: '#EAE0C6', padding: 3, border: '1px solid rgba(33,26,19,0.1)' }}
     >
       <div className="relative grid" style={{ gridTemplateColumns: template, touchAction: 'manipulation' }}>
         {options.map((option) => (
-          <span key={option.value} aria-hidden className={`${SEG} pointer-events-none`} style={{ fontSize: '0.82rem', fontWeight: 600, color: 'rgba(247,247,255,0.4)' }}>
+          <span key={option.value} aria-hidden className={`${SEG} pointer-events-none`} style={{ fontSize: '0.82rem', fontWeight: 600, color: 'rgba(33,26,19,0.45)' }}>
             {option.label}
           </span>
         ))}
@@ -70,13 +70,13 @@ export function SegmentedControl({ options, label, value, defaultValue, onValueC
         <motion.div
           aria-hidden
           className="pointer-events-none absolute inset-y-0 left-0 overflow-hidden"
-          style={{ width: `${100 / count}%`, x: thumbX, borderRadius: 7, background: '#6DD3CE' }}
+          style={{ width: `${100 / count}%`, x: thumbX, borderRadius: 3, background: '#B8451F' }}
           initial={false}
         >
           <motion.div className="absolute inset-0" style={{ x: maskX }} initial={false}>
             <div className="absolute inset-y-0 left-0 grid" style={{ width: `${count * 100}%`, gridTemplateColumns: template }}>
               {options.map((option) => (
-                <span key={option.value} className={SEG} style={{ fontSize: '0.82rem', fontWeight: 700, color: '#2B1E3F' }}>
+                <span key={option.value} className={SEG} style={{ fontSize: '0.82rem', fontWeight: 700, color: '#F6F0E2' }}>
                   {option.label}
                 </span>
               ))}
@@ -110,7 +110,7 @@ export function SegmentedControl({ options, label, value, defaultValue, onValueC
                 select(options[j].value)
               }}
               className="cursor-default outline-none"
-              style={{ borderRadius: 7 }}
+              style={{ borderRadius: 3 }}
             >
               <span className="sr-only">{option.label}</span>
             </button>

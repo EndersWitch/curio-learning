@@ -369,7 +369,7 @@ export default function HomePage() {
 
             {/* Quick actions */}
             <div>
-              <div style={{ fontSize: '0.6rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--m30)', marginBottom: '0.8rem' }}>
+              <div style={{ fontSize: '0.6rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--ink35)', marginBottom: '0.8rem' }}>
                 Quick actions
               </div>
               <div className="quick-actions">
@@ -433,7 +433,7 @@ export default function HomePage() {
               <div className="dash-panel">
                 <div className="dash-ph"><span className="dash-pt dash-pt-icon"><Flame size={16} /> Study streak</span></div>
                 <div className="dash-pb">
-                  <div style={{ fontSize: '0.72rem', color: 'var(--m55)', marginBottom: '0.7rem' }}>Days studied this week</div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--ink55)', marginBottom: '0.7rem' }}>Days studied this week</div>
                   <div className="streak-week">
                     {streakDays.map((on, i) => {
                       const d = new Date(today)
@@ -447,7 +447,7 @@ export default function HomePage() {
                       )
                     })}
                   </div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--m30)', marginTop: '0.7rem' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--ink35)', marginTop: '0.7rem' }}>
                     {streak > 0 ? `${streak} day${streak !== 1 ? 's' : ''} studied. Keep it up!` : 'Open a paper or take a quiz to start your streak!'}
                   </div>
                 </div>
@@ -516,12 +516,12 @@ export default function HomePage() {
             <div className="hero-right">
               <div className="bloom-hero">
                 <svg width="120" height="120" viewBox="0 0 64 64" fill="none">
-                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.85" />
-                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.6" transform="rotate(72 32 32)" />
-                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.4" transform="rotate(144 32 32)" />
-                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.4" transform="rotate(216 32 32)" />
-                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.6" transform="rotate(288 32 32)" />
-                  <circle cx="32" cy="32" r="7" fill="#FF5E5B" />
+                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.85" />
+                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.6" transform="rotate(72 32 32)" />
+                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.4" transform="rotate(144 32 32)" />
+                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.4" transform="rotate(216 32 32)" />
+                  <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.6" transform="rotate(288 32 32)" />
+                  <circle cx="32" cy="32" r="7" fill="#211A13" />
                 </svg>
               </div>
               <div className="hero-stat-row">
@@ -542,7 +542,7 @@ export default function HomePage() {
                 </div>
                 <div className="hstat">
                   <div className="hstat-lbl">Papers</div>
-                  <div className="hstat-val" style={{ color: 'var(--cyan)' }}>Free</div>
+                  <div className="hstat-val" style={{ color: 'var(--rust)' }}>Free</div>
                   <div className="hstat-sub">Always, forever</div>
                 </div>
               </div>
@@ -598,14 +598,14 @@ export default function HomePage() {
             </div>
             <div className="plist">
               {[
-                { bar: 'c', title: 'English HL · Paper 1 · Grade 12', meta: 'Language in Context · Comprehensive' },
-                { bar: 'r', title: 'Mathematics · Paper 2 · Grade 12', meta: 'Geometry & Statistics · Full paper' },
-                { bar: 'c', title: 'Life Sciences · Paper 1 · Grade 12', meta: 'Biochemistry & Cells · Full paper' },
-                { bar: 'r', title: 'History · Paper 1 · Grade 11', meta: 'SA History · Source-based' },
-                { bar: 'c', title: 'Geography · Paper 2 · Grade 10', meta: 'Human Geography · Full paper' },
+                { title: 'English HL · Paper 1 · Grade 12', meta: 'Language in Context · Comprehensive' },
+                { title: 'Mathematics · Paper 2 · Grade 12', meta: 'Geometry & Statistics · Full paper' },
+                { title: 'Life Sciences · Paper 1 · Grade 12', meta: 'Biochemistry & Cells · Full paper' },
+                { title: 'History · Paper 1 · Grade 11', meta: 'SA History · Source-based' },
+                { title: 'Geography · Paper 2 · Grade 10', meta: 'Human Geography · Full paper' },
               ].map((p, i) => (
                 <div className="prow" key={i}>
-                  <div className={`pbar ${p.bar}`} />
+                  <div className="pbar">{String(i + 1).padStart(2, '0')}</div>
                   <div className="pinfo">
                     <div className="ptitle">{p.title}</div>
                     <div className="pmeta">{p.meta}</div>

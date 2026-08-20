@@ -78,9 +78,9 @@ function RichText({ text, className, style }: { text: string; className?: string
   return (
     <span className={className} style={style}>
       {parts.map((p, i) =>
-        p.bold ? <strong key={i} style={{ fontWeight: 700, color: '#F7F7FF' }}>{p.content}</strong>
+        p.bold ? <strong key={i} style={{ fontWeight: 700, color: '#211A13' }}>{p.content}</strong>
         : p.italic ? <em key={i} style={{ fontStyle: 'italic' }}>{p.content}</em>
-        : p.cyan ? <span key={i} style={{ color: '#6DD3CE', fontWeight: 600 }}>{p.content}</span>
+        : p.cyan ? <span key={i} style={{ color: '#B8451F', fontWeight: 600 }}>{p.content}</span>
         : <span key={i}>{p.content}</span>
       )}
     </span>
@@ -89,19 +89,19 @@ function RichText({ text, className, style }: { text: string; className?: string
 
 // Curio colour tokens
 const CURIO = {
-  bg:         '#1a1228',
-  card:       '#231935',
-  cardBorder: 'rgba(109,211,206,0.15)',
-  text:       '#F7F7FF',
-  subtext:    '#9b8ab0',
-  coral:      '#FF5E5B',
-  cyan:       '#6DD3CE',
-  amber:      '#F5C842',
+  bg:         '#F6F0E2',
+  card:       '#FBF8EF',
+  cardBorder: 'rgba(184,69,31,0.18)',
+  text:       '#211A13',
+  subtext:    'rgba(33,26,19,0.55)',
+  coral:      '#9C3428',
+  cyan:       '#B8451F',
+  amber:      '#A9752A',
 }
 
 interface Burst { id: number; bx: number; by: number; color: string; size: number; delay: number }
 
-const BURST_COLORS = ['#34D399', '#6DD3CE', '#F5C842', '#FFFFFF']
+const BURST_COLORS = ['#3F6B3D', '#B8451F', '#A9752A', '#211A13']
 
 function CorrectBurst() {
   const [particles] = useState<Burst[]>(() =>
@@ -203,23 +203,23 @@ export default function QuizRunner({
 
   function optionStyle(optKey: string): React.CSSProperties {
     if (answerState === 'idle') {
-      return { background: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.12)', color: CURIO.text, cursor: 'pointer' }
+      return { background: '#FBF8EF', borderColor: 'rgba(33,26,19,0.15)', color: CURIO.text, cursor: 'pointer' }
     }
     if (optKey === current.correct_key) {
-      return { background: 'rgba(52,211,153,0.12)', borderColor: '#34D399', color: '#6ee7b7' }
+      return { background: 'rgba(63,107,61,0.12)', borderColor: '#3F6B3D', color: '#3F6B3D' }
     }
     if (optKey === selected) {
-      return { background: 'rgba(255,94,91,0.12)', borderColor: CURIO.coral, color: '#fca5a5' }
+      return { background: 'rgba(156,52,40,0.1)', borderColor: CURIO.coral, color: CURIO.coral }
     }
-    return { background: 'rgba(255,255,255,0.02)', borderColor: 'rgba(255,255,255,0.06)', color: CURIO.subtext, opacity: 0.5 }
+    return { background: 'rgba(33,26,19,0.02)', borderColor: 'rgba(33,26,19,0.08)', color: CURIO.subtext, opacity: 0.5 }
   }
 
   function bubbleStyle(optKey: string): React.CSSProperties {
     if (answerState !== 'idle') {
-      if (optKey === current.correct_key) return { background: '#34D399', color: '#fff' }
-      if (optKey === selected)            return { background: CURIO.coral, color: '#fff' }
+      if (optKey === current.correct_key) return { background: '#3F6B3D', color: '#F6F0E2' }
+      if (optKey === selected)            return { background: CURIO.coral, color: '#F6F0E2' }
     }
-    return { background: 'rgba(255,255,255,0.10)', color: CURIO.subtext }
+    return { background: 'rgba(33,26,19,0.08)', color: CURIO.subtext }
   }
 
   return (
@@ -231,7 +231,7 @@ export default function QuizRunner({
           {currentIndex + 1}/{questions.length}
         </span>
         <div className="flex-1">
-          <ProgressBar value={progressPercent} color="bg-gradient-to-r from-[#FF5E5B] to-[#6DD3CE]" />
+          <ProgressBar value={progressPercent} color="bg-[#B8451F]" />
         </div>
         <span className={xpBump ? 'animate-xp-bump inline-block' : 'inline-block'}>
           <XPBadge xp={xpDisplay} size="sm" />
@@ -243,24 +243,24 @@ export default function QuizRunner({
         style={{ background: CURIO.card, border: `1px solid ${CURIO.cardBorder}` }}>
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs font-black px-2.5 py-1 rounded-full"
-            style={{ background: 'rgba(109,211,206,0.12)', color: CURIO.cyan }}>
+            style={{ background: 'rgba(184,69,31,0.1)', color: CURIO.cyan }}>
             Question {currentIndex + 1}
           </span>
           {current.difficulty && (
             <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded-full"
-              style={{ background: 'rgba(245,200,66,0.1)', color: CURIO.amber }}>
+              style={{ background: 'rgba(169,117,42,0.12)', color: CURIO.amber }}>
               <Zap size={12} /> +{questionXp(current.difficulty)} XP · {current.difficulty}
             </span>
           )}
           {sectionType === 'subtopic_mastery' && (
             <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded-full"
-              style={{ background: 'rgba(245,200,66,0.12)', color: CURIO.amber }}>
+              style={{ background: 'rgba(169,117,42,0.14)', color: CURIO.amber }}>
               <Trophy size={12} /> Mastery
             </span>
           )}
           {sectionType === 'broad_topic_mastery' && (
             <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded-full"
-              style={{ background: 'rgba(109,211,206,0.12)', color: CURIO.cyan }}>
+              style={{ background: 'rgba(184,69,31,0.1)', color: CURIO.cyan }}>
               <GraduationCap size={12} /> Final Boss
             </span>
           )}
@@ -300,7 +300,7 @@ export default function QuizRunner({
               </span>
               {answerState !== 'idle' && opt.key === current.correct_key && (
                 <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center animate-pop-in"
-                  style={{ background: '#34D399', color: '#fff' }}><Check size={15} /></span>
+                  style={{ background: '#3F6B3D', color: '#F6F0E2' }}><Check size={15} /></span>
               )}
               {answerState === 'wrong' && opt.key === selected && (
                 <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center animate-wiggle"
@@ -315,17 +315,17 @@ export default function QuizRunner({
       {answerState !== 'idle' && (
         <div className={`rounded-2xl px-5 py-4 mb-4 border-2 ${answerState === 'correct' ? 'animate-celebrate' : 'animate-wrong-bump'}`}
           style={answerState === 'correct'
-            ? { background: 'rgba(52,211,153,0.08)', borderColor: 'rgba(52,211,153,0.3)' }
-            : { background: 'rgba(255,94,91,0.08)', borderColor: 'rgba(255,94,91,0.3)' }
+            ? { background: 'rgba(63,107,61,0.08)', borderColor: 'rgba(63,107,61,0.3)' }
+            : { background: 'rgba(156,52,40,0.08)', borderColor: 'rgba(156,52,40,0.3)' }
           }>
           <p className="font-black text-base mb-2"
-            style={{ color: answerState === 'correct' ? '#6ee7b7' : '#fca5a5' }}>
+            style={{ color: answerState === 'correct' ? '#3F6B3D' : '#9C3428' }}>
             {feedbackRef.current}
           </p>
           {/* Explanation always visible immediately — no button */}
           {current.explanation && (
             <p className="text-sm leading-relaxed pt-2"
-              style={{ color: CURIO.subtext, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+              style={{ color: CURIO.subtext, borderTop: '1px solid rgba(33,26,19,0.1)' }}>
               <RichText text={current.explanation} />
             </p>
           )}
@@ -336,7 +336,7 @@ export default function QuizRunner({
       {answerState !== 'idle' && (
         <button onClick={handleNext}
           className="w-full py-4 rounded-2xl font-black text-base text-white transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-95 animate-pop-in inline-flex items-center justify-center gap-2"
-          style={{ background: CURIO.coral }}>
+          style={{ background: CURIO.cyan }}>
           {isLast ? 'See My Results' : 'Next Question'} <ArrowRight size={18} />
         </button>
       )}

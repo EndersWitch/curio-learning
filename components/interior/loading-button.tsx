@@ -150,8 +150,8 @@ export const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(f
 
   const palette =
     variant === 'solid'
-      ? { bg: status === 'error' ? '#FF5E5B' : '#FF5E5B', hoverBg: '#ff4a47', text: '#F7F7FF' }
-      : { bg: 'rgba(247,247,255,0.06)', hoverBg: 'rgba(247,247,255,0.12)', text: '#F7F7FF' }
+      ? { bg: '#B8451F', hoverBg: '#8F3417', text: '#F6F0E2' }
+      : { bg: 'rgba(33,26,19,0.06)', hoverBg: 'rgba(33,26,19,0.12)', text: '#211A13' }
 
   return (
     <>
@@ -167,7 +167,7 @@ export const LoadingButton = forwardRef<HTMLButtonElement, LoadingButtonProps>(f
         className={`relative inline-flex w-full select-none items-center justify-center transition-[background-color] duration-150 disabled:opacity-50 ${className}`}
         style={{
           height: 44,
-          borderRadius: 10,
+          borderRadius: 5,
           fontFamily: 'var(--h)',
           fontSize: '0.88rem',
           fontWeight: 700,

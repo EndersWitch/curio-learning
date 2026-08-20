@@ -138,8 +138,8 @@ export function FloatingLabelInput({
     [ref, inputRef],
   )
 
-  const borderColor = invalid ? '#FF5E5B' : focused ? '#6DD3CE' : 'rgba(247,247,255,0.12)'
-  const bg = invalid || focused ? '#2B1E3F' : '#2B1E3F'
+  const borderColor = invalid ? '#9C3428' : focused ? '#B8451F' : 'rgba(33,26,19,0.15)'
+  const bg = '#FBF8EF'
 
   return (
     <div className={`w-full ${className}`}>
@@ -148,7 +148,7 @@ export function FloatingLabelInput({
           className="relative transition-[border-color,box-shadow] duration-150"
           style={{
             height: 44,
-            borderRadius: 10,
+            borderRadius: 5,
             border: `1.5px solid ${borderColor}`,
             background: bg,
             opacity: disabled ? 0.55 : 1,
@@ -175,11 +175,11 @@ export function FloatingLabelInput({
             onKeyDown={onKeyDown}
             className="absolute inset-0 h-full w-full bg-transparent outline-none disabled:cursor-not-allowed"
             style={{
-              borderRadius: 9,
+              borderRadius: 4,
               padding: trailing ? '0 40px 0 14px' : '0 14px',
               fontFamily: 'var(--b)',
               fontSize: '0.88rem',
-              color: '#F7F7FF',
+              color: '#211A13',
             }}
           />
           {trailing ? (
@@ -201,12 +201,12 @@ export function FloatingLabelInput({
             top: 32,
             fontSize: '0.82rem',
             lineHeight: '16px',
-            color: invalid ? '#FF5E5B' : raised ? 'rgba(247,247,255,0.7)' : 'rgba(247,247,255,0.35)',
+            color: invalid ? '#9C3428' : raised ? 'rgba(33,26,19,0.7)' : 'rgba(33,26,19,0.4)',
           }}
           className="block cursor-text select-none"
         >
           {label}
-          {required ? <span aria-hidden style={{ marginLeft: 2, color: 'rgba(247,247,255,0.3)' }}>*</span> : null}
+          {required ? <span aria-hidden style={{ marginLeft: 2, color: 'rgba(33,26,19,0.35)' }}>*</span> : null}
         </motion.label>
       </div>
 
@@ -214,7 +214,7 @@ export function FloatingLabelInput({
         <p
           id={hintId}
           className="mt-1.5"
-          style={{ fontSize: '0.68rem', lineHeight: '16px', color: invalid ? '#FF5E5B' : 'rgba(247,247,255,0.3)' }}
+          style={{ fontSize: '0.68rem', lineHeight: '16px', color: invalid ? '#9C3428' : 'rgba(33,26,19,0.35)' }}
         >
           {hint}
         </p>

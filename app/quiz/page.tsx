@@ -104,33 +104,33 @@ export default function QuizBrowsePage() {
     : topics
 
   return (
-    <div className="min-h-screen" style={{ background: '#1a1228' }}>
+    <div className="min-h-screen" style={{ background: '#F6F0E2' }}>
 
       {/* Hero */}
-      <div style={{ background: 'linear-gradient(135deg, #2B1E3F 0%, #3d2d58 100%)' }}>
+      <div style={{ background: '#EAE0C6' }}>
         <div className="max-w-4xl mx-auto px-6 py-12">
-          <h1 className="text-4xl font-black mb-2" style={{ color: '#F7F7FF' }}>
+          <h1 className="text-4xl font-black mb-2" style={{ color: '#211A13' }}>
             Pick a Topic
           </h1>
-          <p className="text-base mb-6" style={{ color: '#c4b8d8' }}>
+          <p className="text-base mb-6" style={{ color: 'rgba(33,26,19,0.6)' }}>
             Choose a subject, work through the levels, and see how much you know.
           </p>
 
           {/* Auth status */}
           {!authLoading && (
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm"
-              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm"
+              style={{ background: '#FBF8EF', border: '1px solid rgba(33,26,19,0.12)' }}>
               {user ? (
                 <>
-                  <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#6DD3CE', display: 'inline-block' }} />
-                  <span style={{ color: '#F7F7FF' }}>{user.fullName}</span>
+                  <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#B8451F', display: 'inline-block' }} />
+                  <span style={{ color: '#211A13' }}>{user.fullName}</span>
                   {isPremium && <span className="ml-1 inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-bold"
-                    style={{ background: 'rgba(245,200,66,0.15)', color: '#F5C842' }}><Star size={11} /> Premium</span>}
+                    style={{ background: 'rgba(169,117,42,0.15)', color: '#A9752A' }}><Star size={11} /> Premium</span>}
                 </>
               ) : (
                 <>
-                  <span style={{ color: '#9b8ab0' }}>Not signed in.</span>
-                  <a href="/login" className="font-bold" style={{ color: '#6DD3CE' }}>Sign in to track progress</a>
+                  <span style={{ color: 'rgba(33,26,19,0.55)' }}>Not signed in.</span>
+                  <a href="/login" className="font-bold" style={{ color: '#B8451F' }}>Sign in to track progress</a>
                 </>
               )}
             </div>
@@ -141,20 +141,20 @@ export default function QuizBrowsePage() {
       {/* Grade filter */}
       <div className="max-w-4xl mx-auto px-6 py-4">
         <div className="flex flex-wrap gap-2 items-center">
-          <span className="text-xs font-black uppercase tracking-widest mr-1" style={{ color: '#6DD3CE' }}>Grade:</span>
+          <span className="text-xs font-black uppercase tracking-widest mr-1" style={{ color: '#B8451F' }}>Grade:</span>
           <button onClick={() => setGradeFilter(null)}
             className="text-xs font-bold px-3 py-1.5 rounded-full border transition-colors"
             style={!gradeFilter
-              ? { background: '#6DD3CE', color: '#2B1E3F', borderColor: '#6DD3CE' }
-              : { background: 'transparent', color: '#c4b8d8', borderColor: 'rgba(255,255,255,0.15)' }}>
+              ? { background: '#B8451F', color: '#F6F0E2', borderColor: '#B8451F' }
+              : { background: 'transparent', color: 'rgba(33,26,19,0.6)', borderColor: 'rgba(33,26,19,0.18)' }}>
             All
           </button>
           {GRADES.map(g => (
             <button key={g} onClick={() => setGradeFilter(g)}
               className="text-xs font-bold px-3 py-1.5 rounded-full border transition-colors"
               style={gradeFilter === g
-                ? { background: '#6DD3CE', color: '#2B1E3F', borderColor: '#6DD3CE' }
-                : { background: 'transparent', color: '#c4b8d8', borderColor: 'rgba(255,255,255,0.15)' }}>
+                ? { background: '#B8451F', color: '#F6F0E2', borderColor: '#B8451F' }
+                : { background: 'transparent', color: 'rgba(33,26,19,0.6)', borderColor: 'rgba(33,26,19,0.18)' }}>
               Gr {g}
             </button>
           ))}
@@ -169,16 +169,16 @@ export default function QuizBrowsePage() {
           skeleton={
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="rounded-2xl" style={{ background: '#231935', height: '140px' }} />
+                <div key={i} className="rounded-lg" style={{ background: '#FBF8EF', height: '140px' }} />
               ))}
             </div>
           }
         >
           {filtered.length === 0 ? (
             <div className="text-center py-20">
-              <Search size={40} style={{ color: '#4a3a63', margin: '0 auto 0.75rem' }} />
-              <p className="font-black text-lg" style={{ color: '#F7F7FF' }}>No topics yet for this grade</p>
-              <p className="text-sm mt-1" style={{ color: '#9b8ab0' }}>More are being added. Check back soon!</p>
+              <Search size={40} style={{ color: 'rgba(33,26,19,0.3)', margin: '0 auto 0.75rem' }} />
+              <p className="font-black text-lg" style={{ color: '#211A13' }}>No topics yet for this grade</p>
+              <p className="text-sm mt-1" style={{ color: 'rgba(33,26,19,0.55)' }}>More are being added. Check back soon!</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -203,38 +203,38 @@ function TopicCard({ topic, isPremium }: { topic: Topic; isPremium: boolean }) {
 
   return (
     <a href={href}
-      className="block rounded-2xl overflow-hidden transition-all duration-200 hover:-translate-y-1"
-      style={{ background: '#231935', border: '1px solid rgba(109,211,206,0.12)' }}
-      onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(109,211,206,0.35)'}
-      onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(109,211,206,0.12)'}
+      className="block rounded-lg overflow-hidden transition-all duration-200 hover:-translate-y-1"
+      style={{ background: '#FBF8EF', border: '1px solid rgba(184,69,31,0.18)' }}
+      onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(184,69,31,0.4)'}
+      onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(184,69,31,0.18)'}
     >
       <div className="p-4">
         <div className="flex items-start justify-between mb-3">
-          <span className="flex items-center justify-center rounded-xl"
-            style={{ width: 38, height: 38, background: 'rgba(109,211,206,0.12)', color: '#6DD3CE' }}>
+          <span className="flex items-center justify-center rounded-lg"
+            style={{ width: 38, height: 38, background: 'rgba(184,69,31,0.1)', color: '#B8451F' }}>
             <Icon size={19} />
           </span>
           <span className="text-xs font-bold px-2 py-0.5 rounded-full"
-            style={{ background: 'rgba(109,211,206,0.12)', color: '#6DD3CE' }}>
+            style={{ background: 'rgba(184,69,31,0.1)', color: '#B8451F' }}>
             Gr {topic.grade}
           </span>
         </div>
 
-        <h3 className="font-black text-base mb-1 leading-tight" style={{ color: '#F7F7FF' }}>
+        <h3 className="font-black text-base mb-1 leading-tight" style={{ color: '#211A13' }}>
           {topic.broad_topic_display}
         </h3>
-        <p className="text-xs mb-3" style={{ color: '#9b8ab0' }}>{topic.subject}</p>
+        <p className="text-xs mb-3" style={{ color: 'rgba(33,26,19,0.55)' }}>{topic.subject}</p>
 
-        <div className="flex items-center justify-between text-xs" style={{ color: '#9b8ab0' }}>
+        <div className="flex items-center justify-between text-xs" style={{ color: 'rgba(33,26,19,0.55)' }}>
           <span>{topic.level_count} level{topic.level_count !== 1 ? 's' : ''}</span>
           {hasLockedLevels && !isPremium && (
             <span className="flex items-center gap-1"
-              style={{ color: '#F5C842' }}>
+              style={{ color: '#A9752A' }}>
               <Lock size={12} /> <span>{topic.free_level_count} free</span>
             </span>
           )}
           {(!hasLockedLevels || isPremium) && (
-            <span style={{ color: '#6DD3CE' }}>Open →</span>
+            <span style={{ color: '#B8451F' }}>Open →</span>
           )}
         </div>
       </div>

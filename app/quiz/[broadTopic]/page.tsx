@@ -36,9 +36,9 @@ interface Level {
 function difficultyBadge(d: string | null) {
   if (!d) return null
   const map: Record<string, { label: string; color: string }> = {
-    'Starter':   { label: 'Starter',   color: '#34D399' },
-    'Building':  { label: 'Building',  color: '#F5C842' },
-    'Challenge': { label: 'Challenge', color: '#FF5E5B' },
+    'Starter':   { label: 'Starter',   color: '#3F6B3D' },
+    'Building':  { label: 'Building',  color: '#A9752A' },
+    'Challenge': { label: 'Challenge', color: '#9C3428' },
   }
   return map[d] ?? null
 }
@@ -114,24 +114,24 @@ export default function BroadTopicPage() {
   const premiumCount = levels.filter(l => l.is_premium).length
 
   return (
-    <div className="min-h-screen" style={{ background: '#1a1228' }}>
+    <div className="min-h-screen" style={{ background: '#F6F0E2' }}>
 
       {/* Header */}
-      <div style={{ background: 'linear-gradient(135deg, #2B1E3F 0%, #3d2d58 100%)' }}>
+      <div style={{ background: '#EAE0C6' }}>
         <div className="max-w-2xl mx-auto px-6 py-10">
           <Link href="/quiz"
             className="inline-flex items-center gap-1 text-xs font-semibold mb-4 hover:opacity-70 transition-opacity"
-            style={{ color: '#6DD3CE' }}>
+            style={{ color: '#B8451F' }}>
             ← Back to Topics
           </Link>
-          <p className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: '#6DD3CE' }}>
+          <p className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: '#B8451F' }}>
             {subject} · Grade {grade}
           </p>
-          <h1 className="text-3xl font-black" style={{ color: '#F7F7FF' }}>{displayName}</h1>
-          <p className="text-sm mt-1" style={{ color: '#9b8ab0' }}>
+          <h1 className="text-3xl font-black" style={{ color: '#211A13' }}>{displayName}</h1>
+          <p className="text-sm mt-1" style={{ color: 'rgba(33,26,19,0.55)' }}>
             {levels.length} level{levels.length !== 1 ? 's' : ''} · {levels.filter(l => !l.is_premium).length} free
             {!isPremium && premiumCount > 0 && (
-              <span className="inline-flex items-center gap-1" style={{ color: '#F5C842' }}> · {premiumCount} premium <Lock size={11} /></span>
+              <span className="inline-flex items-center gap-1" style={{ color: '#A9752A' }}> · {premiumCount} premium <Lock size={11} /></span>
             )}
           </p>
         </div>
@@ -145,10 +145,10 @@ export default function BroadTopicPage() {
             <div key={key}>
               {subtopicName && (
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-xs font-black uppercase tracking-widest" style={{ color: '#9b8ab0' }}>
+                  <span className="text-xs font-black uppercase tracking-widest" style={{ color: 'rgba(33,26,19,0.55)' }}>
                     {subtopicName}
                   </span>
-                  <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.08)' }} />
+                  <div className="flex-1 h-px" style={{ background: 'rgba(33,26,19,0.1)' }} />
                 </div>
               )}
               <div className="space-y-2">
@@ -169,16 +169,16 @@ export default function BroadTopicPage() {
         {/* Premium upsell */}
         {!isPremium && premiumCount > 0 && (
           <div className="rounded-2xl p-5 text-center"
-            style={{ background: 'rgba(245,200,66,0.06)', border: '1px solid rgba(245,200,66,0.2)' }}>
-            <p className="inline-flex items-center gap-1.5 justify-center font-black text-sm mb-1" style={{ color: '#F5C842' }}>
+            style={{ background: 'rgba(169,117,42,0.06)', border: '1px solid rgba(169,117,42,0.2)' }}>
+            <p className="inline-flex items-center gap-1.5 justify-center font-black text-sm mb-1" style={{ color: '#A9752A' }}>
               <Lock size={14} /> {premiumCount} level{premiumCount !== 1 ? 's' : ''} locked
             </p>
-            <p className="text-xs mb-3" style={{ color: '#9b8ab0' }}>
+            <p className="text-xs mb-3" style={{ color: 'rgba(33,26,19,0.55)' }}>
               Get the rest with Curio Premium for R49/month
             </p>
             <a href="/subscription"
               className="inline-block px-5 py-2.5 rounded-xl font-black text-sm"
-              style={{ background: '#F5C842', color: '#2B1E3F' }}>
+              style={{ background: '#A9752A', color: '#F6F0E2' }}>
               Get Premium →
             </a>
           </div>
@@ -201,24 +201,24 @@ function LevelRow({ level, isPremium, broadTopic, progress }: {
   const inner = (
     <div className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all"
       style={locked
-        ? { background: 'rgba(255,255,255,0.02)', opacity: 0.6, cursor: 'not-allowed' }
+        ? { background: 'rgba(33,26,19,0.03)', opacity: 0.6, cursor: 'not-allowed' }
         : completed
-        ? { background: 'rgba(52,211,153,0.06)', border: '1px solid rgba(52,211,153,0.2)' }
-        : { background: 'rgba(255,255,255,0.04)' }}>
+        ? { background: 'rgba(63,107,61,0.06)', border: '1px solid rgba(63,107,61,0.2)' }
+        : { background: 'rgba(33,26,19,0.04)' }}>
       <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0"
         style={locked
-          ? { background: 'rgba(255,255,255,0.04)', color: '#9b8ab0', border: '2px solid rgba(255,255,255,0.08)' }
+          ? { background: 'rgba(33,26,19,0.04)', color: 'rgba(33,26,19,0.55)', border: '2px solid rgba(33,26,19,0.1)' }
           : completed
-          ? { background: '#34D399', color: '#fff', border: '2px solid #34D399' }
-          : { background: 'rgba(109,211,206,0.1)', color: '#6DD3CE', border: '2px solid rgba(109,211,206,0.25)' }}>
+          ? { background: '#3F6B3D', color: '#F6F0E2', border: '2px solid #3F6B3D' }
+          : { background: 'rgba(184,69,31,0.1)', color: '#B8451F', border: '2px solid rgba(184,69,31,0.25)' }}>
         {locked ? <Lock size={15} /> : completed ? <Check size={16} /> : level.level_order}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="font-bold text-sm" style={{ color: locked ? '#9b8ab0' : '#F7F7FF' }}>
+        <p className="font-bold text-sm" style={{ color: locked ? 'rgba(33,26,19,0.55)' : '#211A13' }}>
           {level.level_display}
         </p>
         {level.description && (
-          <p className="text-xs mt-0.5 truncate" style={{ color: '#9b8ab0' }}>
+          <p className="text-xs mt-0.5 truncate" style={{ color: 'rgba(33,26,19,0.55)' }}>
             {level.description}
           </p>
         )}
@@ -231,10 +231,10 @@ function LevelRow({ level, isPremium, broadTopic, progress }: {
           )}
           {progress && (
             <>
-              <span className="text-xs font-bold" style={{ color: completed ? '#34D399' : '#9b8ab0' }}>
+              <span className="text-xs font-bold" style={{ color: completed ? '#3F6B3D' : 'rgba(33,26,19,0.55)' }}>
                 Best: {progress.best_score}%
               </span>
-              <span className="inline-flex items-center gap-1 text-xs font-bold" style={{ color: '#F5C842' }}>
+              <span className="inline-flex items-center gap-1 text-xs font-bold" style={{ color: '#A9752A' }}>
                 <Zap size={11} /> {progress.xp_earned} XP
               </span>
             </>
@@ -242,12 +242,12 @@ function LevelRow({ level, isPremium, broadTopic, progress }: {
         </div>
       </div>
       <div className="flex-shrink-0 text-right">
-        <div className="text-xs" style={{ color: '#9b8ab0' }}>{level.question_count}Q</div>
+        <div className="text-xs" style={{ color: 'rgba(33,26,19,0.55)' }}>{level.question_count}Q</div>
         {locked
-          ? <div className="inline-flex items-center gap-1 text-xs" style={{ color: '#F5C842' }}>Premium <Lock size={11} /></div>
+          ? <div className="inline-flex items-center gap-1 text-xs" style={{ color: '#A9752A' }}>Premium <Lock size={11} /></div>
           : completed
-          ? <div className="text-xs font-bold" style={{ color: '#34D399' }}>Replay ↻</div>
-          : <div className="text-xs font-bold" style={{ color: '#6DD3CE' }}>→</div>}
+          ? <div className="text-xs font-bold" style={{ color: '#3F6B3D' }}>Replay ↻</div>
+          : <div className="text-xs font-bold" style={{ color: '#B8451F' }}>→</div>}
       </div>
     </div>
   )
@@ -258,11 +258,11 @@ function LevelRow({ level, isPremium, broadTopic, progress }: {
 
 function LoadingScreen() {
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: '#1a1228' }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: '#F6F0E2' }}>
       <div className="text-center">
         <div className="w-10 h-10 rounded-full border-2 border-t-transparent animate-spin mx-auto mb-3"
-          style={{ borderColor: '#6DD3CE', borderTopColor: 'transparent' }} />
-        <p className="text-sm" style={{ color: '#9b8ab0' }}>Loading levels...</p>
+          style={{ borderColor: '#B8451F', borderTopColor: 'transparent' }} />
+        <p className="text-sm" style={{ color: 'rgba(33,26,19,0.55)' }}>Loading levels...</p>
       </div>
     </div>
   )
@@ -270,12 +270,12 @@ function LoadingScreen() {
 
 function NotFoundScreen() {
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: '#1a1228' }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: '#F6F0E2' }}>
       <div className="text-center">
-        <Search size={40} style={{ color: '#4a3a63', margin: '0 auto 0.75rem' }} />
-        <h1 className="text-xl font-black mb-2" style={{ color: '#F7F7FF' }}>Topic Not Found</h1>
+        <Search size={40} style={{ color: 'rgba(33,26,19,0.3)', margin: '0 auto 0.75rem' }} />
+        <h1 className="text-xl font-black mb-2" style={{ color: '#211A13' }}>Topic Not Found</h1>
         <Link href="/quiz" className="inline-block px-5 py-2.5 rounded-xl font-black text-sm mt-2"
-          style={{ background: '#6DD3CE', color: '#2B1E3F' }}>← All Topics</Link>
+          style={{ background: '#B8451F', color: '#F6F0E2' }}>← All Topics</Link>
       </div>
     </div>
   )

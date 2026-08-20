@@ -94,45 +94,45 @@ export default function PlayPage() {
   }, [user, levelMeta])
 
   if (loading || authLoading) return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: '#1a1228' }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: '#F6F0E2' }}>
       <div className="text-center">
-        <Target size={36} className="mb-3 animate-bounce" style={{ color: '#6DD3CE', margin: '0 auto 0.75rem' }} />
-        <p className="text-sm" style={{ color: '#9b8ab0' }}>Loading your quiz...</p>
+        <Target size={36} className="mb-3 animate-bounce" style={{ color: '#B8451F', margin: '0 auto 0.75rem' }} />
+        <p className="text-sm" style={{ color: 'rgba(33,26,19,0.55)' }}>Loading your quiz...</p>
       </div>
     </div>
   )
 
   if (accessDenied) return (
-    <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#1a1228' }}>
+    <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#F6F0E2' }}>
       <div className="text-center max-w-sm">
-        <Lock size={40} style={{ color: '#F5C842', margin: '0 auto 0.75rem' }} />
-        <h2 className="text-xl font-black mb-2" style={{ color: '#F7F7FF' }}>Premium Level</h2>
-        <p className="text-sm mb-5" style={{ color: '#9b8ab0' }}>Upgrade to access this level.</p>
+        <Lock size={40} style={{ color: '#A9752A', margin: '0 auto 0.75rem' }} />
+        <h2 className="text-xl font-black mb-2" style={{ color: '#211A13' }}>Premium Level</h2>
+        <p className="text-sm mb-5" style={{ color: 'rgba(33,26,19,0.55)' }}>Upgrade to access this level.</p>
         <a href="/subscription" className="inline-block px-6 py-3 rounded-xl font-black text-sm"
-          style={{ background: '#F5C842', color: '#2B1E3F' }}>Get Premium →</a>
+          style={{ background: '#A9752A', color: '#F6F0E2' }}>Get Premium →</a>
       </div>
     </div>
   )
 
   if (error) return (
-    <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#1a1228' }}>
+    <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#F6F0E2' }}>
       <div className="text-center max-w-sm rounded-2xl p-8"
-        style={{ background: '#231935', border: '1px solid rgba(109,211,206,0.15)' }}>
-        <AlertTriangle size={36} style={{ color: '#FF5E5B', margin: '0 auto 0.75rem' }} />
-        <h2 className="text-xl font-black mb-2" style={{ color: '#F7F7FF' }}>Couldn&apos;t load quiz</h2>
-        <p className="text-sm mb-5" style={{ color: '#9b8ab0' }}>{error}</p>
+        style={{ background: '#FBF8EF', border: '1px solid rgba(184,69,31,0.15)' }}>
+        <AlertTriangle size={36} style={{ color: '#9C3428', margin: '0 auto 0.75rem' }} />
+        <h2 className="text-xl font-black mb-2" style={{ color: '#211A13' }}>Couldn&apos;t load quiz</h2>
+        <p className="text-sm mb-5" style={{ color: 'rgba(33,26,19,0.55)' }}>{error}</p>
         <button onClick={() => window.location.reload()}
           className="w-full py-3 rounded-xl font-black text-sm"
-          style={{ background: '#6DD3CE', color: '#2B1E3F' }}>Try Again</button>
+          style={{ background: '#B8451F', color: '#F6F0E2' }}>Try Again</button>
       </div>
     </div>
   )
 
   if (saving) return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: '#1a1228' }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: '#F6F0E2' }}>
       <div className="text-center">
-        <Zap size={36} className="animate-bounce" style={{ color: '#F5C842', margin: '0 auto 0.75rem' }} />
-        <p className="text-sm" style={{ color: '#9b8ab0' }}>Saving your XP...</p>
+        <Zap size={36} className="animate-bounce" style={{ color: '#A9752A', margin: '0 auto 0.75rem' }} />
+        <p className="text-sm" style={{ color: 'rgba(33,26,19,0.55)' }}>Saving your XP...</p>
       </div>
     </div>
   )
@@ -150,9 +150,9 @@ export default function PlayPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: '#1a1228' }}>
+    <div className="min-h-screen" style={{ background: '#F6F0E2' }}>
       <div className="sticky top-0 z-30 backdrop-blur-md"
-        style={{ background: 'rgba(43,30,63,0.95)', borderBottom: '1px solid rgba(109,211,206,0.15)' }}>
+        style={{ background: 'rgba(246,240,226,0.92)', borderBottom: '1px solid rgba(184,69,31,0.15)' }}>
         <div className="max-w-2xl mx-auto px-6 py-3 flex items-center justify-between">
           <HoldToConfirm
             size="sm"
@@ -160,11 +160,11 @@ export default function PlayPage() {
             confirmLabel="Leaving…"
             onConfirm={() => router.push(learnHref)}
           >
-            <span className="inline-flex items-center gap-1" style={{ color: '#9b8ab0' }}>
+            <span className="inline-flex items-center gap-1" style={{ color: 'rgba(33,26,19,0.55)' }}>
               <X size={12} /> Hold to exit
             </span>
           </HoldToConfirm>
-          <h1 className="font-black text-sm truncate" style={{ color: '#F7F7FF' }}>
+          <h1 className="font-black text-sm truncate" style={{ color: '#211A13' }}>
             {levelMeta?.level_display}
           </h1>
           <div style={{ width: 40 }} />

@@ -187,7 +187,7 @@ export function HoldToConfirm({
 
   const committed = phase === 'committed'
   const seconds = Math.round(duration / 100) / 10
-  const fillColor = tone === 'coral' ? '#FF5E5B' : '#6DD3CE'
+  const fillColor = tone === 'coral' ? '#9C3428' : '#B8451F'
 
   const swept = useMotionValue(0)
   const clipPath = useTransform(swept, (v) => `inset(0 ${(1 - v) * 100}% 0 0)`)
@@ -217,8 +217,8 @@ export function HoldToConfirm({
   }, [phase, duration, reduced, swept])
 
   const dims = size === 'sm'
-    ? { height: 28, borderRadius: 7, fontSize: '0.75rem', fontWeight: 600, padX: 10 }
-    : { height: 44, borderRadius: 10, fontSize: '0.85rem', fontWeight: 700, padX: 16 }
+    ? { height: 28, borderRadius: 4, fontSize: '0.75rem', fontWeight: 600, padX: 10 }
+    : { height: 44, borderRadius: 5, fontSize: '0.85rem', fontWeight: 700, padX: 16 }
 
   return (
     <button
@@ -231,9 +231,9 @@ export function HoldToConfirm({
         WebkitTouchCallout: 'none',
         height: dims.height,
         borderRadius: dims.borderRadius,
-        border: '1px solid rgba(247,247,255,0.12)',
-        background: '#2B1E3F',
-        color: '#F7F7FF',
+        border: '1px solid rgba(33,26,19,0.15)',
+        background: '#FBF8EF',
+        color: '#211A13',
         fontFamily: 'var(--h)',
         fontSize: dims.fontSize,
         fontWeight: dims.fontWeight,
@@ -246,7 +246,7 @@ export function HoldToConfirm({
 
       <motion.span
         aria-hidden
-        style={{ clipPath, background: fillColor, color: '#2B1E3F', paddingLeft: dims.padX, paddingRight: dims.padX }}
+        style={{ clipPath, background: fillColor, color: '#F6F0E2', paddingLeft: dims.padX, paddingRight: dims.padX }}
         className="absolute inset-0 grid place-items-center"
       >
         <Faces committed={committed} confirmLabel={confirmLabel}>{children}</Faces>

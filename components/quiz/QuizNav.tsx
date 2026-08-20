@@ -33,12 +33,12 @@ export default function QuizNav() {
     <nav className="curio-nav">
       <a href="/" className="nav-logo">
         <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.7" transform="rotate(72 32 32)"/>
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.5" transform="rotate(144 32 32)"/>
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.5" transform="rotate(216 32 32)"/>
-          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fillOpacity="0.7" transform="rotate(288 32 32)"/>
-          <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F"/>
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.7" transform="rotate(72 32 32)"/>
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.5" transform="rotate(144 32 32)"/>
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.5" transform="rotate(216 32 32)"/>
+          <ellipse cx="32" cy="16" rx="7" ry="13" fill="#B8451F" fillOpacity="0.7" transform="rotate(288 32 32)"/>
+          <circle cx="32" cy="32" r="7" fill="#211A13"/>
         </svg>
         curio
       </a>
@@ -52,24 +52,24 @@ export default function QuizNav() {
 
       <div className="nav-right">
         {loading ? (
-          <div style={{ width: 80, height: 28, borderRadius: 6, background: 'rgba(255,255,255,0.08)' }} />
+          <div style={{ width: 80, height: 28, borderRadius: 4, background: 'rgba(33,26,19,0.06)' }} />
         ) : user ? (
           <div className="profile-wrap" ref={ddRef} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
             {user.streakDays > 0 && (
               <span title="Day streak" style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
-                fontSize: '0.78rem', fontWeight: 700, color: '#F5C842',
-                background: 'rgba(245,200,66,0.12)', border: '1px solid rgba(245,200,66,0.25)',
-                borderRadius: 999, padding: '0.3rem 0.65rem',
+                fontSize: '0.78rem', fontWeight: 700, color: '#A9752A',
+                background: 'rgba(169,117,42,0.12)', border: '1px solid rgba(169,117,42,0.3)',
+                borderRadius: 4, padding: '0.3rem 0.65rem',
               }}>
                 <Flame size={14} /> {user.streakDays}
               </span>
             )}
             <span title="Total XP" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
-              fontSize: '0.78rem', fontWeight: 700, color: '#6DD3CE',
-              background: 'rgba(109,211,206,0.12)', border: '1px solid rgba(109,211,206,0.25)',
-              borderRadius: 999, padding: '0.3rem 0.65rem',
+              fontSize: '0.78rem', fontWeight: 700, color: '#B8451F',
+              background: 'rgba(184,69,31,0.1)', border: '1px solid rgba(184,69,31,0.3)',
+              borderRadius: 4, padding: '0.3rem 0.65rem',
             }}>
               <Zap size={14} /> {user.totalXp.toLocaleString()} XP
             </span>

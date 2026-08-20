@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Zap } from '@/components/icons'
+import { Zap, Flame } from '@/components/icons'
 
 interface XPBadgeProps {
   xp: number
@@ -39,7 +39,7 @@ export function XPBadge({ xp, animate = false, size = 'md' }: XPBadgeProps) {
   return (
     <span
       className={`inline-flex items-center gap-1 font-bold rounded-full ${sizes[size]}`}
-      style={{ background: '#F5C842', color: '#2B1E3F' }}
+      style={{ background: '#A9752A', color: '#F6F0E2' }}
     >
       <Zap size={iconSizes[size]} /> {displayed} XP
     </span>
@@ -55,19 +55,19 @@ interface ProgressBarProps {
 
 export function ProgressBar({
   value,
-  color = 'bg-[#6DD3CE]',
+  color = 'bg-[#B8451F]',
   label,
   showPercent = false,
 }: ProgressBarProps) {
   return (
     <div className="w-full">
       {(label || showPercent) && (
-        <div className="flex justify-between mb-1 text-xs font-medium" style={{ color: '#9b8ab0' }}>
+        <div className="flex justify-between mb-1 text-xs font-medium" style={{ color: 'rgba(33,26,19,0.55)' }}>
           {label && <span>{label}</span>}
           {showPercent && <span>{Math.round(value)}%</span>}
         </div>
       )}
-      <div className="w-full h-3 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
+      <div className="w-full h-3 rounded-full overflow-hidden" style={{ background: 'rgba(33,26,19,0.08)' }}>
         <div
           className={`h-full rounded-full transition-all duration-700 ease-out ${color}`}
           style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
@@ -84,8 +84,9 @@ interface StreakBadgeProps {
 export function StreakBadge({ streak }: StreakBadgeProps) {
   if (streak < 1) return null
   return (
-    <span className="inline-flex items-center gap-1 font-bold text-sm px-3 py-1 rounded-full bg-orange-100 text-orange-700 border border-orange-200">
-      🔥 {streak} day streak
+    <span className="inline-flex items-center gap-1.5 font-bold text-sm px-3 py-1 rounded-full"
+      style={{ background: '#F4ECDD', color: '#A9752A', border: '1px solid rgba(169,117,42,0.3)' }}>
+      <Flame size={13} /> {streak} day streak
     </span>
   )
 }
@@ -97,13 +98,13 @@ interface LevelPillProps {
 
 export function LevelPill({ level, xp }: LevelPillProps) {
   return (
-    <div className="flex items-center gap-2 bg-white border border-slate-200 rounded-2xl px-3 py-1.5 shadow-sm">
-      <div className="w-7 h-7 rounded-full bg-violet-600 text-white flex items-center justify-center text-xs font-black">
+    <div className="flex items-center gap-2 rounded-lg px-3 py-1.5" style={{ background: '#FBF8EF', border: '1px solid rgba(33,26,19,0.15)' }}>
+      <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black" style={{ background: '#B8451F', color: '#F6F0E2' }}>
         {level}
       </div>
       <div>
-        <div className="text-xs font-bold text-slate-700">Level {level}</div>
-        <div className="text-xs text-slate-400">{xp.toLocaleString()} XP</div>
+        <div className="text-xs font-bold" style={{ color: '#211A13' }}>Level {level}</div>
+        <div className="text-xs" style={{ color: 'rgba(33,26,19,0.4)' }}>{xp.toLocaleString()} XP</div>
       </div>
     </div>
   )

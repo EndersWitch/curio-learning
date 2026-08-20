@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { Star, Lock, Check } from '@/components/icons'
 
 interface TopicCardProps {
   id: string
@@ -26,36 +27,36 @@ const COLOR_MAP: Record<string, {
   glowColor: string
 }> = {
   coral: {
-    headerBg:    'linear-gradient(135deg, #FF5E5B 0%, #ff8a47 100%)',
-    headerBorder:'#FF5E5B',
-    badgeBg:     'rgba(255,94,91,0.15)',
-    badgeText:   '#FF5E5B',
-    barBg:       'linear-gradient(90deg, #FF5E5B, #ff8a47)',
-    glowColor:   'rgba(255,94,91,0.25)',
+    headerBg:    '#9C3428',
+    headerBorder:'#9C3428',
+    badgeBg:     'rgba(156,52,40,0.14)',
+    badgeText:   '#9C3428',
+    barBg:       '#9C3428',
+    glowColor:   'rgba(156,52,40,0.18)',
   },
   cyan: {
-    headerBg:    'linear-gradient(135deg, #6DD3CE 0%, #4ab8c1 100%)',
-    headerBorder:'#6DD3CE',
-    badgeBg:     'rgba(109,211,206,0.15)',
-    badgeText:   '#6DD3CE',
-    barBg:       'linear-gradient(90deg, #6DD3CE, #4ab8c1)',
-    glowColor:   'rgba(109,211,206,0.25)',
+    headerBg:    '#B8451F',
+    headerBorder:'#B8451F',
+    badgeBg:     'rgba(184,69,31,0.14)',
+    badgeText:   '#B8451F',
+    barBg:       '#B8451F',
+    glowColor:   'rgba(184,69,31,0.18)',
   },
   amber: {
-    headerBg:    'linear-gradient(135deg, #F5C842 0%, #f5a623 100%)',
-    headerBorder:'#F5C842',
-    badgeBg:     'rgba(245,200,66,0.15)',
-    badgeText:   '#c8950a',
-    barBg:       'linear-gradient(90deg, #F5C842, #f5a623)',
-    glowColor:   'rgba(245,200,66,0.25)',
+    headerBg:    '#A9752A',
+    headerBorder:'#A9752A',
+    badgeBg:     'rgba(169,117,42,0.14)',
+    badgeText:   '#A9752A',
+    barBg:       '#A9752A',
+    glowColor:   'rgba(169,117,42,0.18)',
   },
   plum: {
-    headerBg:    'linear-gradient(135deg, #3d2d58 0%, #2B1E3F 100%)',
-    headerBorder:'#6DD3CE',
-    badgeBg:     'rgba(109,211,206,0.1)',
-    badgeText:   '#6DD3CE',
-    barBg:       'linear-gradient(90deg, #6DD3CE, #4ab8c1)',
-    glowColor:   'rgba(109,211,206,0.2)',
+    headerBg:    '#211A13',
+    headerBorder:'#B8451F',
+    badgeBg:     'rgba(184,69,31,0.1)',
+    badgeText:   '#B8451F',
+    barBg:       '#B8451F',
+    glowColor:   'rgba(184,69,31,0.16)',
   },
 }
 
@@ -80,10 +81,10 @@ export default function TopicCard({
   return (
     <Link
       href={href}
-      className="group block rounded-2xl overflow-hidden transition-all duration-300"
+      className="group block rounded-lg overflow-hidden transition-all duration-300"
       style={{
-        background: '#231935',
-        border: `1px solid rgba(255,255,255,0.08)`,
+        background: '#FBF8EF',
+        border: `1px solid rgba(33,26,19,0.12)`,
         cursor: isLocked ? 'not-allowed' : 'pointer',
         opacity: isLocked ? 0.75 : 1,
       }}
@@ -97,7 +98,7 @@ export default function TopicCard({
       onMouseLeave={e => {
         (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'
         ;(e.currentTarget as HTMLElement).style.boxShadow = 'none'
-        ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.08)'
+        ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(33,26,19,0.12)'
       }}
     >
       {/* Coloured header strip */}
@@ -108,21 +109,21 @@ export default function TopicCard({
 
         <div className="flex flex-col items-end gap-1.5">
           {isPremium && (
-            <span className="text-xs font-black px-2.5 py-0.5 rounded-full"
+            <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-0.5 rounded-full"
               style={{ background: 'rgba(0,0,0,0.25)', color: '#fff', backdropFilter: 'blur(4px)' }}>
-              ✨ Premium
+              <Star size={11} /> Premium
             </span>
           )}
           {isLocked && (
-            <span className="text-xs font-black px-2.5 py-0.5 rounded-full"
+            <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-0.5 rounded-full"
               style={{ background: 'rgba(0,0,0,0.35)', color: '#fff' }}>
-              🔒 Locked
+              <Lock size={11} /> Locked
             </span>
           )}
           {progressPercent === 100 && (
-            <span className="text-xs font-black px-2.5 py-0.5 rounded-full"
-              style={{ background: 'rgba(255,255,255,0.9)', color: '#1a7a4a' }}>
-              ✅ Mastered!
+            <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-0.5 rounded-full"
+              style={{ background: 'rgba(255,255,255,0.9)', color: '#3F6B3D' }}>
+              <Check size={11} /> Mastered!
             </span>
           )}
         </div>
@@ -135,10 +136,10 @@ export default function TopicCard({
       {/* Card body */}
       <div className="p-4">
         {/* Title */}
-        <h3 className="font-black text-base mb-1 leading-tight" style={{ color: '#F7F7FF' }}>
+        <h3 className="font-black text-base mb-1 leading-tight" style={{ color: '#211A13' }}>
           {name}
         </h3>
-        <p className="text-xs mb-3 line-clamp-1" style={{ color: '#9b8ab0' }}>{description}</p>
+        <p className="text-xs mb-3 line-clamp-1" style={{ color: 'rgba(33,26,19,0.55)' }}>{description}</p>
 
         {/* Meta row */}
         <div className="flex items-center gap-2 mb-3">
@@ -146,28 +147,28 @@ export default function TopicCard({
             style={{ background: c.badgeBg, color: c.badgeText }}>
             Gr {grade}
           </span>
-          <span className="text-xs" style={{ color: '#9b8ab0' }}>{subject}</span>
-          <span className="text-xs ml-auto" style={{ color: '#9b8ab0' }}>{subtopicCount} levels</span>
+          <span className="text-xs" style={{ color: 'rgba(33,26,19,0.55)' }}>{subject}</span>
+          <span className="text-xs ml-auto" style={{ color: 'rgba(33,26,19,0.55)' }}>{subtopicCount} levels</span>
         </div>
 
         {/* Progress bar */}
         {progressPercent > 0 ? (
           <div>
             <div className="flex justify-between mb-1">
-              <span className="text-xs font-semibold" style={{ color: '#9b8ab0' }}>Progress</span>
-              <span className="text-xs font-black" style={{ color: c.badgeText === '#c8950a' ? '#F5C842' : c.badgeText }}>
+              <span className="text-xs font-semibold" style={{ color: 'rgba(33,26,19,0.55)' }}>Progress</span>
+              <span className="text-xs font-black" style={{ color: c.badgeText }}>
                 {progressPercent}%
               </span>
             </div>
-            <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
+            <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: 'rgba(33,26,19,0.08)' }}>
               <div className="h-full rounded-full transition-all duration-700"
                 style={{ width: `${progressPercent}%`, background: c.barBg }} />
             </div>
           </div>
         ) : (
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full" style={{ background: 'rgba(255,255,255,0.2)' }} />
-            <span className="text-xs" style={{ color: '#9b8ab0' }}>Not started yet</span>
+            <div className="w-2 h-2 rounded-full" style={{ background: 'rgba(33,26,19,0.2)' }} />
+            <span className="text-xs" style={{ color: 'rgba(33,26,19,0.55)' }}>Not started yet</span>
           </div>
         )}
       </div>

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import type { QuizLevel, UserProgress } from '@/types/quiz'
 import { isLevelPassed } from '@/lib/progress'
+import { BookOpen, Trophy, GraduationCap, Target, Check, Lock, type IconProps } from '@/components/icons'
 
 interface ProgressionPathProps {
   levels: QuizLevel[]
@@ -12,11 +13,11 @@ interface ProgressionPathProps {
   isUserPremium: boolean
 }
 
-const SECTION_ICONS: Record<string, string> = {
-  level: '📖',
-  subtopic_mastery: '🏆',
-  broad_topic_mastery: '👑',
-  general_practice: '🎯',
+const SECTION_ICONS: Record<string, (props: IconProps) => JSX.Element> = {
+  level: BookOpen,
+  subtopic_mastery: Trophy,
+  broad_topic_mastery: GraduationCap,
+  general_practice: Target,
 }
 
 export default function ProgressionPath({
@@ -37,13 +38,14 @@ export default function ProgressionPath({
   return (
     <div className="space-y-3 relative">
       {/* Vertical connector line */}
-      <div className="absolute left-[1.9rem] top-10 bottom-10 w-0.5 bg-gradient-to-b from-violet-200 via-cyan-200 to-violet-200 z-0" />
+      <div className="absolute left-[1.9rem] top-10 bottom-10 w-px" style={{ background: 'rgba(33,26,19,0.15)' }} />
 
       {levels.map((level, i) => {
         const passed = isLevelPassed(userProgress, level.id)
         const unlocked = isUnlocked(i)
         const locked = !unlocked || (level.is_premium && !isUserPremium)
         const isMastery = level.section_type === 'subtopic_mastery' || level.section_type === 'broad_topic_mastery'
+        const NodeIcon = passed ? Check : locked ? Lock : (SECTION_ICONS[level.section_type] ?? BookOpen)
 
         const learnHref = `/quiz/${broadTopicSlug}/${subtopicSlug}/${level.id}/learn`
 
@@ -51,47 +53,39 @@ export default function ProgressionPath({
           <div key={level.id} className="relative z-10 flex items-center gap-4">
             {/* Node */}
             <div
-              className={`
-                w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center text-base
-                border-2 transition-all duration-200 shadow-sm
-                ${
-                  passed
-                    ? 'bg-emerald-500 border-emerald-500 text-white shadow-emerald-200'
-                    : locked
-                    ? 'bg-slate-100 border-slate-300 text-slate-400'
-                    : isMastery
-                    ? 'bg-gradient-to-br from-amber-400 to-orange-400 border-amber-300 text-white shadow-amber-200'
-                    : 'bg-white border-violet-400 text-violet-600 shadow-violet-100'
-                }
-              `}
+              className="w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center border transition-all duration-200"
+              style={
+                passed
+                  ? { background: '#3F6B3D', borderColor: '#3F6B3D', color: '#F6F0E2' }
+                  : locked
+                  ? { background: '#EAE0C6', borderColor: 'rgba(33,26,19,0.15)', color: 'rgba(33,26,19,0.35)' }
+                  : isMastery
+                  ? { background: '#A9752A', borderColor: '#A9752A', color: '#F6F0E2' }
+                  : { background: '#FBF8EF', borderColor: '#B8451F', color: '#B8451F' }
+              }
             >
-              {passed ? '✓' : locked ? '🔒' : SECTION_ICONS[level.section_type] ?? '📖'}
+              <NodeIcon size={16} />
             </div>
 
             {/* Card */}
             {locked ? (
               <div
-                className={`
-                  flex-1 rounded-2xl border-2 p-4 bg-slate-50 border-slate-200 opacity-70
-                  ${isMastery ? 'border-dashed' : ''}
-                `}
+                className={`flex-1 rounded-lg border p-4 ${isMastery ? 'border-dashed' : ''}`}
+                style={{ background: '#EAE0C6', borderColor: 'rgba(33,26,19,0.15)', opacity: 0.75 }}
               >
                 <LevelCardContent level={level} passed={passed} locked />
               </div>
             ) : (
               <Link
                 href={learnHref}
-                className={`
-                  flex-1 rounded-2xl border-2 p-4 transition-all duration-200
-                  hover:shadow-md hover:-translate-y-0.5
-                  ${
-                    passed
-                      ? 'bg-emerald-50 border-emerald-200 hover:border-emerald-300'
-                      : isMastery
-                      ? 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200 hover:border-amber-400'
-                      : 'bg-white border-slate-200 hover:border-violet-300'
-                  }
-                `}
+                className="flex-1 rounded-lg border p-4 transition-all duration-200 hover:-translate-y-0.5"
+                style={
+                  passed
+                    ? { background: '#EEF3ED', borderColor: 'rgba(63,107,61,0.3)' }
+                    : isMastery
+                    ? { background: '#F4ECDD', borderColor: 'rgba(169,117,42,0.3)' }
+                    : { background: '#FBF8EF', borderColor: 'rgba(33,26,19,0.15)' }
+                }
               >
                 <LevelCardContent level={level} passed={passed} locked={false} />
               </Link>
@@ -120,46 +114,46 @@ function LevelCardContent({
       <div className="min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
           <span
-            className={`text-xs font-black px-2 py-0.5 rounded-full ${
+            className="text-xs font-black px-2 py-0.5 rounded"
+            style={
               isMastery
-                ? 'bg-amber-100 text-amber-800'
+                ? { background: '#F4ECDD', color: '#A9752A' }
                 : level.section_type === 'general_practice'
-                ? 'bg-cyan-100 text-cyan-800'
-                : 'bg-violet-100 text-violet-800'
-            }`}
+                ? { background: 'rgba(184,69,31,0.1)', color: '#B8451F' }
+                : { background: 'rgba(33,26,19,0.06)', color: 'rgba(33,26,19,0.6)' }
+            }
           >
             {isMastery
               ? level.section_type === 'broad_topic_mastery'
-                ? '👑 Final Mastery'
-                : '🏆 Mastery'
+                ? 'Final Mastery'
+                : 'Mastery'
               : level.section_type === 'general_practice'
-              ? '🎯 Practice'
+              ? 'Practice'
               : `Level ${level.level_number}`}
           </span>
           {level.is_premium && (
-            <span className="text-xs font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">
-              ✨
+            <span className="text-xs font-semibold px-1.5 py-0.5 rounded" style={{ background: '#F4ECDD', color: '#A9752A' }}>
+              Premium
             </span>
           )}
         </div>
         <h4
-          className={`font-black text-sm mt-0.5 truncate ${
-            locked ? 'text-slate-400' : 'text-slate-800'
-          }`}
+          className="font-black text-sm mt-0.5 truncate"
+          style={{ color: locked ? 'rgba(33,26,19,0.35)' : '#211A13' }}
         >
           {level.title}
         </h4>
         {level.description && (
-          <p className="text-xs text-slate-400 truncate mt-0.5 hidden sm:block">
+          <p className="text-xs truncate mt-0.5 hidden sm:block" style={{ color: 'rgba(33,26,19,0.35)' }}>
             {level.description}
           </p>
         )}
       </div>
 
-      <div className="flex-shrink-0 text-right text-xs text-slate-400 space-y-0.5">
+      <div className="flex-shrink-0 text-right text-xs space-y-0.5" style={{ color: 'rgba(33,26,19,0.35)' }}>
         <div>{level.question_count} Qs</div>
-        <div className="font-semibold text-amber-500">+{level.xp_reward} XP</div>
-        {passed && <div className="text-emerald-600 font-black">Done ✓</div>}
+        <div className="font-semibold" style={{ color: '#A9752A' }}>+{level.xp_reward} XP</div>
+        {passed && <div className="font-black" style={{ color: '#3F6B3D' }}>Done</div>}
       </div>
     </div>
   )
