@@ -486,8 +486,8 @@ export default function HomePage() {
       <div id="landing" style={{ display: user ? 'none' : 'block' }}>
           <section className="hero">
             <div className="hero-left">
-              <div className="hero-kicker">
-                <span className="hero-kicker-dot" />
+              <div className="hero-note">
+                <span className="hero-note-rule" />
                 for every SA student, Grade R to 12
               </div>
               <h1 className="hero-h1">
@@ -503,10 +503,10 @@ export default function HomePage() {
                 <a href="/quiz" className="btn-soft">Try a quiz</a>
               </div>
               <div className="hero-grades">
-                <span className="gp on">All grades</span>
-                <span className="gp">4 – 6</span>
-                <span className="gp">7 – 9</span>
-                <span className="gp">10 – 12</span>
+                <a href="/subjects" className="gp on">All grades</a>
+                <a href="/subjects#int" className="gp">4 – 6</a>
+                <a href="/subjects#sen" className="gp">7 – 9</a>
+                <a href="/subjects#fet" className="gp">10 – 12</a>
               </div>
             </div>
 

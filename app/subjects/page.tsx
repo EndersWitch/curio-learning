@@ -33,7 +33,7 @@ export default function SubjectsHubPage() {
             const totalRange = `Grade ${phase.grades[0]} – ${phase.grades[phase.grades.length - 1]}`
             const maxCount = Math.max(...gradeCounts.map((g) => g.count))
             return (
-              <div className={`phase-section rv${pi > 0 ? ` rv-d${pi}` : ''}`} key={phase.key}>
+              <div className={`phase-section rv${pi > 0 ? ` rv-d${pi}` : ''}`} id={phase.key} key={phase.key}>
                 <div className="phase-heading">
                   <span className={`phase-tag ${phase.key}`}>{phase.tag}</span>
                   <div className="phase-rule" />

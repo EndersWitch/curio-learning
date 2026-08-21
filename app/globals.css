@@ -79,7 +79,7 @@ html.dark {
 html { color-scheme: light; }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; scroll-padding-top: 80px; }
 body { font-family: var(--b); background: var(--paper); color: var(--ink); overflow-x: hidden; transition: background-color .25s ease, color .25s ease; }
 :where(a, a:visited, a:hover, a:active) { text-decoration: none; color: inherit; }
 button { font-family: var(--b); cursor: pointer; border: none; background: none; }
@@ -106,8 +106,8 @@ button { font-family: var(--b); cursor: pointer; border: none; background: none;
 /* HERO */
 .hero { min-height: 100vh; display: grid; grid-template-columns: 1.15fr 1fr; padding-top: 60px; position: relative; overflow: hidden; }
 .hero-left { padding: 5rem 3rem 5rem 3rem; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
-.hero-kicker { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 600; font-style: italic; color: var(--ink55); margin-bottom: 1.5rem; animation: fadeUp .5s ease both; }
-.hero-kicker-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--rust); flex-shrink: 0; }
+.hero-note { display: flex; align-items: center; gap: 0.7rem; font-size: 0.72rem; font-weight: 600; font-style: italic; color: var(--ink55); margin-bottom: 1.6rem; animation: fadeUp .5s ease both; }
+.hero-note-rule { width: 22px; height: 1.5px; background: var(--rust); flex-shrink: 0; }
 .hero-h1 { font-family: var(--h); font-size: clamp(3.2rem,5.5vw,5.4rem); font-weight: 600; line-height: 0.98; letter-spacing: -1.5px; color: var(--ink); margin-bottom: 2rem; animation: fadeUp .55s .06s ease both; }
 .hero-h1 .w-cyan { color: var(--rust); font-style: italic; font-weight: 500; }
 .squiggle { position: relative; display: inline-block; }
