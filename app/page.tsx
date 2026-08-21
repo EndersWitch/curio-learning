@@ -511,53 +511,29 @@ export default function HomePage() {
             </div>
 
             <div className="hero-right">
-              <div className="bloom-hero">
-                <svg width="120" height="120" viewBox="0 0 64 64" fill="none">
-                  <g fill="none" stroke="var(--rust)" strokeWidth="2" strokeLinejoin="round">
-                    <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(0 32 32)" />
-                    <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(72 32 32)" />
-                    <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(144 32 32)" />
-                    <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(216 32 32)" />
-                    <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(288 32 32)" />
-                  </g>
-                  <circle cx="32" cy="32" r="4.5" fill="var(--ochre)" />
-                </svg>
-              </div>
-              <div className="hero-stat-row">
-                <div className="hstat c">
-                  <div className="hstat-lbl">Subjects</div>
-                  <div className="hstat-val">30+</div>
-                  <div className="hstat-sub">Every grade covered</div>
+              <div className="paper-stack">
+                <div className="paper-card back">
+                  <div className="paper-card-tag dim">English HL · Grade 11</div>
                 </div>
-                <div className="hstat r">
-                  <div className="hstat-lbl">To start</div>
-                  <div className="hstat-val">R0</div>
-                  <div className="hstat-sub">No card, no catch</div>
-                </div>
-                <div className="hstat">
-                  <div className="hstat-lbl">Grade range</div>
-                  <div className="hstat-val" style={{ fontSize: '1.5rem' }}>R – 12</div>
-                  <div className="hstat-sub">All levels welcome</div>
-                </div>
-                <div className="hstat">
-                  <div className="hstat-lbl">Papers</div>
-                  <div className="hstat-val" style={{ color: 'var(--rust)' }}>Free</div>
-                  <div className="hstat-sub">Always, forever</div>
+                <div className="paper-card front">
+                  <div className="paper-card-top">
+                    <span className="paper-card-tag">Grade 12 · Mathematics P1</span>
+                    <span className="paper-card-stamp">8<span>/10</span></span>
+                  </div>
+                  <div className="paper-card-q">
+                    4.2&nbsp; Solve for <em>x</em>:<br />2x² − 5x − 3 = 0
+                  </div>
+                  <div className="paper-card-opts">
+                    <span className="paper-card-opt">x = −3 or x = ½</span>
+                    <span className="paper-card-opt">
+                      <span className="paper-card-loop">x = 3 or x = −½</span>
+                    </span>
+                  </div>
                 </div>
               </div>
-              <div className="hero-subjects-card">
-                <div className="hsc-lbl">Popular subjects</div>
-                <div className="hsc-pills">
-                  <span className="hsc-pill c">English HL</span>
-                  <span className="hsc-pill">Mathematics</span>
-                  <span className="hsc-pill r">Life Sciences</span>
-                  <span className="hsc-pill">History</span>
-                  <span className="hsc-pill c">Geography</span>
-                  <span className="hsc-pill">Physical Sciences</span>
-                  <span className="hsc-pill">Accounting</span>
-                  <span className="hsc-pill">+ more</span>
-                </div>
-              </div>
+              <p className="hero-caption">
+                <strong>30+ subjects</strong> · R0 to start · papers free, forever.
+              </p>
             </div>
           </section>
 
