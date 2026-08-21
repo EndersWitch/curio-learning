@@ -318,8 +318,8 @@ export default function HomePage() {
                     <div className="streak-lbl">day streak</div>
                   </div>
                 </div>
-                <div className="grade-selector">
-                  <span className="grade-selector-label">Grade</span>
+                <div className="dash-grade-selector">
+                  <span className="dash-grade-selector-label">Grade</span>
                   <select
                     className="grade-select"
                     value={savedGrade}
@@ -511,22 +511,22 @@ export default function HomePage() {
             </div>
 
             <div className="hero-right">
-              <div className="paper-stack">
-                <div className="paper-card back">
-                  <div className="paper-card-tag dim">English HL · Grade 11</div>
+              <div className="hero-paper-stack">
+                <div className="hero-paper back">
+                  <div className="hero-paper-tag dim">English HL · Grade 11</div>
                 </div>
-                <div className="paper-card front">
-                  <div className="paper-card-top">
-                    <span className="paper-card-tag">Grade 12 · Mathematics P1</span>
-                    <span className="paper-card-stamp">8<span>/10</span></span>
+                <div className="hero-paper front">
+                  <div className="hero-paper-top">
+                    <span className="hero-paper-tag">Grade 12 · Mathematics P1</span>
+                    <span className="hero-paper-stamp">8<span>/10</span></span>
                   </div>
-                  <div className="paper-card-q">
+                  <div className="hero-paper-q">
                     4.2&nbsp; Solve for <em>x</em>:<br />2x² − 5x − 3 = 0
                   </div>
-                  <div className="paper-card-opts">
-                    <span className="paper-card-opt">x = −3 or x = ½</span>
-                    <span className="paper-card-opt">
-                      <span className="paper-card-loop">x = 3 or x = −½</span>
+                  <div className="hero-paper-opts">
+                    <span className="hero-paper-opt">x = −3 or x = ½</span>
+                    <span className="hero-paper-opt">
+                      <span className="hero-paper-loop">x = 3 or x = −½</span>
                     </span>
                   </div>
                 </div>

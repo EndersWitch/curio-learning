@@ -81,7 +81,7 @@ html { color-scheme: light; }
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 body { font-family: var(--b); background: var(--paper); color: var(--ink); overflow-x: hidden; transition: background-color .25s ease, color .25s ease; }
-a, a:visited, a:hover, a:active { text-decoration: none; color: inherit; }
+:where(a, a:visited, a:hover, a:active) { text-decoration: none; color: inherit; }
 button { font-family: var(--b); cursor: pointer; border: none; background: none; }
 
 /* NAV */
@@ -125,20 +125,20 @@ button { font-family: var(--b); cursor: pointer; border: none; background: none;
 
 /* HERO RIGHT — a marked exam paper, not a stat-tile dashboard */
 .hero-right { position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 3rem 2rem 3rem 1rem; gap: 1.4rem; z-index: 1; }
-.paper-stack { position: relative; width: 100%; max-width: 380px; height: 300px; }
-.paper-card { position: absolute; background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 4px; padding: 1.4rem 1.5rem; box-shadow: 0 18px 40px -12px rgba(var(--ink-rgb),0.16); }
-.paper-card.back { top: 8px; left: 34px; right: -6px; height: 260px; transform: rotate(4deg); z-index: 1; opacity: 0.75; }
-.paper-card.front { top: 0; left: 0; right: 40px; z-index: 2; transform: rotate(-2.5deg); }
-.paper-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.8rem; margin-bottom: 1.4rem; padding-bottom: 0.9rem; border-bottom: 1px dashed var(--ink15); }
-.paper-card-tag { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink55); }
-.paper-card-tag.dim { color: var(--ink35); }
-.paper-card-stamp { font-family: var(--h); font-style: italic; font-weight: 600; font-size: 1.3rem; color: var(--rust); border: 2px solid var(--rust30); border-radius: 50%; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; transform: rotate(-9deg); flex-shrink: 0; }
-.paper-card-stamp span { font-size: 0.6rem; margin-left: 1px; }
-.paper-card-q { font-family: var(--h); font-size: 1.05rem; font-weight: 500; line-height: 1.5; color: var(--ink); margin-bottom: 1.3rem; }
-.paper-card-q em { font-style: italic; color: var(--rust); }
-.paper-card-opts { display: flex; flex-direction: column; gap: 0.9rem; }
-.paper-card-opt { font-size: 0.85rem; color: var(--ink55); }
-.paper-card-loop { position: relative; display: inline-block; padding: 0.1rem 0.7rem; color: var(--ink); font-weight: 500; border: 1.5px solid var(--rust); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; transform: rotate(-1.5deg); }
+.hero-paper-stack { position: relative; width: 100%; max-width: 380px; height: 300px; }
+.hero-paper { position: absolute; background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 4px; padding: 1.4rem 1.5rem; box-shadow: 0 18px 40px -12px rgba(var(--ink-rgb),0.16); }
+.hero-paper.back { top: 8px; left: 34px; right: -6px; height: 260px; transform: rotate(4deg); z-index: 1; opacity: 0.75; }
+.hero-paper.front { top: 0; left: 0; right: 40px; z-index: 2; transform: rotate(-2.5deg); }
+.hero-paper-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.8rem; margin-bottom: 1.4rem; padding-bottom: 0.9rem; border-bottom: 1px dashed var(--ink15); }
+.hero-paper-tag { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink55); }
+.hero-paper-tag.dim { color: var(--ink35); }
+.hero-paper-stamp { font-family: var(--h); font-style: italic; font-weight: 600; font-size: 1.3rem; color: var(--rust); border: 2px solid var(--rust30); border-radius: 50%; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; transform: rotate(-9deg); flex-shrink: 0; }
+.hero-paper-stamp span { font-size: 0.6rem; margin-left: 1px; }
+.hero-paper-q { font-family: var(--h); font-size: 1.05rem; font-weight: 500; line-height: 1.5; color: var(--ink); margin-bottom: 1.3rem; }
+.hero-paper-q em { font-style: italic; color: var(--rust); }
+.hero-paper-opts { display: flex; flex-direction: column; gap: 0.9rem; }
+.hero-paper-opt { font-size: 0.85rem; color: var(--ink55); }
+.hero-paper-loop { position: relative; display: inline-block; padding: 0.1rem 0.7rem; color: var(--ink); font-weight: 500; border: 1.5px solid var(--rust); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; transform: rotate(-1.5deg); }
 .hero-caption { font-size: 0.82rem; font-style: italic; color: var(--ink55); text-align: center; }
 .hero-caption strong { font-style: normal; font-weight: 600; color: var(--ink); }
 .hstat { background: var(--paper-raised); padding: 1.2rem 1.4rem; }
@@ -309,8 +309,8 @@ button { font-family: var(--b); cursor: pointer; border: none; background: none;
 .dash-hello .cy { color: var(--rust); font-style: italic; }
 .dash-date { font-size: 0.78rem; color: var(--ink35); margin-top: 0.3rem; }
 .dash-greeting-right { display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; }
-.grade-selector { display: flex; align-items: center; gap: 0.6rem; background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 4px; padding: 0.5rem 0.9rem; }
-.grade-selector-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink35); }
+.dash-grade-selector { display: flex; align-items: center; gap: 0.6rem; background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 4px; padding: 0.5rem 0.9rem; }
+.dash-grade-selector-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink35); }
 .grade-select { background: none; border: none; font-family: var(--h); font-size: 0.85rem; font-weight: 600; color: var(--ink); cursor: pointer; padding: 0; }
 .grade-select:focus { outline: none; }
 .grade-select option { background: var(--paper-raised); }
@@ -522,8 +522,8 @@ select.field-input { cursor: pointer; }
 .meta-pill.am { background: var(--ochre12); border-color: var(--ochre30); color: var(--ochre); }
 
 /* Grade selector (leaf page) / grade nav (grade hub) */
-.grade-selector, .grade-nav { display: flex; gap: 0.4rem; margin-top: 1.2rem; flex-wrap: wrap; align-items: center; }
-.grade-selector-note, .grade-nav-note { font-size: 0.62rem; color: var(--ink35); }
+.grade-selector, .grade-nav { display: flex; gap: 0.55rem; margin-top: 1.2rem; flex-wrap: wrap; align-items: center; }
+.grade-selector-note, .grade-nav-note { font-size: 0.62rem; color: var(--ink35); margin-right: 0.15rem; }
 .grade-pill, .gnav-pill { font-size: 0.65rem; font-weight: 600; padding: 0.28rem 0.75rem; border-radius: 100px; border: 1px solid var(--ink15); color: var(--ink35); text-decoration: none; transition: all .15s; }
 .grade-pill:hover, .gnav-pill:hover { color: var(--ink); border-color: var(--ink35); }
 .gnav-pill.active { background: var(--rust10); border-color: var(--rust30); color: var(--rust); }
