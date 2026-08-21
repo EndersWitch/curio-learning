@@ -162,10 +162,10 @@ export default function SubscriptionClient() {
                   </div>
                 )}
 
-                <div className="pricing-card">
-                  <div className="pc-top">
-                    <div className="pc-tier">Premium</div>
-                    <div className="pc-trial-tag">Cancel anytime</div>
+                <div className="subpc-card">
+                  <div className="subpc-top">
+                    <div className="subpc-tier">Premium</div>
+                    <div className="subpc-trial-tag">Cancel anytime</div>
                   </div>
                   <div className="price-display">
                     <div className="price-big"><sup>R</sup>49<sub>/mo</sub></div>

@@ -59,24 +59,24 @@ function PaperCard({ p }: { p: Paper }) {
 
   return (
     <div className="paper-card">
-      <div className="pc-top">
-        <span className={`pc-subject-pill ${colour}`}>{subjName}</span>
-        {p.has_memo && <span className="pc-memo-badge">Memo incl.</span>}
+      <div className="paperc-top">
+        <span className={`paperc-subject-pill ${colour}`}>{subjName}</span>
+        {p.has_memo && <span className="paperc-memo-badge">Memo incl.</span>}
       </div>
-      <div className="pc-title">{p.title}</div>
-      {p.topic && <div className="pc-meta">{p.topic}</div>}
-      <div className="pc-actions">
+      <div className="paperc-title">{p.title}</div>
+      {p.topic && <div className="paperc-meta">{p.topic}</div>}
+      <div className="paperc-actions">
         {isDemoLink ? (
-          <button className="pc-btn pc-btn-paper" onClick={() => showComingSoon()}>Download paper ↓</button>
+          <button className="paperc-btn paperc-btn-paper" onClick={() => showComingSoon()}>Download paper ↓</button>
         ) : (
-          <a href={p.file_url} target="_blank" rel="noopener" className="pc-btn pc-btn-paper">Download paper ↓</a>
+          <a href={p.file_url} target="_blank" rel="noopener" className="paperc-btn paperc-btn-paper">Download paper ↓</a>
         )}
         {p.has_memo && p.memo_url && p.memo_url !== '#' ? (
-          <a href={p.memo_url} target="_blank" rel="noopener" className="pc-btn pc-btn-memo has-memo">Memo ↓</a>
+          <a href={p.memo_url} target="_blank" rel="noopener" className="paperc-btn paperc-btn-memo has-memo">Memo ↓</a>
         ) : p.has_memo && isDemoLink ? (
-          <button className="pc-btn pc-btn-memo has-memo" onClick={() => showComingSoon()}>Memo ↓</button>
+          <button className="paperc-btn paperc-btn-memo has-memo" onClick={() => showComingSoon()}>Memo ↓</button>
         ) : (
-          <span className="pc-btn pc-btn-memo" style={{ cursor: 'default', opacity: 0.4 }}>No memo</span>
+          <span className="paperc-btn paperc-btn-memo" style={{ cursor: 'default', opacity: 0.4 }}>No memo</span>
         )}
       </div>
     </div>

@@ -698,37 +698,44 @@ export default function HomePage() {
                 for less than a takeaway a month.
               </p>
             </div>
-            <div className="pricing-cards">
-              <div className="pc">
-                <div className="pc-tier">Free · Forever</div>
-                <div className="pc-price"><sup>R</sup>0</div>
-                <hr className="pc-div" />
-                <ul className="pc-items">
-                  {['Full past paper library','Download papers as PDF','Full marking memos','All grades & subjects'].map((f) => (
-                    <li key={f} className="pc-item"><span className="pci-chk"><Check size={10} /></span>{f}</li>
-                  ))}
-                </ul>
-                <a href="/login?tab=signup" className="pc-btn pc-btn-free">Get started free</a>
+            <div className="report-card">
+              <div className="report-head">
+                <span className="report-head-label">What you get</span>
+                <span className="report-head-cell">Free</span>
+                <span className="report-head-cell premium">
+                  Premium
+                  <span className="report-mark">our pick</span>
+                </span>
               </div>
-              <div className="pc hot">
-                <div className="pc-badge">Most popular</div>
-                <div className="pc-tier">Premium</div>
-                <div className="pc-price"><sup>R</sup>49<sub>/mo</sub></div>
-                <div className="pc-trial">Founder pricing · Cancel anytime</div>
-                <hr className="pc-div" />
-                <ul className="pc-items">
-                  {[
-                    'Everything in Free',
-                    'AI-powered quiz mode',
-                    'Deep Learn explanations',
-                    'Custom test generator',
-                    'Progress tracking & streaks',
-                    'Topic-sorted question sets',
-                  ].map((f) => (
-                    <li key={f} className="pc-item"><span className="pci-chk"><Check size={10} /></span>{f}</li>
-                  ))}
-                </ul>
-                <a href="/login?tab=signup" className="pc-btn pc-btn-pro">Subscribe for R49/month →</a>
+              {[
+                { label: 'Full past paper library', free: true, pro: true },
+                { label: 'Download papers as PDF', free: true, pro: true },
+                { label: 'Full marking memos', free: true, pro: true },
+                { label: 'All grades & subjects', free: true, pro: true },
+                { label: 'AI-powered quiz mode', free: false, pro: true },
+                { label: 'Deep Learn explanations', free: false, pro: true },
+                { label: 'Custom test generator', free: false, pro: true },
+                { label: 'Progress tracking & streaks', free: false, pro: true },
+                { label: 'Topic-sorted question sets', free: false, pro: true },
+              ].map((row) => (
+                <div className="report-row" key={row.label}>
+                  <span className="report-row-label">{row.label}</span>
+                  <span className={`report-row-cell${row.free ? ' on' : ''}`}>{row.free ? <Check size={14} /> : '—'}</span>
+                  <span className={`report-row-cell premium${row.pro ? ' on' : ''}`}>{row.pro ? <Check size={14} /> : '—'}</span>
+                </div>
+              ))}
+              <div className="report-foot">
+                <span className="report-foot-label" />
+                <div className="report-foot-cell">
+                  <div className="report-price"><sup>R</sup>0</div>
+                  <div className="report-price-sub">forever</div>
+                  <a href="/login?tab=signup" className="report-cta report-cta-free">Get started free</a>
+                </div>
+                <div className="report-foot-cell">
+                  <div className="report-price"><sup>R</sup>49<small>/mo</small></div>
+                  <div className="report-price-sub">founder pricing</div>
+                  <a href="/login?tab=signup" className="report-cta report-cta-pro">Subscribe →</a>
+                </div>
               </div>
             </div>
             <div className="heart-note">
