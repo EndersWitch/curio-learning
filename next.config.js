@@ -11,18 +11,12 @@ const nextConfig = {
   },
   async rewrites() {
     return [
-      // Clean URLs → static HTML files in /public
-      { source: '/papers', destination: '/papers.html' },
-      { source: '/subscription', destination: '/subscription.html' },
-      { source: '/contact', destination: '/contact.html' },
-      { source: '/privacy', destination: '/privacy.html' },
-      { source: '/terms', destination: '/terms.html' },
-      { source: '/deeplearn', destination: '/deeplearn.html' },
+      // Clean URLs → static HTML files in /public (internal tools only)
       { source: '/admin', destination: '/admin.html' },
       { source: '/formatter', destination: '/formatter.html' },
       { source: '/quiz-formatter', destination: '/quiz-formatter.html' },
-      // /subjects, /subjects/grade-N and /subjects/grade-N/:subject are now
-      // real Next.js routes (app/subjects/**) — no rewrite needed.
+      // Everything else (subjects, papers, subscription, contact, privacy,
+      // terms, deeplearn) is now a real Next.js route (app/**).
     ]
   },
   async redirects() {

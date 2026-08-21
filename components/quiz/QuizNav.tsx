@@ -39,7 +39,7 @@ export default function QuizNav() {
       </a>
 
       <ul className="nav-links">
-        <li><a href="/papers.html">Papers</a></li>
+        <li><a href="/papers">Papers</a></li>
         <li><a href="/quiz">Quiz</a></li>
         <li><a href="/subjects">Subjects</a></li>
         <li><a href="/#pricing">Pricing</a></li>
@@ -81,7 +81,7 @@ export default function QuizNav() {
                 <div className="profile-dd-name">{user.fullName}</div>
                 <div className="profile-dd-email">{user.email}</div>
               </div>
-              <a href="/papers.html" className="profile-dd-item dd-item-icon"><FileText size={15} /> Papers</a>
+              <a href="/papers" className="profile-dd-item dd-item-icon"><FileText size={15} /> Papers</a>
               <a href="/quiz" className="profile-dd-item dd-item-icon"><PenLine size={15} /> Start a quiz</a>
               <button
                 className="profile-dd-item dd-item-icon"
