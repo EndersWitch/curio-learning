@@ -21,9 +21,8 @@ const nextConfig = {
       { source: '/admin', destination: '/admin.html' },
       { source: '/formatter', destination: '/formatter.html' },
       { source: '/quiz-formatter', destination: '/quiz-formatter.html' },
-      { source: '/subjects', destination: '/subjects/index.html' },
-      { source: '/subjects/grade-:num(\\d+)', destination: '/subjects/grade-:num/index.html' },
-      { source: '/subjects/grade-:num(\\d+)/:subject', destination: '/subjects/grade-:num/:subject.html' },
+      // /subjects, /subjects/grade-N and /subjects/grade-N/:subject are now
+      // real Next.js routes (app/subjects/**) — no rewrite needed.
     ]
   },
   async redirects() {

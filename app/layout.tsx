@@ -5,6 +5,7 @@ import AdGate from '@/components/AdGate'
 import { AccountDrawerProvider } from '@/components/AccountDrawerProvider'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { themeBootScript } from '@/lib/theme'
+import { AuthProvider } from '@/lib/auth-context'
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -58,8 +59,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-body antialiased">
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
         <ThemeProvider>
-          <AccountDrawerProvider>{children}</AccountDrawerProvider>
-          <AdGate />
+          <AuthProvider>
+            <AccountDrawerProvider>{children}</AccountDrawerProvider>
+            <AdGate />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

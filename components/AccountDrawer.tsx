@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { sb } from '@/lib/supabase'
+import { useAuth } from '@/lib/auth-context'
 import { Drawer } from '@/components/interior/drawer'
 import { FloatingLabelInput } from '@/components/interior/floating-label'
 import { PasswordStrength } from '@/components/interior/password-strength'
@@ -78,12 +79,11 @@ function EyeToggle({ shown, onToggle }: { shown: boolean; onToggle: () => void }
 }
 
 export default function AccountDrawer({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
-  const [loading, setLoading] = useState(true)
-  const userId = useRef<string | null>(null)
+  const { user, loading: authLoading, refreshUser } = useAuth()
+  const loading = authLoading && !user
 
   const [name, setName] = useState('')
   const [grade, setGrade] = useState('')
-  const [email, setEmail] = useState('')
   const [currentEmail, setCurrentEmail] = useState('')
 
   const [newEmail, setNewEmail] = useState('')
@@ -97,42 +97,27 @@ export default function AccountDrawer({ open, onOpenChange }: { open: boolean; o
   const [pwNotice, setPwNotice] = useState<Notice>(null)
   const [deleteNotice, setDeleteNotice] = useState<Notice>(null)
 
+  // Seed the form from the shared auth context whenever the drawer opens —
+  // one source of truth for the account, no independent fetch here.
   useEffect(() => {
-    if (!open) return
-    let cancelled = false
-    setLoading(true)
+    if (!open || !user) return
+    setName(user.fullName || '')
+    setGrade(user.grade || '')
+    setCurrentEmail(user.email || '')
+    setNewEmail(user.email || '')
+  }, [open, user])
 
-    sb.auth.getSession().then(async ({ data: { session } }) => {
-      if (cancelled || !session?.user) { setLoading(false); return }
-      userId.current = session.user.id
-      const { data: profile } = await sb
-        .from('profiles')
-        .select('full_name, grade')
-        .eq('id', session.user.id)
-        .single()
-      if (cancelled) return
-      const fullName = profile?.full_name || session.user.user_metadata?.full_name || ''
-      setName(fullName)
-      setGrade(profile?.grade || '')
-      setEmail(session.user.email || '')
-      setCurrentEmail(session.user.email || '')
-      setNewEmail(session.user.email || '')
-      setLoading(false)
-    })
-
-    return () => { cancelled = true }
-  }, [open])
-
-  const initial = (name || email || '?')[0]?.toUpperCase() || '?'
+  const initial = (name || currentEmail || '?')[0]?.toUpperCase() || '?'
 
   async function saveDetails() {
     setDetailsNotice(null)
     const trimmed = name.trim()
     const { error } = await sb.auth.updateUser({ data: { full_name: trimmed, grade } })
     if (error) { setDetailsNotice({ msg: error.message, type: 'err' }); throw error }
-    if (userId.current) {
-      await sb.from('profiles').update({ full_name: trimmed, grade }).eq('id', userId.current)
+    if (user?.id) {
+      await sb.from('profiles').update({ full_name: trimmed, grade }).eq('id', user.id)
     }
+    await refreshUser()
     setDetailsNotice({ msg: 'Details updated successfully!', type: 'ok' })
   }
 

@@ -12,6 +12,7 @@ export interface CurioUser {
   isFounder: boolean
   totalXp: number
   streakDays: number
+  streakLastDate: string | null
 }
 
 interface AuthState {
@@ -41,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Always fetch fresh from DB — no stale data, nothing cached locally
     const { data: profile } = await sb
       .from('profiles')
-      .select('is_premium, is_founder, full_name, grade, xp_total, streak_days')
+      .select('is_premium, is_founder, full_name, grade, xp_total, streak_days, streak_last_date')
       .eq('id', userId)
       .single()
 
@@ -63,6 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isFounder: profile?.is_founder === true,
         totalXp: profile?.xp_total ?? 0,
         streakDays: profile?.streak_days ?? 0,
+        streakLastDate: profile?.streak_last_date ?? null,
       },
     })
   }

@@ -6,19 +6,9 @@ import Bloom from '@/components/Bloom'
 import Footer from '@/components/Footer'
 import ThemeToggle from '@/components/ThemeToggle'
 import { sb } from '@/lib/supabase'
+import { useAuth } from '@/lib/auth-context'
 import { useAccountDrawer } from '@/components/AccountDrawerProvider'
 import { Flame, Zap, FileText, PenLine, User, Star, Check, Brain, Heart, ListChecks } from '@/components/icons'
-
-// ─── Types ────────────────────────────────────────────────────────────────────
-interface Session {
-  access_token: string
-  refresh_token: string
-  expires_at: number
-  user: {
-    email?: string
-    user_metadata?: { full_name?: string; grade?: string; is_premium?: boolean }
-  }
-}
 
 const SUPABASE_URL = 'https://inmrsgujgfktapjnekjs.supabase.co'
 const SUPABASE_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU'
@@ -55,8 +45,7 @@ const SETS = [
 ]
 
 export default function HomePage() {
-  const [session, setSession] = useState<Session | null>(null)
-  const [mounted, setMounted] = useState(false)
+  const { user, refreshUser } = useAuth()
   const { openDrawer } = useAccountDrawer()
   const ddRef = useRef<HTMLDivElement>(null)
 
@@ -82,25 +71,13 @@ export default function HomePage() {
   const [recPapers, setRecPapers] = useState<any[]>([])
   const [quizHistory, setQuizHistory] = useState<any[]>([])
   const [savedGrade, setSavedGrade] = useState('')
-  const [streak, setStreak] = useState(0)
   const [streakDays, setStreakDays] = useState<boolean[]>([])
   const [gradeJustSaved, setGradeJustSaved] = useState(false)
-  const [totalXp, setTotalXp] = useState(0)
   const [quizzesTaken, setQuizzesTaken] = useState(0)
   const [bestScoreOverall, setBestScoreOverall] = useState<number | null>(null)
 
+  // Reveal observer — also immediately trigger elements already in viewport
   useEffect(() => {
-    setMounted(true)
-
-    /// Load session via Supabase auth
-    sb.auth.getSession().then(({ data: { session: s } }) => {
-      if (s?.user) {
-        setSession(s as any)
-        loadDashboard(s as any)
-      }
-    })
-
-    // Reveal observer — also immediately trigger elements already in viewport
     const ro = new IntersectionObserver(
       (entries) => entries.forEach((x) => { if (x.isIntersecting) x.target.classList.add('in') }),
       { threshold: 0.07, rootMargin: '0px 0px -50px 0px' }
@@ -114,6 +91,22 @@ export default function HomePage() {
     return () => ro.disconnect()
   }, [])
 
+  // Grade select + recommended papers + quiz history/streak strip all key
+  // off the shared auth user — profile fields (grade, XP, streak count/date)
+  // come straight from useAuth, nothing re-fetched here.
+  useEffect(() => {
+    setSavedGrade(user?.grade || '')
+    if (user?.grade) fetchRecPapers(user.grade)
+  }, [user?.grade])
+
+  useEffect(() => {
+    if (user?.id) loadQuizHistory(user.id)
+  }, [user?.id])
+
+  useEffect(() => {
+    setStreakDays(computeStreakWeek(user?.streakDays ?? 0, user?.streakLastDate ?? null))
+  }, [user?.streakDays, user?.streakLastDate])
+
   useEffect(() => {
     // Static pages (papers, subscription, subjects/*, etc.) link to /profile,
     // which next.config.js redirects here with ?account=1 — pop the drawer
@@ -124,37 +117,20 @@ export default function HomePage() {
     }
   }, [openDrawer])
 
-  async function loadDashboard(s: Session) {
-    const userId = (s as any).user.id as string
-
-    // Profile — grade, XP, streak all live server-side. Nothing cached locally.
-    const { data: profile } = await sb
-      .from('profiles')
-      .select('grade, xp_total, streak_days, streak_last_date')
-      .eq('id', userId)
-      .single()
-
-    const grade = profile?.grade || ''
-    setSavedGrade(grade)
-    if (grade) fetchRecPapers(grade)
-    setTotalXp(profile?.xp_total ?? 0)
-
-    const streakCount = profile?.streak_days ?? 0
-    setStreak(streakCount)
-
-    // Best-effort weekly streak strip derived from streak_days/streak_last_date —
-    // there's no per-day activity log, so we mark the most recent `streakCount`
-    // consecutive days up to streak_last_date as active.
-    //
-    // IMPORTANT: stick to local-calendar-date string keys throughout (never
-    // .toISOString(), which converts to UTC and silently rolls the date back
-    // a day for anyone east of UTC — that's what made "today" show as
-    // yesterday's box lighting up instead).
+  // Best-effort weekly streak strip derived from streak_days/streak_last_date —
+  // there's no per-day activity log, so we mark the most recent `streakCount`
+  // consecutive days up to streak_last_date as active.
+  //
+  // IMPORTANT: stick to local-calendar-date string keys throughout (never
+  // .toISOString(), which converts to UTC and silently rolls the date back
+  // a day for anyone east of UTC — that's what made "today" show as
+  // yesterday's box lighting up instead).
+  function computeStreakWeek(streakCount: number, streakLastDate: string | null): boolean[] {
     const today = new Date()
     // streak_last_date is a plain YYYY-MM-DD from Postgres — parse it as
     // calendar-date components, not as a UTC instant.
-    const lastActive = profile?.streak_last_date
-      ? (() => { const [y, m, d] = profile.streak_last_date.split('-').map(Number); return new Date(y, m - 1, d) })()
+    const lastActive = streakLastDate
+      ? (() => { const [y, m, d] = streakLastDate.split('-').map(Number); return new Date(y, m - 1, d) })()
       : null
     const activeDates = new Set<string>()
     if (lastActive) {
@@ -170,11 +146,13 @@ export default function HomePage() {
       d.setDate(today.getDate() - i)
       days.push(activeDates.has(localDateKey(d)))
     }
-    setStreakDays(days)
+    return days
+  }
 
-    // Quiz history — straight from user_level_progress (server), most recent first.
-    // Fetch everything (it's one row per level per user — small) so the stat
-    // cards reflect the full picture, then show only the latest 3 in the panel.
+  // Quiz history — straight from user_level_progress (server), most recent first.
+  // Fetch everything (it's one row per level per user — small) so the stat
+  // cards reflect the full picture, then show only the latest 3 in the panel.
+  async function loadQuizHistory(userId: string) {
     const { data: progressRows } = await sb
       .from('user_level_progress')
       .select('topic_id, level_id, best_score, passed, attempts, last_attempted_at')
@@ -225,14 +203,14 @@ export default function HomePage() {
     setGradeJustSaved(true)
     setTimeout(() => setGradeJustSaved(false), 1200)
     fetchRecPapers(v)
-    if (session?.user) {
-      await sb.from('profiles').update({ grade: v }).eq('id', (session as any).user.id)
+    if (user?.id) {
+      await sb.from('profiles').update({ grade: v }).eq('id', user.id)
+      await refreshUser()
     }
   }
 
   async function doLogout() {
     await sb.auth.signOut()
-    setSession(null)
   }
 
   // ── Quiz ──────────────────────────────────────────────────────────────────
@@ -252,8 +230,10 @@ export default function HomePage() {
   const total = SETS[activeSet].questions.length
   const isLast = currentQ >= total - 1
 
-  const name = session?.user?.user_metadata?.full_name?.split(' ')[0] || 'there'
-  const initial = session?.user?.user_metadata?.full_name?.[0]?.toUpperCase() || session?.user?.email?.[0]?.toUpperCase() || '?'
+  const name = user?.fullName?.split(' ')[0] || 'there'
+  const initial = user?.fullName?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || '?'
+  const streak = user?.streakDays ?? 0
+  const totalXp = user?.totalXp ?? 0
   const hr = new Date().getHours()
   const greeting = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening'
   const bestScore = bestScoreOverall
@@ -276,7 +256,7 @@ export default function HomePage() {
           <li><a href="/#pricing">Pricing</a></li>
         </ul>
         <div className="nav-right">
-          {session ? (
+          {user ? (
             <div className="profile-wrap" ref={ddRef}>
               <button
                 className="profile-btn"
@@ -289,8 +269,8 @@ export default function HomePage() {
               </button>
               <div className="profile-dropdown" id="profileDD" onClick={(e) => e.stopPropagation()}>
                 <div className="profile-dd-head">
-                  <div className="profile-dd-name">{session.user.user_metadata?.full_name || 'My account'}</div>
-                  <div className="profile-dd-email">{session.user.email}</div>
+                  <div className="profile-dd-name">{user.fullName || 'My account'}</div>
+                  <div className="profile-dd-email">{user.email}</div>
                 </div>
                 <a href="/papers" className="profile-dd-item dd-item-icon"><FileText size={15} /> Papers</a>
                 <a href="/quiz" className="profile-dd-item dd-item-icon"><PenLine size={15} /> Start a quiz</a>
@@ -318,7 +298,7 @@ export default function HomePage() {
       </nav>
 
       {/* ── DASHBOARD (logged in) ── */}
-      {session && (
+      {user && (
         <div id="dashboard" style={{ display: 'block', paddingTop: '60px' }}>
           <div className="dash-wrap">
             {/* Greeting */}
@@ -477,8 +457,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Premium upsell — hidden for premium users */}
-            {!session.user.user_metadata?.is_premium && (
+            {/* Premium upsell — hidden for premium/founder users */}
+            {!(user.isPremium || user.isFounder) && (
               <div className="pu">
                 <div>
                   <div className="pu-ey">Curio Premium</div>
@@ -503,7 +483,7 @@ export default function HomePage() {
       )}
 
       {/* ── LANDING (guests) ── always in DOM, hidden when logged in */}
-      <div id="landing" style={{ display: session ? 'none' : 'block' }}>
+      <div id="landing" style={{ display: user ? 'none' : 'block' }}>
           <section className="hero">
             <div className="hero-left">
               <div className="hero-kicker">
