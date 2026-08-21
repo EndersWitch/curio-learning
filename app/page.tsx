@@ -253,7 +253,7 @@ export default function HomePage() {
           <li><a href="/papers">Papers</a></li>
           <li><a href="/quiz">Quiz</a></li>
           <li><a href="/subjects">Subjects</a></li>
-          <li><a href="/#pricing">Pricing</a></li>
+          <li><a href="/subscription">Subscription</a></li>
         </ul>
         <div className="nav-right">
           {user ? (
@@ -717,6 +717,7 @@ export default function HomePage() {
                 { label: 'Custom test generator', free: false, pro: true },
                 { label: 'Progress tracking & streaks', free: false, pro: true },
                 { label: 'Topic-sorted question sets', free: false, pro: true },
+                { label: 'No ads', free: false, pro: true },
               ].map((row) => (
                 <div className="report-row" key={row.label}>
                   <span className="report-row-label">{row.label}</span>

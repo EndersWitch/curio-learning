@@ -14,7 +14,7 @@ export default function SimpleNav() {
         <li><a href="/papers">Papers</a></li>
         <li><a href="/quiz">Quiz</a></li>
         <li><a href="/subjects">Subjects</a></li>
-        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/subscription">Subscription</a></li>
       </ul>
       <a href="/" className="nav-back">← Home</a>
     </nav>

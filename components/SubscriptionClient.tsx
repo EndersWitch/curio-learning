@@ -15,19 +15,18 @@ declare global {
   }
 }
 
-const FEATURES = [
-  'Everything free: all papers + memos',
-  'AI-powered quiz mode',
-  'Deep Learn explanations',
-  'Custom test generator',
-  'Progress tracking & streaks',
-  'Topic-sorted question sets',
-  'No ads',
+const PLAN_ROWS = [
+  { label: 'Full past paper library', free: true, pro: true },
+  { label: 'Download papers as PDF', free: true, pro: true },
+  { label: 'Full marking memos', free: true, pro: true },
+  { label: 'All grades & subjects', free: true, pro: true },
+  { label: 'AI-powered quiz mode', free: false, pro: true },
+  { label: 'Deep Learn explanations', free: false, pro: true },
+  { label: 'Custom test generator', free: false, pro: true },
+  { label: 'Progress tracking & streaks', free: false, pro: true },
+  { label: 'Topic-sorted question sets', free: false, pro: true },
+  { label: 'No ads', free: false, pro: true },
 ]
-
-function CheckIcon() {
-  return <span className="feat-chk"><Check size={11} /></span>
-}
 
 export default function SubscriptionClient() {
   const { user, loading, refreshUser } = useAuth()
@@ -35,26 +34,25 @@ export default function SubscriptionClient() {
   const [startedAt, setStartedAt] = useState<string | null>(null)
   const [slotsLeft, setSlotsLeft] = useState<number | null>(null)
   const [subscribing, setSubscribing] = useState(false)
-  const [subscribeLabel, setSubscribeLabel] = useState('Subscribe for R49/month →')
+  const [subscribeLabel, setSubscribeLabel] = useState('Subscribe →')
   const [subscribeDone, setSubscribeDone] = useState(false)
   const [toast, setToastMsg] = useState<string | null>(null)
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
     if (loading) return
-    if (!user) { window.location.href = '/login'; return }
     load()
     return () => { if (pollRef.current) clearInterval(pollRef.current) }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, user?.id])
 
   async function load() {
-    if (!user) return
+    if (user) {
+      const { data } = await sb.from('profiles').select('subscription_started_at').eq('id', user.id).single()
+      setStartedAt(data?.subscription_started_at ?? null)
+    }
 
-    const { data } = await sb.from('profiles').select('subscription_started_at').eq('id', user.id).single()
-    setStartedAt(data?.subscription_started_at ?? null)
-
-    if (!user.isPremium) {
+    if (!user?.isPremium) {
       const { data: slots } = await sb.from('founder_slots').select('total, claimed').eq('id', 1).single()
       if (slots) {
         const remaining = slots.total - slots.claimed
@@ -99,14 +97,14 @@ export default function SubscriptionClient() {
             if (pollRef.current) clearInterval(pollRef.current)
             setSubscribing(false)
             setSubscribeDone(false)
-            setSubscribeLabel('Subscribe for R49/month →')
+            setSubscribeLabel('Subscribe →')
           }
         }, 5000)
       },
       onClose: () => {
         setSubscribing(false)
         setSubscribeDone(false)
-        setSubscribeLabel('Subscribe for R49/month →')
+        setSubscribeLabel('Subscribe →')
       },
     })
     handler.openIframe()
@@ -140,9 +138,9 @@ export default function SubscriptionClient() {
         </svg>
       </div>
 
-      {ready && user && (
+      {ready && (
         <div style={{ paddingTop: '60px' }}>
-          {!user.isPremium ? (
+          {!(user && user.isPremium) ? (
             <div>
               <section className="hero-free">
                 <div className="sub-eyebrow">curio premium</div>
@@ -161,62 +159,59 @@ export default function SubscriptionClient() {
                     </span>
                   </div>
                 )}
-
-                <div className="subpc-card">
-                  <div className="subpc-top">
-                    <div className="subpc-tier">Premium</div>
-                    <div className="subpc-trial-tag">Cancel anytime</div>
-                  </div>
-                  <div className="price-display">
-                    <div className="price-big"><sup>R</sup>49<sub>/mo</sub></div>
-                    <div className="price-note">Lock in <strong>founder pricing</strong> before it rises to R99.</div>
-                  </div>
-                  <ul className="feat-list">
-                    {FEATURES.map((f) => (
-                      <li className="feat-item" key={f}><CheckIcon />{f}</li>
-                    ))}
-                  </ul>
-                  <button
-                    className="btn-sub"
-                    disabled={subscribing}
-                    onClick={startUpgrade}
-                    style={subscribeDone ? { background: 'var(--rust10)', color: 'var(--rust)' } : undefined}
-                  >
-                    {subscribeLabel}
-                  </button>
-                  <p className="sub-footnote">
-                    Cancel anytime · No hidden fees · ZAR incl. VAT<br />
-                    Already subscribed? <a href="#" onClick={(e) => { e.preventDefault(); window.location.reload() }}>Refresh page</a>
-                  </p>
-                </div>
               </section>
 
-              <div className="compare-wrap">
-                <div className="compare-label">Free vs Premium</div>
-                <div className="compare-grid">
-                  <div className="cg-col">
-                    <div className="cg-tier">Free · Forever</div>
-                    <div className="cg-price">R0</div>
-                    <div className="ci"><div className="ci-dot" />Full paper library</div>
-                    <div className="ci"><div className="ci-dot" />PDF downloads</div>
-                    <div className="ci"><div className="ci-dot" />Full memos</div>
-                    <div className="ci"><div className="ci-dot" />All grades &amp; subjects</div>
-                    <div className="ci dim"><div className="ci-dot g" />AI Quiz mode</div>
-                    <div className="ci dim"><div className="ci-dot g" />Deep Learn</div>
-                    <div className="ci dim"><div className="ci-dot g" />Custom tests</div>
+              <div className="sub-ledger-wrap">
+                <div className="report-card">
+                  <div className="report-head">
+                    <span className="report-head-label">What you get</span>
+                    <span className="report-head-cell">Free</span>
+                    <span className="report-head-cell premium">
+                      Premium
+                      <span className="report-mark">our pick</span>
+                    </span>
                   </div>
-                  <div className="cg-col hot">
-                    <div className="cg-tier">Premium</div>
-                    <div className="cg-price">R49 <span>/month</span></div>
-                    <div className="ci"><div className="ci-dot" />Everything in Free</div>
-                    <div className="ci"><div className="ci-dot" />AI Quiz mode</div>
-                    <div className="ci"><div className="ci-dot" />Deep Learn</div>
-                    <div className="ci"><div className="ci-dot" />Custom test generator</div>
-                    <div className="ci"><div className="ci-dot" />Progress &amp; streaks</div>
-                    <div className="ci"><div className="ci-dot" />Topic question sets</div>
-                    <div className="ci"><div className="ci-dot" />No ads</div>
+                  {PLAN_ROWS.map((row) => (
+                    <div className="report-row" key={row.label}>
+                      <span className="report-row-label">{row.label}</span>
+                      <span className={`report-row-cell${row.free ? ' on' : ''}`}>{row.free ? <Check size={14} /> : '—'}</span>
+                      <span className={`report-row-cell premium${row.pro ? ' on' : ''}`}>{row.pro ? <Check size={14} /> : '—'}</span>
+                    </div>
+                  ))}
+                  <div className="report-foot">
+                    <span className="report-foot-label" />
+                    <div className="report-foot-cell">
+                      <div className="report-price"><sup>R</sup>0</div>
+                      <div className="report-price-sub">forever</div>
+                      {!user && <a href="/login?tab=signup" className="report-cta report-cta-free">Get started free</a>}
+                    </div>
+                    <div className="report-foot-cell">
+                      <div className="report-price"><sup>R</sup>49<small>/mo</small></div>
+                      <div className="report-price-sub">founder pricing</div>
+                      {user ? (
+                        <button
+                          className="report-cta report-cta-pro"
+                          disabled={subscribing}
+                          onClick={startUpgrade}
+                          style={subscribeDone ? { background: 'var(--rust10)', color: 'var(--rust)' } : undefined}
+                        >
+                          {subscribeLabel}
+                        </button>
+                      ) : (
+                        <a href="/login?tab=signup" className="report-cta report-cta-pro">Subscribe →</a>
+                      )}
+                    </div>
                   </div>
                 </div>
+                <p className="sub-footnote">
+                  Cancel anytime · No hidden fees · ZAR incl. VAT
+                  {user && (
+                    <>
+                      <br />
+                      Already subscribed? <a href="#" onClick={(e) => { e.preventDefault(); window.location.reload() }}>Refresh page</a>
+                    </>
+                  )}
+                </p>
               </div>
             </div>
           ) : (
