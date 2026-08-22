@@ -168,7 +168,7 @@ export default function BroadTopicPage() {
 
         {/* Premium upsell */}
         {!isPremium && premiumCount > 0 && (
-          <div className="rounded-2xl p-5 text-center"
+          <div className="rounded p-5 text-center"
             style={{ background: 'rgba(var(--ochre-rgb),0.06)', border: '1px solid rgba(var(--ochre-rgb),0.2)' }}>
             <p className="inline-flex items-center gap-1.5 justify-center font-black text-sm mb-1" style={{ color: 'var(--ochre)' }}>
               <Lock size={14} /> {premiumCount} level{premiumCount !== 1 ? 's' : ''} locked
@@ -177,7 +177,7 @@ export default function BroadTopicPage() {
               Get the rest with Curio Premium for R49/month
             </p>
             <a href="/subscription"
-              className="inline-block px-5 py-2.5 rounded-xl font-black text-sm"
+              className="inline-block px-5 py-2.5 rounded font-black text-sm"
               style={{ background: 'var(--ochre)', color: 'var(--paper)' }}>
               Get Premium →
             </a>
@@ -199,7 +199,7 @@ function LevelRow({ level, isPremium, broadTopic, progress }: {
   const completed = progress?.passed ?? false
 
   const inner = (
-    <div className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all"
+    <div className="flex items-center gap-3 px-4 py-3 rounded transition-all"
       style={locked
         ? { background: 'rgba(var(--ink-rgb),0.03)', opacity: 0.6, cursor: 'not-allowed' }
         : completed
@@ -274,7 +274,7 @@ function NotFoundScreen() {
       <div className="text-center">
         <Search size={40} style={{ color: 'rgba(var(--ink-rgb),0.3)', margin: '0 auto 0.75rem' }} />
         <h1 className="text-xl font-black mb-2" style={{ color: 'var(--ink)' }}>Topic Not Found</h1>
-        <Link href="/quiz" className="inline-block px-5 py-2.5 rounded-xl font-black text-sm mt-2"
+        <Link href="/quiz" className="inline-block px-5 py-2.5 rounded font-black text-sm mt-2"
           style={{ background: 'var(--rust)', color: 'var(--paper)' }}>← All Topics</Link>
       </div>
     </div>

@@ -670,6 +670,26 @@ select.field-input { cursor: pointer; }
 .grade-card-label { font-size: 0.62rem; color: var(--ink35); margin-top: 0.2rem; }
 .grade-card-subj { font-size: 0.6rem; color: var(--ink35); margin-top: 0.3rem; }
 
+/* ── Quiz browse (pick a topic) ── */
+.quiz-auth-pill { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: var(--ink70); }
+.quiz-auth-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rust); flex-shrink: 0; }
+.qgrade-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin: 2rem 0 2.5rem; }
+.qgrade-row-label { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink35); margin-right: 0.3rem; }
+.qtopics-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(230px,1fr)); gap: 0.9rem; }
+.qtopic-card { position: relative; background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 4px; padding: 1.3rem 1.4rem; text-decoration: none; display: block; transition: all .2s; }
+.qtopic-card:hover { border-color: var(--rust30); transform: translateY(-2px); box-shadow: 0 12px 28px -10px rgba(var(--ink-rgb),0.14); }
+.qtopic-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.6rem; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 1px dashed var(--ink15); }
+.qtopic-subject { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink55); }
+.qtopic-grade { font-size: 0.62rem; font-weight: 600; color: var(--rust); flex-shrink: 0; }
+.qtopic-title { font-family: var(--h); font-size: 1.05rem; font-weight: 600; color: var(--ink); line-height: 1.3; margin-bottom: 1.1rem; min-height: 2.6rem; }
+.qtopic-foot { display: flex; align-items: center; justify-content: space-between; font-size: 0.72rem; color: var(--ink35); }
+.qtopic-lock { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--ochre); }
+.qtopic-open { color: var(--rust); font-weight: 600; }
+.qtopics-empty { text-align: center; padding: 5rem 1rem; color: var(--ink35); }
+.qtopics-empty-title { font-family: var(--h); font-size: 1.1rem; color: var(--ink); margin: 0.8rem 0 0.3rem; }
+.qtopics-skeleton { display: grid; grid-template-columns: repeat(auto-fill,minmax(230px,1fr)); gap: 0.9rem; }
+.qtopics-skeleton-card { background: var(--paper-raised); border: 1px solid var(--ink08); border-radius: 4px; height: 148px; }
+
 /* ── Per-grade subject list ── */
 .subj-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 0.8rem; }
 .subj-card { background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 6px; padding: 1.3rem 1.2rem; text-decoration: none; display: block; transition: all .2s; }

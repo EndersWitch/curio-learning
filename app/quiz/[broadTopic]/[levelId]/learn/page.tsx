@@ -61,7 +61,7 @@ export default function LearnPage() {
         <p className="text-sm mb-5" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
           This level is available with Curio Premium for R49/month.
         </p>
-        <a href="/subscription" className="inline-block px-6 py-3 rounded-xl font-black text-sm mb-3"
+        <a href="/subscription" className="inline-block px-6 py-3 rounded font-black text-sm mb-3"
           style={{ background: 'var(--ochre)', color: 'var(--paper)' }}>Get Premium →</a>
         <div>
           <Link href={`/quiz/${broadTopic}`} className="text-sm" style={{ color: 'var(--rust)' }}>← Back</Link>
@@ -110,14 +110,14 @@ export default function LearnPage() {
           {cards.map((card, i) => <LearningCard key={i} concept={card} index={i} />)}
         </div>
 
-        <div className="rounded-2xl p-7 text-center"
+        <div className="rounded p-7 text-center"
           style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--rust-rgb),0.15)' }}>
           <h2 className="text-xl font-black mb-2" style={{ color: 'var(--ink)' }}>Ready to quiz?</h2>
           <p className="text-sm mb-6" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
             {level.question_count} questions · You can retry as many times as you like
           </p>
           <Link href={playHref}
-            className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-black text-lg text-white"
+            className="inline-flex items-center justify-center gap-2 w-full py-4 rounded font-black text-lg text-white"
             style={{ background: 'var(--rust)' }}>
             Let&apos;s Go <ArrowRight size={20} />
           </Link>

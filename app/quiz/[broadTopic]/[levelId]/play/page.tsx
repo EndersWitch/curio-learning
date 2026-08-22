@@ -108,7 +108,7 @@ export default function PlayPage() {
         <Lock size={40} style={{ color: 'var(--ochre)', margin: '0 auto 0.75rem' }} />
         <h2 className="text-xl font-black mb-2" style={{ color: 'var(--ink)' }}>Premium Level</h2>
         <p className="text-sm mb-5" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>Upgrade to access this level.</p>
-        <a href="/subscription" className="inline-block px-6 py-3 rounded-xl font-black text-sm"
+        <a href="/subscription" className="inline-block px-6 py-3 rounded font-black text-sm"
           style={{ background: 'var(--ochre)', color: 'var(--paper)' }}>Get Premium →</a>
       </div>
     </div>
@@ -116,13 +116,13 @@ export default function PlayPage() {
 
   if (error) return (
     <div className="min-h-screen flex items-center justify-center p-6" style={{ background: 'var(--paper)' }}>
-      <div className="text-center max-w-sm rounded-2xl p-8"
+      <div className="text-center max-w-sm rounded p-8"
         style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--rust-rgb),0.15)' }}>
         <AlertTriangle size={36} style={{ color: 'var(--brick)', margin: '0 auto 0.75rem' }} />
         <h2 className="text-xl font-black mb-2" style={{ color: 'var(--ink)' }}>Couldn&apos;t load quiz</h2>
         <p className="text-sm mb-5" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>{error}</p>
         <button onClick={() => window.location.reload()}
-          className="w-full py-3 rounded-xl font-black text-sm"
+          className="w-full py-3 rounded font-black text-sm"
           style={{ background: 'var(--rust)', color: 'var(--paper)' }}>Try Again</button>
       </div>
     </div>

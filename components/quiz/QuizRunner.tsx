@@ -239,27 +239,27 @@ export default function QuizRunner({
       </div>
 
       {/* Question card */}
-      <div key={`q-${currentIndex}`} className="rounded-3xl p-7 mb-5 animate-fade-slide"
+      <div key={`q-${currentIndex}`} className="rounded p-7 mb-5 animate-fade-slide"
         style={{ background: CURIO.card, border: `1px solid ${CURIO.cardBorder}` }}>
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs font-black px-2.5 py-1 rounded-full"
+          <span className="text-xs font-black px-2.5 py-1 rounded"
             style={{ background: 'rgba(var(--rust-rgb),0.1)', color: CURIO.cyan }}>
             Question {currentIndex + 1}
           </span>
           {current.difficulty && (
-            <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded-full"
+            <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded"
               style={{ background: 'rgba(var(--ochre-rgb),0.12)', color: CURIO.amber }}>
               <Zap size={12} /> +{questionXp(current.difficulty)} XP · {current.difficulty}
             </span>
           )}
           {sectionType === 'subtopic_mastery' && (
-            <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded-full"
+            <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded"
               style={{ background: 'rgba(var(--ochre-rgb),0.14)', color: CURIO.amber }}>
               <Trophy size={12} /> Mastery
             </span>
           )}
           {sectionType === 'broad_topic_mastery' && (
-            <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded-full"
+            <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded"
               style={{ background: 'rgba(var(--rust-rgb),0.1)', color: CURIO.cyan }}>
               <GraduationCap size={12} /> Final Boss
             </span>
@@ -283,7 +283,7 @@ export default function QuizRunner({
               onClick={() => handleSelect(opt.key)}
               disabled={answerState !== 'idle'}
               aria-label={`Option ${String.fromCharCode(65 + i)}: ${opt.text}`}
-              className={`relative overflow-visible flex items-center gap-4 w-full text-left rounded-2xl border-2 px-5 py-4 font-semibold text-base transition-all duration-200 disabled:cursor-default focus:outline-none active:scale-[0.97]
+              className={`relative overflow-visible flex items-center gap-4 w-full text-left rounded border-2 px-5 py-4 font-semibold text-base transition-all duration-200 disabled:cursor-default focus:outline-none active:scale-[0.97]
                 ${isSelectedWrong ? 'animate-wrong-bump' : ''}
                 ${isSelectedCorrect ? 'animate-correct-bounce animate-ring-pulse' : ''}
                 ${isRevealedCorrect ? 'animate-pulse-soft' : ''}
@@ -313,7 +313,7 @@ export default function QuizRunner({
 
       {/* Feedback bar — always shows explanation immediately when answered */}
       {answerState !== 'idle' && (
-        <div className={`rounded-2xl px-5 py-4 mb-4 border-2 ${answerState === 'correct' ? 'animate-celebrate' : 'animate-wrong-bump'}`}
+        <div className={`rounded px-5 py-4 mb-4 border-2 ${answerState === 'correct' ? 'animate-celebrate' : 'animate-wrong-bump'}`}
           style={answerState === 'correct'
             ? { background: 'rgba(var(--moss-rgb),0.08)', borderColor: 'rgba(var(--moss-rgb),0.3)' }
             : { background: 'rgba(var(--brick-rgb),0.08)', borderColor: 'rgba(var(--brick-rgb),0.3)' }
@@ -335,7 +335,7 @@ export default function QuizRunner({
       {/* Next / Finish button */}
       {answerState !== 'idle' && (
         <button onClick={handleNext}
-          className="w-full py-4 rounded-2xl font-black text-base text-white transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-95 animate-pop-in inline-flex items-center justify-center gap-2"
+          className="w-full py-4 rounded font-black text-base text-white transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-95 animate-pop-in inline-flex items-center justify-center gap-2"
           style={{ background: CURIO.cyan }}>
           {isLast ? 'See My Results' : 'Next Question'} <ArrowRight size={18} />
         </button>

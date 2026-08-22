@@ -3,11 +3,9 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
-import {
-  BookOpen, Calculator, FlaskConical, Globe, TrendingUp,
-  Landmark, Heart, Briefcase, Cog, Lock, Star, Search, type IconProps,
-} from '@/components/icons'
+import { Lock, Star, Search } from '@/components/icons'
 import Footer from '@/components/Footer'
+import QuizNav from '@/components/quiz/QuizNav'
 import { SkeletonSwap } from '@/components/interior/skeleton-swap'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -20,28 +18,6 @@ interface Topic {
   phase: string
   level_count: number
   free_level_count: number
-}
-
-const SUBJECT_ICON: Record<string, (props: IconProps) => JSX.Element> = {
-  'english': BookOpen,
-  'afrikaans': BookOpen,
-  'mathematics': Calculator,
-  'natural sciences': FlaskConical,
-  'life sciences': FlaskConical,
-  'physical sciences': FlaskConical,
-  'social sciences': Globe,
-  'accounting': TrendingUp,
-  'geography': Globe,
-  'history': Landmark,
-  'life orientation': Heart,
-  'business studies': Briefcase,
-  'economics': TrendingUp,
-  'technology': Cog,
-}
-
-function subjectIcon(subject: string) {
-  const key = Object.keys(SUBJECT_ICON).find(k => subject.toLowerCase().includes(k))
-  return key ? SUBJECT_ICON[key] : BookOpen
 }
 
 const GRADES = [4,5,6,7,8,9,10,11,12]
@@ -104,84 +80,60 @@ export default function QuizBrowsePage() {
     : topics
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--paper)' }}>
+    <div style={{ background: 'var(--paper)' }} className="page-wrap">
+      <QuizNav />
 
-      {/* Hero */}
-      <div style={{ background: 'var(--paper-dim)' }}>
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          <h1 className="text-4xl font-black mb-2" style={{ color: 'var(--ink)' }}>
-            Pick a Topic
-          </h1>
-          <p className="text-base mb-6" style={{ color: 'rgba(var(--ink-rgb),0.6)' }}>
-            Choose a subject, work through the levels, and see how much you know.
-          </p>
+      <div className="hub-wrap">
+        <div className="hub-eyebrow">Quizzes &amp; mastery challenges</div>
+        <h1 className="hub-title">Pick a <em>topic</em>.</h1>
+        <p className="hub-sub">
+          Choose a subject, work through the levels, and see how much you know.
+        </p>
 
-          {/* Auth status */}
-          {!authLoading && (
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm"
-              style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--ink-rgb),0.12)' }}>
-              {user ? (
-                <>
-                  <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--rust)', display: 'inline-block' }} />
-                  <span style={{ color: 'var(--ink)' }}>{user.fullName}</span>
-                  {isPremium && <span className="ml-1 inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-bold"
-                    style={{ background: 'rgba(var(--ochre-rgb),0.15)', color: 'var(--ochre)' }}><Star size={11} /> Premium</span>}
-                </>
-              ) : (
-                <>
-                  <span style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>Not signed in.</span>
-                  <a href="/login" className="font-bold" style={{ color: 'var(--rust)' }}>Sign in to track progress</a>
-                </>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
+        {!authLoading && (
+          <div className="quiz-auth-pill">
+            {user ? (
+              <>
+                <span className="quiz-auth-dot" />
+                <span>{user.fullName}</span>
+                {isPremium && <span className="meta-pill am" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}><Star size={11} /> Premium</span>}
+              </>
+            ) : (
+              <>
+                <span style={{ color: 'var(--ink35)' }}>Not signed in.</span>
+                <a href="/login" style={{ color: 'var(--rust)', fontWeight: 600 }}>Sign in to track progress</a>
+              </>
+            )}
+          </div>
+        )}
 
-      {/* Grade filter */}
-      <div className="max-w-4xl mx-auto px-6 py-4">
-        <div className="flex flex-wrap gap-2 items-center">
-          <span className="text-xs font-black uppercase tracking-widest mr-1" style={{ color: 'var(--rust)' }}>Grade:</span>
-          <button onClick={() => setGradeFilter(null)}
-            className="text-xs font-bold px-3 py-1.5 rounded-full border transition-colors"
-            style={!gradeFilter
-              ? { background: 'var(--rust)', color: 'var(--paper)', borderColor: 'var(--rust)' }
-              : { background: 'transparent', color: 'rgba(var(--ink-rgb),0.6)', borderColor: 'rgba(var(--ink-rgb),0.18)' }}>
-            All
-          </button>
+        <div className="qgrade-row">
+          <span className="qgrade-row-label">Grade</span>
+          <button onClick={() => setGradeFilter(null)} className={`gp${!gradeFilter ? ' on' : ''}`}>All</button>
           {GRADES.map(g => (
-            <button key={g} onClick={() => setGradeFilter(g)}
-              className="text-xs font-bold px-3 py-1.5 rounded-full border transition-colors"
-              style={gradeFilter === g
-                ? { background: 'var(--rust)', color: 'var(--paper)', borderColor: 'var(--rust)' }
-                : { background: 'transparent', color: 'rgba(var(--ink-rgb),0.6)', borderColor: 'rgba(var(--ink-rgb),0.18)' }}>
+            <button key={g} onClick={() => setGradeFilter(g)} className={`gp${gradeFilter === g ? ' on' : ''}`}>
               Gr {g}
             </button>
           ))}
         </div>
-      </div>
 
-      {/* Topics grid */}
-      <div className="max-w-4xl mx-auto px-6 pb-16">
         <SkeletonSwap
           ready={!loading}
           label="Topics"
           skeleton={
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="rounded-lg" style={{ background: 'var(--paper-raised)', height: '140px' }} />
-              ))}
+            <div className="qtopics-skeleton">
+              {[...Array(6)].map((_, i) => <div key={i} className="qtopics-skeleton-card" />)}
             </div>
           }
         >
           {filtered.length === 0 ? (
-            <div className="text-center py-20">
-              <Search size={40} style={{ color: 'rgba(var(--ink-rgb),0.3)', margin: '0 auto 0.75rem' }} />
-              <p className="font-black text-lg" style={{ color: 'var(--ink)' }}>No topics yet for this grade</p>
-              <p className="text-sm mt-1" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>More are being added. Check back soon!</p>
+            <div className="qtopics-empty">
+              <Search size={32} style={{ margin: '0 auto', display: 'block' }} />
+              <p className="qtopics-empty-title">No topics yet for this grade</p>
+              <p>More are being added. Check back soon!</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="qtopics-grid">
               {filtered.map(topic => (
                 <TopicCard key={`${topic.grade}-${topic.broad_topic}`} topic={topic} isPremium={isPremium} />
               ))}
@@ -197,46 +149,23 @@ export default function QuizBrowsePage() {
 // ─── Topic Card ───────────────────────────────────────────────────────────────
 
 function TopicCard({ topic, isPremium }: { topic: Topic; isPremium: boolean }) {
-  const Icon = subjectIcon(topic.subject)
   const hasLockedLevels = topic.free_level_count < topic.level_count
   const href = `/quiz/${encodeURIComponent(topic.broad_topic)}?grade=${topic.grade}&subject=${encodeURIComponent(topic.subject)}`
 
   return (
-    <a href={href}
-      className="block rounded-lg overflow-hidden transition-all duration-200 hover:-translate-y-1"
-      style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--rust-rgb),0.18)' }}
-      onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(var(--rust-rgb),0.4)'}
-      onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(var(--rust-rgb),0.18)'}
-    >
-      <div className="p-4">
-        <div className="flex items-start justify-between mb-3">
-          <span className="flex items-center justify-center rounded-lg"
-            style={{ width: 38, height: 38, background: 'rgba(var(--rust-rgb),0.1)', color: 'var(--rust)' }}>
-            <Icon size={19} />
-          </span>
-          <span className="text-xs font-bold px-2 py-0.5 rounded-full"
-            style={{ background: 'rgba(var(--rust-rgb),0.1)', color: 'var(--rust)' }}>
-            Gr {topic.grade}
-          </span>
-        </div>
-
-        <h3 className="font-black text-base mb-1 leading-tight" style={{ color: 'var(--ink)' }}>
-          {topic.broad_topic_display}
-        </h3>
-        <p className="text-xs mb-3" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>{topic.subject}</p>
-
-        <div className="flex items-center justify-between text-xs" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
-          <span>{topic.level_count} level{topic.level_count !== 1 ? 's' : ''}</span>
-          {hasLockedLevels && !isPremium && (
-            <span className="flex items-center gap-1"
-              style={{ color: 'var(--ochre)' }}>
-              <Lock size={12} /> <span>{topic.free_level_count} free</span>
-            </span>
-          )}
-          {(!hasLockedLevels || isPremium) && (
-            <span style={{ color: 'var(--rust)' }}>Open →</span>
-          )}
-        </div>
+    <a href={href} className="qtopic-card">
+      <div className="qtopic-top">
+        <span className="qtopic-subject">{topic.subject}</span>
+        <span className="qtopic-grade">Gr {topic.grade}</span>
+      </div>
+      <div className="qtopic-title">{topic.broad_topic_display}</div>
+      <div className="qtopic-foot">
+        <span>{topic.level_count} level{topic.level_count !== 1 ? 's' : ''}</span>
+        {hasLockedLevels && !isPremium ? (
+          <span className="qtopic-lock"><Lock size={12} /> {topic.free_level_count} free</span>
+        ) : (
+          <span className="qtopic-open">Open →</span>
+        )}
       </div>
     </a>
   )

@@ -210,7 +210,7 @@ export default function ResultsScreen({
       <div className="w-full max-w-md">
 
         {/* ── Hero card with Bloom ── */}
-        <div className="rounded-3xl p-8 mb-4 text-center"
+        <div className="rounded p-8 mb-4 text-center"
           style={{ background: 'var(--paper-raised)', border: `2px solid ${ringColor}40` }}>
 
           {/* Animated Bloom — purely decorative, pop-in + sequential petal reveal */}
@@ -240,7 +240,7 @@ export default function ResultsScreen({
           </div>
 
           {/* Pass/fail badge */}
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full font-black text-sm mb-4 text-white"
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded font-black text-sm mb-4 text-white"
             style={{ background: passed ? 'var(--moss)' : 'var(--brick)' }}>
             {passed ? <Check size={16} /> : <X size={16} />}
             {passed ? 'Passed!' : 'Not Passed'}
@@ -253,7 +253,7 @@ export default function ResultsScreen({
         </div>
 
         {/* ── Stats ── */}
-        <div className="rounded-3xl p-5 mb-4"
+        <div className="rounded p-5 mb-4"
           style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--ink-rgb),0.1)' }}>
           <div className="grid grid-cols-3 gap-0 divide-x" style={{ borderColor: 'rgba(var(--ink-rgb),0.1)' }}>
             {[
@@ -271,7 +271,7 @@ export default function ResultsScreen({
 
         {/* ── XP earned ── */}
         {xpEarned > 0 && (
-          <div className="rounded-3xl p-5 mb-4 flex items-center justify-between"
+          <div className="rounded p-5 mb-4 flex items-center justify-between"
             style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--ochre-rgb),0.25)' }}>
             <div>
               <p className="font-black text-sm" style={{ color: 'var(--ink)' }}>XP Earned</p>
@@ -285,9 +285,9 @@ export default function ResultsScreen({
 
         {/* ── Mastery unlocks ── */}
         {masteryUnlocked && !broadMasteryUnlocked && (
-          <div className="rounded-3xl p-5 mb-4 flex items-center gap-4"
+          <div className="rounded p-5 mb-4 flex items-center gap-4"
             style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--ochre-rgb),0.35)' }}>
-            <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+            <div className="w-12 h-12 rounded flex items-center justify-center flex-shrink-0"
               style={{ background: 'rgba(var(--ochre-rgb),0.15)', border: '1px solid rgba(var(--ochre-rgb),0.3)', color: 'var(--ochre)' }}>
               <Trophy size={22} />
             </div>
@@ -299,9 +299,9 @@ export default function ResultsScreen({
         )}
 
         {broadMasteryUnlocked && (
-          <div className="rounded-3xl p-5 mb-4 flex items-center gap-4"
+          <div className="rounded p-5 mb-4 flex items-center gap-4"
             style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--rust-rgb),0.35)' }}>
-            <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+            <div className="w-12 h-12 rounded flex items-center justify-center flex-shrink-0"
               style={{ background: 'rgba(var(--rust-rgb),0.12)', border: '1px solid rgba(var(--rust-rgb),0.3)', color: 'var(--rust)' }}>
               <GraduationCap size={22} />
             </div>
@@ -313,8 +313,8 @@ export default function ResultsScreen({
         )}
 
         {isMastery && passed && (
-          <div className="rounded-3xl p-5 mb-4 text-center"
-            style={{ background: '#F4ECDD',
+          <div className="rounded p-5 mb-4 text-center"
+            style={{ background: 'var(--ochre12)',
               border: '2px solid rgba(var(--ochre-rgb),0.3)' }}>
             <div className="flex justify-center mb-1" style={{ color: 'var(--rust)' }}>
               {sectionType === 'broad_topic_mastery' ? <GraduationCap size={26} /> : <Trophy size={26} />}
@@ -334,21 +334,21 @@ export default function ResultsScreen({
         <div className="flex flex-col gap-3">
           {passed && nextHref && (
             <Link href={nextHref}
-              className="w-full py-4 rounded-2xl font-black text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
+              className="w-full py-4 rounded font-black text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
               style={{ background: 'var(--rust)' }}>
               Next Level →
             </Link>
           )}
           {passed && !nextHref && (
             <Link href="/quiz"
-              className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-black text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 w-full py-4 rounded font-black text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
               style={{ background: 'var(--rust)' }}>
               <Home size={18} /> Browse More Topics
             </Link>
           )}
 
           <Link href={retryHref}
-            className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-2xl font-black text-base text-center transition-all duration-200"
+            className="inline-flex items-center justify-center gap-2 w-full py-4 rounded font-black text-base text-center transition-all duration-200"
             style={passed
               ? { background: 'rgba(var(--ink-rgb),0.06)', color: 'var(--ink)', border: '2px solid rgba(var(--ink-rgb),0.15)' }
               : { background: 'var(--rust)', color: '#fff' }
