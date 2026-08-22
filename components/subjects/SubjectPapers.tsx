@@ -48,14 +48,14 @@ export function SubjectPapersGrid({ subjectKey, grade }: { subjectKey: string | 
     )
   }
   return (
-    <div className="papers-grid">
+    <div className="subjpapers-grid">
       {papers.map((p) => (
-        <div className="paper-card" key={p.id}>
-          <div className="paper-card-title">{p.title}</div>
-          <div className="paper-card-meta">Grade {p.grade} · {p.section_type || p.topic || ''}</div>
-          <div className="paper-card-footer">
-            <span className="paper-card-badge">{p.has_memo ? 'Free + Memo' : 'Free'}</span>
-            <a href={p.file_url} target="_blank" rel="noopener noreferrer" className="paper-card-btn">Open ↗</a>
+        <div className="subjpaper-card" key={p.id}>
+          <div className="subjpaper-title">{p.title}</div>
+          <div className="subjpaper-meta">Grade {p.grade} · {p.section_type || p.topic || ''}</div>
+          <div className="subjpaper-footer">
+            <span className="subjpaper-badge">{p.has_memo ? 'Free + Memo' : 'Free'}</span>
+            <a href={p.file_url} target="_blank" rel="noopener noreferrer" className="subjpaper-btn">Open ↗</a>
           </div>
         </div>
       ))}

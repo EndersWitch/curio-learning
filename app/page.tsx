@@ -601,7 +601,7 @@ export default function HomePage() {
                 Let&apos;s build it up from scratch.<br /><br />
                 <strong>Plants are the only living things that make their own food,</strong> using sunlight, water, and CO₂ from the air.<br /><br />
                 Here&apos;s the key: the oxygen they release as a by-product is every breath you&apos;ve ever taken. Every human, every animal, all of it comes from photosynthesis.<br /><br />
-                So when your exam asks "why is it important?" it&apos;s not just a plant thing.{' '}
+                So when your exam asks &quot;why is it important?&quot; it&apos;s not just a plant thing.{' '}
                 <strong>It&apos;s the foundation of all life on Earth.</strong>
               </div>
               <span className="chat-label" style={{ alignSelf: 'flex-end' }}>you</span>

@@ -40,7 +40,7 @@ export default function PremiumLock({ levelTitle, compact = false }: PremiumLock
         </div>
         {levelTitle && (
           <p className="text-sm" style={{ color: 'rgba(246,240,226,0.85)' }}>
-            "<span className="font-bold">{levelTitle}</span>" is available with Premium
+            &quot;<span className="font-bold">{levelTitle}</span>&quot; is available with Premium
           </p>
         )}
       </div>

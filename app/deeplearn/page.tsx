@@ -23,21 +23,21 @@ export default function DeepLearnPage() {
           plain language, with real examples, until it actually clicks.
         </p>
         <div className="chat-preview">
-          <div className="chat-msg user">
+          <div className="dl-chat-msg user">
             <div className="chat-sender">You</div>
-            <div className="chat-bubble">Why does photosynthesis matter? I keep forgetting.</div>
+            <div className="dl-chat-bubble">Why does photosynthesis matter? I keep forgetting.</div>
           </div>
-          <div className="chat-msg ai chat-blur">
+          <div className="dl-chat-msg ai chat-blur">
             <div className="chat-sender">curio</div>
-            <div className="chat-bubble">
+            <div className="dl-chat-bubble">
               Let&apos;s build it up from scratch.<br /><br />
               <strong>Plants are the only living things that make their own food,</strong> using sunlight, water, and CO₂ from the air.<br /><br />
               The oxygen they release is every breath you&apos;ve ever taken.<br /><br />
               So when your exam asks &quot;why is it important?&quot; <strong>It&apos;s the foundation of all life on Earth.</strong>
             </div>
           </div>
-          <div className="chat-msg user chat-blur">
-            <div className="chat-bubble">Oh. That actually makes sense now.</div>
+          <div className="dl-chat-msg user chat-blur">
+            <div className="dl-chat-bubble">Oh. That actually makes sense now.</div>
           </div>
         </div>
         <div className="coming-soon-actions">

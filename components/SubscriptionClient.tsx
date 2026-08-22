@@ -221,9 +221,9 @@ export default function SubscriptionClient() {
                 <h1 className="prem-title">You&apos;re in, {firstName}.</h1>
                 <p className="prem-sub">Full access to everything curio has to offer. Let&apos;s get to work.</p>
                 <div className="quick-grid">
-                  <a href="/papers" className="qa"><span className="qa-icon"><FileText size={22} /></span><span className="qa-lbl">Papers</span></a>
-                  <a href="/quiz" className="qa"><span className="qa-icon"><PenLine size={22} /></span><span className="qa-lbl">Quiz</span></a>
-                  <a href="/deeplearn" className="qa"><span className="qa-icon"><Brain size={22} /></span><span className="qa-lbl">Deep Learn</span></a>
+                  <a href="/papers" className="premqa"><span className="premqa-icon"><FileText size={22} /></span><span className="premqa-lbl">Papers</span></a>
+                  <a href="/quiz" className="premqa"><span className="premqa-icon"><PenLine size={22} /></span><span className="premqa-lbl">Quiz</span></a>
+                  <a href="/deeplearn" className="premqa"><span className="premqa-icon"><Brain size={22} /></span><span className="premqa-lbl">Deep Learn</span></a>
                 </div>
               </section>
 
