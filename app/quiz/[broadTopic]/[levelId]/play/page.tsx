@@ -32,6 +32,10 @@ export default function PlayPage() {
   const learnHref = `/quiz/${broadTopic}/${levelUUID}/learn`
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [levelUUID])
+
+  useEffect(() => {
     if (authLoading) return
     load()
   }, [authLoading, levelUUID])

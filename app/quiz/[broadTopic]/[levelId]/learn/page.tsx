@@ -23,6 +23,10 @@ export default function LearnPage() {
   const [accessDenied, setAccessDenied] = useState(false)
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [levelUUID])
+
+  useEffect(() => {
     if (authLoading) return
     loadLevel()
   }, [authLoading, levelUUID])

@@ -54,6 +54,7 @@ export default function BroadTopicPage() {
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
 
+  useEffect(() => { window.scrollTo(0, 0) }, [broadTopic])
   useEffect(() => { loadLevels() }, [broadTopic])
   // Wait for levels so we know which grade's progress to load — level_id slugs
   // (e.g. "nouns_1") are reused across grades, so progress must be grade-scoped too.
