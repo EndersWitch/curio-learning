@@ -23,6 +23,7 @@ export default function Footer() {
         </div>
         <div className="footer-col">
           <div className="footer-col-title">Support</div>
+          <a href="/about">About Us</a>
           <a href="/contact">Contact Us</a>
           <a href="/privacy">Privacy Policy</a>
           <a href="/terms">Terms of Service</a>
