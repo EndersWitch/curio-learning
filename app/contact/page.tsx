@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import SimpleNav from '@/components/SimpleNav'
 import Footer from '@/components/Footer'
 import FaqAccordion from '@/components/FaqAccordion'
+import ContactForm from '@/components/ContactForm'
 import RevealObserver from '@/components/RevealObserver'
 import Bloom from '@/components/Bloom'
 
@@ -140,6 +141,10 @@ export default function ContactPage() {
             <span className="ln">get</span>
             <span className="ln ac">help</span>
           </h2>
+
+          <div className="rv rv-d2">
+            <ContactForm />
+          </div>
         </div>
       </section>
 
