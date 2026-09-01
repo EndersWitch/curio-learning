@@ -135,6 +135,9 @@ export default function LoginPage() {
 
       {/* Brand panel */}
       <div className="brand-panel">
+        <div className="spread-deco o1" style={{ top: '-40px', left: '-40px' }}>
+          <Bloom size={200} />
+        </div>
         <div className="bp-top">
           <a href="/" className="bp-logo">
             <Bloom size={26} />

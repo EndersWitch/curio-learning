@@ -485,6 +485,9 @@ export default function HomePage() {
       {/* ── LANDING (guests) ── always in DOM, hidden when logged in */}
       <div id="landing" style={{ display: user ? 'none' : 'block' }}>
           <section className="hero">
+            <div className="spread-deco o1" style={{ bottom: '-8%', left: '2%' }}>
+              <Bloom size={220} />
+            </div>
             <div className="hero-left">
               <div className="hero-note">
                 <span className="hero-note-rule" />
@@ -539,6 +542,9 @@ export default function HomePage() {
 
           {/* ── SUBJECTS CLOUD ── */}
           <section className="subjects-section rv">
+            <div className="spread-deco o1" style={{ top: '-30px', right: '4%' }}>
+              <Bloom size={140} />
+            </div>
             <div className="subjects-label">Every subject · Grade R to 12</div>
             <div className="subject-cloud">
               <span className="sc-word big c">English HL</span><span className="sc-div">·</span>
@@ -559,6 +565,9 @@ export default function HomePage() {
 
           {/* ── CH1: PAPERS ── */}
           <section className="ch1 rv" id="papers">
+            <div className="spread-deco o1" style={{ bottom: '-40px', right: '-30px' }}>
+              <Bloom size={180} />
+            </div>
             <div>
               <h2 className="ch-h">
                 Exam papers.<br />Full memos.<br />
@@ -593,6 +602,9 @@ export default function HomePage() {
 
           {/* ── CH2: DEEP LEARN ── */}
           <section className="ch2 rv">
+            <div className="spread-deco o1" style={{ top: '-30px', right: '6%' }}>
+              <Bloom size={150} />
+            </div>
             <div className="chat">
               <span className="chat-label" style={{ alignSelf: 'flex-end' }}>you</span>
               <div className="chat-bubble cb-me">Why does photosynthesis matter? I keep forgetting.</div>
@@ -623,6 +635,9 @@ export default function HomePage() {
 
           {/* ── CH3: QUIZ ── */}
           <section className="ch3 rv" id="quiz">
+            <div className="spread-deco o1" style={{ bottom: '-30px', left: '-30px' }}>
+              <Bloom size={160} />
+            </div>
             <div>
               <h2 className="ch-h">
                 Questions that<br /><span className="cy">actually</span><br />teach you.
@@ -691,6 +706,9 @@ export default function HomePage() {
 
           {/* ── PRICING ── */}
           <section className="pricing rv" id="pricing">
+            <div className="spread-deco o1" style={{ top: '-20px', right: '2%' }}>
+              <Bloom size={110} />
+            </div>
             <div className="pricing-header">
               <h2 className="pricing-h">Honest pricing.<br />For <em>every</em> student.</h2>
               <p className="pricing-note-top">
@@ -749,6 +767,9 @@ export default function HomePage() {
 
           {/* ── CLOSING ── */}
           <section className="closing">
+            <div className="spread-deco o1" style={{ bottom: '-40px', right: '4%' }}>
+              <Bloom size={190} />
+            </div>
             <div className="closing-big rv">
               <span className="cy">You&apos;ve</span><br />Got<br /><span className="co">This.</span>
             </div>

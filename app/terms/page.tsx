@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import SimpleNav from '@/components/SimpleNav'
 import Footer from '@/components/Footer'
+import RevealObserver from '@/components/RevealObserver'
+import Bloom from '@/components/Bloom'
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
@@ -9,13 +11,30 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div style={{ background: 'var(--paper)', minHeight: '100vh' }}>
+    <div className="poster-page">
       <SimpleNav />
-      <div className="legal-wrap">
-        <div className="page-eyebrow">Legal</div>
-        <h1 className="page-title">Terms of Service</h1>
-        <p className="page-date">Last updated: March 2026 &nbsp;·&nbsp; Effective date: March 2026</p>
+      <RevealObserver />
 
+      <section className="spread hero compact">
+        <div className="spread-deco o1" style={{ top: '-40px', right: '4%' }}>
+          <Bloom size={160} />
+        </div>
+
+        <div className="spread-inner">
+          <div className="spread-kicker">
+            <span className="spread-kicker-line" />
+            Curio Learning
+          </div>
+          <p className="spread-tagline">Last updated: March 2026 &nbsp;&middot;&nbsp; Effective date: March 2026</p>
+
+          <h1 className="spread-h">
+            <span className="ln">terms</span>
+            <span className="ln ac">of service</span>
+          </h1>
+        </div>
+      </section>
+
+      <div className="legal-wrap">
         <div className="highlight-box terms">
           <p>
             These Terms of Service constitute a legally binding agreement between you and Curio Learning, governed by the

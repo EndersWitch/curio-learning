@@ -5,6 +5,7 @@ import Script from 'next/script'
 import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
 import { Check, FileText, PenLine, Brain } from '@/components/icons'
+import Bloom from '@/components/Bloom'
 
 const PAYSTACK_KEY = 'pk_live_6540061572fe506bdb52063847dedb801c38765b'
 const PLAN_CODE = 'PLN_rgv78ij4cj0ky3d'
@@ -143,6 +144,12 @@ export default function SubscriptionClient() {
           {!(user && user.isPremium) ? (
             <div>
               <section className="hero-free">
+                <div className="spread-deco o1" style={{ top: '-40px', right: '4%' }}>
+                  <Bloom size={220} />
+                </div>
+                <div className="spread-deco o1" style={{ bottom: '-30px', left: '4%' }}>
+                  <Bloom size={160} />
+                </div>
                 <div className="sub-eyebrow">curio premium</div>
                 <h1 className="sub-hero-title">Papers get you started.<br /><span className="cy">This gets you through it.</span></h1>
                 <p className="sub-hero-sub">
@@ -217,6 +224,9 @@ export default function SubscriptionClient() {
           ) : (
             <div>
               <section className="premium-hero">
+                <div className="spread-deco o1" style={{ top: '-30px', right: '6%' }}>
+                  <Bloom size={180} />
+                </div>
                 <div className="prem-badge"><div className="prem-badge-dot" /><span className="prem-badge-text">Premium · Active</span></div>
                 <h1 className="prem-title">You&apos;re in, {firstName}.</h1>
                 <p className="prem-sub">Full access to everything curio has to offer. Let&apos;s get to work.</p>
