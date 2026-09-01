@@ -19,7 +19,11 @@ export default function FaqAccordion({ items }: { items: FaqEntry[] }) {
             {item.q}
             <span className="faq-q-arrow">↓</span>
           </div>
-          <div className="faq-a">{item.a}</div>
+          <div className="faq-a-panel">
+            <div className="faq-a-inner">
+              <div className="faq-a">{item.a}</div>
+            </div>
+          </div>
         </div>
       ))}
     </div>
