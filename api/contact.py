@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler
 import json, os, re, urllib.request, urllib.error
 
 TO_EMAIL = 'hello@curiolearning.co.za'
-FROM_EMAIL = 'hello@curiolearning.co.za'  # must be a verified sender/domain in Brevo
+FROM_EMAIL = 'Curio Learning <hello@curiolearning.co.za>'  # domain must be verified in Resend
 EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
 
 
@@ -26,9 +26,9 @@ class handler(BaseHTTPRequestHandler):
         if not name or not email or not message or not EMAIL_RE.match(email):
             return self._json(400, {'ok': False, 'error': 'Please fill in your name, a valid email, and a message.'})
 
-        api_key = os.environ.get('BREVO_API_KEY', '')
+        api_key = os.environ.get('RESEND_API_KEY', '')
         if not api_key:
-            print('contact.py: BREVO_API_KEY is not set')
+            print('contact.py: RESEND_API_KEY is not set')
             return self._json(500, {'ok': False, 'error': "Email sending isn't configured yet — please email hello@curiolearning.co.za directly."})
 
         html = (
@@ -38,27 +38,26 @@ class handler(BaseHTTPRequestHandler):
             f"<p><strong>Message:</strong></p><p>{_escape(message).replace(chr(10), '<br>')}</p>"
         )
         payload = json.dumps({
-            'sender': {'name': 'Curio Learning contact form', 'email': FROM_EMAIL},
-            'to': [{'email': TO_EMAIL}],
-            'replyTo': {'email': email, 'name': name},
+            'from': FROM_EMAIL,
+            'to': [TO_EMAIL],
+            'reply_to': email,
             'subject': f'New contact form message from {name}',
-            'htmlContent': html,
+            'html': html,
         }).encode()
 
         req = urllib.request.Request(
-            'https://api.brevo.com/v3/smtp/email',
+            'https://api.resend.com/emails',
             data=payload,
             method='POST',
             headers={
-                'accept': 'application/json',
-                'api-key': api_key,
-                'content-type': 'application/json',
+                'Authorization': f'Bearer {api_key}',
+                'Content-Type': 'application/json',
             },
         )
         try:
             urllib.request.urlopen(req, timeout=10)
         except urllib.error.HTTPError as e:
-            print('contact.py: Brevo error', e.code, e.read().decode(errors='ignore'))
+            print('contact.py: Resend error', e.code, e.read().decode(errors='ignore'))
             return self._json(502, {'ok': False, 'error': 'Could not send your message right now. Please try again shortly.'})
         except Exception as e:
             print('contact.py: send failed', repr(e))
