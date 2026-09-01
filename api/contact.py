@@ -52,6 +52,8 @@ class handler(BaseHTTPRequestHandler):
             headers={
                 'Authorization': f'Bearer {api_key}',
                 'Content-Type': 'application/json',
+                'User-Agent': 'curio-learning-contact-form/1.0',
+                'Accept': 'application/json',
             },
         )
         try:
