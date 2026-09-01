@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import SimpleNav from '@/components/SimpleNav'
 import Footer from '@/components/Footer'
 import FaqAccordion from '@/components/FaqAccordion'
+import RevealObserver from '@/components/RevealObserver'
+import Bloom from '@/components/Bloom'
 
 export const metadata: Metadata = {
   title: 'Contact Us',
@@ -72,36 +74,132 @@ const FAQ = [
 
 export default function ContactPage() {
   return (
-    <div style={{ background: 'var(--paper)', minHeight: '100vh' }}>
+    <div className="poster-page">
       <SimpleNav />
-      <div className="legal-wrap">
-        <div className="page-eyebrow">Get in touch</div>
-        <h1 className="page-title">Contact Us</h1>
-        <p style={{ fontSize: '0.95rem', color: 'var(--ink55)', maxWidth: 500 }}>
-          We&apos;re a small team but we care deeply about every student who uses Curio. We&apos;ll get back to you as soon as we can.
-        </p>
+      <RevealObserver />
 
-        <div className="contact-grid">
-          {CARDS.map((card) => (
-            <div className={`contact-card${card.featured ? ' featured' : ''}`} key={card.title}>
-              <div className="contact-card-icon">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                  {card.icon}
-                </svg>
+      {/* ── HERO — let's talk ── */}
+      <section className="spread hero compact">
+        <div className="spread-deco o2" style={{ top: '-60px', right: '-30px' }}>
+          <Bloom size={280} />
+        </div>
+        <div className="spread-deco o1" style={{ bottom: '-40px', left: '-50px' }}>
+          <Bloom size={220} />
+        </div>
+
+        <div className="spread-inner">
+          <div className="spread-kicker">
+            <span className="spread-kicker-line" />
+            Curio Learning
+          </div>
+          <p className="spread-tagline">We&apos;re a small team, but we care about every message that lands in this inbox.</p>
+
+          <h1 className="spread-h">
+            <span className="ln">let&apos;s</span>
+            <span className="ln ac">talk</span>
+          </h1>
+
+          <p className="spread-lede rv">
+            Questions about Curio, a bug you spotted, or a subscription issue &mdash; pick a category below
+            and drop us a line. We usually reply within <strong>1&ndash;2 business days</strong>.
+          </p>
+        </div>
+      </section>
+
+      {/* ── CARDS ── */}
+      <section className="spread">
+        <div className="spread-deco o1" style={{ top: '4%', right: '3%' }}>
+          <Bloom size={160} />
+        </div>
+
+        <div className="spread-inner">
+          <p className="spread-blurb-head rv">
+            Pick the inbox that fits, and we&apos;ll take it from there:
+          </p>
+
+          <div className="contact-grid rv rv-d1">
+            {CARDS.map((card) => (
+              <div className={`contact-card${card.featured ? ' featured' : ''}`} key={card.title}>
+                <div className="contact-card-icon">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                    {card.icon}
+                  </svg>
+                </div>
+                <div className="contact-card-title">{card.title}</div>
+                <div className="contact-card-desc">{card.desc}</div>
+                <a href={`mailto:${card.email}`} className="contact-card-link">{card.email} &rarr;</a>
               </div>
-              <div className="contact-card-title">{card.title}</div>
-              <div className="contact-card-desc">{card.desc}</div>
-              <a href={`mailto:${card.email}`} className="contact-card-link">{card.email} →</a>
+            ))}
+          </div>
+
+          <div className="response-note rv rv-d2">
+            <strong>Based in South Africa.</strong> We typically respond within 1&ndash;2 business days (Monday to Friday, 08:00&ndash;17:00 SAST). For urgent issues, include &quot;URGENT&quot; in your subject line.
+          </div>
+
+          <h2 className="spread-h rv rv-d2" style={{ marginTop: '4rem' }}>
+            <span className="ln">get</span>
+            <span className="ln ac">help</span>
+          </h2>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="spread">
+        <div className="spread-deco o1" style={{ bottom: '-30px', left: '2%' }}>
+          <Bloom size={190} />
+        </div>
+
+        <div className="spread-inner">
+          <div className="spread-kicker">
+            <span className="spread-kicker-line" />
+            Curio Learning
+          </div>
+          <h2 className="spread-h rv">
+            <span className="ln">still</span>
+            <span className="ln ac">curious?</span>
+          </h2>
+
+          <div className="rv rv-d1" style={{ marginTop: '3rem', maxWidth: 700 }}>
+            <FaqAccordion items={FAQ} />
+          </div>
+        </div>
+      </section>
+
+      {/* ── CLOSING CTA ── */}
+      <section className="spread dark">
+        <div className="spread-deco o2" style={{ top: '-50px', right: '-30px' }}>
+          <Bloom size={240} />
+        </div>
+        <div className="spread-deco o1" style={{ bottom: '-10%', left: '4%' }}>
+          <Bloom size={150} />
+        </div>
+
+        <div className="spread-inner">
+          <div className="spread-kicker">
+            <span className="spread-kicker-line" />
+            Curio Learning
+          </div>
+
+          <h2 className="spread-h">
+            <span className="ln">reach</span>
+            <span className="ln ac">out</span>
+          </h2>
+
+          <div className="spread-closing-row">
+            <p className="spread-closing-sub">
+              Every message reaches a real person on the Curio team &mdash; usually within 1&ndash;2 business days.
+            </p>
+            <div className="spread-closing-actions">
+              <a href="mailto:hello@curiolearning.co.za" className="spread-closing-cta">
+                Email us
+              </a>
             </div>
-          ))}
-        </div>
+          </div>
 
-        <div className="response-note">
-          <strong>Based in South Africa.</strong> We typically respond within 1–2 business days (Monday to Friday, 08:00–17:00 SAST). For urgent issues, include &quot;URGENT&quot; in your subject line.
+          <div className="spread-closing-url">curiolearning.co.za</div>
         </div>
+      </section>
 
-        <FaqAccordion items={FAQ} />
-      </div>
       <Footer />
     </div>
   )
