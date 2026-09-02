@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
+import Bloom from '@/components/Bloom'
 
 interface Paper {
   id: number | string
@@ -175,18 +176,27 @@ export default function PapersClient() {
         </div>
       )}
 
-      <div className="papers-hero">
-        <div className="hero-left">
-          <div className="hero-eyebrow">Free forever · No sign-up required</div>
-          <h1 className="hero-h">Exam papers.<br /><span className="cy">All grades.</span></h1>
-          <p className="hero-sub">Browse and download exam papers for every grade and subject. <strong>Papers and memos are always free,</strong> no account needed, no strings.</p>
+      <section className="papers-hero">
+        <div className="spread-deco o1 papers-bloom papers-bloom-one"><Bloom size={260} /></div>
+        <div className="spread-deco o2 papers-bloom papers-bloom-two"><Bloom size={104} /></div>
+        <div className="papers-hero-inner">
+          <div className="papers-hero-copy">
+            <div className="spread-kicker">
+              <span className="spread-kicker-line" />Free forever · No sign-up required
+            </div>
+            <h1 className="papers-hero-title">
+              <span>exam</span>
+              <span className="accent">papers.</span>
+            </h1>
+            <p className="papers-hero-sub">Browse and download exam papers for every grade and subject. <strong>Papers and memos are always free,</strong> no account needed, no strings.</p>
+          </div>
+          <div className="papers-hero-stats" aria-label="Paper library totals">
+            <div className="papers-hero-stat"><div className="papers-hero-stat-value">{allPapers?.length ?? '—'}</div><div className="papers-hero-stat-label">Papers</div></div>
+            <div className="papers-hero-stat"><div className="papers-hero-stat-value">{grades.length || '—'}</div><div className="papers-hero-stat-label">Grades</div></div>
+            <div className="papers-hero-stat"><div className="papers-hero-stat-value">{subjects.length || '—'}</div><div className="papers-hero-stat-label">Subjects</div></div>
+          </div>
         </div>
-        <div className="hero-stats">
-          <div className="hstat"><div className="hstat-val"><span className="cy">{allPapers?.length ?? '—'}</span></div><div className="hstat-label">Papers</div></div>
-          <div className="hstat"><div className="hstat-val"><span className="cy">{grades.length || '—'}</span></div><div className="hstat-label">Grades</div></div>
-          <div className="hstat"><div className="hstat-val"><span className="cy">{subjects.length || '—'}</span></div><div className="hstat-label">Subjects</div></div>
-        </div>
-      </div>
+      </section>
 
       <div className="papers-layout">
         <aside className="papers-sidebar">
