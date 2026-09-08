@@ -31,15 +31,15 @@ export default function PremiumLock({ levelTitle, compact = false }: PremiumLock
   }
 
   return (
-    <div className="rounded-lg overflow-hidden border-2" style={{ borderColor: 'rgba(var(--ochre-rgb),0.3)' }}>
+    <div className="rounded-lg overflow-hidden border-2" style={{ borderColor: 'rgba(var(--ochre-rgb),0.3)', boxShadow: '0 16px 40px -14px rgba(var(--ink-rgb),0.22)' }}>
       {/* Header */}
-      <div className="px-6 py-5 text-white" style={{ background: 'var(--ochre)' }}>
-        <div className="flex items-center gap-3 mb-2">
+      <div className="px-6 py-6 text-white" style={{ background: 'var(--ochre)', position: 'relative', overflow: 'hidden' }}>
+        <div className="flex items-center gap-3 mb-2" style={{ position: 'relative', zIndex: 2 }}>
           <Star size={20} />
-          <span className="font-black text-lg">Premium Content</span>
+          <span style={{ fontFamily: 'var(--h)', fontWeight: 800, fontSize: '1.35rem', letterSpacing: '-0.02em' }}>Premium Content</span>
         </div>
         {levelTitle && (
-          <p className="text-sm" style={{ color: 'rgba(246,240,226,0.85)' }}>
+          <p className="text-sm" style={{ color: 'rgba(246,240,226,0.85)', position: 'relative', zIndex: 2 }}>
             &quot;<span className="font-bold">{levelTitle}</span>&quot; is available with Premium
           </p>
         )}
@@ -64,15 +64,15 @@ export default function PremiumLock({ levelTitle, compact = false }: PremiumLock
         <div className="flex flex-col sm:flex-row gap-3">
           <Link
             href="/premium"
-            className="flex-1 text-center py-3 rounded-lg font-black text-sm transition-colors"
-            style={{ background: 'var(--ochre)', color: 'var(--paper)' }}
+            className="flex-1 text-center py-3 rounded-lg text-sm transition-all hover:-translate-y-0.5"
+            style={{ background: 'var(--ochre)', color: 'var(--paper)', fontFamily: 'var(--h)', fontWeight: 700 }}
           >
             Get Premium — R49/month
           </Link>
           <Link
             href="/quiz"
-            className="flex-1 text-center py-3 rounded-lg font-black text-sm border-2 transition-colors"
-            style={{ background: 'var(--paper-raised)', color: 'rgba(var(--ink-rgb),0.6)', borderColor: 'rgba(var(--ink-rgb),0.15)' }}
+            className="flex-1 text-center py-3 rounded-lg text-sm border-2 transition-colors"
+            style={{ background: 'var(--paper-raised)', color: 'rgba(var(--ink-rgb),0.6)', borderColor: 'rgba(var(--ink-rgb),0.15)', fontFamily: 'var(--h)', fontWeight: 700 }}
           >
             Browse Free Topics
           </Link>

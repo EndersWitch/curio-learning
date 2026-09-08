@@ -220,7 +220,7 @@ export default function ResultsScreen({
 
           {/* Score — its own clearly legible block, not overlaid on the bloom */}
           <div className="mb-1">
-            <span className="text-5xl font-black tabular-nums" style={{ color: 'var(--ink)' }}>
+            <span className="text-6xl tabular-nums" style={{ color: 'var(--ink)', fontFamily: 'var(--h)', fontWeight: 800, letterSpacing: '-0.03em' }}>
               {reveal.displayPercent}%
             </span>
           </div>
@@ -246,7 +246,7 @@ export default function ResultsScreen({
             {passed ? 'Passed!' : 'Not Passed'}
           </div>
 
-          <h2 className="text-xl font-black mb-1 leading-tight" style={{ color: 'var(--ink)' }}>
+          <h2 className="text-2xl mb-1 leading-tight" style={{ color: 'var(--ink)', fontFamily: 'var(--h)', fontWeight: 800, letterSpacing: '-0.02em' }}>
             {messageRef.current}
           </h2>
           <p className="text-sm" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>{levelTitle}</p>
@@ -334,25 +334,27 @@ export default function ResultsScreen({
         <div className="flex flex-col gap-3">
           {passed && nextHref && (
             <Link href={nextHref}
-              className="w-full py-4 rounded font-black text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
-              style={{ background: 'var(--rust)' }}>
+              className="w-full py-4 rounded text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
+              style={{ background: 'var(--rust)', fontFamily: 'var(--h)', fontWeight: 700, letterSpacing: '-0.01em' }}>
               Next Level →
             </Link>
           )}
           {passed && !nextHref && (
             <Link href="/quiz"
-              className="inline-flex items-center justify-center gap-2 w-full py-4 rounded font-black text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
-              style={{ background: 'var(--rust)' }}>
+              className="inline-flex items-center justify-center gap-2 w-full py-4 rounded text-base text-white text-center transition-all duration-200 hover:-translate-y-0.5"
+              style={{ background: 'var(--rust)', fontFamily: 'var(--h)', fontWeight: 700, letterSpacing: '-0.01em' }}>
               <Home size={18} /> Browse More Topics
             </Link>
           )}
 
           <Link href={retryHref}
-            className="inline-flex items-center justify-center gap-2 w-full py-4 rounded font-black text-base text-center transition-all duration-200"
-            style={passed
-              ? { background: 'rgba(var(--ink-rgb),0.06)', color: 'var(--ink)', border: '2px solid rgba(var(--ink-rgb),0.15)' }
-              : { background: 'var(--rust)', color: '#fff' }
-            }>
+            className="inline-flex items-center justify-center gap-2 w-full py-4 rounded text-base text-center transition-all duration-200"
+            style={{
+              fontFamily: 'var(--h)', fontWeight: 700, letterSpacing: '-0.01em',
+              ...(passed
+                ? { background: 'rgba(var(--ink-rgb),0.06)', color: 'var(--ink)', border: '2px solid rgba(var(--ink-rgb),0.15)' }
+                : { background: 'var(--rust)', color: '#fff' })
+            }}>
             <RefreshCw size={16} /> {passed ? 'Try Again' : 'Try Again, You Can Do It!'}
           </Link>
         </div>

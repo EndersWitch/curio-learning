@@ -240,7 +240,7 @@ export default function QuizRunner({
 
       {/* Question card */}
       <div key={`q-${currentIndex}`} className="rounded p-7 mb-5 animate-fade-slide"
-        style={{ background: CURIO.card, border: `1px solid ${CURIO.cardBorder}` }}>
+        style={{ background: CURIO.card, border: `1px solid ${CURIO.cardBorder}`, boxShadow: '0 10px 30px -12px rgba(var(--ink-rgb),0.14)' }}>
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs font-black px-2.5 py-1 rounded"
             style={{ background: 'rgba(var(--rust-rgb),0.1)', color: CURIO.cyan }}>
@@ -266,8 +266,8 @@ export default function QuizRunner({
           )}
         </div>
         <RichText text={current.question_text}
-          className="text-lg md:text-xl font-black leading-relaxed"
-          style={{ color: CURIO.text }} />
+          className="text-xl md:text-2xl leading-snug"
+          style={{ color: CURIO.text, fontFamily: 'var(--h)', fontWeight: 700, letterSpacing: '-0.01em' }} />
       </div>
 
       {/* Answer options */}
@@ -318,8 +318,8 @@ export default function QuizRunner({
             ? { background: 'rgba(var(--moss-rgb),0.08)', borderColor: 'rgba(var(--moss-rgb),0.3)' }
             : { background: 'rgba(var(--brick-rgb),0.08)', borderColor: 'rgba(var(--brick-rgb),0.3)' }
           }>
-          <p className="font-black text-base mb-2"
-            style={{ color: answerState === 'correct' ? 'var(--moss)' : 'var(--brick)' }}>
+          <p className="text-lg mb-2"
+            style={{ color: answerState === 'correct' ? 'var(--moss)' : 'var(--brick)', fontFamily: 'var(--h)', fontWeight: 700, letterSpacing: '-0.01em' }}>
             {feedbackRef.current}
           </p>
           {/* Explanation always visible immediately — no button */}
@@ -335,8 +335,8 @@ export default function QuizRunner({
       {/* Next / Finish button */}
       {answerState !== 'idle' && (
         <button onClick={handleNext}
-          className="w-full py-4 rounded font-black text-base text-white transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-95 animate-pop-in inline-flex items-center justify-center gap-2"
-          style={{ background: CURIO.cyan }}>
+          className="w-full py-4 rounded text-base text-white transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-95 animate-pop-in inline-flex items-center justify-center gap-2"
+          style={{ background: CURIO.cyan, fontFamily: 'var(--h)', fontWeight: 700, letterSpacing: '-0.01em' }}>
           {isLast ? 'See My Results' : 'Next Question'} <ArrowRight size={18} />
         </button>
       )}

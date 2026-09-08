@@ -7,6 +7,7 @@ import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
 import { Lock, Search, Check, Zap } from '@/components/icons'
 import Footer from '@/components/Footer'
+import Bloom from '@/components/Bloom'
 
 interface LevelProgress {
   best_score: number
@@ -118,8 +119,11 @@ export default function BroadTopicPage() {
     <div className="min-h-screen" style={{ background: 'var(--paper)' }}>
 
       {/* Header */}
-      <div style={{ background: 'var(--paper-dim)' }}>
-        <div className="max-w-2xl mx-auto px-6 py-10">
+      <div style={{ background: 'var(--paper-dim)', position: 'relative', overflow: 'hidden' }}>
+        <div className="spread-deco o1" style={{ top: '-40px', right: '4%' }}>
+          <Bloom size={190} />
+        </div>
+        <div className="max-w-2xl mx-auto px-6 py-10" style={{ position: 'relative', zIndex: 2 }}>
           <Link href="/quiz"
             className="inline-flex items-center gap-1 text-xs font-semibold mb-4 hover:opacity-70 transition-opacity"
             style={{ color: 'var(--rust)' }}>
@@ -128,8 +132,10 @@ export default function BroadTopicPage() {
           <p className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: 'var(--rust)' }}>
             {subject} · Grade {grade}
           </p>
-          <h1 className="text-3xl font-black" style={{ color: 'var(--ink)' }}>{displayName}</h1>
-          <p className="text-sm mt-1" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
+          <h1 style={{ fontFamily: 'var(--h)', fontSize: 'clamp(2.2rem,4.5vw,3.4rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 0.95, color: 'var(--ink)' }}>
+            {displayName}
+          </h1>
+          <p className="text-sm mt-2" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
             {levels.length} level{levels.length !== 1 ? 's' : ''} · {levels.filter(l => !l.is_premium).length} free
             {!isPremium && premiumCount > 0 && (
               <span className="inline-flex items-center gap-1" style={{ color: 'var(--ochre)' }}> · {premiumCount} premium <Lock size={11} /></span>

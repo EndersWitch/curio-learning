@@ -6,6 +6,7 @@ import { sb } from '@/lib/supabase'
 import { Lock, Star, Search } from '@/components/icons'
 import Footer from '@/components/Footer'
 import QuizNav from '@/components/quiz/QuizNav'
+import Bloom from '@/components/Bloom'
 import { SkeletonSwap } from '@/components/interior/skeleton-swap'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -84,6 +85,12 @@ export default function QuizBrowsePage() {
       <QuizNav />
 
       <div className="hub-wrap">
+        <div className="spread-deco o1" style={{ top: '-50px', right: '-20px' }}>
+          <Bloom size={260} />
+        </div>
+        <div className="spread-deco o1" style={{ bottom: '5%', left: '-40px' }}>
+          <Bloom size={160} />
+        </div>
         <div className="hub-eyebrow">Quizzes &amp; mastery challenges</div>
         <h1 className="hub-title">Pick a <em>topic</em>.</h1>
         <p className="hub-sub">
