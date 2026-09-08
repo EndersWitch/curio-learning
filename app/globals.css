@@ -453,6 +453,13 @@ select.field-input { cursor: pointer; }
 .pw-label { font-size: 0.62rem; font-weight: 600; }
 .forgot-link { font-size: 0.74rem; color: var(--ink35); text-align: right; display: block; margin-top: 0.2rem; margin-bottom: 0.3rem; transition: color .15s; }
 .forgot-link:hover { color: var(--ink); }
+.field-row-between { display: flex; align-items: center; justify-content: space-between; margin-top: 0.5rem; margin-bottom: 0.3rem; }
+.field-row-between .forgot-link { margin: 0; }
+.remember-check { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.78rem; color: var(--ink55); user-select: none; }
+.remember-check input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.remember-check-box { width: 16px; height: 16px; flex-shrink: 0; border-radius: 3px; border: 1.5px solid var(--ink15); background: var(--paper-raised); display: flex; align-items: center; justify-content: center; color: transparent; transition: all .15s; }
+.remember-check input:checked + .remember-check-box { background: var(--rust); border-color: var(--rust); color: var(--paper-raised); }
+.remember-check input:focus-visible + .remember-check-box { outline: 2px solid var(--rust30); outline-offset: 2px; }
 .btn-submit { width: 100%; padding: 0.88rem; background: var(--rust); color: var(--paper-raised); font-family: var(--h); font-size: 0.9rem; font-weight: 600; border: none; border-radius: 5px; cursor: pointer; transition: all .15s; margin-top: 0.5rem; }
 .btn-submit:hover { background: var(--rust-dark); }
 .btn-submit:active { transform: scale(0.99); }
@@ -850,6 +857,12 @@ select.field-input { cursor: pointer; }
 .sub-loading-screen.gone { opacity: 0; pointer-events: none; }
 .sub-loading-bloom { animation: lspin 1.8s linear infinite; }
 @keyframes lspin { to { transform: rotate(360deg); } }
+
+/* Homepage splash — same language as the subscription loading screen */
+.home-splash { position: fixed; inset: 0; background: var(--paper); display: flex; align-items: center; justify-content: center; z-index: 500; transition: opacity .45s ease; }
+.home-splash.gone { opacity: 0; pointer-events: none; }
+.home-splash-bloom { animation: lspin 1.6s linear infinite, homeSplashPulse 1.6s ease-in-out infinite; }
+@keyframes homeSplashPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
 
 /* ══════════════════════════════════════════════════════════════
    PAPERS PAGE

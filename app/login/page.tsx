@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react'
 import Bloom from '@/components/Bloom'
-import { sb } from '@/lib/supabase'
+import { sb, setRememberMe } from '@/lib/supabase'
 import { Check, Eye, EyeOff } from '@/components/icons'
 import { SegmentedControl } from '@/components/interior/segmented-control'
 import { FloatingLabelInput } from '@/components/interior/floating-label'
@@ -45,6 +45,7 @@ export default function LoginPage() {
 
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPw, setLoginPw] = useState('')
+  const [rememberMe, setRememberMeState] = useState(true)
   const [signupName, setSignupName] = useState('')
   const [signupEmail, setSignupEmail] = useState('')
   const [signupPw, setSignupPw] = useState('')
@@ -70,6 +71,7 @@ export default function LoginPage() {
       setAlert({ msg: 'Please fill in your email and password.', type: 'err' })
       throw new Error('Missing fields')
     }
+    setRememberMe(rememberMe)
     const { error } = await sb.auth.signInWithPassword({ email: loginEmail, password: loginPw })
     if (error) {
       const msg = error.message || ''
@@ -98,6 +100,7 @@ export default function LoginPage() {
       setConfirmError(true)
       throw new Error('Password mismatch')
     }
+    setRememberMe(true)
     const { error } = await sb.auth.signUp({
       email: signupEmail,
       password: signupPw,
@@ -213,6 +216,7 @@ export default function LoginPage() {
                 <FloatingLabelInput
                   label="Email address"
                   type="email"
+                  autoComplete="email"
                   value={loginEmail}
                   onChange={setLoginEmail}
                   onKeyDown={(e) => e.key === 'Enter' && loginBtnRef.current?.click()}
@@ -222,14 +226,26 @@ export default function LoginPage() {
                 <FloatingLabelInput
                   label="Password"
                   type={showPw ? 'text' : 'password'}
+                  autoComplete="current-password"
                   value={loginPw}
                   onChange={setLoginPw}
                   onKeyDown={(e) => e.key === 'Enter' && loginBtnRef.current?.click()}
                   trailing={<EyeToggle shown={showPw} onToggle={() => setShowPw(!showPw)} />}
                 />
-                <button className="forgot-link" onClick={() => { setTab('forgot'); setAlert(null) }}>
-                  Forgot password?
-                </button>
+                <div className="field-row-between">
+                  <label className="remember-check">
+                    <input
+                      type="checkbox"
+                      checked={rememberMe}
+                      onChange={(e) => setRememberMeState(e.target.checked)}
+                    />
+                    <span className="remember-check-box"><Check size={11} /></span>
+                    Stay signed in
+                  </label>
+                  <button className="forgot-link" onClick={() => { setTab('forgot'); setAlert(null) }}>
+                    Forgot password?
+                  </button>
+                </div>
               </div>
               <LoadingButton ref={loginBtnRef} onAction={doLogin} pendingLabel="Signing in…" successLabel="Welcome back" errorLabel="Try again">
                 Sign in

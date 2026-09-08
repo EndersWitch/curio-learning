@@ -45,9 +45,20 @@ const SETS = [
 ]
 
 export default function HomePage() {
-  const { user, refreshUser } = useAuth()
+  const { user, loading: authLoading, refreshUser } = useAuth()
   const { openDrawer } = useAccountDrawer()
   const ddRef = useRef<HTMLDivElement>(null)
+
+  // Splash stays up until the auth check resolves AND a minimum beat has
+  // played, so returning users never see a flash of the landing page before
+  // the dashboard swaps in — and the bloom always gets its moment, even when
+  // the session check resolves instantly from cache.
+  const [splashMinTimeDone, setSplashMinTimeDone] = useState(false)
+  useEffect(() => {
+    const t = setTimeout(() => setSplashMinTimeDone(true), 650)
+    return () => clearTimeout(t)
+  }, [])
+  const showSplash = authLoading || !splashMinTimeDone
 
   // Close the profile dropdown when clicking anywhere outside it.
   useEffect(() => {
@@ -243,6 +254,13 @@ export default function HomePage() {
 
   return (
     <>
+      {/* ── SPLASH — always plays a beat, and masks the auth check so a
+          returning user never sees the landing page flash before their
+          dashboard swaps in ── */}
+      <div className={`home-splash${showSplash ? '' : ' gone'}`} aria-hidden={!showSplash}>
+        <Bloom size={52} className="home-splash-bloom" />
+      </div>
+
       {/* ── NAV ── */}
       <nav className="curio-nav">
         <a href="/" className="nav-logo">
