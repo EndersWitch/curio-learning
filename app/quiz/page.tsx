@@ -5,7 +5,6 @@ import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
 import { Lock, Star, Search } from '@/components/icons'
 import Footer from '@/components/Footer'
-import QuizNav from '@/components/quiz/QuizNav'
 import Bloom from '@/components/Bloom'
 import { SkeletonSwap } from '@/components/interior/skeleton-swap'
 
@@ -81,9 +80,7 @@ export default function QuizBrowsePage() {
     : topics
 
   return (
-    <div style={{ background: 'var(--paper)' }} className="page-wrap">
-      <QuizNav />
-
+    <div style={{ background: 'var(--paper)' }}>
       <div className="hub-wrap">
         <div className="spread-deco o1" style={{ top: '-50px', right: '-20px' }}>
           <Bloom size={260} />
