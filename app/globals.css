@@ -514,7 +514,7 @@ select.field-input { cursor: pointer; }
 .page-wrap { padding-top: 60px; }
 
 /* Breadcrumb */
-.breadcrumb { display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; color: var(--ink35); margin-bottom: 1.8rem; flex-wrap: wrap; }
+.breadcrumb { display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; color: var(--ink35); margin-bottom: 1.8rem; flex-wrap: wrap; position: relative; z-index: 2; }
 .breadcrumb a { color: var(--ink35); transition: color .15s; }
 .breadcrumb a:hover { color: var(--rust); }
 .breadcrumb-sep { color: var(--ink15); }
@@ -528,10 +528,10 @@ select.field-input { cursor: pointer; }
 .phase-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
 
 /* Subject hero */
-.subject-hero { background: var(--paper-dim); border-bottom: 1px solid var(--ink08); padding: 4rem 3rem 3.5rem; }
-.hero-inner { max-width: 1100px; margin: 0 auto; }
+.subject-hero { background: var(--paper-dim); border-bottom: 1px solid var(--ink08); padding: 4rem 3rem 3.5rem; position: relative; overflow: hidden; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
 .subject-title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-.subject-title { font-family: var(--h); font-size: clamp(2.6rem,5vw,4.2rem); font-weight: 600; letter-spacing: -1.5px; line-height: 0.98; color: var(--ink); }
+.subject-title { font-family: var(--h); font-size: clamp(2.8rem,6vw,5rem); font-weight: 800; letter-spacing: -0.035em; line-height: 0.92; color: var(--ink); }
 .subject-tagline { font-size: 0.68rem; font-weight: 600; font-style: italic; color: var(--rust); display: inline-block; white-space: nowrap; }
 .subject-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.4rem; }
 .meta-pill { font-size: 0.68rem; font-weight: 500; padding: 0.28rem 0.7rem; border-radius: 3px; background: var(--ink08); border: 1px solid var(--ink15); color: var(--ink55); }
@@ -648,12 +648,12 @@ select.field-input { cursor: pointer; }
 .paper-badge { font-size: 0.62rem; font-weight: 600; color: var(--moss); flex-shrink: 0; }
 
 /* ── Subjects HUB (top-level grade picker) ── */
-.hub-wrap { max-width: 960px; margin: 0 auto; padding: 4rem 2rem; }
-.hub-eyebrow { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--rust); margin-bottom: 0.5rem; }
-.hub-title { font-family: var(--h); font-size: clamp(2rem,4vw,3rem); font-weight: 600; letter-spacing: -1px; color: var(--ink); margin-bottom: 0.6rem; }
+.hub-wrap { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; position: relative; overflow: hidden; }
+.hub-eyebrow { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--rust); margin-bottom: 0.5rem; position: relative; z-index: 2; }
+.hub-title { font-family: var(--h); font-size: clamp(3.2rem,7vw,6rem); font-weight: 800; letter-spacing: -0.035em; line-height: 0.92; color: var(--ink); margin-bottom: 0.8rem; position: relative; z-index: 2; }
 .hub-title em { font-style: italic; color: var(--rust); }
-.hub-sub { font-size: 0.9rem; color: var(--ink70); line-height: 1.75; max-width: 540px; margin-bottom: 3rem; }
-.phase-section { margin-bottom: 2.5rem; }
+.hub-sub { font-size: 0.95rem; color: var(--ink70); line-height: 1.75; max-width: 540px; margin-bottom: 3.5rem; position: relative; z-index: 2; }
+.phase-section { margin-bottom: 2.5rem; position: relative; z-index: 2; }
 .phase-heading { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; }
 .phase-tag { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.28rem 0.7rem; border-radius: 100px; }
 .phase-tag.int { background: var(--rust10); color: var(--rust); border: 1px solid var(--rust30); }
@@ -661,9 +661,9 @@ select.field-input { cursor: pointer; }
 .phase-tag.fet { background: var(--ochre12); color: var(--ochre); border: 1px solid var(--ochre30); }
 .phase-rule { flex: 1; height: 1px; background: var(--ink08); }
 .grade-cards { display: grid; grid-template-columns: repeat(auto-fill,minmax(130px,1fr)); gap: 0.7rem; }
-.grade-card { background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 6px; padding: 1.2rem 1rem; text-align: center; text-decoration: none; transition: all .2s; display: block; }
-.grade-card:hover { border-color: var(--rust30); transform: translateY(-2px); }
-.grade-card-num { font-family: var(--h); font-size: 2rem; font-weight: 600; line-height: 1; color: var(--ink); }
+.grade-card { background: var(--paper-raised); border: 1.5px solid var(--ink15); border-radius: 4px; padding: 1.4rem 1rem 1.2rem; text-align: center; text-decoration: none; transition: all .2s; display: block; }
+.grade-card:hover { border-color: var(--rust30); transform: translateY(-3px); box-shadow: 0 12px 28px -10px rgba(var(--ink-rgb),0.16); }
+.grade-card-num { font-family: var(--h); font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 0.9; color: var(--ink); }
 .grade-card.int .grade-card-num { color: var(--rust); }
 .grade-card.sen .grade-card-num { color: var(--brick); }
 .grade-card.fet .grade-card-num { color: var(--ochre); }
@@ -692,11 +692,11 @@ select.field-input { cursor: pointer; }
 
 /* ── Per-grade subject list ── */
 .subj-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 0.8rem; }
-.subj-card { background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 6px; padding: 1.3rem 1.2rem; text-decoration: none; display: block; transition: all .2s; }
-.subj-card:hover { border-color: var(--rust30); transform: translateY(-2px); }
-.subj-card-name { font-family: var(--h); font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 0.25rem; line-height: 1.25; }
-.subj-card-desc { font-size: 0.68rem; color: var(--ink35); line-height: 1.5; }
-.subj-card-arrow { font-size: 0.72rem; font-weight: 600; color: var(--rust); margin-top: 0.6rem; display: block; }
+.subj-card { background: var(--paper-raised); border: 1.5px solid var(--ink15); border-radius: 4px; padding: 1.5rem 1.3rem; text-decoration: none; display: block; transition: all .2s; }
+.subj-card:hover { border-color: var(--rust30); transform: translateY(-3px); box-shadow: 0 12px 28px -10px rgba(var(--ink-rgb),0.16); }
+.subj-card-name { font-family: var(--h); font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.3rem; line-height: 1.2; }
+.subj-card-desc { font-size: 0.7rem; color: var(--ink35); line-height: 1.55; }
+.subj-card-arrow { font-size: 0.72rem; font-weight: 700; font-family: var(--h); color: var(--rust); margin-top: 0.8rem; display: block; }
 .subj-card.has-papers { border-color: var(--rust18); }
 .subj-card.has-papers .subj-card-name { color: var(--rust); }
 

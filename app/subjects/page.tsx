@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import QuizNav from '@/components/quiz/QuizNav'
 import Footer from '@/components/Footer'
 import RevealObserver from '@/components/RevealObserver'
+import Bloom from '@/components/Bloom'
 import { getGradeIndex } from '@/lib/subjectsData'
 
 export const metadata: Metadata = {
@@ -22,8 +23,14 @@ export default function SubjectsHubPage() {
       <RevealObserver />
       <div className="page-wrap">
         <div className="hub-wrap">
+          <div className="spread-deco o1" style={{ top: '-50px', right: '-20px' }}>
+            <Bloom size={260} />
+          </div>
+          <div className="spread-deco o1" style={{ bottom: '10%', left: '-40px' }}>
+            <Bloom size={160} />
+          </div>
           <div className="hub-eyebrow">CAPS-aligned · Grade 4 to 12</div>
-          <h1 className="hub-title">Pick your grade.</h1>
+          <h1 className="hub-title">Pick your<br /><em>grade.</em></h1>
           <p className="hub-sub">
             Find detailed study guides, term-by-term breakdowns and free practice papers for every CAPS subject. Select your grade to get started.
           </p>

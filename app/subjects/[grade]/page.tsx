@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import QuizNav from '@/components/quiz/QuizNav'
 import Footer from '@/components/Footer'
 import RevealObserver from '@/components/RevealObserver'
+import Bloom from '@/components/Bloom'
 import { ALL_GRADES, getGradeIndex } from '@/lib/subjectsData'
 
 interface Props {
@@ -38,6 +39,9 @@ export default function GradeSubjectsPage({ params }: Props) {
       <RevealObserver />
       <div className="page-wrap">
         <div className="hub-wrap">
+          <div className="spread-deco o1" style={{ top: '-40px', right: '-10px' }}>
+            <Bloom size={220} />
+          </div>
           <div className="breadcrumb" style={{ marginBottom: '1.5rem' }}>
             <a href="/">Home</a>
             <span className="breadcrumb-sep">›</span>

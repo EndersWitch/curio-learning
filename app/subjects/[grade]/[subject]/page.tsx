@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import QuizNav from '@/components/quiz/QuizNav'
 import Footer from '@/components/Footer'
 import RevealObserver from '@/components/RevealObserver'
+import Bloom from '@/components/Bloom'
 import { SubjectPapersGrid, SubjectPapersSidebar } from '@/components/subjects/SubjectPapers'
 import { ALL_SUBJECTS, getSubjectPage } from '@/lib/subjectsData'
 
@@ -40,6 +41,9 @@ export default function SubjectGuidePage({ params }: Props) {
       <RevealObserver />
       <div className="page-wrap">
         <div className="subject-hero">
+          <div className="spread-deco o1" style={{ top: '-30px', right: '3%' }}>
+            <Bloom size={170} />
+          </div>
           <div className="hero-inner">
             <div className="breadcrumb">
               <a href="/">Home</a>
