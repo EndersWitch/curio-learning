@@ -319,6 +319,9 @@ export default function HomePage() {
       {user && (
         <div id="dashboard" style={{ display: 'block', paddingTop: '60px' }}>
           <div className="dash-wrap">
+            <div className="spread-deco o1" style={{ top: '-60px', right: '-30px' }}>
+              <Bloom size={200} />
+            </div>
             {/* Greeting */}
             <div className="dash-greeting">
               <div>
@@ -478,6 +481,9 @@ export default function HomePage() {
             {/* Premium upsell — hidden for premium/founder users */}
             {!(user.isPremium || user.isFounder) && (
               <div className="pu">
+                <div className="spread-deco o1" style={{ bottom: '-30px', right: '2%' }}>
+                  <Bloom size={130} />
+                </div>
                 <div>
                   <div className="pu-ey">Curio Premium</div>
                   <div className="pu-title">Ready for more than papers?</div>
