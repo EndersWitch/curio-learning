@@ -3,9 +3,14 @@ api/backfill-tokens.py
 Curio Learning — ONE-TIME backfill.
 
 Fills in paystack_email_token for subscribers who subscribed before that
-field existed, by pulling each subscription's email_token from Paystack's
-GET /subscription/:code. Without this, those users can't self-cancel via
-the API and fall back to the manual-email path.
+field existed, so those users can self-cancel via the API instead of
+falling back to the manual-email path.
+
+Looks subscriptions up via GET /customer/:code rather than trusting the
+existing paystack_subscription_code column: a webhook bug that predates
+this feature could store a PLAN code (PLN_...) there instead of a real
+SUBSCRIPTION code (SUB_...) when Paystack's charge.success event didn't
+include one. This also corrects that column along the way.
 
 Gated behind the same ADMIN_PASSWORD already used by api/admin-auth.py —
 no new secret is introduced. Naturally safe to re-run: it only ever
@@ -44,8 +49,8 @@ def sb_patch(path, data):
     urllib.request.urlopen(req, timeout=10)
 
 
-def paystack_get_subscription(code):
-    req = urllib.request.Request(f"https://api.paystack.co/subscription/{code}")
+def paystack_get_customer(customer_code):
+    req = urllib.request.Request(f"https://api.paystack.co/customer/{customer_code}")
     req.add_header("Authorization", f"Bearer {PAYSTACK_SECRET}")
     # Paystack's edge (Cloudflare) blocks Python's default "Python-urllib/x.x"
     # User-Agent as a bot — same issue the Resend contact-form call hit.
@@ -64,9 +69,9 @@ class handler(BaseHTTPRequestHandler):
 
         try:
             rows = sb_get(
-                "profiles?paystack_subscription_code=not.is.null"
+                "profiles?paystack_customer_code=not.is.null"
                 "&paystack_email_token=is.null"
-                "&select=id,paystack_subscription_code"
+                "&select=id,paystack_customer_code"
             )
         except Exception as e:
             return self._json(500, {"error": f"lookup failed: {e}"})
@@ -74,18 +79,24 @@ class handler(BaseHTTPRequestHandler):
         filled, skipped, failed = 0, 0, 0
         errors = []
         for row in rows:
-            code = row["paystack_subscription_code"]
+            customer_code = row["paystack_customer_code"]
             try:
-                resp = paystack_get_subscription(code)
-                token = (resp.get("data") or {}).get("email_token", "")
-                if token:
-                    sb_patch(f"profiles?id=eq.{row['id']}", {"paystack_email_token": token})
+                resp = paystack_get_customer(customer_code)
+                subs = (resp.get("data") or {}).get("subscriptions") or []
+                active = next((s for s in subs if s.get("status") == "active"), None) or (subs[0] if subs else None)
+                token = (active or {}).get("email_token", "")
+                real_code = (active or {}).get("subscription_code", "")
+                if token and real_code:
+                    sb_patch(f"profiles?id=eq.{row['id']}", {
+                        "paystack_email_token": token,
+                        "paystack_subscription_code": real_code,
+                    })
                     filled += 1
                 else:
                     skipped += 1
             except Exception as e:
                 failed += 1
-                print(f"backfill-tokens: failed for subscription {code}: {e}")
+                print(f"backfill-tokens: failed for customer {customer_code}: {e}")
                 errors.append(str(e))
 
         self._json(200, {

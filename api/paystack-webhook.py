@@ -139,8 +139,13 @@ class handler(BaseHTTPRequestHandler):
 
         # ── charge.success ────────────────────────────────────────
         if event_type == "charge.success":
-            plan = data.get("plan", {}) or {}
-            subscription_code = data.get("subscription_code") or plan.get("plan_code", "")
+            # Note: subscription_code here must come only from Paystack's
+            # own subscription_code field. A previous version fell back to
+            # plan.get("plan_code") when it was absent, which silently
+            # stored a PLAN code (PLN_...) as if it were a SUBSCRIPTION
+            # code (SUB_...) — those are different Paystack objects, and
+            # calling the subscription API with a plan code 404s.
+            subscription_code = data.get("subscription_code", "")
 
             user_id = get_user_id_by_email(email)
             if user_id:
