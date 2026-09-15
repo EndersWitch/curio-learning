@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Curio — Material Formatter</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/admin-auth-shared.js"></script>
 <style>
-:root{--plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;--cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;--m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);--m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--r10:rgba(255,94,91,0.1);--r20:rgba(255,94,91,0.2);--h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;}
+:root{--plum:#241D15;--deep:#1B1611;--mid:#372C1F;--card:#2C2319;--cyan:#74B26C;--coral:#D2652F;--moon:#F3EADA;--amber:#D0A059;--m80:rgba(243,234,218,0.8);--m55:rgba(243,234,218,0.55);--m30:rgba(243,234,218,0.35);--m12:rgba(243,234,218,0.15);--m06:rgba(243,234,218,0.08);--c25:rgba(116,178,108,0.38);--c12:rgba(116,178,108,0.16);--r10:rgba(210,101,47,0.16);--r20:rgba(210,101,47,0.26);--h:'Fraunces',Georgia,serif;--b:'Work Sans',system-ui,sans-serif;}
 #login-screen{position:fixed;inset:0;z-index:1000;min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--deep);}
 .login-box{width:100%;max-width:360px;}
 .login-logo{display:flex;align-items:center;gap:0.6rem;font-family:var(--h);font-size:1.2rem;font-weight:800;color:var(--moon);margin-bottom:0.5rem;justify-content:center;}
@@ -26,7 +26,7 @@
 body{font-family:var(--b);background:var(--deep);color:var(--moon);min-height:100vh;}
 a{text-decoration:none;color:inherit;}
 button{font-family:var(--b);cursor:pointer;border:none;}
-nav{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(26,18,40,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--m06);position:sticky;top:0;z-index:100;}
+nav{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(27,22,17,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--m06);position:sticky;top:0;z-index:100;}
 .nav-logo{display:flex;align-items:center;gap:0.6rem;font-family:var(--h);font-size:1.2rem;font-weight:800;color:var(--moon);}
 .nav-badge{font-size:0.5rem;font-weight:700;text-transform:uppercase;background:var(--coral);color:var(--moon);padding:0.12rem 0.45rem;border-radius:3px;margin-left:0.3rem;}
 .nav-back{font-size:0.8rem;color:var(--m30);}
@@ -86,7 +86,7 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 .pill{font-size:0.62rem;font-weight:700;padding:0.18rem 0.55rem;border-radius:4px;}
 .pill-cyan{background:var(--c12);color:var(--cyan);border:1px solid var(--c25);}
 .pill-coral{background:var(--r10);color:var(--coral);border:1px solid var(--r20);}
-.pill-amber{background:rgba(245,200,66,0.1);color:var(--amber);border:1px solid rgba(245,200,66,0.25);}
+.pill-amber{background:rgba(208,160,89,0.16);color:var(--amber);border:1px solid rgba(208,160,89,0.38);}
 .warn{color:var(--coral);font-size:0.78rem;padding:0.5rem;background:var(--r10);border-radius:6px;margin-top:0.5rem;}
 
 /* settings */
@@ -102,11 +102,11 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 .band-btn:hover{color:var(--moon);}
 .band-btn.active{background:var(--c12);color:var(--cyan);border-color:var(--c25);}
 .btn-format{width:100%;padding:0.9rem;background:var(--coral);color:var(--moon);font-family:var(--h);font-size:0.9rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:all .15s;margin-top:0.4rem;}
-.btn-format:hover{background:#ff4a47;transform:translateY(-1px);}
+.btn-format:hover{background:#E8894F;transform:translateY(-1px);}
 .btn-format:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
 .status-msg{font-size:0.78rem;padding:0.7rem 1rem;border-radius:8px;display:none;margin-top:0.6rem;line-height:1.55;}
 .status-msg.ok{display:block;background:var(--c12);color:var(--cyan);border:1px solid var(--c25);}
-.status-msg.err{display:block;background:var(--r10);color:#ff9a98;border:1px solid var(--r20);}
+.status-msg.err{display:block;background:var(--r10);color:#E07A6B;border:1px solid var(--r20);}
 </style>
 </head>
 <body>
@@ -115,12 +115,12 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
   <div class="login-box">
     <div class="login-logo">
       <svg width="26" height="26" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".7" transform="rotate(72 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".5" transform="rotate(144 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".5" transform="rotate(216 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".7" transform="rotate(288 32 32)"/>
-        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity=".7" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity=".5" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity=".5" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity=".7" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#D2652F"/>
       </svg>
       curio
     </div>
@@ -138,7 +138,7 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 
 <nav>
   <div class="nav-logo">
-    <svg width="24" height="24" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/><circle cx="32" cy="32" r="7" fill="#FF5E5B"/></svg>
+    <svg width="24" height="24" viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity="0.7" transform="rotate(72 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity="0.5" transform="rotate(144 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity="0.5" transform="rotate(216 32 32)"/><ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity="0.7" transform="rotate(288 32 32)"/><circle cx="32" cy="32" r="7" fill="#D2652F"/></svg>
     curio <span class="nav-badge">Formatter</span>
   </div>
   <a href="admin.html" class="nav-back">← Back to admin</a>

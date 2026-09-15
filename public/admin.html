@@ -4,19 +4,22 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Curio — Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/admin-auth-shared.js"></script>
 <style>
 :root{
-  --plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;
-  --cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;
-  --m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);
-  --m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--m03:rgba(247,247,255,0.03);
-  --c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);
-  --r20:rgba(255,94,91,0.2);--r10:rgba(255,94,91,0.10);
-  --a20:rgba(245,200,66,0.2);--a12:rgba(245,200,66,0.12);
-  --h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;
+  /* Curio brand tokens (dark variant) — same variable names the rest of this
+     file already uses, just pointed at the real site palette instead of the
+     generic plum/cyan/coral theme this tool used to have. */
+  --plum:#241D15;--deep:#1B1611;--mid:#372C1F;--card:#2C2319;
+  --cyan:#74B26C;--coral:#D2652F;--moon:#F3EADA;--amber:#D0A059;
+  --m80:rgba(243,234,218,0.8);--m55:rgba(243,234,218,0.55);--m30:rgba(243,234,218,0.35);
+  --m12:rgba(243,234,218,0.15);--m06:rgba(243,234,218,0.08);--m03:rgba(243,234,218,0.04);
+  --c25:rgba(116,178,108,0.38);--c12:rgba(116,178,108,0.16);
+  --r20:rgba(210,101,47,0.26);--r10:rgba(210,101,47,0.16);
+  --a20:rgba(208,160,89,0.38);--a12:rgba(208,160,89,0.16);
+  --h:'Fraunces',Georgia,serif;--b:'Work Sans',system-ui,sans-serif;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:var(--b);background:var(--deep);color:var(--moon);min-height:100vh;}
@@ -99,7 +102,7 @@ tr:hover td{background:var(--m03);}
 .correct-radio input{accent-color:var(--cyan);}
 .form-footer{padding:1.2rem 1.8rem;display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;background:var(--deep);border-top:1px solid var(--m06);}
 .btn-submit{padding:0.7rem 1.4rem;background:var(--coral);color:var(--moon);font-family:var(--h);font-size:0.82rem;font-weight:700;border:none;border-radius:9px;cursor:pointer;transition:all .15s;}
-.btn-submit:hover{background:#ff4a47;}
+.btn-submit:hover{background:#E8894F;}
 .btn-submit:disabled{opacity:0.5;cursor:not-allowed;}
 .btn-amber{padding:0.7rem 1.6rem;background:var(--amber);color:var(--plum);font-family:var(--h);font-size:0.85rem;font-weight:700;border:none;border-radius:9px;cursor:pointer;transition:all .15s;}
 .btn-amber:hover{filter:brightness(1.1);}
@@ -155,12 +158,12 @@ tr:hover td{background:var(--m03);}
   <div class="login-box">
     <div class="login-logo">
       <svg width="26" height="26" viewBox="0 0 64 64" fill="none">
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
-        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#D2652F"/>
       </svg>
       curio
     </div>
@@ -180,12 +183,12 @@ tr:hover td{background:var(--m03);}
   <nav class="admin-nav">
     <div class="admin-logo">
       <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(72 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(144 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.5" transform="rotate(216 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity="0.7" transform="rotate(288 32 32)"/>
-        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity="0.7" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity="0.5" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity="0.5" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity="0.7" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#D2652F"/>
       </svg>
       curio
       <span class="admin-logo-badge">Admin</span>
@@ -1448,19 +1451,19 @@ function hideLZForm(){
 // ── Concept card builder ──
 // ── Card type definitions (mirrors LearningCard.tsx) ──
 const CARD_TYPES = [
-  { value:'key_rule',        icon:'📕', label:'Key Rule',             color:'#6DD3CE', desc:'Core concept or rule the learner must know' },
-  { value:'did_you_know',    icon:'✨', label:'Did You Know?',        color:'#F5C842', desc:'Interesting fact — sparks curiosity' },
-  { value:'example',         icon:'📝', label:'Example',              color:'#FF5E5B', desc:'Worked example showing the concept in action' },
-  { value:'tip',             icon:'💡', label:'Quick Tip',            color:'#6DD3CE', desc:'Shortcut, trick or helpful hint' },
-  { value:'common_mistake',  icon:'⚠️', label:'Common Mistake',       color:'#FF5E5B', desc:'Flip card — shows the mistake then the fix on tap' },
-  { value:'spot_difference', icon:'🔍', label:'Spot the Difference',  color:'#F5C842', desc:'Split panel comparison — content goes Left\nRight split by newline midpoint' },
-  { value:'try_it',          icon:'🎮', label:'Try It!',              color:'#a78bfa', desc:'Mini challenge — learner reads the prompt then reveals the answer' },
-  { value:'real_world',      icon:'🌍', label:'Real World',           color:'#6DD3CE', desc:'Story or context connecting to real life' },
-  { value:'memory_trick',    icon:'🧠', label:'Memory Trick',         color:'#a78bfa', desc:'Mnemonic or trick to help remember a rule' },
-  { value:'watch_out',       icon:'🚨', label:'Watch Out!',           color:'#FF5E5B', desc:'Critical warning — examiners love to test this' },
-  { value:'fun_fact',        icon:'🎉', label:'Fun Fact!',            color:'#F5C842', desc:'Playful and surprising — keeps energy up' },
-  { value:'step_by_step',    icon:'🪜', label:'Step by Step',         color:'#6DD3CE', desc:'Numbered steps — one step per line' },
-  { value:'definition',      icon:'📖', label:'Definition',           color:'#c4b8d8', desc:'Formal dictionary-style definition of a term' },
+  { value:'key_rule',        icon:'📕', label:'Key Rule',             color:'#74B26C', desc:'Core concept or rule the learner must know' },
+  { value:'did_you_know',    icon:'✨', label:'Did You Know?',        color:'#D0A059', desc:'Interesting fact — sparks curiosity' },
+  { value:'example',         icon:'📝', label:'Example',              color:'#D2652F', desc:'Worked example showing the concept in action' },
+  { value:'tip',             icon:'💡', label:'Quick Tip',            color:'#74B26C', desc:'Shortcut, trick or helpful hint' },
+  { value:'common_mistake',  icon:'⚠️', label:'Common Mistake',       color:'#D2652F', desc:'Flip card — shows the mistake then the fix on tap' },
+  { value:'spot_difference', icon:'🔍', label:'Spot the Difference',  color:'#D0A059', desc:'Split panel comparison — content goes Left\nRight split by newline midpoint' },
+  { value:'try_it',          icon:'🎮', label:'Try It!',              color:'#B8952E', desc:'Mini challenge — learner reads the prompt then reveals the answer' },
+  { value:'real_world',      icon:'🌍', label:'Real World',           color:'#74B26C', desc:'Story or context connecting to real life' },
+  { value:'memory_trick',    icon:'🧠', label:'Memory Trick',         color:'#B8952E', desc:'Mnemonic or trick to help remember a rule' },
+  { value:'watch_out',       icon:'🚨', label:'Watch Out!',           color:'#D2652F', desc:'Critical warning — examiners love to test this' },
+  { value:'fun_fact',        icon:'🎉', label:'Fun Fact!',            color:'#D0A059', desc:'Playful and surprising — keeps energy up' },
+  { value:'step_by_step',    icon:'🪜', label:'Step by Step',         color:'#74B26C', desc:'Numbered steps — one step per line' },
+  { value:'definition',      icon:'📖', label:'Definition',           color:'#C97064', desc:'Formal dictionary-style definition of a term' },
 ];
 
 function getCardTypeMeta(val){ return CARD_TYPES.find(t=>t.value===val) || CARD_TYPES[0]; }

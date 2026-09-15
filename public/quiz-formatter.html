@@ -5,30 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>curio learning — Quiz Formatter</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/admin-auth-shared.js"></script>
 <style>
 :root{
-  --plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;
-  --cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;
-  --m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);
-  --m30:rgba(247,247,255,0.3);--m12:rgba(247,247,255,0.12);
-  --m06:rgba(247,247,255,0.06);--m03:rgba(247,247,255,0.03);
-  --c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--c06:rgba(109,211,206,0.06);
-  --r10:rgba(255,94,91,0.1);--r20:rgba(255,94,91,0.2);
-  --a10:rgba(245,200,66,0.1);--a25:rgba(245,200,66,0.25);
+  --plum:#241D15;--deep:#1B1611;--mid:#372C1F;--card:#2C2319;
+  --cyan:#74B26C;--coral:#D2652F;--moon:#F3EADA;--amber:#D0A059;
+  --m80:rgba(243,234,218,0.8);--m55:rgba(243,234,218,0.55);
+  --m30:rgba(243,234,218,0.35);--m12:rgba(243,234,218,0.15);
+  --m06:rgba(243,234,218,0.08);--m03:rgba(243,234,218,0.04);
+  --c25:rgba(116,178,108,0.38);--c12:rgba(116,178,108,0.16);--c06:rgba(116,178,108,0.08);
+  --r10:rgba(210,101,47,0.16);--r20:rgba(210,101,47,0.26);
+  --a10:rgba(208,160,89,0.16);--a25:rgba(208,160,89,0.38);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--deep);color:var(--moon);min-height:100vh;}
+body{font-family:'Work Sans',system-ui,sans-serif;background:var(--deep);color:var(--moon);min-height:100vh;}
 a{text-decoration:none;color:inherit;}
-button{font-family:'DM Sans',sans-serif;cursor:pointer;border:none;}
+button{font-family:'Work Sans',system-ui,sans-serif;cursor:pointer;border:none;}
 
 /* NAV */
 nav{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;
-  background:rgba(26,18,40,0.95);backdrop-filter:blur(20px);
+  background:rgba(27,22,17,0.95);backdrop-filter:blur(20px);
   border-bottom:1px solid var(--m06);position:sticky;top:0;z-index:100;}
-.nav-logo{display:flex;align-items:center;gap:0.6rem;font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;color:var(--moon);}
+.nav-logo{display:flex;align-items:center;gap:0.6rem;font-family:'Fraunces',Georgia,serif;font-size:1.1rem;font-weight:800;color:var(--moon);}
 .nav-badge{font-size:0.48rem;font-weight:700;text-transform:uppercase;background:var(--cyan);color:var(--plum);padding:0.12rem 0.45rem;border-radius:3px;margin-left:0.3rem;}
 .nav-back{font-size:0.78rem;color:var(--m30);transition:color .15s;}
 .nav-back:hover{color:var(--moon);}
@@ -36,12 +36,12 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 /* PAGE */
 .page-wrap{max-width:1200px;margin:0 auto;padding:2.5rem 2rem 4rem;}
 .page-eyebrow{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--cyan);margin-bottom:0.4rem;}
-.page-title{font-family:'Poppins',sans-serif;font-size:1.9rem;font-weight:800;letter-spacing:-1px;color:var(--moon);margin-bottom:0.3rem;}
+.page-title{font-family:'Fraunces',Georgia,serif;font-size:1.9rem;font-weight:800;letter-spacing:-1px;color:var(--moon);margin-bottom:0.3rem;}
 .page-sub{font-size:0.85rem;color:var(--m55);max-width:640px;line-height:1.7;margin-bottom:2rem;}
 
 /* FORMAT SPEC CARD */
 .spec-card{background:var(--card);border:1px solid var(--m06);border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:2rem;}
-.spec-title{font-family:'Poppins',sans-serif;font-size:0.78rem;font-weight:700;color:var(--amber);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;}
+.spec-title{font-family:'Fraunces',Georgia,serif;font-size:0.78rem;font-weight:700;color:var(--amber);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;}
 .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
 @media(max-width:700px){.spec-grid{grid-template-columns:1fr;}}
 .spec-section h4{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.5rem;}
@@ -57,7 +57,7 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 /* PASTE CARD */
 .paste-card{background:var(--card);border:1px solid var(--m06);border-radius:16px;overflow:hidden;}
 .card-head{padding:0.9rem 1.3rem;border-bottom:1px solid var(--m06);display:flex;align-items:center;justify-content:space-between;gap:0.8rem;flex-wrap:wrap;}
-.card-title{font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:700;color:var(--moon);}
+.card-title{font-family:'Fraunces',Georgia,serif;font-size:0.82rem;font-weight:700;color:var(--moon);}
 .card-hint{font-size:0.7rem;color:var(--m30);}
 .paste-area{width:100%;min-height:520px;padding:1.3rem;background:var(--plum);border:none;
   font-family:monospace;font-size:0.78rem;color:var(--m80);line-height:1.85;resize:vertical;outline:none;}
@@ -67,7 +67,7 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 .sidebar{display:flex;flex-direction:column;gap:1rem;position:sticky;top:74px;}
 .panel{background:var(--card);border:1px solid var(--m06);border-radius:14px;overflow:hidden;}
 .panel-head{padding:0.8rem 1.1rem;border-bottom:1px solid var(--m06);}
-.panel-title{font-family:'Poppins',sans-serif;font-size:0.78rem;font-weight:700;color:var(--moon);}
+.panel-title{font-family:'Fraunces',Georgia,serif;font-size:0.78rem;font-weight:700;color:var(--moon);}
 .panel-sub{font-size:0.68rem;color:var(--m30);margin-top:0.15rem;}
 .panel-body{padding:1.1rem;}
 
@@ -75,18 +75,18 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 .field:last-child{margin-bottom:0;}
 .field-label{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);}
 .field-select,.field-input{width:100%;padding:0.6rem 0.9rem;background:var(--plum);border:1.5px solid var(--m12);
-  border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.82rem;color:var(--moon);
+  border-radius:8px;font-family:'Work Sans',system-ui,sans-serif;font-size:0.82rem;color:var(--moon);
   -webkit-appearance:none;transition:border-color .15s;}
 .field-select:focus,.field-input:focus{outline:none;border-color:var(--cyan);}
 
 .btn-parse{width:100%;padding:0.85rem;background:var(--coral);color:var(--moon);
-  font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:700;
+  font-family:'Fraunces',Georgia,serif;font-size:0.88rem;font-weight:700;
   border:none;border-radius:9px;cursor:pointer;transition:all .15s;margin-bottom:0.7rem;}
-.btn-parse:hover{background:#ff4a47;transform:translateY(-1px);}
+.btn-parse:hover{background:#E8894F;transform:translateY(-1px);}
 .btn-parse:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
 
 .btn-save{width:100%;padding:0.85rem;background:var(--c12);color:var(--cyan);
-  font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:700;
+  font-family:'Fraunces',Georgia,serif;font-size:0.88rem;font-weight:700;
   border:1.5px solid var(--c25);border-radius:9px;cursor:pointer;transition:all .15s;display:none;}
 .btn-save:hover{background:var(--c25);}
 .btn-save:disabled{opacity:0.5;cursor:not-allowed;}
@@ -94,7 +94,7 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 
 .status-msg{font-size:0.76rem;padding:0.65rem 0.9rem;border-radius:8px;display:none;line-height:1.5;margin-top:0.5rem;}
 .status-msg.ok{display:block;background:var(--c12);color:var(--cyan);border:1px solid var(--c25);}
-.status-msg.err{display:block;background:var(--r10);color:#ff9a98;border:1px solid var(--r20);}
+.status-msg.err{display:block;background:var(--r10);color:#E07A6B;border:1px solid var(--r20);}
 .status-msg.warn{display:block;background:var(--a10);color:var(--amber);border:1px solid var(--a25);}
 
 /* PREVIEW */
@@ -154,19 +154,19 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 
 /* Error list */
 .err-list{display:flex;flex-direction:column;gap:0.3rem;}
-.err-item{font-size:0.75rem;color:#ff9a98;padding:0.35rem 0.7rem;background:var(--r10);border-radius:6px;}
+.err-item{font-size:0.75rem;color:#E07A6B;padding:0.35rem 0.7rem;background:var(--r10);border-radius:6px;}
 
 /* LOGIN OVERLAY */
 #login-screen{position:fixed;inset:0;z-index:1000;min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--deep);}
 .login-box{width:100%;max-width:360px;}
-.login-logo{display:flex;align-items:center;gap:0.6rem;font-family:'Poppins',sans-serif;font-size:1.2rem;font-weight:800;color:var(--moon);margin-bottom:0.5rem;justify-content:center;}
+.login-logo{display:flex;align-items:center;gap:0.6rem;font-family:'Fraunces',Georgia,serif;font-size:1.2rem;font-weight:800;color:var(--moon);margin-bottom:0.5rem;justify-content:center;}
 .login-eyebrow{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--m30);text-align:center;margin-bottom:2rem;}
 .login-card{background:var(--card);border:1px solid var(--m06);border-radius:20px;padding:2rem;}
 .login-label{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.35rem;display:block;}
-.login-input{width:100%;padding:0.75rem 1rem;background:var(--plum);border:1.5px solid var(--m12);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--moon);margin-bottom:1.2rem;transition:border-color .15s;}
+.login-input{width:100%;padding:0.75rem 1rem;background:var(--plum);border:1.5px solid var(--m12);border-radius:9px;font-family:'Work Sans',system-ui,sans-serif;font-size:0.9rem;color:var(--moon);margin-bottom:1.2rem;transition:border-color .15s;}
 .login-input:focus{outline:none;border-color:var(--cyan);}
 .login-input::placeholder{color:var(--m30);}
-.login-btn{width:100%;padding:0.8rem;background:var(--cyan);color:var(--plum);font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:all .15s;}
+.login-btn{width:100%;padding:0.8rem;background:var(--cyan);color:var(--plum);font-family:'Fraunces',Georgia,serif;font-size:0.9rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:all .15s;}
 .login-btn:hover{background:var(--moon);}
 .login-error{font-size:0.78rem;color:var(--coral);margin-top:0.8rem;display:none;text-align:center;}
 </style>
@@ -177,12 +177,12 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
   <div class="login-box">
     <div class="login-logo">
       <svg width="26" height="26" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".7" transform="rotate(72 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".5" transform="rotate(144 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".5" transform="rotate(216 32 32)"/>
-        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".7" transform="rotate(288 32 32)"/>
-        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity=".7" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity=".5" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity=".5" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity=".7" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#D2652F"/>
       </svg>
       curio
     </div>
@@ -201,12 +201,12 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 <nav>
   <div class="nav-logo">
     <svg width="26" height="26" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
-      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".7" transform="rotate(72 32 32)"/>
-      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".5" transform="rotate(144 32 32)"/>
-      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".5" transform="rotate(216 32 32)"/>
-      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".7" transform="rotate(288 32 32)"/>
-      <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity=".7" transform="rotate(72 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity=".5" transform="rotate(144 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity=".5" transform="rotate(216 32 32)"/>
+      <ellipse cx="32" cy="16" rx="7" ry="13" fill="#74B26C" fill-opacity=".7" transform="rotate(288 32 32)"/>
+      <circle cx="32" cy="32" r="7" fill="#D2652F"/>
     </svg>
     curio learning
     <span class="nav-badge">Quiz Formatter</span>
@@ -325,7 +325,7 @@ actions that have *already happened*.</span>
             <div class="card-title">Paste Quiz Content</div>
             <div class="card-hint">Paste the full @@LEVEL … @@ENDLEVEL and @@QUESTIONS … @@ENDQUESTIONS blocks</div>
           </div>
-          <button class="btn-parse" id="btnClear" style="padding:0.4rem 0.9rem;background:var(--m06);color:var(--m30);font-size:0.72rem;font-weight:700;border-radius:7px;font-family:'Poppins',sans-serif;width:auto;margin-bottom:0;" onclick="clearAll()">Clear</button>
+          <button class="btn-parse" id="btnClear" style="padding:0.4rem 0.9rem;background:var(--m06);color:var(--m30);font-size:0.72rem;font-weight:700;border-radius:7px;font-family:'Fraunces',Georgia,serif;width:auto;margin-bottom:0;" onclick="clearAll()">Clear</button>
         </div>
         <textarea class="paste-area" id="pasteArea" placeholder="Paste your @@LEVEL ... @@ENDLEVEL and @@QUESTIONS ... @@ENDQUESTIONS blocks here..."></textarea>
       </div>
