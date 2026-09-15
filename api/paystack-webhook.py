@@ -3,11 +3,37 @@ import hmac
 import json
 import os
 import urllib.request
+from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler
 
 PAYSTACK_SECRET = os.environ.get("PAYSTACK_SECRET_KEY", "")
 SUPABASE_URL = "https://inmrsgujgfktapjnekjs.supabase.co"
 SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_KEY", "")
+
+
+def add_one_month(dt):
+    year = dt.year + (1 if dt.month == 12 else 0)
+    month = 1 if dt.month == 12 else dt.month + 1
+    # Clamp the day so e.g. Jan 31 + 1 month lands on Feb 28/29, not an error.
+    day = min(dt.day, [31, 29 if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0) else 28,
+                       31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1])
+    return dt.replace(year=year, month=month, day=day)
+
+
+def next_payment_date(data):
+    """Best-effort 'paid through' date for a monthly plan charge/subscription."""
+    raw = data.get("next_payment_date") or (data.get("subscription") or {}).get("next_payment_date")
+    if raw:
+        try:
+            return datetime.fromisoformat(raw.replace("Z", "+00:00")).isoformat()
+        except Exception:
+            pass
+    paid_at = data.get("paid_at") or data.get("createdAt")
+    try:
+        base = datetime.fromisoformat(paid_at.replace("Z", "+00:00")) if paid_at else datetime.now(timezone.utc)
+    except Exception:
+        base = datetime.now(timezone.utc)
+    return add_one_month(base).isoformat()
 
 
 def supabase_patch(path, data):
@@ -113,40 +139,67 @@ class handler(BaseHTTPRequestHandler):
 
         # ── charge.success ────────────────────────────────────────
         if event_type == "charge.success":
-            plan = data.get("plan", {}) or {}
-            subscription_code = data.get("subscription_code") or plan.get("plan_code", "")
+            # Note: subscription_code here must come only from Paystack's
+            # own subscription_code field. A previous version fell back to
+            # plan.get("plan_code") when it was absent, which silently
+            # stored a PLAN code (PLN_...) as if it were a SUBSCRIPTION
+            # code (SUB_...) — those are different Paystack objects, and
+            # calling the subscription API with a plan code 404s.
+            subscription_code = data.get("subscription_code", "")
 
             user_id = get_user_id_by_email(email)
             if user_id:
                 slots = get_founder_slots()
                 is_founder = slots["claimed"] < slots["total"]
 
-                supabase_patch(
-                    f"profiles?id=eq.{user_id}",
-                    {
-                        "is_premium": True,
-                        "paystack_customer_code": customer_code,
-                        "paystack_subscription_code": subscription_code,
-                        "subscription_status": "active",
-                        "subscription_started_at": data.get("paid_at"),
-                        "is_founder": is_founder,
-                    }
-                )
+                patch = {
+                    "is_premium": True,
+                    "paystack_customer_code": customer_code,
+                    "subscription_status": "active",
+                    "subscription_started_at": data.get("paid_at"),
+                    "subscription_expires_at": next_payment_date(data),
+                    "is_founder": is_founder,
+                }
+                if subscription_code:
+                    patch["paystack_subscription_code"] = subscription_code
+
+                supabase_patch(f"profiles?id=eq.{user_id}", patch)
                 if is_founder:
                     increment_founder_slots()
                 print(f"Activated premium for {email}, founder={is_founder}")
             else:
                 print(f"User not found for email: {email}")
 
-        # ── subscription cancelled / disabled ─────────────────────
+        # ── subscription created (captures the code + token needed ─
+        # ── to cancel via API later) ───────────────────────────────
+        elif event_type == "subscription.create":
+            subscription_code = data.get("subscription_code", "")
+            email_token = data.get("email_token", "")
+            user_id = get_user_id_by_email(email)
+            if user_id:
+                supabase_patch(
+                    f"profiles?id=eq.{user_id}",
+                    {
+                        "paystack_customer_code": customer_code,
+                        "paystack_subscription_code": subscription_code,
+                        "paystack_email_token": email_token,
+                        "subscription_expires_at": next_payment_date(data),
+                    }
+                )
+                print(f"Stored subscription code/token for {email}")
+
+        # ── subscription cancelled / set to not renew ──────────────
+        # Access is NOT revoked here — the user already paid for the
+        # current period. A daily cron (api/expire-subscriptions.py)
+        # flips is_premium off once subscription_expires_at passes.
         elif event_type in ("subscription.disable", "subscription.not_renew"):
             user_id = get_user_id_by_email(email)
             if user_id:
                 supabase_patch(
                     f"profiles?id=eq.{user_id}",
-                    {"is_premium": False, "subscription_status": "cancelled"}
+                    {"subscription_status": "cancelled"}
                 )
-                print(f"Cancelled premium for {email}")
+                print(f"Marked subscription cancelled (access continues until period end) for {email}")
 
         # ── payment failed ────────────────────────────────────────
         elif event_type == "invoice.payment_failed":
