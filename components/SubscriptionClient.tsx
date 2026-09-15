@@ -33,6 +33,9 @@ export default function SubscriptionClient() {
   const { user, loading, refreshUser } = useAuth()
   const [ready, setReady] = useState(false)
   const [startedAt, setStartedAt] = useState<string | null>(null)
+  const [subStatus, setSubStatus] = useState<string | null>(null)
+  const [expiresAt, setExpiresAt] = useState<string | null>(null)
+  const [cancelling, setCancelling] = useState(false)
   const [slotsLeft, setSlotsLeft] = useState<number | null>(null)
   const [subscribing, setSubscribing] = useState(false)
   const [subscribeLabel, setSubscribeLabel] = useState('Subscribe →')
@@ -49,8 +52,14 @@ export default function SubscriptionClient() {
 
   async function load() {
     if (user) {
-      const { data } = await sb.from('profiles').select('subscription_started_at').eq('id', user.id).single()
+      const { data } = await sb
+        .from('profiles')
+        .select('subscription_started_at, subscription_status, subscription_expires_at')
+        .eq('id', user.id)
+        .single()
       setStartedAt(data?.subscription_started_at ?? null)
+      setSubStatus(data?.subscription_status ?? null)
+      setExpiresAt(data?.subscription_expires_at ?? null)
     }
 
     if (!user?.isPremium) {
@@ -111,16 +120,39 @@ export default function SubscriptionClient() {
     handler.openIframe()
   }
 
-  function cancelSub() {
-    if (!user) return
-    if (!confirm('Cancel your Premium subscription?\n\nYou keep Premium access until the end of your current billing period.')) return
-    const subject = encodeURIComponent('Cancel subscription')
-    const body = encodeURIComponent(`Please cancel my Curio Premium subscription.\nAccount email: ${user.email}`)
-    window.location.href = `mailto:hello@curiolearning.co.za?subject=${subject}&body=${body}`
-    showToast('Email opened. We will cancel within 24 hours.')
+  async function cancelSub() {
+    if (!user || cancelling) return
+    if (!confirm('Cancel your Premium subscription?\n\nYou keep Premium access until the end of your current billing period — we just won\'t charge you again after that.')) return
+
+    setCancelling(true)
+    try {
+      const { data: { session } } = await sb.auth.getSession()
+      const res = await fetch('/api/cancel-subscription', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${session?.access_token ?? ''}` },
+      })
+      const result = await res.json()
+
+      if (!res.ok) {
+        showToast(result?.error || 'Something went wrong. Please try again.', 5000)
+        return
+      }
+
+      setSubStatus('cancelled')
+      if (result.access_until) setExpiresAt(result.access_until)
+      const until = result.access_until
+        ? new Date(result.access_until).toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' })
+        : 'the end of your billing period'
+      showToast(`We're sad to see you go 💛 Premium stays active until ${until}. Resubscribe any time to keep enjoying it.`, 6000)
+    } catch {
+      showToast('Something went wrong. Please try again.', 5000)
+    } finally {
+      setCancelling(false)
+    }
   }
 
   const firstName = (user?.fullName || '').split(' ')[0] || 'there'
+  const isCancelled = subStatus === 'cancelled'
 
   return (
     <>
@@ -254,11 +286,18 @@ export default function SubscriptionClient() {
                         )}
                       </div>
                     </div>
-                    <div className="mem-status"><div className="mem-status-dot" />Active</div>
+                    <div className="mem-status"><div className="mem-status-dot" />{isCancelled ? 'Active · not renewing' : 'Active'}</div>
                   </div>
                   <div className="mem-body">
                     <div className="mem-row"><span className="mem-row-k">Amount</span><span className="mem-row-v good">R49 / month</span></div>
-                    <div className="mem-row"><span className="mem-row-k">Billing</span><span className="mem-row-v">Monthly · auto-renews</span></div>
+                    <div className="mem-row">
+                      <span className="mem-row-k">Billing</span>
+                      <span className="mem-row-v">
+                        {isCancelled
+                          ? `Cancelled · access until ${expiresAt ? new Date(expiresAt).toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' }) : 'period end'}`
+                          : 'Monthly · auto-renews'}
+                      </span>
+                    </div>
                     <div className="mem-row">
                       <span className="mem-row-k">Member since</span>
                       <span className="mem-row-v">
@@ -270,7 +309,25 @@ export default function SubscriptionClient() {
                     <div className="mem-row"><span className="mem-row-k">Custom tests</span><span className="mem-row-v good">Active</span></div>
                   </div>
                   <div className="mem-foot">
-                    <button className="btn-cancel" onClick={cancelSub}>Cancel subscription</button>
+                    {isCancelled ? (
+                      <>
+                        <p className="sub-footnote" style={{ marginBottom: 8 }}>
+                          We&apos;re sad to see you go 💛 You can resubscribe any time to keep enjoying Premium.
+                        </p>
+                        <button
+                          className="report-cta report-cta-pro"
+                          disabled={subscribing}
+                          onClick={startUpgrade}
+                          style={subscribeDone ? { background: 'var(--rust10)', color: 'var(--rust)' } : undefined}
+                        >
+                          {subscribeLabel === 'Subscribe →' ? 'Resubscribe →' : subscribeLabel}
+                        </button>
+                      </>
+                    ) : (
+                      <button className="btn-cancel" onClick={cancelSub} disabled={cancelling}>
+                        {cancelling ? 'Cancelling…' : 'Cancel subscription'}
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
