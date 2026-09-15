@@ -66,6 +66,9 @@ def paystack_disable_subscription(code, token):
     )
     req.add_header("Authorization", f"Bearer {PAYSTACK_SECRET}")
     req.add_header("Content-Type", "application/json")
+    # Paystack's edge (Cloudflare) blocks Python's default "Python-urllib/x.x"
+    # User-Agent as a bot — same issue the Resend contact-form call hit.
+    req.add_header("User-Agent", "curio-learning-cancel-subscription/1.0")
     with urllib.request.urlopen(req, timeout=15) as r:
         return json.loads(r.read())
 
