@@ -1077,7 +1077,9 @@ async function loadQuizPerformance(){
 
     const byLevel={};
     progress.forEach(p=>{(byLevel[p.level_id]=byLevel[p.level_id]||[]).push(p);});
-    const levelIds=Object.keys(byLevel);
+    // Only show levels that still exist — progress rows for renamed/deleted
+    // levels (level_id no longer in quiz_levels) are stale and not actionable.
+    const levelIds=Object.keys(byLevel).filter(lid=>levelMap.has(lid));
     document.getElementById('qpLevels').textContent=levelIds.length;
     const levelBody=document.getElementById('qpLevelBody');
     if(levelIds.length===0){
@@ -1088,7 +1090,7 @@ async function loadQuizPerformance(){
         const meta=levelMap.get(lid);
         const avg=Math.round(rows.reduce((s,r)=>s+(r.best_score||0),0)/rows.length);
         const pr=Math.round(rows.filter(r=>r.passed).length/rows.length*100);
-        return `<tr><td>${meta?meta.level_display:lid}</td><td>${meta?(meta.broad_topic_display||'—'):'—'}</td><td>${rows.length}</td><td>${avg}%</td><td>${pr}%</td></tr>`;
+        return `<tr><td>${meta.level_display}</td><td>${meta.broad_topic_display||'—'}</td><td>${rows.length}</td><td>${avg}%</td><td>${pr}%</td></tr>`;
       }).join('');
     }
 
