@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import type { ShuffledQuestion, QuizResult } from '@/types/quiz'
-import { ProgressBar, XPBadge } from '@/components/ui/XPBar'
+import { ProgressBar } from '@/components/ui/XPBar'
 import { calculateXP } from '@/lib/progress'
-import { Zap, Trophy, GraduationCap, ArrowRight, Check, X } from '@/components/icons'
+import { Trophy, GraduationCap, ArrowRight, Check, X } from '@/components/icons'
 
 interface QuizRunnerProps {
   questions: ShuffledQuestion[]
@@ -35,10 +35,6 @@ function pickRandom<T>(arr: T[]): T {
 // Mirrors the server-side weighting in the award_quiz_xp RPC — used here only
 // for a live preview during play. The actual award is always recomputed and
 // confirmed server-side from the real difficulty column, never trusted from the client.
-const DIFFICULTY_XP: Record<string, number> = { Starter: 1, Building: 3, Challenge: 5 }
-function questionXp(difficulty?: string): number {
-  return DIFFICULTY_XP[difficulty ?? ''] ?? 3
-}
 
 // Render text with <strong>, <em> tags and *asterisk* → cyan highlight
 function RichText({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
@@ -141,10 +137,7 @@ export default function QuizRunner({
   const [answerState, setAnswerState]   = useState<AnswerState>('idle')
   const [startTime]  = useState(Date.now())
   const [scoreDisplay, setScoreDisplay] = useState(0)
-  const [xpDisplay, setXpDisplay]       = useState(0)
-  const [xpBump, setXpBump]             = useState(false)
   const scoreRef      = useRef(0)
-  const xpRef         = useRef(0)
   const correctIdsRef = useRef<string[]>([])
   const feedbackRef   = useRef('')
 
@@ -162,10 +155,6 @@ export default function QuizRunner({
       scoreRef.current += 1
       setScoreDisplay(scoreRef.current)
       correctIdsRef.current.push(current.id)
-      xpRef.current += questionXp(current.difficulty)
-      setXpDisplay(xpRef.current)
-      setXpBump(true)
-      setTimeout(() => setXpBump(false), 450)
     }
   }, [answerState, current])
 
@@ -233,9 +222,6 @@ export default function QuizRunner({
         <div className="flex-1">
           <ProgressBar value={progressPercent} color="bg-[var(--rust)]" />
         </div>
-        <span className={xpBump ? 'animate-xp-bump inline-block' : 'inline-block'}>
-          <XPBadge xp={xpDisplay} size="sm" />
-        </span>
       </div>
 
       {/* Question card */}
@@ -249,7 +235,7 @@ export default function QuizRunner({
           {current.difficulty && (
             <span className="inline-flex items-center gap-1 text-xs font-black px-2.5 py-1 rounded"
               style={{ background: 'rgba(var(--ochre-rgb),0.12)', color: CURIO.amber }}>
-              <Zap size={12} /> +{questionXp(current.difficulty)} XP · {current.difficulty}
+              {current.difficulty}
             </span>
           )}
           {sectionType === 'subtopic_mastery' && (

@@ -6,8 +6,22 @@
 <title>Curio — Material Formatter</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/admin-auth-shared.js"></script>
 <style>
 :root{--plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;--cyan:#6DD3CE;--coral:#FF5E5B;--moon:#F7F7FF;--amber:#F5C842;--m80:rgba(247,247,255,0.8);--m55:rgba(247,247,255,0.55);--m30:rgba(247,247,255,0.3);--m12:rgba(247,247,255,0.12);--m06:rgba(247,247,255,0.06);--c25:rgba(109,211,206,0.25);--c12:rgba(109,211,206,0.12);--r10:rgba(255,94,91,0.1);--r20:rgba(255,94,91,0.2);--h:'Poppins',sans-serif;--b:'DM Sans',sans-serif;}
+#login-screen{position:fixed;inset:0;z-index:1000;min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--deep);}
+.login-box{width:100%;max-width:360px;}
+.login-logo{display:flex;align-items:center;gap:0.6rem;font-family:var(--h);font-size:1.2rem;font-weight:800;color:var(--moon);margin-bottom:0.5rem;justify-content:center;}
+.login-eyebrow{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--m30);text-align:center;margin-bottom:2rem;}
+.login-card{background:var(--card);border:1px solid var(--m06);border-radius:20px;padding:2rem;}
+.login-label{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.35rem;display:block;}
+.login-input{width:100%;padding:0.75rem 1rem;background:var(--plum);border:1.5px solid var(--m12);border-radius:9px;font-family:var(--b);font-size:0.9rem;color:var(--moon);margin-bottom:1.2rem;transition:border-color .15s;}
+.login-input:focus{outline:none;border-color:var(--cyan);}
+.login-input::placeholder{color:var(--m30);}
+.login-btn{width:100%;padding:0.8rem;background:var(--cyan);color:var(--plum);font-family:var(--h);font-size:0.9rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:all .15s;}
+.login-btn:hover{background:var(--moon);}
+.login-error{font-size:0.78rem;color:var(--coral);margin-top:0.8rem;display:none;text-align:center;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:var(--b);background:var(--deep);color:var(--moon);min-height:100vh;}
 a{text-decoration:none;color:inherit;}
@@ -96,6 +110,31 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 </style>
 </head>
 <body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <svg width="26" height="26" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".7" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".5" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".5" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".7" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+      </svg>
+      curio
+    </div>
+    <div class="login-eyebrow">Material Formatter · Restricted Access</div>
+    <div class="login-card">
+      <label class="login-label">Email</label>
+      <input class="login-input" type="email" id="loginEmail" placeholder="you@example.com" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <label class="login-label">Password</label>
+      <input class="login-input" type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <button class="login-btn" onclick="doLogin()">Enter →</button>
+      <div class="login-error" id="loginError"></div>
+    </div>
+  </div>
+</div>
 
 <nav>
   <div class="nav-logo">
@@ -306,6 +345,30 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 </div>
 
 <script>
+// ── Admin auth (shared with /admin and /quiz-formatter) ─────────────────────
+async function doLogin() {
+  var email = document.getElementById('loginEmail').value.trim();
+  var pw = document.getElementById('loginPassword').value.trim();
+  if (!email || !pw) return;
+  var btn = document.querySelector('.login-btn');
+  btn.disabled = true; btn.textContent = 'Checking…';
+  var errEl = document.getElementById('loginError');
+  errEl.style.display = 'none';
+  try {
+    await AdminAuth.login(email, pw);
+    document.getElementById('login-screen').style.display = 'none';
+  } catch (e) {
+    errEl.textContent = e.message || 'Incorrect email or password. Access denied.';
+    errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Enter →';
+  }
+}
+(async function initAdminAuth() {
+  var session = await AdminAuth.trySilentLogin();
+  if (session) document.getElementById('login-screen').style.display = 'none';
+})();
+
 var gradeBand='4-7';
 function setBand(b){gradeBand=b;document.getElementById('band47').classList.toggle('active',b==='4-7');document.getElementById('band812').classList.toggle('active',b==='8-12');}
 
@@ -569,7 +632,7 @@ function formatAndDownload(){
   // Call the Vercel serverless API
   fetch('/api/generate-pdf?type=paper',{
     method:'POST',
-    headers:{'Content-Type':'application/json'},
+    headers:{'Content-Type':'application/json','Authorization':AdminAuth.authHeaders().Authorization},
     body:JSON.stringify(payload)
   })
   .then(function(res){
@@ -588,7 +651,7 @@ function formatAndDownload(){
     // Now fetch the memo
     return fetch('/api/generate-pdf?type=memo',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json','Authorization':AdminAuth.authHeaders().Authorization},
       body:JSON.stringify(payload)
     });
   })

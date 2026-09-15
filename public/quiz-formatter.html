@@ -6,6 +6,8 @@
 <title>curio learning — Quiz Formatter</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(72 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(144 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.5' transform='rotate(216 32 32)'/%3E%3Cellipse cx='32' cy='16' rx='7' ry='13' fill='%236DD3CE' fill-opacity='.7' transform='rotate(288 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23FF5E5B'/%3E%3C/svg%3E"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/admin-auth-shared.js"></script>
 <style>
 :root{
   --plum:#2B1E3F;--deep:#1a1228;--mid:#3d2d58;--card:#231935;
@@ -153,9 +155,48 @@ nav{height:58px;display:flex;align-items:center;justify-content:space-between;pa
 /* Error list */
 .err-list{display:flex;flex-direction:column;gap:0.3rem;}
 .err-item{font-size:0.75rem;color:#ff9a98;padding:0.35rem 0.7rem;background:var(--r10);border-radius:6px;}
+
+/* LOGIN OVERLAY */
+#login-screen{position:fixed;inset:0;z-index:1000;min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--deep);}
+.login-box{width:100%;max-width:360px;}
+.login-logo{display:flex;align-items:center;gap:0.6rem;font-family:'Poppins',sans-serif;font-size:1.2rem;font-weight:800;color:var(--moon);margin-bottom:0.5rem;justify-content:center;}
+.login-eyebrow{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:var(--m30);text-align:center;margin-bottom:2rem;}
+.login-card{background:var(--card);border:1px solid var(--m06);border-radius:20px;padding:2rem;}
+.login-label{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--m30);margin-bottom:0.35rem;display:block;}
+.login-input{width:100%;padding:0.75rem 1rem;background:var(--plum);border:1.5px solid var(--m12);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--moon);margin-bottom:1.2rem;transition:border-color .15s;}
+.login-input:focus{outline:none;border-color:var(--cyan);}
+.login-input::placeholder{color:var(--m30);}
+.login-btn{width:100%;padding:0.8rem;background:var(--cyan);color:var(--plum);font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:all .15s;}
+.login-btn:hover{background:var(--moon);}
+.login-error{font-size:0.78rem;color:var(--coral);margin-top:0.8rem;display:none;text-align:center;}
 </style>
 </head>
 <body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <svg width="26" height="26" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".7" transform="rotate(72 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".5" transform="rotate(144 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".5" transform="rotate(216 32 32)"/>
+        <ellipse cx="32" cy="16" rx="7" ry="13" fill="#6DD3CE" fill-opacity=".7" transform="rotate(288 32 32)"/>
+        <circle cx="32" cy="32" r="7" fill="#FF5E5B"/>
+      </svg>
+      curio
+    </div>
+    <div class="login-eyebrow">Quiz Formatter · Restricted Access</div>
+    <div class="login-card">
+      <label class="login-label">Email</label>
+      <input class="login-input" type="email" id="loginEmail" placeholder="you@example.com" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <label class="login-label">Password</label>
+      <input class="login-input" type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <button class="login-btn" onclick="doLogin()">Enter →</button>
+      <div class="login-error" id="loginError"></div>
+    </div>
+  </div>
+</div>
 
 <nav>
   <div class="nav-logo">
@@ -370,14 +411,12 @@ actions that have *already happened*.</span>
 <script>
 // ── Supabase ──────────────────────────────────────────────────────────────────
 const SB_URL = 'https://inmrsgujgfktapjnekjs.supabase.co';
-const SB_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU';
 
 async function sbFetch(path, options = {}) {
   const res = await fetch(`${SB_URL}/rest/v1/${path}`, {
     method: options.method || 'GET',
     headers: {
-      'apikey': SB_KEY,
-      'Authorization': `Bearer ${SB_KEY}`,
+      ...AdminAuth.authHeaders(),
       'Content-Type': 'application/json',
       'Prefer': options.prefer || ''
     },
@@ -390,6 +429,30 @@ async function sbFetch(path, options = {}) {
   if (res.status === 204) return null;
   return await res.json();
 }
+
+// ── Admin auth (shared with /admin and /formatter) ─────────────────────────────
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pw = document.getElementById('loginPassword').value.trim();
+  if (!email || !pw) return;
+  const btn = document.querySelector('.login-btn');
+  btn.disabled = true; btn.textContent = 'Checking…';
+  const errEl = document.getElementById('loginError');
+  errEl.style.display = 'none';
+  try {
+    await AdminAuth.login(email, pw);
+    document.getElementById('login-screen').style.display = 'none';
+  } catch (e) {
+    errEl.textContent = e.message || 'Incorrect email or password. Access denied.';
+    errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Enter →';
+  }
+}
+(async function initAdminAuth() {
+  const session = await AdminAuth.trySilentLogin();
+  if (session) document.getElementById('login-screen').style.display = 'none';
+})();
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let parsedLevel = null;

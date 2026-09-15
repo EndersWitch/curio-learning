@@ -152,7 +152,6 @@ function LevelCardContent({
 
       <div className="flex-shrink-0 text-right text-xs space-y-0.5" style={{ color: 'rgba(var(--ink-rgb),0.35)' }}>
         <div>{level.question_count} Qs</div>
-        <div className="font-semibold" style={{ color: 'var(--ochre)' }}>+{level.xp_reward} XP</div>
         {passed && <div className="font-black" style={{ color: 'var(--moss)' }}>Done</div>}
       </div>
     </div>

@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
-import { Lock, Search, Check, Zap } from '@/components/icons'
+import { Lock, Search, Check } from '@/components/icons'
 import Footer from '@/components/Footer'
 import Bloom from '@/components/Bloom'
 
@@ -237,14 +237,9 @@ function LevelRow({ level, isPremium, broadTopic, progress }: {
             </span>
           )}
           {progress && (
-            <>
-              <span className="text-xs font-bold" style={{ color: completed ? 'var(--moss)' : 'rgba(var(--ink-rgb),0.55)' }}>
-                Best: {progress.best_score}%
-              </span>
-              <span className="inline-flex items-center gap-1 text-xs font-bold" style={{ color: 'var(--ochre)' }}>
-                <Zap size={11} /> {progress.xp_earned} XP
-              </span>
-            </>
+            <span className="text-xs font-bold" style={{ color: completed ? 'var(--moss)' : 'rgba(var(--ink-rgb),0.55)' }}>
+              Best: {progress.best_score}%
+            </span>
           )}
         </div>
       </div>

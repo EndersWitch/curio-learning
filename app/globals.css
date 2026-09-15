@@ -332,7 +332,7 @@ button { font-family: var(--b); cursor: pointer; border: none; background: none;
 .streak-fire { color: var(--ochre); flex-shrink: 0; }
 .streak-val { font-family: var(--h); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ochre); }
 .streak-lbl { font-size: 0.65rem; color: var(--ochre); opacity: 0.75; font-weight: 500; }
-.dash-stats { display: grid; grid-template-columns: repeat(5,1fr); gap: 0; border: 1px solid var(--ink15); position: relative; z-index: 2; }
+.dash-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border: 1px solid var(--ink15); position: relative; z-index: 2; }
 .dash-stat { background: var(--paper-raised); padding: 1.3rem 1.3rem 1.4rem; border-left: 1px solid var(--ink15); transition: background .15s; }
 .dash-stat:first-child { border-left: none; }
 .dash-stat:hover { background: var(--rust10); }

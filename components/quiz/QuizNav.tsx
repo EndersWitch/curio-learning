@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
 import { useAccountDrawer } from '@/components/AccountDrawerProvider'
-import { Flame, Zap, FileText, PenLine, User, Star } from '@/components/icons'
+import { Flame, FileText, PenLine, User, Star } from '@/components/icons'
 import Bloom from '@/components/Bloom'
 import ThemeToggle from '@/components/ThemeToggle'
 
@@ -60,14 +60,6 @@ export default function QuizNav() {
                 <Flame size={14} /> {user.streakDays}
               </span>
             )}
-            <span title="Total XP" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
-              fontSize: '0.78rem', fontWeight: 700, color: 'var(--rust)',
-              background: 'rgba(var(--rust-rgb),0.1)', border: '1px solid rgba(var(--rust-rgb),0.3)',
-              borderRadius: 4, padding: '0.3rem 0.65rem',
-            }}>
-              <Zap size={14} /> {user.totalXp.toLocaleString()} XP
-            </span>
             <button
               className="profile-btn"
               onClick={(e) => {

@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import type { QuizResult } from '@/types/quiz'
-import { XPBadge } from '@/components/ui/XPBar'
 import { useAuth } from '@/lib/auth-context'
 import { Trophy, GraduationCap, Home, RefreshCw, Check, X } from '@/components/icons'
 
@@ -149,7 +148,7 @@ function BloomScore({ percent, passed, reveal }: {
 export default function ResultsScreen({
   result, levelTitle, sectionType, retryHref, nextHref, masteryUnlocked, broadMasteryUnlocked,
 }: ResultsScreenProps) {
-  const { score, total, passed, xpEarned, timeTaken } = result
+  const { score, total, passed, timeTaken } = result
   const percent = Math.round((score / total) * 100)
   const reveal = useBloomReveal(percent)
   const { refreshUser } = useAuth()
@@ -163,7 +162,6 @@ export default function ResultsScreen({
   )
   const [particles, setParticles] = useState<Particle[]>([])
   const [showConfetti, setShowConfetti] = useState(false)
-  const [xpAnimated, setXpAnimated]   = useState(false)
 
   useEffect(() => {
     if (!passed) return
@@ -179,8 +177,7 @@ export default function ResultsScreen({
     })))
     setShowConfetti(true)
     const t1 = setTimeout(() => setShowConfetti(false), 3500)
-    const t2 = setTimeout(() => setXpAnimated(true), 400)
-    return () => { clearTimeout(t1); clearTimeout(t2) }
+    return () => clearTimeout(t1)
   }, [passed])
 
   const isMastery = sectionType === 'subtopic_mastery' || sectionType === 'broad_topic_mastery'
@@ -268,20 +265,6 @@ export default function ResultsScreen({
             ))}
           </div>
         </div>
-
-        {/* ── XP earned ── */}
-        {xpEarned > 0 && (
-          <div className="rounded p-5 mb-4 flex items-center justify-between"
-            style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--ochre-rgb),0.25)' }}>
-            <div>
-              <p className="font-black text-sm" style={{ color: 'var(--ink)' }}>XP Earned</p>
-              <p className="text-xs mt-0.5" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
-                {passed ? 'Keep it up!' : 'Every attempt counts!'}
-              </p>
-            </div>
-            <XPBadge xp={xpEarned} animate={xpAnimated} size="lg" />
-          </div>
-        )}
 
         {/* ── Mastery unlocks ── */}
         {masteryUnlocked && !broadMasteryUnlocked && (

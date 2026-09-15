@@ -8,7 +8,7 @@ import ThemeToggle from '@/components/ThemeToggle'
 import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
 import { useAccountDrawer } from '@/components/AccountDrawerProvider'
-import { Flame, Zap, FileText, PenLine, User, Star, Check, Brain, Heart, ListChecks } from '@/components/icons'
+import { Flame, FileText, PenLine, User, Star, Check, Brain, Heart, ListChecks } from '@/components/icons'
 
 const SUPABASE_URL = 'https://inmrsgujgfktapjnekjs.supabase.co'
 const SUPABASE_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU'
@@ -244,7 +244,6 @@ export default function HomePage() {
   const name = user?.fullName?.split(' ')[0] || 'there'
   const initial = user?.fullName?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || '?'
   const streak = user?.streakDays ?? 0
-  const totalXp = user?.totalXp ?? 0
   const hr = new Date().getHours()
   const greeting = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening'
   const bestScore = bestScoreOverall
@@ -358,11 +357,6 @@ export default function HomePage() {
 
             {/* Stats */}
             <div className="dash-stats">
-              <div className="dash-stat am">
-                <div className="ds-label">Total XP</div>
-                <div className="ds-val ds-val-icon"><Zap size={22} />{totalXp.toLocaleString()}</div>
-                <div className="ds-sub">earned all time</div>
-              </div>
               <div className="dash-stat cy">
                 <div className="ds-label">Papers for your grade</div>
                 <div className="ds-val">{recPapers.length > 0 ? recPapers.length : '—'}</div>

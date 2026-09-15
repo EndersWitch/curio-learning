@@ -51,7 +51,7 @@ export default function PremiumLock({ levelTitle, compact = false }: PremiumLock
           {[
             'All quiz levels and mastery challenges',
             'AI-powered deep explanations',
-            'Progress tracking and XP',
+            'Progress tracking and streaks',
             'Unlimited practice attempts',
           ].map((feature) => (
             <li key={feature} className="flex items-center gap-2 text-sm" style={{ color: '#8A611F' }}>

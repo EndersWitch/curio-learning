@@ -8,7 +8,7 @@ interface AuthGateProps {
 }
 
 export default function AuthGate({
-  message = 'Sign in to save your progress and earn XP!',
+  message = 'Sign in to save your progress!',
   redirectAfter,
 }: AuthGateProps) {
   // Always use the existing login.html page — never /auth/login

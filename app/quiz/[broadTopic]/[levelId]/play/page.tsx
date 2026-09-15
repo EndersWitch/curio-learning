@@ -9,7 +9,7 @@ import ResultsScreen from '@/components/quiz/ResultsScreen'
 import { fetchLevelQuestions } from '@/lib/questions'
 import { saveQuizResult } from '@/lib/progress'
 import type { ShuffledQuestion, QuizResult } from '@/types/quiz'
-import { Target, Zap, Lock, AlertTriangle, X } from '@/components/icons'
+import { Target, RefreshCw, Lock, AlertTriangle, X } from '@/components/icons'
 import { HoldToConfirm } from '@/components/interior/hold-to-confirm'
 
 export default function PlayPage() {
@@ -135,8 +135,8 @@ export default function PlayPage() {
   if (saving) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--paper)' }}>
       <div className="text-center">
-        <Zap size={36} className="animate-bounce" style={{ color: 'var(--ochre)', margin: '0 auto 0.75rem' }} />
-        <p className="text-sm" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>Saving your XP...</p>
+        <RefreshCw size={36} className="animate-spin" style={{ color: 'var(--ochre)', margin: '0 auto 0.75rem' }} />
+        <p className="text-sm" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>Saving your results...</p>
       </div>
     </div>
   )
