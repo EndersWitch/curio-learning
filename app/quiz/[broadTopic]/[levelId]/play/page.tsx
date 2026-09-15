@@ -87,6 +87,25 @@ export default function PlayPage() {
         result: res,
       })
       setResult({ ...res, xpEarned: server.xpEarned, passed: server.passed })
+
+      // Per-question analytics log for the admin dashboard (hardest
+      // questions, section performance). Independent of the scoring/XP path
+      // above -- a failure here never affects the quiz result shown to the
+      // student, it only means that attempt is missing from the analytics.
+      if (res.attempts && res.attempts.length > 0) {
+        sb.from('question_attempts').insert(
+          res.attempts.map(a => ({
+            user_id: user.id,
+            question_id: Number(a.questionId),
+            level_id: levelMeta.id,
+            topic_id: levelMeta.broad_topic,
+            chosen_key: a.chosenKey,
+            is_correct: a.correct,
+          }))
+        ).then(({ error }) => {
+          if (error) console.error('[QuizPlay] question_attempts insert failed:', error)
+        })
+      }
     } catch (e) {
       console.error('[QuizPlay] save failed:', e)
       // Fall back to showing the local result so the user isn't stuck,

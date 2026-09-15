@@ -139,4 +139,5 @@ export interface QuizResult {
   newMasteryUnlocked?: string
   nextLevelId?: string
   correctQuestionIds: string[]
+  attempts?: { questionId: string; chosenKey: string; correct: boolean }[]
 }

@@ -139,6 +139,7 @@ export default function QuizRunner({
   const [scoreDisplay, setScoreDisplay] = useState(0)
   const scoreRef      = useRef(0)
   const correctIdsRef = useRef<string[]>([])
+  const attemptsRef   = useRef<{ questionId: string; chosenKey: string; correct: boolean }[]>([])
   const feedbackRef   = useRef('')
 
   const current         = questions[currentIndex]
@@ -151,6 +152,7 @@ export default function QuizRunner({
     setSelected(key)
     setAnswerState(correct ? 'correct' : 'wrong')
     feedbackRef.current = correct ? pickRandom(CORRECT_MESSAGES) : pickRandom(WRONG_MESSAGES)
+    attemptsRef.current.push({ questionId: current.id, chosenKey: key, correct })
     if (correct) {
       scoreRef.current += 1
       setScoreDisplay(scoreRef.current)
@@ -166,7 +168,7 @@ export default function QuizRunner({
       const passed     = finalScore / total >= passThreshold
       const timeTaken  = Math.round((Date.now() - startTime) / 1000)
       const xpEarned   = calculateXP({ score: finalScore, total, sectionType, baseXP })
-      onComplete({ score: finalScore, total, passed, xpEarned, timeTaken, correctQuestionIds: correctIdsRef.current })
+      onComplete({ score: finalScore, total, passed, xpEarned, timeTaken, correctQuestionIds: correctIdsRef.current, attempts: attemptsRef.current })
     } else {
       setCurrentIndex(i => i + 1)
       setSelected(null)

@@ -41,7 +41,8 @@ button{font-family:var(--b);cursor:pointer;border:none;background:none;}
 .admin-nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px;background:var(--plum);border-bottom:1px solid var(--m06);position:sticky;top:0;z-index:100;}
 .admin-logo{display:flex;align-items:center;gap:0.55rem;font-family:var(--h);font-size:1.05rem;font-weight:800;color:var(--moon);}
 .admin-logo-badge{font-size:0.5rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:var(--coral);color:var(--moon);padding:0.12rem 0.4rem;border-radius:3px;margin-left:0.3rem;}
-.nav-tabs{display:flex;gap:0.2rem;}
+.nav-tabs{display:flex;gap:0.2rem;overflow-x:auto;scrollbar-width:thin;min-width:0;}
+.nav-tab{white-space:nowrap;flex-shrink:0;}
 .nav-tab{padding:0.38rem 0.9rem;font-size:0.78rem;font-weight:600;color:var(--m30);border-radius:6px;cursor:pointer;transition:all .15s;}
 .nav-tab:hover{color:var(--moon);background:var(--m06);}
 .nav-tab.active{background:var(--c12);color:var(--cyan);}
@@ -81,6 +82,13 @@ tr:hover td{background:var(--m03);}
 .loading-row td{text-align:center;padding:2.5rem;color:var(--m30);font-style:italic;font-size:0.85rem;}
 .empty-state{text-align:center;padding:3rem;color:var(--m30);}
 .empty-state p{font-size:0.8rem;margin-top:0.4rem;}
+/* Analytics: mini bar chart (signups over time etc) */
+.mini-bars{display:flex;flex-direction:column;gap:0.55rem;background:var(--card);border:1px solid var(--m06);border-radius:14px;padding:1.3rem 1.5rem;margin-bottom:1.5rem;}
+.mini-bar-row{display:grid;grid-template-columns:90px 1fr 40px;align-items:center;gap:0.8rem;}
+.mini-bar-label{font-size:0.72rem;color:var(--m55);}
+.mini-bar-track{height:10px;background:var(--m06);border-radius:5px;overflow:hidden;}
+.mini-bar-fill{height:100%;background:var(--cyan);border-radius:5px;transition:width .3s;}
+.mini-bar-val{font-size:0.72rem;color:var(--m80);text-align:right;font-weight:700;}
 .form-card{background:var(--card);border:1px solid var(--m06);border-radius:16px;overflow:hidden;margin-bottom:1.5rem;}
 .form-section{padding:1.5rem 1.8rem;border-bottom:1px solid var(--m06);}
 .form-section:last-child{border-bottom:none;}
@@ -200,6 +208,9 @@ tr:hover td{background:var(--m03);}
       <div class="nav-tab" onclick="switchPanel('papers',this)">Papers</div>
       <div class="nav-tab" onclick="switchPanel('add-paper',this)">Add Paper</div>
       <div class="nav-tab" onclick="switchPanel('learn-zones',this)">📚 Learning Zones</div>
+      <div class="nav-tab" onclick="switchPanel('users',this)">Users</div>
+      <div class="nav-tab" onclick="switchPanel('quiz-performance',this)">Quiz Performance</div>
+      <div class="nav-tab" onclick="switchPanel('revenue',this)">Revenue</div>
       <div class="nav-tab ai-tab" onclick="switchPanel('generate-papers',this)">✦ Generate Papers</div>
     </div>
     <div class="nav-right">
@@ -759,6 +770,78 @@ tr:hover td{background:var(--m03);}
     </div>
 
 
+    <!-- USERS -->
+    <div class="panel" id="panel-users">
+      <div class="panel-header">
+        <div><div class="panel-title">Users</div><div class="panel-sub">Everyone who has signed up</div></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card c"><div class="stat-label">Total Users</div><div class="stat-val" id="uTotal">—</div></div>
+        <div class="stat-card"><div class="stat-label">Premium</div><div class="stat-val" id="uPremium">—</div></div>
+        <div class="stat-card r"><div class="stat-label">Founders</div><div class="stat-val" id="uFounders">—</div></div>
+        <div class="stat-card"><div class="stat-label">On Trial</div><div class="stat-val" id="uTrial">—</div></div>
+      </div>
+      <div class="panel-header"><div><div class="panel-title">Signups by week</div></div></div>
+      <div class="mini-bars" id="uSignupWeeks"><span class="log-dim">Loading…</span></div>
+      <div class="table-toolbar">
+        <input class="search-input" id="uSearch" placeholder="Search by name…" oninput="renderUsersTable()"/>
+        <span class="table-count" id="uCount"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Grade</th><th>Plan</th><th>Streak</th><th>Joined</th></tr></thead>
+          <tbody id="uBody"><tr class="loading-row"><td colspan="5">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- QUIZ PERFORMANCE -->
+    <div class="panel" id="panel-quiz-performance">
+      <div class="panel-header">
+        <div><div class="panel-title">Quiz Performance</div><div class="panel-sub">How students are actually doing — use this to see what needs fixing</div></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card c"><div class="stat-label">Quiz Attempts</div><div class="stat-val" id="qpAttempts">—</div></div>
+        <div class="stat-card"><div class="stat-label">Average Score</div><div class="stat-val" id="qpAvgScore">—</div></div>
+        <div class="stat-card r"><div class="stat-label">Pass Rate</div><div class="stat-val" id="qpPassRate">—</div></div>
+        <div class="stat-card"><div class="stat-label">Levels With Data</div><div class="stat-val" id="qpLevels">—</div></div>
+      </div>
+      <div class="panel-header"><div><div class="panel-title">Performance by level</div></div></div>
+      <div class="table-wrap" style="margin-bottom:1.5rem;">
+        <table>
+          <thead><tr><th>Level</th><th>Topic</th><th>Attempts</th><th>Avg Score</th><th>Pass Rate</th></tr></thead>
+          <tbody id="qpLevelBody"><tr class="loading-row"><td colspan="5">Loading…</td></tr></tbody>
+        </table>
+      </div>
+      <div class="panel-header"><div><div class="panel-title">Hardest questions</div><div class="panel-sub">Highest miss rate, minimum 3 attempts</div></div></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Question</th><th>Attempts</th><th>Miss Rate</th></tr></thead>
+          <tbody id="qpHardestBody"><tr class="loading-row"><td colspan="3">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- REVENUE -->
+    <div class="panel" id="panel-revenue">
+      <div class="panel-header">
+        <div><div class="panel-title">Revenue</div><div class="panel-sub">Subscriptions and founder pricing</div></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card c"><div class="stat-label">Active Subscriptions</div><div class="stat-val" id="rActive">—</div></div>
+        <div class="stat-card"><div class="stat-label">Founder Slots</div><div class="stat-val" id="rFounderSlots">—</div></div>
+        <div class="stat-card r"><div class="stat-label">Est. MRR</div><div class="stat-val" id="rMRR">—</div></div>
+        <div class="stat-card"><div class="stat-label">Free Users</div><div class="stat-val" id="rFree">—</div></div>
+      </div>
+      <div class="panel-header"><div><div class="panel-title">Subscription status</div></div></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Status</th><th>Users</th></tr></thead>
+          <tbody id="rStatusBody"><tr class="loading-row"><td colspan="2">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
     <div class="panel" id="panel-generate-papers">
       <div class="panel-header">
         <div>
@@ -902,6 +985,9 @@ function switchPanel(name,btn){
   if(name==='dashboard')loadDashboard();
   if(name==='papers')loadAllPapers();
   if(name==='learn-zones')loadLearningZones();
+  if(name==='users')loadUsers();
+  if(name==='quiz-performance')loadQuizPerformance();
+  if(name==='revenue')loadRevenue();
 }
 
 async function loadDashboard(){
@@ -918,6 +1004,149 @@ async function loadDashboard(){
     const tbody=document.getElementById('recentBody');
     if(recent.length===0){tbody.innerHTML=`<tr class="loading-row"><td colspan="5">No questions yet — add your first one!</td></tr>`;return;}
     tbody.innerHTML=recent.map(q=>`<tr><td class="q-text-cell">${q.question_text.substring(0,80)}${q.question_text.length>80?'…':''}</td><td>Grade ${q.grade}</td><td>${q.subject}</td><td>${q.topic}</td><td><span class="chip-small ${q.is_premium?'chip-premium':'chip-free'}">${q.is_premium?'Premium':'Free'}</span></td></tr>`).join('');
+  }catch(e){console.error(e);}
+}
+
+// ════════════════════════════════════
+// USERS
+// ════════════════════════════════════
+let usersCache=[];
+async function loadUsers(){
+  try{
+    const profiles=await sbFetch('profiles?select=full_name,grade,is_premium,is_founder,is_trial,subscription_status,streak_days,created_at&order=created_at.desc');
+    if(!profiles)return;
+    usersCache=profiles;
+    document.getElementById('uTotal').textContent=profiles.length;
+    document.getElementById('uPremium').textContent=profiles.filter(p=>p.is_premium).length;
+    document.getElementById('uFounders').textContent=profiles.filter(p=>p.is_founder).length;
+    document.getElementById('uTrial').textContent=profiles.filter(p=>p.is_trial).length;
+    renderSignupWeeks(profiles);
+    renderUsersTable();
+  }catch(e){console.error(e);}
+}
+function renderSignupWeeks(profiles){
+  const weeks={};
+  profiles.forEach(p=>{
+    if(!p.created_at)return;
+    const d=new Date(p.created_at);
+    const monday=new Date(d);monday.setDate(d.getDate()-((d.getDay()+6)%7));
+    const key=monday.toISOString().slice(0,10);
+    weeks[key]=(weeks[key]||0)+1;
+  });
+  const keys=Object.keys(weeks).sort().slice(-8);
+  const el=document.getElementById('uSignupWeeks');
+  if(keys.length===0){el.innerHTML=`<span class="log-dim">No signups yet.</span>`;return;}
+  const max=Math.max(1,...keys.map(k=>weeks[k]));
+  el.innerHTML=keys.map(k=>{
+    const val=weeks[k];
+    const pct=Math.round((val/max)*100);
+    const label=new Date(k).toLocaleDateString('en-ZA',{day:'numeric',month:'short'});
+    return `<div class="mini-bar-row"><span class="mini-bar-label">${label}</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:${pct}%"></div></div><span class="mini-bar-val">${val}</span></div>`;
+  }).join('');
+}
+function renderUsersTable(){
+  const q=(document.getElementById('uSearch').value||'').toLowerCase();
+  const rows=usersCache.filter(p=>(p.full_name||'').toLowerCase().includes(q));
+  document.getElementById('uCount').textContent=`${rows.length} user${rows.length!==1?'s':''}`;
+  const tbody=document.getElementById('uBody');
+  if(rows.length===0){tbody.innerHTML=`<tr class="loading-row"><td colspan="5">No users match.</td></tr>`;return;}
+  tbody.innerHTML=rows.map(p=>{
+    const plan=p.is_founder?'Founder':p.is_premium?'Premium':p.is_trial?'Trial':'Free';
+    const chipClass=(p.is_founder||p.is_premium)?'chip-premium':'chip-free';
+    const joined=p.created_at?new Date(p.created_at).toLocaleDateString('en-ZA',{day:'numeric',month:'short',year:'numeric'}):'—';
+    return `<tr><td>${p.full_name||'—'}</td><td>${p.grade?'Grade '+p.grade:'—'}</td><td><span class="chip-small ${chipClass}">${plan}</span></td><td>${p.streak_days||0}</td><td>${joined}</td></tr>`;
+  }).join('');
+}
+
+// ════════════════════════════════════
+// QUIZ PERFORMANCE
+// ════════════════════════════════════
+async function loadQuizPerformance(){
+  try{
+    const[progress,levels]=await Promise.all([
+      sbFetch('user_level_progress?select=level_id,best_score,passed,attempts'),
+      sbFetch('quiz_levels?select=level_id,level_display,broad_topic_display'),
+    ]);
+    if(!progress||!levels)return;
+    const levelMap=new Map(levels.map(l=>[l.level_id,l]));
+    document.getElementById('qpAttempts').textContent=progress.length;
+    const avgScore=progress.length?Math.round(progress.reduce((s,p)=>s+(p.best_score||0),0)/progress.length):0;
+    document.getElementById('qpAvgScore').textContent=progress.length?avgScore+'%':'—';
+    const passRate=progress.length?Math.round(progress.filter(p=>p.passed).length/progress.length*100):0;
+    document.getElementById('qpPassRate').textContent=progress.length?passRate+'%':'—';
+
+    const byLevel={};
+    progress.forEach(p=>{(byLevel[p.level_id]=byLevel[p.level_id]||[]).push(p);});
+    const levelIds=Object.keys(byLevel);
+    document.getElementById('qpLevels').textContent=levelIds.length;
+    const levelBody=document.getElementById('qpLevelBody');
+    if(levelIds.length===0){
+      levelBody.innerHTML=`<tr class="loading-row"><td colspan="5">No quiz attempts yet — this fills in as students take quizzes.</td></tr>`;
+    }else{
+      levelBody.innerHTML=levelIds.map(lid=>{
+        const rows=byLevel[lid];
+        const meta=levelMap.get(lid);
+        const avg=Math.round(rows.reduce((s,r)=>s+(r.best_score||0),0)/rows.length);
+        const pr=Math.round(rows.filter(r=>r.passed).length/rows.length*100);
+        return `<tr><td>${meta?meta.level_display:lid}</td><td>${meta?(meta.broad_topic_display||'—'):'—'}</td><td>${rows.length}</td><td>${avg}%</td><td>${pr}%</td></tr>`;
+      }).join('');
+    }
+
+    const attempts=await sbFetch('question_attempts?select=question_id,is_correct');
+    const hardestBody=document.getElementById('qpHardestBody');
+    if(!attempts||attempts.length===0){
+      hardestBody.innerHTML=`<tr class="loading-row"><td colspan="3">No attempt data yet — this fills in as students take quizzes.</td></tr>`;
+      return;
+    }
+    const byQ={};
+    attempts.forEach(a=>{
+      byQ[a.question_id]=byQ[a.question_id]||{total:0,wrong:0};
+      byQ[a.question_id].total++;
+      if(!a.is_correct)byQ[a.question_id].wrong++;
+    });
+    const hardest=Object.entries(byQ)
+      .filter(([,v])=>v.total>=3)
+      .map(([qid,v])=>({qid,total:v.total,missRate:Math.round(v.wrong/v.total*100)}))
+      .sort((a,b)=>b.missRate-a.missRate)
+      .slice(0,20);
+    if(hardest.length===0){
+      hardestBody.innerHTML=`<tr class="loading-row"><td colspan="3">Not enough attempts yet (need 3+ per question).</td></tr>`;
+      return;
+    }
+    const qIds=hardest.map(h=>h.qid).join(',');
+    const qRows=await sbFetch(`questions?id=in.(${qIds})&select=id,question_text`);
+    const qTextMap=new Map((qRows||[]).map(q=>[String(q.id),q.question_text]));
+    hardestBody.innerHTML=hardest.map(h=>{
+      const text=qTextMap.get(String(h.qid))||`Question #${h.qid}`;
+      return `<tr><td class="q-text-cell">${text.substring(0,90)}${text.length>90?'…':''}</td><td>${h.total}</td><td>${h.missRate}%</td></tr>`;
+    }).join('');
+  }catch(e){console.error(e);}
+}
+
+// ════════════════════════════════════
+// REVENUE
+// ════════════════════════════════════
+async function loadRevenue(){
+  try{
+    const[profiles,slots]=await Promise.all([
+      sbFetch('profiles?select=subscription_status,is_premium,is_founder'),
+      sbFetch('founder_slots?select=*'),
+    ]);
+    if(!profiles)return;
+    const active=profiles.filter(p=>p.is_premium||p.is_founder).length;
+    document.getElementById('rActive').textContent=active;
+    document.getElementById('rFree').textContent=profiles.length-active;
+    document.getElementById('rMRR').textContent='R'+(active*49).toLocaleString();
+    if(slots&&slots[0]){
+      document.getElementById('rFounderSlots').textContent=`${slots[0].claimed}/${slots[0].total}`;
+    }
+    const statusCounts={};
+    profiles.forEach(p=>{
+      const s=p.subscription_status||'free';
+      statusCounts[s]=(statusCounts[s]||0)+1;
+    });
+    const entries=Object.entries(statusCounts).sort((a,b)=>b[1]-a[1]);
+    document.getElementById('rStatusBody').innerHTML=entries.map(([status,count])=>`<tr><td style="text-transform:capitalize">${status}</td><td>${count}</td></tr>`).join('');
   }catch(e){console.error(e);}
 }
 
