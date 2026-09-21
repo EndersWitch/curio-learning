@@ -227,7 +227,7 @@ export default function QuizRunner({
       </div>
 
       {/* Question card */}
-      <div key={`q-${currentIndex}`} className="rounded p-7 mb-5 animate-fade-slide"
+      <div key={`q-${currentIndex}`} className="rounded p-5 sm:p-7 mb-5 animate-fade-slide"
         style={{ background: CURIO.card, border: `1px solid ${CURIO.cardBorder}`, boxShadow: '0 10px 30px -12px rgba(var(--ink-rgb),0.14)' }}>
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs font-black px-2.5 py-1 rounded"
@@ -323,13 +323,13 @@ export default function QuizRunner({
       {/* Next / Finish button */}
       {answerState !== 'idle' && (
         <button onClick={handleNext}
-          className="w-full py-4 rounded text-base text-white transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-95 animate-pop-in inline-flex items-center justify-center gap-2"
+          className="quiz-next w-full py-4 rounded text-base text-white transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-95 animate-pop-in inline-flex items-center justify-center gap-2"
           style={{ background: CURIO.cyan, fontFamily: 'var(--h)', fontWeight: 700, letterSpacing: '-0.01em' }}>
           {isLast ? 'See My Results' : 'Next Question'} <ArrowRight size={18} />
         </button>
       )}
 
-      <p className="text-center text-xs mt-4" style={{ color: CURIO.subtext }}>
+      <p className="quiz-kbd-hint text-center text-xs mt-4" style={{ color: CURIO.subtext }}>
         {answerState === 'idle' ? 'Press 1–4 to answer' : 'Press Enter or Space to continue'}
       </p>
     </div>

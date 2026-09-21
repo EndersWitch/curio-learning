@@ -1079,3 +1079,190 @@ select.field-input { cursor: pointer; }
   .dl-hero-grid { grid-template-columns: 1fr; }
   .chat-preview { margin: 0 0 1rem; max-width: 480px; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE — phone-first layer. Most visitors arrive on a phone, so
+   below 760px the site swaps the desktop nav for a bottom tab bar
+   (components/MobileTabBar.tsx), tightens page gutters, and makes
+   every control finger-sized. Desktop is untouched above 760px.
+   ══════════════════════════════════════════════════════════════ */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+a, button, label, select, summary { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
+/* Bottom tab bar — off by default, phones only */
+.mtab { display: none; }
+
+@media (max-width: 760px) {
+  /* Room for the tab bar (class toggled by MobileTabBar) */
+  body.has-mtab { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+  .mtab {
+    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 250;
+    padding: 0 0.25rem env(safe-area-inset-bottom);
+    background: rgba(var(--paper-rgb), 0.96);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    border-top: 1px solid var(--ink15);
+  }
+  .mtab-item {
+    flex: 1; min-width: 0; height: 64px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.22rem;
+    color: var(--ink55); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.02em;
+    position: relative; transition: color .15s;
+  }
+  .mtab-item svg { transition: transform .15s; }
+  .mtab-item:active svg { transform: scale(0.9); }
+  .mtab-item.active { color: var(--rust); }
+  .mtab-item.active::before {
+    content: ''; position: absolute; top: 0; left: 50%; width: 28px; height: 3px;
+    transform: translateX(-50%); background: var(--rust); border-radius: 0 0 3px 3px;
+  }
+
+  /* Top bar: logo + account only (links live in the tab bar) */
+  .curio-nav { padding: 0 1rem; padding-top: env(safe-area-inset-top); height: calc(60px + env(safe-area-inset-top)); gap: 0.5rem; }
+  .simple-nav { padding: 0 1rem; }
+  .nav-links { display: none; }
+  .nav-right { gap: 0.35rem; }
+  .btn-ghost { padding: 0.55rem 0.7rem; font-size: 0.85rem; }
+  .btn-nav { padding: 0.62rem 0.95rem; font-size: 0.85rem; white-space: nowrap; }
+  .profile-btn { width: 40px; height: 40px; }
+  .profile-dropdown { min-width: min(260px, calc(100vw - 2rem)); }
+  .profile-dd-item { padding: 0.85rem 1rem; font-size: 0.9rem; }
+  .nav-back { padding: 0.6rem 0; }
+  /* Pages that offset for the fixed nav */
+  .page-wrap { padding-top: calc(60px + env(safe-area-inset-top)); }
+
+  /* Type & controls: 16px stops iOS from zooming the page on focus */
+  input, select, textarea, .field-input, .papers-search, .grade-select { font-size: 16px !important; }
+  .field-input { padding: 0.85rem 1rem; }
+  .btn-submit { padding: 1rem; font-size: 1rem; }
+
+  /* Finger-sized tap targets */
+  .btn-primary, .btn-soft, .cs-cta, .cs-soft, .pu-cta, .btn-go, .premium-cta, .spread-closing-cta { min-height: 48px; justify-content: center; }
+  .gp, .grade-pill, .gnav-pill, .subj-pill { min-height: 38px; display: inline-flex; align-items: center; padding-left: 0.9rem; padding-right: 0.9rem; }
+  .grade-btn { min-height: 44px; }
+  .paperc-btn, .subjpaper-btn, .rec-btn { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; }
+  .qopt { min-height: 48px; }
+  .tab-btn { min-height: 44px; }
+  .faq-q { min-height: 44px; }
+  .footer-col a { min-height: 40px; }
+  .ad-x { width: 32px; height: 32px; }
+
+  /* Gutters: 3rem side padding is a desktop luxury */
+  .hero { min-height: auto; }
+  .hero-left { padding: 2.75rem 1.25rem 3rem; }
+  .hero-h1 { font-size: clamp(3.2rem, 17vw, 4.4rem); margin-bottom: 1.4rem; }
+  .hero-desc { margin-bottom: 1.8rem; }
+  .hero-actions .btn-primary, .hero-actions .btn-soft { flex: 1 1 100%; }
+  .subjects-section, .ch1, .ch2, .ch3, .pricing { padding: 3.5rem 1.25rem; }
+  .closing { padding: 4rem 1.25rem; }
+  .ch-h { font-size: clamp(2.1rem, 9vw, 2.8rem); }
+  .pricing-header { margin-bottom: 2rem; }
+  .hub-wrap { padding: 2.25rem 1.25rem 2.5rem; }
+  .hub-sub { margin-bottom: 2.25rem; }
+  .subject-hero { padding: 2.5rem 1.25rem 2.25rem; }
+  .content-area { padding: 2rem 1.25rem; gap: 1.75rem; }
+  .legal-wrap { padding: 2.5rem 1.25rem; }
+  .page-title { font-size: 2rem; }
+  .hero-free { padding: 3.5rem 1.25rem 3rem; min-height: auto; }
+  .premium-hero { padding: 3.5rem 1.25rem 1.5rem; min-height: auto; }
+  .sub-ledger-wrap { padding: 0 1.25rem 4rem; }
+  .mem-section { padding: 0 1.25rem 3rem; }
+  .mem-card-head, .mem-body, .mem-foot { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .coming-soon { padding: 3rem 1.25rem 2rem; }
+  .ad-topbar { padding: 0.5rem 1rem; }
+  .form-panel { padding: 2rem 1.25rem 2.5rem; min-height: 100svh; }
+  .form-back { margin-bottom: 1.75rem; padding: 0.4rem 0; }
+  .papers-search { padding: 0.8rem 0.9rem; }
+
+  /* Dashboard */
+  .dash-wrap { padding: 1.5rem 1rem 2rem; gap: 1.4rem; }
+  .dash-greeting { align-items: flex-start; }
+  .dash-greeting-right { width: 100%; justify-content: space-between; flex-wrap: wrap; }
+  .dash-grade-selector { flex: 1; min-width: 0; }
+  .ds-val { font-size: 2rem; }
+  .dash-stat { padding: 1.1rem 1rem 1.15rem; }
+  .dash-stat:nth-child(odd) { border-left: none; }
+  .dash-stat:nth-child(n+3) { border-top: 1px solid var(--ink15); }
+  .quick-actions .qa-btn:nth-child(odd) { border-left: none; }
+  .quick-actions .qa-btn:nth-child(n+3) { border-top: 1px solid var(--ink15); }
+  .qa-btn { padding: 1.15rem 0.6rem; min-height: 88px; justify-content: center; }
+  .dash-ph, .dash-pb { padding-left: 1rem; padding-right: 1rem; }
+  .pu { padding: 1.5rem 1.25rem; gap: 1.25rem; }
+  .pu-cta { width: 100%; }
+  .rec-paper, .qhi { min-height: 52px; }
+
+  /* Subject / papers / subscription details */
+  .wbar-label { min-width: 0; flex: 0 0 38%; font-size: 0.7rem; }
+  .subject-title-row { gap: 1rem; }
+  .papers-hero { padding: 3.5rem 1.25rem 2.5rem; }
+  .papers-layout { grid-template-columns: minmax(0, 1fr); }
+  .papers-sidebar, .papers-main { min-width: 0; }
+  .papers-sidebar { padding: 1.25rem; gap: 1.25rem; }
+  /* Grade + subject filters become swipeable chip rows instead of tall lists */
+  .grade-list, .subject-pills {
+    display: flex; flex-direction: row; flex-wrap: nowrap; gap: 0.45rem; overflow-x: auto;
+    margin: 0 -1.25rem; padding: 0.1rem 1.25rem 0.35rem;
+    scroll-snap-type: x proximity; scroll-padding: 0 1.25rem; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .grade-list::-webkit-scrollbar, .subject-pills::-webkit-scrollbar { display: none; }
+  .grade-list .grade-btn, .subject-pills .subj-pill {
+    width: auto; flex: 0 0 auto; white-space: nowrap; gap: 0.6rem; scroll-snap-align: start;
+    border: 1px solid var(--ink15); border-radius: 100px; padding: 0.5rem 0.95rem; min-height: 40px;
+  }
+  .grade-list .grade-btn.active { border-color: var(--rust30); }
+  .papers-main { padding: 1.5rem 1.25rem; }
+  .grade-heading-num { font-size: 3.2rem; }
+  .spread-closing-actions { width: 100%; }
+  .spread-closing-cta { width: 100%; }
+  .sub-toast { bottom: calc(80px + env(safe-area-inset-bottom)); max-width: calc(100vw - 2rem); white-space: normal; text-align: center; }
+  .grade-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .qtopics-grid, .qtopics-skeleton, .subj-grid { grid-template-columns: 1fr; }
+  .qtopic-title { min-height: 0; }
+  .nav-logo { min-height: 44px; padding-right: 0.5rem; }
+  .footer-logo { min-height: 44px; }
+  .report-cta { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+  .ad-cta { min-height: 36px; }
+  .quiz-auth-pill a, .switch-link a, .forgot-link, .dash-pl, .sidebar-card-link { display: inline-block; padding: 0.55rem 0; }
+}
+
+/* Very small phones (≤360px) */
+@media (max-width: 360px) {
+  .btn-ghost { display: none; }
+  .mtab-item { font-size: 0.58rem; }
+  .hero-left, .subject-hero, .hub-wrap, .content-area, .legal-wrap { padding-left: 1rem; padding-right: 1rem; }
+}
+
+/* Touch devices: hover lifts stick after a tap, so don't apply them */
+@media (hover: none) {
+  .grade-card:hover, .qtopic-card:hover, .subj-card:hover, .paper-card:hover, .qa-btn:hover, .premqa:hover, .cs-cta:hover { transform: none; box-shadow: none; }
+}
+
+/* Respect reduced-motion (also calms the decorative bloom animations) */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rv { opacity: 1; transform: none; transition: none; }
+  .cs-bloom svg, .papers-loading-bloom { animation: none; }
+}
+
+/* ── Quiz play screen ── */
+/* The play header sits under the fixed site nav on desktop... */
+.quiz-play-bar { top: 60px; }
+@media (max-width: 760px) {
+  /* ...but on phones the quiz is a focused screen: drop the site chrome so a
+     stray tap on the logo can't dump a half-finished quiz, and reclaim 60px. */
+  body:has(.quiz-play) .curio-nav { display: none; }
+  body:has(.quiz-play) main { padding-top: env(safe-area-inset-top) !important; }
+  .quiz-play-bar { top: 0; padding-top: env(safe-area-inset-top); }
+  /* Next/Finish stays reachable without scrolling past the feedback card */
+  .quiz-next { position: sticky; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 20; box-shadow: 0 10px 28px -6px rgba(0,0,0,0.45); min-height: 52px; }
+}
+/* No keyboard on a touchscreen — the shortcut hint is just noise there */
+@media (hover: none) { .quiz-kbd-hint { display: none; } }
+
+/* Login: the desktop split-screen grid is set inline; on phones the brand
+   panel is hidden, so the form must take the whole width (and the dynamic
+   viewport height, so mobile browser chrome doesn't cause a scroll jump). */
+@media (max-width: 760px) {
+  .login-shell { grid-template-columns: 1fr !important; min-height: 100svh !important; }
+  .form-panel { border-left: none; justify-content: flex-start; padding-top: calc(1.25rem + env(safe-area-inset-top)); }
+  .remember-check { min-height: 44px; }
+}

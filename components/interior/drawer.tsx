@@ -335,7 +335,7 @@ export function Drawer({
             onPointerDown={(e) => e.stopPropagation()}
             onClick={drawer.close}
             aria-label={closeLabel}
-            className="-mr-1 grid size-7 shrink-0 place-items-center outline-none transition-colors duration-150"
+            className="-mr-1 grid size-7 max-sm:size-11 max-sm:-mr-2 shrink-0 place-items-center outline-none transition-colors duration-150"
             style={{ borderRadius: 4, color: 'rgba(var(--ink-rgb),0.4)' }}
             onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(var(--ink-rgb),0.08)'; e.currentTarget.style.color = 'var(--ink)' }}
             onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(var(--ink-rgb),0.4)' }}

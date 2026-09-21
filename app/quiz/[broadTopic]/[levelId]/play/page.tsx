@@ -173,9 +173,9 @@ export default function PlayPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--paper)' }}>
-      <div className="sticky top-0 z-30 backdrop-blur-md"
-        style={{ background: 'rgba(246,240,226,0.92)', borderBottom: '1px solid rgba(var(--rust-rgb),0.15)' }}>
+    <div className="quiz-play min-h-screen" style={{ background: 'var(--paper)' }}>
+      <div className="quiz-play-bar sticky top-0 z-30 backdrop-blur-md"
+        style={{ background: 'rgba(var(--paper-rgb),0.92)', borderBottom: '1px solid rgba(var(--rust-rgb),0.15)' }}>
         <div className="max-w-2xl mx-auto px-6 py-3 flex items-center justify-between">
           <HoldToConfirm
             size="sm"
