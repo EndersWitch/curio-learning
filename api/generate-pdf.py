@@ -8,8 +8,7 @@ SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY", "sb_publishable__15Lhb_Z
 
 def _is_admin(auth_header):
     """Verify the caller's bearer token belongs to a signed-in admin account.
-    Stdlib-only (no supabase-py dependency), mirroring generate_paper_ai.py's
-    Supabase REST helpers."""
+    Stdlib-only (no supabase-py dependency)."""
     if not auth_header or not auth_header.startswith('Bearer '):
         return False
     token = auth_header[len('Bearer '):]
@@ -31,11 +30,13 @@ def _is_admin(auth_header):
     except Exception:
         return False
 
+# No Access-Control-Allow-Origin: the only callers are /formatter (same origin)
+# and the generate-paper-ai edge function (server-to-server), neither of which
+# needs CORS.
 class handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
         self.send_response(200)
         for h,v in [
-            ('Access-Control-Allow-Origin','*'),
             ('Access-Control-Allow-Methods','POST,OPTIONS'),
             ('Access-Control-Allow-Headers','Content-Type,Authorization'),
         ]: self.send_header(h,v)
@@ -47,7 +48,6 @@ class handler(BaseHTTPRequestHandler):
                 err = json.dumps({'error': 'Not authorized'}).encode()
                 self.send_response(401)
                 self.send_header('Content-Type', 'application/json')
-                self.send_header('Access-Control-Allow-Origin', '*')
                 self.end_headers()
                 self.wfile.write(err)
                 return
@@ -71,7 +71,6 @@ class handler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-Type', 'application/pdf')
             self.send_header('Content-Disposition', f'attachment; filename="{fname}"')
-            self.send_header('Access-Control-Allow-Origin', '*')
             self.send_header('Content-Length', str(len(pdf)))
             self.end_headers()
             self.wfile.write(pdf)
@@ -80,6 +79,5 @@ class handler(BaseHTTPRequestHandler):
             err = json.dumps({'error': str(e)}).encode()
             self.send_response(500)
             self.send_header('Content-Type', 'application/json')
-            self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
             self.wfile.write(err)

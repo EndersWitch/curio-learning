@@ -964,6 +964,8 @@ function enterAdmin(){
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('admin-screen').style.display = 'block';
   loadDashboard(); loadAllQuestions();
+  // The paper generator needs the admin's token, so load its preview after login.
+  onGenGradeTermChange();
 }
 async function doLogout(){
   await AdminAuth.logout();
@@ -1494,7 +1496,9 @@ async function onGenGradeTermChange(){
 
   loading.textContent = 'loading…';
   try {
-    const resp = await fetch(`${EDGE_FN}?grade=${grade}&term=${term}`);
+    const resp = await fetch(`${EDGE_FN}?grade=${grade}&term=${term}`, {
+      headers: { Authorization: AdminAuth.authHeaders().Authorization }
+    });
     if (!resp.ok) throw new Error('fetch failed');
     const data = await resp.json();
 
@@ -1520,9 +1524,6 @@ async function onGenGradeTermChange(){
   }
 }
 
-// Load on first render
-onGenGradeTermChange();
-
 async function startGeneration(){
   const sectionType=document.getElementById('genSectionType').value;
   const topic=document.getElementById('genTopic').value.trim();
@@ -1540,7 +1541,7 @@ async function startGeneration(){
   try{
     const resp=await fetch(EDGE_FN,{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json','Authorization':AdminAuth.authHeaders().Authorization},
       body:JSON.stringify({grade,subject,term,section_type:sectionType,topic,count})
     });
     if(!resp.ok){
