@@ -1,20 +1,9 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
 import Bloom from '@/components/Bloom'
-
-interface Paper {
-  id: number | string
-  grade: number
-  subject: string
-  title: string
-  has_memo: boolean
-  file_url: string
-  memo_url: string | null
-  topic?: string | null
-}
+import type { Paper } from '@/lib/content'
 
 const SUBJECT_NAMES: Record<string, string> = {
   english: 'English HL', afrikaans: 'Afrikaans', maths: 'Mathematics',
@@ -28,35 +17,9 @@ const SUBJECT_COLOUR: Record<string, string> = {
   science: 'coral', physics: 'coral', lifesciences: 'coral',
 }
 
-// Shown when the papers table is empty, so the page still demonstrates the
-// layout instead of rendering blank.
-const DEMO_PAPERS: Paper[] = [
-  { id: 1, grade: 10, subject: 'maths', title: 'Mathematics · Paper 1', has_memo: true, file_url: '#', memo_url: '#', topic: 'Algebra & Functions' },
-  { id: 2, grade: 10, subject: 'maths', title: 'Mathematics · Paper 2', has_memo: true, file_url: '#', memo_url: '#', topic: 'Geometry & Statistics' },
-  { id: 3, grade: 10, subject: 'english', title: 'English HL · Paper 1', has_memo: true, file_url: '#', memo_url: '#', topic: 'Comprehension & Language' },
-  { id: 4, grade: 10, subject: 'english', title: 'English HL · Paper 2', has_memo: false, file_url: '#', memo_url: null, topic: 'Literature' },
-  { id: 5, grade: 10, subject: 'physics', title: 'Physical Sciences · Paper 1', has_memo: true, file_url: '#', memo_url: '#', topic: 'Mechanics & Waves' },
-  { id: 6, grade: 11, subject: 'maths', title: 'Mathematics · Paper 1', has_memo: true, file_url: '#', memo_url: '#', topic: 'Functions & Algebra' },
-  { id: 7, grade: 11, subject: 'maths', title: 'Mathematics · Paper 2', has_memo: true, file_url: '#', memo_url: '#', topic: 'Trigonometry & Stats' },
-  { id: 8, grade: 11, subject: 'english', title: 'English HL · Paper 1', has_memo: true, file_url: '#', memo_url: '#', topic: 'Comprehension & Summary' },
-  { id: 9, grade: 11, subject: 'lifesciences', title: 'Life Sciences · Paper 1', has_memo: false, file_url: '#', memo_url: null, topic: 'DNA & Evolution' },
-  { id: 10, grade: 12, subject: 'maths', title: 'Mathematics · Paper 1', has_memo: true, file_url: '#', memo_url: '#', topic: 'Functions, Sequences & Finance' },
-  { id: 11, grade: 12, subject: 'maths', title: 'Mathematics · Paper 2', has_memo: true, file_url: '#', memo_url: '#', topic: 'Statistics, Analytical Geometry' },
-  { id: 12, grade: 12, subject: 'english', title: 'English HL · Paper 1', has_memo: true, file_url: '#', memo_url: '#', topic: 'Comprehension, Summary, Language' },
-  { id: 13, grade: 12, subject: 'english', title: 'English HL · Paper 2', has_memo: true, file_url: '#', memo_url: '#', topic: 'Literature & Poetry' },
-  { id: 14, grade: 12, subject: 'physics', title: 'Physical Sciences · Paper 1', has_memo: true, file_url: '#', memo_url: '#', topic: 'Mechanics, Electricity' },
-  { id: 15, grade: 12, subject: 'physics', title: 'Physical Sciences · Paper 2', has_memo: true, file_url: '#', memo_url: '#', topic: 'Chemical Change, Organic Chemistry' },
-  { id: 16, grade: 12, subject: 'accounting', title: 'Accounting · Full Paper', has_memo: true, file_url: '#', memo_url: '#', topic: 'Financial Statements & Analysis' },
-  { id: 17, grade: 9, subject: 'maths', title: 'Mathematics · Paper 1', has_memo: true, file_url: '#', memo_url: '#', topic: 'Algebra & Geometry' },
-  { id: 18, grade: 9, subject: 'english', title: 'English HL · Paper 1', has_memo: false, file_url: '#', memo_url: null, topic: 'Comprehension & Writing' },
-  { id: 19, grade: 4, subject: 'english', title: 'English HL · Term 1', has_memo: true, file_url: '#', memo_url: '#', topic: 'Language & Reading' },
-  { id: 20, grade: 4, subject: 'maths', title: 'Mathematics · Term 1', has_memo: true, file_url: '#', memo_url: '#', topic: 'Number Sense & Operations' },
-]
-
 function PaperCard({ p }: { p: Paper }) {
   const subjName = SUBJECT_NAMES[p.subject] || p.subject
   const colour = SUBJECT_COLOUR[p.subject] || ''
-  const isDemoLink = p.file_url === '#'
 
   return (
     <div className="paper-card">
@@ -67,15 +30,9 @@ function PaperCard({ p }: { p: Paper }) {
       <div className="paperc-title">{p.title}</div>
       {p.topic && <div className="paperc-meta">{p.topic}</div>}
       <div className="paperc-actions">
-        {isDemoLink ? (
-          <button className="paperc-btn paperc-btn-paper" onClick={() => showComingSoon()}>Download paper ↓</button>
-        ) : (
-          <a href={p.file_url} target="_blank" rel="noopener" className="paperc-btn paperc-btn-paper">Download paper ↓</a>
-        )}
-        {p.has_memo && p.memo_url && p.memo_url !== '#' ? (
+        <a href={p.file_url} target="_blank" rel="noopener" className="paperc-btn paperc-btn-paper">Download paper ↓</a>
+        {p.has_memo && p.memo_url ? (
           <a href={p.memo_url} target="_blank" rel="noopener" className="paperc-btn paperc-btn-memo has-memo">Memo ↓</a>
-        ) : p.has_memo && isDemoLink ? (
-          <button className="paperc-btn paperc-btn-memo has-memo" onClick={() => showComingSoon()}>Memo ↓</button>
         ) : (
           <span className="paperc-btn paperc-btn-memo" style={{ cursor: 'default', opacity: 0.4 }}>No memo</span>
         )}
@@ -84,24 +41,15 @@ function PaperCard({ p }: { p: Paper }) {
   )
 }
 
-function showComingSoon() {
-  alert('This is a demo paper.\n\nAdd real papers via the Admin Panel → Add Paper, paste in a Supabase Storage URL and it will appear here automatically.')
-}
-
-export default function PapersClient() {
+// `papers` comes from the server (app/papers/page.tsx), so the full library is
+// in the page's HTML. There's deliberately no placeholder/demo fallback: fake
+// papers shown to a crawler or reviewer read as a thin or misleading site.
+export default function PapersClient({ papers: allPapers }: { papers: Paper[] }) {
   const { user } = useAuth()
-  const [allPapers, setAllPapers] = useState<Paper[] | null>(null)
   const [selectedGrade, setSelectedGrade] = useState<number | 'all'>('all')
   const [selectedSubject, setSelectedSubject] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [adDismissed, setAdDismissed] = useState(true) // starts hidden until we know it should show
-
-  useEffect(() => {
-    sb.from('papers').select('*').order('grade', { ascending: true }).order('subject', { ascending: true }).order('title', { ascending: true })
-      .then(({ data }) => {
-        setAllPapers(data && data.length > 0 ? (data as Paper[]) : DEMO_PAPERS)
-      })
-  }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -111,17 +59,14 @@ export default function PapersClient() {
   const showAd = !user || !(user.isPremium || user.isFounder)
 
   const grades = useMemo(() => {
-    if (!allPapers) return []
     return [...new Set(allPapers.map((p) => p.grade))].sort((a, b) => a - b)
   }, [allPapers])
 
   const subjects = useMemo(() => {
-    if (!allPapers) return []
     return [...new Set(allPapers.map((p) => p.subject))].sort()
   }, [allPapers])
 
   const filtered = useMemo(() => {
-    if (!allPapers) return []
     const q = searchQuery.toLowerCase().trim()
     return allPapers.filter((p) => {
       const matchGrade = selectedGrade === 'all' || p.grade === selectedGrade
@@ -188,10 +133,10 @@ export default function PapersClient() {
               <span>exam</span>
               <span className="accent">papers.</span>
             </h1>
-            <p className="papers-hero-sub">Browse and download exam papers for every grade and subject. <strong>Papers and memos are always free,</strong> no account needed, no strings.</p>
+            <p className="papers-hero-sub">Browse and download CAPS-aligned practice papers by grade and subject. <strong>Papers and memos are always free,</strong> no account needed, no strings.</p>
           </div>
           <div className="papers-hero-stats" aria-label="Paper library totals">
-            <div className="papers-hero-stat"><div className="papers-hero-stat-value">{allPapers?.length ?? '—'}</div><div className="papers-hero-stat-label">Papers</div></div>
+            <div className="papers-hero-stat"><div className="papers-hero-stat-value">{allPapers.length || '—'}</div><div className="papers-hero-stat-label">Papers</div></div>
             <div className="papers-hero-stat"><div className="papers-hero-stat-value">{grades.length || '—'}</div><div className="papers-hero-stat-label">Grades</div></div>
             <div className="papers-hero-stat"><div className="papers-hero-stat-value">{subjects.length || '—'}</div><div className="papers-hero-stat-label">Subjects</div></div>
           </div>
@@ -215,11 +160,11 @@ export default function PapersClient() {
             <div className="sidebar-label">Grade</div>
             <div className="grade-list">
               <button className={`grade-btn${selectedGrade === 'all' ? ' active' : ''}`} onClick={() => setSelectedGrade('all')}>
-                All grades <span className="grade-count">{allPapers?.length ?? 0}</span>
+                All grades <span className="grade-count">{allPapers.length}</span>
               </button>
               {grades.map((g) => (
                 <button key={g} className={`grade-btn${selectedGrade === g ? ' active' : ''}`} onClick={() => setSelectedGrade(g)}>
-                  Grade {g} <span className="grade-count">{allPapers!.filter((p) => p.grade === g).length}</span>
+                  Grade {g} <span className="grade-count">{allPapers.filter((p) => p.grade === g).length}</span>
                 </button>
               ))}
             </div>
@@ -239,20 +184,8 @@ export default function PapersClient() {
         </aside>
 
         <main className="papers-main">
-          {allPapers === null ? (
-            <div className="papers-loading">
-              <svg className="papers-loading-bloom" width="48" height="48" viewBox="0 0 64 64" fill="none">
-                <g fill="none" stroke="var(--rust)" strokeWidth="2" strokeLinejoin="round">
-                  <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(0 32 32)" />
-                  <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(72 32 32)" />
-                  <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(144 32 32)" />
-                  <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(216 32 32)" />
-                  <path d="M32,32 C20,30 20,12 32,4 C44,12 44,30 32,32 Z" transform="rotate(288 32 32)" />
-                </g>
-                <circle cx="32" cy="32" r="4.5" fill="var(--ochre)" />
-              </svg>
-              <span className="papers-loading-text">Loading papers…</span>
-            </div>
+          {allPapers.length === 0 ? (
+            <div className="no-results">No papers have been published yet.</div>
           ) : filtered.length === 0 ? (
             <div className="no-results">
               No papers found for your search. <button className="clear-btn" onClick={clearFilters}>Clear filters</button>

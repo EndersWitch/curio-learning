@@ -6,6 +6,9 @@ import SubscriptionClient from '@/components/SubscriptionClient'
 export const metadata: Metadata = {
   title: 'Premium',
   description: 'Upgrade to Curio Premium for AI-powered quizzes, Deep Learn explanations, custom tests and progress tracking.',
+  // Checkout page, and SubscriptionClient renders nothing until the auth
+  // check finishes, so crawlers get an empty page.
+  robots: { index: false, follow: true },
 }
 
 export default function SubscriptionPage() {

@@ -11,6 +11,7 @@ import { saveQuizResult } from '@/lib/progress'
 import type { ShuffledQuestion, QuizResult } from '@/types/quiz'
 import { Target, RefreshCw, Lock, AlertTriangle, X } from '@/components/icons'
 import { HoldToConfirm } from '@/components/interior/hold-to-confirm'
+import { topicHref } from '@/lib/quizUrls'
 
 export default function PlayPage() {
   const params = useParams()
@@ -167,7 +168,7 @@ export default function PlayPage() {
         levelTitle={levelMeta?.level_display ?? 'Quiz Complete'}
         sectionType={levelMeta?.section_type ?? 'learning_level'}
         retryHref={learnHref}
-        nextHref={`/quiz/${broadTopic}`}
+        nextHref={levelMeta ? topicHref(levelMeta) : '/quiz'}
       />
     )
   }

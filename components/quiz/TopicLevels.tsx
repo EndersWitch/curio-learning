@@ -1,0 +1,211 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useAuth } from '@/lib/auth-context'
+import { sb } from '@/lib/supabase'
+import { Lock, Check } from '@/components/icons'
+import Footer from '@/components/Footer'
+import Bloom from '@/components/Bloom'
+import type { LevelSummary } from '@/lib/content'
+import { learnHref, prettySlug } from '@/lib/quizUrls'
+
+interface LevelProgress {
+  best_score: number
+  passed: boolean
+  xp_earned: number
+  attempts: number
+}
+
+function difficultyBadge(d: string | null) {
+  if (!d) return null
+  const map: Record<string, { label: string; color: string }> = {
+    'Starter':   { label: 'Starter',   color: 'var(--moss)' },
+    'Building':  { label: 'Building',  color: 'var(--ochre)' },
+    'Challenge': { label: 'Challenge', color: 'var(--brick)' },
+  }
+  return map[d] ?? null
+}
+
+// The level list arrives from the server (app/quiz/[broadTopic]/page.tsx) so
+// it's in the page's HTML for crawlers; the signed-in layer — progress ticks,
+// and premium levels unlocking for subscribers — fills in once auth resolves.
+export default function TopicLevels({ levels }: { levels: LevelSummary[] }) {
+  const { user, loading: authLoading } = useAuth()
+  const isPremium = user?.isPremium || user?.isFounder || false
+
+  const [progressMap, setProgressMap] = useState<Map<string, LevelProgress>>(new Map())
+
+  const broadTopic = levels[0].broad_topic
+  const grade = levels[0].grade
+
+  useEffect(() => { window.scrollTo(0, 0) }, [broadTopic])
+  // level_id slugs (e.g. "nouns_1") are reused across grades, so progress
+  // must be grade-scoped too.
+  useEffect(() => { if (!authLoading) loadProgress() }, [authLoading, user?.id, broadTopic, grade])
+
+  async function loadProgress() {
+    if (!user) { setProgressMap(new Map()); return }
+    const { data } = await sb
+      .from('user_level_progress')
+      .select('level_id, best_score, passed, xp_earned, attempts')
+      .eq('user_id', user.id)
+      .eq('topic_id', broadTopic)
+      .eq('grade', grade)
+
+    setProgressMap(new Map((data ?? []).map((r: any) => [r.level_id, r])))
+  }
+
+  const displayName = levels[0].broad_topic_display || prettySlug(broadTopic)
+  const subject = levels[0].subject
+
+  // Group by subtopic
+  const subtopicMap = new Map<string, LevelSummary[]>()
+  for (const level of levels) {
+    const key = level.subtopic_id ?? '_none'
+    if (!subtopicMap.has(key)) subtopicMap.set(key, [])
+    subtopicMap.get(key)!.push(level)
+  }
+
+  const premiumCount = levels.filter(l => l.is_premium).length
+
+  return (
+    <div className="min-h-screen" style={{ background: 'var(--paper)' }}>
+
+      {/* Header */}
+      <div style={{ background: 'var(--paper-dim)', position: 'relative', overflow: 'hidden' }}>
+        <div className="spread-deco o1" style={{ top: '-40px', right: '4%' }}>
+          <Bloom size={190} />
+        </div>
+        <div className="max-w-2xl mx-auto px-6 py-10" style={{ position: 'relative', zIndex: 2 }}>
+          <Link href="/quiz"
+            className="inline-flex items-center gap-1 text-xs font-semibold mb-4 hover:opacity-70 transition-opacity"
+            style={{ color: 'var(--rust)' }}>
+            ← Back to Topics
+          </Link>
+          <p className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: 'var(--rust)' }}>
+            {subject} · Grade {grade}
+          </p>
+          <h1 style={{ fontFamily: 'var(--h)', fontSize: 'clamp(2.2rem,4.5vw,3.4rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 0.95, color: 'var(--ink)' }}>
+            {displayName}
+          </h1>
+          <p className="text-sm mt-2" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
+            {levels.length} level{levels.length !== 1 ? 's' : ''} · {levels.filter(l => !l.is_premium).length} free
+            {!isPremium && premiumCount > 0 && (
+              <span className="inline-flex items-center gap-1" style={{ color: 'var(--ochre)' }}> · {premiumCount} premium <Lock size={11} /></span>
+            )}
+          </p>
+        </div>
+      </div>
+
+      {/* Levels list */}
+      <div className="max-w-2xl mx-auto px-6 py-8 space-y-6">
+        {[...subtopicMap.entries()].map(([key, subLevels]) => {
+          const subtopicName = subLevels[0]?.subtopic_display || (key === '_none' ? null : key)
+          return (
+            <div key={key}>
+              {subtopicName && (
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-xs font-black uppercase tracking-widest" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
+                    {subtopicName}
+                  </span>
+                  <div className="flex-1 h-px" style={{ background: 'rgba(var(--ink-rgb),0.1)' }} />
+                </div>
+              )}
+              <div className="space-y-2">
+                {subLevels.map(level => (
+                  <LevelRow
+                    key={level.id}
+                    level={level}
+                    isPremium={isPremium}
+                    progress={progressMap.get(level.level_id)}
+                  />
+                ))}
+              </div>
+            </div>
+          )
+        })}
+
+        {/* Premium upsell */}
+        {!isPremium && premiumCount > 0 && (
+          <div className="rounded p-5 text-center"
+            style={{ background: 'rgba(var(--ochre-rgb),0.06)', border: '1px solid rgba(var(--ochre-rgb),0.2)' }}>
+            <p className="inline-flex items-center gap-1.5 justify-center font-black text-sm mb-1" style={{ color: 'var(--ochre)' }}>
+              <Lock size={14} /> {premiumCount} level{premiumCount !== 1 ? 's' : ''} locked
+            </p>
+            <p className="text-xs mb-3" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
+              Get the rest with Curio Premium for R49/month
+            </p>
+            <a href="/subscription"
+              className="inline-block px-5 py-2.5 rounded font-black text-sm"
+              style={{ background: 'var(--ochre)', color: 'var(--paper)' }}>
+              Get Premium →
+            </a>
+          </div>
+        )}
+      </div>
+      <Footer />
+    </div>
+  )
+}
+
+function LevelRow({ level, isPremium, progress }: {
+  level: LevelSummary; isPremium: boolean; progress?: LevelProgress
+}) {
+  const locked = level.is_premium && !isPremium
+  const diff = difficultyBadge(level.difficulty)
+  const completed = progress?.passed ?? false
+
+  const inner = (
+    <div className="flex items-center gap-3 px-4 py-3 rounded transition-all"
+      style={locked
+        ? { background: 'rgba(var(--ink-rgb),0.03)', opacity: 0.6, cursor: 'not-allowed' }
+        : completed
+        ? { background: 'rgba(var(--moss-rgb),0.06)', border: '1px solid rgba(var(--moss-rgb),0.2)' }
+        : { background: 'rgba(var(--ink-rgb),0.04)' }}>
+      <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0"
+        style={locked
+          ? { background: 'rgba(var(--ink-rgb),0.04)', color: 'rgba(var(--ink-rgb),0.55)', border: '2px solid rgba(var(--ink-rgb),0.1)' }
+          : completed
+          ? { background: 'var(--moss)', color: 'var(--paper)', border: '2px solid var(--moss)' }
+          : { background: 'rgba(var(--rust-rgb),0.1)', color: 'var(--rust)', border: '2px solid rgba(var(--rust-rgb),0.25)' }}>
+        {locked ? <Lock size={15} /> : completed ? <Check size={16} /> : level.level_order}
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="font-bold text-sm" style={{ color: locked ? 'rgba(var(--ink-rgb),0.55)' : 'var(--ink)' }}>
+          {level.level_display}
+        </p>
+        {level.description && (
+          <p className="text-xs mt-0.5 truncate" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
+            {level.description}
+          </p>
+        )}
+        <div className="flex items-center gap-2 mt-1 flex-wrap">
+          {diff && (
+            <span className="inline-flex items-center gap-1 text-xs" style={{ color: diff.color }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: diff.color, display: 'inline-block' }} />
+              {diff.label}
+            </span>
+          )}
+          {progress && (
+            <span className="text-xs font-bold" style={{ color: completed ? 'var(--moss)' : 'rgba(var(--ink-rgb),0.55)' }}>
+              Best: {progress.best_score}%
+            </span>
+          )}
+        </div>
+      </div>
+      <div className="flex-shrink-0 text-right">
+        <div className="text-xs" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>{level.question_count}Q</div>
+        {locked
+          ? <div className="inline-flex items-center gap-1 text-xs" style={{ color: 'var(--ochre)' }}>Premium <Lock size={11} /></div>
+          : completed
+          ? <div className="text-xs font-bold" style={{ color: 'var(--moss)' }}>Replay ↻</div>
+          : <div className="text-xs font-bold" style={{ color: 'var(--rust)' }}>→</div>}
+      </div>
+    </div>
+  )
+
+  if (locked) return <div>{inner}</div>
+  // URL uses the UUID id — so learn/play pages can fetch by id directly
+  return <Link href={learnHref(level)} className="block hover:brightness-110 transition-all">{inner}</Link>
+}

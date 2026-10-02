@@ -7,6 +7,9 @@ import Bloom from '@/components/Bloom'
 export const metadata: Metadata = {
   title: 'Deep Learn',
   description: "Curio's AI tutor breaks down concepts from first principles, in plain language, with real examples, until it actually clicks.",
+  // "Coming soon" pages read as an unfinished site to Google and AdSense.
+  // Drop this once Deep Learn is live.
+  robots: { index: false, follow: true },
 }
 
 export default function DeepLearnPage() {

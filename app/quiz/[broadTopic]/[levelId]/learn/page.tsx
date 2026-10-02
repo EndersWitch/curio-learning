@@ -1,132 +1,83 @@
-'use client'
-
-import { useEffect, useState } from 'react'
-import { useParams } from 'next/navigation'
-import Link from 'next/link'
-import { useAuth } from '@/lib/auth-context'
-import { sb } from '@/lib/supabase'
-import LearningCard from '@/components/quiz/LearningCard'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import LearnView from '@/components/quiz/LearnView'
+import PremiumLearn from '@/components/quiz/PremiumLearn'
 import { buildLearningZone } from '@/lib/learningZone'
+import { getLevel, getLevelSummaries, subjectGuideFor, type LevelSummary } from '@/lib/content'
+import { learnHref, plainText, playHref, prettySlug, subjectLabel, topicHref, truncate } from '@/lib/quizUrls'
 import type { QuizLevel } from '@/types/quiz'
-import { Lock, BookOpen, ArrowRight } from '@/components/icons'
 
-export default function LearnPage() {
-  const params = useParams()
-  const broadTopic = params.broadTopic as string
-  // levelId in URL is the quiz_levels UUID (primary key)
-  const levelUUID = params.levelId as string
-  const { user, loading: authLoading } = useAuth()
-  const isPremium = user?.isPremium || user?.isFounder || false
+export const revalidate = 3600
 
-  const [level, setLevel] = useState<QuizLevel | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [accessDenied, setAccessDenied] = useState(false)
+interface Props {
+  params: { broadTopic: string; levelId: string }
+}
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [levelUUID])
+// Free lessons are prebuilt at deploy; premium ones render on first request.
+export async function generateStaticParams() {
+  const levels = await getLevelSummaries()
+  return levels.filter((l) => !l.is_premium).map((l) => ({ broadTopic: l.broad_topic, levelId: l.id }))
+}
 
-  useEffect(() => {
-    if (authLoading) return
-    loadLevel()
-  }, [authLoading, levelUUID])
+function topicName(level: LevelSummary): string {
+  return level.broad_topic_display || prettySlug(level.broad_topic)
+}
 
-  async function loadLevel() {
-    // Fetch by UUID id — the primary key
-    const { data, error } = await sb
-      .from('quiz_levels')
-      .select('*')
-      .eq('id', levelUUID)
-      .single()
+// "Grade 4 English Home Language · Parts of Speech · Nouns"
+function contextLine(level: LevelSummary): string {
+  const parts = [`Grade ${level.grade} ${subjectLabel(level.subject)}`, topicName(level)]
+  if (level.subtopic_display && level.subtopic_display !== topicName(level)) parts.push(level.subtopic_display)
+  return parts.join(' · ')
+}
 
-    if (error || !data) { setLoading(false); return }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const level = await getLevel(params.levelId)
+  if (!level) return {}
+  const summary = plainText(level.intro || level.description || '')
+  return {
+    title: `${level.level_display} · Grade ${level.grade} ${subjectLabel(level.subject)} · ${topicName(level)}`,
+    description: truncate(summary || `A short CAPS-aligned lesson, then a ${level.question_count}-question quiz.`, 160),
+    alternates: { canonical: learnHref(level) },
+    // A premium lesson's body never reaches the HTML, so there's nothing to index.
+    ...(level.is_premium && { robots: { index: false, follow: true } }),
+  }
+}
 
-    // Premium gate — only block if level is premium AND user is not premium
-    if (data.is_premium && !isPremium) {
-      setAccessDenied(true); setLoading(false); return
-    }
+// Server-rendered so a free lesson's full text is in the page's HTML — it used
+// to load in the browser after a spinner, which is all crawlers ever saw.
+export default async function LearnPage({ params }: Props) {
+  const level = await getLevel(params.levelId)
+  if (!level) notFound()
 
-    setLevel(data as QuizLevel)
-    setLoading(false)
+  const guidePage = subjectGuideFor(level.grade, level.subject)
+  const guide = guidePage && {
+    href: `/subjects/grade-${guidePage.grade}/${guidePage.slug}`,
+    label: `Grade ${guidePage.grade} ${guidePage.subjectTitle}`,
+  }
+  const backHref = topicHref(level)
+
+  if (level.is_premium) {
+    return (
+      <PremiumLearn
+        levelId={level.id}
+        broadTopic={level.broad_topic}
+        backHref={backHref}
+        context={contextLine(level)}
+        guide={guide}
+      />
+    )
   }
 
-  if (loading || authLoading) return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--paper)' }}>
-      <div className="w-10 h-10 rounded-full border-2 border-t-transparent animate-spin"
-        style={{ borderColor: 'var(--rust)', borderTopColor: 'transparent' }} />
-    </div>
-  )
-
-  if (accessDenied) return (
-    <div className="min-h-screen flex items-center justify-center p-6" style={{ background: 'var(--paper)' }}>
-      <div className="text-center max-w-sm">
-        <Lock size={40} style={{ color: 'var(--ochre)', margin: '0 auto 0.75rem' }} />
-        <h2 className="text-xl font-black mb-2" style={{ color: 'var(--ink)' }}>Premium Level</h2>
-        <p className="text-sm mb-5" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
-          This level is available with Curio Premium for R49/month.
-        </p>
-        <a href="/subscription" className="inline-block px-6 py-3 rounded font-black text-sm mb-3"
-          style={{ background: 'var(--ochre)', color: 'var(--paper)' }}>Get Premium →</a>
-        <div>
-          <Link href={`/quiz/${broadTopic}`} className="text-sm" style={{ color: 'var(--rust)' }}>← Back</Link>
-        </div>
-      </div>
-    </div>
-  )
-
-  if (!level) return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--paper)' }}>
-      <div className="text-center">
-        <p className="font-black" style={{ color: 'var(--ink)' }}>Level not found</p>
-        <Link href={`/quiz/${broadTopic}`} className="text-sm mt-2 block" style={{ color: 'var(--rust)' }}>← Back</Link>
-      </div>
-    </div>
-  )
-
-  const cards = buildLearningZone(level)
-  const playHref = `/quiz/${broadTopic}/${levelUUID}/play`
-
   return (
-    <div className="min-h-screen" style={{ background: 'var(--paper)' }}>
-      <div style={{ background: 'var(--paper-dim)' }}>
-        <div className="max-w-2xl mx-auto px-6 py-10">
-          <Link href={`/quiz/${broadTopic}`}
-            className="inline-flex items-center gap-1 text-xs font-semibold mb-4 hover:opacity-70 transition-opacity"
-            style={{ color: 'var(--rust)' }}>← Back</Link>
-          <p className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: 'var(--rust)' }}>
-            Level {(level as any).level_order} · {level.question_count} questions
-          </p>
-          <h1 className="text-2xl font-black" style={{ color: 'var(--ink)' }}>{(level as any).level_display}</h1>
-        </div>
-      </div>
-
-      <div className="max-w-2xl mx-auto px-6 py-8">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="flex-1 h-px" style={{ background: 'rgba(var(--ink-rgb),0.1)' }} />
-          <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full"
-            style={{ color: 'var(--rust)', background: 'rgba(var(--rust-rgb),0.08)', border: '1px solid rgba(var(--rust-rgb),0.2)' }}>
-            <BookOpen size={13} /> Learning Zone
-          </span>
-          <div className="flex-1 h-px" style={{ background: 'rgba(var(--ink-rgb),0.1)' }} />
-        </div>
-
-        <div className="space-y-4 mb-8">
-          {cards.map((card, i) => <LearningCard key={i} concept={card} index={i} />)}
-        </div>
-
-        <div className="rounded p-7 text-center"
-          style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--rust-rgb),0.15)' }}>
-          <h2 className="text-xl font-black mb-2" style={{ color: 'var(--ink)' }}>Ready to quiz?</h2>
-          <p className="text-sm mb-6" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>
-            {level.question_count} questions · You can retry as many times as you like
-          </p>
-          <Link href={playHref}
-            className="inline-flex items-center justify-center gap-2 w-full py-4 rounded font-black text-lg text-white"
-            style={{ background: 'var(--rust)' }}>
-            Let&apos;s Go <ArrowRight size={20} />
-          </Link>
-        </div>
-      </div>
-    </div>
+    <LearnView
+      title={level.level_display}
+      levelOrder={level.level_order}
+      questionCount={level.question_count}
+      cards={buildLearningZone(level as unknown as QuizLevel)}
+      backHref={backHref}
+      playHref={playHref(level)}
+      context={contextLine(level)}
+      guide={guide}
+    />
   )
 }

@@ -509,7 +509,7 @@ export default function HomePage() {
             <div className="hero-left">
               <div className="hero-note">
                 <span className="hero-note-rule" />
-                for every SA student, Grade R to 12
+                for every SA student, Grade 4 to 12
               </div>
               <h1 className="hero-h1">
                 Your<br />study<br />
@@ -553,7 +553,7 @@ export default function HomePage() {
                 </div>
               </div>
               <p className="hero-caption">
-                <strong>30+ subjects</strong> · R0 to start · papers free, forever.
+                <strong>Grades 4–12</strong> · R0 to start · papers free, forever.
               </p>
             </div>
           </section>
@@ -563,20 +563,20 @@ export default function HomePage() {
             <div className="spread-deco o1" style={{ top: '-30px', right: '4%' }}>
               <Bloom size={140} />
             </div>
-            <div className="subjects-label">Every subject · Grade R to 12</div>
+            <div className="subjects-label">CAPS subject guides · Grade 4 to 12</div>
             <div className="subject-cloud">
               <span className="sc-word big c">English HL</span><span className="sc-div">·</span>
               <span className="sc-word big">Mathematics</span><span className="sc-div">·</span>
-              <span className="sc-word med r">Life Sciences</span><span className="sc-div">·</span>
-              <span className="sc-word med">Physical Sciences</span><span className="sc-div">·</span>
-              <span className="sc-word med">History</span><span className="sc-div">·</span>
-              <span className="sc-word big a">Geography</span><span className="sc-div">·</span>
-              <span className="sc-word sm">Accounting</span><span className="sc-div">·</span>
-              <span className="sc-word sm c">Afrikaans HL</span><span className="sc-div">·</span>
-              <span className="sc-word sm">Business Studies</span><span className="sc-div">·</span>
-              <span className="sc-word sm r">Economics</span><span className="sc-div">·</span>
-              <span className="sc-word sm">Natural Sciences</span><span className="sc-div">·</span>
-              <span className="sc-word sm">Social Sciences</span><span className="sc-div">·</span>
+              <span className="sc-word med r">Natural Sciences</span><span className="sc-div">·</span>
+              <span className="sc-word med">Social Sciences</span><span className="sc-div">·</span>
+              <span className="sc-word med">Afrikaans HL</span><span className="sc-div">·</span>
+              <span className="sc-word big a">Life Orientation</span><span className="sc-div">·</span>
+              <span className="sc-word sm">Maths Literacy</span><span className="sc-div">·</span>
+              <span className="sc-word sm c">English FAL</span><span className="sc-div">·</span>
+              <span className="sc-word sm">Technology</span><span className="sc-div">·</span>
+              <span className="sc-word sm r">EMS</span><span className="sc-div">·</span>
+              <span className="sc-word sm">Life Skills</span><span className="sc-div">·</span>
+              <span className="sc-word sm">isiZulu FAL</span><span className="sc-div">·</span>
               <span className="sc-word sm c">+ more</span>
             </div>
           </section>
@@ -592,7 +592,7 @@ export default function HomePage() {
                 <span className="cy">Yours to keep.</span>
               </h2>
               <p className="ch-p">
-                Exam papers for every grade and subject, complete with full marking memos. Download them,
+                Practice papers written for the CAPS curriculum, complete with full marking memos. Download them,
                 study from them, own them. We never charge for this. Access to good study material
                 shouldn&apos;t depend on who you are or where you come from.
               </p>
@@ -600,11 +600,12 @@ export default function HomePage() {
             </div>
             <div className="plist">
               {[
-                { title: 'English HL · Paper 1 · Grade 12', meta: 'Language in Context · Comprehensive' },
-                { title: 'Mathematics · Paper 2 · Grade 12', meta: 'Geometry & Statistics · Full paper' },
-                { title: 'Life Sciences · Paper 1 · Grade 12', meta: 'Biochemistry & Cells · Full paper' },
-                { title: 'History · Paper 1 · Grade 11', meta: 'SA History · Source-based' },
-                { title: 'Geography · Paper 2 · Grade 10', meta: 'Human Geography · Full paper' },
+                // Real papers from the library (keep these in step with what's on /papers)
+                { title: 'English HL · Language Practice · Grade 4', meta: 'Paper 1 · A market day at a South African primary school' },
+                { title: 'English HL · Language Practice · Grade 5', meta: 'Paper 1 · How a simple machine like a lever works' },
+                { title: 'English HL · Language Practice · Grade 6', meta: 'Paper 1 · How rainbows are formed' },
+                { title: 'English HL · Language Practice · Grade 7', meta: 'Paper 1 · Load-shedding and South African schools' },
+                { title: 'English HL · Language Practice · Grade 9', meta: 'Paper 1 · Plastic pollution on SA coastlines' },
               ].map((p, i) => (
                 <div className="prow" key={i}>
                   <div className="pbar">{String(i + 1).padStart(2, '0')}</div>

@@ -7,6 +7,7 @@ import { AccountDrawerProvider } from '@/components/AccountDrawerProvider'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { themeBootScript } from '@/lib/theme'
 import { AuthProvider } from '@/lib/auth-context'
+import { ADSENSE_CLIENT_ID } from '@/lib/ads'
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -70,7 +71,10 @@ export const metadata: Metadata = {
   },
   appleWebApp: { capable: true, title: 'curio', statusBarStyle: 'default' },
   robots: { index: true, follow: true },
-  alternates: { canonical: '/' },
+  // No site-wide canonical here: metadata is inherited, so a canonical of '/'
+  // in this root layout told Google every page was a duplicate of the
+  // homepage. Pages that need one set their own.
+  other: { 'google-adsense-account': ADSENSE_CLIENT_ID },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
