@@ -15,10 +15,11 @@ const TABS = [
   { href: '/subscription', label: 'Plans', Icon: Star, match: (p: string) => p.startsWith('/subscription') },
 ]
 
-// Routes where a persistent tab bar would get in the way: the auth screen
-// and the focused quiz-taking / lesson flows (they have their own exit).
+// Routes where a persistent tab bar would get in the way: the auth screen,
+// the focused quiz-taking / lesson flows (they have their own exit), and the
+// Bloom chat, whose question box lives where the bar would be.
 function isHidden(pathname: string) {
-  if (pathname.startsWith('/login')) return true
+  if (pathname.startsWith('/login') || pathname.startsWith('/bloom')) return true
   return /^\/quiz\/[^/]+\/[^/]+\/(play|learn)/.test(pathname)
 }
 
