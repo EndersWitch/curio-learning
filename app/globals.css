@@ -1269,3 +1269,148 @@ a, button, label, select, summary { -webkit-tap-highlight-color: transparent; to
   .form-panel { border-left: none; justify-content: flex-start; padding-top: calc(1.25rem + env(safe-area-inset-top)); }
   .remember-check { min-height: 44px; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   BLOOM — the Deep Learn tutor chat (/bloom). Testers only for now.
+   A fixed-height app screen: header, scrolling chat log, composer.
+   ══════════════════════════════════════════════════════════════ */
+.bloom-main { padding-top: 60px; }
+.bloom-app { max-width: 780px; margin: 0 auto; height: calc(100vh - 60px); height: calc(100dvh - 60px); display: flex; flex-direction: column; padding: 0 1.5rem; }
+.bloom-head { display: flex; align-items: center; gap: 0.85rem; padding: 1rem 0 0.9rem; border-bottom: 1px solid var(--ink15); flex-shrink: 0; }
+.bloom-head-name { font-family: var(--h); font-size: 1.65rem; font-weight: 900; line-height: 1; letter-spacing: -0.02em; color: var(--ink); }
+.bloom-head-sub { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink55); margin-top: 0.3rem; }
+.bloom-head-tools { margin-left: auto; display: flex; align-items: center; gap: 0.5rem; }
+.bloom-grade { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.72rem; font-weight: 600; color: var(--ink55); }
+.bloom-grade select { font-family: var(--b); font-size: 0.85rem; font-weight: 600; color: var(--ink); background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 4px; padding: 0.4rem 0.5rem; cursor: pointer; }
+.bloom-tool-btn { font-size: 0.78rem; font-weight: 600; color: var(--ink70); border: 1px solid var(--ink15); border-radius: 4px; padding: 0.45rem 0.8rem; transition: all .15s; }
+.bloom-tool-btn:hover:not(:disabled) { color: var(--ink); border-color: var(--ink35); }
+.bloom-tool-btn:disabled, .bloom-grade select:disabled { opacity: 0.5; cursor: default; }
+
+.bloom-log { flex: 1; min-height: 0; overflow-y: auto; padding: 1.5rem 0 1rem; overscroll-behavior: contain; }
+.bloom-turn { margin-bottom: 1.4rem; }
+.bloom-q { display: flex; justify-content: flex-end; margin-bottom: 0.75rem; }
+.bloom-q-bubble { max-width: 82%; background: var(--ink); color: var(--paper); padding: 0.65rem 0.95rem; border-radius: 10px 10px 3px 10px; font-size: 0.95rem; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+.bloom-a { display: flex; gap: 0.6rem; align-items: flex-start; }
+.bloom-a > .bb { margin-top: 0.2rem; }
+.bloom-a-body { min-width: 0; flex: 1; }
+.bloom-a-card { display: inline-block; max-width: 100%; background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 3px 10px 10px 10px; padding: 0.8rem 1rem; font-size: 0.95rem; line-height: 1.62; color: var(--ink80); overflow-wrap: anywhere; }
+.bloom-a-card > * + * { margin-top: 0.6rem; }
+.bloom-a-card strong { color: var(--ink); font-weight: 600; }
+.bloom-a-card ul, .bloom-a-card ol { padding-left: 1.3rem; }
+.bloom-a-card ul { list-style: disc; }
+.bloom-a-card ol { list-style: decimal; }
+.bloom-a-card li::marker { color: var(--rust); }
+.bloom-a-card li + li { margin-top: 0.25rem; }
+.bloom-a-card code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.86em; background: var(--ink08); border-radius: 3px; padding: 0.05em 0.3em; }
+.bloom-a-card .bloom-code { background: var(--ink08); border-radius: 6px; padding: 0.7rem 0.85rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.5; }
+.bloom-a-card .bloom-code code { background: none; padding: 0; font-size: inherit; }
+.bloom-caret { display: inline-block; width: 0.45em; height: 1.05em; margin-left: 2px; vertical-align: -0.18em; background: var(--rust); border-radius: 1px; animation: bloom-caret 1s steps(2, start) infinite; }
+.bloom-a-wait { padding: 0.75rem 1rem; }
+.bloom-dots { display: inline-flex; gap: 5px; vertical-align: middle; }
+.bloom-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--rust); opacity: 0.5; animation: bloom-dot 1.2s ease-in-out infinite; }
+.bloom-dots i:nth-child(2) { animation-delay: 0.15s; }
+.bloom-dots i:nth-child(3) { animation-delay: 0.3s; }
+.bloom-note { margin-top: 0.45rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; font-size: 0.78rem; color: var(--ink55); }
+.bloom-note.bad { color: var(--brick); }
+.bloom-retry { font-size: 0.78rem; font-weight: 600; color: var(--rust); text-decoration: underline; text-underline-offset: 2px; }
+
+.bloom-empty { text-align: center; padding: 2.25rem 0 1.5rem; }
+.bloom-empty > .bb { margin: 0 auto 1.1rem; }
+.bloom-empty-h { font-family: var(--h); font-size: clamp(2rem, 5vw, 2.7rem); font-weight: 900; line-height: 1; letter-spacing: -0.02em; color: var(--ink); }
+.bloom-empty-h em, .bloom-state h1 em { color: var(--rust); font-style: italic; font-weight: 500; }
+.bloom-empty-p { max-width: 440px; margin: 0.9rem auto 0; font-size: 0.95rem; line-height: 1.65; color: var(--ink70); }
+.bloom-empty-label { margin-top: 1.75rem; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink55); }
+.bloom-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: 0.75rem; }
+.bloom-chip { font-size: 0.86rem; line-height: 1.35; color: var(--ink80); background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 100px; padding: 0.5rem 0.95rem; transition: all .15s; }
+.bloom-chip:hover:not(:disabled) { border-color: var(--rust30); color: var(--ink); }
+.bloom-chip:disabled { opacity: 0.5; cursor: default; }
+.bloom-chip.grade { font-weight: 600; }
+
+.bloom-composer { flex-shrink: 0; padding: 0.75rem 0 calc(1rem + env(safe-area-inset-bottom)); border-top: 1px solid var(--ink15); }
+.bloom-banner { margin-bottom: 0.6rem; padding: 0.6rem 0.85rem; border-radius: 6px; background: var(--ochre12); border: 1px solid var(--ochre30); font-size: 0.85rem; line-height: 1.5; color: var(--ink80); }
+.bloom-banner a, .bloom-banner button { color: var(--rust); font-weight: 600; font-size: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.bloom-input-row { display: flex; align-items: flex-end; gap: 0.5rem; background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 12px; padding: 0.4rem 0.4rem 0.4rem 0.95rem; transition: border-color .15s, box-shadow .15s; }
+.bloom-input-row:focus-within { border-color: var(--rust30); box-shadow: 0 0 0 3px var(--rust10); }
+.bloom-input { flex: 1; min-width: 0; resize: none; border: none; outline: none; background: transparent; font-family: var(--b); font-size: 0.98rem; line-height: 1.45; color: var(--ink); padding: 0.45rem 0; max-height: 9.5rem; }
+.bloom-input::placeholder { color: var(--ink35); }
+.bloom-input:disabled { cursor: not-allowed; }
+.bloom-send { flex-shrink: 0; min-height: 40px; background: var(--rust); color: var(--paper-raised); font-family: var(--h); font-size: 0.92rem; font-weight: 600; border-radius: 8px; padding: 0.5rem 1.1rem; transition: background .15s, opacity .15s; }
+.bloom-send:hover:not(:disabled) { background: var(--rust-dark); }
+.bloom-send:disabled { opacity: 0.4; cursor: default; }
+.bloom-meter { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.45rem; font-size: 0.7rem; color: var(--ink55); }
+
+.bloom-state { min-height: calc(100vh - 60px); min-height: calc(100dvh - 60px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.9rem; padding: 2rem 1.5rem; text-align: center; }
+.bloom-state h1 { font-family: var(--h); font-size: clamp(1.9rem, 5vw, 2.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); }
+.bloom-state p { max-width: 380px; font-size: 0.95rem; line-height: 1.6; color: var(--ink70); }
+.bloom-state .btn-primary, .bloom-state .btn-soft { margin-top: 0.4rem; }
+
+@keyframes bloom-caret { to { visibility: hidden; } }
+@keyframes bloom-dot { 0%, 60%, 100% { transform: translateY(0); opacity: 0.45; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+/* Bloom the mascot (components/bloom/BloomBuddy.tsx); moods key off data-mood.
+   The face is a fixed dark brown so it reads on the ochre centre in both themes. */
+.bb { display: block; flex-shrink: 0; overflow: visible; }
+.bb-petals, .bb-petal { transform-box: view-box; transform-origin: 50% 50%; }
+.bb-petal { fill: var(--rust); }
+.bb-core { fill: var(--ochre); }
+.bb-cheek { fill: var(--rust); opacity: 0.28; transition: opacity .3s; }
+.bb-eye, .bb-mouth-talk, .bb-mouth-o, .bb-mouth-grin { fill: #2A1D12; }
+.bb-eyes-happy, .bb-mouth-smile { fill: none; stroke: #2A1D12; stroke-width: 3.4; stroke-linecap: round; }
+.bb-eye, .bb-mouth-talk { transform-box: fill-box; transform-origin: center; }
+.bb-eyes { transition: transform .3s ease; }
+.bb-eyes-happy, .bb-mouth-talk, .bb-mouth-o, .bb-mouth-grin { display: none; }
+.bb-eye { animation: bb-blink 5s infinite; }
+
+.bb[data-mood="idle"] .bb-petals { animation: bb-sway 6s ease-in-out infinite; }
+.bb[data-mood="listening"] .bb-petals { transform: rotate(-8deg) scale(1.04); transition: transform .35s ease; }
+.bb[data-mood="listening"] .bb-eyes { transform: translate(-1.5px, 2px); }
+.bb[data-mood="thinking"] .bb-petals { animation: bb-spin 4s linear infinite; }
+.bb[data-mood="thinking"] .bb-eyes { transform: translate(2px, -3px); }
+.bb[data-mood="thinking"] .bb-mouth-smile { display: none; }
+.bb[data-mood="thinking"] .bb-mouth-o { display: block; }
+.bb[data-mood="talking"] { animation: bb-bob .45s ease-in-out infinite alternate; }
+.bb[data-mood="talking"] .bb-petals { animation: bb-pulse 1.4s ease-in-out infinite; }
+.bb[data-mood="talking"] .bb-mouth-smile { display: none; }
+.bb[data-mood="talking"] .bb-mouth-talk { display: block; animation: bb-chat .26s ease-in-out infinite alternate; }
+.bb[data-mood="cheer"] { animation: bb-hop .55s cubic-bezier(.34,1.56,.64,1) 2; }
+.bb[data-mood="cheer"] .bb-petals { animation: bb-burst 1.3s cubic-bezier(.34,1.56,.64,1); }
+.bb[data-mood="cheer"] .bb-eyes, .bb[data-mood="cheer"] .bb-mouth-smile { display: none; }
+.bb[data-mood="cheer"] .bb-eyes-happy, .bb[data-mood="cheer"] .bb-mouth-grin { display: block; }
+.bb[data-mood="cheer"] .bb-cheek { opacity: 0.5; }
+.bb-enter .bb-petal { animation: bb-open .7s cubic-bezier(.34,1.56,.64,1) both; animation-delay: calc(var(--i) * 70ms); }
+.bb[data-still], .bb[data-still] * { animation: none !important; }
+
+@keyframes bb-sway { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+@keyframes bb-spin { to { transform: rotate(360deg); } }
+@keyframes bb-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+@keyframes bb-bob { to { transform: translateY(-3px); } }
+@keyframes bb-chat { from { transform: scaleY(0.4); } to { transform: scaleY(1.1); } }
+@keyframes bb-hop { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-14%); } }
+@keyframes bb-burst { 0% { transform: rotate(0) scale(1); } 40% { transform: rotate(150deg) scale(1.25); } 100% { transform: rotate(360deg) scale(1); } }
+@keyframes bb-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
+@keyframes bb-open { from { transform: scale(0); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .bb, .bb *, .bloom-dots i { animation: none !important; transition: none !important; }
+  .bloom-caret { animation: none; }
+}
+
+@media (max-width: 760px) {
+  .bloom-main { padding-top: calc(60px + env(safe-area-inset-top)); }
+  .bloom-app { height: calc(100vh - 60px - env(safe-area-inset-top)); height: calc(100dvh - 60px - env(safe-area-inset-top)); padding: 0 16px; }
+  .bloom-state { min-height: calc(100dvh - 60px - env(safe-area-inset-top)); padding: 2rem 16px; }
+  .bloom-head { gap: 0.6rem; padding: 0.7rem 0; }
+  .bloom-head > .bb { width: 42px; height: 42px; }
+  .bloom-head-name { font-size: 1.35rem; }
+  .bloom-head-sub { display: none; }
+  .bloom-grade > span { display: none; }
+  .bloom-grade select, .bloom-tool-btn { min-height: 40px; }
+  .bloom-log { padding-top: 1.1rem; }
+  .bloom-q-bubble { max-width: 88%; }
+  .bloom-a > .bb { display: none; }
+  .bloom-empty { padding-top: 1.5rem; }
+  .bloom-empty > .bb { width: 104px; height: 104px; }
+  .bloom-chip { min-height: 40px; }
+  .bloom-send { min-height: 44px; }
+  .bloom-meter-hint { display: none; }
+}

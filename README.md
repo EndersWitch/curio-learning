@@ -28,7 +28,9 @@ npm run dev
 |---|---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | ✅ | Your Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ✅ | Supabase anon/public key |
-| `ANTHROPIC_API_KEY` | Optional | For AI deep-learn explanations (set in Vercel, never in .env) |
+| `ANTHROPIC_API_KEY` | For Bloom | Powers Bloom, the Deep Learn tutor (`/bloom`). Locally it goes in the git-ignored `.env.local`; never commit it |
+| `BLOOM_ACCESS` | Optional | Who can use Bloom: `off`, `testers` or `everyone`. Unset means `off`, except under `npm run dev` (testers) |
+| `BLOOM_TESTERS` | Optional | Extra Bloom testers by email, comma-separated. Admin accounts are always testers |
 
 ---
 

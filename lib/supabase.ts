@@ -1,11 +1,13 @@
 import { createClient } from '@supabase/supabase-js'
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@/lib/supabaseConfig'
 
 // ─── THE ONE AND ONLY Supabase client for the entire Next.js app ──────────────
 // Every file must import { sb } from '@/lib/supabase'.
-// NEVER call createClient() anywhere else.
+// NEVER call createClient() anywhere else. (The one exception is server API
+// routes that act as the signed-in learner, which need a per-request client:
+// see lib/bloom/server.ts.)
 
-export const SUPABASE_URL = 'https://inmrsgujgfktapjnekjs.supabase.co'
-export const SUPABASE_ANON_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU'
+export { SUPABASE_URL, SUPABASE_ANON_KEY }
 
 // "Remember me" support — the flag itself always lives in localStorage (it
 // has to survive in order to be readable on the next visit), but it decides
