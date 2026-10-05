@@ -44,7 +44,7 @@ export function serverError(what: string, err: unknown) {
   console.error(`[bloom] ${what} failed`, err)
   // Before the Bloom migration is applied, its tables and function don't exist yet.
   const code = (err as { code?: string } | null)?.code
-  if (code && ['PGRST202', 'PGRST205', '42P01', '42883'].includes(code)) return apiError('setup', 503)
+  if (code && ['PGRST202', 'PGRST205', '42P01', '42883'].includes(code)) return apiError('setup', 503, { reason: 'no-tables' })
   return apiError('server', 500)
 }
 
@@ -80,7 +80,8 @@ export async function getLearner(req: Request): Promise<Learner | Response> {
 
   const access = bloomAccess()
   const isTester = profile?.is_admin === true || testerEmails().has((user.email ?? '').toLowerCase())
-  if (access === 'off' || (access === 'testers' && !isTester)) return apiError('closed', 403)
+  if (access === 'off') return apiError('closed', 403, { reason: 'off' })
+  if (access === 'testers' && !isTester) return apiError('closed', 403, { reason: 'not-tester' })
 
   // Same premium rule as the rest of the site: paying members and founders.
   const tier: BloomTier = isTester ? 'tester' : profile?.is_premium || profile?.is_founder ? 'premium' : 'free'
