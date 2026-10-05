@@ -1343,6 +1343,9 @@ a, button, label, select, summary { -webkit-tap-highlight-color: transparent; to
 .bloom-state h1 { font-family: var(--h); font-size: clamp(1.9rem, 5vw, 2.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); }
 .bloom-state p { max-width: 380px; font-size: 0.95rem; line-height: 1.6; color: var(--ink70); }
 .bloom-state .btn-primary, .bloom-state .btn-soft { margin-top: 0.4rem; }
+.bloom-state .bloom-state-note { font-size: 0.82rem; color: var(--ink55); }
+.bloom-state-note strong { color: var(--ink80); font-weight: 600; overflow-wrap: anywhere; }
+.bloom-state-link { font-size: 0.85rem; font-weight: 600; color: var(--rust); text-decoration: underline; text-underline-offset: 2px; padding: 0.5rem; }
 
 @keyframes bloom-caret { to { visibility: hidden; } }
 @keyframes bloom-dot { 0%, 60%, 100% { transform: translateY(0); opacity: 0.45; } 30% { transform: translateY(-4px); opacity: 1; } }

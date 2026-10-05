@@ -11,7 +11,7 @@ export async function GET(req: Request) {
   const { sb } = learner
 
   // Say so up front rather than after the learner has typed a question.
-  if (!process.env.ANTHROPIC_API_KEY) return apiError('setup', 503)
+  if (!process.env.ANTHROPIC_API_KEY) return apiError('setup', 503, { reason: 'no-key' })
 
   const { data: usage, error: usageError } = await sb
     .from('bloom_usage')
