@@ -58,8 +58,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        heading: ['var(--font-fraunces)', 'Georgia', 'serif'],
-        body:    ['var(--font-worksans)', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-heading)', 'system-ui', 'sans-serif'],
+        body:    ['var(--font-body)', 'Georgia', 'serif'],
       },
       borderRadius: {
         '4xl': '1.25rem',

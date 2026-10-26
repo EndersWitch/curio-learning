@@ -92,7 +92,7 @@ export default function QuizNav() {
         ) : (
           <>
             <a href="/login" className="btn-ghost">Log in</a>
-            <a href="/login?tab=signup" className="btn-nav">Start free →</a>
+            <a href="/login?tab=signup" className="btn-nav">Start free</a>
           </>
         )}
       </div>

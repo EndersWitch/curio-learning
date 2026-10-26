@@ -171,7 +171,7 @@ export default function SubjectGuidePage({ params }: Props) {
               </div>
               <div className="premium-feats">
                 <span className="premium-feat">AI Quizzes</span>
-                <span className="premium-feat">Deep Learn</span>
+                <span className="premium-feat">Bloom</span>
                 <span className="premium-feat">Writing Feedback</span>
               </div>
               <a href="/login?tab=signup" className="premium-cta">Start free trial →</a>

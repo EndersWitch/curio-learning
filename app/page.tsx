@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import Bloom from '@/components/Bloom'
 import Footer from '@/components/Footer'
 import ThemeToggle from '@/components/ThemeToggle'
 import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
 import { useAccountDrawer } from '@/components/AccountDrawerProvider'
-import { Flame, FileText, PenLine, User, Star, Check, Brain, Heart, ListChecks } from '@/components/icons'
+import { Flame, FileText, PenLine, User, Star, Check, Brain, Heart, ListChecks, Trophy } from '@/components/icons'
 
 const SUPABASE_URL = 'https://inmrsgujgfktapjnekjs.supabase.co'
 const SUPABASE_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU'
@@ -42,6 +43,20 @@ const SETS = [
       { q: 'Which organ produces urine?', opts: ['Liver','Stomach','Kidney','Lungs'], correct: 2, ok: 'Correct! Kidneys filter blood and produce urine.', err: 'The kidneys filter waste and produce urine.' },
     ],
   },
+]
+
+// Feature rows for the pricing cards — `free` marks what the free plan includes.
+const PLAN_FEATURES = [
+  { label: 'Full past paper library', free: true },
+  { label: 'Download papers as PDF', free: true },
+  { label: 'Full marking memos', free: true },
+  { label: 'All grades & subjects', free: true },
+  { label: 'AI-powered quiz mode', free: false },
+  { label: 'Bloom AI tutor', free: false },
+  { label: 'Custom test generator', free: false },
+  { label: 'Progress tracking & streaks', free: false },
+  { label: 'Topic-sorted question sets', free: false },
+  { label: 'No ads', free: false },
 ]
 
 export default function HomePage() {
@@ -263,7 +278,7 @@ export default function HomePage() {
       {/* ── NAV ── */}
       <nav className="curio-nav">
         <a href="/" className="nav-logo">
-          <Bloom size={26} />
+          <Bloom size={32} />
           curio
         </a>
         <ul className="nav-links">
@@ -308,7 +323,7 @@ export default function HomePage() {
           ) : (
             <>
               <a href="/login" className="btn-ghost">Log in</a>
-              <a href="/login?tab=signup" className="btn-nav">Start free →</a>
+              <a href="/login?tab=signup" className="btn-nav">Start free</a>
             </>
           )}
         </div>
@@ -318,14 +333,21 @@ export default function HomePage() {
       {user && (
         <div id="dashboard" style={{ display: 'block', paddingTop: '60px' }}>
           <div className="dash-wrap">
-            <div className="spread-deco o1" style={{ top: '-60px', right: '-30px' }}>
-              <Bloom size={200} />
+            <div className="spread-deco o2 lp-float" style={{ top: '-50px', right: '-40px' }}>
+              <Bloom size={220} />
+            </div>
+            <div className="spread-deco o2 lp-float slow" style={{ top: '38%', left: '-60px' }}>
+              <Bloom size={150} tone="moss" />
+            </div>
+            <div className="spread-deco o2 lp-float" style={{ bottom: '8%', right: '-50px' }}>
+              <Bloom size={170} tone="ochre" />
             </div>
             {/* Greeting */}
             <div className="dash-greeting">
               <div>
                 <div className="dash-eyebrow">{greeting},</div>
-                <h1 className="dash-hello">{name}</h1>
+                <h1 className="dash-hello"><span className="squiggle">{name}</span>!</h1>
+                <p className="dash-tagline">Ready to learn something new today?</p>
                 <div className="dash-date">
                   {today.toLocaleDateString('en-ZA', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
                 </div>
@@ -358,22 +380,22 @@ export default function HomePage() {
             {/* Stats */}
             <div className="dash-stats">
               <div className="dash-stat cy">
-                <div className="ds-label">Papers for your grade</div>
+                <div className="ds-top"><span className="ds-ic"><FileText size={20} /></span><div className="ds-label">Papers for your grade</div></div>
                 <div className="ds-val">{recPapers.length > 0 ? recPapers.length : '—'}</div>
                 <div className="ds-sub">available now</div>
               </div>
               <div className="dash-stat">
-                <div className="ds-label">Quizzes taken</div>
+                <div className="ds-top"><span className="ds-ic"><PenLine size={20} /></span><div className="ds-label">Quizzes taken</div></div>
                 <div className="ds-val">{quizzesTaken}</div>
                 <div className="ds-sub">all time</div>
               </div>
               <div className="dash-stat co">
-                <div className="ds-label">Best quiz score</div>
+                <div className="ds-top"><span className="ds-ic"><Trophy size={20} /></span><div className="ds-label">Best quiz score</div></div>
                 <div className="ds-val">{bestScore !== null ? `${bestScore}%` : '—'}</div>
                 <div className="ds-sub">% correct</div>
               </div>
               <div className="dash-stat am">
-                <div className="ds-label">Day streak</div>
+                <div className="ds-top"><span className="ds-ic"><Flame size={20} /></span><div className="ds-label">Day streak</div></div>
                 <div className="ds-val">{streak}</div>
                 <div className="ds-sub">keep going!</div>
               </div>
@@ -381,14 +403,14 @@ export default function HomePage() {
 
             {/* Quick actions */}
             <div>
-              <div style={{ fontSize: '0.6rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--ink35)', marginBottom: '0.8rem' }}>
+              <div className="dash-section-label">
                 Quick actions
               </div>
               <div className="quick-actions">
-                <a href="/papers" className="qa-btn"><FileText size={22} className="qa-icon" /><span className="qa-label">Browse papers</span></a>
-                <a href="/quiz" className="qa-btn"><PenLine size={22} className="qa-icon" /><span className="qa-label">Start a quiz</span></a>
-                <a href="/deeplearn" className="qa-btn"><Brain size={22} className="qa-icon" /><span className="qa-label">Deep Learn</span></a>
-                <a href="/subscription" className="qa-btn"><Star size={22} className="qa-icon" /><span className="qa-label">My plan</span></a>
+                <a href="/papers" className="qa-btn q1"><FileText size={22} className="qa-icon" /><span className="qa-label">Browse papers</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
+                <a href="/quiz" className="qa-btn q2"><PenLine size={22} className="qa-icon" /><span className="qa-label">Start a quiz</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
+                <a href="/deeplearn" className="qa-btn q3"><Brain size={22} className="qa-icon" /><span className="qa-label">Bloom</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
+                <a href="/subscription" className="qa-btn q4"><Star size={22} className="qa-icon" /><span className="qa-label">My plan</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
               </div>
             </div>
 
@@ -475,16 +497,19 @@ export default function HomePage() {
             {/* Premium upsell — hidden for premium/founder users */}
             {!(user.isPremium || user.isFounder) && (
               <div className="pu">
-                <div className="spread-deco o1" style={{ bottom: '-30px', right: '2%' }}>
-                  <Bloom size={130} />
+                <div className="spread-deco o1 lp-float" style={{ bottom: '-30px', right: '2%' }}>
+                  <Bloom size={150} tone="paper" />
+                </div>
+                <div className="spread-deco o1 lp-float slow" style={{ top: '-40px', left: '38%' }}>
+                  <Bloom size={100} tone="paper" />
                 </div>
                 <div>
                   <div className="pu-ey">Curio Premium</div>
                   <div className="pu-title">Ready for more than papers?</div>
-                  <div className="pu-sub">You&apos;re on the free plan. Upgrade to access AI quizzes, Deep Learn, custom tests and more.</div>
+                  <div className="pu-sub">You&apos;re on the free plan. Upgrade to access AI quizzes, Bloom, custom tests and more.</div>
                   <div className="pu-feats">
                     <span className="pu-feat">AI Quizzes</span>
-                    <span className="pu-feat">Deep Learn</span>
+                    <span className="pu-feat">Bloom</span>
                     <span className="pu-feat">Custom Tests</span>
                     <span className="pu-feat">No Ads</span>
                   </div>
@@ -502,170 +527,240 @@ export default function HomePage() {
 
       {/* ── LANDING (guests) ── always in DOM, hidden when logged in */}
       <div id="landing" style={{ display: user ? 'none' : 'block' }}>
-          <section className="hero">
-            <div className="spread-deco o1" style={{ bottom: '-8%', left: '2%' }}>
-              <Bloom size={220} />
-            </div>
-            <div className="hero-left">
-              <div className="hero-note">
-                <span className="hero-note-rule" />
-                for every SA student, Grade R to 12
+        {/* HERO */}
+        <section className="lp-hero">
+          <div className="spread-deco o2 lp-float" style={{ top: '70px', left: '-70px' }}>
+            <Bloom size={280} />
+          </div>
+          <div className="spread-deco o2 lp-float slow" style={{ top: '40px', right: '-50px' }}>
+            <Bloom size={210} tone="ochre" />
+          </div>
+          <div className="spread-deco o3 lp-float" style={{ top: '430px', left: '9%' }}>
+            <Bloom size={54} tone="moss" />
+          </div>
+          <div className="spread-deco o3 lp-float slow" style={{ top: '390px', right: '8%' }}>
+            <Bloom size={70} />
+          </div>
+          <div className="lp-wrap">
+            <div className="lp-hero-copy">
+              <span className="lp-sticker">Free papers, always!</span>
+              <div className="lp-pill">
+                <span className="lp-pill-icon"><Bloom size={44} className="lp-spin" /></span>
+                <h1 className="lp-h1">Your <span className="lp-accent squiggle">study</span> friend</h1>
               </div>
-              <h1 className="hero-h1">
-                Your<br />study<br />
-                <span className="squiggle w-cyan">friend.</span>
-              </h1>
-              <p className="hero-desc">
-                Exam papers, AI-powered quizzes and deep explanations,{' '}
-                <strong>built for South African students.</strong> Free to start. Always in your corner.
-              </p>
-              <div className="hero-actions">
-                <a href="/login?tab=signup" className="btn-primary">Start for free →</a>
+              <p className="lp-lead">Past papers, quizzes and explanations that actually make sense, made for South African students.</p>
+              <p className="lp-lead-sm">Free to start. Papers and memos are free, always.</p>
+              <div className="lp-actions">
+                <a href="/login?tab=signup" className="btn-primary">Start for free</a>
                 <a href="/quiz" className="btn-soft">Try a quiz</a>
               </div>
-              <div className="hero-grades">
-                <a href="/subjects" className="gp on">All grades</a>
-                <a href="/subjects#int" className="gp">4 – 6</a>
-                <a href="/subjects#sen" className="gp">7 – 9</a>
-                <a href="/subjects#fet" className="gp">10 – 12</a>
-              </div>
             </div>
 
-            <div className="hero-right">
-              <div className="hero-paper-stack">
-                <div className="hero-paper back">
-                  <div className="hero-paper-tag dim">English HL · Grade 11</div>
-                </div>
-                <div className="hero-paper front">
-                  <div className="hero-paper-top">
-                    <span className="hero-paper-tag">Grade 12 · Mathematics P1</span>
-                    <span className="hero-paper-stamp">8<span>/10</span></span>
-                  </div>
-                  <div className="hero-paper-q">
-                    4.2&nbsp; Solve for <em>x</em>:<br />2x² − 5x − 3 = 0
-                  </div>
-                  <div className="hero-paper-opts">
-                    <span className="hero-paper-opt">x = −3 or x = ½</span>
-                    <span className="hero-paper-opt">
-                      <span className="hero-paper-loop">x = 3 or x = −½</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <p className="hero-caption">
-                <strong>30+ subjects</strong> · R0 to start · papers free, forever.
-              </p>
-            </div>
-          </section>
-
-          {/* ── SUBJECTS CLOUD ── */}
-          <section className="subjects-section rv">
-            <div className="spread-deco o1" style={{ top: '-30px', right: '4%' }}>
-              <Bloom size={140} />
-            </div>
-            <div className="subjects-label">Every subject · Grade R to 12</div>
-            <div className="subject-cloud">
-              <span className="sc-word big c">English HL</span><span className="sc-div">·</span>
-              <span className="sc-word big">Mathematics</span><span className="sc-div">·</span>
-              <span className="sc-word med r">Life Sciences</span><span className="sc-div">·</span>
-              <span className="sc-word med">Physical Sciences</span><span className="sc-div">·</span>
-              <span className="sc-word med">History</span><span className="sc-div">·</span>
-              <span className="sc-word big a">Geography</span><span className="sc-div">·</span>
-              <span className="sc-word sm">Accounting</span><span className="sc-div">·</span>
-              <span className="sc-word sm c">Afrikaans HL</span><span className="sc-div">·</span>
-              <span className="sc-word sm">Business Studies</span><span className="sc-div">·</span>
-              <span className="sc-word sm r">Economics</span><span className="sc-div">·</span>
-              <span className="sc-word sm">Natural Sciences</span><span className="sc-div">·</span>
-              <span className="sc-word sm">Social Sciences</span><span className="sc-div">·</span>
-              <span className="sc-word sm c">+ more</span>
-            </div>
-          </section>
-
-          {/* ── CH1: PAPERS ── */}
-          <section className="ch1 rv" id="papers">
-            <div className="spread-deco o1" style={{ bottom: '-40px', right: '-30px' }}>
-              <Bloom size={180} />
-            </div>
-            <div>
-              <h2 className="ch-h">
-                Exam papers.<br />Full memos.<br />
-                <span className="cy">Yours to keep.</span>
-              </h2>
-              <p className="ch-p">
-                Exam papers for every grade and subject, complete with full marking memos. Download them,
-                study from them, own them. We never charge for this. Access to good study material
-                shouldn&apos;t depend on who you are or where you come from.
-              </p>
-              <span className="tag-pill tag-free">Always free</span>
-            </div>
-            <div className="plist">
+            <div className="lp-collage">
               {[
-                { title: 'English HL · Paper 1 · Grade 12', meta: 'Language in Context · Comprehensive' },
-                { title: 'Mathematics · Paper 2 · Grade 12', meta: 'Geometry & Statistics · Full paper' },
-                { title: 'Life Sciences · Paper 1 · Grade 12', meta: 'Biochemistry & Cells · Full paper' },
-                { title: 'History · Paper 1 · Grade 11', meta: 'SA History · Source-based' },
-                { title: 'Geography · Paper 2 · Grade 10', meta: 'Human Geography · Full paper' },
-              ].map((p, i) => (
-                <div className="prow" key={i}>
-                  <div className="pbar">{String(i + 1).padStart(2, '0')}</div>
-                  <div className="pinfo">
-                    <div className="ptitle">{p.title}</div>
-                    <div className="pmeta">{p.meta}</div>
+                { cls: 'a', img: '/images/home/hero-science.jpg', alt: 'Colourful flasks and beakers in a science lab', tag: 'Science', pos: '50% 50%' },
+                { cls: 'b', img: '/images/home/hero-maths.jpg', alt: 'Colourful magnetic numbers spelling a sum', tag: 'Maths', pos: '50% 50%' },
+                { cls: 'c', img: '/images/home/hero-english.jpg', alt: 'A green chalkboard with a spelling list', tag: 'English', pos: '50% 35%' },
+              ].map((p) => (
+                <figure className={`lp-polaroid ${p.cls}`} key={p.cls}>
+                  <div className="lp-polaroid-img">
+                    <Image src={p.img} alt={p.alt} fill priority sizes="(max-width: 680px) 45vw, 300px" style={{ objectPosition: p.pos }} />
                   </div>
-                  <span className="pbadge">Free + Memo</span>
+                  <figcaption><Bloom size={16} /> {p.tag}</figcaption>
+                </figure>
+              ))}
+            </div>
+
+            <div className="lp-stats rv">
+              {[
+                { n: '30+', l: 'Subjects', t: 't1' },
+                { n: '4–12', l: 'Grades covered', t: 't2' },
+                { n: 'R0', l: 'Papers and memos, always', t: 't3' },
+                { n: 'CAPS', l: 'Aligned to the curriculum', t: 't4' },
+              ].map((s) => (
+                <div className={`lp-stat ${s.t}`} key={s.l}>
+                  <div className="lp-stat-n">{s.n}</div>
+                  <div className="lp-stat-l">{s.l}</div>
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* ── CH2: DEEP LEARN ── */}
-          <section className="ch2 rv">
-            <div className="spread-deco o1" style={{ top: '-30px', right: '6%' }}>
-              <Bloom size={150} />
-            </div>
-            <div className="chat">
-              <span className="chat-label" style={{ alignSelf: 'flex-end' }}>you</span>
-              <div className="chat-bubble cb-me">Why does photosynthesis matter? I keep forgetting.</div>
-              <span className="chat-label">curio</span>
-              <div className="chat-bubble cb-them">
-                Let&apos;s build it up from scratch.<br /><br />
-                <strong>Plants are the only living things that make their own food,</strong> using sunlight, water, and CO₂ from the air.<br /><br />
-                Here&apos;s the key: the oxygen they release as a by-product is every breath you&apos;ve ever taken. Every human, every animal, all of it comes from photosynthesis.<br /><br />
-                So when your exam asks &quot;why is it important?&quot; it&apos;s not just a plant thing.{' '}
-                <strong>It&apos;s the foundation of all life on Earth.</strong>
+        {/* BENEFITS */}
+        <section className="lp-section" id="why">
+          <div className="spread-deco o2 lp-float slow" style={{ top: '30px', right: '-60px' }}>
+            <Bloom size={230} tone="moss" />
+          </div>
+          <div className="lp-wrap">
+            <div className="lp-head rv">
+              <div>
+                <h2 className="lp-h2"><Bloom size={36} className="lp-h2-bloom" />Why students love Curio</h2>
+                <p>One place for past papers, practice and the explanations that make them make sense.</p>
               </div>
-              <span className="chat-label" style={{ alignSelf: 'flex-end' }}>you</span>
-              <div className="chat-bubble cb-me">Oh. That actually makes sense now.</div>
+              <a href="/subjects" className="btn-soft">All subjects</a>
             </div>
-            <div>
-              <h2 className="ch-h">
-                Not just<br /><em><span className="cy">right or wrong.</span></em><br />
-                <span className="cr">Actually explained.</span>
-              </h2>
-              <p className="ch-p">
-                When you get something wrong, Curio doesn&apos;t just mark you down and move on. Deep Learn
+            <div className="lp-cards rv">
+              {[
+                { href: '/papers', title: 'Free papers and memos', text: 'Past exam papers with full marking memos for every grade and subject. Download them and keep them.', t: 't1' },
+                { href: '/deeplearn', title: 'Explained, not just marked', text: 'Got something wrong? Bloom breaks the idea down from the start until it clicks.', t: 't2' },
+                { href: '/quiz', title: 'Quizzes that teach', text: 'Topic-sorted quizzes with instant feedback, plus custom tests you build yourself.', t: 't3' },
+                { href: '/subjects', title: 'Your grade, your subjects', text: 'Pick your grade and go straight to the papers and practice that match your CAPS year.', t: 't4' },
+                { href: '/login?tab=signup', title: 'Progress you can see', text: 'Streaks and quiz history show what you have practised and where to go next.', t: 't2' },
+                { href: '/subscription', title: 'No student left behind', text: 'Papers and memos stay free. Premium adds the AI features for R49 a month.', t: 't1' },
+              ].map((c, i) => (
+                <a href={c.href} className={`lp-card ${c.t}`} key={c.title}>
+                  <span className="lp-num">
+                    <Bloom size={104} className="lp-num-bloom" />
+                    <b>{String(i + 1).padStart(2, '0')}</b>
+                  </span>
+                  <span className="lp-card-text">
+                    <h3>{c.title}</h3>
+                    <p>{c.text}</p>
+                  </span>
+                  <span className="lp-arrow" aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* PHASES */}
+        <section className="lp-section" id="phases">
+          <div className="spread-deco o2 lp-float" style={{ bottom: '40px', left: '-70px' }}>
+            <Bloom size={240} />
+          </div>
+          <div className="lp-wrap">
+            <div className="lp-head rv">
+              <div>
+                <h2 className="lp-h2"><Bloom size={36} className="lp-h2-bloom" />Where are you in school?</h2>
+                <p>Pick your phase and we&apos;ll show you the papers, memos and practice for your grades.</p>
+              </div>
+              <a href="/subjects" className="btn-soft">View all</a>
+            </div>
+            <div className="lp-phases rv">
+              {[
+                { img: '/images/home/phase-intermediate.jpg', pos: '50% 35%', alt: 'Smiling primary school learners outdoors', grades: 'Grades 4–6', title: 'Intermediate phase', text: 'Build solid foundations in English, Maths and Natural Sciences.', href: '/subjects#int', t: 't1' },
+                { img: '/images/home/phase-senior.jpg', pos: '50% 25%', alt: 'A learner absorbed in a book', grades: 'Grades 7–9', title: 'Senior phase', text: 'Get ready for high school with the full range of subjects.', href: '/subjects#sen', t: 't2' },
+                { img: '/images/home/phase-fet.jpg', pos: '50% 30%', alt: 'Two learners reading a book together', grades: 'Grades 10–12', title: 'FET phase', text: 'Past papers and memos for the years that count, up to matric.', href: '/subjects#fet', t: 't3' },
+              ].map((p) => (
+                <div className={`lp-phase ${p.t}`} key={p.title}>
+                  <div className="lp-phase-photo">
+                    <Image src={p.img} alt={p.alt} fill sizes="(max-width: 680px) 100vw, 400px" style={{ objectPosition: p.pos }} />
+                    <span className="lp-phase-chip">{p.grades}</span>
+                  </div>
+                  <div className="lp-phase-body">
+                    <h3>{p.title}</h3>
+                    <p>{p.text}</p>
+                  </div>
+                  <a href={p.href} className="btn-soft">Browse subjects</a>
+                </div>
+              ))}
+            </div>
+            <div className="lp-subjects rv">
+              {['English HL', 'Mathematics', 'Life Sciences', 'Physical Sciences', 'History', 'Geography', 'Accounting', 'Afrikaans HL', 'Business Studies', 'Economics', 'Natural Sciences', 'Social Sciences'].map((s) => (
+                <span className="lp-subj" key={s}>{s}</span>
+              ))}
+              <a href="/subjects" className="lp-subj more">+ more</a>
+            </div>
+          </div>
+        </section>
+
+        {/* PAPERS */}
+        <section className="lp-section" id="papers">
+          <div className="spread-deco o2 lp-float slow" style={{ top: '20px', right: '-50px' }}>
+            <Bloom size={200} tone="ochre" />
+          </div>
+          <div className="lp-wrap">
+            <div className="lp-head rv">
+              <div>
+                <h2 className="lp-h2"><Bloom size={36} className="lp-h2-bloom" />Exam papers. Full memos. Yours to keep.</h2>
+                <p>
+                  Papers for every grade and subject, complete with full marking memos. Download them, study from them,
+                  own them. We never charge for this, because access to good study material shouldn&apos;t depend on who you are.
+                </p>
+              </div>
+              <a href="/papers" className="btn-primary">Browse papers</a>
+            </div>
+            <div className="lp-split rv">
+              <div className="lp-photo-card">
+                <Image src="/images/home/papers-notebook.jpg" alt="An open notebook with pencils beside it" fill sizes="(max-width: 960px) 100vw, 560px" style={{ objectPosition: '50% 50%' }} />
+                <span className="lp-photo-sticker"><Bloom size={22} /> Free + memo</span>
+              </div>
+              <div className="lp-panel">
+                <span className="lp-tag free">Always free</span>
+                <div className="plist">
+                  {[
+                    { title: 'English HL · Paper 1 · Grade 12', meta: 'Language in Context · Comprehensive' },
+                    { title: 'Mathematics · Paper 2 · Grade 12', meta: 'Geometry & Statistics · Full paper' },
+                    { title: 'Life Sciences · Paper 1 · Grade 12', meta: 'Biochemistry & Cells · Full paper' },
+                    { title: 'History · Paper 1 · Grade 11', meta: 'SA History · Source-based' },
+                    { title: 'Geography · Paper 2 · Grade 10', meta: 'Human Geography · Full paper' },
+                  ].map((p, i) => (
+                    <div className="prow" key={i}>
+                      <div className="pbar">{String(i + 1).padStart(2, '0')}</div>
+                      <div className="pinfo">
+                        <div className="ptitle">{p.title}</div>
+                        <div className="pmeta">{p.meta}</div>
+                      </div>
+                      <span className="pbadge">Free + Memo</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* DEEP LEARN */}
+        <section className="lp-section">
+          <div className="spread-deco o2 lp-float" style={{ bottom: '-30px', left: '3%' }}>
+            <Bloom size={150} tone="moss" />
+          </div>
+          <div className="lp-wrap lp-split rv">
+            <div className="lp-panel">
+              <div className="chat">
+                <span className="chat-label" style={{ alignSelf: 'flex-end' }}>you</span>
+                <div className="chat-bubble cb-me">Why does photosynthesis matter? I keep forgetting.</div>
+                <span className="chat-label">bloom</span>
+                <div className="chat-bubble cb-them">
+                  Let&apos;s build it up from scratch.<br /><br />
+                  <strong>Plants are the only living things that make their own food,</strong> using sunlight, water, and CO₂ from the air.<br /><br />
+                  Here&apos;s the key: the oxygen they release as a by-product is every breath you&apos;ve ever taken. Every human, every animal, all of it comes from photosynthesis.<br /><br />
+                  So when your exam asks &quot;why is it important?&quot; it&apos;s not just a plant thing.{' '}
+                  <strong>It&apos;s the foundation of all life on Earth.</strong>
+                </div>
+                <span className="chat-label" style={{ alignSelf: 'flex-end' }}>you</span>
+                <div className="chat-bubble cb-me">Oh. That actually makes sense now.</div>
+              </div>
+            </div>
+            <div className="lp-split-copy">
+              <span className="lp-tag pro">Premium feature</span>
+              <h2 className="lp-h2">Not just right or wrong. <span className="lp-accent squiggle">Actually</span> explained.</h2>
+              <p>
+                When you get something wrong, Curio doesn&apos;t just mark you down and move on. Bloom
                 breaks down the concept from first principles, in plain language, with real examples,
                 until it actually clicks.
               </p>
-              <span className="tag-pill tag-pro">Premium feature</span>
+              <a href="/deeplearn" className="btn-soft">See how Bloom works</a>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* ── CH3: QUIZ ── */}
-          <section className="ch3 rv" id="quiz">
-            <div className="spread-deco o1" style={{ bottom: '-30px', left: '-30px' }}>
-              <Bloom size={160} />
-            </div>
-            <div>
-              <h2 className="ch-h">
-                Questions that<br /><span className="cy">actually</span><br />teach you.
-              </h2>
-              <p className="ch-p">
+        {/* QUIZ */}
+        <section className="lp-section" id="quiz">
+          <div className="spread-deco o2 lp-float slow" style={{ top: '-20px', right: '4%' }}>
+            <Bloom size={130} />
+          </div>
+          <div className="lp-wrap lp-split rv">
+            <div className="lp-split-copy">
+              <span className="lp-tag pro">Premium feature</span>
+              <h2 className="lp-h2">Questions that <span className="lp-accent squiggle">actually</span> teach you.</h2>
+              <p>
                 Topic-sorted quizzes with instant, meaningful feedback. Build your own custom test.
                 Work at your own pace. Every question is a chance to understand something better.
               </p>
-              <span className="tag-pill tag-pro">Premium feature</span>
-              <div className="topic-tabs" style={{ marginTop: '1.8rem' }}>
+              <div className="topic-tabs">
                 {SETS.map((s, i) => (
                   <div
                     key={i}
@@ -715,65 +810,58 @@ export default function HomePage() {
               <div className="qcard-footer">
                 {answered && (
                   <button className="btn-next" style={{ display: 'block' }} onClick={next}>
-                    {isLast ? 'Restart →' : 'Continue →'}
+                    {isLast ? 'Restart' : 'Continue'}
                   </button>
                 )}
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* ── PRICING ── */}
-          <section className="pricing rv" id="pricing">
-            <div className="spread-deco o1" style={{ top: '-20px', right: '2%' }}>
-              <Bloom size={110} />
-            </div>
-            <div className="pricing-header">
-              <h2 className="pricing-h">Honest pricing.<br />For <em>every</em> student.</h2>
-              <p className="pricing-note-top">
-                Papers and memos are free, always. Premium adds the AI quizzes and explanations,
-                for less than a takeaway a month.
-              </p>
-            </div>
-            <div className="report-card">
-              <div className="report-head">
-                <span className="report-head-label">What you get</span>
-                <span className="report-head-cell">Free</span>
-                <span className="report-head-cell premium">
-                  Premium
-                  <span className="report-mark">our pick</span>
-                </span>
+        {/* PRICING */}
+        <section className="lp-section" id="pricing">
+          <div className="spread-deco o2 lp-float" style={{ top: '40px', left: '-60px' }}>
+            <Bloom size={190} tone="ochre" />
+          </div>
+          <div className="lp-wrap">
+            <div className="lp-head rv">
+              <div>
+                <h2 className="lp-h2"><Bloom size={36} className="lp-h2-bloom" />Honest pricing. For every student.</h2>
+                <p>
+                  Papers and memos are free, always. Premium adds the AI quizzes and explanations,
+                  for less than a takeaway a month.
+                </p>
               </div>
+            </div>
+            <div className="lp-plans rv">
               {[
-                { label: 'Full past paper library', free: true, pro: true },
-                { label: 'Download papers as PDF', free: true, pro: true },
-                { label: 'Full marking memos', free: true, pro: true },
-                { label: 'All grades & subjects', free: true, pro: true },
-                { label: 'AI-powered quiz mode', free: false, pro: true },
-                { label: 'Deep Learn explanations', free: false, pro: true },
-                { label: 'Custom test generator', free: false, pro: true },
-                { label: 'Progress tracking & streaks', free: false, pro: true },
-                { label: 'Topic-sorted question sets', free: false, pro: true },
-                { label: 'No ads', free: false, pro: true },
-              ].map((row) => (
-                <div className="report-row" key={row.label}>
-                  <span className="report-row-label">{row.label}</span>
-                  <span className={`report-row-cell${row.free ? ' on' : ''}`}>{row.free ? <Check size={14} /> : '—'}</span>
-                  <span className={`report-row-cell premium${row.pro ? ' on' : ''}`}>{row.pro ? <Check size={14} /> : '—'}</span>
+                { name: 'Free plan', price: '0', per: '', sub: 'forever', cta: 'Get started free', pro: false },
+                { name: 'Premium plan', price: '49', per: '/month', sub: 'founder pricing', cta: 'Subscribe', pro: true },
+              ].map((plan) => (
+                <div className={`lp-plan${plan.pro ? ' pro' : ''}`} key={plan.name}>
+                  {plan.pro && <span className="lp-pick">our pick</span>}
+                  <div className="lp-plan-inner">
+                    <div className="lp-plan-title">{plan.name}</div>
+                    <div className="lp-plan-price">
+                      <sup>R</sup>{plan.price}<small>{plan.per}</small>
+                    </div>
+                    <div className="lp-plan-sub">{plan.sub}</div>
+                    <div className="lp-feats">
+                      <div className="lp-feats-title">What you get</div>
+                      {PLAN_FEATURES.map((f) => {
+                        const on = plan.pro || f.free
+                        return (
+                          <div className={`lp-feat${on ? '' : ' off'}`} key={f.label}>
+                            <span className="lp-feat-ic">{on ? <Check size={13} /> : '×'}</span>
+                            {f.label}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                  <a href="/login?tab=signup" className="lp-plan-cta">{plan.cta}</a>
                 </div>
               ))}
-              <div className="report-foot">
-                <span className="report-foot-label" />
-                <div className="report-foot-cell">
-                  <div className="report-price"><sup>R</sup>0</div>
-                  <div className="report-price-sub">forever</div>
-                  <a href="/login?tab=signup" className="report-cta report-cta-free">Get started free</a>
-                </div>
-                <div className="report-foot-cell">
-                  <div className="report-price"><sup>R</sup>49<small>/mo</small></div>
-                  <div className="report-price-sub">founder pricing</div>
-                  <a href="/login?tab=signup" className="report-cta report-cta-pro">Subscribe →</a>
-                </div>
-              </div>
             </div>
             <div className="heart-note">
               <Heart size={16} className="heart-note-icon" />
@@ -781,32 +869,32 @@ export default function HomePage() {
               No account needed, no strings attached. Because access to good study material shouldn&apos;t
               have a price tag.</span>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* ── CLOSING ── */}
-          <section className="closing">
-            <div className="spread-deco o1" style={{ bottom: '-40px', right: '4%' }}>
-              <Bloom size={190} />
-            </div>
-            <div className="closing-big rv">
-              <span className="cy">You&apos;ve</span><br />Got<br /><span className="co">This.</span>
-            </div>
-            <div className="closing-right rv rv-delay-1">
-              <p>
-                Every student, no matter their school, their background, or their circumstances,
-                deserves a real shot. <strong>Curio is here to give it to you.</strong>
-              </p>
-              <p>Free to start. No card needed. Just you and the work.</p>
-              <div>
-                <a href="/login?tab=signup" className="btn-primary" style={{ display: 'inline-flex', marginTop: '0.5rem' }}>
-                  Create your free account →
-                </a>
+        {/* CLOSING */}
+        <section className="lp-section lp-last">
+          <div className="lp-wrap">
+            <div className="lp-closing rv">
+              <div className="spread-deco lp-closing-b1 lp-float slow"><Bloom size={380} tone="paper" /></div>
+              <div className="spread-deco lp-closing-b2 lp-float"><Bloom size={150} tone="paper" /></div>
+              <div className="lp-closing-copy">
+                <h2>You&apos;ve got this.</h2>
+                <p>
+                  Every student, no matter their school or their circumstances, deserves a real shot.
+                  Curio is here to give it to you. Free to start. No card needed.
+                </p>
+                <div className="lp-actions" style={{ justifyContent: 'flex-start' }}>
+                  <a href="/login?tab=signup" className="lp-btn-ink">Create your free account</a>
+                  <a href="/papers" className="btn-soft">Browse papers</a>
+                </div>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <Footer />
-        </div>
+        <Footer />
+      </div>
     </>
   )
 }

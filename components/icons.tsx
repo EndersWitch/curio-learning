@@ -1,63 +1,67 @@
 // Central icon re-export — every component imports icons from here rather
-// than 'lucide-react' directly, so the underlying icon library can be swapped
-// in one place. Replaces emoji use across the app.
+// than from the icon package directly, so the underlying icon set can be
+// swapped in one place. Replaces emoji use across the app.
 //
-// Wrapped (not re-exported raw) so every icon defaults to the same thin
-// monoline stroke weight instead of lucide's bolder default — override with
-// an explicit strokeWidth prop where needed.
+// The set is Heroicons (outline, 24px) — the same pack used in the Figma
+// education template. Wrapped so icons keep the `size` prop the app already
+// uses (Heroicons only take width/height). Heroicons has no brain or target
+// icon, so those two map to the closest meaning (Sparkles for Bloom the AI
+// tutor, a viewfinder circle for the quiz target).
 
 import {
-  Flame as FlameIcon,
-  Zap as ZapIcon,
-  FileText as FileTextIcon,
-  PenLine as PenLineIcon,
-  User as UserIcon,
-  Star as StarIcon,
-  Check as CheckIcon,
-  X as XIcon,
-  Lock as LockIcon,
-  Search as SearchIcon,
-  ChevronRight as ChevronRightIcon,
-  ChevronLeft as ChevronLeftIcon,
-  ArrowRight as ArrowRightIcon,
-  BookOpen as BookOpenIcon,
-  BookMarked as BookMarkedIcon,
-  Trophy as TrophyIcon,
-  GraduationCap as GraduationCapIcon,
-  Target as TargetIcon,
-  AlertTriangle as AlertTriangleIcon,
-  Lightbulb as LightbulbIcon,
-  Eye as EyeIcon,
-  Globe as GlobeIcon,
-  Brain as BrainIcon,
-  ListChecks as ListChecksIcon,
-  Layers as LayersIcon,
-  RefreshCw as RefreshCwIcon,
-  Heart as HeartIcon,
-  Home as HomeIcon,
-  Calculator as CalculatorIcon,
-  FlaskConical as FlaskConicalIcon,
-  Landmark as LandmarkIcon,
-  Briefcase as BriefcaseIcon,
-  Cog as CogIcon,
-  TrendingUp as TrendingUpIcon,
-  EyeOff as EyeOffIcon,
-  Sun as SunIcon,
-  Moon as MoonIcon,
-  type LucideProps,
-} from 'lucide-react'
+  FireIcon,
+  BoltIcon,
+  DocumentTextIcon,
+  PencilSquareIcon,
+  UserIcon,
+  StarIcon,
+  CheckIcon,
+  XMarkIcon,
+  LockClosedIcon,
+  MagnifyingGlassIcon,
+  ChevronRightIcon,
+  ChevronLeftIcon,
+  ArrowRightIcon,
+  BookOpenIcon,
+  BookmarkIcon,
+  TrophyIcon,
+  AcademicCapIcon,
+  ViewfinderCircleIcon,
+  ExclamationTriangleIcon,
+  LightBulbIcon,
+  EyeIcon,
+  GlobeAltIcon,
+  SparklesIcon,
+  ClipboardDocumentCheckIcon,
+  Square3Stack3DIcon,
+  ArrowPathIcon,
+  HeartIcon,
+  HomeIcon,
+  CalculatorIcon,
+  BeakerIcon,
+  BuildingLibraryIcon,
+  BriefcaseIcon,
+  Cog6ToothIcon,
+  ArrowTrendingUpIcon,
+  EyeSlashIcon,
+  SunIcon,
+  MoonIcon,
+} from '@heroicons/react/24/outline'
 
-export type IconProps = LucideProps
+export type IconProps = React.SVGProps<SVGSVGElement> & {
+  size?: number | string
+  strokeWidth?: number | string
+}
 
-function withDefaultStroke(Icon: React.ComponentType<LucideProps>) {
-  return function Wrapped({ strokeWidth = 1.75, ...props }: LucideProps) {
-    return <Icon strokeWidth={strokeWidth} {...props} />
+function wrap(Icon: React.ElementType) {
+  return function Wrapped({ size = 24, strokeWidth = 1.5, ...props }: IconProps) {
+    return <Icon width={size} height={size} strokeWidth={strokeWidth} {...props} />
   }
 }
 
-// lucide-react ships no brand/social icons by design — these two are hand-drawn
-// in the same monoline style (stroke-only, no filled brand mark).
-function FacebookIcon({ strokeWidth = 1.75, size = 24, ...props }: LucideProps) {
+// Heroicons ships no brand/social icons — these two are hand-drawn in the
+// same monoline style (stroke-only, no filled brand mark).
+function FacebookIcon({ strokeWidth = 1.5, size = 24, ...props }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
       strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -66,7 +70,7 @@ function FacebookIcon({ strokeWidth = 1.75, size = 24, ...props }: LucideProps) 
   )
 }
 
-function InstagramIcon({ strokeWidth = 1.75, size = 24, ...props }: LucideProps) {
+function InstagramIcon({ strokeWidth = 1.5, size = 24, ...props }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
       strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -80,40 +84,40 @@ function InstagramIcon({ strokeWidth = 1.75, size = 24, ...props }: LucideProps)
 export const Facebook = FacebookIcon
 export const Instagram = InstagramIcon
 
-export const Flame = withDefaultStroke(FlameIcon)
-export const Zap = withDefaultStroke(ZapIcon)
-export const FileText = withDefaultStroke(FileTextIcon)
-export const PenLine = withDefaultStroke(PenLineIcon)
-export const User = withDefaultStroke(UserIcon)
-export const Star = withDefaultStroke(StarIcon)
-export const Check = withDefaultStroke(CheckIcon)
-export const X = withDefaultStroke(XIcon)
-export const Lock = withDefaultStroke(LockIcon)
-export const Search = withDefaultStroke(SearchIcon)
-export const ChevronRight = withDefaultStroke(ChevronRightIcon)
-export const ChevronLeft = withDefaultStroke(ChevronLeftIcon)
-export const ArrowRight = withDefaultStroke(ArrowRightIcon)
-export const BookOpen = withDefaultStroke(BookOpenIcon)
-export const BookMarked = withDefaultStroke(BookMarkedIcon)
-export const Trophy = withDefaultStroke(TrophyIcon)
-export const GraduationCap = withDefaultStroke(GraduationCapIcon)
-export const Target = withDefaultStroke(TargetIcon)
-export const AlertTriangle = withDefaultStroke(AlertTriangleIcon)
-export const Lightbulb = withDefaultStroke(LightbulbIcon)
-export const Eye = withDefaultStroke(EyeIcon)
-export const Globe = withDefaultStroke(GlobeIcon)
-export const Brain = withDefaultStroke(BrainIcon)
-export const ListChecks = withDefaultStroke(ListChecksIcon)
-export const Layers = withDefaultStroke(LayersIcon)
-export const RefreshCw = withDefaultStroke(RefreshCwIcon)
-export const Heart = withDefaultStroke(HeartIcon)
-export const Home = withDefaultStroke(HomeIcon)
-export const Calculator = withDefaultStroke(CalculatorIcon)
-export const FlaskConical = withDefaultStroke(FlaskConicalIcon)
-export const Landmark = withDefaultStroke(LandmarkIcon)
-export const Briefcase = withDefaultStroke(BriefcaseIcon)
-export const Cog = withDefaultStroke(CogIcon)
-export const TrendingUp = withDefaultStroke(TrendingUpIcon)
-export const EyeOff = withDefaultStroke(EyeOffIcon)
-export const Sun = withDefaultStroke(SunIcon)
-export const Moon = withDefaultStroke(MoonIcon)
+export const Flame = wrap(FireIcon)
+export const Zap = wrap(BoltIcon)
+export const FileText = wrap(DocumentTextIcon)
+export const PenLine = wrap(PencilSquareIcon)
+export const User = wrap(UserIcon)
+export const Star = wrap(StarIcon)
+export const Check = wrap(CheckIcon)
+export const X = wrap(XMarkIcon)
+export const Lock = wrap(LockClosedIcon)
+export const Search = wrap(MagnifyingGlassIcon)
+export const ChevronRight = wrap(ChevronRightIcon)
+export const ChevronLeft = wrap(ChevronLeftIcon)
+export const ArrowRight = wrap(ArrowRightIcon)
+export const BookOpen = wrap(BookOpenIcon)
+export const BookMarked = wrap(BookmarkIcon)
+export const Trophy = wrap(TrophyIcon)
+export const GraduationCap = wrap(AcademicCapIcon)
+export const Target = wrap(ViewfinderCircleIcon)
+export const AlertTriangle = wrap(ExclamationTriangleIcon)
+export const Lightbulb = wrap(LightBulbIcon)
+export const Eye = wrap(EyeIcon)
+export const Globe = wrap(GlobeAltIcon)
+export const Brain = wrap(SparklesIcon)
+export const ListChecks = wrap(ClipboardDocumentCheckIcon)
+export const Layers = wrap(Square3Stack3DIcon)
+export const RefreshCw = wrap(ArrowPathIcon)
+export const Heart = wrap(HeartIcon)
+export const Home = wrap(HomeIcon)
+export const Calculator = wrap(CalculatorIcon)
+export const FlaskConical = wrap(BeakerIcon)
+export const Landmark = wrap(BuildingLibraryIcon)
+export const Briefcase = wrap(BriefcaseIcon)
+export const Cog = wrap(Cog6ToothIcon)
+export const TrendingUp = wrap(ArrowTrendingUpIcon)
+export const EyeOff = wrap(EyeSlashIcon)
+export const Sun = wrap(SunIcon)
+export const Moon = wrap(MoonIcon)

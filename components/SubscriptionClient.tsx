@@ -22,7 +22,7 @@ const PLAN_ROWS = [
   { label: 'Full marking memos', free: true, pro: true },
   { label: 'All grades & subjects', free: true, pro: true },
   { label: 'AI-powered quiz mode', free: false, pro: true },
-  { label: 'Deep Learn explanations', free: false, pro: true },
+  { label: 'Bloom AI tutor', free: false, pro: true },
   { label: 'Custom test generator', free: false, pro: true },
   { label: 'Progress tracking & streaks', free: false, pro: true },
   { label: 'Topic-sorted question sets', free: false, pro: true },
@@ -265,7 +265,7 @@ export default function SubscriptionClient() {
                 <div className="quick-grid">
                   <a href="/papers" className="premqa"><span className="premqa-icon"><FileText size={22} /></span><span className="premqa-lbl">Papers</span></a>
                   <a href="/quiz" className="premqa"><span className="premqa-icon"><PenLine size={22} /></span><span className="premqa-lbl">Quiz</span></a>
-                  <a href="/deeplearn" className="premqa"><span className="premqa-icon"><Brain size={22} /></span><span className="premqa-lbl">Deep Learn</span></a>
+                  <a href="/deeplearn" className="premqa"><span className="premqa-icon"><Brain size={22} /></span><span className="premqa-lbl">Bloom</span></a>
                 </div>
               </section>
 
@@ -305,7 +305,7 @@ export default function SubscriptionClient() {
                       </span>
                     </div>
                     <div className="mem-row"><span className="mem-row-k">AI Quizzes</span><span className="mem-row-v good">Active</span></div>
-                    <div className="mem-row"><span className="mem-row-k">Deep Learn</span><span className="mem-row-v good">Active</span></div>
+                    <div className="mem-row"><span className="mem-row-k">Bloom</span><span className="mem-row-v good">Active</span></div>
                     <div className="mem-row"><span className="mem-row-k">Custom tests</span><span className="mem-row-v good">Active</span></div>
                   </div>
                   <div className="mem-foot">

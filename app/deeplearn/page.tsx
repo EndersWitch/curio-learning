@@ -5,7 +5,7 @@ import RevealObserver from '@/components/RevealObserver'
 import Bloom from '@/components/Bloom'
 
 export const metadata: Metadata = {
-  title: 'Deep Learn',
+  title: 'Bloom',
   description: "Curio's AI tutor breaks down concepts from first principles, in plain language, with real examples, until it actually clicks.",
 }
 
@@ -39,7 +39,7 @@ export default function DeepLearnPage() {
               </h1>
 
               <p className="spread-lede rv">
-                Deep Learn is Curio&apos;s AI tutor. Ask it anything. It breaks down concepts{' '}
+                Bloom is Curio&apos;s AI tutor. Ask it anything. It breaks down concepts{' '}
                 <strong>from first principles</strong>, in plain language, with real examples, until it actually clicks.
               </p>
 
@@ -55,7 +55,7 @@ export default function DeepLearnPage() {
                 <div className="dl-chat-bubble">Why does photosynthesis matter? I keep forgetting.</div>
               </div>
               <div className="dl-chat-msg ai chat-blur">
-                <div className="chat-sender">curio</div>
+                <div className="chat-sender">bloom</div>
                 <div className="dl-chat-bubble">
                   Let&apos;s build it up from scratch.<br /><br />
                   <strong>Plants are the only living things that make their own food,</strong> using sunlight, water, and CO₂ from the air.<br /><br />

@@ -63,7 +63,7 @@ export default function TermsPage() {
           <h3>Free tier:</h3>
           <p>Exam papers and memoranda are available to all users free of charge, with no account required. We are committed to keeping this free forever.</p>
           <h3>Premium tier:</h3>
-          <p>Premium features (AI-powered quizzes, Deep Learn explanations, custom test generators, and progress tracking) require a paid subscription. Premium subscriptions are billed monthly at the rate displayed on our pricing page. A 7-day free trial is available for new subscribers.</p>
+          <p>Premium features (AI-powered quizzes, Bloom AI tutor sessions, custom test generators, and progress tracking) require a paid subscription. Premium subscriptions are billed monthly at the rate displayed on our pricing page. A 7-day free trial is available for new subscribers.</p>
 
           <h2>5. Payment and Billing</h2>
           <p>Payments are processed securely by <strong>Paystack</strong>, a PCI-DSS compliant payment provider operating in South Africa. All prices are in <strong>South African Rand (ZAR)</strong> and include VAT where applicable.</p>
