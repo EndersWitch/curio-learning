@@ -1469,7 +1469,7 @@ html.dark { --rust-shadow: #8A3A17; }
 .lp-last { padding-bottom: 5.5rem; }
 
 /* hero */
-.lp-hero { padding-top: 7rem; overflow: hidden; }
+.lp-hero { padding-top: 7rem; padding-bottom: 1.5rem; }
 .lp-hero-copy { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.1rem; max-width: 880px; margin: 0 auto 3.5rem; }
 .lp-sticker { display: inline-block; font-family: var(--h); font-size: 0.85rem; font-weight: 800; color: var(--on-rust); background: var(--rust); border-radius: 999px; padding: 0.45rem 1.1rem; transform: rotate(-4deg); box-shadow: 0 3px 0 var(--rust-shadow); }
 .lp-pill { display: inline-flex; align-items: center; gap: 1rem; background: var(--paper-raised); border: 2px solid var(--ink); border-radius: 20px; padding: 0.8rem 1.8rem 0.8rem 0.9rem; box-shadow: 0 6px 0 var(--ink); }
@@ -1586,7 +1586,7 @@ html.dark { --rust-shadow: #8A3A17; }
 .lp-plan { position: relative; display: flex; flex-direction: column; background: var(--paper); border: 2px solid var(--ink15); border-radius: 22px; overflow: hidden; }
 .lp-plan.pro { border-color: var(--ink); box-shadow: 0 8px 0 var(--ink); }
 .lp-plan-inner { flex: 1; padding: 1.5rem; }
-.lp-pick { position: absolute; top: 0.9rem; right: 0.9rem; z-index: 2; font-family: var(--h); font-size: 0.78rem; font-weight: 800; color: var(--on-rust); background: var(--rust); border-radius: 999px; padding: 0.3rem 0.8rem; transform: rotate(6deg); animation: lpWobble 3s ease-in-out infinite; }
+.lp-pick { display: inline-block; margin-left: 0.7rem; font-family: var(--h); font-size: 0.74rem; font-weight: 800; color: var(--on-rust); background: var(--rust); border-radius: 999px; padding: 0.22rem 0.7rem; transform: rotate(4deg); animation: lpWobble 3s ease-in-out infinite; vertical-align: 0.1em; }
 .lp-plan-title { text-align: center; font-family: var(--h); font-size: 1rem; font-weight: 700; color: var(--ink); background: var(--rust-tint); border-radius: 12px; padding: 0.8rem; }
 .lp-plan-price { text-align: center; font-family: var(--h); font-size: 3.8rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--ink); margin-top: 1.6rem; }
 .lp-plan-price sup { font-size: 1.4rem; vertical-align: top; margin-right: 0.15rem; position: relative; top: 0.4rem; }
@@ -1635,7 +1635,8 @@ html.dark { --rust-shadow: #8A3A17; }
   .lp-cards, .lp-phases, .lp-plans { grid-template-columns: 1fr; }
   .lp-pill { padding: 0.6rem 1.1rem 0.6rem 0.6rem; gap: 0.7rem; }
   .lp-pill-icon { width: 50px; height: 50px; }
-  .lp-polaroid { margin: 0 -1.1rem; padding: 0.4rem 0.4rem 0.2rem; border-radius: 14px; }
+  .lp-polaroid { width: clamp(112px, 32vw, 190px); margin: 0 -0.9rem; padding: 0.4rem 0.4rem 0.2rem; border-radius: 14px; }
+  .lp-polaroid.b { width: clamp(126px, 36vw, 210px); }
   .lp-polaroid figcaption { font-size: 0.72rem; padding: 0.45rem 0 0.25rem; gap: 0.25rem; }
   .lp-polaroid figcaption svg { display: none; }
   .lp-card { padding: 1.4rem; gap: 1.5rem; }
@@ -1903,3 +1904,50 @@ html.dark { --rust-shadow: #8A3A17; }
 .dash-pt { min-width: 0; }
 .streak-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.45rem; }
 .s-day { width: auto; }
+
+/* long paper titles truncate instead of running under the Open button */
+.rec-left { flex: 1; min-width: 0; }
+.rec-left > div:last-child { min-width: 0; }
+.rec-btn { white-space: nowrap; }
+
+/* nav + logo consistency across every page */
+.simple-nav { height: 60px; border-bottom: 1px solid var(--line); }
+.simple-nav .nav-logo, .bp-logo { font-weight: 800; font-style: normal; letter-spacing: -0.02em; }
+.simple-nav .nav-logo { font-size: 1.3rem; gap: 0.55rem; }
+.simple-nav-links a { padding: 0.5rem 0.95rem; font-size: 0.9rem; color: var(--ink80); border-radius: 8px; }
+.nav-back { font-family: var(--h); font-weight: 600; color: var(--ink70); }
+.nav-back:hover { color: var(--ink); }
+.brand-panel .bp-logo { color: var(--on-rust); font-size: 1.3rem; }
+.brand-panel .bp-eyebrow { color: var(--on-rust); font-family: var(--h); font-weight: 800; opacity: 0.85; }
+.brand-panel .bp-sub strong { color: var(--on-rust); }
+
+/* benefit numbers sit on a clean badge in the middle of the flower */
+.lp-num-bloom { opacity: 0.85; }
+.lp-num b { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--paper-raised); border: 2px solid var(--ink); font-size: 1.25rem; letter-spacing: -0.02em; line-height: 1; }
+
+/* hero content lines up with the sections below it instead of shrink-wrapping to the centre */
+.spread.hero > .spread-inner { width: 100%; }
+
+/* remaining card families brought onto the same rounded, tinted system */
+.qtopic-card, .paper-card, .sidebar-card { border: 2px solid var(--ink15); border-radius: 22px; }
+.qtopic-card, .paper-card { background: linear-gradient(var(--tint, transparent), var(--tint, transparent)), var(--paper-raised); transition: transform .35s var(--spring), border-color .2s, box-shadow .25s; }
+.qtopic-card:nth-child(4n+1), .paper-card:nth-child(4n+1) { --tint: var(--tint-rust); }
+.qtopic-card:nth-child(4n+2), .paper-card:nth-child(4n+2) { --tint: var(--tint-moss); }
+.qtopic-card:nth-child(4n+3), .paper-card:nth-child(4n+3) { --tint: var(--tint-ochre); }
+.qtopic-card:nth-child(4n), .paper-card:nth-child(4n) { --tint: var(--tint-brick); }
+.qtopic-card:hover, .paper-card:hover { transform: translateY(-5px) rotate(-0.6deg); border-color: var(--ink); box-shadow: 0 6px 0 var(--ink); }
+.qtopic-card { padding: 1.4rem 1.5rem; }
+.qtopic-top { border-bottom-width: 2px; }
+.qtopic-title { font-weight: 800; }
+.qtopics-skeleton-card { border: 2px solid var(--ink08); border-radius: 22px; }
+.paper-card { padding: 1.3rem; }
+.paperc-btn { border-radius: 10px; }
+.sidebar-card-title { font-weight: 800; }
+.grade-btn { border-radius: 12px; }
+.grade-btn.active { background: var(--rust); color: var(--on-rust); }
+.grade-btn.active .grade-count { background: rgba(255,255,255,0.25); color: var(--on-rust); }
+.qopt { border-radius: 12px; border-width: 2px; }
+.qcard { border-radius: 22px; }
+@media (prefers-reduced-motion: reduce) { .qtopic-card, .paper-card { transition: none; } }
+.paperc-actions { flex-wrap: wrap; }
+.paperc-btn { flex: 1 1 auto; white-space: nowrap; text-align: center; justify-content: center; }

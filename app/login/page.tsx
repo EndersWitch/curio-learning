@@ -143,7 +143,7 @@ export default function LoginPage() {
         </div>
         <div className="bp-top">
           <a href="/" className="bp-logo">
-            <Bloom size={26} />
+            <Bloom size={32} />
             curio
           </a>
         </div>

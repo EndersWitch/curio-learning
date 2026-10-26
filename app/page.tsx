@@ -641,7 +641,7 @@ export default function HomePage() {
             <div className="lp-phases rv">
               {[
                 { img: '/images/home/phase-intermediate.jpg', pos: '50% 35%', alt: 'Smiling primary school learners outdoors', grades: 'Grades 4–6', title: 'Intermediate phase', text: 'Build solid foundations in English, Maths and Natural Sciences.', href: '/subjects#int', t: 't1' },
-                { img: '/images/home/phase-senior.jpg', pos: '50% 25%', alt: 'A learner absorbed in a book', grades: 'Grades 7–9', title: 'Senior phase', text: 'Get ready for high school with the full range of subjects.', href: '/subjects#sen', t: 't2' },
+                { img: '/images/home/phase-senior.jpg', pos: '50% 40%', alt: 'A learner absorbed in a book', grades: 'Grades 7–9', title: 'Senior phase', text: 'Get ready for high school with the full range of subjects.', href: '/subjects#sen', t: 't2' },
                 { img: '/images/home/phase-fet.jpg', pos: '50% 30%', alt: 'Two learners reading a book together', grades: 'Grades 10–12', title: 'FET phase', text: 'Past papers and memos for the years that count, up to matric.', href: '/subjects#fet', t: 't3' },
               ].map((p) => (
                 <div className={`lp-phase ${p.t}`} key={p.title}>
@@ -714,8 +714,8 @@ export default function HomePage() {
 
         {/* DEEP LEARN */}
         <section className="lp-section">
-          <div className="spread-deco o2 lp-float" style={{ bottom: '-30px', left: '3%' }}>
-            <Bloom size={150} tone="moss" />
+          <div className="spread-deco o2 lp-float" style={{ top: '6%', right: '-70px' }}>
+            <Bloom size={170} tone="moss" />
           </div>
           <div className="lp-wrap lp-split rv">
             <div className="lp-panel">
@@ -820,7 +820,7 @@ export default function HomePage() {
 
         {/* PRICING */}
         <section className="lp-section" id="pricing">
-          <div className="spread-deco o2 lp-float" style={{ top: '40px', left: '-60px' }}>
+          <div className="spread-deco o2 lp-float" style={{ top: '30px', right: '-60px' }}>
             <Bloom size={190} tone="ochre" />
           </div>
           <div className="lp-wrap">
@@ -839,9 +839,8 @@ export default function HomePage() {
                 { name: 'Premium plan', price: '49', per: '/month', sub: 'founder pricing', cta: 'Subscribe', pro: true },
               ].map((plan) => (
                 <div className={`lp-plan${plan.pro ? ' pro' : ''}`} key={plan.name}>
-                  {plan.pro && <span className="lp-pick">our pick</span>}
                   <div className="lp-plan-inner">
-                    <div className="lp-plan-title">{plan.name}</div>
+                    <div className="lp-plan-title">{plan.name}{plan.pro && <span className="lp-pick">our pick</span>}</div>
                     <div className="lp-plan-price">
                       <sup>R</sup>{plan.price}<small>{plan.per}</small>
                     </div>
