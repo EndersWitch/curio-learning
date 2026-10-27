@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Fraunces, Work_Sans } from 'next/font/google'
+import { Raleway, Merriweather } from 'next/font/google'
 import './globals.css'
 import AdGate from '@/components/AdGate'
 import MobileTabBar from '@/components/MobileTabBar'
@@ -8,18 +8,20 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 import { themeBootScript } from '@/lib/theme'
 import { AuthProvider } from '@/lib/auth-context'
 
-const fraunces = Fraunces({
+// Raleway for headings, buttons and UI; Merriweather for running text.
+const raleway = Raleway({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '900'],
+  weight: ['400', '500', '600', '700', '800'],
   style: ['normal', 'italic'],
-  variable: '--font-fraunces',
+  variable: '--font-heading',
   display: 'swap',
 })
 
-const workSans = Work_Sans({
+const merriweather = Merriweather({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-worksans',
+  weight: ['300', '400', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-body',
   display: 'swap',
 })
 
@@ -75,8 +77,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${workSans.variable}`} suppressHydrationWarning>
-      <body className="font-body antialiased">
+    <html lang="en" className={`${raleway.variable} ${merriweather.variable}`} suppressHydrationWarning>
+      <body className="font-heading antialiased">
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
         <ThemeProvider>
           <AuthProvider>

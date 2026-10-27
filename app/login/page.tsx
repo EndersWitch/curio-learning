@@ -143,7 +143,7 @@ export default function LoginPage() {
         </div>
         <div className="bp-top">
           <a href="/" className="bp-logo">
-            <Bloom size={26} />
+            <Bloom size={32} />
             curio
           </a>
         </div>
@@ -157,7 +157,7 @@ export default function LoginPage() {
             Everything you need to <strong>actually prepare</strong> for exams, free to start, always.
           </p>
           <ul className="bp-features">
-            {['Exam papers & memos, free forever','AI-powered topic quizzes','Deep Learn explanations','Grades 4 – 12 · every subject'].map((f) => (
+            {['Exam papers & memos, free forever','AI-powered topic quizzes','Bloom AI tutor','Grades 4 – 12 · every subject'].map((f) => (
               <li key={f} className="bp-feature"><span className="bp-chk"><Check size={11} /></span>{f}</li>
             ))}
           </ul>

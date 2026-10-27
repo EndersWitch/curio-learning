@@ -7,7 +7,7 @@ export default function SimpleNav() {
   return (
     <nav className="simple-nav">
       <a href="/" className="nav-logo">
-        <Bloom size={24} />
+        <Bloom size={32} />
         curio
       </a>
       <ul className="simple-nav-links">

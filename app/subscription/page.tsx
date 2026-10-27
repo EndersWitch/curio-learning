@@ -5,7 +5,7 @@ import SubscriptionClient from '@/components/SubscriptionClient'
 
 export const metadata: Metadata = {
   title: 'Premium',
-  description: 'Upgrade to Curio Premium for AI-powered quizzes, Deep Learn explanations, custom tests and progress tracking.',
+  description: 'Upgrade to Curio Premium for AI-powered quizzes, the Bloom AI tutor, custom tests and progress tracking.',
 }
 
 export default function SubscriptionPage() {

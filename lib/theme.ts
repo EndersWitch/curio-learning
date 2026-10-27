@@ -33,8 +33,7 @@ export async function persistTheme(theme: Theme) {
 
 // Called once per page load to reconcile theme state: the signed-in
 // account's saved preference wins (that's the cross-device source of
-// truth), falling back to whatever the blocking head script already
-// applied from localStorage/system preference.
+// truth), falling back to what this device stored, then to light.
 export async function syncThemeFromAccount(): Promise<Theme> {
   const { data: { session } } = await sb.auth.getSession()
   if (session?.user) {
@@ -53,10 +52,10 @@ export async function syncThemeFromAccount(): Promise<Theme> {
   const stored = getStoredTheme()
   if (stored) { applyTheme(stored); return stored }
 
-  const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches
-  const fallback: Theme = prefersDark ? 'dark' : 'light'
-  applyTheme(fallback)
-  return fallback
+  // First-time visitors always start in light mode, whatever their OS
+  // prefers; dark is opt-in via the theme toggle.
+  applyTheme('light')
+  return 'light'
 }
 
 // Inlined verbatim into a blocking <script> at the top of <body> so the
@@ -67,7 +66,6 @@ export async function syncThemeFromAccount(): Promise<Theme> {
 export const themeBootScript = `
 try {
   var t = localStorage.getItem('${STORAGE_KEY}');
-  if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   if (t === 'dark') document.documentElement.classList.add('dark');
 } catch (e) {}
 `
