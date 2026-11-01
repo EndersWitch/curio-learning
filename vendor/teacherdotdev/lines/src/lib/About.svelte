@@ -5,19 +5,14 @@
 
   <section class="card">
     <div class="titlerow">
-      <img src="/logo.svg" alt="" width="40" height="40" />
-      <h2>From teacher.dev</h2>
+      <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" width="40" height="40" />
+      <h2>Part of curio learning</h2>
     </div>
     <p>
-      Rounding on a Number Line is a project from
-      <a href="https://teacher.dev" target="_blank" rel="noopener noreferrer">teacher.dev</a>,
-      a team building apps for teachers that solve real problems. Learn more about who we are
-      and what else we're building at
-      <a href="https://teacher.dev" target="_blank" rel="noopener noreferrer">teacher.dev</a>.
+      Rounding on a Number Line is part of curio learning, a free CAPS-aligned learning site for South African
+      learners in Grades 4 to 12. It is adapted from open-source software; see the
+      <a href="/licences">licences page</a>.
     </p>
-    <figure class="photo">
-      <figcaption>EdTech-a-thon 2026</figcaption>
-    </figure>
   </section>
 
   <section class="card">
@@ -32,10 +27,9 @@
   <section class="card">
     <h2>Feedback &amp; ideas</h2>
     <p>
-      We'd love to hear from you. Tell us what's working, what's not, or pitch us an idea for a
-      tool you wish existed. We're here to help.
+      Tell us what's working, what's not, or what you wish you had for your class.
     </p>
-    <a class="btn-dark" href="mailto:directors@teacher.dev?subject=lines%20feedback">Email directors@teacher.dev</a>
+    <a class="btn-dark" href="mailto:hello@curiolearning.co.za?subject=Rounding%20feedback">Email hello@curiolearning.co.za</a>
   </section>
 </div>
 

@@ -7,7 +7,7 @@
 </script>
 
 <svelte:element this={href ? 'a' : 'div'} class="brand-box" class:scrolls {href}>
-  <img src="/favicon.svg" alt="" width="30" height="30" />
+  <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" width="30" height="30" />
   <span>Fraction Fun</span>
 </svelte:element>
 

@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import type { ShuffledQuestion, QuizResult } from '@/types/quiz'
 import { ProgressBar } from '@/components/ui/XPBar'
+import ActivityFrame from '@/components/ActivityFrame'
+import { parseActivity } from '@/lib/activities'
 import { calculateXP } from '@/lib/progress'
 import { Trophy, GraduationCap, ArrowRight, Check, X } from '@/components/icons'
 
@@ -134,6 +136,7 @@ export default function QuizRunner({
 }: QuizRunnerProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [selected, setSelected]         = useState<string | null>(null)
+  const [showActivity, setShowActivity] = useState(false)
   const [answerState, setAnswerState]   = useState<AnswerState>('idle')
   const [startTime]  = useState(Date.now())
   const [scoreDisplay, setScoreDisplay] = useState(0)
@@ -172,6 +175,7 @@ export default function QuizRunner({
     } else {
       setCurrentIndex(i => i + 1)
       setSelected(null)
+      setShowActivity(false)
       setAnswerState('idle')
       feedbackRef.current = ''
     }
@@ -256,6 +260,23 @@ export default function QuizRunner({
         <RichText text={current.question_text}
           className="text-xl md:text-2xl leading-snug"
           style={{ color: CURIO.text, fontFamily: 'var(--h)', fontWeight: 700, letterSpacing: '-0.01em' }} />
+        {current.activity && parseActivity(current.activity) && (
+          <div className="mt-4">
+            <button
+              type="button"
+              onClick={() => setShowActivity(v => !v)}
+              aria-expanded={showActivity}
+              className="text-sm px-3 py-2 rounded border-2 transition-colors"
+              style={{ borderColor: 'rgba(var(--rust-rgb),0.35)', color: 'var(--rust)', fontFamily: 'var(--h)', fontWeight: 700, background: 'transparent' }}>
+              {showActivity ? 'Hide the activity' : 'Show me how'}
+            </button>
+            {showActivity && (
+              <div className="mt-3">
+                <ActivityFrame activity={current.activity} showDone={false} />
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Answer options */}

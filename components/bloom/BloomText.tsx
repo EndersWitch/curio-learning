@@ -1,4 +1,6 @@
 import { Fragment, type ReactNode } from 'react'
+import ActivityFrame from '@/components/ActivityFrame'
+import { parseActivity } from '@/lib/activities'
 
 // Renders a Bloom reply: the small slice of Markdown its rulebook allows
 // (paragraphs, **bold**, *italics*, `code`, "- " and "1." lists, ``` blocks).
@@ -12,6 +14,9 @@ export default function BloomText({ text }: { text: string }) {
 const BULLET = /^\s*[-*•]\s+/
 const NUMBERED = /^\s*\d+[.)]\s+/
 const FENCE = /^\s*```/
+// A line of its own, [[activity:fraction-fun?n=1&d=4&of=20]], becomes a hands-on frame (lib/activities.ts).
+const ACTIVITY_LINE = /^\s*\[\[activity:([^\]]*)\]\]\s*$/
+const OPEN_MARKER = /^\s*\[\[/
 const INLINE = /(\*\*[^*\n]+\*\*|`[^`\n]+`|\*[^*\s][^*\n]*\*)/
 
 function renderBlocks(text: string): ReactNode[] {
@@ -22,7 +27,16 @@ function renderBlocks(text: string): ReactNode[] {
   while (i < lines.length) {
     const line = lines[i]
 
-    if (FENCE.test(line)) {
+    const marker = ACTIVITY_LINE.exec(line)
+    if (marker) {
+      // Anything that is not a known tool with valid settings shows nothing at all.
+      if (parseActivity(marker[1])) {
+        out.push(<div key={out.length} className="bloom-activity"><ActivityFrame activity={marker[1]} /></div>)
+      }
+      i++
+    } else if (OPEN_MARKER.test(line)) {
+      i++ // a marker still streaming in: hold it back until it is complete
+    } else if (FENCE.test(line)) {
       const code: string[] = []
       i++
       while (i < lines.length && !FENCE.test(lines[i])) code.push(lines[i++])

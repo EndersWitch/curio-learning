@@ -1,4 +1,5 @@
 <script>
+  import { report } from './curio.js'
   // The student's page. Settings come straight from the link; the drill runs
   // entirely on this device and ends with a report the teacher can read.
   import { onDestroy, tick } from 'svelte'
@@ -161,6 +162,7 @@
     clearInterval(ticker)
     elapsedMs = Date.now() - startTime
     phase = 'done'
+    report('complete', { correct, total: results.length, percent })
   }
 
   onDestroy(() => clearInterval(ticker))

@@ -8,6 +8,7 @@ interface DbConcept {
   example?: string | { text?: string; label?: string }
   sideA?: string
   sideB?: string
+  activity?: string
 }
 
 // Normalise a raw DB concept into the canonical LearningConcept shape.
@@ -32,6 +33,7 @@ function normaliseConcept(raw: DbConcept): LearningConcept {
       example,
       sideA:   raw.sideA,
       sideB:   raw.sideB,
+      activity: raw.activity,
     }
   }
 
@@ -136,4 +138,5 @@ export const CARD_META: Record<CardType, { icon: string; label: string; descript
   fun_fact:        { icon: '🎉', label: 'Fun Fact!',            color: '#F5C842', description: 'Playful and surprising — keeps energy up' },
   step_by_step:    { icon: '🪜', label: 'Step by Step',         color: '#6DD3CE', description: 'Numbered steps for a process or method' },
   definition:      { icon: '📖', label: 'Definition',           color: '#c4b8d8', description: 'Formal dictionary-style definition of a term' },
+  activity:        { icon: '🧩', label: 'Hands-on',             color: '#B8451F', description: 'Interactive maths activity (fraction donut, number line, algebra tiles). Needs an activity reference' },
 }

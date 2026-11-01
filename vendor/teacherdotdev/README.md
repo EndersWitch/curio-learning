@@ -11,6 +11,6 @@ Copied from https://github.com/teacherdotdev (Apache-2.0) on 2026-11-01. Each fo
 | `morphology-mash` | 15fb9b1630c4 | Data copied to `lib/data/morphology/` |
 | `question-commons` | 50fee56b34fa | Source only. Also installable: `npm i @teacherdotdev/question-commons` |
 
-Changes made to the three built apps: Vite/SvelteKit base path set to `/tools/<name>/`, internal links made base-aware, teacher.dev analytics removed, photos of teacher.dev people removed, Vercel adapter swapped for the static adapter (Algebra Tiles).
+Changes made to the three built apps: base path `/tools/<name>/` with base-aware links, curio colours and branding, teacher.dev analytics and photos of their people removed, support email changed to curio's, `?embed=1` mode that hides the page chrome, and a `postMessage` to the host page when the learner finishes (`src/lib/curio.*`). Algebra Tiles also swaps the Vercel adapter for the static adapter. See `/THIRD_PARTY_NOTICES.md`.
 
 To rebuild a tool: `cd vendor/teacherdotdev/<name> && npm install && npm run build`, then copy `dist/` (Algebra Tiles: `build/`) into `public/tools/<name>/`.

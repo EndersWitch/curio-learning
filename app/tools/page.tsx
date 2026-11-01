@@ -98,7 +98,7 @@ export default function ToolsPage() {
           <a href="https://github.com/teacherdotdev" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--rust-text)' }}>
             teacher.dev
           </a>
-          , used under the Apache License 2.0. Each tool folder carries its licence file.
+          , used under the Apache License 2.0. See the <a href="/licences" style={{ color: 'var(--rust-text)' }}>licences page</a>.
         </p>
       </main>
       <Footer />

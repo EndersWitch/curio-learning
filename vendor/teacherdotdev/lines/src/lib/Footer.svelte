@@ -1,12 +1,11 @@
-<!-- The teacher.dev footer, shared with the other teacher.dev tools so the
-     whole set feels like one project. -->
 <footer class="no-print">
-  <a class="built" href="https://teacher.dev" target="_blank" rel="noopener noreferrer">
-    <img src="/logo.svg" alt="" width="24" height="24" />
-    Built by teacher.dev
+  <a class="built" href="/tools">
+    <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" width="24" height="24" />
+    curio learning
   </a>
   <a href="{import.meta.env.BASE_URL}about">about</a>
   <a href="{import.meta.env.BASE_URL}privacy">privacy</a>
+  <a href="/licences">licences</a>
 </footer>
 
 <style>

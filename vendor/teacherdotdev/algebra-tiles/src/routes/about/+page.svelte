@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logo from '$lib/assets/edtechathon-logo.svg';
+	import logo from '$lib/assets/favicon.svg';
 	import SitePage from '$lib/SitePage.svelte';
 	import { SUPPORT_EMAIL } from '$lib/support';
 </script>
@@ -11,19 +11,13 @@
 	<section>
 		<div class="heading">
 			<img src={logo} alt="" width="40" height="40" />
-			<h2>From the EdTech-a-thon</h2>
+			<h2>Part of curio learning</h2>
 		</div>
 		<p>
-			Algebra Tiles is a project from the
-			<a href="https://edtechathon.com" target="_blank" rel="noopener noreferrer">EdTech-a-thon</a>,
-			a community of builders making free tools for classrooms. Learn more about who we are and what
-			else we’re building at
-			<a href="https://edtechathon.com" target="_blank" rel="noopener noreferrer">edtechathon.com</a
-			>.
+			Algebra Tiles is part of curio learning, a free CAPS-aligned learning site for South African
+			learners in Grades 4 to 12. It is adapted from open-source software; see the
+			<a href="/licences">licences page</a>.
 		</p>
-		<figure>
-			<figcaption>EdTech-a-thon 2026</figcaption>
-		</figure>
 	</section>
 
 	<section>
@@ -38,8 +32,7 @@
 	<section>
 		<h2>Feedback &amp; ideas</h2>
 		<p>
-			We’d love to hear from you. Tell us what’s working, what’s not, or pitch us an idea for a tool
-			you wish existed. We’re here to help.
+			Tell us what’s working, what’s not, or what you wish you had for your class.
 		</p>
 		<a class="btn-primary" href="mailto:{SUPPORT_EMAIL}?subject=Algebra%20Tiles%20feedback">
 			Email {SUPPORT_EMAIL}

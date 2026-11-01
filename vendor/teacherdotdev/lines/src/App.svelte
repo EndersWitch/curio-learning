@@ -7,11 +7,14 @@
   import Privacy from './lib/Privacy.svelte'
   import Footer from './lib/Footer.svelte'
   import Help from './lib/Help.svelte'
+  import { embedded, report } from './lib/curio.js'
   import { settingsFromParams } from './lib/settings.js'
 
   const BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
   const path = window.location.pathname.replace(BASE, '').replace(/\/$/, '') || '/'
   const settings = settingsFromParams(new URLSearchParams(window.location.search))
+  if (embedded) document.documentElement.classList.add('embedded')
+  report('ready')
 </script>
 
 <div class="shell">
@@ -26,8 +29,10 @@
       <Setup />
     {/if}
   </main>
-  <Footer />
-  <Help />
+  {#if !embedded}
+    <Footer />
+    <Help />
+  {/if}
 </div>
 
 <style>

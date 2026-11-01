@@ -59,6 +59,7 @@ export type CardType =
   | 'fun_fact'        // 🎉 Fun / surprising fact — playful, confetti feel
   | 'step_by_step'    // 🪜 Numbered steps — ordered process
   | 'definition'      // 📖 Formal definition — dictionary style
+  | 'activity'        // 🧩 Hands-on maths activity shown in a frame (see lib/activities.ts)
 
 export interface LearningConcept {
   type: CardType
@@ -68,6 +69,8 @@ export interface LearningConcept {
   // For spot_difference: sideA and sideB labels
   sideA?: string
   sideB?: string
+  // For activity: a reference like "fraction-fun?n=1&d=4&of=20"
+  activity?: string
 }
 
 export interface Question {
@@ -87,6 +90,8 @@ export interface Question {
   explanation?: string
   is_premium: boolean
   difficulty?: string // 'Starter' | 'Building' | 'Challenge'
+  // Optional hands-on aid shown with the question, e.g. "fraction-fun?n=1&d=4&of=20"
+  activity?: string | null
 }
 
 export interface ShuffledQuestion {
@@ -96,6 +101,7 @@ export interface ShuffledQuestion {
   correct_key: string
   explanation?: string
   difficulty?: string // 'Starter' | 'Building' | 'Challenge'
+  activity?: string
 }
 
 export interface UserProgress {

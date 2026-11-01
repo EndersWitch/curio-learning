@@ -1951,3 +1951,4 @@ html.dark { --rust-shadow: #8A3A17; }
 @media (prefers-reduced-motion: reduce) { .qtopic-card, .paper-card { transition: none; } }
 .paperc-actions { flex-wrap: wrap; }
 .paperc-btn { flex: 1 1 auto; white-space: nowrap; text-align: center; justify-content: center; }
+.bloom-a-card .bloom-activity { margin: 0.75rem 0; }

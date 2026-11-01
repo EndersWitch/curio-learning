@@ -54,7 +54,7 @@
 <div class="page">
   <header class="intro">
     <div class="title-row">
-      <img src="/favicon.svg" alt="" width="40" height="40" />
+      <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" width="40" height="40" />
       <h1>Set up a rounding drill</h1>
     </div>
     <p>

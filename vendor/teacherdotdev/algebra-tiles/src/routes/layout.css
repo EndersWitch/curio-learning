@@ -1,20 +1,19 @@
 @import 'tailwindcss';
 
-/* Morphology Mash's paper-and-ink look, in blue: pale blue-gray paper on a
-   cool ground, navy ink, and a strong blue accent. Plain sans throughout. */
+/* Curio's paper-and-ink look: warm paper, dark brown ink, rust accent. */
 :root {
-	--ground: #e7edf5;
-	--paper: #fbfcfe;
-	--paper-low: #eef2f8;
-	--line: #d5deea;
-	--line-strong: #a9b8cc;
-	--ink: #1d2838;
-	--ink-soft: #2e3e55;
-	--muted: #5a6a80;
-	--accent: #2c5fc7;
-	--accent-dark: #224ea8;
-	--accent-wash: #dfe8fa;
-	--accent-line: #c3d3f3;
+	--ground: #eae0c6;
+	--paper: #fbf8ef;
+	--paper-low: #f6f0e2;
+	--line: #ddd2b8;
+	--line-strong: #b9a98a;
+	--ink: #211a13;
+	--ink-soft: #3a2f24;
+	--muted: #5a5046;
+	--accent: #b8451f;
+	--accent-dark: #8f3417;
+	--accent-wash: #fbeee7;
+	--accent-line: #e8c4b3;
 	--good: #2f6e4a;
 	--good-wash: #e2f1e8;
 	--good-line: #b3d8c1;

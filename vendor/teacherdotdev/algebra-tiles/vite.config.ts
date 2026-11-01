@@ -23,7 +23,8 @@ export default defineConfig({
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
 			adapter: adapter({ pages: 'build', assets: 'build', fallback: '404.html', strict: false }),
-			paths: { base: '/tools/algebra-tiles' }
+			paths: { base: '/tools/algebra-tiles' },
+			prerender: { handleHttpError: 'ignore' }
 		})
 	]
 });

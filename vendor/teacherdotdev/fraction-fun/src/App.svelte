@@ -5,6 +5,7 @@
   import Island, { type Highlight } from './components/Island.svelte'
   import BrandBox from './components/BrandBox.svelte'
   import SiteChrome from './components/SiteChrome.svelte'
+  import { embedded, report } from './lib/curio'
   import Stepper from './components/Stepper.svelte'
   import { playStep } from './lib/autoplay'
   import { countingOrder, dealTo, sprinkleSlots } from './lib/donut'
@@ -58,6 +59,8 @@
   let kept = $state(new Set<number>())
   let fallen = $state(new Set<number>())
   let attempts = $state(0)
+  /** Wrong confirms across the whole problem, reported to curio when it is finished. */
+  let mistakes = 0
   let wobble = $state(false)
   let busy = $state(false)
   /** Watch mode is playing a step; the button hides until the next step begins. */
@@ -198,7 +201,10 @@
     play(sound, { volume: sound === 'intro' ? 0.8 : 0.35 })
     busy = false
     if (from === 'count') settleZoom()
-    if (step === 'answer') celebrate()
+    if (step === 'answer') {
+      celebrate()
+      report('complete', { mistakes, watch })
+    }
   }
 
   let zoomingOut = $state(false)
@@ -273,6 +279,7 @@
 
   function miss() {
     attempts += 1
+    mistakes += 1
     play('wrong')
     hintShown = true
     clearTimeout(hintTimer)
@@ -620,6 +627,7 @@
     {/if}
   </button>
 
+  {#if !embedded}
   <!-- Teacher setup, beside the sound button. Opens with this problem filled in. -->
   <a class="settings" href={`${import.meta.env.BASE_URL}teacher${location.search}`} aria-label="Teacher settings">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -627,6 +635,7 @@
       <circle cx="12" cy="12" r="3" />
     </svg>
   </a>
+  {/if}
 
   {#if step !== 'question'}
     <ol class="dots" class:gone={revealing} aria-label="Progress">
@@ -773,7 +782,7 @@
 </main>
 
 <BrandBox />
-<SiteChrome />
+{#if !embedded}<SiteChrome />{/if}
 
 <style>
   .app {

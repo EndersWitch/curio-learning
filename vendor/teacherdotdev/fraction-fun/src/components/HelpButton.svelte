@@ -21,7 +21,7 @@
   <Modal title="Need a hand?" closeLabel="Close help" onclose={() => (open = false)}>
     <p>
       If you’re running into trouble or have suggestions, email us at
-      <a href="mailto:support@teacher.dev?subject=Fraction%20Fun">support@teacher.dev</a>.
+      <a href="mailto:hello@curiolearning.co.za?subject=Fraction%20Fun">hello@curiolearning.co.za</a>.
     </p>
   </Modal>
 {/if}

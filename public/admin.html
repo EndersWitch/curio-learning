@@ -1695,6 +1695,7 @@ const CARD_TYPES = [
   { value:'fun_fact',        icon:'🎉', label:'Fun Fact!',            color:'#D0A059', desc:'Playful and surprising — keeps energy up' },
   { value:'step_by_step',    icon:'🪜', label:'Step by Step',         color:'#74B26C', desc:'Numbered steps — one step per line' },
   { value:'definition',      icon:'📖', label:'Definition',           color:'#C97064', desc:'Formal dictionary-style definition of a term' },
+  { value:'activity',        icon:'🧩', label:'Hands-on',             color:'#D2652F', desc:'Interactive maths activity shown in the card. Fill in the activity reference below' },
 ];
 
 function getCardTypeMeta(val){ return CARD_TYPES.find(t=>t.value===val) || CARD_TYPES[0]; }
@@ -1715,6 +1716,8 @@ function onCardTypeChange(n){
   if(badge){ badge.textContent = `${meta.icon} ${meta.label}`; badge.style.color = meta.color; badge.style.borderColor = meta.color+'55'; }
   if(desc) desc.textContent = meta.desc;
   if(sideARow) sideARow.style.display = val==='spot_difference' ? 'grid' : 'none';
+  const actRow = document.getElementById(`cc-act-row-${n}`);
+  if(actRow) actRow.style.display = val==='activity' ? 'block' : 'none';
 }
 
 function addConceptCard(data){
@@ -1760,6 +1763,14 @@ function addConceptCard(data){
           <input class="form-input" type="text" id="cc-sideb-${n}" placeholder="e.g. ✅ Right" value="${(data?.sideB||'').replace(/"/g,'&quot;')}"/>
         </div>
       </div>
+      <div id="cc-act-row-${n}" class="form-group full" style="display:${selectedType==='activity'?'block':'none'};margin-bottom:0.8rem;">
+        <label class="form-label">Activity reference <span style="font-weight:400;color:var(--m30)">— pick one format and change the numbers</span></label>
+        <input class="form-input" type="text" id="cc-act-${n}" placeholder="fraction-fun?n=3&d=4&of=24" value="${(data?.activity||'').replace(/"/g,'&quot;')}"/>
+        <div style="margin-top:0.3rem;font-size:0.72rem;color:var(--m40);line-height:1.5;">
+          <b>fraction-fun</b>?n=3&amp;d=4&amp;of=24 &nbsp;·&nbsp; <b>rounding</b>?to=10&amp;max=100&amp;n=5&amp;mode=guided &nbsp;·&nbsp; <b>algebra-tiles</b>?type=multiply&amp;p=(x+2)(x-3)<br>
+          Preview it at <a href="/tools" target="_blank" style="color:var(--coral)">/tools</a>. A wrong reference simply shows no activity.
+        </div>
+      </div>
       <div class="form-group full">
         <label class="form-label">Example / Answer <span style="font-weight:400;color:var(--m30)">(optional — shown below content, or as the revealed answer for Try It)</span></label>
         <textarea class="form-textarea" id="cc-extext-${n}" placeholder="e.g. cat → cats, box → boxes&#10;One example per line if needed" style="min-height:60px;">${exText.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
@@ -1784,11 +1795,13 @@ function readConceptCards(){
     const exText= document.getElementById(`cc-extext-${id}`)?.value.trim();
     const sideA = document.getElementById(`cc-sidea-${id}`)?.value.trim();
     const sideB = document.getElementById(`cc-sideb-${id}`)?.value.trim();
+    const activity = document.getElementById(`cc-act-${id}`)?.value.trim();
     if(title && text){
       const concept = { type, title, content: text };
       if(exText) concept.example = exText;
       if(sideA) concept.sideA = sideA;
       if(sideB) concept.sideB = sideB;
+      if(type==='activity' && activity) concept.activity = activity;
       concepts.push(concept);
     }
   });

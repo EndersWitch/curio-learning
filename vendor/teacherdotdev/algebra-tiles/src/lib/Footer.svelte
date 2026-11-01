@@ -3,12 +3,14 @@
 	// help button pinned to the bottom-left corner of the window.
 	import { CircleQuestionMark } from '@lucide/svelte';
 	import { resolve } from '$app/paths';
-	import logo from '$lib/assets/edtechathon-logo.svg';
+	import logo from '$lib/assets/favicon.svg';
+	import { embedded } from '$lib/curio';
 	import EmailDialog from '$lib/EmailDialog.svelte';
 
 	let help = $state<EmailDialog>();
 </script>
 
+{#if !embedded}
 <footer>
 	<button
 		type="button"
@@ -19,13 +21,15 @@
 	>
 		<CircleQuestionMark size={20} aria-hidden="true" />
 	</button>
-	<a class="link built" href="https://teacher.dev" target="_blank" rel="noopener noreferrer">
+	<a class="link built" href="/tools">
 		<img src={logo} alt="" width="18" height="18" />
-		Built by teacher.dev
+		curio learning
 	</a>
 	<a class="link" href={resolve('/about')}>about</a>
 	<a class="link" href={resolve('/privacy')}>privacy</a>
+	<a class="link" href="/licences">licences</a>
 </footer>
+{/if}
 
 <EmailDialog bind:this={help} title="Need a hand?" subject="Algebra Tiles">
 	<p>If you’re running into trouble or have suggestions, email us and we’ll help.</p>

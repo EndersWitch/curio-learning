@@ -52,7 +52,7 @@
       </header>
       <p>
         If you’re running into trouble or have suggestions, email us at
-        <a href="mailto:directors@teacher.dev?subject=Rounding%20Number%20Line">directors@teacher.dev</a>.
+        <a href="mailto:hello@curiolearning.co.za?subject=Rounding%20Number%20Line">hello@curiolearning.co.za</a>.
       </p>
     </div>
   </div>

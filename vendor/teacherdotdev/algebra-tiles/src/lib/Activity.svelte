@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { report } from '$lib/curio';
 	// The student's view of one problem: a whiteboard with the mat on it. A bar
 	// across the top names the problem, its steps and the step's Check (or, on
 	// the last step, the answer field); what a failed Check found wrong shows
@@ -168,6 +169,9 @@
 			? ['balance', 'divide', 'answer']
 			: ['balance', 'answer'];
 	let step = $state<Step>(steps[0]);
+	$effect(() => {
+		if (step === 'done') report('complete', { solved });
+	});
 	/** Multiply's T fades away once its rectangle is done, leaving the tiles to sort. */
 	const faded = $derived(
 		p.type === 'multiply' && (step === 'groups' || step === 'equation' || step === 'done')

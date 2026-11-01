@@ -6,11 +6,7 @@
   <section class="card">
     <p>
       Rounding on a Number Line does not collect personal information from visitors or students.
-      We use Cloudflare Web Analytics to anonymously count the number of visits, which helps us
-      understand how the tool is being used in classrooms. Cloudflare Web Analytics is cookieless,
-      does not fingerprint visitors, and does not track users across other sites; see Cloudflare's
-      <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">privacy policy</a>
-      for details. We do not share, sell, or otherwise transfer any visitor data to third parties.
+      This page does not use cookies or trackers.
     </p>
     <p>
       A drill's settings live entirely in the link the teacher shares, and a student's answers and
@@ -19,7 +15,7 @@
     </p>
     <p>
       Questions or concerns? Email
-      <a href="mailto:directors@teacher.dev?subject=lines%20privacy">directors@teacher.dev</a>.
+      <a href="mailto:hello@curiolearning.co.za?subject=Rounding%20privacy">hello@curiolearning.co.za</a>.
     </p>
   </section>
 </div>

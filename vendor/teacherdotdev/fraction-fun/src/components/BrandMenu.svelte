@@ -1,5 +1,5 @@
 <!--
-  The teacher.dev mark in the top-left corner (the same pattern as Timer Toolbox).
+  The curio mark in the top-left corner.
   It opens to the credit and the About and Privacy cards, so the activity itself
   carries no footer to distract a student or take height from the donut.
 -->
@@ -59,18 +59,18 @@
     class="logo"
     aria-expanded={open}
     aria-controls="brand-menu-panel"
-    aria-label="teacher.dev: about and privacy"
+    aria-label="curio learning: about and privacy"
     onclick={() => (pinned = !pinned)}
   >
-    <img src="/teacher-dev-logo.svg" alt="" width="30" height="30" />
+    <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" width="30" height="30" />
   </button>
 
   {#if open}
     <div id="brand-menu-panel" class="panel">
       <div class="card">
-        <a class="credit" href="https://teacher.dev" target="_blank" rel="noopener noreferrer">
-          <img src="/teacher-dev-logo.svg" alt="" width="24" height="24" />
-          Built by teacher.dev
+        <a class="credit" href="/tools">
+          <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" width="24" height="24" />
+          curio learning
         </a>
         <p class="links">
           <button type="button" aria-haspopup="dialog" onclick={() => show('about')}>About</button>
@@ -89,37 +89,25 @@
       groups and sharing out sprinkles.
     </p>
 
-    <h3 class="with-logo"><img src="/teacher-dev-logo.svg" alt="" width="28" height="28" />From teacher.dev</h3>
+    <h3>Free to use</h3>
     <p>
-      Fraction Fun is a project from
-      <a href="https://teacher.dev" target="_blank" rel="noopener noreferrer">teacher.dev</a>, a
-      community of builders making free tools for classrooms.
+      Part of curio learning, a free CAPS-aligned learning site for South African learners in
+      Grades 4 to 12. Adapted from open-source software; see the <a href="/licences">licences page</a>.
     </p>
-
-    <h3>Our promise</h3>
-    <ul class="promise">
-      <li>Zero paywalls.</li>
-      <li>Zero ads.</li>
-      <li>Zero tracking of personal data.</li>
-    </ul>
 
     <h3>Feedback &amp; ideas</h3>
     <p>
       Tell us what’s working, what’s not, or what you wish you had for your class:
-      <a href="mailto:support@teacher.dev?subject=Fraction%20Fun%20feedback">support@teacher.dev</a>
+      <a href="mailto:hello@curiolearning.co.za?subject=Fraction%20Fun%20feedback">hello@curiolearning.co.za</a>
     </p>
   </Modal>
 {:else if dialog === 'privacy'}
   <Modal title="Privacy" closeLabel="Close privacy" returnTo={trigger} onclose={() => (dialog = null)}>
-    <p>Fraction Fun has no accounts, ads or cookies, and collects no personal information.</p>
-    <p>
-      We count visits with
-      <a href="https://www.cloudflare.com/web-analytics/" target="_blank" rel="noopener noreferrer">Cloudflare Web Analytics</a>,
-      which doesn't track you. The only thing saved is your sound setting, in this browser.
-    </p>
+    <p>Fraction Fun has no accounts, ads or cookies, and collects no personal information here.</p>
+    <p>Nothing you do here is sent anywhere. The only thing saved is your sound setting, in this browser.</p>
     <p>
       Questions? Email
-      <a href="mailto:support@teacher.dev?subject=Fraction%20Fun%20privacy">support@teacher.dev</a>.
+      <a href="mailto:hello@curiolearning.co.za?subject=Fraction%20Fun%20privacy">hello@curiolearning.co.za</a>.
     </p>
   </Modal>
 {/if}
