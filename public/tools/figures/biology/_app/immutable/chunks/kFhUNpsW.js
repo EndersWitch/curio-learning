@@ -1,0 +1,1 @@
+import{d as e,f as t}from"./Bn1h20o_.js";import"./xihTtKlq.js";import{t as n}from"./CnDPvf1q.js";var r=new Set([`$$slots`,`$$events`,`$$legacy`]);function i(i,a){let o=e(a,r),s={name:`move-right`,size:24,node:[[`path`,{d:`M18 8L22 12L18 16`}],[`path`,{d:`M2 12H22`}]]};n(i,t(()=>o,{get icon(){return s}}))}export{i as t};

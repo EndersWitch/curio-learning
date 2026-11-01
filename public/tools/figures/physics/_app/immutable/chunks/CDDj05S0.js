@@ -1,0 +1,1 @@
+import{d as e,u as t}from"./oyIREVVZ.js";import"./xihTtKlq.js";import{Y as n}from"./DNpVAhxI.js";var r=new Set([`$$slots`,`$$events`,`$$legacy`]);function i(i,a){let o=t(a,r),s={name:`triangle`,size:24,node:[[`path`,{d:`M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z`}]]};n(i,e(()=>o,{get icon(){return s}}))}export{i as t};

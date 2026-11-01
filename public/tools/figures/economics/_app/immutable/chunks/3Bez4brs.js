@@ -1,0 +1,1 @@
+var e=`economics`,t=`Econ Figures`,n=`/tools/figures/economics`,r={name:`STEM Figures`,url:`https://stemfigures.com`},i=[{name:`Math Figures`,url:`/tools/figures/math`},{name:`Physics Figures`,url:`/tools/figures/physics`},{name:`Chemistry Figures`,url:`/tools/figures/chemistry`}];export{n as a,t as i,i as n,e as r,r as t};

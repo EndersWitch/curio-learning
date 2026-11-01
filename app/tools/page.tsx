@@ -32,11 +32,11 @@ const TOOLS: Tool[] = [
 ]
 
 const FIGURES: { name: string; href: string }[] = [
-  { name: 'Maths figures', href: 'https://mathfigures.com' },
-  { name: 'Physics figures', href: 'https://physicsfigures.com' },
-  { name: 'Chemistry figures', href: 'https://chemistryfigures.com' },
-  { name: 'Biology figures', href: 'https://biologyfigures.com' },
-  { name: 'Economics figures', href: 'https://econfigures.com' },
+  { name: 'Maths figures', href: '/tools/figures/math' },
+  { name: 'Physics figures', href: '/tools/figures/physics' },
+  { name: 'Chemistry figures', href: '/tools/figures/chemistry' },
+  { name: 'Biology figures', href: '/tools/figures/biology' },
+  { name: 'Economics figures', href: '/tools/figures/economics' },
 ]
 
 const card: React.CSSProperties = {
@@ -78,16 +78,17 @@ export default function ToolsPage() {
           Clean, printable figures for tests and worksheets: number lines, triangles, graphs, circuits, Punnett squares, supply and demand
           and more. Download them as SVG or PNG. The figures are public domain.
         </p>
+        <p style={{ margin: '1rem 0 0' }}>
+          <a href="/tools/library" style={{ color: 'var(--rust-text)', fontFamily: 'var(--h)', fontWeight: 800 }}>Browse 422 ready-made figures →</a>
+        </p>
         <ul style={{ listStyle: 'none', padding: 0, margin: '1rem 0 0', display: 'flex', flexWrap: 'wrap', gap: '.6rem' }}>
           {FIGURES.map((f) => (
             <li key={f.href}>
               <a
                 href={f.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 style={{ display: 'inline-block', padding: '.5rem .9rem', border: '1px solid var(--line)', borderRadius: 999, color: 'var(--ink)', textDecoration: 'none', fontFamily: 'var(--h)', fontWeight: 600, fontSize: '.9rem', background: 'var(--paper-raised)' }}
               >
-                {f.name} ↗
+                {f.name}
               </a>
             </li>
           ))}
