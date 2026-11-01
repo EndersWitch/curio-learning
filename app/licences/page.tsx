@@ -11,6 +11,7 @@ const ITEMS = [
   { name: 'Fraction Fun', where: '/tools/fraction-fun', changes: 'Curio colours and branding; analytics and photos removed; reports completion to the page that shows it.' },
   { name: 'Rounding on a Number Line', where: '/tools/lines', changes: 'Curio colours and branding; analytics and photos removed; reports completion to the page that shows it.' },
   { name: 'Algebra Tiles', where: '/tools/algebra-tiles', changes: 'Built as a static site; curio colours and branding; analytics and photos removed; reports completion to the page that shows it.' },
+  { name: 'STEM Figures diagram makers', where: '/tools/figures and /tools/library', changes: 'Built as static sites; curio logo and wording; example galleries, analytics and photos removed; links kept inside curio. The figures they make are public domain (CC0 1.0).' },
   { name: 'Morphology Mash word data', where: 'Word-part data', changes: 'Copied unchanged. Used for word-building practice.' },
 ]
 

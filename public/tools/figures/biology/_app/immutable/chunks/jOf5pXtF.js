@@ -1,0 +1,1 @@
+import{s as e}from"./Bn1h20o_.js";function t(t,n){throw new e(t,n)}export{t};

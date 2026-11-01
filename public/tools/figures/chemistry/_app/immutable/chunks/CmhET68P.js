@@ -1,0 +1,1 @@
+import{st as e}from"./CWZN9LPz.js";var t=e({open:!1,topic:``});function n(e=``){t.topic=e.trim(),t.open=!0}export{t as n,n as t};

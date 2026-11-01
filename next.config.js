@@ -22,6 +22,9 @@ const nextConfig = {
       { source: '/tools/lines/:path*', destination: '/tools/lines/index.html' },
       { source: '/tools/fraction-fun', destination: '/tools/fraction-fun/index.html' },
       { source: '/tools/fraction-fun/teacher', destination: '/tools/fraction-fun/index.html' },
+      // STEM Figures diagram makers, built as single-page apps (scripts/figures/build-hosted.sh).
+      { source: '/tools/figures/:site(math|physics|chemistry|biology|economics)', destination: '/tools/figures/:site/index.html' },
+      { source: '/tools/figures/:site(math|physics|chemistry|biology|economics)/:path*', destination: '/tools/figures/:site/index.html' },
       { source: '/tools/algebra-tiles', destination: '/tools/algebra-tiles/index.html' },
       { source: '/tools/algebra-tiles/:page(about|privacy|factor|multiply|solve|play)', destination: '/tools/algebra-tiles/:page.html' },
       // Everything else (subjects, papers, subscription, contact, privacy,

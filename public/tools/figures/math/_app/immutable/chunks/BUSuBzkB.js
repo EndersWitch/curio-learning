@@ -1,0 +1,1 @@
+var e=`math`,t=`Math Figures`,n=`/tools/figures/math`,r={name:`STEM Figures`,url:`https://stemfigures.com`},i=[{name:`Physics Figures`,url:`/tools/figures/physics`},{name:`Chemistry Figures`,url:`/tools/figures/chemistry`}];export{n as a,t as i,i as n,e as r,r as t};

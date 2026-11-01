@@ -1,0 +1,1 @@
+import"./oyIREVVZ.js";import{r as e}from"./DQiqI8E_.js";function t(t,n){return e({tidy:t.clean,fromParams:t.fromParams,toQuery:t.toQuery,keyOf:t.toQuery},n,{history:`physicsfigures.${n}.history`,presets:`physicsfigures.${n}.presets`})}export{t};

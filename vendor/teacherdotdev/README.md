@@ -7,7 +7,7 @@ Copied from https://github.com/teacherdotdev (Apache-2.0) on 2026-11-01. Each fo
 | `lines` | cloned 2026-11-01 | Built to `public/tools/lines/` (base path patched) |
 | `fraction-fun` | cloned 2026-11-01 | Built to `public/tools/fraction-fun/` (base path patched, analytics beacon removed) |
 | `algebra-tiles` | cloned 2026-11-01 | Built to `public/tools/algebra-tiles/` (static adapter, base path patched) |
-| `stem-figures` | aa64a3668f44 | Source only. Examples and og images left out. Use for self-hosting later |
+| `stem-figures` | aa64a3668f44 | Untouched upstream source (example PNGs left out). Built to `public/tools/figures/<site>/` by `scripts/figures/build-hosted.sh` |
 | `morphology-mash` | 15fb9b1630c4 | Data copied to `lib/data/morphology/` |
 | `question-commons` | 50fee56b34fa | Source only. Also installable: `npm i @teacherdotdev/question-commons` |
 
