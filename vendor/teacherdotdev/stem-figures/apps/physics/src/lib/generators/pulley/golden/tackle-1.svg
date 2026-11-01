@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420" role="img" aria-label="A block and tackle: a load held up by 1 strand of rope" id="g-pulley">
+<rect class="paper" width="640" height="420" fill="#fff">
+</rect>
+<g fill="none" stroke-linecap="round">
+<line x1="244" y1="34" x2="452" y2="34" stroke="#111827" stroke-width="2.5">
+</line>
+<line x1="248" y1="34" x2="256" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="261" y1="34" x2="269" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="274" y1="34" x2="282" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="287" y1="34" x2="295" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="300" y1="34" x2="308" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="313" y1="34" x2="321" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="326" y1="34" x2="334" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="339" y1="34" x2="347" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="352" y1="34" x2="360" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="365" y1="34" x2="373" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="378" y1="34" x2="386" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="391" y1="34" x2="399" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="404" y1="34" x2="412" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="417" y1="34" x2="425" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="430" y1="34" x2="438" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="443" y1="34" x2="451" y2="24" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="320" y1="34" x2="320" y2="114" stroke="#111827" stroke-width="3">
+</line>
+<polyline points="284,114 284,180" stroke="#111827" stroke-width="2.2" stroke-linejoin="round">
+</polyline>
+<polyline points="356,114 356,130" stroke="#111827" stroke-width="2.2" stroke-linejoin="round">
+</polyline>
+<circle cx="320" cy="114" r="36" fill="#f3f4f6" stroke="#111827" stroke-width="2.5">
+</circle>
+<circle cx="320" cy="114" r="10.799999999999999" stroke="#111827" stroke-width="1.5">
+</circle>
+<circle cx="320" cy="114" r="3" fill="#111827">
+</circle>
+<path d="M284,114 A36,36 0 0 1 356,114" stroke="#111827" stroke-width="2.2">
+</path>
+<circle cx="284" cy="186" r="6" fill="#fff" stroke="#111827" stroke-width="2.2">
+</circle>
+<g transform="translate(356 242) rotate(0)">
+<rect x="-56" y="-112" width="112" height="112" rx="2" fill="#e5e7eb" stroke="#111827" stroke-width="2.5">
+</rect>
+</g>
+<line x1="356" y1="130" x2="356" y2="130" stroke="#111827" stroke-width="3" stroke-linecap="butt">
+</line>
+<polygon points="356,123.28 361.88,130 350.12,130" fill="#111827">
+</polygon>
+<line x1="284" y1="215" x2="284" y2="180" stroke="#111827" stroke-width="3" stroke-linecap="butt">
+</line>
+<polygon points="284,224.8 278.12,210.8 289.88,210.8" fill="#111827">
+</polygon>
+<line x1="356" y1="292.2" x2="356" y2="242" stroke="#111827" stroke-width="3" stroke-linecap="butt">
+</line>
+<polygon points="356,302 350.12,288 361.88,288" fill="#111827">
+</polygon>
+<line x1="428" y1="170.8" x2="428" y2="211" stroke="#111827" stroke-width="3" stroke-dasharray="9.27 5.79" stroke-linecap="butt">
+</line>
+<polygon points="428,161 433.88,175 422.12,175" fill="#111827">
+</polygon>
+</g>
+<text x="372.62" y="134.34" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">T</tspan>
+</tspan>
+</text>
+<text x="267.38" y="210.1" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">T</tspan>
+</tspan>
+</text>
+<text x="356" y="332.7" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">mg</tspan>
+</tspan>
+</text>
+<text x="444.62" y="193.7" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">a</tspan>
+</tspan>
+</text>
+<text x="356" y="191.06" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan>50 </tspan>
+<tspan>kg</tspan>
+</tspan>
+</text>
+</svg>

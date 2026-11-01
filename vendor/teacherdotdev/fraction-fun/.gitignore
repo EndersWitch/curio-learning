@@ -1,0 +1,9 @@
+node_modules
+dist
+.DS_Store
+*.local
+
+# Installed agent skills, kept out of the repo
+.agents/
+.claude/
+skills-lock.json

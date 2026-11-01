@@ -1,0 +1,3 @@
+# Call the meaning-carrying morpheme a "base", not a "root"
+
+Classroom materials usually say "Greek and Latin roots" for parts like _spect_ and _rupt_, and the teachers who asked for this app use "root" that way. We follow the word-matrix (Structured Word Inquiry) vocabulary instead: the morpheme that carries a word's core meaning is a **base**, whether or not it can stand alone, and a **root** is only the historical word it descends from (Latin _rumpere_ for _rupt_). The app labels morphemes Prefix / Base / Suffix so it matches the word-matrix model it is built on and doesn't conflate a present-day spelling unit with its etymology. Teacher-facing setup may say "Bases (roots)" so teachers looking for roots still find them.

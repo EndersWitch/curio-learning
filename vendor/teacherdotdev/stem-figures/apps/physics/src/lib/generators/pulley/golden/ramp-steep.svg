@@ -1,0 +1,215 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 428" width="640" height="428" role="img" aria-label="An object on a ramp tied over a pulley at its top to a hanging object" id="g-pulley">
+<rect class="paper" width="640" height="428" fill="#fff">
+</rect>
+<g fill="none" stroke-linecap="round">
+<line x1="220.44" y1="390" x2="536.66" y2="390" stroke="#111827" stroke-width="2.5">
+</line>
+<line x1="231.64" y1="390" x2="224.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="244.64" y1="390" x2="237.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="257.64" y1="390" x2="250.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="270.64" y1="390" x2="263.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="283.64" y1="390" x2="276.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="296.64" y1="390" x2="289.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="309.64" y1="390" x2="302.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="322.64" y1="390" x2="315.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="335.64" y1="390" x2="328.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="348.64" y1="390" x2="341.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="361.64" y1="390" x2="354.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="374.64" y1="390" x2="367.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="387.64" y1="390" x2="380.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="400.64" y1="390" x2="393.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="413.64" y1="390" x2="406.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="426.64" y1="390" x2="419.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="439.64" y1="390" x2="432.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="452.64" y1="390" x2="445.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="465.64" y1="390" x2="458.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="478.64" y1="390" x2="471.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="491.64" y1="390" x2="484.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="504.64" y1="390" x2="497.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="517.64" y1="390" x2="510.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="530.64" y1="390" x2="523.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<line x1="543.64" y1="390" x2="536.44" y2="399" stroke="#111827" stroke-width="1.3">
+</line>
+<path d="M250.44,390 L386.66,390 L386.66,154.05 Z" fill="#f3f4f6" stroke="#111827" stroke-width="2.5" stroke-linejoin="round">
+</path>
+<path d="M44,0 A44,44 0 0 0 22,-38.11" transform="translate(250.44 390)" stroke="#111827" stroke-width="1.5">
+</path>
+<line x1="386.66" y1="154.05" x2="416.66" y2="58.09" stroke="#111827" stroke-width="3">
+</line>
+<polyline points="291.24,207.32 387.22,41.09" stroke="#111827" stroke-width="2.2" stroke-linejoin="round">
+</polyline>
+<polyline points="450.66,58.09 450.66,168.09" stroke="#111827" stroke-width="2.2" stroke-linejoin="round">
+</polyline>
+<circle cx="416.66" cy="58.09" r="34" fill="#f3f4f6" stroke="#111827" stroke-width="2.5">
+</circle>
+<circle cx="416.66" cy="58.09" r="10.2" stroke="#111827" stroke-width="1.5">
+</circle>
+<circle cx="416.66" cy="58.09" r="3" fill="#111827">
+</circle>
+<path d="M387.22,41.09 A34,34 0 0 1 450.66,58.09" stroke="#111827" stroke-width="2.2">
+</path>
+<g transform="translate(311.74 283.82) rotate(-60)">
+<rect x="-56" y="-112" width="112" height="112" rx="2" fill="#e5e7eb" stroke="#111827" stroke-width="2.5">
+</rect>
+</g>
+<g transform="translate(450.66 280.09) rotate(0)">
+<rect x="-56" y="-112" width="112" height="112" rx="2" fill="#e5e7eb" stroke="#111827" stroke-width="2.5">
+</rect>
+</g>
+<line x1="314.34" y1="167.31" x2="291.24" y2="207.32" stroke="#111827" stroke-width="3" stroke-linecap="butt">
+</line>
+<polygon points="319.24,158.82 317.33,173.88 307.15,168" fill="#111827">
+</polygon>
+<line x1="364.12" y1="81.1" x2="387.22" y2="41.09" stroke="#111827" stroke-width="3" stroke-linecap="butt">
+</line>
+<polygon points="359.22,89.59 361.13,74.53 371.31,80.41" fill="#111827">
+</polygon>
+<line x1="450.66" y1="131.69" x2="450.66" y2="168.09" stroke="#111827" stroke-width="3" stroke-linecap="butt">
+</line>
+<polygon points="450.66,121.89 456.54,135.89 444.78,135.89" fill="#111827">
+</polygon>
+<line x1="450.66" y1="94.49" x2="450.66" y2="58.09" stroke="#111827" stroke-width="3" stroke-linecap="butt">
+</line>
+<polygon points="450.66,104.29 444.78,90.29 456.54,90.29" fill="#111827">
+</polygon>
+<line x1="263.24" y1="370.68" x2="263.24" y2="320.48" stroke="#111827" stroke-width="3" stroke-linecap="butt">
+</line>
+<polygon points="263.24,380.48 257.36,366.48 269.12,366.48" fill="#111827">
+</polygon>
+<line x1="450.66" y1="330.29" x2="450.66" y2="280.09" stroke="#111827" stroke-width="3" stroke-linecap="butt">
+</line>
+<polygon points="450.66,340.09 444.78,326.09 456.54,326.09" fill="#111827">
+</polygon>
+<line x1="171.27" y1="202.72" x2="214.74" y2="227.82" stroke="#111827" stroke-width="3" stroke-linecap="butt">
+</line>
+<polygon points="162.78,197.82 177.84,199.73 171.96,209.91" fill="#111827">
+</polygon>
+<line x1="255.35" y1="363.5" x2="275.95" y2="327.82" stroke="#111827" stroke-width="3" stroke-linecap="butt">
+</line>
+<polygon points="250.45,371.99 252.36,356.93 262.54,362.81" fill="#111827">
+</polygon>
+<line x1="170.32" y1="264.75" x2="190.42" y2="229.94" stroke="#111827" stroke-width="3" stroke-dasharray="9.27 5.79" stroke-linecap="butt">
+</line>
+<polygon points="165.42,273.24 167.33,258.18 177.51,264.06" fill="#111827">
+</polygon>
+<line x1="522.66" y1="208.89" x2="522.66" y2="249.09" stroke="#111827" stroke-width="3" stroke-dasharray="9.27 5.79" stroke-linecap="butt">
+</line>
+<polygon points="522.66,199.09 528.54,213.09 516.78,213.09" fill="#111827">
+</polygon>
+</g>
+<text x="290.85" y="182.45999999999998" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">T</tspan>
+</tspan>
+</text>
+<text x="358.83" y="64.73" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">T</tspan>
+</tspan>
+</text>
+<text x="467.28" y="152.69" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">T</tspan>
+</tspan>
+</text>
+<text x="467.28" y="88.89" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">T</tspan>
+</tspan>
+</text>
+<text x="263.24" y="411.18" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">m</tspan>
+</tspan>
+<tspan dy="6.6" font-size="15.399999999999999">
+<tspan>1</tspan>
+</tspan>
+<tspan dy="-6.6">
+<tspan> </tspan>
+<tspan font-style="italic">g</tspan>
+</tspan>
+</text>
+<text x="450.66" y="370.78999999999996" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">m</tspan>
+</tspan>
+<tspan dy="6.6" font-size="15.399999999999999">
+<tspan>2</tspan>
+</tspan>
+<tspan dy="-6.6">
+<tspan> </tspan>
+<tspan font-style="italic">g</tspan>
+</tspan>
+</text>
+<text x="137.23" y="190.76999999999998" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">F</tspan>
+</tspan>
+<tspan dy="6.6" font-size="15.399999999999999">
+<tspan font-style="italic">N</tspan>
+</tspan>
+</text>
+<text x="236.22" y="404.33" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">F</tspan>
+</tspan>
+<tspan dy="6.6" font-size="15.399999999999999">
+<tspan font-style="italic">f</tspan>
+</tspan>
+</text>
+<text x="163.53" y="250.98" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">a</tspan>
+</tspan>
+</text>
+<text x="539.28" y="231.79" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">a</tspan>
+</tspan>
+</text>
+<text x="315.33" y="361.7" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">θ</tspan>
+</tspan>
+</text>
+<text x="263.24" y="257.58" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">m</tspan>
+</tspan>
+<tspan dy="6.6" font-size="15.399999999999999">
+<tspan>1</tspan>
+</tspan>
+</text>
+<text x="450.66" y="225.85" text-anchor="middle" font-family="'Times New Roman', Times, serif" font-size="22" fill="#111827" stroke-linejoin="round" paint-order="stroke">
+<tspan>
+<tspan font-style="italic">m</tspan>
+</tspan>
+<tspan dy="6.6" font-size="15.399999999999999">
+<tspan>2</tspan>
+</tspan>
+</text>
+</svg>

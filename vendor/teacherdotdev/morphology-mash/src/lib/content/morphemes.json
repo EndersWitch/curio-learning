@@ -1,0 +1,5340 @@
+{
+	"un": {
+		"type": "prefix",
+		"spelling": "un",
+		"meanings": ["not", "reverse of"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "not"
+	},
+	"re": {
+		"type": "prefix",
+		"spelling": "re",
+		"meanings": ["again", "back"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "time"
+	},
+	"dis": {
+		"type": "prefix",
+		"spelling": "dis",
+		"meanings": ["not", "apart"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "not"
+	},
+	"pre": {
+		"type": "prefix",
+		"spelling": "pre",
+		"meanings": ["before"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "time"
+	},
+	"mis": {
+		"type": "prefix",
+		"spelling": "mis",
+		"meanings": ["wrongly"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "not"
+	},
+	"non": {
+		"type": "prefix",
+		"spelling": "non",
+		"meanings": ["not"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "not"
+	},
+	"in": {
+		"type": "prefix",
+		"spelling": "in",
+		"meanings": ["not", "in or into"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "not"
+	},
+	"sub": {
+		"type": "prefix",
+		"spelling": "sub",
+		"meanings": ["under"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"inter": {
+		"type": "prefix",
+		"spelling": "inter",
+		"meanings": ["between"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"trans": {
+		"type": "prefix",
+		"spelling": "trans",
+		"meanings": ["across"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"super": {
+		"type": "prefix",
+		"spelling": "super",
+		"meanings": ["above or beyond"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "place"
+	},
+	"anti": {
+		"type": "prefix",
+		"spelling": "anti",
+		"meanings": ["against"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "not"
+	},
+	"de": {
+		"type": "prefix",
+		"spelling": "de",
+		"meanings": ["away or down"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"ex": {
+		"type": "prefix",
+		"spelling": "ex",
+		"meanings": ["out"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"pro": {
+		"type": "prefix",
+		"spelling": "pro",
+		"meanings": ["forward"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"con": {
+		"type": "prefix",
+		"spelling": "con",
+		"meanings": ["together"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"over": {
+		"type": "prefix",
+		"spelling": "over",
+		"meanings": ["too much"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "amount"
+	},
+	"micro": {
+		"type": "prefix",
+		"spelling": "micro",
+		"meanings": ["very small"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"tele": {
+		"type": "prefix",
+		"spelling": "tele",
+		"meanings": ["far"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "place"
+	},
+	"auto": {
+		"type": "prefix",
+		"spelling": "auto",
+		"meanings": ["self"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "people"
+	},
+	"kind": {
+		"type": "base",
+		"spelling": "kind",
+		"meanings": ["caring and gentle"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "feelings"
+	},
+	"read": {
+		"type": "base",
+		"spelling": "read",
+		"meanings": ["to look at and understand words"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "senses"
+	},
+	"help": {
+		"type": "base",
+		"spelling": "help",
+		"meanings": ["to make things easier for someone"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"care": {
+		"type": "base",
+		"spelling": "care",
+		"meanings": ["attention and concern"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "feelings"
+	},
+	"hope": {
+		"type": "base",
+		"spelling": "hope",
+		"meanings": ["to wish for"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "feelings"
+	},
+	"hop": {
+		"type": "base",
+		"spelling": "hop",
+		"meanings": ["to jump"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"use": {
+		"type": "base",
+		"spelling": "use",
+		"meanings": ["to put to work"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"happy": {
+		"type": "base",
+		"spelling": "happy",
+		"meanings": ["feeling glad"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "feelings"
+	},
+	"write": {
+		"type": "base",
+		"spelling": "write",
+		"meanings": ["to put words on a page"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "senses"
+	},
+	"play": {
+		"type": "base",
+		"spelling": "play",
+		"meanings": ["to have fun or take part in a game"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"agree": {
+		"type": "base",
+		"spelling": "agree",
+		"meanings": ["to think the same way"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"cover": {
+		"type": "base",
+		"spelling": "cover",
+		"meanings": ["to put something over"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"fair": {
+		"type": "base",
+		"spelling": "fair",
+		"meanings": ["treating everyone the same"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "describing"
+	},
+	"like": {
+		"type": "base",
+		"spelling": "like",
+		"meanings": ["to enjoy"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "feelings"
+	},
+	"appear": {
+		"type": "base",
+		"spelling": "appear",
+		"meanings": ["to come into view"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"comfort": {
+		"type": "base",
+		"spelling": "comfort",
+		"meanings": ["a feeling of ease"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"friend": {
+		"type": "base",
+		"spelling": "friend",
+		"meanings": ["a person you like and trust"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "people"
+	},
+	"pay": {
+		"type": "base",
+		"spelling": "pay",
+		"meanings": ["to give money for something"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"heat": {
+		"type": "base",
+		"spelling": "heat",
+		"meanings": ["warmth"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "nature"
+	},
+	"cook": {
+		"type": "base",
+		"spelling": "cook",
+		"meanings": ["to make food ready to eat"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"build": {
+		"type": "base",
+		"spelling": "build",
+		"meanings": ["to put together"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"joy": {
+		"type": "base",
+		"spelling": "joy",
+		"meanings": ["great happiness"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"power": {
+		"type": "base",
+		"spelling": "power",
+		"meanings": ["strength"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"move": {
+		"type": "base",
+		"spelling": "move",
+		"meanings": ["to go from one place to another"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"teach": {
+		"type": "base",
+		"spelling": "teach",
+		"meanings": ["to help someone learn"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"sleep": {
+		"type": "base",
+		"spelling": "sleep",
+		"meanings": ["rest with your eyes closed"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"run": {
+		"type": "base",
+		"spelling": "run",
+		"meanings": ["to move quickly on foot"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"sad": {
+		"type": "base",
+		"spelling": "sad",
+		"meanings": ["unhappy"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "feelings"
+	},
+	"big": {
+		"type": "base",
+		"spelling": "big",
+		"meanings": ["large"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "amount"
+	},
+	"fun": {
+		"type": "base",
+		"spelling": "fun",
+		"meanings": ["enjoyment"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "feelings"
+	},
+	"safe": {
+		"type": "base",
+		"spelling": "safe",
+		"meanings": ["free from danger"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"fear": {
+		"type": "base",
+		"spelling": "fear",
+		"meanings": ["the feeling of being afraid"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "feelings"
+	},
+	"thank": {
+		"type": "base",
+		"spelling": "thank",
+		"meanings": ["to show you are grateful"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "feelings"
+	},
+	"tie": {
+		"type": "base",
+		"spelling": "tie",
+		"meanings": ["to fasten with a knot"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"lock": {
+		"type": "base",
+		"spelling": "lock",
+		"meanings": ["to close with a key"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"pack": {
+		"type": "base",
+		"spelling": "pack",
+		"meanings": ["to put things into a container"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"view": {
+		"type": "base",
+		"spelling": "view",
+		"meanings": ["to look at"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"beauty": {
+		"type": "base",
+		"spelling": "beauty",
+		"meanings": ["the quality of being lovely to look at"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"act": {
+		"type": "base",
+		"spelling": "act",
+		"meanings": ["to do something"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"correct": {
+		"type": "base",
+		"spelling": "correct",
+		"meanings": ["right; without mistakes"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"complete": {
+		"type": "base",
+		"spelling": "complete",
+		"meanings": ["whole", "finished"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"possible": {
+		"type": "base",
+		"spelling": "possible",
+		"meanings": ["able to happen"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"sense": {
+		"type": "base",
+		"spelling": "sense",
+		"meanings": ["feeling", "good judgment or meaning"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"way": {
+		"type": "base",
+		"spelling": "way",
+		"meanings": ["a road or path"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "place"
+	},
+	"marine": {
+		"type": "base",
+		"spelling": "marine",
+		"meanings": ["having to do with the sea"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"freeze": {
+		"type": "base",
+		"spelling": "freeze",
+		"meanings": ["to turn to ice"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"hero": {
+		"type": "base",
+		"spelling": "hero",
+		"meanings": ["a person admired for bravery"],
+		"grade": "3-4",
+		"origin": "greek",
+		"group": "people"
+	},
+	"press": {
+		"type": "base",
+		"spelling": "press",
+		"meanings": ["to push"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"form": {
+		"type": "base",
+		"spelling": "form",
+		"meanings": ["shape"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"rupt": {
+		"type": "base",
+		"spelling": "rupt",
+		"meanings": ["break"],
+		"root": "Latin rumpere, to break",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"spect": {
+		"type": "base",
+		"spelling": "spect",
+		"meanings": ["look"],
+		"root": "Latin specere, to look",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"port": {
+		"type": "base",
+		"spelling": "port",
+		"meanings": ["carry"],
+		"root": "Latin portare, to carry",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"dict": {
+		"type": "base",
+		"spelling": "dict",
+		"meanings": ["say"],
+		"root": "Latin dicere, to say",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"struct": {
+		"type": "base",
+		"spelling": "struct",
+		"meanings": ["build"],
+		"root": "Latin struere, to build",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"tract": {
+		"type": "base",
+		"spelling": "tract",
+		"meanings": ["pull"],
+		"root": "Latin trahere, to pull",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"ject": {
+		"type": "base",
+		"spelling": "ject",
+		"meanings": ["throw"],
+		"root": "Latin iacere, to throw",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"script": {
+		"type": "base",
+		"spelling": "script",
+		"meanings": ["write"],
+		"root": "Latin scribere, to write",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"vis": {
+		"type": "base",
+		"spelling": "vis",
+		"meanings": ["see"],
+		"root": "Latin videre, to see",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"aud": {
+		"type": "base",
+		"spelling": "aud",
+		"meanings": ["hear"],
+		"root": "Latin audire, to hear",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"graph": {
+		"type": "base",
+		"spelling": "graph",
+		"meanings": ["write or draw"],
+		"root": "Greek graphein, to write",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"phone": {
+		"type": "base",
+		"spelling": "phone",
+		"meanings": ["sound"],
+		"root": "Greek phone, sound or voice",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"scope": {
+		"type": "base",
+		"spelling": "scope",
+		"meanings": ["look at"],
+		"root": "Greek skopein, to look at",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"photo": {
+		"type": "base",
+		"spelling": "photo",
+		"meanings": ["light"],
+		"root": "Greek phos, light",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"bio": {
+		"type": "base",
+		"spelling": "bio",
+		"meanings": ["life"],
+		"root": "Greek bios, life",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"stop": {
+		"type": "base",
+		"spelling": "stop",
+		"meanings": ["to come to an end"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"count": {
+		"type": "base",
+		"spelling": "count",
+		"meanings": ["to find how many"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"spell": {
+		"type": "base",
+		"spelling": "spell",
+		"meanings": ["to write or say the letters of a word"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "senses"
+	},
+	"ness": {
+		"type": "suffix",
+		"spelling": "ness",
+		"meanings": ["the state of being"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "describing"
+	},
+	"ful": {
+		"type": "suffix",
+		"spelling": "ful",
+		"meanings": ["full of"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "amount"
+	},
+	"less": {
+		"type": "suffix",
+		"spelling": "less",
+		"meanings": ["without"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "not"
+	},
+	"able": {
+		"type": "suffix",
+		"spelling": "able",
+		"meanings": ["able to be"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"ible": {
+		"type": "suffix",
+		"spelling": "ible",
+		"meanings": ["able to be"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"ly": {
+		"type": "suffix",
+		"spelling": "ly",
+		"meanings": ["in a way that is", "like"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "describing"
+	},
+	"er": {
+		"type": "suffix",
+		"spelling": "er",
+		"meanings": ["a person or thing that", "more"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "people"
+	},
+	"est": {
+		"type": "suffix",
+		"spelling": "est",
+		"meanings": ["most"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "amount"
+	},
+	"ing": {
+		"type": "suffix",
+		"spelling": "ing",
+		"meanings": ["doing"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"ed": {
+		"type": "suffix",
+		"spelling": "ed",
+		"meanings": ["happened in the past"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "time"
+	},
+	"ment": {
+		"type": "suffix",
+		"spelling": "ment",
+		"meanings": ["the act or result of"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"ion": {
+		"type": "suffix",
+		"spelling": "ion",
+		"meanings": ["the act or result of"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"ation": {
+		"type": "suffix",
+		"spelling": "ation",
+		"meanings": ["the act or result of"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"ive": {
+		"type": "suffix",
+		"spelling": "ive",
+		"meanings": ["tending to"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"or": {
+		"type": "suffix",
+		"spelling": "or",
+		"meanings": ["a person or thing that"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"y": {
+		"type": "suffix",
+		"spelling": "y",
+		"meanings": ["full of or having"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "describing"
+	},
+	"ish": {
+		"type": "suffix",
+		"spelling": "ish",
+		"meanings": ["somewhat"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "describing"
+	},
+	"ure": {
+		"type": "suffix",
+		"spelling": "ure",
+		"meanings": ["the act or result of"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"ic": {
+		"type": "suffix",
+		"spelling": "ic",
+		"meanings": ["having to do with"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"ship": {
+		"type": "suffix",
+		"spelling": "ship",
+		"meanings": ["the state of being"],
+		"grade": "5-6",
+		"origin": "english",
+		"group": "describing"
+	},
+	"uni": {
+		"type": "prefix",
+		"spelling": "uni",
+		"meanings": ["one"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"bi": {
+		"type": "prefix",
+		"spelling": "bi",
+		"meanings": ["two"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"tri": {
+		"type": "prefix",
+		"spelling": "tri",
+		"meanings": ["three"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"quadri": {
+		"type": "prefix",
+		"spelling": "quadri",
+		"meanings": ["four"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"mono": {
+		"type": "prefix",
+		"spelling": "mono",
+		"meanings": ["one"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"multi": {
+		"type": "prefix",
+		"spelling": "multi",
+		"meanings": ["many"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"poly": {
+		"type": "prefix",
+		"spelling": "poly",
+		"meanings": ["many"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"centi": {
+		"type": "prefix",
+		"spelling": "centi",
+		"meanings": ["hundred", "one hundredth"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"cycle": {
+		"type": "base",
+		"spelling": "cycle",
+		"meanings": ["circle or repeat"],
+		"root": "Greek kyklos, circle",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"angle": {
+		"type": "base",
+		"spelling": "angle",
+		"meanings": ["corner"],
+		"root": "Latin angulus, corner",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"geo": {
+		"type": "base",
+		"spelling": "geo",
+		"meanings": ["earth"],
+		"root": "Greek ge, earth",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"thermo": {
+		"type": "base",
+		"spelling": "thermo",
+		"meanings": ["warmth"],
+		"root": "Greek therme, heat",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"hydro": {
+		"type": "base",
+		"spelling": "hydro",
+		"meanings": ["water"],
+		"root": "Greek hydor, water",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"meter": {
+		"type": "base",
+		"spelling": "meter",
+		"meanings": ["measure"],
+		"root": "Greek metron, measure",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"duct": {
+		"type": "base",
+		"spelling": "duct",
+		"meanings": ["lead"],
+		"root": "Latin ducere, to lead",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"vert": {
+		"type": "base",
+		"spelling": "vert",
+		"meanings": ["turn"],
+		"root": "Latin vertere, to turn",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"mit": {
+		"type": "base",
+		"spelling": "mit",
+		"meanings": ["send"],
+		"root": "Latin mittere, to send",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"cede": {
+		"type": "base",
+		"spelling": "cede",
+		"meanings": ["go"],
+		"root": "Latin cedere, to go",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"fer": {
+		"type": "base",
+		"spelling": "fer",
+		"meanings": ["carry"],
+		"root": "Latin ferre, to carry",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"tone": {
+		"type": "base",
+		"spelling": "tone",
+		"meanings": ["sound or pitch"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"rail": {
+		"type": "base",
+		"spelling": "rail",
+		"meanings": ["bar or track"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"color": {
+		"type": "base",
+		"spelling": "color",
+		"meanings": ["a shade like green or blue"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"task": {
+		"type": "base",
+		"spelling": "task",
+		"meanings": ["job or piece of work"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"gon": {
+		"type": "base",
+		"spelling": "gon",
+		"meanings": ["corner"],
+		"root": "Greek gonia, angle or corner",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "place"
+	},
+	"hedron": {
+		"type": "base",
+		"spelling": "hedron",
+		"meanings": ["flat side or face"],
+		"root": "Greek hedra, seat or base",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "place"
+	},
+	"ped": {
+		"type": "base",
+		"spelling": "ped",
+		"meanings": ["foot"],
+		"root": "Latin pes, foot",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"lateral": {
+		"type": "base",
+		"spelling": "lateral",
+		"meanings": ["side"],
+		"root": "Latin latus, side",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"real": {
+		"type": "base",
+		"spelling": "real",
+		"meanings": ["true"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"final": {
+		"type": "base",
+		"spelling": "final",
+		"meanings": ["last"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "time"
+	},
+	"equal": {
+		"type": "base",
+		"spelling": "equal",
+		"meanings": ["equal"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"assist": {
+		"type": "base",
+		"spelling": "assist",
+		"meanings": ["to give help"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"serve": {
+		"type": "base",
+		"spelling": "serve",
+		"meanings": ["to work for or help"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"defend": {
+		"type": "base",
+		"spelling": "defend",
+		"meanings": ["to guard from harm"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"danger": {
+		"type": "base",
+		"spelling": "danger",
+		"meanings": ["something that could cause harm"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"fame": {
+		"type": "base",
+		"spelling": "fame",
+		"meanings": ["being known by many people"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "people"
+	},
+	"poison": {
+		"type": "base",
+		"spelling": "poison",
+		"meanings": ["a substance that harms the body"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "people"
+	},
+	"voc": {
+		"type": "base",
+		"spelling": "voc",
+		"meanings": ["voice or call"],
+		"root": "Latin vocare, to call",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"claim": {
+		"type": "base",
+		"spelling": "claim",
+		"meanings": ["to call out or ask for"],
+		"root": "Latin clamare, to cry out",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"log": {
+		"type": "base",
+		"spelling": "log",
+		"meanings": ["word or speech", "reason"],
+		"root": "Greek logos, word or reason",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"son": {
+		"type": "base",
+		"spelling": "son",
+		"meanings": ["sound"],
+		"root": "Latin sonus, sound",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"lingu": {
+		"type": "base",
+		"spelling": "lingu",
+		"meanings": ["language or tongue"],
+		"root": "Latin lingua, tongue or language",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"logy": {
+		"type": "suffix",
+		"spelling": "logy",
+		"meanings": ["the study of"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"al": {
+		"type": "suffix",
+		"spelling": "al",
+		"meanings": ["having to do with"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"ous": {
+		"type": "suffix",
+		"spelling": "ous",
+		"meanings": ["full of"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"ity": {
+		"type": "suffix",
+		"spelling": "ity",
+		"meanings": ["the state of being"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"ize": {
+		"type": "suffix",
+		"spelling": "ize",
+		"meanings": ["to make or become"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"ate": {
+		"type": "suffix",
+		"spelling": "ate",
+		"meanings": ["to make or become"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"ant": {
+		"type": "suffix",
+		"spelling": "ant",
+		"meanings": ["a person or thing that"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"ist": {
+		"type": "suffix",
+		"spelling": "ist",
+		"meanings": ["a person or thing that"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "people"
+	},
+	"out": {
+		"type": "prefix",
+		"spelling": "out",
+		"meanings": ["more than"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "amount"
+	},
+	"under": {
+		"type": "prefix",
+		"spelling": "under",
+		"meanings": ["below", "too little"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "amount"
+	},
+	"mid": {
+		"type": "prefix",
+		"spelling": "mid",
+		"meanings": ["middle"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "time"
+	},
+	"post": {
+		"type": "prefix",
+		"spelling": "post",
+		"meanings": ["after"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "time"
+	},
+	"semi": {
+		"type": "prefix",
+		"spelling": "semi",
+		"meanings": ["half"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"grow": {
+		"type": "base",
+		"spelling": "grow",
+		"meanings": ["to get bigger"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "nature"
+	},
+	"last": {
+		"type": "base",
+		"spelling": "last",
+		"meanings": ["to keep going"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "time"
+	},
+	"day": {
+		"type": "base",
+		"spelling": "day",
+		"meanings": ["a period of daylight"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "time"
+	},
+	"night": {
+		"type": "base",
+		"spelling": "night",
+		"meanings": ["the dark part of the day"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "time"
+	},
+	"week": {
+		"type": "base",
+		"spelling": "week",
+		"meanings": ["seven days"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "time"
+	},
+	"war": {
+		"type": "base",
+		"spelling": "war",
+		"meanings": ["war"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"game": {
+		"type": "base",
+		"spelling": "game",
+		"meanings": ["a contest with rules"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"season": {
+		"type": "base",
+		"spelling": "season",
+		"meanings": ["a part of the year"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "time"
+	},
+	"circle": {
+		"type": "base",
+		"spelling": "circle",
+		"meanings": ["a round shape"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "place"
+	},
+	"colon": {
+		"type": "base",
+		"spelling": "colon",
+		"meanings": ["a mark made of two dots"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"sweet": {
+		"type": "base",
+		"spelling": "sweet",
+		"meanings": ["tasting like sugar"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "senses"
+	},
+	"kilo": {
+		"type": "prefix",
+		"spelling": "kilo",
+		"meanings": ["thousand"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"milli": {
+		"type": "prefix",
+		"spelling": "milli",
+		"meanings": ["thousand", "one thousandth"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"deci": {
+		"type": "prefix",
+		"spelling": "deci",
+		"meanings": ["one tenth"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"gram": {
+		"type": "base",
+		"spelling": "gram",
+		"meanings": ["a unit of mass", "something written"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount",
+		"root": "Greek gramma, something written"
+	},
+	"hyper": {
+		"type": "prefix",
+		"spelling": "hyper",
+		"meanings": ["too much"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"ultra": {
+		"type": "prefix",
+		"spelling": "ultra",
+		"meanings": ["beyond"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"counter": {
+		"type": "prefix",
+		"spelling": "counter",
+		"meanings": ["against"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "not"
+	},
+	"violet": {
+		"type": "base",
+		"spelling": "violet",
+		"meanings": ["a purple color"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"ance": {
+		"type": "suffix",
+		"spelling": "ance",
+		"meanings": ["the act or result of", "the state of being"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"ence": {
+		"type": "suffix",
+		"spelling": "ence",
+		"meanings": ["the act or result of", "the state of being"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"ary": {
+		"type": "suffix",
+		"spelling": "ary",
+		"meanings": ["having to do with"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"ee": {
+		"type": "suffix",
+		"spelling": "ee",
+		"meanings": ["a person who receives"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"ism": {
+		"type": "suffix",
+		"spelling": "ism",
+		"meanings": ["a way of acting or thinking"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"tour": {
+		"type": "base",
+		"spelling": "tour",
+		"meanings": ["a trip to see places"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "place"
+	},
+	"fy": {
+		"type": "suffix",
+		"spelling": "fy",
+		"meanings": ["to make or become"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"some": {
+		"type": "suffix",
+		"spelling": "some",
+		"meanings": ["tending to"],
+		"grade": "5-6",
+		"origin": "english",
+		"group": "describing"
+	},
+	"ward": {
+		"type": "suffix",
+		"spelling": "ward",
+		"meanings": ["in the direction of"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "place"
+	},
+	"age": {
+		"type": "suffix",
+		"spelling": "age",
+		"meanings": ["the act or result of"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"pure": {
+		"type": "base",
+		"spelling": "pure",
+		"meanings": ["clean; not mixed"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"simple": {
+		"type": "base",
+		"spelling": "simple",
+		"meanings": ["easy; not complicated"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"trouble": {
+		"type": "base",
+		"spelling": "trouble",
+		"meanings": ["worry or difficulty"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"tire": {
+		"type": "base",
+		"spelling": "tire",
+		"meanings": ["to run out of energy"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "feelings"
+	},
+	"lone": {
+		"type": "base",
+		"spelling": "lone",
+		"meanings": ["alone"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "describing"
+	},
+	"back": {
+		"type": "base",
+		"spelling": "back",
+		"meanings": ["the rear side"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "place"
+	},
+	"up": {
+		"type": "base",
+		"spelling": "up",
+		"meanings": ["toward a higher place"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "place"
+	},
+	"down": {
+		"type": "base",
+		"spelling": "down",
+		"meanings": ["toward a lower place"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "place"
+	},
+	"home": {
+		"type": "base",
+		"spelling": "home",
+		"meanings": ["the place where you live"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "place"
+	},
+	"store": {
+		"type": "base",
+		"spelling": "store",
+		"meanings": ["to put away for later"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"pose": {
+		"type": "base",
+		"spelling": "pose",
+		"meanings": ["put or place"],
+		"root": "Latin ponere, to put",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"tain": {
+		"type": "base",
+		"spelling": "tain",
+		"meanings": ["hold"],
+		"root": "Latin tenere, to hold",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"ceive": {
+		"type": "base",
+		"spelling": "ceive",
+		"meanings": ["take or get"],
+		"root": "Latin capere, to take",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"clude": {
+		"type": "base",
+		"spelling": "clude",
+		"meanings": ["shut"],
+		"root": "Latin claudere, to shut",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"pend": {
+		"type": "base",
+		"spelling": "pend",
+		"meanings": ["hang"],
+		"root": "Latin pendere, to hang",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"sect": {
+		"type": "base",
+		"spelling": "sect",
+		"meanings": ["cut"],
+		"root": "Latin secare, to cut",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"fract": {
+		"type": "base",
+		"spelling": "fract",
+		"meanings": ["break"],
+		"root": "Latin frangere, to break",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"gress": {
+		"type": "base",
+		"spelling": "gress",
+		"meanings": ["step or walk"],
+		"root": "Latin gradi, to step or walk",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"pel": {
+		"type": "base",
+		"spelling": "pel",
+		"meanings": ["push or drive"],
+		"root": "Latin pellere, to push or drive",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"cur": {
+		"type": "base",
+		"spelling": "cur",
+		"meanings": ["run"],
+		"root": "Latin currere, to run",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"cred": {
+		"type": "base",
+		"spelling": "cred",
+		"meanings": ["believe"],
+		"root": "Latin credere, to believe",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"vive": {
+		"type": "base",
+		"spelling": "vive",
+		"meanings": ["live"],
+		"root": "Latin vivere, to live",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"solve": {
+		"type": "base",
+		"spelling": "solve",
+		"meanings": ["loosen or work out"],
+		"root": "Latin solvere, to loosen",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"flect": {
+		"type": "base",
+		"spelling": "flect",
+		"meanings": ["bend"],
+		"root": "Latin flectere, to bend",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"vent": {
+		"type": "base",
+		"spelling": "vent",
+		"meanings": ["come"],
+		"root": "Latin venire, to come",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"ply": {
+		"type": "base",
+		"spelling": "ply",
+		"meanings": ["fold"],
+		"root": "Latin plicare, to fold",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"volve": {
+		"type": "base",
+		"spelling": "volve",
+		"meanings": ["roll"],
+		"root": "Latin volvere, to roll",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"manu": {
+		"type": "base",
+		"spelling": "manu",
+		"meanings": ["hand"],
+		"root": "Latin manus, hand",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"mort": {
+		"type": "base",
+		"spelling": "mort",
+		"meanings": ["death"],
+		"root": "Latin mors, death",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"astro": {
+		"type": "base",
+		"spelling": "astro",
+		"meanings": ["star"],
+		"root": "Greek astron, star",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"cosmo": {
+		"type": "base",
+		"spelling": "cosmo",
+		"meanings": ["universe"],
+		"root": "Greek kosmos, order or universe",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"chrono": {
+		"type": "base",
+		"spelling": "chrono",
+		"meanings": ["time"],
+		"root": "Greek chronos, time",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "time"
+	},
+	"naut": {
+		"type": "base",
+		"spelling": "naut",
+		"meanings": ["sailor or traveler"],
+		"root": "Greek nautes, sailor",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "people"
+	},
+	"sphere": {
+		"type": "base",
+		"spelling": "sphere",
+		"meanings": ["ball or globe"],
+		"root": "Greek sphaira, ball",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"path": {
+		"type": "base",
+		"spelling": "path",
+		"meanings": ["feeling"],
+		"root": "Greek pathos, feeling",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "feelings"
+	},
+	"psycho": {
+		"type": "base",
+		"spelling": "psycho",
+		"meanings": ["mind"],
+		"root": "Greek psyche, mind or soul",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "feelings"
+	},
+	"techno": {
+		"type": "base",
+		"spelling": "techno",
+		"meanings": ["skill or craft"],
+		"root": "Greek techne, art or skill",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"anthropo": {
+		"type": "base",
+		"spelling": "anthropo",
+		"meanings": ["human being"],
+		"root": "Greek anthropos, human being",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"phobia": {
+		"type": "base",
+		"spelling": "phobia",
+		"meanings": ["fear"],
+		"root": "Greek phobos, fear",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "feelings"
+	},
+	"homo": {
+		"type": "base",
+		"spelling": "homo",
+		"meanings": ["same"],
+		"root": "Greek homos, same",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"zoo": {
+		"type": "base",
+		"spelling": "zoo",
+		"meanings": ["animal"],
+		"root": "Greek zoion, animal",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"eco": {
+		"type": "base",
+		"spelling": "eco",
+		"meanings": ["home or environment"],
+		"root": "Greek oikos, house or home",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"onym": {
+		"type": "base",
+		"spelling": "onym",
+		"meanings": ["name"],
+		"root": "Greek onyma, name",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"exo": {
+		"type": "prefix",
+		"spelling": "exo",
+		"meanings": ["outside"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "place"
+	},
+	"endo": {
+		"type": "prefix",
+		"spelling": "endo",
+		"meanings": ["inside"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "place"
+	},
+	"di": {
+		"type": "prefix",
+		"spelling": "di",
+		"meanings": ["two"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"iso": {
+		"type": "prefix",
+		"spelling": "iso",
+		"meanings": ["equal"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"macro": {
+		"type": "prefix",
+		"spelling": "macro",
+		"meanings": ["very large"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"atom": {
+		"type": "base",
+		"spelling": "atom",
+		"meanings": ["smallest piece"],
+		"root": "Greek atomos, uncuttable",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"mole": {
+		"type": "base",
+		"spelling": "mole",
+		"meanings": ["mass"],
+		"root": "Latin moles, mass",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"lumin": {
+		"type": "base",
+		"spelling": "lumin",
+		"meanings": ["light"],
+		"root": "Latin lumen, light",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"neuro": {
+		"type": "base",
+		"spelling": "neuro",
+		"meanings": ["nerve"],
+		"root": "Greek neuron, nerve",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"skeleton": {
+		"type": "base",
+		"spelling": "skeleton",
+		"meanings": ["the frame of bones that holds up a body"],
+		"root": "Greek skeletos, dried up",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "people"
+	},
+	"lysis": {
+		"type": "suffix",
+		"spelling": "lysis",
+		"meanings": ["breaking down"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"cule": {
+		"type": "suffix",
+		"spelling": "cule",
+		"meanings": ["small"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"syn": {
+		"type": "prefix",
+		"spelling": "syn",
+		"meanings": ["together"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "place"
+	},
+	"thesis": {
+		"type": "base",
+		"spelling": "thesis",
+		"meanings": ["put or place"],
+		"root": "Greek tithenai, to put or place",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"a": {
+		"type": "prefix",
+		"spelling": "a",
+		"meanings": ["not"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "not"
+	},
+	"cyto": {
+		"type": "base",
+		"spelling": "cyto",
+		"meanings": ["cell"],
+		"root": "Greek kytos, hollow vessel",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"plasm": {
+		"type": "base",
+		"spelling": "plasm",
+		"meanings": ["molded material"],
+		"root": "Greek plasma, something molded",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"cell": {
+		"type": "base",
+		"spelling": "cell",
+		"meanings": ["cell"],
+		"root": "Latin cella, small room",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"ar": {
+		"type": "suffix",
+		"spelling": "ar",
+		"meanings": ["having to do with"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"vore": {
+		"type": "base",
+		"spelling": "vore",
+		"meanings": ["eat"],
+		"root": "Latin vorare, to swallow up",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"herbi": {
+		"type": "base",
+		"spelling": "herbi",
+		"meanings": ["plant"],
+		"root": "Latin herba, grass or plant",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"carni": {
+		"type": "base",
+		"spelling": "carni",
+		"meanings": ["meat"],
+		"root": "Latin caro (carnis), flesh or meat",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"omni": {
+		"type": "prefix",
+		"spelling": "omni",
+		"meanings": ["all"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"troph": {
+		"type": "base",
+		"spelling": "troph",
+		"meanings": ["feeding"],
+		"root": "Greek trophe, food or nourishment",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"gest": {
+		"type": "base",
+		"spelling": "gest",
+		"meanings": ["carry"],
+		"root": "Latin gerere, to carry",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"spir": {
+		"type": "base",
+		"spelling": "spir",
+		"meanings": ["breathe"],
+		"root": "Latin spirare, to breathe",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"mut": {
+		"type": "base",
+		"spelling": "mut",
+		"meanings": ["change"],
+		"root": "Latin mutare, to change",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"seismo": {
+		"type": "base",
+		"spelling": "seismo",
+		"meanings": ["earthquake"],
+		"root": "Greek seismos, a shaking or earthquake",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"litho": {
+		"type": "base",
+		"spelling": "litho",
+		"meanings": ["stone"],
+		"root": "Greek lithos, stone",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"strato": {
+		"type": "base",
+		"spelling": "strato",
+		"meanings": ["layer"],
+		"root": "Latin stratum, something spread out flat; a layer",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"tropo": {
+		"type": "base",
+		"spelling": "tropo",
+		"meanings": ["turn"],
+		"root": "Greek tropos, a turn",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"atmo": {
+		"type": "base",
+		"spelling": "atmo",
+		"meanings": ["steam or mist"],
+		"root": "Greek atmos, vapor or steam",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"hemi": {
+		"type": "prefix",
+		"spelling": "hemi",
+		"meanings": ["half"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"meteoro": {
+		"type": "base",
+		"spelling": "meteoro",
+		"meanings": ["high in the air"],
+		"root": "Greek meteoros, high in the air",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"rode": {
+		"type": "base",
+		"spelling": "rode",
+		"meanings": ["gnaw"],
+		"root": "Latin rodere, to gnaw",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"sed": {
+		"type": "base",
+		"spelling": "sed",
+		"meanings": ["sit or settle"],
+		"root": "Latin sedere, to sit",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"stell": {
+		"type": "base",
+		"spelling": "stell",
+		"meanings": ["star"],
+		"root": "Latin stella, star",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"nomy": {
+		"type": "suffix",
+		"spelling": "nomy",
+		"meanings": ["the laws or system of"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"oid": {
+		"type": "suffix",
+		"spelling": "oid",
+		"meanings": ["like"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"planet": {
+		"type": "base",
+		"spelling": "planet",
+		"meanings": ["a large world that travels around a star"],
+		"root": "Greek planetes, wanderer",
+		"grade": "3-4",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"volcano": {
+		"type": "base",
+		"spelling": "volcano",
+		"meanings": ["a mountain that can erupt with lava"],
+		"root": "Latin Vulcanus, the Roman god of fire",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"electro": {
+		"type": "base",
+		"spelling": "electro",
+		"meanings": ["electricity"],
+		"root": "Greek elektron, amber",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"magnet": {
+		"type": "base",
+		"spelling": "magnet",
+		"meanings": ["a stone or metal that pulls iron"],
+		"root": "Greek magnes, stone from Magnesia",
+		"grade": "3-4",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"erg": {
+		"type": "base",
+		"spelling": "erg",
+		"meanings": ["work"],
+		"root": "Greek ergon, work",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"en": {
+		"type": "prefix",
+		"spelling": "en",
+		"meanings": ["in or into"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "place"
+	},
+	"grav": {
+		"type": "base",
+		"spelling": "grav",
+		"meanings": ["heavy"],
+		"root": "Latin gravis, heavy",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"dense": {
+		"type": "base",
+		"spelling": "dense",
+		"meanings": ["thick or packed closely"],
+		"root": "Latin densus, thick",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"vapor": {
+		"type": "base",
+		"spelling": "vapor",
+		"meanings": ["steam or mist"],
+		"root": "Latin vapor, steam",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"radi": {
+		"type": "base",
+		"spelling": "radi",
+		"meanings": ["ray"],
+		"root": "Latin radius, ray or spoke",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"on": {
+		"type": "suffix",
+		"spelling": "on",
+		"meanings": ["a tiny particle"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"neutr": {
+		"type": "base",
+		"spelling": "neutr",
+		"meanings": ["neither one nor the other"],
+		"root": "Latin neuter, neither",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"ox": {
+		"type": "base",
+		"spelling": "ox",
+		"meanings": ["oxygen"],
+		"root": "Greek oxys, sour, through the word oxygen",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"ide": {
+		"type": "suffix",
+		"spelling": "ide",
+		"meanings": ["a chemical compound"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"chem": {
+		"type": "base",
+		"spelling": "chem",
+		"meanings": ["substances and how they change"],
+		"root": "Greek khemeia, alchemy, through Arabic al-kimiya",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"insul": {
+		"type": "base",
+		"spelling": "insul",
+		"meanings": ["island"],
+		"root": "Latin insula, island",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"fuse": {
+		"type": "base",
+		"spelling": "fuse",
+		"meanings": ["pour or melt"],
+		"root": "Latin fundere, to pour or melt",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"hypo": {
+		"type": "prefix",
+		"spelling": "hypo",
+		"meanings": ["under"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "place"
+	},
+	"dia": {
+		"type": "prefix",
+		"spelling": "dia",
+		"meanings": ["across"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "place"
+	},
+	"nano": {
+		"type": "prefix",
+		"spelling": "nano",
+		"meanings": ["one billionth"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"morpho": {
+		"type": "base",
+		"spelling": "morpho",
+		"meanings": ["shape"],
+		"root": "Greek morphe, shape or form",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"taxo": {
+		"type": "base",
+		"spelling": "taxo",
+		"meanings": ["arrangement or order"],
+		"root": "Greek taxis, arrangement",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"quant": {
+		"type": "base",
+		"spelling": "quant",
+		"meanings": ["how much"],
+		"root": "Latin quantus, how much",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"qual": {
+		"type": "base",
+		"spelling": "qual",
+		"meanings": ["what kind"],
+		"root": "Latin qualis, of what kind",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"class": {
+		"type": "base",
+		"spelling": "class",
+		"meanings": ["a group of things that are alike"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"vary": {
+		"type": "base",
+		"spelling": "vary",
+		"meanings": ["change"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"second": {
+		"type": "base",
+		"spelling": "second",
+		"meanings": ["a small unit of time"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "time"
+	},
+	"liter": {
+		"type": "base",
+		"spelling": "liter",
+		"meanings": ["a unit of liquid volume"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"ent": {
+		"type": "suffix",
+		"spelling": "ent",
+		"meanings": ["doing"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"s": {
+		"type": "suffix",
+		"spelling": "s",
+		"meanings": ["more than one", "one person or thing does it"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "amount"
+	},
+	"es": {
+		"type": "suffix",
+		"spelling": "es",
+		"meanings": ["more than one", "one person or thing does it"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "amount"
+	},
+	"fore": {
+		"type": "prefix",
+		"spelling": "fore",
+		"meanings": ["before"],
+		"grade": "5-6",
+		"origin": "english",
+		"group": "time"
+	},
+	"ad": {
+		"type": "prefix",
+		"spelling": "ad",
+		"meanings": ["toward"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"mal": {
+		"type": "prefix",
+		"spelling": "mal",
+		"meanings": ["bad or badly"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "not"
+	},
+	"circum": {
+		"type": "prefix",
+		"spelling": "circum",
+		"meanings": ["around"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"ob": {
+		"type": "prefix",
+		"spelling": "ob",
+		"meanings": ["against", "toward"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"head": {
+		"type": "base",
+		"spelling": "head",
+		"meanings": ["head"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "people"
+	},
+	"arm": {
+		"type": "base",
+		"spelling": "arm",
+		"meanings": ["the body part between the shoulder and the hand"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "people"
+	},
+	"ground": {
+		"type": "base",
+		"spelling": "ground",
+		"meanings": ["earth"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "nature"
+	},
+	"word": {
+		"type": "base",
+		"spelling": "word",
+		"meanings": ["word or speech"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "senses"
+	},
+	"see": {
+		"type": "base",
+		"spelling": "see",
+		"meanings": ["see"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "senses"
+	},
+	"tell": {
+		"type": "base",
+		"spelling": "tell",
+		"meanings": ["say"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "senses"
+	},
+	"cast": {
+		"type": "base",
+		"spelling": "cast",
+		"meanings": ["throw"],
+		"grade": "5-6",
+		"origin": "english",
+		"group": "actions"
+	},
+	"warn": {
+		"type": "base",
+		"spelling": "warn",
+		"meanings": ["to give notice of danger"],
+		"grade": "5-6",
+		"origin": "english",
+		"group": "senses"
+	},
+	"function": {
+		"type": "base",
+		"spelling": "function",
+		"meanings": ["what something is for"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"treat": {
+		"type": "base",
+		"spelling": "treat",
+		"meanings": ["to deal with someone or something in a certain way"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"nourish": {
+		"type": "base",
+		"spelling": "nourish",
+		"meanings": ["feeding"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"tend": {
+		"type": "base",
+		"spelling": "tend",
+		"meanings": ["stretch"],
+		"root": "Latin tendere, to stretch",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"navig": {
+		"type": "base",
+		"spelling": "navig",
+		"meanings": ["sail"],
+		"root": "Latin navigare, to sail",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"fact": {
+		"type": "base",
+		"spelling": "fact",
+		"meanings": ["make"],
+		"root": "Latin facere, to make or do (also fect-, fic-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"stat": {
+		"type": "base",
+		"spelling": "stat",
+		"meanings": ["stand"],
+		"root": "Latin stare, to stand (also stance, stant-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"sist": {
+		"type": "base",
+		"spelling": "sist",
+		"meanings": ["stand"],
+		"root": "Latin sistere, to stand or cause to stand",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"jur": {
+		"type": "base",
+		"spelling": "jur",
+		"meanings": ["law"],
+		"root": "Latin ius, juris, law (also jus-, just-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"jud": {
+		"type": "base",
+		"spelling": "jud",
+		"meanings": ["judge or decide"],
+		"root": "Latin iudicare, to judge, from ius (law) + dicere (to say)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"bene": {
+		"type": "base",
+		"spelling": "bene",
+		"meanings": ["good or well"],
+		"root": "Latin bene, well (also ben-; bon- from bonus, good)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"join": {
+		"type": "base",
+		"spelling": "join",
+		"meanings": ["link together"],
+		"root": "Latin iungere, to join (also junct-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"strict": {
+		"type": "base",
+		"spelling": "strict",
+		"meanings": ["draw tight"],
+		"root": "Latin stringere, to draw tight (also strain-, string-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"terra": {
+		"type": "base",
+		"spelling": "terra",
+		"meanings": ["earth"],
+		"root": "Latin terra, earth",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"citizen": {
+		"type": "base",
+		"spelling": "citizen",
+		"meanings": ["a member of a town or country"],
+		"root": "Old French citeien, from cite, city",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"commun": {
+		"type": "base",
+		"spelling": "commun",
+		"meanings": ["shared by all"],
+		"root": "Latin communis, shared or common",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"globe": {
+		"type": "base",
+		"spelling": "globe",
+		"meanings": ["ball or globe"],
+		"root": "Latin globus, ball",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"juxta": {
+		"type": "prefix",
+		"spelling": "juxta",
+		"meanings": ["next to"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"migr": {
+		"type": "base",
+		"spelling": "migr",
+		"meanings": ["to go from one place to another"],
+		"root": "Latin migrare, to move",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"nect": {
+		"type": "base",
+		"spelling": "nect",
+		"meanings": ["link together"],
+		"root": "Latin nectere, to tie or bind",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"fuge": {
+		"type": "base",
+		"spelling": "fuge",
+		"meanings": ["flee or run away"],
+		"root": "Latin fugere, to flee",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"mass": {
+		"type": "base",
+		"spelling": "mass",
+		"meanings": ["mass"],
+		"root": "Latin massa, lump",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"ante": {
+		"type": "prefix",
+		"spelling": "ante",
+		"meanings": ["before"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "time"
+	},
+	"equi": {
+		"type": "prefix",
+		"spelling": "equi",
+		"meanings": ["equal"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"extra": {
+		"type": "prefix",
+		"spelling": "extra",
+		"meanings": ["beyond"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"intra": {
+		"type": "prefix",
+		"spelling": "intra",
+		"meanings": ["inside"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"intro": {
+		"type": "prefix",
+		"spelling": "intro",
+		"meanings": ["in or into"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"contra": {
+		"type": "prefix",
+		"spelling": "contra",
+		"meanings": ["against"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "not"
+	},
+	"retro": {
+		"type": "prefix",
+		"spelling": "retro",
+		"meanings": ["back"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "time"
+	},
+	"para": {
+		"type": "prefix",
+		"spelling": "para",
+		"meanings": ["next to"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "place"
+	},
+	"meta": {
+		"type": "prefix",
+		"spelling": "meta",
+		"meanings": ["change"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"epi": {
+		"type": "prefix",
+		"spelling": "epi",
+		"meanings": ["on or upon"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "place"
+	},
+	"ab": {
+		"type": "prefix",
+		"spelling": "ab",
+		"meanings": ["away from"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"se": {
+		"type": "prefix",
+		"spelling": "se",
+		"meanings": ["apart"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"per": {
+		"type": "prefix",
+		"spelling": "per",
+		"meanings": ["through", "completely"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"infra": {
+		"type": "prefix",
+		"spelling": "infra",
+		"meanings": ["below"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"proto": {
+		"type": "prefix",
+		"spelling": "proto",
+		"meanings": ["first"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "time"
+	},
+	"dys": {
+		"type": "prefix",
+		"spelling": "dys",
+		"meanings": ["bad or badly"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "not"
+	},
+	"ecto": {
+		"type": "prefix",
+		"spelling": "ecto",
+		"meanings": ["outside"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "place"
+	},
+	"ordin": {
+		"type": "base",
+		"spelling": "ordin",
+		"meanings": ["arrangement or order"],
+		"root": "Latin ordo (ordinis), a row or order",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"oper": {
+		"type": "base",
+		"spelling": "oper",
+		"meanings": ["work"],
+		"root": "Latin operari, to work",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"norm": {
+		"type": "base",
+		"spelling": "norm",
+		"meanings": ["the usual way"],
+		"root": "Latin norma, a carpenter's square; a rule",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"bol": {
+		"type": "base",
+		"spelling": "bol",
+		"meanings": ["throw"],
+		"root": "Greek ballein, to throw",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"mur": {
+		"type": "base",
+		"spelling": "mur",
+		"meanings": ["wall"],
+		"root": "Latin murus, wall",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"date": {
+		"type": "base",
+		"spelling": "date",
+		"meanings": ["the day something happens"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "time"
+	},
+	"room": {
+		"type": "base",
+		"spelling": "room",
+		"meanings": ["a space inside a building"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "place"
+	},
+	"phrase": {
+		"type": "base",
+		"spelling": "phrase",
+		"meanings": ["a group of words"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"medic": {
+		"type": "base",
+		"spelling": "medic",
+		"meanings": ["doctor or healing"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"red": {
+		"type": "base",
+		"spelling": "red",
+		"meanings": ["the color of a ripe strawberry"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "senses"
+	},
+	"type": {
+		"type": "base",
+		"spelling": "type",
+		"meanings": ["a model or example"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"muscle": {
+		"type": "base",
+		"spelling": "muscle",
+		"meanings": ["a body part that tightens to pull on a bone"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"mega": {
+		"type": "prefix",
+		"spelling": "mega",
+		"meanings": ["very large"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"penta": {
+		"type": "prefix",
+		"spelling": "penta",
+		"meanings": ["five"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"tetra": {
+		"type": "prefix",
+		"spelling": "tetra",
+		"meanings": ["four"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"hexa": {
+		"type": "prefix",
+		"spelling": "hexa",
+		"meanings": ["six"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"octa": {
+		"type": "prefix",
+		"spelling": "octa",
+		"meanings": ["eight"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"deca": {
+		"type": "prefix",
+		"spelling": "deca",
+		"meanings": ["ten"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"athlon": {
+		"type": "base",
+		"spelling": "athlon",
+		"meanings": ["a contest with rules"],
+		"root": "Greek athlon, contest or prize",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"plur": {
+		"type": "base",
+		"spelling": "plur",
+		"meanings": ["more"],
+		"root": "Latin plus (pluris), more",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"holo": {
+		"type": "base",
+		"spelling": "holo",
+		"meanings": ["whole"],
+		"root": "Greek holos, whole",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "amount"
+	},
+	"prim": {
+		"type": "base",
+		"spelling": "prim",
+		"meanings": ["first"],
+		"root": "Latin primus, first",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "time"
+	},
+	"magni": {
+		"type": "base",
+		"spelling": "magni",
+		"meanings": ["large"],
+		"root": "Latin magnus, great",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"brev": {
+		"type": "base",
+		"spelling": "brev",
+		"meanings": ["short"],
+		"root": "Latin brevis, short",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"numer": {
+		"type": "base",
+		"spelling": "numer",
+		"meanings": ["number"],
+		"root": "Latin numerus, number",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"centr": {
+		"type": "base",
+		"spelling": "centr",
+		"meanings": ["middle"],
+		"root": "Latin centrum, from Greek kentron, center",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"medi": {
+		"type": "base",
+		"spelling": "medi",
+		"meanings": ["middle"],
+		"root": "Latin medius, middle",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"par": {
+		"type": "base",
+		"spelling": "par",
+		"meanings": ["equal"],
+		"root": "Latin par, equal",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"archy": {
+		"type": "suffix",
+		"spelling": "archy",
+		"meanings": ["rule or government"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"cracy": {
+		"type": "suffix",
+		"spelling": "cracy",
+		"meanings": ["rule or government"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"cide": {
+		"type": "suffix",
+		"spelling": "cide",
+		"meanings": ["kill"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"ician": {
+		"type": "suffix",
+		"spelling": "ician",
+		"meanings": ["a person or thing that"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"itis": {
+		"type": "suffix",
+		"spelling": "itis",
+		"meanings": ["a sore, swollen condition"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"tomy": {
+		"type": "suffix",
+		"spelling": "tomy",
+		"meanings": ["cut"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"ess": {
+		"type": "suffix",
+		"spelling": "ess",
+		"meanings": ["a female"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "people"
+	},
+	"ics": {
+		"type": "suffix",
+		"spelling": "ics",
+		"meanings": ["the study of"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"ine": {
+		"type": "suffix",
+		"spelling": "ine",
+		"meanings": ["having to do with"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"tude": {
+		"type": "suffix",
+		"spelling": "tude",
+		"meanings": ["the state of being"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"ium": {
+		"type": "suffix",
+		"spelling": "ium",
+		"meanings": ["a chemical element"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"ulent": {
+		"type": "suffix",
+		"spelling": "ulent",
+		"meanings": ["full of"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"gamy": {
+		"type": "suffix",
+		"spelling": "gamy",
+		"meanings": ["marriage"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"a-plural": {
+		"type": "suffix",
+		"spelling": "a",
+		"meanings": ["more than one"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"i": {
+		"type": "suffix",
+		"spelling": "i",
+		"meanings": ["more than one"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"ana": {
+		"type": "prefix",
+		"spelling": "ana",
+		"meanings": ["up"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "place"
+	},
+	"phile": {
+		"type": "base",
+		"spelling": "phile",
+		"meanings": ["love"],
+		"root": "Greek philos, loving or dear",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "feelings"
+	},
+	"opto": {
+		"type": "base",
+		"spelling": "opto",
+		"meanings": ["eye"],
+		"root": "Greek optos, seen (from ops, eye)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"aristo": {
+		"type": "base",
+		"spelling": "aristo",
+		"meanings": ["best"],
+		"root": "Greek aristos, best",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"bronch": {
+		"type": "base",
+		"spelling": "bronch",
+		"meanings": ["windpipe"],
+		"root": "Greek bronchos, windpipe",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"sal": {
+		"type": "base",
+		"spelling": "sal",
+		"meanings": ["salt"],
+		"root": "Latin sal, salt",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"turb": {
+		"type": "base",
+		"spelling": "turb",
+		"meanings": ["stir up"],
+		"root": "Latin turbare, to stir up or throw into disorder",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"bureau": {
+		"type": "base",
+		"spelling": "bureau",
+		"meanings": ["an office or department"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "place"
+	},
+	"fungus": {
+		"type": "base",
+		"spelling": "fungus",
+		"meanings": ["a living thing like a mushroom or mold"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"tonsil": {
+		"type": "base",
+		"spelling": "tonsil",
+		"meanings": ["one of two small lumps at the back of the throat"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"appendix": {
+		"type": "base",
+		"spelling": "appendix",
+		"meanings": ["an extra part attached to something"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"lion": {
+		"type": "base",
+		"spelling": "lion",
+		"meanings": ["a large wild cat"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"prince": {
+		"type": "base",
+		"spelling": "prince",
+		"meanings": ["the son of a king or queen"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "people"
+	},
+	"host": {
+		"type": "base",
+		"spelling": "host",
+		"meanings": ["a person who has guests"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "people"
+	},
+	"crystal": {
+		"type": "base",
+		"spelling": "crystal",
+		"meanings": ["a solid with flat sides in a repeating pattern"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"ample": {
+		"type": "base",
+		"spelling": "ample",
+		"meanings": ["plentiful"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"part": {
+		"type": "base",
+		"spelling": "part",
+		"meanings": ["a piece of a whole"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"bacterium": {
+		"type": "base",
+		"spelling": "bacterium",
+		"meanings": ["a tiny living thing made of one cell"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"stimulus": {
+		"type": "base",
+		"spelling": "stimulus",
+		"meanings": ["something that causes a reaction"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"titan": {
+		"type": "base",
+		"spelling": "titan",
+		"meanings": ["a giant"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"fraud": {
+		"type": "base",
+		"spelling": "fraud",
+		"meanings": ["a trick to cheat someone"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"virus": {
+		"type": "base",
+		"spelling": "virus",
+		"meanings": ["a tiny particle that can only multiply inside living cells"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"nov": {
+		"type": "base",
+		"spelling": "nov",
+		"meanings": ["new"],
+		"root": "Latin novus, new",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"domin": {
+		"type": "base",
+		"spelling": "domin",
+		"meanings": ["rule"],
+		"root": "Latin dominus, master or lord, and dominari, to rule",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"germ": {
+		"type": "base",
+		"spelling": "germ",
+		"meanings": ["seed or sprout", "a tiny living thing that can cause sickness"],
+		"root": "Latin germen, a sprout or seed",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"cise": {
+		"type": "base",
+		"spelling": "cise",
+		"meanings": ["cut"],
+		"root": "Latin caedere (caesus), to cut",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"pute": {
+		"type": "base",
+		"spelling": "pute",
+		"meanings": ["count", "think"],
+		"root": "Latin putare, to think or reckon",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"cogn": {
+		"type": "base",
+		"spelling": "cogn",
+		"meanings": ["know"],
+		"root": "Latin cognoscere (cognitus), to get to know",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"fid": {
+		"type": "base",
+		"spelling": "fid",
+		"meanings": ["trust"],
+		"root": "Latin fidere, to trust (fides, faith)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"fin": {
+		"type": "base",
+		"spelling": "fin",
+		"meanings": ["end"],
+		"root": "Latin finis, end or limit",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "time"
+	},
+	"sci": {
+		"type": "base",
+		"spelling": "sci",
+		"meanings": ["know"],
+		"root": "Latin scire, to know",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"cad": {
+		"type": "base",
+		"spelling": "cad",
+		"meanings": ["fall"],
+		"root": "Latin cadere, to fall (also -cid- in accident)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"loqu": {
+		"type": "base",
+		"spelling": "loqu",
+		"meanings": ["say"],
+		"root": "Latin loqui, to speak",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"nat": {
+		"type": "base",
+		"spelling": "nat",
+		"meanings": ["birth or origin"],
+		"root": "Latin nasci (natus), to be born",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"cant": {
+		"type": "base",
+		"spelling": "cant",
+		"meanings": ["sing"],
+		"root": "Latin canere (cantare), to sing (French chant-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"mot": {
+		"type": "base",
+		"spelling": "mot",
+		"meanings": ["to go from one place to another"],
+		"root": "Latin movere (motus), to move (also mob-, from mobilis)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"nounce": {
+		"type": "base",
+		"spelling": "nounce",
+		"meanings": ["say"],
+		"root": "Latin nuntiare, to announce, from nuntius, messenger",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"reg": {
+		"type": "base",
+		"spelling": "reg",
+		"meanings": ["rule"],
+		"root": "Latin regere, to rule (regula, a rule)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"rog": {
+		"type": "base",
+		"spelling": "rog",
+		"meanings": ["ask"],
+		"root": "Latin rogare, to ask",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"surge": {
+		"type": "base",
+		"spelling": "surge",
+		"meanings": ["rise"],
+		"root": "Latin surgere, to rise",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"sequ": {
+		"type": "base",
+		"spelling": "sequ",
+		"meanings": ["follow"],
+		"root": "Latin sequi (secutus), to follow",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "time"
+	},
+	"val": {
+		"type": "base",
+		"spelling": "val",
+		"meanings": ["worth"],
+		"root": "Latin valere, to be strong or be worth",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"vol": {
+		"type": "base",
+		"spelling": "vol",
+		"meanings": ["wish or will"],
+		"root": "Latin velle (volo), to wish or want",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"vac": {
+		"type": "base",
+		"spelling": "vac",
+		"meanings": ["empty"],
+		"root": "Latin vacare, to be empty",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"cure": {
+		"type": "base",
+		"spelling": "cure",
+		"meanings": ["attention and concern"],
+		"root": "Latin cura, care",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"labor": {
+		"type": "base",
+		"spelling": "labor",
+		"meanings": ["work"],
+		"root": "Latin labor, work",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"memor": {
+		"type": "base",
+		"spelling": "memor",
+		"meanings": ["remember"],
+		"root": "Latin memor, mindful, remembering (also mem-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"flu": {
+		"type": "base",
+		"spelling": "flu",
+		"meanings": ["flow"],
+		"root": "Latin fluere, to flow",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"here": {
+		"type": "base",
+		"spelling": "here",
+		"meanings": ["stick"],
+		"root": "Latin haerere, to stick (also her-, hes-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"mens": {
+		"type": "base",
+		"spelling": "mens",
+		"meanings": ["measure"],
+		"root": "Latin metiri (mensus), to measure",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"rat": {
+		"type": "base",
+		"spelling": "rat",
+		"meanings": ["reason"],
+		"root": "Latin ratio, reason or calculation, from reri, to think",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"vect": {
+		"type": "base",
+		"spelling": "vect",
+		"meanings": ["carry"],
+		"root": "Latin vehere (vectus), to carry",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"satis": {
+		"type": "base",
+		"spelling": "satis",
+		"meanings": ["enough"],
+		"root": "Latin satis, enough (also sat-, sati-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"tact": {
+		"type": "base",
+		"spelling": "tact",
+		"meanings": ["touch"],
+		"root": "Latin tangere (tactus), to touch (also tang-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"tort": {
+		"type": "base",
+		"spelling": "tort",
+		"meanings": ["twist"],
+		"root": "Latin torquere (tortus), to twist",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"leg": {
+		"type": "base",
+		"spelling": "leg",
+		"meanings": ["to look at and understand words"],
+		"root": "Latin legere (lectus), to read (also lect-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"rid": {
+		"type": "base",
+		"spelling": "rid",
+		"meanings": ["laugh"],
+		"root": "Latin ridere (risus), to laugh (also ris-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"mir": {
+		"type": "base",
+		"spelling": "mir",
+		"meanings": ["wonder at"],
+		"root": "Latin mirari, to wonder at or admire",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"apt": {
+		"type": "base",
+		"spelling": "apt",
+		"meanings": ["fit"],
+		"root": "Latin aptus, fitted or suited (also ept-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"grat": {
+		"type": "base",
+		"spelling": "grat",
+		"meanings": ["thankful", "pleasing"],
+		"root": "Latin gratus, pleasing or thankful (also grate-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"tribute": {
+		"type": "base",
+		"spelling": "tribute",
+		"meanings": ["give"],
+		"root": "Latin tribuere, to give, assign or pay (also trib-, tribut-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"ambul": {
+		"type": "base",
+		"spelling": "ambul",
+		"meanings": ["step or walk"],
+		"root": "Latin ambulare, to walk (also amble)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"grade": {
+		"type": "base",
+		"spelling": "grade",
+		"meanings": ["step or walk"],
+		"root": "Latin gradus, a step, from gradi, to step (also grad-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"line": {
+		"type": "base",
+		"spelling": "line",
+		"meanings": ["a long, thin mark"],
+		"root": "Latin linea, a linen thread or line",
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "place"
+	},
+	"orbit": {
+		"type": "base",
+		"spelling": "orbit",
+		"meanings": ["a path around a planet or star"],
+		"root": "Latin orbis, circle, through orbita, a wheel track",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"cumul": {
+		"type": "base",
+		"spelling": "cumul",
+		"meanings": ["pile up"],
+		"root": "Latin cumulus, a heap (also cumu-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"fiss": {
+		"type": "base",
+		"spelling": "fiss",
+		"meanings": ["split"],
+		"root": "Latin findere (fissus), to split",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"via": {
+		"type": "base",
+		"spelling": "via",
+		"meanings": ["a road or path"],
+		"root": "Latin via, road or way",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"alter": {
+		"type": "base",
+		"spelling": "alter",
+		"meanings": ["other"],
+		"root": "Latin alter, the other of two (also altern-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"amor": {
+		"type": "base",
+		"spelling": "amor",
+		"meanings": ["love"],
+		"root": "Latin amare, to love; amor, love (also amat-, amic-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"dign": {
+		"type": "base",
+		"spelling": "dign",
+		"meanings": ["worthy"],
+		"root": "Latin dignus, worthy",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"liber": {
+		"type": "base",
+		"spelling": "liber",
+		"meanings": ["free"],
+		"root": "Latin liber, free",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"greg": {
+		"type": "base",
+		"spelling": "greg",
+		"meanings": ["flock or herd"],
+		"root": "Latin grex (gregis), a flock or herd",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"soci": {
+		"type": "base",
+		"spelling": "soci",
+		"meanings": ["companion or group"],
+		"root": "Latin socius, companion (also socio-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"popul": {
+		"type": "base",
+		"spelling": "popul",
+		"meanings": ["people"],
+		"root": "Latin populus, people (also pop-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"anim": {
+		"type": "base",
+		"spelling": "anim",
+		"meanings": ["spirit"],
+		"root": "Latin anima, breath or soul, and animus, mind",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"ocul": {
+		"type": "base",
+		"spelling": "ocul",
+		"meanings": ["eye"],
+		"root": "Latin oculus, eye",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"capit": {
+		"type": "base",
+		"spelling": "capit",
+		"meanings": ["head"],
+		"root": "Latin caput (capitis), head",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"corp": {
+		"type": "base",
+		"spelling": "corp",
+		"meanings": ["body"],
+		"root": "Latin corpus (corporis), body (also corpor-, corpus-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"pater": {
+		"type": "base",
+		"spelling": "pater",
+		"meanings": ["father"],
+		"root": "Latin pater, father, and patria, fatherland (also patri-, patern-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"frat": {
+		"type": "base",
+		"spelling": "frat",
+		"meanings": ["brother"],
+		"root": "Latin frater, brother (also fratern-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"cord": {
+		"type": "base",
+		"spelling": "cor",
+		"meanings": ["heart"],
+		"root": "Latin cor (cordis), heart (also cord-; French cour-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"belli": {
+		"type": "base",
+		"spelling": "belli",
+		"meanings": ["war"],
+		"root": "Latin bellum, war (also bel-, bell-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"pac": {
+		"type": "base",
+		"spelling": "pac",
+		"meanings": ["peace"],
+		"root": "Latin pax (pacis), peace",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"urb": {
+		"type": "base",
+		"spelling": "urb",
+		"meanings": ["city"],
+		"root": "Latin urbs, city",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"vit": {
+		"type": "base",
+		"spelling": "vit",
+		"meanings": ["life"],
+		"root": "Latin vita, life",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"sanct": {
+		"type": "base",
+		"spelling": "sanct",
+		"meanings": ["holy"],
+		"root": "Latin sanctus, holy",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"sacr": {
+		"type": "base",
+		"spelling": "sacr",
+		"meanings": ["holy"],
+		"root": "Latin sacer, holy (also sacro-, secr-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"annu": {
+		"type": "base",
+		"spelling": "annu",
+		"meanings": ["year"],
+		"root": "Latin annus, year (also ann-, anni-, enn-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "time"
+	},
+	"tempor": {
+		"type": "base",
+		"spelling": "tempor",
+		"meanings": ["time"],
+		"root": "Latin tempus (temporis), time",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "time"
+	},
+	"potent": {
+		"type": "base",
+		"spelling": "potent",
+		"meanings": ["strength"],
+		"root": "Latin potens, powerful or able",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"sen": {
+		"type": "base",
+		"spelling": "sen",
+		"meanings": ["old"],
+		"root": "Latin senex, old man",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"digit": {
+		"type": "base",
+		"spelling": "digit",
+		"meanings": ["finger, or a number from 0 to 9"],
+		"root": "Latin digitus, finger or toe",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "people"
+	},
+	"an": {
+		"type": "suffix",
+		"spelling": "an",
+		"meanings": ["having to do with"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"ior": {
+		"type": "suffix",
+		"spelling": "ior",
+		"meanings": ["more"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"luc": {
+		"type": "base",
+		"spelling": "luc",
+		"meanings": ["light"],
+		"root": "Latin lux (lucis), light; lucere, to shine",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"aqua": {
+		"type": "base",
+		"spelling": "aqua",
+		"meanings": ["water"],
+		"root": "Latin aqua, water (also aque-, aqui-)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"loc": {
+		"type": "base",
+		"spelling": "loc",
+		"meanings": ["place"],
+		"root": "Latin locus, place",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"punct": {
+		"type": "base",
+		"spelling": "punct",
+		"meanings": ["point"],
+		"root": "Latin pungere (punctus), to prick or point",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"ver": {
+		"type": "base",
+		"spelling": "ver",
+		"meanings": ["true"],
+		"root": "Latin verus, true",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"sol": {
+		"type": "base",
+		"spelling": "sol",
+		"meanings": ["sun"],
+		"root": "Latin sol, sun",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"fort": {
+		"type": "base",
+		"spelling": "fort",
+		"meanings": ["strength"],
+		"root": "Latin fortis, strong",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"rect": {
+		"type": "base",
+		"spelling": "rect",
+		"meanings": ["straight or correct"],
+		"root": "Latin rectus, straight or right, from regere, to guide straight",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"coron": {
+		"type": "base",
+		"spelling": "coron",
+		"meanings": ["crown"],
+		"root": "Latin corona, crown or wreath",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"hibern": {
+		"type": "base",
+		"spelling": "hibern",
+		"meanings": ["winter"],
+		"root": "Latin hibernus, of winter",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"foli": {
+		"type": "base",
+		"spelling": "foli",
+		"meanings": ["leaf"],
+		"root": "Latin folium, leaf",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"ign": {
+		"type": "base",
+		"spelling": "ign",
+		"meanings": ["fire"],
+		"root": "Latin ignis, fire (also ignit-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"litera": {
+		"type": "base",
+		"spelling": "litera",
+		"meanings": ["letter"],
+		"root": "Latin littera, letter",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"id": {
+		"type": "suffix",
+		"spelling": "id",
+		"meanings": ["full of or having"],
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"arium": {
+		"type": "suffix",
+		"spelling": "arium",
+		"meanings": ["a place for"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"calli": {
+		"type": "base",
+		"spelling": "calli",
+		"meanings": ["the quality of being lovely to look at"],
+		"root": "Greek kallos, beauty",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"gno": {
+		"type": "base",
+		"spelling": "gno",
+		"meanings": ["know"],
+		"root": "Greek gignoskein, to know (also gnos-, gnost-, gnosis)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"ideo": {
+		"type": "base",
+		"spelling": "ideo",
+		"meanings": ["idea"],
+		"root": "Greek idea, form or notion (also ide- in ideal)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "feelings"
+	},
+	"biblio": {
+		"type": "base",
+		"spelling": "biblio",
+		"meanings": ["a set of printed pages held together"],
+		"root": "Greek biblion, book",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"ortho": {
+		"type": "base",
+		"spelling": "ortho",
+		"meanings": ["straight or correct"],
+		"root": "Greek orthos, straight or correct",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"dox": {
+		"type": "base",
+		"spelling": "dox",
+		"meanings": ["opinion"],
+		"root": "Greek doxa, opinion",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "feelings"
+	},
+	"demo": {
+		"type": "base",
+		"spelling": "demo",
+		"meanings": ["people"],
+		"root": "Greek demos, the people",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"dynam": {
+		"type": "base",
+		"spelling": "dynam",
+		"meanings": ["strength"],
+		"root": "Greek dynamis, power (also dyna-)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"gyro": {
+		"type": "base",
+		"spelling": "gyro",
+		"meanings": ["turn"],
+		"root": "Greek gyros, ring or circle",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"stereo": {
+		"type": "base",
+		"spelling": "stereo",
+		"meanings": ["solid"],
+		"root": "Greek stereos, solid",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"soph": {
+		"type": "base",
+		"spelling": "soph",
+		"meanings": ["wisdom"],
+		"root": "Greek sophia, wisdom",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"acro": {
+		"type": "base",
+		"spelling": "acro",
+		"meanings": ["top or tip"],
+		"root": "Greek akros, highest or topmost",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "place"
+	},
+	"agog": {
+		"type": "base",
+		"spelling": "agog",
+		"meanings": ["lead"],
+		"root": "Greek agogos, leading, from agein, to lead (also -agogue)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"ego": {
+		"type": "base",
+		"spelling": "ego",
+		"meanings": ["self"],
+		"root": "Latin ego, I",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"ornitho": {
+		"type": "base",
+		"spelling": "ornitho",
+		"meanings": ["bird"],
+		"root": "Greek ornis (ornithos), bird",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"polis": {
+		"type": "base",
+		"spelling": "polis",
+		"meanings": ["city"],
+		"root": "Greek polis, city (also polit-, from polites, citizen)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "place"
+	},
+	"petro": {
+		"type": "base",
+		"spelling": "petro",
+		"meanings": ["stone"],
+		"root": "Greek petra, rock",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"theo": {
+		"type": "base",
+		"spelling": "theo",
+		"meanings": ["god"],
+		"root": "Greek theos, god",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"topo": {
+		"type": "base",
+		"spelling": "topo",
+		"meanings": ["place"],
+		"root": "Greek topos, place",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "place"
+	},
+	"crypt": {
+		"type": "base",
+		"spelling": "crypt",
+		"meanings": ["hidden"],
+		"root": "Greek kryptos, hidden",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"ethno": {
+		"type": "base",
+		"spelling": "ethno",
+		"meanings": ["nation or cultural group"],
+		"root": "Greek ethnos, nation or people",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"gen": {
+		"type": "base",
+		"spelling": "gen",
+		"meanings": ["born", "make"],
+		"root": "Greek genos and Latin genus, birth, family or kind (also gener-, genet-)",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"paleo": {
+		"type": "base",
+		"spelling": "paleo",
+		"meanings": ["old"],
+		"root": "Greek palaios, old or ancient",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "time"
+	},
+	"onto": {
+		"type": "base",
+		"spelling": "onto",
+		"meanings": ["a living being"],
+		"root": "Greek on (ontos), being",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"mel": {
+		"type": "base",
+		"spelling": "mel",
+		"meanings": ["tune"],
+		"root": "Greek melos, song or tune",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"ode": {
+		"type": "base",
+		"spelling": "ode",
+		"meanings": ["song"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"chrom": {
+		"type": "base",
+		"spelling": "chrom",
+		"meanings": ["a shade like green or blue"],
+		"root": "Greek chroma, color (also chrome, chromat-)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"paed": {
+		"type": "base",
+		"spelling": "ped",
+		"meanings": ["child"],
+		"root": "Greek pais (paidos), child (also -pedia)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"iatr": {
+		"type": "base",
+		"spelling": "iatr",
+		"meanings": ["doctor or healing"],
+		"root": "Greek iatros, healer or doctor",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"hemo": {
+		"type": "base",
+		"spelling": "hemo",
+		"meanings": ["blood"],
+		"root": "Greek haima, blood (also hema-, hemat-)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"derm": {
+		"type": "base",
+		"spelling": "derm",
+		"meanings": ["skin"],
+		"root": "Greek derma, skin (also dermat-)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"cardio": {
+		"type": "base",
+		"spelling": "cardio",
+		"meanings": ["heart"],
+		"root": "Greek kardia, heart",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"gastro": {
+		"type": "base",
+		"spelling": "gastro",
+		"meanings": ["stomach"],
+		"root": "Greek gaster, stomach",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"ophthalmo": {
+		"type": "base",
+		"spelling": "ophthalmo",
+		"meanings": ["eye"],
+		"root": "Greek ophthalmos, eye",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"patho": {
+		"type": "base",
+		"spelling": "patho",
+		"meanings": ["disease"],
+		"root": "Greek pathos, suffering or disease",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"phago": {
+		"type": "base",
+		"spelling": "phago",
+		"meanings": ["eat"],
+		"root": "Greek phagein, to eat (also -phage)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"kine": {
+		"type": "base",
+		"spelling": "kine",
+		"meanings": ["to go from one place to another"],
+		"root": "Greek kinein, to move (also kinet-, kinesi-)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"aer": {
+		"type": "base",
+		"spelling": "aer",
+		"meanings": ["air"],
+		"root": "Greek aer, air (also aero-)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"tox": {
+		"type": "base",
+		"spelling": "tox",
+		"meanings": ["a substance that harms the body"],
+		"root": "Greek toxikon, poison for arrows, from toxon, bow",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"ovi": {
+		"type": "base",
+		"spelling": "ovi",
+		"meanings": ["egg"],
+		"root": "Latin ovum, egg (also ov-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"baro": {
+		"type": "base",
+		"spelling": "baro",
+		"meanings": ["weight or pressure"],
+		"root": "Greek baros, weight (also bar-)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"nucle": {
+		"type": "base",
+		"spelling": "nucle",
+		"meanings": ["middle"],
+		"root": "Latin nucleus, a little nut or kernel",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "nature"
+	},
+	"ard": {
+		"type": "suffix",
+		"spelling": "ard",
+		"meanings": ["a person who is or does something too much"],
+		"grade": "7-8",
+		"origin": "english",
+		"group": "people"
+	},
+	"let": {
+		"type": "suffix",
+		"spelling": "let",
+		"meanings": ["small"],
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "amount"
+	},
+	"monger": {
+		"type": "base",
+		"spelling": "monger",
+		"meanings": ["a person who sells", "a person who stirs up or spreads"],
+		"root": "Old English mangere, a trader, from Latin mango, a dealer",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"trust": {
+		"type": "base",
+		"spelling": "trust",
+		"meanings": ["trust"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "feelings"
+	},
+	"hand": {
+		"type": "base",
+		"spelling": "hand",
+		"meanings": ["hand"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "people"
+	},
+	"card": {
+		"type": "base",
+		"spelling": "card",
+		"meanings": ["a small, stiff piece of paper"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "people"
+	},
+	"chain": {
+		"type": "base",
+		"spelling": "chain",
+		"meanings": ["a row of metal rings joined together"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "people"
+	},
+	"drink": {
+		"type": "base",
+		"spelling": "drink",
+		"meanings": ["to swallow a liquid"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"faith": {
+		"type": "base",
+		"spelling": "faith",
+		"meanings": ["trust"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"think": {
+		"type": "base",
+		"spelling": "think",
+		"meanings": ["think"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"grate": {
+		"type": "base",
+		"spelling": "grate",
+		"meanings": ["to rub against something rough"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"snap": {
+		"type": "base",
+		"spelling": "snap",
+		"meanings": ["to break or shut with a quick, sharp sound"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"rest": {
+		"type": "base",
+		"spelling": "rest",
+		"meanings": ["to relax and be still"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"fix": {
+		"type": "base",
+		"spelling": "fix",
+		"meanings": ["to repair", "to fasten in place"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"pain": {
+		"type": "base",
+		"spelling": "pain",
+		"meanings": ["an ache"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"reach": {
+		"type": "base",
+		"spelling": "reach",
+		"meanings": ["to stretch out to touch or get"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"taste": {
+		"type": "base",
+		"spelling": "taste",
+		"meanings": ["the flavor of something"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"mend": {
+		"type": "base",
+		"spelling": "mend",
+		"meanings": ["to repair"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"sink": {
+		"type": "base",
+		"spelling": "sink",
+		"meanings": ["to go down under water"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"skill": {
+		"type": "base",
+		"spelling": "skill",
+		"meanings": ["skill or craft"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"own": {
+		"type": "base",
+		"spelling": "own",
+		"meanings": ["to have something that belongs to you"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"load": {
+		"type": "base",
+		"spelling": "load",
+		"meanings": ["to put things into or onto a vehicle"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"twist": {
+		"type": "base",
+		"spelling": "twist",
+		"meanings": ["twist"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"please": {
+		"type": "base",
+		"spelling": "please",
+		"meanings": ["pleasing"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"work": {
+		"type": "base",
+		"spelling": "work",
+		"meanings": ["work"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"boast": {
+		"type": "base",
+		"spelling": "boast",
+		"meanings": ["to talk proudly about yourself"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "senses"
+	},
+	"harm": {
+		"type": "base",
+		"spelling": "harm",
+		"meanings": ["damage or injury"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"break": {
+		"type": "base",
+		"spelling": "break",
+		"meanings": ["break"],
+		"root": "Old English brecan, to break (Germanic brekan)",
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"wreck": {
+		"type": "base",
+		"spelling": "wreck",
+		"meanings": ["to smash or ruin"],
+		"root": "Old Norse, related to Old English wrecan (Germanic wrekan)",
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"brag": {
+		"type": "base",
+		"spelling": "brag",
+		"meanings": ["to talk proudly about yourself"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "senses"
+	},
+	"slug": {
+		"type": "base",
+		"spelling": "slug",
+		"meanings": ["to be slow and lazy"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"dull": {
+		"type": "base",
+		"spelling": "dull",
+		"meanings": ["not sharp or exciting"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "describing"
+	},
+	"book": {
+		"type": "base",
+		"spelling": "book",
+		"meanings": ["a set of printed pages held together"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "people"
+	},
+	"leaf": {
+		"type": "base",
+		"spelling": "leaf",
+		"meanings": ["leaf"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "nature"
+	},
+	"drop": {
+		"type": "base",
+		"spelling": "drop",
+		"meanings": ["a small amount of liquid", "fall"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "nature"
+	},
+	"fish": {
+		"type": "base",
+		"spelling": "fish",
+		"meanings": ["an animal that lives and swims in water"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "nature"
+	},
+	"flash": {
+		"type": "base",
+		"spelling": "flash",
+		"meanings": ["a sudden burst of light"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "senses"
+	},
+	"score": {
+		"type": "base",
+		"spelling": "score",
+		"meanings": ["the number of points in a game"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "amount"
+	},
+	"pod": {
+		"type": "base",
+		"spelling": "pod",
+		"meanings": ["foot"],
+		"root": "Greek pous (podos), foot (also -pus)",
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "people"
+	},
+	"arthro": {
+		"type": "base",
+		"spelling": "arthro",
+		"meanings": ["joint"],
+		"root": "Greek arthron, joint",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"chlor": {
+		"type": "base",
+		"spelling": "chlor",
+		"meanings": ["green"],
+		"root": "Greek chloros, pale green",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"mater": {
+		"type": "base",
+		"spelling": "mater",
+		"meanings": ["mother"],
+		"root": "Latin mater, mother (also matri-, matern-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"hetero": {
+		"type": "base",
+		"spelling": "hetero",
+		"meanings": ["different"],
+		"root": "Greek heteros, other or different",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"helio": {
+		"type": "base",
+		"spelling": "helio",
+		"meanings": ["sun"],
+		"root": "Greek helios, sun",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "nature"
+	},
+	"pseudo": {
+		"type": "prefix",
+		"spelling": "pseudo",
+		"meanings": ["false"],
+		"root": "Greek pseudes, false",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "not"
+	},
+	"phor": {
+		"type": "base",
+		"spelling": "phor",
+		"meanings": ["carry"],
+		"root": "Greek pherein, to carry (also pher-)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"eu": {
+		"type": "prefix",
+		"spelling": "eu",
+		"meanings": ["good or well"],
+		"root": "Greek eu, well",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"ia": {
+		"type": "suffix",
+		"spelling": "ia",
+		"meanings": ["the state of being"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"vas": {
+		"type": "base",
+		"spelling": "vas",
+		"meanings": ["vessel"],
+		"root": "Latin vas, a vessel or container (vasculum, a little vessel)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"ventri": {
+		"type": "base",
+		"spelling": "ventri",
+		"meanings": ["stomach"],
+		"root": "Latin venter, belly or stomach (also ventr-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"soli": {
+		"type": "base",
+		"spelling": "soli",
+		"meanings": ["alone"],
+		"root": "Latin solus, alone (also sol-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"peri": {
+		"type": "prefix",
+		"spelling": "peri",
+		"meanings": ["around"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "place"
+	},
+	"sis": {
+		"type": "suffix",
+		"spelling": "sis",
+		"meanings": ["the act or result of"],
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "actions"
+	},
+	"soma": {
+		"type": "base",
+		"spelling": "soma",
+		"meanings": ["body"],
+		"root": "Greek soma (somatos), body (also -some)",
+		"grade": "7-8",
+		"origin": "greek",
+		"group": "people"
+	},
+	"mand": {
+		"type": "base",
+		"spelling": "mand",
+		"meanings": ["give an order"],
+		"root": "Latin mandare, to order or entrust",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"cret": {
+		"type": "base",
+		"spelling": "cret",
+		"meanings": ["sift or separate"],
+		"root": "Latin cernere (cretus), to sift or separate",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"verb": {
+		"type": "base",
+		"spelling": "verb",
+		"meanings": ["word or speech", "an action word"],
+		"root": "Latin verbum, word",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "senses"
+	},
+	"scend": {
+		"type": "base",
+		"spelling": "scend",
+		"meanings": ["climb"],
+		"root": "Latin scandere, to climb",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"text": {
+		"type": "base",
+		"spelling": "text",
+		"meanings": ["weave", "something written"],
+		"root": "Latin texere (textus), to weave",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"proper": {
+		"type": "base",
+		"spelling": "proper",
+		"meanings": ["fit"],
+		"root": "Latin proprius, one's own; in English, proper came to mean fit or suitable",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "describing"
+	},
+	"fall": {
+		"type": "base",
+		"spelling": "fall",
+		"meanings": ["fall"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"rain": {
+		"type": "base",
+		"spelling": "rain",
+		"meanings": ["water falling in drops from clouds"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "nature"
+	},
+	"water": {
+		"type": "base",
+		"spelling": "water",
+		"meanings": ["water"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "nature"
+	},
+	"art": {
+		"type": "base",
+		"spelling": "art",
+		"meanings": ["creative work like painting, drawing and music"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "people"
+	},
+	"believe": {
+		"type": "base",
+		"spelling": "believe",
+		"meanings": ["believe"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "actions"
+	},
+	"doubt": {
+		"type": "base",
+		"spelling": "doubt",
+		"meanings": ["a feeling of not being sure"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"drama": {
+		"type": "base",
+		"spelling": "drama",
+		"meanings": ["a story acted out on a stage or screen"],
+		"grade": "5-6",
+		"origin": "greek",
+		"group": "senses"
+	},
+	"luck": {
+		"type": "base",
+		"spelling": "luck",
+		"meanings": ["good or bad things that happen by chance"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "describing"
+	},
+	"hunger": {
+		"type": "base",
+		"spelling": "hunger",
+		"meanings": ["the need or wish for food"],
+		"grade": "3-4",
+		"origin": "english",
+		"group": "feelings"
+	},
+	"mystery": {
+		"type": "base",
+		"spelling": "mystery",
+		"meanings": ["something that is hard to explain or understand"],
+		"grade": "3-4",
+		"origin": "greek",
+		"group": "describing"
+	},
+	"office": {
+		"type": "base",
+		"spelling": "office",
+		"meanings": ["a room or building where people work", "an important job or position"],
+		"grade": "3-4",
+		"origin": "latin",
+		"group": "place"
+	},
+	"environ": {
+		"type": "base",
+		"spelling": "environ",
+		"meanings": ["surround"],
+		"root": "French environner, to surround (environ, around)",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "place"
+	},
+	"terr": {
+		"type": "base",
+		"spelling": "terr",
+		"meanings": ["frighten"],
+		"root": "Latin terrere, to frighten",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "feelings"
+	},
+	"lect": {
+		"type": "base",
+		"spelling": "lect",
+		"meanings": ["choose or gather"],
+		"root": "Latin legere (lectus), to choose or gather",
+		"grade": "5-6",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"feder": {
+		"type": "base",
+		"spelling": "feder",
+		"meanings": ["league or agreement"],
+		"root": "Latin foedus (foederis), treaty or league",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"execute": {
+		"type": "base",
+		"spelling": "execute",
+		"meanings": ["carry out"],
+		"root": "Latin exsequi (exsecutus), to follow out",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"legis": {
+		"type": "base",
+		"spelling": "legis",
+		"meanings": ["law"],
+		"root": "Latin lex (legis), law (also leg-)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "people"
+	},
+	"lat": {
+		"type": "base",
+		"spelling": "lat",
+		"meanings": ["carry"],
+		"root": "Latin latus, carried (a form of ferre)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	},
+	"pugn": {
+		"type": "base",
+		"spelling": "pugn",
+		"meanings": ["fight"],
+		"root": "Latin pugnare, to fight (pugnus, fist)",
+		"grade": "7-8",
+		"origin": "latin",
+		"group": "actions"
+	}
+}

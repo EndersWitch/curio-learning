@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import type { LearningConcept } from '@/types/quiz'
+import ActivityFrame from '@/components/ActivityFrame'
 import {
   BookMarked, Lightbulb, PenLine, Zap, AlertTriangle, Search, ListChecks,
   Eye, Globe, Brain, Star, Layers, BookOpen, Check, X,
@@ -487,6 +488,21 @@ function DefinitionCard({ concept, index }: LearningCardProps) {
   )
 }
 
+function ActivityCard({ concept, index }: LearningCardProps) {
+  const accent = 'var(--rust)'
+  return (
+    <CardShell icon={<Layers size={16} />} label="Hands-on" accentColor={accent} index={index}>
+      <h3 className="font-black text-base mb-2 leading-tight" style={{ color: 'var(--ink)' }}>{concept.title}</h3>
+      {concept.content && <ContentBlock text={concept.content} accentColor={accent} />}
+      {concept.activity && (
+        <div className="mt-3">
+          <ActivityFrame activity={concept.activity} />
+        </div>
+      )}
+    </CardShell>
+  )
+}
+
 // ══════════════════════════════════════════════════════════════
 // ROUTER
 // ══════════════════════════════════════════════════════════════
@@ -507,6 +523,7 @@ export default function LearningCard({ concept, index }: LearningCardProps) {
     case 'fun_fact':        return <FunFactCard      concept={concept} index={index} />
     case 'step_by_step':    return <StepByStepCard   concept={concept} index={index} />
     case 'definition':      return <DefinitionCard   concept={concept} index={index} />
+    case 'activity':        return <ActivityCard     concept={concept} index={index} />
     default:                return <KeyRuleCard      concept={concept} index={index} />
   }
 }

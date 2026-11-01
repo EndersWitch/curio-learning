@@ -15,6 +15,15 @@ const nextConfig = {
       { source: '/admin', destination: '/admin.html' },
       { source: '/formatter', destination: '/formatter.html' },
       { source: '/quiz-formatter', destination: '/quiz-formatter.html' },
+      // Self-hosted maths tools (built from teacher.dev's open-source apps, see
+      // vendor/teacherdotdev). Each is a single-page app that reads its own URL,
+      // so every path inside it serves the same index.html.
+      { source: '/tools/lines', destination: '/tools/lines/index.html' },
+      { source: '/tools/lines/:path*', destination: '/tools/lines/index.html' },
+      { source: '/tools/fraction-fun', destination: '/tools/fraction-fun/index.html' },
+      { source: '/tools/fraction-fun/teacher', destination: '/tools/fraction-fun/index.html' },
+      { source: '/tools/algebra-tiles', destination: '/tools/algebra-tiles/index.html' },
+      { source: '/tools/algebra-tiles/:page(about|privacy|factor|multiply|solve|play)', destination: '/tools/algebra-tiles/:page.html' },
       // Everything else (subjects, papers, subscription, contact, privacy,
       // terms, deeplearn) is now a real Next.js route (app/**).
     ]

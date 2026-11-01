@@ -308,7 +308,11 @@ actions that have *already happened*.</span>
 
 <span class="comment"># Valid DIFFICULTY values: Starter / Building / Challenge
 # Valid TYPE values: definition / example / spot_difference
-#   step_by_step / common_mistake / try_it / key_rule
+#   step_by_step / common_mistake / try_it / key_rule / activity
+# Optional ACTIVITY: line (on a @@Q or on an activity @@CARD), e.g.
+#   ACTIVITY: fraction-fun?n=3&d=4&of=24
+#   ACTIVITY: rounding?to=10&max=100&n=5&mode=guided
+#   ACTIVITY: algebra-tiles?type=multiply&p=(x+2)(x-3)
 # *word* renders as cyan highlight in the quiz
 # &lt;strong&gt; renders as bold</span></div>
       </div>
@@ -591,6 +595,7 @@ function parseCardBlock(raw) {
       case 'TITLE':   card.title = v; break;
       case 'SIDE_A':  card.sideA = v; break;
       case 'SIDE_B':  card.sideB = v; break;
+      case 'ACTIVITY': card.activity = v; break;
       case 'CONTENT': card.content = v; break;
       case 'EXAMPLE': card.example = v; break;
     }
@@ -598,7 +603,7 @@ function parseCardBlock(raw) {
     currentVal = [];
   };
 
-  const SINGLE_LINE_CARD_KEYS = ['TYPE','TITLE','SIDE_A','SIDE_B'];
+  const SINGLE_LINE_CARD_KEYS = ['TYPE','TITLE','SIDE_A','SIDE_B','ACTIVITY'];
 
   for (const line of lines) {
     const keyMatch = line.match(/^([A-Z_]+):\s*(.*)/);
@@ -612,6 +617,7 @@ function parseCardBlock(raw) {
           case 'TITLE':  card.title = rest.trim(); break;
           case 'SIDE_A': card.sideA = rest.trim(); break;
           case 'SIDE_B': card.sideB = rest.trim(); break;
+          case 'ACTIVITY': card.activity = rest.trim(); break;
         }
       } else {
         flush();
@@ -660,12 +666,13 @@ function parseQuestionBlock(raw, num) {
       case 'D':          q.option_d = v; break;
       case 'CORRECT':    q.correct_option = v.toUpperCase(); break;
       case 'EXPLAIN':    q.explanation = v; break;
+      case 'ACTIVITY':   q.activity = v; break;
     }
     currentKey = null;
     currentVal = [];
   };
 
-  const SINGLE_LINE_Q_KEYS = ['DIFFICULTY','A','B','C','D','CORRECT'];
+  const SINGLE_LINE_Q_KEYS = ['DIFFICULTY','A','B','C','D','CORRECT','ACTIVITY'];
 
   for (const line of lines) {
     const keyMatch = line.match(/^([A-Z_]+):\s*(.*)/);
@@ -681,6 +688,7 @@ function parseQuestionBlock(raw, num) {
           case 'C': q.option_c = rest.trim(); break;
           case 'D': q.option_d = rest.trim(); break;
           case 'CORRECT': q.correct_option = rest.trim().toUpperCase(); break;
+          case 'ACTIVITY': q.activity = rest.trim(); break;
         }
       } else {
         flush();
@@ -919,6 +927,8 @@ async function doSave() {
           difficulty:         q.difficulty || 'Starter',
           is_premium:         lz.is_premium || false
         };
+        // Only sent when the question has one, so uploads still work before the activity column exists.
+        if (q.activity) qPayload.activity = q.activity;
         await sbFetch('questions', {
           method: 'POST',
           prefer: 'return=representation',
