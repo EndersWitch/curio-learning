@@ -1,0 +1,1 @@
+import"../chunks/xihTtKlq.js";import"../chunks/BInjEa_X.js";import{t as e}from"../chunks/BnP0tMPx.js";function t(t){e(t,{activity:`solve`})}export{t as component};
