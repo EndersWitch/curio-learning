@@ -1,0 +1,103 @@
+@import 'tailwindcss';
+
+/* Morphology Mash's paper-and-ink look, in blue: pale blue-gray paper on a
+   cool ground, navy ink, and a strong blue accent. Plain sans throughout. */
+:root {
+	--ground: #e7edf5;
+	--paper: #fbfcfe;
+	--paper-low: #eef2f8;
+	--line: #d5deea;
+	--line-strong: #a9b8cc;
+	--ink: #1d2838;
+	--ink-soft: #2e3e55;
+	--muted: #5a6a80;
+	--accent: #2c5fc7;
+	--accent-dark: #224ea8;
+	--accent-wash: #dfe8fa;
+	--accent-line: #c3d3f3;
+	--good: #2f6e4a;
+	--good-wash: #e2f1e8;
+	--good-line: #b3d8c1;
+	--bad: #b3321f;
+	--bad-wash: #fbe3de;
+	--bad-line: #f0c3b9;
+
+	/* The tiles, in the colors classroom sets use, softened to sit on blue
+	   paper. Every negative tile is red, whatever its shape. */
+	--x2-fill: #8fb3ee;
+	--x2-edge: #4a78c8;
+	--x2-ink: #13336e;
+	--x-fill: #9fd8b4;
+	--x-edge: #4f9f6d;
+	--x-ink: #134a2a;
+	--unit-fill: #f7dc84;
+	--unit-edge: #c9a43a;
+	--unit-ink: #5c4504;
+	--neg-fill: #f2a196;
+	--neg-edge: #c95b4b;
+	--neg-ink: #6b1a0e;
+
+	--radius: 10px;
+	--sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+	font-family: var(--sans);
+	color: var(--ink);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--ground);
+}
+
+/* Shared button styles (global so components can use them) */
+.btn-primary,
+.btn-ghost,
+.btn-dark {
+	padding: 0.6rem 1.15rem;
+	border-radius: 8px;
+	font-size: 0.95rem;
+	font-weight: 600;
+	cursor: pointer;
+	border: 1px solid transparent;
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.4rem;
+	line-height: 1;
+}
+.btn-primary {
+	background: var(--accent);
+	color: var(--paper);
+}
+.btn-primary:hover:not(:disabled) {
+	background: var(--accent-dark);
+}
+.btn-primary:disabled {
+	background: #b9c6da;
+	cursor: default;
+}
+.btn-ghost {
+	background: var(--paper);
+	color: var(--ink-soft);
+	border-color: var(--line-strong);
+}
+.btn-ghost:hover:not(:disabled) {
+	background: var(--paper-low);
+}
+.btn-ghost:disabled {
+	color: #9aa7b8;
+	border-color: var(--line);
+	cursor: default;
+}
+.btn-dark {
+	background: var(--ink-soft);
+	color: var(--paper);
+}
+.btn-dark:hover {
+	background: var(--ink);
+}

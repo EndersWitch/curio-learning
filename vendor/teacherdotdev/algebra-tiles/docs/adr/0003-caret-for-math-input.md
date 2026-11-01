@@ -1,0 +1,3 @@
+# Caret for math input
+
+Students type the answer side of their final equation (the problem is printed before the =), and teachers type the problem, in a Caret math field (`@caret-js/core`, `@caret-js/math`, `@caret-js/svelte`), parsed with Caret into an expression tree. Caret is a friend's unpublished library, used with permission and vendored as tarballs, the same way `../stemfigures` uses it (see its `apps/math/docs/adr/0002-caret-for-math-input.md`). We chose it over a fixed fill-in-the-coefficients template so students write the answer with `^` the way they would on paper, and over a hand-written text parser so typing shows real math as it goes. Caret must be loaded as exactly one copy of its ES module build, because its parser relies on `instanceof`.

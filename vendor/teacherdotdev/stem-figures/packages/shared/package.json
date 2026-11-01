@@ -1,0 +1,18 @@
+{
+  "name": "@stemfigures/shared",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Components and helpers shared by the STEM Figures sites, imported as $shared/...",
+  "scripts": {
+    "test": "vitest run --passWithNoTests"
+  },
+  "peerDependencies": {
+    "@lucide/svelte": "^1.47.0",
+    "@sveltejs/kit": "^2.70.3",
+    "svelte": "^5.57.0"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.1"
+  }
+}

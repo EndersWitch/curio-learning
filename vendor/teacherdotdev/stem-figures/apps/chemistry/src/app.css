@@ -1,0 +1,188 @@
+:root {
+  --blue: #2563eb;
+  --blue-dark: #1d4ed8;
+  --blue-soft: #eff6ff;
+  --blue-border: #bfdbfe;
+  --purple: #7c3aed;
+  --green: #16a34a;
+  --green-soft: #dcfce7;
+  --red: #dc2626;
+  --red-soft: #fee2e2;
+  --amber: #f59e0b;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --border: #e3e4ea;
+  --card: #ffffff;
+  --bg: #f6f7fb;
+  --radius: 16px;
+  --topbar-h: 3.5rem;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px -12px rgba(16, 24, 40, 0.12);
+
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+/* A faint hexagonal lattice behind every page, like rings of carbon atoms in
+   a skeletal formula or a sheet of graphene: bonds as thin lines, atoms as
+   small dots where they meet. It fades out toward the middle so the page's
+   content sits on a plain background. One tile is a full ring plus the bonds
+   above and below it; bonds on the tile's edges are drawn half on each side. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48.497' height='84' viewBox='0 0 48.497 84'%3E%3Cg fill='none' stroke='%232563eb' stroke-opacity='.09' stroke-width='1.25'%3E%3Cpath d='M24.249 0v14l24.248 14v28L24.249 70v14M24.249 70 0 56V28l24.249-14'/%3E%3C/g%3E%3Cg fill='%232563eb' fill-opacity='.16'%3E%3Ccircle cx='24.249' cy='14' r='2.25'/%3E%3Ccircle cx='48.497' cy='28' r='2.25'/%3E%3Ccircle cx='48.497' cy='56' r='2.25'/%3E%3Ccircle cx='24.249' cy='70' r='2.25'/%3E%3Ccircle cx='0' cy='56' r='2.25'/%3E%3Ccircle cx='0' cy='28' r='2.25'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 48.497px 84px;
+  --fade: linear-gradient(to right, #000 calc(50% - 38rem), transparent calc(50% - 30rem), transparent calc(50% + 30rem), #000 calc(50% + 38rem));
+  -webkit-mask-image: var(--fade);
+  mask-image: var(--fade);
+}
+
+h1, h2, h3 { margin: 0; line-height: 1.2; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Shared buttons */
+.btn-primary, .btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 1.5px solid transparent;
+  text-decoration: none;
+  line-height: 1;
+  transition: background 0.15s, transform 0.08s;
+}
+.btn-primary:active, .btn-ghost:active { transform: scale(0.97); }
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--blue-dark); }
+.btn-primary:disabled { background: #c3c8d4; cursor: default; }
+.btn-ghost { background: #fff; color: var(--blue-dark); border-color: var(--blue-border); }
+.btn-ghost:hover:not(:disabled) { background: var(--blue-soft); }
+.btn-ghost:disabled { color: #9aa0aa; border-color: var(--border); cursor: default; }
+.btn-big { font-size: 1.2rem; padding: 0.95rem 1.8rem; border-radius: 14px; }
+
+/* Selectable chips, shared by the customizer */
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip {
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s;
+}
+.chip:hover { border-color: var(--blue-border); background: var(--blue-soft); }
+.chip.on { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+/* Form controls */
+input[type='number'], input[type='text'], select {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 400;
+  background: #fff;
+  color: var(--ink);
+}
+input:focus, select:focus { outline: none; border-color: var(--blue); }
+
+/* Segmented choice (e.g. Text / Blank line / None) */
+.segmented { display: flex; gap: 2px; padding: 3px; border-radius: 11px; background: var(--bg); }
+.segmented button {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.4rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+.segmented button:hover { color: var(--ink); }
+.segmented button.on { background: #fff; color: var(--blue-dark); box-shadow: 0 1px 2px rgba(16, 24, 40, 0.12); }
+
+/* Square icon buttons with a hover/focus tooltip from data-tip */
+.icon-btn {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  flex: none;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+}
+.icon-btn:hover:not(:disabled) { background: var(--blue-soft); color: var(--blue-dark); }
+.icon-btn:disabled { color: #b5bac4; cursor: default; }
+.icon-btn.primary { background: var(--blue); color: #fff; }
+.icon-btn.primary:hover { background: var(--blue-dark); color: #fff; }
+[data-tip] { position: relative; }
+[data-tip]:hover::after, [data-tip]:focus-visible::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; }
+  body::before { display: none; }
+  .card { box-shadow: none; }
+}

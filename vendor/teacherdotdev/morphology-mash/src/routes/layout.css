@@ -1,0 +1,234 @@
+@import 'tailwindcss';
+
+/* Literata, served from this site rather than a font service, so a visit
+   reaches no one but us. SIL Open Font License 1.1. */
+@font-face {
+	font-family: 'Literata';
+	font-style: normal;
+	font-weight: 400 700;
+	font-display: swap;
+	src: url('/fonts/literata-latin.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Literata';
+	font-style: italic;
+	font-weight: 400 700;
+	font-display: swap;
+	src: url('/fonts/literata-latin-italic.woff2') format('woff2');
+}
+
+/* The palette is TestParrot's: cream paper on a warm ground, brown ink, and
+   a terracotta accent, so the EdTech-a-thon's writing tools look like they
+   belong together. */
+:root {
+	--ground: #eee6da;
+	--paper: #fffaf3;
+	--paper-low: #f2e6d8;
+	--line: #e0d3c2;
+	--line-strong: #bda995;
+	--ink: #332a24;
+	--ink-soft: #4e3b2f;
+	--muted: #6e5b4d;
+	--accent: #9f5037;
+	--accent-dark: #87422e;
+	--accent-wash: #f4e0cf;
+	--accent-line: #ecd0bb;
+	--good: #3f6a47;
+	--good-wash: #e6efe4;
+	--good-line: #b9d3b6;
+	--bad: #a3321f;
+	--bad-wash: #f8e0da;
+	--bad-line: #eec8be;
+	/* Reserved for unsaved work, so amber never means anything else here. */
+	--amber: #f6e2a8;
+	--amber-strong: #f0d27c;
+	--amber-border: #d9a93a;
+
+	/* One colour per morpheme type, used wherever the type is shown and
+	   nowhere it is being asked. Green and red are kept for right and wrong. */
+	--prefix-wash: #e4ecf5;
+	--prefix-line: #b9cde4;
+	--prefix-ink: #3f5a7c;
+	--base-wash: #f6ecd4;
+	--base-line: #e2cd97;
+	--base-ink: #7a5a1c;
+	--suffix-wash: #f2e4ee;
+	--suffix-line: #dcc2d4;
+	--suffix-ink: #6f4262;
+
+	--radius: 10px;
+	/* Words are set like a printed page; the controls around them stay plain. */
+	--serif: 'Literata', Georgia, 'Times New Roman', serif;
+	--sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+	font-family: var(--sans);
+	color: var(--ink);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--ground);
+}
+
+h1,
+h2,
+h3 {
+	font-family: var(--serif);
+}
+
+/* Shared button styles (global so components can use them) */
+.btn-primary,
+.btn-ghost,
+.btn-dark,
+.btn-save,
+.btn-danger {
+	padding: 0.6rem 1.15rem;
+	border-radius: 8px;
+	font-size: 0.95rem;
+	font-weight: 600;
+	cursor: pointer;
+	border: 1px solid transparent;
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+}
+.btn-primary {
+	background: var(--accent);
+	color: var(--paper);
+}
+.btn-primary:hover:not(:disabled) {
+	background: var(--accent-dark);
+}
+.btn-primary:disabled {
+	background: #cdbfae;
+	cursor: default;
+}
+.btn-ghost {
+	background: var(--paper);
+	color: var(--ink-soft);
+	border-color: var(--line-strong);
+}
+.btn-ghost:hover:not(:disabled) {
+	background: var(--paper-low);
+}
+.btn-ghost:disabled {
+	color: #a8998a;
+	border-color: var(--line);
+	cursor: default;
+}
+.btn-dark {
+	background: var(--ink-soft);
+	color: var(--paper);
+}
+.btn-dark:hover {
+	background: var(--ink);
+}
+/* Save sits quiet until there is something to save, then turns amber so the
+   unsaved work is visible without a warning the teacher has to dismiss. */
+.btn-save {
+	background: var(--paper);
+	color: var(--muted);
+	border-color: var(--line);
+}
+.btn-save.pending {
+	background: var(--amber);
+	border-color: var(--amber-border);
+	color: #6b4a00;
+}
+.btn-save.pending:hover {
+	background: var(--amber-strong);
+}
+.btn-danger {
+	background: var(--bad);
+	color: var(--paper);
+}
+.btn-danger:hover {
+	background: #85281a;
+}
+
+/* Print: show only the report */
+@media print {
+	body {
+		background: #fff;
+	}
+	body * {
+		visibility: hidden;
+	}
+	.print-area,
+	.print-area * {
+		visibility: visible;
+	}
+	.print-area {
+		position: absolute;
+		inset: 0;
+		max-width: none !important;
+		box-shadow: none !important;
+		padding: 0 !important;
+	}
+	.no-print {
+		display: none !important;
+	}
+}
+
+/* Shared layout for the plain text pages (about, privacy), global so both
+   routes describe only what is unique to them. */
+.doc {
+	max-width: 46rem;
+	margin: 0 auto;
+	padding: 1.5rem 1.25rem 1rem;
+}
+.doc > header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-bottom: 1.5rem;
+}
+.doc h1 {
+	font-size: 1.8rem;
+	font-weight: 700;
+	margin: 0;
+}
+.doc h2 {
+	font-size: 1.2rem;
+	font-weight: 600;
+	margin: 0 0 0.5rem;
+}
+.doc .lede {
+	color: var(--muted);
+	font-size: 0.95rem;
+	margin: 0.4rem 0 0;
+}
+.doc .back {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 0.9rem;
+	white-space: nowrap;
+}
+.doc .panel {
+	background: var(--paper);
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	padding: 1.25rem;
+	margin-bottom: 1.25rem;
+}
+.doc p {
+	font-family: var(--serif);
+	font-size: 1rem;
+	line-height: 1.65;
+	margin: 0 0 1rem;
+}
+.doc p:last-child {
+	margin-bottom: 0;
+}
+.doc .panel a:not(.btn-dark) {
+	color: var(--accent);
+	font-weight: 600;
+}

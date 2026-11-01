@@ -1,0 +1,90 @@
+:root {
+  --blue: #2563eb;
+  --blue-dark: #1d4ed8;
+  --blue-soft: #eff6ff;
+  --blue-border: #bfdbfe;
+  --purple: #7c3aed;
+  --green: #16a34a;
+  --green-soft: #dcfce7;
+  --red: #dc2626;
+  --red-soft: #fee2e2;
+  --amber: #f59e0b;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --border: #e3e4ea;
+  --card: #ffffff;
+  --bg: #f6f7fb;
+  --radius: 16px;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px -12px rgba(16, 24, 40, 0.12);
+
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+h1, h2, h3 { margin: 0; line-height: 1.2; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Shared buttons */
+.btn-primary, .btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 1.5px solid transparent;
+  text-decoration: none;
+  line-height: 1;
+  transition: background 0.15s, transform 0.08s;
+}
+.btn-primary:active, .btn-ghost:active { transform: scale(0.97); }
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--blue-dark); }
+.btn-primary:disabled { background: #c3c8d4; cursor: default; }
+.btn-ghost { background: #fff; color: var(--blue-dark); border-color: var(--blue-border); }
+.btn-ghost:hover:not(:disabled) { background: var(--blue-soft); }
+.btn-ghost:disabled { color: #9aa0aa; border-color: var(--border); cursor: default; }
+.btn-big { font-size: 1.2rem; padding: 0.95rem 1.8rem; border-radius: 14px; }
+
+/* Selectable chips, shared by the customizer */
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip {
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s;
+}
+.chip:hover { border-color: var(--blue-border); background: var(--blue-soft); }
+.chip.on { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; }
+  .card { box-shadow: none; }
+}

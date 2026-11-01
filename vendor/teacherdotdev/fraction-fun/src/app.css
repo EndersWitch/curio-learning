@@ -1,0 +1,47 @@
+:root {
+  /* Fredoka for headings, numbers and buttons; Atkinson Hyperlegible for reading. */
+  --font: 'Fredoka Variable', 'Fredoka', system-ui, sans-serif;
+  --font-text: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --ink: #2b2b3a;
+  --ink-soft: #5d5d72;
+  --bg: #fff6e8;
+  --accent: #ff4f98;
+  --go: #1f7ae0;
+  color: var(--ink);
+  background: var(--bg);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+button {
+  font-family: var(--font);
+}
+
+button,
+[role='button'],
+summary,
+label[for],
+select,
+input[type='checkbox'],
+input[type='radio'] {
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 4px solid #ffd23f;
+  outline-offset: 3px;
+}
