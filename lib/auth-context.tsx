@@ -13,6 +13,10 @@ export interface CurioUser {
   totalXp: number
   streakDays: number
   streakLastDate: string | null
+  /** profiles.subscription_status, e.g. 'active', 'payment_failed', 'cancelled' */
+  subscriptionStatus: string | null
+  /** End of the period they last paid for */
+  subscriptionExpiresAt: string | null
 }
 
 interface AuthState {
@@ -42,7 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Always fetch fresh from DB — no stale data, nothing cached locally
     const { data: profile } = await sb
       .from('profiles')
-      .select('is_premium, is_founder, full_name, grade, xp_total, streak_days, streak_last_date')
+      .select('is_premium, is_founder, full_name, grade, xp_total, streak_days, streak_last_date, subscription_status, subscription_expires_at')
       .eq('id', userId)
       .single()
 
@@ -65,6 +69,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         totalXp: profile?.xp_total ?? 0,
         streakDays: profile?.streak_days ?? 0,
         streakLastDate: profile?.streak_last_date ?? null,
+        subscriptionStatus: profile?.subscription_status ?? null,
+        subscriptionExpiresAt: profile?.subscription_expires_at ?? null,
       },
     })
   }

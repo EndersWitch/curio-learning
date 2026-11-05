@@ -6,6 +6,7 @@ import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
 import { Check, FileText, PenLine, Brain } from '@/components/icons'
 import Bloom from '@/components/Bloom'
+import { longDay, premiumEndsAt } from '@/lib/billing'
 
 const PAYSTACK_KEY = 'pk_live_6540061572fe506bdb52063847dedb801c38765b'
 const PLAN_CODE = 'PLN_rgv78ij4cj0ky3d'
@@ -73,6 +74,12 @@ export default function SubscriptionClient() {
     setReady(true)
   }
 
+  useEffect(() => {
+    if (ready && window.location.hash === '#renew') {
+      document.getElementById('renew')?.scrollIntoView({ block: 'start' })
+    }
+  }, [ready])
+
   function showToast(msg: string, dur = 3500) {
     setToastMsg(msg)
     setTimeout(() => setToastMsg(null), dur)
@@ -96,8 +103,10 @@ export default function SubscriptionClient() {
         let tries = 0
         pollRef.current = setInterval(async () => {
           tries++
-          const { data } = await sb.from('profiles').select('is_premium').eq('id', user.id).single()
-          if (data?.is_premium) {
+          // Wait for an active subscription, not just is_premium — someone paying
+          // after a failed renewal (or resubscribing) is already premium.
+          const { data } = await sb.from('profiles').select('is_premium, subscription_status').eq('id', user.id).single()
+          if (data?.is_premium && data?.subscription_status === 'active') {
             if (pollRef.current) clearInterval(pollRef.current)
             await refreshUser()
             window.location.reload()
@@ -153,6 +162,10 @@ export default function SubscriptionClient() {
 
   const firstName = (user?.fullName || '').split(' ')[0] || 'there'
   const isCancelled = subStatus === 'cancelled'
+  const isPaymentFailed = subStatus === 'payment_failed'
+  const endsAt = premiumEndsAt(expiresAt)
+  const endsLabel = endsAt && endsAt.getTime() > Date.now() ? longDay(endsAt) : 'today'
+  const payLabel = subscribeLabel === 'Subscribe →' ? 'Pay R49 now' : subscribeLabel
 
   return (
     <>
@@ -255,13 +268,36 @@ export default function SubscriptionClient() {
             </div>
           ) : (
             <div>
-              <section className="premium-hero">
+              <section className="premium-hero" id="renew">
                 <div className="spread-deco o1" style={{ top: '-30px', right: '6%' }}>
                   <Bloom size={180} />
                 </div>
-                <div className="prem-badge"><div className="prem-badge-dot" /><span className="prem-badge-text">Premium · Active</span></div>
-                <h1 className="prem-title">You&apos;re in, {firstName}.</h1>
-                <p className="prem-sub">Full access to everything curio has to offer. Let&apos;s get to work.</p>
+                {isPaymentFailed ? (
+                  <>
+                    <div className="prem-badge is-failed"><div className="prem-badge-dot" /><span className="prem-badge-text">Premium · Payment failed</span></div>
+                    <h1 className="prem-title">Your payment didn&apos;t go through.</h1>
+                    <p className="prem-sub">
+                      Premium stays on until <strong>{endsLabel}</strong>. Pay R49 now to keep quizzes, Bloom and custom tests.
+                    </p>
+                    <div className="renew-actions">
+                      <button
+                        className="report-cta report-cta-pro renew-cta"
+                        disabled={subscribing}
+                        onClick={startUpgrade}
+                        style={subscribeDone ? { background: 'var(--rust10)', color: 'var(--rust)' } : undefined}
+                      >
+                        {payLabel}
+                      </button>
+                      <p className="renew-note">You can use a different card. Your old subscription is stopped automatically, so you&apos;re only charged once.</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="prem-badge"><div className="prem-badge-dot" /><span className="prem-badge-text">Premium · Active</span></div>
+                    <h1 className="prem-title">You&apos;re in, {firstName}.</h1>
+                    <p className="prem-sub">Full access to everything curio has to offer. Let&apos;s get to work.</p>
+                  </>
+                )}
                 <div className="quick-grid">
                   <a href="/papers" className="premqa"><span className="premqa-icon"><FileText size={22} /></span><span className="premqa-lbl">Papers</span></a>
                   <a href="/quiz" className="premqa"><span className="premqa-icon"><PenLine size={22} /></span><span className="premqa-lbl">Quiz</span></a>
@@ -286,14 +322,16 @@ export default function SubscriptionClient() {
                         )}
                       </div>
                     </div>
-                    <div className="mem-status"><div className="mem-status-dot" />{isCancelled ? 'Active · not renewing' : 'Active'}</div>
+                    <div className={`mem-status${isPaymentFailed ? ' is-failed' : ''}`}><div className="mem-status-dot" />{isPaymentFailed ? 'Payment failed' : isCancelled ? 'Active · not renewing' : 'Active'}</div>
                   </div>
                   <div className="mem-body">
                     <div className="mem-row"><span className="mem-row-k">Amount</span><span className="mem-row-v good">R49 / month</span></div>
                     <div className="mem-row">
                       <span className="mem-row-k">Billing</span>
                       <span className="mem-row-v">
-                        {isCancelled
+                        {isPaymentFailed
+                          ? `Premium ends ${endsLabel}`
+                          : isCancelled
                           ? `Cancelled · access until ${expiresAt ? new Date(expiresAt).toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' }) : 'period end'}`
                           : 'Monthly · auto-renews'}
                       </span>

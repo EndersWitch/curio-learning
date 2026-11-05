@@ -3,6 +3,7 @@ import { Raleway, Merriweather } from 'next/font/google'
 import './globals.css'
 import AdGate from '@/components/AdGate'
 import MobileTabBar from '@/components/MobileTabBar'
+import PaymentBanner from '@/components/PaymentBanner'
 import { AccountDrawerProvider } from '@/components/AccountDrawerProvider'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { themeBootScript } from '@/lib/theme'
@@ -83,6 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <AuthProvider>
             <AccountDrawerProvider>{children}</AccountDrawerProvider>
+            <PaymentBanner />
             <MobileTabBar />
             <AdGate />
           </AuthProvider>
