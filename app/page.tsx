@@ -494,8 +494,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Premium upsell — hidden for premium/founder users */}
-            {!(user.isPremium || user.isFounder) && (
+            {/* Premium upsell — hidden for premium users */}
+            {!user.isPremium && (
               <div className="pu">
                 <div className="spread-deco o1 lp-float" style={{ bottom: '-30px', right: '2%' }}>
                   <Bloom size={150} tone="paper" />

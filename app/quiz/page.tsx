@@ -30,7 +30,7 @@ export default function QuizBrowsePage() {
   const [loading, setLoading] = useState(true)
   const [gradeFilter, setGradeFilter] = useState<number | null>(null)
 
-  const isPremium = user?.isPremium || user?.isFounder || false
+  const isPremium = user?.isPremium || false
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)

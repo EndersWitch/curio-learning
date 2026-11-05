@@ -48,7 +48,7 @@ export default function BroadTopicPage() {
   const params = useParams()
   const broadTopic = decodeURIComponent(params.broadTopic as string)
   const { user, loading: authLoading } = useAuth()
-  const isPremium = user?.isPremium || user?.isFounder || false
+  const isPremium = user?.isPremium || false
 
   const [levels, setLevels] = useState<Level[]>([])
   const [progressMap, setProgressMap] = useState<Map<string, LevelProgress>>(new Map())

@@ -31,7 +31,7 @@ export default function AdGate() {
             .eq('id', session.user.id)
             .single()
 
-          if (profile?.is_premium === true || profile?.is_founder === true) return
+          if (profile?.is_premium === true) return
         }
       } catch {
         // On any failure, fall through and treat as non-premium (free tier)

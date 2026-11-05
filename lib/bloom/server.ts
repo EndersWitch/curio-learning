@@ -82,8 +82,9 @@ export async function getLearner(req: Request): Promise<Learner | Response> {
   const isTester = profile?.is_admin === true || testerEmails().has((user.email ?? '').toLowerCase())
   if (access === 'off' || (access === 'testers' && !isTester)) return apiError('closed', 403)
 
-  // Same premium rule as the rest of the site: paying members and founders.
-  const tier: BloomTier = isTester ? 'tester' : profile?.is_premium || profile?.is_founder ? 'premium' : 'free'
+  // Same premium rule as the rest of the site: only is_premium grants access
+  // (is_founder is founder pricing, not access).
+  const tier: BloomTier = isTester ? 'tester' : profile?.is_premium ? 'premium' : 'free'
   return { id: user.id, grade: parseGrade(profile?.grade), tier, limit: DAILY_LIMITS[tier], sb }
 }
 

@@ -16,7 +16,7 @@ export default function LearnPage() {
   // levelId in URL is the quiz_levels UUID (primary key)
   const levelUUID = params.levelId as string
   const { user, loading: authLoading } = useAuth()
-  const isPremium = user?.isPremium || user?.isFounder || false
+  const isPremium = user?.isPremium || false
 
   const [level, setLevel] = useState<QuizLevel | null>(null)
   const [loading, setLoading] = useState(true)

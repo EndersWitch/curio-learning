@@ -19,7 +19,7 @@ export default function PlayPage() {
   // levelId in URL = quiz_levels.id (UUID)
   const levelUUID = params.levelId as string
   const { user, loading: authLoading } = useAuth()
-  const isPremium = user?.isPremium || user?.isFounder || false
+  const isPremium = user?.isPremium || false
 
   const [questions, setQuestions] = useState<ShuffledQuestion[]>([])
   const [levelMeta, setLevelMeta] = useState<any>(null)
