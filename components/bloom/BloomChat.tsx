@@ -11,6 +11,7 @@ import {
   MAX_QUESTION_CHARS,
   MAX_TURNS_PER_CHAT,
   type BloomErrorCode,
+  type BloomErrorReason,
   type BloomEvent,
   type BloomSession,
   type BloomTier,
@@ -58,14 +59,14 @@ async function authHeaders(): Promise<Record<string, string> | null> {
   return session ? { Authorization: `Bearer ${session.access_token}` } : null
 }
 
-async function errorCode(res: Response): Promise<BloomErrorCode | undefined> {
-  const body = await res.json().catch(() => null)
-  return body?.error
+async function errorBody(res: Response): Promise<{ error?: BloomErrorCode; reason?: BloomErrorReason }> {
+  return (await res.json().catch(() => null)) ?? {}
 }
 
 export default function BloomChat() {
   const { user, loading: authLoading } = useAuth()
   const [page, setPage] = useState<PageState>('loading')
+  const [reason, setReason] = useState<BloomErrorReason>()
   const [tier, setTier] = useState<BloomTier>('free')
   const [limit, setLimit] = useState(0)
   const [remaining, setRemaining] = useState(0)
@@ -116,7 +117,8 @@ export default function BloomChat() {
       if (!headers) return setPage('signin')
       const res = await fetch('/api/bloom/session', { headers, cache: 'no-store' })
       if (!res.ok) {
-        const code = await errorCode(res)
+        const { error: code, reason } = await errorBody(res)
+        setReason(reason)
         return setPage(code === 'signin' || code === 'closed' || code === 'setup' ? code : 'error')
       }
       const session: BloomSession = await res.json()
@@ -162,8 +164,11 @@ export default function BloomChat() {
       })
 
       if (!res.ok || !res.body) {
-        const code = await errorCode(res)
-        if (code === 'signin' || code === 'closed' || code === 'setup') return setPage(code)
+        const { error: code, reason } = await errorBody(res)
+        if (code === 'signin' || code === 'closed' || code === 'setup') {
+          setReason(reason)
+          return setPage(code)
+        }
         if (code === 'limit') {
           setRemaining(0)
           return update(() => ({ status: 'failed', note: "You've used all of today's questions." }))
@@ -260,7 +265,14 @@ export default function BloomChat() {
     if (log) stickToBottom.current = log.scrollHeight - log.scrollTop - log.clientHeight < 80
   }
 
-  if (page !== 'ready') return <BloomStateScreen page={page} onRetry={loadSession} />
+  async function switchAccount() {
+    await sb.auth.signOut()
+    window.location.href = '/login'
+  }
+
+  if (page !== 'ready') {
+    return <BloomStateScreen page={page} reason={reason} email={user?.email} onRetry={loadSession} onSwitchAccount={switchAccount} />
+  }
 
   const isEmpty = turns.length === 0
   const last = turns[turns.length - 1]
@@ -396,7 +408,15 @@ export default function BloomChat() {
   )
 }
 
-function BloomStateScreen({ page, onRetry }: { page: Exclude<PageState, 'ready'>; onRetry: () => void }) {
+interface StateScreenProps {
+  page: Exclude<PageState, 'ready'>
+  reason?: BloomErrorReason
+  email?: string
+  onRetry: () => void
+  onSwitchAccount: () => void
+}
+
+function BloomStateScreen({ page, reason, email, onRetry, onSwitchAccount }: StateScreenProps) {
   if (page === 'loading') {
     return (
       <div className="bloom-state">
@@ -421,7 +441,16 @@ function BloomStateScreen({ page, onRetry }: { page: Exclude<PageState, 'ready'>
         <BloomBuddy size={110} entrance />
         <h1>Bloom is <em>still growing.</em></h1>
         <p>Curio&apos;s AI study buddy is being tested right now. It&apos;s coming soon.</p>
+        {reason === 'off' && <p className="bloom-state-note">Bloom is switched off on this server for now.</p>}
+        {reason === 'not-tester' && (
+          <p className="bloom-state-note">
+            You&apos;re signed in{email ? <> as <strong>{email}</strong></> : null}, which isn&apos;t on the tester list yet.
+          </p>
+        )}
         <a href="/deeplearn" className="btn-soft">What&apos;s Bloom?</a>
+        {reason === 'not-tester' && (
+          <button type="button" className="bloom-state-link" onClick={onSwitchAccount}>Use a different account</button>
+        )}
       </div>
     )
   }
@@ -430,7 +459,13 @@ function BloomStateScreen({ page, onRetry }: { page: Exclude<PageState, 'ready'>
       <div className="bloom-state">
         <BloomBuddy mood="thinking" size={92} />
         <h1>Bloom isn&apos;t set up <em>here yet.</em></h1>
-        <p>This server is missing Bloom&apos;s Anthropic API key or its database tables.</p>
+        <p>
+          {reason === 'no-key'
+            ? "This server doesn't have Bloom's Anthropic API key yet."
+            : reason === 'no-tables'
+              ? "This server's database is missing Bloom's tables."
+              : "This server is missing Bloom's Anthropic API key or its database tables."}
+        </p>
       </div>
     )
   }

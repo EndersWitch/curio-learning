@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 
   if (!process.env.ANTHROPIC_API_KEY) {
     console.error('[bloom] ANTHROPIC_API_KEY is not set')
-    return apiError('setup', 503)
+    return apiError('setup', 503, { reason: 'no-key' })
   }
 
   let body: { conversationId?: unknown; grade?: unknown; message?: unknown }

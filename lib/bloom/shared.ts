@@ -36,5 +36,13 @@ export type BloomEvent =
   | { type: 'done'; truncated: boolean }
   | { type: 'error'; message: string }
 
-// Error bodies are { error: BloomErrorCode, ... } with a matching HTTP status.
+// Error bodies are { error: BloomErrorCode, reason?: BloomErrorReason, ... } with a matching HTTP status.
 export type BloomErrorCode = 'signin' | 'closed' | 'limit' | 'full' | 'invalid' | 'setup' | 'server'
+
+// Why a 'closed' or 'setup' error happened, so the page can say what's wrong
+// instead of leaving the learner (or the owner setting it up) at a dead end.
+export type BloomErrorReason =
+  | 'off'         // closed: BLOOM_ACCESS switches Bloom off on this server
+  | 'not-tester'  // closed: testers-only, and this account isn't one
+  | 'no-key'      // setup: ANTHROPIC_API_KEY isn't set on this server
+  | 'no-tables'   // setup: the Bloom database migration hasn't been applied
