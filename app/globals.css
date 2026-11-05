@@ -1955,3 +1955,65 @@ html.dark { --rust-shadow: #8A3A17; }
 .paperc-actions { flex-wrap: wrap; }
 .paperc-btn { flex: 1 1 auto; white-space: nowrap; text-align: center; justify-content: center; }
 .bloom-a-card .bloom-activity { margin: 0.75rem 0; }
+
+/* ══════════════════════════════════════════════════════════════
+   PAYMENT-FAILED BAR — components/PaymentBanner.tsx
+   Pinned to the bottom of every page for members whose renewal
+   failed. No close button on purpose; it goes away when they pay.
+   Quiet (paper + one brick line), never covers content: body gets
+   .has-paybar, which reserves its height.
+   ══════════════════════════════════════════════════════════════ */
+:root { --paybar-h: 46px; }
+.paybar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 240;
+  min-height: var(--paybar-h);
+  display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+  padding: 0.6rem 1.25rem calc(0.6rem + env(safe-area-inset-bottom));
+  background: var(--paper-raised);
+  border-top: 1px solid rgba(var(--brick-rgb), 0.4);
+  color: var(--ink); font-family: var(--h); font-size: 0.86rem; line-height: 1.35;
+  text-decoration: none;
+  animation: paybar-in .5s cubic-bezier(.2,.8,.2,1) .8s both;
+}
+.paybar-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brick); flex-shrink: 0; }
+.paybar-msg strong { font-weight: 700; }
+.paybar-narrow { display: none; }
+.paybar-cta {
+  display: inline-flex; align-items: center; gap: 0.3rem; flex-shrink: 0;
+  color: var(--brick); font-weight: 700; white-space: nowrap;
+  border-bottom: 1px solid rgba(var(--brick-rgb), 0.45); padding-bottom: 1px;
+}
+.paybar-cta svg { transition: transform .2s; }
+.paybar:hover .paybar-cta, .paybar:focus-visible .paybar-cta { border-bottom-color: var(--brick); }
+.paybar:hover .paybar-cta svg { transform: translateX(3px); }
+.paybar:focus-visible { outline: 2px solid var(--brick); outline-offset: -4px; }
+@keyframes paybar-in { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .paybar { animation: none; } .paybar-cta svg { transition: none; } }
+
+/* Reserve room so the bar never sits on top of content */
+body.has-paybar { padding-bottom: calc(var(--paybar-h) + env(safe-area-inset-bottom)); }
+body.has-paybar .sub-toast { bottom: calc(2rem + var(--paybar-h)); }
+body.has-paybar .bloom-app { height: calc(100vh - 60px - var(--paybar-h)); height: calc(100dvh - 60px - var(--paybar-h) - env(safe-area-inset-bottom)); }
+body.has-paybar .bloom-composer { padding-bottom: 1rem; }
+
+@media (max-width: 760px) {
+  .paybar { font-size: 0.8rem; gap: 0.55rem; padding-left: 1rem; padding-right: 1rem; justify-content: flex-start; }
+  .paybar-msg { flex: 1; min-width: 0; }
+  .paybar-wide { display: none; }
+  .paybar-narrow { display: inline; }
+  /* Sit directly on top of the tab bar when it's showing */
+  body.has-mtab .paybar { bottom: calc(64px + env(safe-area-inset-bottom)); padding-bottom: 0.6rem; border-bottom: 1px solid var(--ink08); }
+  body.has-mtab.has-paybar { padding-bottom: calc(64px + var(--paybar-h) + env(safe-area-inset-bottom)); }
+  body.has-paybar .sub-toast { bottom: calc(80px + var(--paybar-h) + env(safe-area-inset-bottom)); }
+  body.has-paybar .quiz-next { bottom: calc(12px + var(--paybar-h) + env(safe-area-inset-bottom)); }
+  body.has-paybar .bloom-app { height: calc(100dvh - 60px - env(safe-area-inset-top) - var(--paybar-h) - env(safe-area-inset-bottom)); }
+}
+
+/* Subscription page, payment-failed state (the bar above links here) */
+.prem-badge.is-failed, .mem-status.is-failed { background: var(--brick10); border-color: rgba(var(--brick-rgb), 0.3); }
+.prem-badge.is-failed .prem-badge-dot, .mem-status.is-failed .mem-status-dot { background: var(--brick); }
+.prem-badge.is-failed .prem-badge-text, .mem-status.is-failed { color: var(--brick); }
+.premium-hero .prem-sub strong { color: var(--ink); font-weight: 700; }
+.renew-actions { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin: -1rem auto 2.5rem; max-width: 360px; }
+.renew-cta { width: auto; min-width: 220px; font-size: 0.95rem; padding: 0.9rem 1.6rem; }
+.renew-note { font-size: 0.76rem; color: var(--ink55); line-height: 1.6; text-align: center; }

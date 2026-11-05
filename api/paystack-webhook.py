@@ -60,6 +60,10 @@ def handle_event(event_type, data):
         profile = b.find_profile(data)
         if not profile:
             return "subscription.create: no matching user"
+        # Paying again creates a new subscription — stop the old one first
+        # so nobody is charged twice. Raises (-> 500 -> Paystack retries)
+        # if the old one can't be stopped yet.
+        note = b.stop_old_subscription(profile, data.get("subscription_code"))
         patch = {}
         customer_code = (data.get("customer") or {}).get("customer_code")
         if customer_code:
@@ -71,12 +75,14 @@ def handle_event(event_type, data):
         # Note: this does NOT grant Premium — only a successful charge does.
         if patch:
             b.patch_profile(profile["id"], patch)
-        return f"stored subscription details for {profile['id']}"
+        return f"stored subscription details for {profile['id']} ({note})"
 
     if event_type == "invoice.payment_failed":
         profile = b.find_profile(data)
         if not profile:
             return "payment_failed: no matching user"
+        if not b.is_current_subscription(profile, data):
+            return "payment_failed: ignored, about an older subscription"
         # The period they paid for ends now. The daily job removes Premium
         # once the grace period passes, unless Paystack shows a payment.
         now = b.now_utc()
@@ -92,6 +98,8 @@ def handle_event(event_type, data):
         profile = b.find_profile(data)
         if not profile:
             return f"{event_type}: no matching user"
+        if not b.is_current_subscription(profile, data):
+            return f"{event_type}: ignored, about an older subscription"
         # Access continues until the paid period ends; the daily job revokes it.
         if profile.get("subscription_status") in ("active", "payment_failed", None):
             b.patch_profile(profile["id"], {"subscription_status": "cancelled"})
