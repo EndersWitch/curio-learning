@@ -1,4 +1,5 @@
 import { sb } from '@/lib/supabase'
+import type { CatalogLevel } from '@/lib/levelCatalog'
 import type { Question, ShuffledQuestion } from '@/types/quiz'
 
 export function shuffle<T>(arr: T[]): T[] {
@@ -65,10 +66,11 @@ export async function fetchLevelQuestions(quizLevelUUID: string): Promise<Shuffl
   // level_id strings (e.g. "parts_of_speech_1") are reused across grades, so we
   // must also filter by grade/subject or different grades' questions will mix.
   const { data: lvl } = await sb
-    .from('quiz_levels')
+    .rpc('quiz_level_catalog')
     .select('level_id, grade, subject')
     .eq('id', quizLevelUUID)
-    .single()
+    .maybeSingle()
+    .overrideTypes<CatalogLevel, { merge: false }>()
 
   if (!lvl?.level_id) return []
 

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
+import type { CatalogLevel } from '@/lib/levelCatalog'
 import { Lock, Star, Search } from '@/components/icons'
 import Footer from '@/components/Footer'
 import Bloom from '@/components/Bloom'
@@ -40,9 +41,10 @@ export default function QuizBrowsePage() {
   }, [])
 
   async function loadTopics() {
-    // Fetch all quiz levels from DB — group client-side into topics
+    // Fetch every level (incl. locked Premium ones) from the content-free
+    // catalogue — quiz_levels itself only returns Premium rows to paid members.
     const { data, error } = await sb
-      .from('quiz_levels')
+      .rpc('quiz_level_catalog')
       .select('broad_topic, broad_topic_display, subject, grade, phase, is_premium')
       .order('grade')
       .order('broad_topic')
@@ -52,7 +54,7 @@ export default function QuizBrowsePage() {
     // Group into topics — keyed by grade+subject+topic so the same topic name
     // in different grades/subjects doesn't collapse into one card
     const map = new Map<string, Topic>()
-    for (const row of data) {
+    for (const row of data as CatalogLevel[]) {
       if (!row.broad_topic) continue
       const key = `${row.grade}|${row.subject}|${row.broad_topic}`
       if (!map.has(key)) {

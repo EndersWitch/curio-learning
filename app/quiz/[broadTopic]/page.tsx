@@ -68,8 +68,10 @@ export default function BroadTopicPage() {
     const gradeParam = sp.get('grade')
     const subjectParam = sp.get('subject')
 
+    // Catalogue = every level's name/order/lock state, no content, so locked
+    // Premium levels still show with a padlock for free users.
     let query = sb
-      .from('quiz_levels')
+      .rpc('quiz_level_catalog')
       .select('*')
       .eq('broad_topic', broadTopic)
 
