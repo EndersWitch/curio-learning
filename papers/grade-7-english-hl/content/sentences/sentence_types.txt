@@ -1,0 +1,240 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: sentences
+BROAD_TOPIC_DISPLAY: Sentences
+SUBTOPIC_ID: sentence_types
+SUBTOPIC_DISPLAY: Sentence Types
+LEVEL_ID: sentence_types_mastery
+LEVEL_DISPLAY: Sentence Types Mastery
+LEVEL_DESC: Grade 7 exam-style revision of statements, questions, commands and exclamations.
+LEVEL_ORDER: 1
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: You have met <strong>sentence types</strong> before. This Grade 7 revision checks that you can name all four in exam-style sentences, including tricky ones where the wording hides the type.
+
+@@CARD
+TYPE: spot_difference
+TITLE: The four sentence types
+SIDE_A: Type
+SIDE_B: Job
+CONTENT: Statement | supplies information<br>Question | asks for information<br>Command (imperative) | gives an order or instruction<br>Exclamation | expresses emotion such as surprise, fear, alarm or anger
+EXAMPLE: Shaun is going to school.<br>Where is Shaun going?<br>Do not enter through that door.<br>It's a ghost!
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Look at the job, not the word
+CONTENT: A question word does not always make a question. Decide what the sentence does. A polite request that asks for information is still a question, and a polite order is still a command.
+EXAMPLE: I know what you mean. (statement)<br>What do you mean? (question)<br>Please close the window. (command)
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Naming the type
+CONTENT: 1. Ask whether the sentence gives information, asks for it, gives an order or shows strong feeling.<br>2. Check the punctuation at the end.<br>3. Check whether the word order has changed.
+EXAMPLE: Leave the room immediately!<br>It gives an order, so it is a command, and the exclamation mark adds force.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Exclamation marks
+CONTENT: An exclamation mark does not make every sentence an exclamation. A command can end with one to add force. An exclamation expresses emotion.
+EXAMPLE: Leave the room immediately! (command)<br>It's a ghost! (exclamation)
+@@ENDCARD
+
+TESTED:
+Name the four sentence types
+Choose the correct end punctuation
+Tell a question from a statement that contains a question word
+Recognise polite commands
+Match sentences to their types
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is a statement?
+A: Go to school.
+B: Where is Shaun going?
+C: Shaun is going to school.
+D: What a lovely day!
+CORRECT: C
+EXPLAIN:
+A statement supplies information. The other sentences ask, order or express feeling.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is a question?
+A: Shaun is going to school.
+B: It's a ghost!
+C: Leave the room.
+D: Where is Shaun going?
+CORRECT: D
+EXPLAIN:
+A question asks for information, and this one asks where. The other sentences state, order or exclaim.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is a command?
+A: Shaun enters through the door.
+B: Do not enter through that door.
+C: How loud it is!
+D: Who is at the door?
+CORRECT: B
+EXPLAIN:
+A command gives an order or instruction. The other sentences state, exclaim or ask.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is an exclamation?
+A: Where is the ghost?
+B: The ghost is here.
+C: It's a ghost!
+D: Find the ghost.
+CORRECT: C
+EXPLAIN:
+An exclamation expresses strong feeling such as fear or surprise. The other sentences state, ask or command.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What does a statement do?
+A: It asks for information
+B: It supplies information
+C: It gives an order
+D: It expresses strong emotion
+CORRECT: B
+EXPLAIN:
+Statements supply information. Questions ask, commands order and exclamations express emotion.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Another name for a command is
+A: a statement
+B: an interrogative
+C: an exclamation
+D: an imperative
+CORRECT: D
+EXPLAIN:
+Commands are also called imperatives. An interrogative sentence is a question.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which punctuation mark ends a question?
+A: A comma
+B: A full stop
+C: A question mark
+D: A colon
+CORRECT: C
+EXPLAIN:
+A question ends with a question mark. The other marks do not end a question.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What type of sentence is This work is unacceptable!?
+A: A statement
+B: An exclamation
+C: A question
+D: A command
+CORRECT: B
+EXPLAIN:
+The sentence expresses anger, so it is an exclamation.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What type of sentence is Please close the window?
+A: A statement
+B: A question
+C: An exclamation
+D: A command
+CORRECT: D
+EXPLAIN:
+It gives an instruction, even though it is polite. Please does not change the type.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is a command even though it is polite?
+A: What a cold room!
+B: Could you tell me the time?
+C: The window is open.
+D: Please close the window.
+CORRECT: D
+EXPLAIN:
+Please close the window gives an order. Could you tell me the time asks for information, so it is a question.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is punctuated correctly?
+A: Where do you live,
+B: Where do you live.
+C: Where do you live?
+D: Where do you live:
+CORRECT: C
+EXPLAIN:
+A question ends with a question mark. The other endings do not suit a question.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which pair correctly matches a sentence with its type?
+A: It's a ghost! and exclamation
+B: Open the door and question
+C: Who won? and statement
+D: The sun sets in the west and command
+CORRECT: A
+EXPLAIN:
+It's a ghost shows alarm, so it is an exclamation. Open the door is a command, Who won is a question and the last sentence is a statement.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is a statement that contains the word what?
+A: I know what you mean.
+B: What do you mean?
+C: What a mess!
+D: Tell me what you mean.
+CORRECT: A
+EXPLAIN:
+I know what you mean supplies information, so it is a statement. The others are a question, an exclamation and a command.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+A sentence that expresses surprise, fear, alarm or anger is
+A: an exclamation
+B: a statement
+C: a question
+D: a command
+CORRECT: A
+EXPLAIN:
+Exclamations express strong emotions such as surprise, fear, alarm or anger.
+@@ENDQ
+
+@@ENDQUESTIONS

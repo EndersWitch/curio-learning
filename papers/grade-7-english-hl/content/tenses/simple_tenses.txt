@@ -1,0 +1,791 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: tenses
+BROAD_TOPIC_DISPLAY: Tenses
+SUBTOPIC_ID: simple_tenses
+SUBTOPIC_DISPLAY: Simple Tenses
+LEVEL_ID: simple_tenses_1
+LEVEL_DISPLAY: Simple Present
+LEVEL_DESC: Use the simple present tense for habits, facts and routines.
+LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: The <strong>simple present tense</strong> tells us what happens regularly or what is always true. Sipho walks to school every day. The sun rises in the east. Getting the verb ending right is the main skill here.
+
+@@CARD
+TYPE: definition
+TITLE: What is the simple present?
+CONTENT: The simple present tense shows habits, routines and facts. It uses the base form of the verb. With he, she, it and singular nouns, the verb takes an -s or -es ending.
+EXAMPLE: I paint a picture.<br>Sipho walks to school every day.<br>Snakes are reptiles.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Adding -s and -es
+CONTENT: Most verbs just add -s (play, plays). Verbs ending in s, sh, ch, x, z or o add -es. A consonant followed by y changes to -ies. A vowel followed by y just adds -s. The verb have becomes has.
+EXAMPLE: watch → watches<br>go → goes<br>study → studies<br>play → plays<br>have → has
+@@ENDCARD
+
+@@CARD
+TYPE: example
+TITLE: When we use it
+CONTENT: Use the simple present for habits, for facts that are always true and for timetables. Signal words such as every day, always, usually, often, never and on Mondays often point to this tense.
+EXAMPLE: Lerato always packs her bag at night. (habit)<br>Water boils at 100 degrees Celsius. (fact)<br>The train leaves at six. (timetable)
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Doesn't takes no -s
+CONTENT: After does not or doesn't, the verb goes back to its base form. The -s ending is already carried by does. Writing doesn't likes is wrong.
+EXAMPLE: Wrong: Sipho doesn't likes boerewors.<br>Right: Sipho doesn't like boerewors.
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Fix the verb
+CONTENT: Choose the correct verb. Nomsa (go / goes) to Soweto Primary every day.
+EXAMPLE: goes. Nomsa is one person (she), and go ends in o, so it adds -es.
+@@ENDCARD
+
+TESTED:
+Identify a sentence in the simple present tense
+Add -s or -es to a verb with he, she and it
+Choose between the base form and the -s form after plural subjects
+Know that habits, routines and facts use the simple present
+Use the base verb after does not and doesn't
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is in the simple present tense?
+A: Sipho walked to school.
+B: Sipho walks to school every day.
+C: Sipho will walk to school.
+D: Sipho walking to school.
+CORRECT: B
+EXPLAIN:
+Walks is the simple present form with a singular subject, and every day shows a habit. Will walk is future and walked is past. Walking on its own is not a complete verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Choose the correct verb. Naledi ___ netball every Tuesday.
+A: played
+B: play
+C: plays
+D: playing
+CORRECT: C
+EXPLAIN:
+Naledi is one person, so the simple present verb takes an -s. Every Tuesday shows a habit. Played is past tense and playing is not a complete verb here.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which verb is in the simple present tense?
+A: swam
+B: will swim
+C: swimming
+D: swims
+CORRECT: D
+EXPLAIN:
+Swims is the simple present form used with he, she or it. Swam is the simple past, will swim is the simple future, and swimming is only an -ing form.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word or phrase is a good signal for the simple present?
+A: yesterday
+B: every morning
+C: tomorrow
+D: last year
+CORRECT: B
+EXPLAIN:
+Every morning describes a routine, and routines use the simple present. Yesterday and last year point to the past. Tomorrow points to the future.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which is the correct simple present of the verb study with she?
+A: studies
+B: studys
+C: studyes
+D: studing
+CORRECT: A
+EXPLAIN:
+Study ends in a consonant followed by y, so the y changes to ies. Studys and studyes break that rule. Studing is not a correct spelling of any form.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence is correct?
+A: The dogs barks at night.
+B: The dog bark at night.
+C: The dogs bark at night.
+D: The dogs is barking at night.
+CORRECT: C
+EXPLAIN:
+Dogs is plural, so the verb stays in its base form and does not take an -s. In sentence A the verb has an -s with a plural subject. In sentence B the singular subject needs barks.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Why is the simple present used in the sentence Cape Town is in the Western Cape?
+A: It states a fact that is always true.
+B: It describes a plan.
+C: It describes an event that is finished.
+D: It describes something that is happening only now.
+CORRECT: A
+EXPLAIN:
+The simple present is used for facts that stay true. The location of Cape Town does not change from day to day. The other options describe plans, finished events or actions in progress, which are not what this sentence does.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: Sipho don't like boerewors.
+B: Sipho doesn't likes boerewors.
+C: Sipho not like boerewors.
+D: Sipho doesn't like boerewors.
+CORRECT: D
+EXPLAIN:
+Doesn't already carries the -s for a singular subject, so the main verb stays in its base form. Sentence A uses don't with a singular subject. Sentence B puts a second -s on likes, and sentence C is missing the helping verb.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: tenses
+BROAD_TOPIC_DISPLAY: Tenses
+SUBTOPIC_ID: simple_tenses
+SUBTOPIC_DISPLAY: Simple Tenses
+LEVEL_ID: simple_tenses_2
+LEVEL_DISPLAY: Simple Past
+LEVEL_DESC: Form and use the simple past tense, including regular and irregular verbs.
+LEVEL_ORDER: 2
+DIFFICULTY: Building
+ACCESS: Premium
+QUESTION_COUNT: 9
+INTRO: The <strong>simple past tense</strong> describes an action that started and finished at a definite time before now. Most verbs add -ed, but many common verbs change in their own way. Spelling and irregular forms are where marks are lost.
+
+@@CARD
+TYPE: definition
+TITLE: What is the simple past?
+CONTENT: The simple past tense shows an action that is finished. The time is often named or clear from the sentence. Regular verbs add -ed or -d. Irregular verbs have their own forms.
+EXAMPLE: I painted a picture yesterday.<br>Thabo kicked the ball.<br>We ate pap last night.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Spelling regular verbs
+CONTENT: Most verbs add -ed. Verbs ending in e add only -d. A consonant followed by y changes to -ied. A vowel followed by y just adds -ed. A short verb with one vowel and one final consonant doubles that consonant.
+EXAMPLE: walk → walked<br>live → lived<br>carry → carried<br>play → played<br>stop → stopped
+@@ENDCARD
+
+@@CARD
+TYPE: spot_difference
+TITLE: Regular and irregular verbs
+SIDE_A: Regular (add -ed)
+SIDE_B: Irregular (new form)
+CONTENT: walk → walked | go → went<br>jump → jumped | eat → ate<br>clean → cleaned | buy → bought<br>play → played | swim → swam
+EXAMPLE: Irregular verbs have to be learned. The Handbook gives eat → ate and drive → drove as examples.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Did already shows the past
+CONTENT: In questions and negatives, did carries the past tense. The main verb goes back to its base form. Did not went and did you saw are both wrong.
+EXAMPLE: Wrong: Nomsa didn't ate lunch.<br>Right: Nomsa didn't eat lunch.<br>Right: Did you see the match?
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Spot the finished action
+CONTENT: Write the simple past of these verbs. try, drop, see, play.
+EXAMPLE: tried (y after a consonant becomes ied), dropped (the final consonant doubles), saw (irregular), played (y after a vowel just adds ed).
+@@ENDCARD
+
+TESTED:
+Write the simple past of regular verbs
+Apply the spelling rules for -ed endings
+Recognise common irregular past forms
+Use the base verb after did and didn't
+Use signal words such as yesterday, last week and ago
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the simple past of the verb walk?
+A: walks
+B: walked
+C: walking
+D: will walk
+CORRECT: B
+EXPLAIN:
+Walk is a regular verb, so it adds -ed in the simple past. Walks is the simple present, walking is an -ing form and will walk is future.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word or phrase is a signal for the simple past?
+A: next week
+B: every day
+C: tomorrow
+D: yesterday
+CORRECT: D
+EXPLAIN:
+Yesterday names a time that has already finished. Tomorrow and next week point to the future, and every day describes a habit in the simple present.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the simple past of the verb carry?
+A: carryed
+B: carred
+C: carried
+D: carrid
+CORRECT: C
+EXPLAIN:
+Carry ends in a consonant followed by y, so the y changes to i and -ed is added. Carryed keeps the y, and carred and carrid are not spelling patterns of this verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the simple past of the verb stop?
+A: stopped
+B: stopt
+C: stopping
+D: stoped
+CORRECT: A
+EXPLAIN:
+Stop has one vowel and one final consonant, so the p doubles before -ed. Stoped leaves out the double p. Stopping is an -ing form.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which of these verbs is irregular?
+A: jump
+B: clean
+C: walk
+D: eat
+CORRECT: D
+EXPLAIN:
+Eat changes to ate in the simple past instead of adding -ed. Jump, clean and walk are all regular and become jumped, cleaned and walked.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the simple past of the verb buy?
+A: bought
+B: buyed
+C: boughten
+D: buyd
+CORRECT: A
+EXPLAIN:
+Buy is irregular and becomes bought. Buyed and buyd wrongly treat it as a regular verb. Boughten is not a standard English form.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: Did Thabo went to the match?
+B: Thabo did went to the match.
+C: Did Thabo go to the match?
+D: Did Thabo goes to the match?
+CORRECT: C
+EXPLAIN:
+Did already shows the past, so the main verb stays in its base form, which is go. Went after did, as in A and B, puts the past tense in twice. Goes after did is the simple present form and does not belong.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Three learners rewrote the sentence Nomsa ate lunch as a negative.<br>Sipho wrote Nomsa didn't ate lunch.<br>Amara wrote Nomsa didn't eat lunch.<br>Naledi wrote Nomsa not ate lunch.<br>Who is correct?
+A: Sipho
+B: Amara
+C: Naledi
+D: All three are correct
+CORRECT: B
+EXPLAIN:
+Amara is correct because didn't carries the past tense and eat stays in its base form. Sipho put the past form ate after didn't. Naledi left out the helping verb did altogether.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Read the passage.<br>Last Saturday, we goed to Durban. We swimmed in the sea and eated bunny chow.<br>How many verbs are wrongly formed?
+A: One
+B: Two
+C: Three
+D: Four
+CORRECT: C
+EXPLAIN:
+Goed, swimmed and eated all add -ed to irregular verbs. The correct forms are went, swam and ate. That makes three mistakes in two sentences.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: tenses
+BROAD_TOPIC_DISPLAY: Tenses
+SUBTOPIC_ID: simple_tenses
+SUBTOPIC_DISPLAY: Simple Tenses
+LEVEL_ID: simple_tenses_3
+LEVEL_DISPLAY: Simple Future
+LEVEL_DESC: Form and use the simple future tense with will and shall.
+LEVEL_ORDER: 3
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 10
+INTRO: The <strong>simple future tense</strong> talks about actions that have not happened yet. It is built with <em>will</em> or <em>shall</em> followed by the base verb. The verb after will never changes, whoever the subject is.
+
+@@CARD
+TYPE: definition
+TITLE: What is the simple future?
+CONTENT: The simple future tense shows an action that will happen later. It is formed with will or shall plus the base form of the verb. Will works with every subject. Shall is used mainly with I and we.
+EXAMPLE: I shall paint a picture tomorrow.<br>Naledi will visit her gran on Sunday.<br>They will arrive in Polokwane at noon.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Will plus the base verb
+CONTENT: The verb after will or shall never takes -s, -ed or -ing. Negatives use will not or the short form won't. Questions put will first. The short form of will is 'll, as in she'll and they'll.
+EXAMPLE: She will walk. (not will walks)<br>We will not forget. We won't forget.<br>Will you come?<br>They'll arrive soon.
+@@ENDCARD
+
+@@CARD
+TYPE: example
+TITLE: All three simple tenses
+CONTENT: Compare one verb in the three simple tenses. The Handbook shows this pattern with paint, and it works for any verb.
+EXAMPLE: Present, I paint a picture today.<br>Past, I painted a picture yesterday.<br>Future, I shall paint a picture tomorrow.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Only one tense marker
+CONTENT: Will already shows the future. Adding -s or -ed to the verb after it is a mistake. Putting will after the verb is also wrong.
+EXAMPLE: Wrong: Danie will goes to Pretoria.<br>Wrong: Danie will went to Pretoria.<br>Right: Danie will go to Pretoria.
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Make it future
+CONTENT: Rewrite in the simple future. Lerato writes her test on Monday.
+EXAMPLE: Lerato will write her test on Monday. Will goes before the base verb write, and the -s disappears.
+@@ENDCARD
+
+TESTED:
+Form the simple future with will and shall
+Use the base verb after will
+Make negatives with will not and won't
+Use the short form 'll correctly
+Recognise future signal words such as tomorrow and next week
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is in the simple future tense?
+A: Sipho will play soccer tomorrow.
+B: Sipho played soccer yesterday.
+C: Sipho plays soccer every day.
+D: Sipho play soccer yesterday.
+CORRECT: A
+EXPLAIN:
+Will play is the simple future form, and tomorrow confirms the time. Played is the simple past and plays every day is a habit in the simple present. Play with yesterday is not a correct form in any tense.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which phrase is a signal for the simple future?
+A: next week
+B: yesterday
+C: every day
+D: last year
+CORRECT: A
+EXPLAIN:
+Next week names a time that has not arrived yet. Last year and yesterday point to the past, and every day describes a routine.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct sentence.
+A: Naledi will visit her grandmother on Sunday.
+B: Naledi will visits her grandmother on Sunday.
+C: Naledi will visited her grandmother on Sunday.
+D: Naledi visit will her grandmother on Sunday.
+CORRECT: A
+EXPLAIN:
+Will is followed by the base form visit. Visits and visited add a second tense marker. In D, will is in the wrong place.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the short form of they will?
+A: they'd
+B: they'll
+C: they's
+D: theyl
+CORRECT: B
+EXPLAIN:
+The apostrophe replaces the letters wi, giving they'll. They'd is the short form of they had or they would. They's is not a correct short form of they will.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence is the correct negative of We will braai tonight?
+A: We do not will braai tonight.
+B: We not will braai tonight.
+C: We will not braai tonight.
+D: We will not braaied tonight.
+CORRECT: C
+EXPLAIN:
+The negative of the simple future puts not after will and keeps the base verb. The other options add do, misplace not or put an -ed on the verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word can replace will in the sentence We will leave at noon without changing the tense?
+A: did
+B: have
+C: was
+D: shall
+CORRECT: D
+EXPLAIN:
+Shall is used with I and we to form the simple future, just like will. Did, have and was belong to other tenses and would change the meaning.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is NOT in the simple future tense?
+A: The bus will leave at six.
+B: We will not forget.
+C: Tebogo will phone you tonight.
+D: Zanele waited at the gate.
+CORRECT: D
+EXPLAIN:
+Waited is the simple past. The other three use will followed by a base verb, which is the simple future pattern.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence contains a mistake?
+A: Mia will study tonight.
+B: Jade will not be late.
+C: Danie will goes to Pretoria next week.
+D: Will Riaan come to the braai?
+CORRECT: C
+EXPLAIN:
+The verb after will must stay in the base form, so it should be Danie will go. The other sentences all follow the will plus base verb rule, including the negative and the question.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Three learners completed the sentence Tomorrow I ___ my test.<br>Thabo wrote will wrote.<br>Lerato wrote will write.<br>Nomsa wrote write will.<br>Who is correct?
+A: Thabo
+B: Nomsa
+C: Lerato
+D: None of them
+CORRECT: C
+EXPLAIN:
+Lerato is correct because will comes first and the base verb write follows it. Thabo put the past form wrote after will. Nomsa reversed the word order.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Read the passage.<br>Next month, Amara will starts at a new school in Polokwane. Her parents will drive her there. Her brother will not goes with them. He will stay at home.<br>How many verbs break the rule of will plus the base verb?
+A: One
+B: Two
+C: Three
+D: Four
+CORRECT: B
+EXPLAIN:
+Will starts and will not goes both add an -s after will. Will drive and will stay are correct. That leaves exactly two mistakes.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: tenses
+BROAD_TOPIC_DISPLAY: Tenses
+SUBTOPIC_ID: simple_tenses
+SUBTOPIC_DISPLAY: Simple Tenses
+LEVEL_ID: simple_tenses_mastery
+LEVEL_DISPLAY: Simple Tenses Mastery
+LEVEL_DESC: Mixed practice across the simple present, simple past and simple future.
+LEVEL_ORDER: 4
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: This challenge brings the three <strong>simple tenses</strong> together. You will choose the right form for habits, finished actions and future plans, and spot tense mistakes in short passages.
+
+@@CARD
+TYPE: spot_difference
+TITLE: Three simple tenses side by side
+SIDE_A: Form
+SIDE_B: Example
+CONTENT: Simple present, base verb or verb with -s | Lerato walks to school.<br>Simple past, verb with -ed or an irregular form | Lerato walked to school.<br>Simple future, will plus base verb | Lerato will walk to school.
+EXAMPLE: Signal words help. Every day points to the present, yesterday to the past and tomorrow to the future.
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Finding the tense
+CONTENT: 1. Find the verb or verb group.<br>2. Look for will or shall. If you see it, the tense is future.<br>3. Look for an -ed ending or an irregular past form. If you see it, the tense is past.<br>4. If neither is there, the tense is present.
+EXAMPLE: Tebogo will phone. (will, so future)<br>Tebogo phoned. (-ed, so past)<br>Tebogo phones. (neither, so present)
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: One tense marker per verb
+CONTENT: Each verb carries its tense once. After did, does or will, the main verb stays in its base form. Adding -s, -ed or -ing there is a mistake.
+EXAMPLE: Wrong: She didn't went. She will goes.<br>Right: She didn't go. She will go.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Mixing tenses in one passage
+CONTENT: When a passage is about one time, the verbs should stay in one tense. A sentence that jumps to a different tense without a time signal is usually a mistake.
+EXAMPLE: Wrong: Yesterday Tariq walks to the shop and buys bread.<br>Right: Yesterday Tariq walked to the shop and bought bread.
+@@ENDCARD
+
+TESTED:
+Choose the correct simple present, simple past or simple future form
+Spot tense mistakes in short passages
+Use the base verb after did, does and will
+Match tenses to signal words
+Correct irregular verb errors
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Choose the correct verb. My uncle ___ in Mamelodi and works in Pretoria every day.
+A: lives
+B: will live
+C: lived
+D: live
+CORRECT: A
+EXPLAIN:
+Every day shows a routine, so the simple present is needed. My uncle is one person, so the verb takes an -s. Lived and will live point to other times, and live does not match a singular subject.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence is correct?
+A: She watches TV every night.
+B: They watches TV every night.
+C: We watches TV every night.
+D: He watch TV every night.
+CORRECT: A
+EXPLAIN:
+She is singular, so the simple present verb takes -es after ch. He, they and we do not fit watch or watches as written in the other options.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence states a general truth?
+A: Bees make honey.
+B: Bees made honey.
+C: Bees will make honey.
+D: Sipho eats pap tonight.
+CORRECT: A
+EXPLAIN:
+A general truth uses the simple present, and bees make honey is always true. Made and will make place the action in the past or the future. Eats pap tonight is a single event.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the simple past of the verb write?
+A: writed
+B: written
+C: writes
+D: wrote
+CORRECT: D
+EXPLAIN:
+Write is irregular and becomes wrote in the simple past. Writed wrongly adds -ed. Written is a different form, and writes is the simple present.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence is correct?
+A: We swimmed in the Orange River.
+B: We swum in the Orange River.
+C: We swam in the Orange River.
+D: We did swam in the Orange River.
+CORRECT: C
+EXPLAIN:
+Swim is irregular and its simple past is swam. Swimmed adds -ed to an irregular verb. Swum is a different form that needs a helping verb, and did swam puts the past tense in twice.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: Kobus did not stop at the robot.
+B: Kobus did not stopped at the robot.
+C: Kobus not stopped at the robot.
+D: Kobus did not stops at the robot.
+CORRECT: A
+EXPLAIN:
+Did not carries the past tense, so the main verb stays in the base form stop. Stopped and stops after did not add a second tense marker. Sentence C leaves out the helping verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is in the simple future tense?
+A: Fatima bakes bread.
+B: Fatima bake bread.
+C: Fatima will bake bread.
+D: Fatima baked bread.
+CORRECT: C
+EXPLAIN:
+Will bake is the simple future form. Bakes is the simple present, baked is the simple past, and bake alone does not agree with a singular subject.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct sentence.
+A: Zainab will writes the exam next Monday.
+B: Zainab will wrote the exam next Monday.
+C: Zainab writes will the exam next Monday.
+D: Zainab will write the exam next Monday.
+CORRECT: D
+EXPLAIN:
+Will is followed by the base verb write. Writes and wrote add another tense marker, and in C the word order is wrong.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which is another way to write She will not pass?
+A: She willn't pass.
+B: She will'nt pass.
+C: She wont' pass.
+D: She won't pass.
+CORRECT: D
+EXPLAIN:
+The short form of will not is won't. The apostrophe replaces the o that is dropped from not. The other options misspell the short form or put the apostrophe in the wrong place.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Read the sentences.<br>Yesterday, Tariq walks to the shop. He buy bread and milk.<br>Which tense should both verbs be in?
+A: Simple present
+B: Simple past
+C: Simple future
+D: They are correct as they are
+CORRECT: B
+EXPLAIN:
+Yesterday shows that the actions are finished, so both verbs belong in the simple past, walked and bought. As written, one verb is wrongly in the present and the other has no ending at all.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence has a verb in the wrong tense?
+A: Every morning, Palesa walks to school.
+B: Yesterday, Palesa walks to the shop.
+C: Tomorrow, Palesa will walk to the clinic.
+D: Palesa walks fast.
+CORRECT: B
+EXPLAIN:
+Yesterday needs the simple past, so it should be Palesa walked. The other three sentences match their time words or describe a habit.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Read the sentences.<br>Gadija bakes every Saturday. Last Saturday she baked koeksisters. Next Saturday she will bake roosterkoek.<br>Which list gives the tenses in order?
+A: Past, present, future
+B: Present, past, future
+C: Present, future, past
+D: Future, past, present
+CORRECT: B
+EXPLAIN:
+Bakes with every Saturday is the simple present. Baked with last Saturday is the simple past. Will bake with next Saturday is the simple future.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Read the passage.<br>Last Sunday, Mpho and her father go to the Kruger National Park. They see lions and elephants. Next year they will goes again.<br>How many verbs need to be corrected?
+A: One
+B: Two
+C: Three
+D: Four
+CORRECT: C
+EXPLAIN:
+Go and see should be the simple past, went and saw, because of last Sunday. Will goes should be will go. That makes three corrections.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Dineo must rewrite Every day Tebogo walked to school in the simple present.<br>Sipho wrote Every day Tebogo walk to school.<br>Amara wrote Every day Tebogo walks to school.<br>Naledi wrote Every day Tebogo will walk to school.<br>Who is correct?
+A: Sipho
+B: Amara
+C: Naledi
+D: None of them
+CORRECT: B
+EXPLAIN:
+Amara used walks, the simple present form for a singular subject. Sipho left off the -s. Naledi changed the sentence to the simple future.
+@@ENDQ
+
+@@ENDQUESTIONS

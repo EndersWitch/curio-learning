@@ -1,0 +1,240 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: sentences
+BROAD_TOPIC_DISPLAY: Sentences
+SUBTOPIC_ID: speech
+SUBTOPIC_DISPLAY: Direct and Indirect Speech
+LEVEL_ID: speech_mastery
+LEVEL_DISPLAY: Direct and Indirect Speech Mastery
+LEVEL_DESC: Grade 7 exam-style revision of direct speech, reported speech and the changes between them.
+LEVEL_ORDER: 1
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: <strong>Direct speech</strong> uses the exact words of the speaker. <strong>Reported speech</strong> tells what was said without quoting it. This Grade 7 revision checks punctuation, pronouns, tenses and time words.
+
+@@CARD
+TYPE: key_rule
+TITLE: Direct speech
+CONTENT: Direct speech uses the exact words of the speaker, inside quotation marks. The introductory verb, such as said or asked, is followed by a comma. The first spoken word begins with a capital letter, and each new speaker starts a new paragraph.
+EXAMPLE: Mary said, "It is cold today."<br>"How long until half-time?" asked an excited spectator.
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Changing to reported speech
+CONTENT: 1. Remove the quotation marks, question marks, exclamation marks and capital letters.<br>2. Add that, if or whether, or keep the question word.<br>3. Change the pronouns so the meaning stays the same.<br>4. Put the verb one stage back in tense when the introductory verb is in the past.<br>5. Change the time and place words.
+EXAMPLE: Joanne said, "I am feeling dizzy today."<br>Joanne said that she was feeling dizzy that day.
+@@ENDCARD
+
+@@CARD
+TYPE: spot_difference
+TITLE: Time and place words
+SIDE_A: Direct
+SIDE_B: Reported
+CONTENT: here | there<br>now | then<br>today | that day<br>yesterday | the day before or the previous day<br>tomorrow | the next day or the following day<br>two days ago | two days before
+EXAMPLE: These words change when the introductory verb is in the past tense.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Questions, commands and exclamations
+CONTENT: Questions that begin with a question word keep that word. Yes or no questions take if or whether. Commands become to plus the verb. Exclamations such as ouch and hooray are described rather than repeated.
+EXAMPLE: Roxanne asked why she couldn't have another candy floss.<br>The teacher ordered the children to do their homework.<br>The girl screamed in pain that she had stubbed her toe.
+@@ENDCARD
+
+TESTED:
+Punctuate direct speech
+Report statements, questions and commands
+Change pronouns and tenses
+Change time and place words
+Describe exclamations in reported speech
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Direct speech uses
+A: only questions
+B: a summary of what was said
+C: no punctuation
+D: the exact words of the speaker
+CORRECT: D
+EXPLAIN:
+Direct speech repeats the speaker's own words. Reported speech gives a summary.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What marks show direct speech?
+A: Hyphens
+B: Brackets
+C: Quotation marks
+D: Colons
+CORRECT: C
+EXPLAIN:
+Quotation marks, also called inverted commas, enclose the spoken words.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is direct speech?
+A: Mary said that it was cold.
+B: Mary said, "It is cold today."
+C: Mary said it was cold.
+D: Mary told us about the cold.
+CORRECT: B
+EXPLAIN:
+The exact words are in quotation marks. The others report what she said.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is reported speech?
+A: "It is cold," said Mary.
+B: Mary said, "It is cold."
+C: Mary said that it was cold.
+D: Mary asked, "Is it cold?"
+CORRECT: C
+EXPLAIN:
+It does not quote the exact words, and it uses that and the past tense. The others are direct speech.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word links the introductory verb to a reported statement?
+A: which
+B: that
+C: whose
+D: where
+CORRECT: B
+EXPLAIN:
+That is inserted to link said and the reported words, as in she said that she was tired.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Complete the reported speech. Joanne said, "I am feeling dizzy today." Joanne said that she ___ feeling dizzy that day.
+A: has been
+B: is
+C: will be
+D: was
+CORRECT: D
+EXPLAIN:
+The introductory verb said is in the past, so the verb goes one stage back, from am to was.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is used to report a yes or no question?
+A: because
+B: if
+C: which
+D: that
+CORRECT: B
+EXPLAIN:
+If or whether links the introductory verb to a yes or no question, as in the teacher asked if we were ready.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Complete the reported speech. Mother asked, "Where have I left my keys?" Mother asked where she ___ her keys.
+A: leaves
+B: has left
+C: had left
+D: will leave
+CORRECT: C
+EXPLAIN:
+Have left goes one stage back to had left, and I becomes she. The question mark disappears.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In reported speech with a past tense introductory verb, tomorrow becomes
+A: now
+B: today
+C: yesterday
+D: the next day
+CORRECT: D
+EXPLAIN:
+Tomorrow becomes the next day or the following day when the introductory verb is in the past.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which is the correct reported form? The teacher ordered, "Children, do your homework!"
+A: The teacher ordered that children do your homework.
+B: The teacher ordered the children do your homework.
+C: The teacher ordered, the children to do their homework!
+D: The teacher ordered the children to do their homework.
+CORRECT: D
+EXPLAIN:
+A command is reported with to and the verb, and your changes to their. The other versions keep wrong pronouns or punctuation.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is punctuated correctly?
+A: The teacher asked "Is anyone absent today?"
+B: The teacher asked, "Is anyone absent today?"
+C: The teacher asked, "is anyone absent today?"
+D: The teacher asked, "Is anyone absent today"?
+CORRECT: B
+EXPLAIN:
+A comma follows the introductory verb and the spoken words begin with a capital letter. The question mark stays inside the quotation marks.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which is the correct reported form of Shahida said, "My family and I are going to the flea market today."?
+A: Shahida said that she and her family would be going to the flea market that day.
+B: Shahida said that my family and I are going to the flea market today.
+C: Shahida said that she and her family are going to the flea market today.
+D: Shahida said that she and her family were going to the flea market today.
+CORRECT: A
+EXPLAIN:
+The pronouns change to she and her, the verb goes back a stage, and today becomes that day. The other versions miss at least one change.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which is the correct reported form? "Ouch! I've stubbed my toe!" screamed the girl.
+A: The girl screamed in pain that she had stubbed her toe.
+B: The girl screamed, "Ouch!" that she had stubbed her toe.
+C: The girl screamed ouch that she stubbed her toe.
+D: The girl screamed that ouch she had stubbed her toe.
+CORRECT: A
+EXPLAIN:
+Exclamations such as ouch are described, here with in pain, and not repeated in reported speech.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence has the spoken words first and is punctuated correctly?
+A: "How long until half-time?" asked an excited spectator.
+B: "How long until half-time." asked an excited spectator.
+C: "How long until half-time?", asked an excited spectator.
+D: "how long until half-time?" asked an excited spectator.
+CORRECT: A
+EXPLAIN:
+When the spoken words come first they end with a comma, question mark or exclamation mark, never a full stop. The follow-on words begin with a small letter unless a name follows.
+@@ENDQ
+
+@@ENDQUESTIONS

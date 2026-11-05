@@ -1,0 +1,412 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: word_meaning
+BROAD_TOPIC_DISPLAY: Word Meaning
+SUBTOPIC_ID: homophones_homonyms
+SUBTOPIC_DISPLAY: Homophones and Homonyms
+LEVEL_ID: homophones_homonyms_1
+LEVEL_DISPLAY: Homonyms
+LEVEL_DESC: Recognise homonyms and use context to find the meaning of each one.
+LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: Some words look and sound exactly the same but mean different things. These words are called <strong>homonyms</strong>. The sentence around the word, called its context, tells us which meaning is meant.
+
+@@CARD
+TYPE: definition
+TITLE: What are homonyms?
+CONTENT: Homonyms are words that are spelt and pronounced in an identical way but have different meanings and functions. You may be asked to use a homonym in a sentence as a noun, an adjective or a verb.
+EXAMPLE: The dog has a loud bark.<br>The bark of the tree showed its age.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Context decides the meaning
+CONTENT: A homonym on its own can mean several things. Read the whole sentence, and notice what job the word does, to know which meaning is intended.
+EXAMPLE: The bat flew into the cave. (a noun, the animal)<br>He will bat first for his team. (a verb)
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: More homonyms
+CONTENT: The same spelling can be a different part of speech, and the meaning changes with it.
+EXAMPLE: She loved her birthday present. (noun)<br>James will present the trophy. (verb)<br>Many people were present. (adjective)<br>I need medication for my cold. (noun, an illness)
+@@ENDCARD
+
+@@CARD
+TYPE: spot_difference
+TITLE: Homonym or homophone
+SIDE_A: Type
+SIDE_B: Example
+CONTENT: Homonym, same spelling and same sound | bark (of a dog) and bark (of a tree)<br>Homophone, different spelling but same sound | to, too and two
+EXAMPLE: A homonym looks identical. A homophone only sounds identical.
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Two meanings
+CONTENT: Write two different meanings of the word peer. Use these sentences. It is rude to peer through the window. Your peer group influences your thinking.
+EXAMPLE: To look closely. A person of the same age or standing.
+@@ENDCARD
+
+TESTED:
+Say what homonyms are
+Tell homonyms from homophones
+Use context to find the meaning
+Name the part of speech of a homonym
+Use a homonym in a sentence
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What are homonyms?
+A: Words with similar meanings
+B: Words that sound the same but are spelt differently
+C: Words with opposite meanings
+D: Words spelt and pronounced the same, with different meanings
+CORRECT: D
+EXPLAIN:
+Homonyms look and sound identical but mean different things. Words that sound alike but are spelt differently are homophones, opposites are antonyms and similar words are synonyms.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+In The dog has a loud bark and The bark of the tree showed its age, the word bark is an example of
+A: an antonym
+B: a homonym
+C: a synonym
+D: a prefix
+CORRECT: B
+EXPLAIN:
+Bark is spelt and pronounced the same in both sentences but has different meanings, so it is a homonym.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a homonym?
+A: mat
+B: cat
+C: hat
+D: bat
+CORRECT: D
+EXPLAIN:
+Bat can mean an animal, a cricket bat, or the verb to bat. Cat, hat and mat each have only one common meaning.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What helps us choose the meaning of a homonym?
+A: The first letter
+B: The length of the word
+C: The context
+D: The font
+CORRECT: C
+EXPLAIN:
+The words around a homonym show which meaning is intended. The length, first letter and font do not change the meaning.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In which sentence is bat a verb?
+A: The bat flew into the cave.
+B: His cricket bat was brand new.
+C: He will bat first for his team.
+D: The bat is asleep.
+CORRECT: C
+EXPLAIN:
+Bat is an action that he will do when he bats first. In the other sentences it names a thing, the animal or the cricket bat.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In which sentence is present a verb?
+A: She loved her birthday present.
+B: James will present the school with a trophy.
+C: Many people were present at the assembly.
+D: She wrote her essay in the present tense.
+CORRECT: B
+EXPLAIN:
+Present is the action James will do, which is to give. In the other sentences it is a noun naming a gift or an adjective.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What does cold mean in the sentence I need medication for my cold?
+A: An illness
+B: Low temperature
+C: Unfriendly
+D: A season
+CORRECT: A
+EXPLAIN:
+Medication is for an illness, so cold here is a noun naming an illness. The other meanings do not fit medication.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which word has a different meaning in these two sentences? It is rude to peer through the window. Your peer group influences your thinking.
+A: peer
+B: through
+C: group
+D: influences
+CORRECT: A
+EXPLAIN:
+Peer is a verb meaning to look closely in one sentence and a noun meaning a person of the same age or standing in the other. The other words keep the same meaning.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: word_meaning
+BROAD_TOPIC_DISPLAY: Word Meaning
+SUBTOPIC_ID: homophones_homonyms
+SUBTOPIC_DISPLAY: Homophones and Homonyms
+LEVEL_ID: homophones_homonyms_mastery
+LEVEL_DISPLAY: Homophones and Homonyms Mastery
+LEVEL_DESC: Mixed practice with homophones and homonyms.
+LEVEL_ORDER: 2
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: This challenge brings together <strong>homophones</strong> and <strong>homonyms</strong>. You will choose the right spelling for words that sound alike and use context to find the meaning of words that look alike.
+
+@@CARD
+TYPE: spot_difference
+TITLE: Homophones and homonyms
+SIDE_A: Type
+SIDE_B: Example
+CONTENT: Homophone, sounds the same but spelt differently | hear and here<br>their, there and they're<br>to, too and two<br>Homonym, spelt and sounds the same | bark (dog) and bark (tree)<br>bat (animal) and bat (verb)
+EXAMPLE: Check the spelling to decide which one you have.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Choose by meaning
+CONTENT: For homophones, decide what the sentence means and pick the spelling that has that meaning. For homonyms, read the context to see which meaning is meant.
+EXAMPLE: Take care not to lose your passport.<br>This dress is loose because I have lost weight.
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Working out the right word
+CONTENT: 1. Read the whole sentence.<br>2. Decide what job the word does.<br>3. Think of the meaning that fits.<br>4. Choose the spelling for that meaning.
+EXAMPLE: The driver had to brake suddenly.<br>Brake means to slow down a vehicle, so it is the right spelling.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Common mix-ups
+CONTENT: The most common mistakes are using their, there and they're for one another, mixing up lose and loose, and confusing whole and hole.
+EXAMPLE: Wrong: Take care not to loose your passport.<br>Right: Take care not to lose your passport.
+@@ENDCARD
+
+TESTED:
+Say what homophones and homonyms are
+Choose the correct homophone in a sentence
+Find the meaning of a homonym from context
+Tell the part of speech of a homonym
+Avoid common mix-ups
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What are homophones?
+A: Words with opposite meanings
+B: Words spelt and pronounced the same
+C: Words that sound the same but are spelt differently
+D: Words that rhyme
+CORRECT: C
+EXPLAIN:
+Homophones sound alike but are spelt differently, as in hear and here. Words that are spelt and pronounced the same are homonyms.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a homophone of hear?
+A: hair
+B: her
+C: heard
+D: here
+CORRECT: D
+EXPLAIN:
+Here sounds the same as hear but has a different spelling and meaning. Her, heard and hair do not sound exactly the same.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Choose the correct word. I can ___ the birds singing.
+A: heir
+B: here
+C: hear
+D: hare
+CORRECT: C
+EXPLAIN:
+Hear means to take in sound with your ears. Here means in this place, and heir and hare are different words.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Choose the correct word. The learners packed ___ bags.
+A: the
+B: there
+C: they're
+D: their
+CORRECT: D
+EXPLAIN:
+Their shows that the bags belong to the learners. There shows place and they're means they are.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. The driver had to ___ suddenly.
+A: brick
+B: break
+C: bake
+D: brake
+CORRECT: D
+EXPLAIN:
+Brake means to slow a vehicle down. Break means to smash or rest, and bake and brick are different words.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. Take care not to ___ your passport.
+A: loss
+B: loose
+C: lose
+D: lost
+CORRECT: C
+EXPLAIN:
+Lose is a verb meaning to misplace something. Loose means not tight, and loss and lost are other forms.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. This dress is ___ because I have lost weight.
+A: lost
+B: lose
+C: loose
+D: loss
+CORRECT: C
+EXPLAIN:
+Loose means not tight, which fits a dress after weight loss. Lose is a verb and does not describe the dress.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In which sentence does bark mean the covering of a tree?
+A: The dog has a loud bark.
+B: I heard a bark in the dark.
+C: The dogs bark at night.
+D: The bark of the tree showed its age.
+CORRECT: D
+EXPLAIN:
+Bark of the tree is the outer covering of the tree. In the other sentences it is the sound a dog makes.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word has the same sound as write but a different spelling?
+A: right
+B: wrote
+C: writing
+D: rewrite
+CORRECT: A
+EXPLAIN:
+Right sounds the same as write but is spelt differently, so it is a homophone. The other words are forms of write.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence uses the correct word?
+A: There going to the park.
+B: They're going to the park.
+C: Their going to the park.
+D: Theyre going to the park.
+CORRECT: B
+EXPLAIN:
+They're is short for they are, which fits the sentence. There and their have other meanings, and theyre has no apostrophe.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: I ate the hole cake.
+B: I ate the whole cake.
+C: The whole in my sock is big.
+D: I ate the wholl cake.
+CORRECT: B
+EXPLAIN:
+Whole means all of something, so I ate the whole cake is correct. A hole is an opening, and wholl is not a word.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which pair of words are homophones and not homonyms?
+A: to and too
+B: bark and bark
+C: bat and bat
+D: cold and cold
+CORRECT: A
+EXPLAIN:
+To and too sound the same but are spelt differently, so they are homophones. The other pairs are spelt exactly alike, so they are homonyms.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+In which sentence is preserve a noun?
+A: The birth of the child will preserve the family name.
+B: The jam preserve was made from figs.
+C: We must preserve the forest.
+D: They preserve fruit in jars.
+CORRECT: B
+EXPLAIN:
+In the jam sentence preserve names a thing. In the others it is a verb meaning to keep safe.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which statement is correct?
+A: Homonyms have identical spelling and pronunciation.
+B: Homophones are spelt the same.
+C: Homonyms always sound different.
+D: Homophones have the same meaning.
+CORRECT: A
+EXPLAIN:
+Homonyms are spelt and pronounced the same but have different meanings. Homophones are spelt differently.
+@@ENDQ
+
+@@ENDQUESTIONS

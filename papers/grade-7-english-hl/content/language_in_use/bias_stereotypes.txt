@@ -1,0 +1,593 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: language_in_use
+BROAD_TOPIC_DISPLAY: Language in Use
+SUBTOPIC_ID: bias_stereotypes
+SUBTOPIC_DISPLAY: Bias, Prejudice and Stereotypes
+LEVEL_ID: bias_stereotypes_1
+LEVEL_DISPLAY: Bias and Prejudice
+LEVEL_DESC: Recognise bias and prejudice and spot the words that signal them.
+LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: <strong>Bias</strong> or <strong>prejudice</strong> is a belief formed without evidence. It means judging a person or a group before you know the facts. Learning to spot it helps you read fairly and write fairly.
+
+@@CARD
+TYPE: definition
+TITLE: Bias and prejudice
+CONTENT: Bias or prejudice is a personal, pre-conceived belief not based on evidence or fact. It is literally pre-judging, which means making up your mind about something or someone before you know the relevant facts.
+EXAMPLE: Women are bad drivers.<br>This claim judges a whole group without evidence.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Where bias comes from
+CONTENT: Bias often results from ignorance or from generalisations. A generalisation treats every member of a group as if they were the same.
+EXAMPLE: All teenagers are lazy.<br>Boys never listen.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Words that give bias away
+CONTENT: Words such as all, never, always, everyone and nobody often signal a generalisation. Emotive words that praise one side and insult the other also signal bias.
+EXAMPLE: Our brilliant team crushed the useless visitors.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Opinion based on evidence
+CONTENT: A view that is backed by evidence is not prejudice. Prejudice is a belief formed without looking at the facts.
+EXAMPLE: Based on the survey, most learners prefer maths. (evidence)<br>Nobody likes maths. (prejudice)
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Spot the bias
+CONTENT: Explain why this statement is biased. All boys are noisy.
+EXAMPLE: It judges every boy as the same without evidence.
+@@ENDCARD
+
+TESTED:
+Say what bias and prejudice mean
+Recognise generalisations
+Spot words that signal bias
+Tell evidence from prejudice
+Recognise biased headlines
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Bias or prejudice is
+A: a spelling rule
+B: a proven fact
+C: a belief formed without evidence or facts
+D: a type of poem
+CORRECT: C
+EXPLAIN:
+Bias is a pre-conceived belief not based on evidence. It is not a fact, a rule or a poem.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Prejudice literally means
+A: judging afterwards
+B: pre-judging
+C: correcting a mistake
+D: describing a picture
+CORRECT: B
+EXPLAIN:
+Prejudice is making up your mind before you know the facts, so it is pre-judging.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which statement is biased?
+A: Teenagers are people.
+B: Teenagers are between thirteen and nineteen years old.
+C: Teenagers go to school.
+D: All teenagers are lazy.
+CORRECT: D
+EXPLAIN:
+All teenagers are lazy judges a whole group without evidence. The other statements are neutral.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Bias often comes from
+A: reading widely
+B: careful research
+C: ignorance or generalisations
+D: checking sources
+CORRECT: C
+EXPLAIN:
+Bias grows from not knowing the facts and from generalising. Research, wide reading and checking sources reduce bias.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word in Boys never listen shows a generalisation?
+A: Boys listen
+B: Boys
+C: listen
+D: never
+CORRECT: D
+EXPLAIN:
+Never says that no boy ever listens, which is a sweeping claim. The word boys names the group, and listen is the action.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence is fair and based on evidence?
+A: Learners hate maths.
+B: Based on the survey, sixty of a hundred learners prefer maths.
+C: Maths is for clever people only.
+D: Nobody likes maths.
+CORRECT: B
+EXPLAIN:
+The sentence rests on a survey. The other sentences are sweeping claims with no evidence.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Why is Women are bad drivers an example of bias?
+A: It judges a whole group without evidence
+B: It is based on statistics
+C: It is a question
+D: It is a command
+CORRECT: A
+EXPLAIN:
+The statement is a generalisation about all women with no evidence. It is a statement, not a question or a command.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which headline shows bias?
+A: Our brilliant team crushes the useless visitors
+B: Home team wins three to one
+C: Match ends three to one
+D: Teams meet on Saturday
+CORRECT: A
+EXPLAIN:
+Brilliant and useless are emotive words that praise one side and insult the other. The other headlines report the facts neutrally.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: language_in_use
+BROAD_TOPIC_DISPLAY: Language in Use
+SUBTOPIC_ID: bias_stereotypes
+SUBTOPIC_DISPLAY: Bias, Prejudice and Stereotypes
+LEVEL_ID: bias_stereotypes_2
+LEVEL_DISPLAY: Stereotypes and Fair Language
+LEVEL_DESC: Recognise stereotypes and choose fair language.
+LEVEL_ORDER: 2
+DIFFICULTY: Building
+ACCESS: Premium
+QUESTION_COUNT: 9
+INTRO: A <strong>stereotype</strong> is a fixed idea about a whole group of people. Fair writers avoid stereotypes and choose language that respects people's age, gender, race and abilities.
+
+@@CARD
+TYPE: definition
+TITLE: What is a stereotype?
+CONTENT: A stereotype is a fixed, oversimplified idea about a whole group of people. It treats every person in the group as the same. The Handbook does not define the word, so this card uses the usual meaning.
+EXAMPLE: All old people are forgetful.<br>Boys never cry.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Why stereotypes are harmful
+CONTENT: Stereotypes ignore the differences between people. They can lead to unfair treatment and they are a form of bias.
+EXAMPLE: Some old people enjoy gardening and some do not.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Fair language
+CONTENT: In modern times we avoid words that insult people because of age, gender, race, social status, physical appearance or physical or intellectual disabilities. We often replace offensive words with gentler words, called euphemisms.
+EXAMPLE: chairman or chairwoman, chairperson<br>old people, senior citizens
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Titles
+CONTENT: Many women prefer the title Ms because it does not show whether they are married.
+EXAMPLE: My teacher is Ms Grey.
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Make it fair
+CONTENT: Rewrite this sentence so that it does not stereotype anyone. All girls are afraid of mice.
+EXAMPLE: Some people are afraid of mice.
+@@ENDCARD
+
+TESTED:
+Say what a stereotype is
+Recognise stereotypes in sentences
+Say why stereotypes are harmful
+Choose fair and respectful language
+Use euphemisms and neutral titles
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+A stereotype is
+A: a proven fact about one person
+B: a fixed idea about a whole group of people
+C: a word that rhymes
+D: a type of verb
+CORRECT: B
+EXPLAIN:
+A stereotype treats everyone in a group as the same. It is not a proven fact about one person.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which statement is a stereotype?
+A: Many people retire at sixty-five.
+B: Some old people enjoy gardening.
+C: Mr Dlamini is seventy years old.
+D: All old people are forgetful.
+CORRECT: D
+EXPLAIN:
+All old people are forgetful treats the whole group the same. The other statements are specific or limited.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Why are stereotypes harmful?
+A: They give exact facts
+B: They are always true
+C: They treat every person in a group as the same
+D: They improve friendships
+CORRECT: C
+EXPLAIN:
+Stereotypes ignore individual differences and lead to unfair treatment. They are not true of everyone in a group.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In modern language, chairman or chairwoman is often replaced by
+A: boss
+B: chairman only
+C: chair-girl
+D: chairperson
+CORRECT: D
+EXPLAIN:
+Chairperson does not refer to gender. The other options are either gendered or have a different meaning.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Old people are now often called
+A: the ancient
+B: senior citizens
+C: the useless
+D: oldies
+CORRECT: B
+EXPLAIN:
+Senior citizens is a respectful, neutral term. The other terms are insulting or too casual.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which title do many women prefer because it does not show whether they are married?
+A: Mrs
+B: Miss
+C: Ms
+D: Madam
+CORRECT: C
+EXPLAIN:
+Ms does not show marital status. Miss and Mrs show whether a woman is married, and Madam is a polite form of address.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence avoids stereotyping?
+A: Girls cannot do maths.
+B: Some learners find maths difficult.
+C: Boys are good at maths.
+D: Old people cannot learn.
+CORRECT: B
+EXPLAIN:
+Some learners talks about particular people and does not label a whole group. The other sentences generalise about girls, boys or old people.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence uses fair language?
+A: The senior citizens enjoyed the concert.
+B: The old fogies enjoyed the concert.
+C: The oldies enjoyed the concert.
+D: The ancient ones enjoyed the concert.
+CORRECT: A
+EXPLAIN:
+Senior citizens is respectful. The other phrases are disrespectful or mocking.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What does a euphemism do?
+A: It replaces a harsh or offensive word with a gentler one
+B: It makes language harsher
+C: It is a type of rhyme
+D: It is always slang
+CORRECT: A
+EXPLAIN:
+A euphemism softens a word that might offend. It does not make language harsher, and it is not always slang.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: language_in_use
+BROAD_TOPIC_DISPLAY: Language in Use
+SUBTOPIC_ID: bias_stereotypes
+SUBTOPIC_DISPLAY: Bias, Prejudice and Stereotypes
+LEVEL_ID: bias_stereotypes_mastery
+LEVEL_DISPLAY: Bias, Prejudice and Stereotypes Mastery
+LEVEL_DESC: Mixed practice with bias, prejudice, stereotypes and fair language.
+LEVEL_ORDER: 3
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: This challenge brings together <strong>bias</strong>, <strong>prejudice</strong>, <strong>stereotypes</strong> and fair language. You will spot unfair claims and choose respectful wording.
+
+@@CARD
+TYPE: spot_difference
+TITLE: Bias, stereotype and fact
+SIDE_A: Idea
+SIDE_B: Example
+CONTENT: Bias or prejudice, a belief without evidence | Women are bad drivers.<br>Stereotype, a fixed idea about a group | Boys never cry.<br>Fair statement, based on evidence | Based on the survey, sixty of a hundred learners prefer maths.
+EXAMPLE: Look for words such as all, never and always.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Fair language
+CONTENT: Avoid words that insult people because of age, gender, race, social status, physical appearance or disability. Use neutral words and titles, and replace offensive words with gentler ones.
+EXAMPLE: chairperson<br>senior citizens<br>Ms
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Checking for bias
+CONTENT: 1. Look for words such as all, never and always.<br>2. Ask whether there is evidence.<br>3. Notice emotive words that praise or insult.<br>4. Rewrite the claim so it applies only to who it truly describes.
+EXAMPLE: All teachers are boring.<br>Some learners find some lessons boring.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Confusing opinion with prejudice
+CONTENT: An opinion with evidence is not prejudice. Prejudice is a belief about a person or group formed before knowing the facts.
+EXAMPLE: Wrong: Based on the survey is prejudice.<br>Right: Nobody likes maths is prejudice.
+@@ENDCARD
+
+TESTED:
+Recognise bias and prejudice
+Recognise stereotypes and generalisations
+Say why stereotypes are harmful
+Choose fair and respectful language
+Rewrite biased sentences fairly
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+A belief formed before knowing the facts is called
+A: a fact
+B: evidence
+C: a synonym
+D: prejudice
+CORRECT: D
+EXPLAIN:
+Prejudice is pre-judging without the facts. Evidence and facts are the opposite of prejudice.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which statement is a stereotype?
+A: Sipho is a boy.
+B: Some boys cry.
+C: Boys never cry.
+D: Boys play sport at school.
+CORRECT: C
+EXPLAIN:
+Boys never cry treats all boys as the same. The other statements are limited or neutral.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word makes Learners always forget their books a generalisation?
+A: Learners
+B: always
+C: forget
+D: books
+CORRECT: B
+EXPLAIN:
+Always claims that it happens every time. The other words name the group, the action and the objects.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is a fact?
+A: The learners are rude.
+B: The school is terrible.
+C: The school is full of snobs.
+D: The school has six hundred learners.
+CORRECT: D
+EXPLAIN:
+The number of learners can be checked. The other sentences are opinions or insults.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Why is All teachers are boring unfair?
+A: It is polite
+B: It judges a whole group without evidence
+C: It is a fact
+D: It names one person
+CORRECT: B
+EXPLAIN:
+The sentence generalises about every teacher without evidence. It is not a fact and it does not name one person.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which phrase is a respectful replacement for old people?
+A: the ancient
+B: the elderly fools
+C: senior citizens
+D: oldies
+CORRECT: C
+EXPLAIN:
+Senior citizens is respectful and neutral. The other phrases are disrespectful.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word replaces chairman in modern, gender-neutral language?
+A: chairboy
+B: chairperson
+C: chairlady
+D: chairlord
+CORRECT: B
+EXPLAIN:
+Chairperson does not refer to gender. The other forms are gendered or not used.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which headline shows bias?
+A: Match ends in a draw
+B: Referee sends player off
+C: Useless referee ruins the brilliant home team's day
+D: Teams to meet on Saturday
+CORRECT: C
+EXPLAIN:
+Useless and brilliant are emotive words that insult one side and praise the other. The other headlines are neutral.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Bias often comes from
+A: reading widely
+B: careful research
+C: checking the facts
+D: ignorance or generalisations
+CORRECT: D
+EXPLAIN:
+Bias grows from not knowing the facts and from sweeping generalisations. The other choices reduce bias.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence avoids stereotyping?
+A: Boys never like reading.
+B: Girls only like dolls.
+C: Some learners enjoy reading.
+D: Old people hate change.
+CORRECT: C
+EXPLAIN:
+Some learners limits the claim to particular people. The other sentences label whole groups.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is both biased and a generalisation?
+A: Some people from the city are rude.
+B: All people from the city are rude.
+C: People live in the city.
+D: The city is large.
+CORRECT: B
+EXPLAIN:
+All people from the city are rude judges everyone in a group without evidence. The other sentences are limited or neutral.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which statement about fair language is correct?
+A: It avoids words that insult people because of age, gender, race, appearance or disability
+B: It uses the most dramatic words
+C: It repeats stereotypes for effect
+D: It never uses titles
+CORRECT: A
+EXPLAIN:
+Fair language respects people and avoids insulting words. It does not use dramatic words or repeat stereotypes.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What does a euphemism do?
+A: It replaces a harsh word with a gentler one
+B: It makes language harsher
+C: It is a type of rhyme
+D: It repeats a word
+CORRECT: A
+EXPLAIN:
+A euphemism softens a word that might offend. It does not make language harsher.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What is the best way to avoid prejudice?
+A: Check the facts before forming a view
+B: Trust what everyone says
+C: Repeat what you heard
+D: Judge by appearance
+CORRECT: A
+EXPLAIN:
+Prejudice is forming a view before knowing the facts, so checking the facts prevents it. The other choices lead to prejudice.
+@@ENDQ
+
+@@ENDQUESTIONS

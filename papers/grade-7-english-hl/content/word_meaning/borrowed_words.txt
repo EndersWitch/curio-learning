@@ -1,0 +1,593 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: word_meaning
+BROAD_TOPIC_DISPLAY: Word Meaning
+SUBTOPIC_ID: borrowed_words
+SUBTOPIC_DISPLAY: Borrowed Words
+LEVEL_ID: borrowed_words_1
+LEVEL_DISPLAY: Borrowed Words and Their Origins
+LEVEL_DESC: Recognise words that English has taken from other languages and name where they come from.
+LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: English has taken many words from other languages. These are called <strong>borrowed words</strong>. South African English has borrowed from Afrikaans and from African languages, and from languages all over the world.
+
+@@CARD
+TYPE: definition
+TITLE: What is a borrowed word?
+CONTENT: A borrowed word is a word taken from another language and used in English. Borrowed words are usually kept with their meaning, and sometimes with their spelling. The Handbook does not cover this topic, so this level uses well-known examples.
+EXAMPLE: braai from Afrikaans<br>pizza from Italian<br>karaoke from Japanese
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Why languages borrow
+CONTENT: A language often borrows a word when it has no word of its own for a new thing or idea. Trade, travel and people living side by side bring languages into contact.
+EXAMPLE: Karaoke came with the idea of singing along to music.<br>Indaba came from the way people met to talk.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Words from Afrikaans and African languages
+CONTENT: South African English has borrowed from Afrikaans and from languages such as isiZulu and isiXhosa. Many of these words are now used by all English speakers in the country.
+EXAMPLE: Afrikaans, braai, veld, trek, biltong, spoor<br>isiZulu, indaba, impala, mamba
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Words from around the world
+CONTENT: Languages from many countries have given English words, often for food, music and sport.
+EXAMPLE: Italian, pizza, piano, spaghetti<br>French, ballet, café, bouquet<br>Japanese, sushi, karaoke, tsunami<br>German, kindergarten<br>Hindi, shampoo, jungle, pyjamas
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Name the language
+CONTENT: Name the language that gave English the word sushi.
+EXAMPLE: Japanese.
+@@ENDCARD
+
+TESTED:
+Say what a borrowed word is
+Match common borrowed words to their languages
+Recognise words from Afrikaans and African languages
+Give a reason why languages borrow words
+Sort borrowed words by language
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is a borrowed word?
+A: A made-up word
+B: A very long word
+C: A word spelt wrongly
+D: A word taken from another language and used in English
+CORRECT: D
+EXPLAIN:
+A borrowed word comes into English from another language. It is not a long word, a mistake or an invented word.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is borrowed from Afrikaans?
+A: ballet
+B: pizza
+C: braai
+D: karaoke
+CORRECT: C
+EXPLAIN:
+Braai comes from Afrikaans and means a barbecue. Pizza is Italian, ballet is French and karaoke is Japanese.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word comes from Italian?
+A: braai
+B: pizza
+C: sushi
+D: indaba
+CORRECT: B
+EXPLAIN:
+Pizza comes from Italian. Braai is Afrikaans, sushi is Japanese and indaba comes from isiZulu and isiXhosa.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which language did the word indaba come from?
+A: Japanese
+B: French
+C: isiZulu
+D: German
+CORRECT: C
+EXPLAIN:
+Indaba comes from isiZulu, where it means a meeting or a matter for discussion. It is also used in isiXhosa.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word came into English from Japanese?
+A: kindergarten
+B: karaoke
+C: ballet
+D: shampoo
+CORRECT: B
+EXPLAIN:
+Karaoke is a Japanese word. Kindergarten is German, ballet is French and shampoo comes from Hindi.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which language does the word kindergarten come from?
+A: Afrikaans
+B: Spanish
+C: Italian
+D: German
+CORRECT: D
+EXPLAIN:
+Kindergarten is German for a garden for children. It is now used in English for a school for very young children.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Why do languages borrow words?
+A: They often have no word of their own for a new thing or idea
+B: A dictionary forces them to
+C: Borrowed words are always shorter
+D: Grammar rules require it
+CORRECT: A
+EXPLAIN:
+A language often borrows when it meets something new that it has no word for. Dictionaries and grammar rules do not force borrowing, and borrowed words are not always shorter.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which list contains only words borrowed from Afrikaans?
+A: braai, veld, trek
+B: pizza, piano, pasta
+C: sushi, karaoke, tsunami
+D: ballet, café, bouquet
+CORRECT: A
+EXPLAIN:
+Braai, veld and trek all come from Afrikaans. The other lists are Italian, Japanese and French words.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: word_meaning
+BROAD_TOPIC_DISPLAY: Word Meaning
+SUBTOPIC_ID: borrowed_words
+SUBTOPIC_DISPLAY: Borrowed Words
+LEVEL_ID: borrowed_words_2
+LEVEL_DISPLAY: Borrowed Words in Sentences
+LEVEL_DESC: Understand and use borrowed words in context.
+LEVEL_ORDER: 2
+DIFFICULTY: Building
+ACCESS: Premium
+QUESTION_COUNT: 9
+INTRO: Knowing where a word comes from helps, but you must also know what it means and how to use it. This level looks at the <strong>meanings</strong> of common borrowed words and how they are used in sentences.
+
+@@CARD
+TYPE: key_rule
+TITLE: South African borrowed words
+CONTENT: These words are used in everyday South African English and each has a clear meaning.
+EXAMPLE: braai, a barbecue<br>veld, open grassland<br>trek, a long trip, often a hard one<br>biltong, dried and salted meat<br>spoor, the track left by an animal<br>indaba, a meeting or discussion<br>ubuntu, the belief that people care for one another
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Words from other languages
+CONTENT: These borrowed words are used worldwide and keep the meaning they had in the original language.
+EXAMPLE: bouquet, a bunch of flowers<br>café, a small restaurant serving drinks and light meals<br>tsunami, a very large sea wave<br>algebra, a branch of mathematics<br>kindergarten, a school for young children
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Using the word in a sentence
+CONTENT: A borrowed word is used like any other word. It can be a noun or a verb, and it follows English grammar even when its spelling is not English.
+EXAMPLE: The farmers decided to trek across the veld.<br>We held a braai on Saturday.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Keep the original spelling
+CONTENT: Borrowed words usually keep the spelling they have in the language they come from. Check how a word is spelt before you write it.
+EXAMPLE: Wrong: bokay, kafe<br>Right: bouquet, café
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Use the word
+CONTENT: Write a sentence using the word spoor.
+EXAMPLE: The tracker followed the spoor of the leopard.
+@@ENDCARD
+
+TESTED:
+Give the meaning of common borrowed words
+Use borrowed words in sentences
+Match borrowed words to their languages
+Spell borrowed words correctly
+Recognise words that are not from a given language
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What does the word indaba mean?
+A: A type of food
+B: A meeting or discussion
+C: A musical instrument
+D: A long trip
+CORRECT: B
+EXPLAIN:
+Indaba comes from isiZulu and means a meeting or a matter for discussion. It is not a food, an instrument or a trip.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is a braai?
+A: A kind of hat
+B: A type of dance
+C: A small bird
+D: An outdoor fire for cooking meat
+CORRECT: D
+EXPLAIN:
+A braai is a barbecue, an outdoor fire for cooking meat. The other choices are not related to the word.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In the sentence The farmers decided to trek across the veld, what does trek mean?
+A: Plant seeds
+B: Rest for a while
+C: Make a long, difficult trip
+D: Sing a song
+CORRECT: C
+EXPLAIN:
+Trek means to make a long trip, often a hard one, and the veld is open grassland. The other meanings do not fit the sentence.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What does the word tsunami mean?
+A: A fast train
+B: A heavy rainstorm
+C: A type of tree
+D: A very large sea wave
+CORRECT: D
+EXPLAIN:
+Tsunami is a Japanese word for a very large sea wave, often caused by an earthquake under the sea.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In the sentence She bought a bouquet for her mother, what is a bouquet?
+A: A box of sweets
+B: A bunch of flowers
+C: A birthday card
+D: A scarf
+CORRECT: B
+EXPLAIN:
+A bouquet is a bunch of flowers. The word comes from French.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence uses a word borrowed from isiZulu?
+A: The ballet was lovely.
+B: The pizza was hot.
+C: The impala leapt over the fence.
+D: The karaoke was loud.
+CORRECT: C
+EXPLAIN:
+Impala comes from isiZulu. Pizza is Italian, ballet is French and karaoke is Japanese.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which word was borrowed into English from Hindi?
+A: pizza
+B: shampoo
+C: braai
+D: sushi
+CORRECT: B
+EXPLAIN:
+Shampoo comes from Hindi. Pizza is Italian, braai is Afrikaans and sushi is Japanese.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which of these words is NOT from Afrikaans?
+A: tsunami
+B: veld
+C: trek
+D: biltong
+CORRECT: A
+EXPLAIN:
+Tsunami comes from Japanese. Veld, trek and biltong are all Afrikaans words.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What does the Afrikaans word spoor mean?
+A: The track left by an animal
+B: A type of grass
+C: A fast run
+D: A sharp noise
+CORRECT: A
+EXPLAIN:
+Spoor is the track or trail left by an animal. It is used in English by trackers and hunters.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: word_meaning
+BROAD_TOPIC_DISPLAY: Word Meaning
+SUBTOPIC_ID: borrowed_words
+SUBTOPIC_DISPLAY: Borrowed Words
+LEVEL_ID: borrowed_words_mastery
+LEVEL_DISPLAY: Borrowed Words Mastery
+LEVEL_DESC: Mixed practice with the origins and meanings of borrowed words.
+LEVEL_ORDER: 3
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: This challenge brings together everything about <strong>borrowed words</strong>. You will match words to their languages, give their meanings, and say why languages borrow.
+
+@@CARD
+TYPE: spot_difference
+TITLE: Where borrowed words come from
+SIDE_A: Language
+SIDE_B: Examples
+CONTENT: Afrikaans | braai, veld, trek, biltong, spoor<br>isiZulu | indaba, impala, mamba<br>Italian | pizza, piano, spaghetti<br>French | ballet, café, bouquet<br>Japanese | sushi, karaoke, tsunami<br>German | kindergarten<br>Hindi | shampoo, jungle, pyjamas<br>Arabic | algebra
+EXAMPLE: A borrowed word is taken from another language and used in English.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Meanings to remember
+CONTENT: Learn each word with its meaning. The meaning in English is usually close to the meaning in the language it came from.
+EXAMPLE: indaba, a meeting<br>veld, open grassland<br>trek, a long trip<br>café, a small restaurant<br>bouquet, a bunch of flowers
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Working out a borrowed word
+CONTENT: 1. Look at the spelling for clues, such as the endings in pizza or the letters in tsunami.<br>2. Think of the thing the word names.<br>3. Match the word to the language that gave it.<br>4. Check the meaning fits the sentence.
+EXAMPLE: sushi names a Japanese food.<br>The word comes from Japanese.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Common borrowing mistakes
+CONTENT: Learners often mix up the language a word comes from, change the spelling of a borrowed word, or think every unusual word is borrowed.
+EXAMPLE: Wrong: tsunami is Afrikaans.<br>Right: tsunami is Japanese.
+@@ENDCARD
+
+TESTED:
+Say what a borrowed word is
+Match borrowed words to their languages
+Give the meanings of borrowed words
+Give reasons why languages borrow
+Spot words that do not belong to a language group
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+A word taken from another language and used in English is called
+A: a synonym
+B: a prefix
+C: a borrowed word
+D: a clipped word
+CORRECT: C
+EXPLAIN:
+A borrowed word comes from another language. A prefix, a synonym and a clipped word are different things.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word comes from French?
+A: karaoke
+B: braai
+C: sushi
+D: ballet
+CORRECT: D
+EXPLAIN:
+Ballet comes from French. Braai is Afrikaans, and sushi and karaoke are Japanese.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word comes from Japanese?
+A: pizza
+B: sushi
+C: ballet
+D: indaba
+CORRECT: B
+EXPLAIN:
+Sushi is Japanese. Pizza is Italian, ballet is French and indaba comes from isiZulu.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is a café?
+A: A type of horn
+B: A type of dance
+C: A bunch of flowers
+D: A small restaurant serving drinks and light meals
+CORRECT: D
+EXPLAIN:
+A café is a small restaurant that serves drinks and light meals. The word comes from French.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which language gave English the word algebra?
+A: French
+B: Arabic
+C: isiZulu
+D: Japanese
+CORRECT: B
+EXPLAIN:
+Algebra comes from Arabic. It is a branch of mathematics.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which language did the word impala come from?
+A: German
+B: Italian
+C: isiZulu
+D: Hindi
+CORRECT: C
+EXPLAIN:
+Impala is an isiZulu word for a type of antelope. The other languages did not give English this word.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What does the word ubuntu mean?
+A: A style of clothing
+B: A kind of dance
+C: A type of food
+D: The belief that people are connected and should show care for one another
+CORRECT: D
+EXPLAIN:
+Ubuntu is a Nguni word that expresses humanity towards others. It is not a dance, food or clothing.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which list contains only words borrowed from Italian?
+A: sushi, karaoke, tsunami
+B: braai, veld, trek
+C: pizza, piano, spaghetti
+D: kindergarten, ballet, café
+CORRECT: C
+EXPLAIN:
+Pizza, piano and spaghetti are all Italian. The other lists are Afrikaans, Japanese, and German and French.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence contains a word borrowed from Afrikaans?
+A: The ballet starts at eight.
+B: They ate biltong on the long drive.
+C: We sang karaoke.
+D: The pizza arrived.
+CORRECT: B
+EXPLAIN:
+Biltong is an Afrikaans word for dried meat. Ballet is French, karaoke is Japanese and pizza is Italian.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Why does English have so many borrowed words?
+A: Dictionaries add them for no reason
+B: English has no grammar of its own
+C: Borrowed words are always easier to spell
+D: It has come into contact with many languages through trade, travel and settlement
+CORRECT: D
+EXPLAIN:
+When people from different language groups meet, words pass between their languages. The other reasons are not true.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which word came into English from German?
+A: kindness
+B: kindergarten
+C: kitchen
+D: kindle
+CORRECT: B
+EXPLAIN:
+Kindergarten is a German word meaning a garden for children. The other words are not borrowed from German in this way.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which pair is correctly matched with its language?
+A: braai, Afrikaans
+B: pizza, Japanese
+C: sushi, Italian
+D: indaba, French
+CORRECT: A
+EXPLAIN:
+Braai is Afrikaans. Pizza is Italian, sushi is Japanese and indaba comes from isiZulu.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which of these words is NOT borrowed from Hindi?
+A: pizza
+B: shampoo
+C: jungle
+D: pyjamas
+CORRECT: A
+EXPLAIN:
+Pizza is Italian. Shampoo, jungle and pyjamas all come from Hindi.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What does the Afrikaans word veld mean?
+A: Open grassland
+B: A type of tree
+C: A river
+D: A mountain
+CORRECT: A
+EXPLAIN:
+Veld means open grassland, and the word is used in South African English. It does not mean a tree, a river or a mountain.
+@@ENDQ
+
+@@ENDQUESTIONS

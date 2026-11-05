@@ -1,0 +1,238 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: word_meaning
+BROAD_TOPIC_DISPLAY: Word Meaning
+SUBTOPIC_ID: synonyms_antonyms
+SUBTOPIC_DISPLAY: Synonyms and Antonyms
+LEVEL_ID: synonyms_antonyms_mastery
+LEVEL_DISPLAY: Synonyms and Antonyms Mastery
+LEVEL_DESC: Grade 7 exam-style revision of synonyms and antonyms.
+LEVEL_ORDER: 1
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: <strong>Synonyms</strong> are words with the same or similar meaning, and <strong>antonyms</strong> are words with opposite meanings. This Grade 7 revision uses the harder words you meet in exams.
+
+@@CARD
+TYPE: definition
+TITLE: Synonyms
+CONTENT: Synonyms are words of the same or similar meaning. They are often interchangeable, but the best choice depends on the context. A thesaurus is the best source of synonyms.
+EXAMPLE: brave, courageous<br>huge, enormous<br>calm, tranquil<br>scarce, rare
+@@ENDCARD
+
+@@CARD
+TYPE: definition
+TITLE: Antonyms
+CONTENT: Antonyms are words of opposite meaning. An antonym may be a different word, or it may be made by adding a prefix or a suffix.
+EXAMPLE: modern, old-fashioned<br>accept, reject<br>useful, useless<br>pro-exams, anti-exams
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Useful pairs to know
+CONTENT: These pairs appear often. Learn both words in each pair.
+EXAMPLE: abundance, scarcity<br>compulsory, optional<br>humane, cruel<br>comedy, tragedy<br>include, exclude
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Not always interchangeable
+CONTENT: Two synonyms may mean almost the same thing, but one may sound wrong in a sentence. Check that the word fits the context before you swap it.
+EXAMPLE: She was brave. She was courageous.<br>They are both fine, but a courageous firefighter sounds stronger than a brave firefighter.
+@@ENDCARD
+
+TESTED:
+Choose synonyms in context
+Choose antonyms
+Make antonyms with prefixes and suffixes
+Spot the word that does not belong
+Use a thesaurus
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Synonyms are words that
+A: have opposite meanings
+B: have the same or similar meaning
+C: sound the same
+D: rhyme
+CORRECT: B
+EXPLAIN:
+Synonyms are words of the same or similar meaning. Words with opposite meanings are antonyms.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a synonym of huge?
+A: narrow
+B: tiny
+C: enormous
+D: quiet
+CORRECT: C
+EXPLAIN:
+Enormous means very large, like huge. The other words have different meanings.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is an antonym of modern?
+A: latest
+B: new
+C: current
+D: old-fashioned
+CORRECT: D
+EXPLAIN:
+Modern means up to date, and its opposite is old-fashioned. The other words are similar to modern.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+The best source of synonyms is
+A: a calendar
+B: an atlas
+C: a thesaurus
+D: a map
+CORRECT: C
+EXPLAIN:
+A thesaurus lists words with similar meanings. The other books do not.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is a synonym of brave?
+A: cowardly
+B: courageous
+C: careful
+D: calm
+CORRECT: B
+EXPLAIN:
+Courageous means brave. Cowardly is an antonym, and careful and calm have other meanings.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is an antonym of accept?
+A: agree
+B: allow
+C: receive
+D: reject
+CORRECT: D
+EXPLAIN:
+Reject means to refuse. The other words are close to accept in meaning.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which antonym of useful is made by adding a suffix?
+A: disuseful
+B: unuseful
+C: misuseful
+D: useless
+CORRECT: D
+EXPLAIN:
+Adding the suffix less gives the antonym useless. The other forms are not used in English.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which pair are synonyms?
+A: start and finish
+B: start and commence
+C: start and stop
+D: start and end
+CORRECT: B
+EXPLAIN:
+Start and commence mean the same. The other pairs are opposites.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is a synonym of tranquil?
+A: busy
+B: noisy
+C: serene
+D: angry
+CORRECT: C
+EXPLAIN:
+Tranquil and serene both mean calm and peaceful. The other words describe the opposite.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which word is an antonym of visible made by adding a prefix?
+A: unvisible
+B: invisible
+C: disvisible
+D: nonvisible
+CORRECT: B
+EXPLAIN:
+The prefix in gives invisible. The other forms are not used.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which word is NOT a synonym of start?
+A: commence
+B: begin
+C: finish
+D: launch
+CORRECT: C
+EXPLAIN:
+Finish is the opposite of start. Begin, commence and launch all mean to start.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which pair are antonyms?
+A: comedy and tragedy
+B: huge and enormous
+C: brave and courageous
+D: calm and tranquil
+CORRECT: A
+EXPLAIN:
+A comedy is funny and a tragedy is sad, so they are opposites. The other pairs are synonyms.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which word is a synonym of despise?
+A: scorn
+B: admire
+C: adore
+D: praise
+CORRECT: A
+EXPLAIN:
+To scorn is to treat with contempt, which is close to despise. The other words show approval.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Why must you check the context when you choose a synonym?
+A: The best synonym depends on the sentence
+B: All synonyms are identical in every sentence
+C: Synonyms are always antonyms
+D: A thesaurus gives only antonyms
+CORRECT: A
+EXPLAIN:
+Synonyms are often interchangeable but the right choice depends on the context.
+@@ENDQ
+
+@@ENDQUESTIONS

@@ -1,0 +1,238 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: word_meaning
+BROAD_TOPIC_DISPLAY: Word Meaning
+SUBTOPIC_ID: idioms_proverbs
+SUBTOPIC_DISPLAY: Idioms and Proverbs
+LEVEL_ID: idioms_proverbs_mastery
+LEVEL_DISPLAY: Idioms and Proverbs Mastery
+LEVEL_DESC: Grade 7 exam-style revision of idioms and proverbs.
+LEVEL_ORDER: 1
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: An <strong>idiom</strong> is an expression whose meaning is different from the meaning of its words, and a <strong>proverb</strong> is a short, wise saying. This Grade 7 revision checks the meanings of common ones.
+
+@@CARD
+TYPE: definition
+TITLE: Idioms
+CONTENT: Words and expressions may be used literally or figuratively. An idiom is a figurative expression whose meaning cannot be worked out from its words. Be careful not to overuse them.
+EXAMPLE: The fledglings have left the nest. (literal)<br>Their children have left the nest. (figurative, they have grown up)
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Common idioms
+CONTENT: Learn the meaning of each idiom as a whole.
+EXAMPLE: a bolt from the blue, a sudden and unexpected event<br>a storm in a teacup, much fuss over something unimportant<br>at a snail's pace, very slowly<br>at the eleventh hour, at the last minute<br>beat about the bush, approach a matter indirectly<br>let the cat out of the bag, reveal a secret<br>once in a blue moon, a very rare occurrence<br>rain cats and dogs, rain heavily<br>burn the candle at both ends, overwork oneself<br>kill two birds with one stone, achieve a double result with one effort
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Proverbs
+CONTENT: A proverb is a short, wise saying that gives advice or states a truth. Its message applies to many situations.
+EXAMPLE: Rome was not built in a day. (big undertakings take time)<br>Strike while the iron is hot. (act when the opportunity arises)<br>Save it for a rainy day. (save for a time of need)
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Do not take idioms literally
+CONTENT: If an expression makes no sense word for word, it is probably an idiom. Ask what it means as a whole, and check the context.
+EXAMPLE: It is raining cats and dogs. It means it is raining very heavily, not that animals are falling.
+@@ENDCARD
+
+TESTED:
+Say what an idiom is
+Give the meaning of common idioms
+Say what a proverb is
+Give the meaning of common proverbs
+Tell literal from figurative use
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+An idiom is
+A: a word that sounds like another
+B: an expression whose meaning is not the literal meaning of its words
+C: a word with opposite meaning
+D: a type of poem
+CORRECT: B
+EXPLAIN:
+An idiom has a figurative meaning that cannot be worked out from its individual words.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What does a bolt from the blue mean?
+A: A blue storm
+B: A piece of hardware
+C: A sudden and unexpected event
+D: A long delay
+CORRECT: C
+EXPLAIN:
+A bolt from the blue is something that happens without warning.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What does at a snail's pace mean?
+A: Very loudly
+B: Very quickly
+C: Very quietly
+D: Very slowly
+CORRECT: D
+EXPLAIN:
+Snails move slowly, so the idiom means very slowly.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What does rain cats and dogs mean?
+A: Rain lightly
+B: Rain heavily
+C: Animals fall from the sky
+D: Rain stops
+CORRECT: B
+EXPLAIN:
+The idiom means that it is raining very heavily.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What does let the cat out of the bag mean?
+A: Start a fight
+B: Free an animal
+C: Make a mess
+D: Reveal a secret
+CORRECT: D
+EXPLAIN:
+The idiom means to reveal a secret that was meant to stay hidden.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What does burn the candle at both ends mean?
+A: Save energy
+B: Waste candles
+C: Overwork oneself
+D: Rest often
+CORRECT: C
+EXPLAIN:
+The idiom means to work so hard, day and night, that you exhaust yourself.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+A proverb is
+A: a long speech
+B: a type of figure of speech with as or like
+C: a spelling rule
+D: a short, wise saying that gives advice
+CORRECT: D
+EXPLAIN:
+A proverb states a truth or gives advice in a short saying.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What does the proverb Rome was not built in a day teach?
+A: Rome was built quickly
+B: Big undertakings take time
+C: Building is easy
+D: Cities should be small
+CORRECT: B
+EXPLAIN:
+The proverb teaches patience, because large tasks cannot be finished at once.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What does beat about the bush mean?
+A: Speak directly
+B: Hit a plant
+C: Approach a matter in a roundabout way
+D: Run away
+CORRECT: C
+EXPLAIN:
+The idiom means to avoid coming to the point.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which of these is a proverb?
+A: Under a cloud.
+B: Spill the beans.
+C: Cold feet.
+D: Strike while the iron is hot.
+CORRECT: D
+EXPLAIN:
+Strike while the iron is hot is a complete saying that gives advice. The others are idioms.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+In which sentence is left the nest used figuratively?
+A: The nest fell from the tree.
+B: The fledglings have left the nest.
+C: Their children have left the nest to make lives of their own.
+D: The birds built a nest.
+CORRECT: C
+EXPLAIN:
+In this sentence it means the children have grown up and left home. For the fledglings it is literal.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What does kill two birds with one stone mean?
+A: Achieve a double result with a single effort
+B: Harm two animals
+C: Throw stones
+D: Waste time
+CORRECT: A
+EXPLAIN:
+The idiom means to get two things done with one action.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which idiom means to feel anxious about an undertaking and think of withdrawing?
+A: have cold feet
+B: in the same boat
+C: jump the gun
+D: break the ice
+CORRECT: A
+EXPLAIN:
+To have cold feet is to lose your nerve. The other idioms have different meanings.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence uses spill the beans figuratively?
+A: Thabo spilled the beans about the surprise party, so everyone knew.
+B: Thabo spilled the beans on the kitchen floor.
+C: The beans were on the table.
+D: Thabo ate the beans.
+CORRECT: A
+EXPLAIN:
+Spilled the beans here means revealed a secret. In the other sentences beans are real.
+@@ENDQ
+
+@@ENDQUESTIONS

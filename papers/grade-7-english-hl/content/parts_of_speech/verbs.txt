@@ -1,0 +1,593 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: verbs
+SUBTOPIC_DISPLAY: Verbs
+LEVEL_ID: verbs_1
+LEVEL_DISPLAY: Main, Finite and Non-finite Verbs
+LEVEL_DESC: Identify verbs, finite verbs and the infinitive.
+LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: A <strong>verb</strong> is a doing or action word, or a word that shows a state of being. A <strong>finite verb</strong> has a subject, a number and a tense, and it can anchor a sentence. The <strong>infinitive</strong> is the non-finite form that begins with to.
+
+@@CARD
+TYPE: definition
+TITLE: What is a verb?
+CONTENT: A verb is an action word or a word that shows a state of being. A good test is to ask can you followed by the word. You can run, ask and reply, so these are verbs. You can also put a pronoun in front of a verb.
+EXAMPLE: The boy runs. She is happy.<br>He runs. She asked. They replied.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Finite verbs
+CONTENT: A finite verb can stand on its own and does not need a helping verb. It must have a subject, show number (singular or plural) and show tense. Together with the subject, it makes a complete sentence.
+EXAMPLE: She plays. They argue.<br>The girl plays netball. The girls play netball.<br>Today I play. Yesterday I played.
+@@ENDCARD
+
+@@CARD
+TYPE: definition
+TITLE: The infinitive
+CONTENT: When a verb is preceded by to, it is called the infinitive. The infinitive cannot stand alone in a sentence. It needs a finite verb in front of it.
+EXAMPLE: to play, to argue, to study<br>She wants to leave.<br>They start to argue.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Fragments with no finite verb
+CONTENT: A group of words with only an infinitive or an -ing form is not a complete sentence. The Handbook says that an -ing word needs a helping verb in front of it.
+EXAMPLE: Wrong: The tap leaking. To leave.<br>Right: The tap is leaking. She wants to leave.
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Find the finite verb
+CONTENT: Write the finite verb in this sentence. Children love to play.
+EXAMPLE: love. It has a subject, children, and shows the simple present tense. To play is the infinitive and cannot stand alone.
+@@ENDCARD
+
+TESTED:
+Identify verbs with the can you test
+Name the finite verb in a sentence
+Recognise an infinitive
+Know that an infinitive cannot stand alone
+Tell a complete sentence from a fragment
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a verb?
+A: table
+B: slowly
+C: happy
+D: run
+CORRECT: D
+EXPLAIN:
+Run is an action word, and you can say can you run. Table is a noun, happy is an adjective and slowly is an adverb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word passes the test can you ___?
+A: quick
+B: chair
+C: jump
+D: green
+CORRECT: C
+EXPLAIN:
+You can jump, so jump is a verb. Quick and green are adjectives, and chair is a noun.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is the finite verb in this sentence? She plays netball.
+A: She
+B: She plays
+C: netball
+D: plays
+CORRECT: D
+EXPLAIN:
+Plays shows the subject is singular and the tense is the simple present, so it is the finite verb. She is a pronoun and netball is a noun.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which of these is an infinitive?
+A: played
+B: to play
+C: playing
+D: plays
+CORRECT: B
+EXPLAIN:
+An infinitive is a verb preceded by to. Played, playing and plays are finite or participle forms.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which statement about a finite verb is correct?
+A: It always starts with to.
+B: It has a subject, number and tense.
+C: It always ends in -ing.
+D: It can never stand alone.
+CORRECT: B
+EXPLAIN:
+A finite verb shows number and tense and works with a subject. Starting with to describes the infinitive, and ending in -ing describes a participle.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is the finite verb in this sentence? Children love to play.
+A: Children
+B: to play
+C: love
+D: play
+CORRECT: C
+EXPLAIN:
+Love agrees with the plural subject children and shows the simple present. To play is the infinitive and depends on love.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence contains an infinitive?
+A: She wants to leave.
+B: She left.
+C: She is leaving.
+D: She leaves.
+CORRECT: A
+EXPLAIN:
+To leave is the infinitive, and wants is the finite verb. The other sentences use finite forms or a participle.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+In the sentence They start to argue, which words are the finite verb and the infinitive?
+A: start and to argue
+B: to start and argue
+C: start and argue
+D: argue and to start
+CORRECT: A
+EXPLAIN:
+Start agrees with the plural subject they and is the finite verb. To argue is the infinitive that follows it.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: verbs
+SUBTOPIC_DISPLAY: Verbs
+LEVEL_ID: verbs_2
+LEVEL_DISPLAY: Auxiliary Verbs
+LEVEL_DESC: Recognise auxiliary verbs and linking verbs and tell them from main verbs.
+LEVEL_ORDER: 2
+DIFFICULTY: Building
+ACCESS: Premium
+QUESTION_COUNT: 9
+INTRO: An <strong>auxiliary verb</strong> is a helping verb. It comes before another verb and helps to show tense. The same word can be a helping verb in one sentence and the main verb in another, so you have to look at how it is used.
+
+@@CARD
+TYPE: definition
+TITLE: Auxiliary verbs
+CONTENT: An auxiliary verb is a helping verb. It always comes before a main verb and helps to regulate the tense of the sentence. The Handbook lists the common ones as am, are, be, can, could, had, has, have, is, may, might, must, shall, should, was, were, will and would.
+EXAMPLE: She has done her work.<br>We could see the sun rising in the east.<br>They will leave tomorrow.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Finite or auxiliary
+CONTENT: The same verb can be finite or auxiliary depending on the sentence. If it stands alone as the verb, it is a finite verb. If it helps another verb, it is an auxiliary verb.
+EXAMPLE: He is the president of his company. (is is the finite verb)<br>He is hoping to become president. (is helps hoping)
+@@ENDCARD
+
+@@CARD
+TYPE: definition
+TITLE: The linking verb
+CONTENT: The verb to be (is, am, are) is also called the linking verb. It connects a noun with another noun, or a noun with an adjective. The word after it is not an object. It is called the complement.
+EXAMPLE: The man is a soldier. (noun)<br>The man is brave. (adjective)
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Participles need help
+CONTENT: A word such as leaking or played cannot stand alone as the verb in a sentence. It needs an auxiliary verb in front of it. Without the auxiliary the sentence is incomplete.
+EXAMPLE: Wrong: The tap leaking.<br>Right: The tap is leaking.
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Spot the helper
+CONTENT: Write the auxiliary verb. Lerato has finished her homework.
+EXAMPLE: has. It helps the main verb finished and shows the tense.
+@@ENDCARD
+
+TESTED:
+Identify auxiliary verbs
+Tell an auxiliary verb from a finite verb
+Recognise the linking verb to be
+Know that participles need an auxiliary verb
+Find auxiliary verbs in a verb group
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is an auxiliary verb?
+A: quickly
+B: run
+C: table
+D: has
+CORRECT: D
+EXPLAIN:
+Has is a helping verb, as in has done. Run is a main verb, table is a noun and quickly is an adverb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which list contains only auxiliary verbs?
+A: table, chair, desk
+B: run, jump, swim
+C: am, is, will
+D: quickly, slowly, softly
+CORRECT: C
+EXPLAIN:
+Am, is and will are all helping verbs. The other lists contain nouns, main verbs and adverbs.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is the auxiliary verb in this sentence? She has done her work.
+A: She
+B: done
+C: work
+D: has
+CORRECT: D
+EXPLAIN:
+Has helps the main verb done and shows the tense. Done is the main verb and work is a noun.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In the sentence He is the president of his company, what kind of verb is is?
+A: An infinitive
+B: An auxiliary verb
+C: A finite verb
+D: A participle
+CORRECT: C
+EXPLAIN:
+Is stands alone as the verb of the sentence, so it is a finite verb. It does not help another verb here.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In the sentence He is hoping to become president, what job does the word is do?
+A: It is the only verb and stands alone.
+B: It is an infinitive.
+C: It is a noun.
+D: It helps the participle hoping.
+CORRECT: D
+EXPLAIN:
+Is helps the participle hoping, so it works as an auxiliary verb. It is not the only verb standing alone, and the infinitive in the sentence is to become.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is the auxiliary verb in this sentence? We could see the sun rising in the east.
+A: could
+B: see
+C: sun
+D: rising
+CORRECT: A
+EXPLAIN:
+Could helps the verb see and shows the tense. See is the main verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which pair are the auxiliary verbs in She should have finished?
+A: should, have
+B: have, finished
+C: should, finished
+D: She, should
+CORRECT: A
+EXPLAIN:
+Should and have both help the main verb finished. Finished is the main verb, and she is the subject.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+In which sentence is was a linking verb and not a helping verb?
+A: He was reading.
+B: He was tired.
+C: He was running.
+D: He was singing.
+CORRECT: B
+EXPLAIN:
+Was links He to the adjective tired. In the other sentences was helps an -ing verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Three learners looked at the sentence The tap is leaking.<br>Sipho said is is the auxiliary verb.<br>Amara said leaking is the auxiliary verb.<br>Naledi said tap is the auxiliary verb.<br>Who is correct?
+A: Amara
+B: Sipho
+C: Naledi
+D: None of them
+CORRECT: B
+EXPLAIN:
+Is helps the participle leaking and shows the tense. Leaking is the participle, and tap is a noun.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: verbs
+SUBTOPIC_DISPLAY: Verbs
+LEVEL_ID: verbs_mastery
+LEVEL_DISPLAY: Verbs Mastery
+LEVEL_DESC: Mixed practice on main, finite, non-finite, auxiliary and linking verbs.
+LEVEL_ORDER: 3
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: This challenge brings together everything about <strong>verbs</strong>. You will find verbs in sentences, separate finite verbs from infinitives, and work out when a word is acting as a helping verb.
+
+@@CARD
+TYPE: spot_difference
+TITLE: Kinds of verb
+SIDE_A: Kind
+SIDE_B: Example
+CONTENT: Finite verb | She plays netball.<br>Infinitive | to play<br>Auxiliary verb | She has played.<br>Linking verb | She is happy.
+EXAMPLE: A word like is can be finite, auxiliary or linking. Look at what it does in the sentence.
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Analysing a verb group
+CONTENT: 1. Find the main verb, the word that names the action or state.<br>2. Look in front of it for helping verbs.<br>3. Check whether a to comes before the verb, which makes it an infinitive.<br>4. Find the verb that has a subject, number and tense, which is the finite verb.
+EXAMPLE: She has decided to leave.<br>Has is the auxiliary, decided is the main verb, and to leave is the infinitive.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: What a sentence needs
+CONTENT: A complete sentence needs a finite verb. An infinitive or a participle on its own is not enough. A participle needs an auxiliary verb in front of it.
+EXAMPLE: She wants to leave. (finite verb wants)<br>The tap is leaking. (auxiliary is)
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Common verb mistakes
+CONTENT: The usual errors are treating the infinitive as the finite verb and leaving out the auxiliary before an -ing word. Another is thinking every is, was or have is an auxiliary verb.
+EXAMPLE: Wrong: The tap leaking.<br>Right: The tap is leaking.
+@@ENDCARD
+
+TESTED:
+Identify verbs, finite verbs and infinitives
+Identify auxiliary and linking verbs
+Tell complete sentences from fragments
+Analyse a verb group
+Count infinitives in a sentence
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a verb?
+A: swim
+B: lovely
+C: Thabo
+D: quickly
+CORRECT: A
+EXPLAIN:
+Swim is an action word. Lovely is an adjective, Thabo is a noun and quickly is an adverb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which of these is an infinitive?
+A: studied
+B: studies
+C: studying
+D: to study
+CORRECT: D
+EXPLAIN:
+An infinitive is a verb with to in front of it. The other forms are finite verbs or a participle.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is an auxiliary verb?
+A: boy
+B: green
+C: slowly
+D: will
+CORRECT: D
+EXPLAIN:
+Will is a helping verb, as in will leave. Boy is a noun, green is an adjective and slowly is an adverb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is the finite verb in this sentence? She plays netball every Tuesday.
+A: plays
+B: She
+C: netball
+D: Tuesday
+CORRECT: A
+EXPLAIN:
+Plays shows the subject is singular and the tense is the simple present. The other words are a pronoun and nouns.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence contains an infinitive?
+A: Children play.
+B: Children are playing.
+C: Children love to play.
+D: Children played.
+CORRECT: C
+EXPLAIN:
+To play is the infinitive. The other sentences use finite forms or a participle with an auxiliary verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is the auxiliary verb in this sentence? They will leave tomorrow.
+A: will
+B: leave
+C: They
+D: tomorrow
+CORRECT: A
+EXPLAIN:
+Will helps the main verb leave and shows the future. Leave is the main verb, they is a pronoun and tomorrow is an adverb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which group of words is a complete sentence?
+A: The tap leaking.
+B: To leak the tap.
+C: The leaking tap.
+D: The tap leaks.
+CORRECT: D
+EXPLAIN:
+Leaks is a finite verb with a subject and a tense, so the group of words makes a sentence. The other groups have an infinitive or a participle with no finite verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In the sentence The man is brave, what does the verb is do?
+A: It shows an action.
+B: It connects the man to the adjective brave.
+C: It is an infinitive.
+D: It helps another verb.
+CORRECT: B
+EXPLAIN:
+Is is a linking verb that connects the noun man to the adjective brave. It shows no action and does not help another verb here.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which group of words is a complete sentence?
+A: To leave.
+B: Leaving.
+C: To leave it.
+D: She wants to leave.
+CORRECT: D
+EXPLAIN:
+Wants is a finite verb with a subject, so the group makes a sentence. An infinitive or an -ing word on its own cannot stand alone.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+In the sentence He is hoping to become the president, what are is and hoping?
+A: A finite verb and an infinitive
+B: An auxiliary verb and a present participle
+C: A linking verb and a noun
+D: An infinitive and a participle
+CORRECT: B
+EXPLAIN:
+Is helps hoping, which is a present participle ending in -ing. To become is the infinitive in the sentence.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+In which sentence is was a helping verb?
+A: He was brave.
+B: He was a soldier.
+C: He was reading.
+D: He was tired.
+CORRECT: C
+EXPLAIN:
+In he was reading, was helps the participle reading. In the other sentences was links the subject to a noun or an adjective.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Three learners looked at the sentence We tried to study.<br>Sipho said tried is the finite verb.<br>Amara said to study is the finite verb.<br>Naledi said We is the finite verb.<br>Who is correct?
+A: Naledi
+B: Amara
+C: Sipho
+D: None of them
+CORRECT: C
+EXPLAIN:
+Tried has a subject and a tense, so it is the finite verb. To study is the infinitive, and we is a pronoun.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+How many infinitives are in this sentence? Sipho wants to play soccer, but he needs to study.
+A: One
+B: Two
+C: Three
+D: Four
+CORRECT: B
+EXPLAIN:
+To play and to study are both infinitives. Wants and needs are the finite verbs.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence contains both an infinitive and an auxiliary verb?
+A: She has decided to leave.
+B: She decided.
+C: She leaves.
+D: She is tall.
+CORRECT: A
+EXPLAIN:
+Has is the auxiliary verb and to leave is the infinitive. The other sentences have neither one or only a linking verb.
+@@ENDQ
+
+@@ENDQUESTIONS

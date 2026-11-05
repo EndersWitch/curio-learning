@@ -1,0 +1,595 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: articles_determiners
+SUBTOPIC_DISPLAY: Articles and Determiners
+LEVEL_ID: articles_determiners_1
+LEVEL_DISPLAY: Definite and Indefinite Articles
+LEVEL_DESC: Choose between the, a and an.
+LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: The words <strong>a</strong>, <strong>an</strong> and <strong>the</strong> are called <strong>articles</strong>. They come before nouns. Choosing between a and an depends on the sound that follows, not the spelling.
+
+@@CARD
+TYPE: definition
+TITLE: What are articles?
+CONTENT: Articles are the words a, an and the. They usually come before a noun or before an adjective that describes the noun. The is the definite article and a and an are the indefinite articles.
+EXAMPLE: The dog barked. A cat sat on a mat.
+@@ENDCARD
+
+@@CARD
+TYPE: spot_difference
+TITLE: Definite and indefinite
+SIDE_A: Definite (the)
+SIDE_B: Indefinite (a, an)
+CONTENT: A specific thing | Any one of many<br>Anne received the award for bravery. | She received an award for bravery.<br>The book on my desk | A book on a desk
+EXAMPLE: Use the when both the writer and the reader know which one is meant. Use a or an for one of many.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: A or an
+CONTENT: Use an before a vowel sound and a before a consonant sound. What matters is the sound, not the first letter. Some words start with a vowel letter but sound like a consonant, and some start with a consonant letter but sound like a vowel.
+EXAMPLE: an umbrella, an elephant<br>a used car, a useful gadget<br>an hour, an honest man, an MG sports car
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Going by the letter
+CONTENT: Learners often choose a or an by the first letter. Say the word aloud and listen to the first sound instead. Words such as university and one start with a consonant sound, and hour and honest start with a vowel sound.
+EXAMPLE: Wrong: an university, a hour<br>Right: a university, an hour
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Choose the article
+CONTENT: Write a or an. ___ European holiday, ___ egg, ___ one-rand coin.
+EXAMPLE: a European holiday (starts with a y sound), an egg, a one-rand coin (starts with a w sound).
+@@ENDCARD
+
+TESTED:
+Name the definite and indefinite articles
+Choose a or an by the sound that follows
+Use the for a specific thing
+Spot article mistakes in sentences
+Handle words with silent letters such as hour and honest
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is the definite article?
+A: this
+B: a
+C: an
+D: the
+CORRECT: D
+EXPLAIN:
+The is the definite article because it points to a specific thing. A and an are the indefinite articles. This is a demonstrative word, not an article.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Choose the correct article. ___ elephant
+A: a
+B: the
+C: an
+D: these
+CORRECT: C
+EXPLAIN:
+Elephant starts with a vowel sound, so it takes an. A is used before consonant sounds. These is not an article.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which two words are the indefinite articles?
+A: this, that
+B: the, a
+C: the, an
+D: a, an
+CORRECT: D
+EXPLAIN:
+A and an are the indefinite articles, used for one of many. The is the only definite article. This and that are demonstratives.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence uses the correct article?
+A: She ate a banana.
+B: She ate an banana.
+C: She ate a apple.
+D: She ate an pear.
+CORRECT: A
+EXPLAIN:
+Banana starts with a consonant sound, so it takes a. Apple starts with a vowel sound and needs an. Pear starts with a consonant sound and needs a.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct article. ___ hour
+A: a
+B: an
+C: the
+D: these
+CORRECT: B
+EXPLAIN:
+The h in hour is silent, so the word begins with a vowel sound and takes an. A would be used before a consonant sound.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct article. ___ useful gadget
+A: an
+B: the
+C: a
+D: these
+CORRECT: C
+EXPLAIN:
+Useful begins with a y sound, which is a consonant sound, so it takes a. The first letter is a vowel, but the sound is what counts.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence refers to a specific award that both writer and reader know about?
+A: She received an award for bravery.
+B: Anne received the award for bravery.
+C: She is a candidate for an award.
+D: An award was given.
+CORRECT: B
+EXPLAIN:
+The shows that one particular award is meant. An and a in the other sentences mean any one of many awards.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: He is an honest man and a university student.
+B: He is a honest man and an university student.
+C: He is an honest man and an university student.
+D: He is a honest man and a university student.
+CORRECT: A
+EXPLAIN:
+Honest starts with a silent h, so it takes an. University starts with a y sound, so it takes a. The other sentences get one or both articles wrong.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: articles_determiners
+SUBTOPIC_DISPLAY: Articles and Determiners
+LEVEL_ID: articles_determiners_2
+LEVEL_DISPLAY: Demonstrative, Numerical and Quantity Words
+LEVEL_DESC: Use this, that, these, those, numbers and quantity words before nouns.
+LEVEL_ORDER: 2
+DIFFICULTY: Building
+ACCESS: Premium
+QUESTION_COUNT: 9
+INTRO: Articles belong to a bigger group of words called <strong>determiners</strong>. A determiner comes before a noun and tells us which one or how many. This level covers <em>this</em> and <em>that</em>, numbers, and words such as <em>many</em>, <em>much</em>, <em>few</em> and <em>each</em>.
+
+@@CARD
+TYPE: definition
+TITLE: Demonstratives
+CONTENT: This, that, these and those point out a particular noun. This and these are for things that are near, and that and those are for things that are far. This and that go with singular nouns. These and those go with plural nouns.
+EXAMPLE: This pen is mine.<br>That bakkie is old.<br>These books are heavy.<br>Those hills are far away.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Determiner or pronoun
+CONTENT: When this, that, these or those comes before a noun, it describes that noun. When it stands alone in place of a noun, it is a demonstrative pronoun. The Handbook uses the example that picture to show this.
+EXAMPLE: That picture has to go. (before a noun)<br>That has to go. (standing alone)
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Numbers and quantity words
+CONTENT: Numerical words say exactly how many or which one in order. Quantity words give a rough amount. Many, few and fewer go with plural nouns you can count. Much, little and less go with nouns you cannot count. Each and every go with a singular noun.
+EXAMPLE: one book, second place, single file<br>many learners, few learners, fewer learners<br>much water, little sugar, less time<br>Each learner has a pen.
+@@ENDCARD
+
+@@CARD
+TYPE: example
+TITLE: More quantity words
+CONTENT: Some quantity words work with both kinds of noun, such as all, some, most, no, any, more. Both, either and neither refer to two things. Another and other point to something extra.
+EXAMPLE: all learners, all water<br>some books, some rice<br>both hands, either road, neither answer<br>another chance, other options
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Much and many mix-ups
+CONTENT: Do not use much with plural nouns you can count, and do not use many with nouns you cannot count. Use fewer for countable plurals and less for uncountable nouns.
+EXAMPLE: Wrong: much learners, less cars, many water<br>Right: many learners, fewer cars, much water
+@@ENDCARD
+
+TESTED:
+Use this, that, these and those with the right nouns
+Tell a demonstrative determiner from a demonstrative pronoun
+Identify numerical determiners
+Choose between much and many, less and fewer
+Use each and every with singular nouns
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a demonstrative?
+A: this
+B: some
+C: two
+D: every
+CORRECT: A
+EXPLAIN:
+This points out a particular noun, so it is a demonstrative. Some and every are quantity words, and two is a number.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Choose the correct word. I am holding one pen. ___ pen is blue.
+A: These
+B: Those
+C: This
+D: They
+CORRECT: C
+EXPLAIN:
+Pen is singular and the pen is near the speaker, so this is correct. These and those go with plural nouns, and they is a pronoun.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. The school has ___ learners.
+A: many
+B: much
+C: little
+D: less
+CORRECT: A
+EXPLAIN:
+Learners are countable and plural, so many is correct. Much, little and less go with nouns that cannot be counted.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. There is too ___ sugar in my tea.
+A: much
+B: few
+C: many
+D: fewer
+CORRECT: A
+EXPLAIN:
+Sugar cannot be counted, so much is correct. Many, few and fewer go with countable plural nouns.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. ___ learner received a certificate.
+A: Both
+B: Each
+C: Many
+D: Few
+CORRECT: B
+EXPLAIN:
+Each goes with a singular noun and means every one taken separately. Both, many and few go with plural nouns.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is the numerical determiner in this sentence? Lerato read two books.
+A: Lerato
+B: read
+C: books
+D: two
+CORRECT: D
+EXPLAIN:
+Two tells us exactly how many books. Lerato is a name, read is a verb and books is the noun being counted.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Choose the correct word. There are ___ cars on the road today than yesterday.
+A: less
+B: much
+C: little
+D: fewer
+CORRECT: D
+EXPLAIN:
+Cars can be counted, so fewer is correct. Less is used with nouns that cannot be counted, and much and little do not fit a comparison with than here.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+In which sentence is that a pronoun and not a determiner?
+A: That picture has to go.
+B: That has to go.
+C: I like that bakkie.
+D: That book is mine.
+CORRECT: B
+EXPLAIN:
+In That has to go, that stands alone in place of a noun, so it is a demonstrative pronoun. In the other sentences it comes before a noun and describes it.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Three learners completed the sentence ___ learner must bring a pen.<br>Sipho wrote All.<br>Amara wrote Every.<br>Naledi wrote Many.<br>Who is correct?
+A: Sipho
+B: Naledi
+C: Amara
+D: None of them
+CORRECT: C
+EXPLAIN:
+Every goes with a singular noun, and learner is singular. All and many need a plural noun, so they do not fit here.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: articles_determiners
+SUBTOPIC_DISPLAY: Articles and Determiners
+LEVEL_ID: articles_determiners_mastery
+LEVEL_DISPLAY: Articles and Determiners Mastery
+LEVEL_DESC: Mixed practice across articles, demonstratives, numbers and quantity words.
+LEVEL_ORDER: 3
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: This challenge mixes <strong>articles</strong> and <strong>determiners</strong>. You will choose between a and an, pick the right demonstrative, and decide between words such as much, many, less and fewer.
+
+@@CARD
+TYPE: key_rule
+TITLE: Articles at a glance
+CONTENT: The is definite and points to a specific thing. A and an are indefinite. Choose a or an by the sound that follows, not the letter.
+EXAMPLE: an hour, an honest man, an MG<br>a university, a useful tip, a one-rand coin
+@@ENDCARD
+
+@@CARD
+TYPE: spot_difference
+TITLE: Countable and uncountable
+SIDE_A: Countable nouns
+SIDE_B: Uncountable nouns
+CONTENT: many learners | much water<br>few books | little sugar<br>fewer cars | less time<br>each learner | some rice
+EXAMPLE: If you can count the noun, use many, few or fewer. If you cannot, use much, little or less.
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Choosing a determiner
+CONTENT: 1. Find the noun after the gap.<br>2. Decide whether it is singular or plural.<br>3. Decide whether it can be counted.<br>4. Choose the word that matches. Check a or an by the sound.
+EXAMPLE: ___ learners → plural and countable → many, few or fewer<br>___ water → uncountable → much, little or less
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Common determiner mistakes
+CONTENT: The usual errors are using a before a vowel sound, using an before a consonant sound, using this with plural nouns and mixing up much and many. Check each noun in a passage against these.
+EXAMPLE: Wrong: an unicorn, this books, much cars<br>Right: a unicorn, these books, many cars
+@@ENDCARD
+
+TESTED:
+Choose a or an by sound
+Use this, that, these and those with the right nouns
+Identify numerical determiners
+Choose between much, many, less and fewer
+Spot mistakes in a short passage
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Choose the correct article. ___ egg
+A: a
+B: some
+C: these
+D: an
+CORRECT: D
+EXPLAIN:
+Egg starts with a vowel sound, so it takes an. A is used before a consonant sound.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word points out a specific thing?
+A: these
+B: a
+C: some
+D: three
+CORRECT: A
+EXPLAIN:
+These is a demonstrative and points out particular things. A is an indefinite article, some is a quantity word and three is a number.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct article. He drives ___ MG sports car.
+A: an
+B: the
+C: a
+D: some
+CORRECT: A
+EXPLAIN:
+The letters MG are said em-gee, so the word begins with a vowel sound and takes an. The Handbook gives this exact example.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct article. She paid with ___ one-rand coin.
+A: an
+B: a
+C: the
+D: these
+CORRECT: B
+EXPLAIN:
+One begins with a w sound, which is a consonant sound, so the article is a. The spelling starts with a vowel, but the sound is what matters.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence has an article mistake?
+A: She is an honest girl.
+B: He waited for an hour.
+C: We saw an unicorn.
+D: It was a useful tip.
+CORRECT: C
+EXPLAIN:
+Unicorn begins with a y sound, so it takes a. Honest and hour begin with a vowel sound and take an, and useful begins with a consonant sound and takes a.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a numerical determiner?
+A: some
+B: three
+C: this
+D: many
+CORRECT: B
+EXPLAIN:
+Three tells exactly how many. Some and many are rough quantity words, and this is a demonstrative.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. How ___ water do you need?
+A: many
+B: few
+C: fewer
+D: much
+CORRECT: D
+EXPLAIN:
+Water cannot be counted, so much is correct. Many, few and fewer go with countable plural nouns.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence is correct?
+A: There are few learners in the hall.
+B: There are little learners in the hall.
+C: There is few water in the glass.
+D: There are much books on the desk.
+CORRECT: A
+EXPLAIN:
+Learners are countable and plural, so few is correct. Little, few and much must match whether the noun can be counted, which the other sentences fail to do.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence is correct?
+A: Each learner have a book.
+B: Each learners has a book.
+C: Each learner have books.
+D: Each learner has a book.
+CORRECT: D
+EXPLAIN:
+Each goes with a singular noun and a singular verb, so each learner has a book. The other sentences use a plural noun or a plural verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+In which sentence does the word this describe a noun?
+A: This is my bakkie.
+B: I like this.
+C: This bakkie is mine.
+D: Give me this.
+CORRECT: C
+EXPLAIN:
+In this bakkie, this comes before a noun and describes it. In the other sentences this stands alone and is a pronoun.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Three learners completed the sentence There are ___ learners today than yesterday.<br>Sipho wrote less.<br>Amara wrote fewer.<br>Naledi wrote much.<br>Who is correct?
+A: Sipho
+B: Naledi
+C: None of them
+D: Amara
+CORRECT: D
+EXPLAIN:
+Learners can be counted, so fewer is correct. Less and much are used with nouns that cannot be counted.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Read the passage.<br>A elephant and an hippo drank much water. Many animal came to the river.<br>How many mistakes are there?
+A: One
+B: Two
+C: Three
+D: Four
+CORRECT: C
+EXPLAIN:
+It should be an elephant, a hippo and many animals. Much water is correct because water cannot be counted. That makes three mistakes.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: A honest learner gave an useful answer.
+B: An honest learner gave a useful answer.
+C: An honest learner gave an useful answer.
+D: A honest learner gave a useful answer.
+CORRECT: B
+EXPLAIN:
+Honest begins with a vowel sound and takes an, and useful begins with a y sound and takes a. The other sentences get one or both articles wrong.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence is correct?
+A: This books are mine.
+B: These book is mine.
+C: These books are mine.
+D: Those books is mine.
+CORRECT: C
+EXPLAIN:
+Books is plural, so it needs these and the plural verb are. This goes with singular nouns, and is does not agree with books.
+@@ENDQ
+
+@@ENDQUESTIONS

@@ -1,0 +1,238 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: sentences
+BROAD_TOPIC_DISPLAY: Sentences
+SUBTOPIC_ID: sentence_structure
+SUBTOPIC_DISPLAY: Subject, Predicate and Object
+LEVEL_ID: sentence_structure_mastery
+LEVEL_DISPLAY: Subject, Predicate and Object Mastery
+LEVEL_DESC: Grade 7 exam-style revision of subject, predicate, verb, objects and complement.
+LEVEL_ORDER: 1
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: You have worked on <strong>subject</strong> and <strong>object</strong> before. This Grade 7 revision adds the <strong>predicate</strong>, the <strong>complement</strong> and the two kinds of object in longer sentences.
+
+@@CARD
+TYPE: key_rule
+TITLE: Subject and predicate
+CONTENT: A sentence can be divided into a subject and a predicate. The subject is who or what we are talking about and usually performs the action. The predicate is the rest of the sentence and contains the verb.
+EXAMPLE: The boys in Grade 7 | were happy to go to high school.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Objects and complement
+CONTENT: The direct object answers who or what after the verb. The indirect object tells to whom or for whom the action is done. The word that follows a linking verb such as be is not an object but a complement.
+EXAMPLE: She threw her brother the ball. (direct object, the ball; indirect object, her brother)<br>The race was exciting. (complement, exciting)
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Analysing a sentence
+CONTENT: 1. Find the finite verb.<br>2. Ask who or what before the verb to find the subject.<br>3. Ask who or what after the verb to find the direct object.<br>4. Ask to whom or for whom to find the indirect object.<br>5. Everything after the subject is the predicate.
+EXAMPLE: Anne reads a book.<br>Subject, Anne. Verb, reads. Direct object, a book.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Linking verbs have no object
+CONTENT: After a linking verb such as be or become, the word that follows names or describes the subject. It is a complement, not an object.
+EXAMPLE: The author became famous.<br>Famous is the complement.
+@@ENDCARD
+
+TESTED:
+Find the subject of a sentence
+Find the predicate
+Find the direct object
+Find the indirect object
+Tell an object from a complement
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the subject of this sentence? The boy plays soccer.
+A: The boy plays
+B: plays
+C: soccer
+D: The boy
+CORRECT: D
+EXPLAIN:
+Ask who plays, and the answer is the boy. Plays is the verb and soccer is the object.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the verb in this sentence? Anne reads a book.
+A: a book
+B: Anne
+C: reads
+D: Anne reads
+CORRECT: C
+EXPLAIN:
+Reads is the action word. Anne is the subject and a book is the object.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the direct object in this sentence? Anne reads a book.
+A: Anne
+B: a book
+C: reads
+D: Anne reads
+CORRECT: B
+EXPLAIN:
+Ask what Anne reads, and the answer is a book.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+The subject of a sentence tells us
+A: where the action happens
+B: how the action is done
+C: who or what we are talking about
+D: when the action happens
+CORRECT: C
+EXPLAIN:
+The subject is who or what the sentence is about. Adverbs tell how, where and when.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the predicate of this sentence? The boys in Grade 7 were happy to go to high school.
+A: The boys in Grade 7
+B: were happy to go to high school
+C: The boys
+D: in Grade 7
+CORRECT: B
+EXPLAIN:
+The predicate is the rest of the sentence after the subject, and it contains the verb were.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the indirect object in this sentence? She threw her brother the ball.
+A: threw
+B: the ball
+C: She
+D: her brother
+CORRECT: D
+EXPLAIN:
+The indirect object says to whom the action is done, and she threw her brother the ball. The ball is the direct object.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In the sentence The race was exciting, the word exciting is
+A: an indirect object
+B: a direct object
+C: a complement
+D: the subject
+CORRECT: C
+EXPLAIN:
+Exciting follows the linking verb was and describes the subject, so it is a complement.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+How do you find the subject of a sentence?
+A: Ask how after the verb
+B: Ask who or what before the verb
+C: Look for the last word
+D: Look for the adjective
+CORRECT: B
+EXPLAIN:
+The question who or what before the verb gives the subject. The other methods do not work.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which part of the sentence is everything after the subject?
+A: The adjective
+B: The subject
+C: The title
+D: The predicate
+CORRECT: D
+EXPLAIN:
+The predicate is the rest of the sentence after the subject, and it contains the verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What is the subject of this sentence? The model with the dazzling smile came from Durban.
+A: the dazzling smile
+B: The model
+C: The model with the dazzling smile
+D: Durban
+CORRECT: C
+EXPLAIN:
+The full subject includes the phrase that describes the model. Came is the verb and from Durban is part of the predicate.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence contains a complement and not an object?
+A: The author read a poem.
+B: The author wrote a book.
+C: The author sent a letter to her editor.
+D: The author became famous.
+CORRECT: D
+EXPLAIN:
+Became is a linking verb and famous describes the author, so it is a complement. The other sentences have objects after the verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence contains both a direct and an indirect object?
+A: He gave his sister the book.
+B: He read the book.
+C: He is a teacher.
+D: He ran quickly.
+CORRECT: A
+EXPLAIN:
+The book is the direct object and his sister is the indirect object. The other sentences have one object, a complement or none.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+In which sentence is cake the direct object?
+A: Thandi baked a cake.
+B: The cake was delicious.
+C: Thandi sat near the cake.
+D: The cake fell.
+CORRECT: A
+EXPLAIN:
+Ask what Thandi baked, and the answer is a cake, so it is the direct object. In the other sentences cake is a subject or follows a preposition.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What is the indirect object in this sentence? Dan gave his mother a gift.
+A: his mother
+B: a gift
+C: Dan
+D: gave
+CORRECT: A
+EXPLAIN:
+His mother tells to whom the gift was given, so it is the indirect object. A gift is the direct object.
+@@ENDQ
+
+@@ENDQUESTIONS

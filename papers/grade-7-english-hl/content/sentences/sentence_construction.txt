@@ -1,0 +1,240 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: sentences
+BROAD_TOPIC_DISPLAY: Sentences
+SUBTOPIC_ID: sentence_construction
+SUBTOPIC_DISPLAY: Simple, Compound and Complex Sentences
+LEVEL_ID: sentence_construction_mastery
+LEVEL_DISPLAY: Simple, Compound and Complex Sentences Mastery
+LEVEL_DESC: Grade 7 exam-style revision of simple, compound and complex sentences.
+LEVEL_ORDER: 1
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: Sentences are built in three ways. A <strong>simple</strong> sentence has one finite verb, a <strong>compound</strong> sentence joins equal ideas, and a <strong>complex</strong> sentence has a main clause and a subordinate clause. This revision checks you can tell them apart.
+
+@@CARD
+TYPE: spot_difference
+TITLE: Three sentence forms
+SIDE_A: Form
+SIDE_B: Example
+CONTENT: Simple, one finite verb and one idea | Anne reads a book.<br>Compound, two or more finite verbs joined by a co-ordinating conjunction | Dan plays soccer at school and works on his computer at home.<br>Complex, a main clause and a subordinate clause joined by a subordinating conjunction | Candice received her results while she was recuperating in hospital.
+EXAMPLE: Count the finite verbs, then check how the clauses are joined.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Joining words
+CONTENT: Co-ordinating conjunctions such as and, but, or and so join equal clauses in a compound sentence. Subordinating conjunctions such as because, while, although, if and after join a subordinate clause to a main clause in a complex sentence.
+EXAMPLE: and, but, or, so<br>because, while, although, if, after, when
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Naming the sentence form
+CONTENT: 1. Underline each finite verb.<br>2. If there is one, the sentence is simple.<br>3. If there are two or more equal clauses joined by and, but, or or so, it is compound.<br>4. If a subordinating conjunction makes one clause depend on another, it is complex.
+EXAMPLE: She stayed in because it was raining.<br>Two verbs and the conjunction because, so it is complex.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Long is not complex
+CONTENT: A sentence can be long and still be simple if it has only one finite verb. Length does not decide the form. The verbs and conjunctions do.
+EXAMPLE: The tall girl in the red jersey walked slowly across the field. (simple)
+@@ENDCARD
+
+TESTED:
+Count finite verbs in a sentence
+Name a sentence as simple, compound or complex
+Choose co-ordinating and subordinating conjunctions
+Join simple sentences into compound sentences
+Join clauses into complex sentences
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+A simple sentence has
+A: no verb
+B: two main clauses
+C: a subordinate clause
+D: one finite verb
+CORRECT: D
+EXPLAIN:
+A simple sentence deals with one idea and has one finite verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is simple?
+A: Candice cried because she was hurt.
+B: Dan plays soccer and works on his computer.
+C: Anne reads a book.
+D: Dan played, but Anne watched.
+CORRECT: C
+EXPLAIN:
+Anne reads a book has one finite verb. The other sentences have two.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a co-ordinating conjunction?
+A: because
+B: but
+C: while
+D: although
+CORRECT: B
+EXPLAIN:
+But joins equal clauses. Because, while and although introduce subordinate clauses.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a subordinating conjunction?
+A: and
+B: because
+C: but
+D: or
+CORRECT: B
+EXPLAIN:
+Because introduces a subordinate clause. And, but and or join equal clauses.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence is compound?
+A: Dan plays soccer because he loves it.
+B: Dan plays soccer at school.
+C: Dan plays soccer at school and works on his computer at home.
+D: Dan, who loves soccer, plays well.
+CORRECT: C
+EXPLAIN:
+Two equal clauses are joined by and. The other sentences are simple or complex.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence is complex?
+A: Candice received her results, but she was not happy.
+B: Candice received her results.
+C: Candice received her results and went home.
+D: Candice received her results while she was recuperating in hospital.
+CORRECT: D
+EXPLAIN:
+While she was recuperating is a subordinate clause attached to the main clause. The other sentences are simple or compound.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+How many finite verbs are in this sentence? She stayed in because it was raining.
+A: Two
+B: One
+C: Three
+D: None
+CORRECT: A
+EXPLAIN:
+Stayed and was are finite verbs, so there are two.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What type of sentence is He was tired, but he kept running?
+A: Simple
+B: Compound
+C: Complex
+D: A command
+CORRECT: B
+EXPLAIN:
+Two equal clauses are joined by but, so it is compound.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word could join these two sentences into a compound sentence? We were late. We caught the bus.
+A: if
+B: because
+C: while
+D: but
+CORRECT: D
+EXPLAIN:
+But is a co-ordinating conjunction and makes sense here. Because, while and if would create a complex sentence.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is simple even though it is long?
+A: The girl walked across the field because she was late.
+B: The girl walked across the field, and her friend followed.
+C: The tall girl in the red jersey walked slowly across the field.
+D: The girl walked across the field while it rained.
+CORRECT: C
+EXPLAIN:
+It has only one finite verb, walked, so it is simple. The other sentences have two finite verbs.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is complex?
+A: It was cold so they played outside.
+B: It was cold, but they played outside.
+C: It was cold and they played outside.
+D: Although it was cold, they played outside.
+CORRECT: D
+EXPLAIN:
+Although is a subordinating conjunction, so the first clause depends on the second. In the others, but, and and so join equal clauses.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which conjunction would turn these two ideas into a complex sentence? We cancelled the picnic. It rained.
+A: but
+B: and
+C: because
+D: or
+CORRECT: C
+EXPLAIN:
+Because makes it rained a subordinate clause that gives the reason. And, but and or would join equal clauses.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+A compound sentence is made of
+A: two or more simple sentences joined by a co-ordinating conjunction
+B: one main clause and a subordinate clause
+C: one clause with no verb
+D: a phrase only
+CORRECT: A
+EXPLAIN:
+Compound sentences join equal clauses with and, but, or or so. A main clause with a subordinate clause makes a complex sentence.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What type of sentence is this? Candice received her results while she was recuperating in hospital.
+A: Complex
+B: Compound
+C: Simple
+D: A command
+CORRECT: A
+EXPLAIN:
+It has a main clause and a subordinate clause introduced by while, so it is complex.
+@@ENDQ
+
+@@ENDQUESTIONS

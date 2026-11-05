@@ -1,0 +1,238 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: punctuation_spelling
+BROAD_TOPIC_DISPLAY: Punctuation and Spelling
+SUBTOPIC_ID: spelling_word_skills
+SUBTOPIC_DISPLAY: Spelling and Dictionary Skills
+LEVEL_ID: spelling_word_skills_mastery
+LEVEL_DISPLAY: Spelling and Dictionary Skills Mastery
+LEVEL_DESC: Grade 7 exam-style revision of spelling rules for suffixes and dictionary skills.
+LEVEL_ORDER: 1
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: Good spellers know the <strong>rules</strong> for adding endings to words, and good readers know how to use a <strong>dictionary</strong>. This Grade 7 revision checks both.
+
+@@CARD
+TYPE: key_rule
+TITLE: Adding suffixes
+CONTENT: After a short vowel and a consonant, double the consonant before a vowel suffix. After a long vowel, simply join. If a word ends in e, drop the e before a vowel suffix, but keep it after ce or ge. If a word ends in y, change the y to i before a suffix.
+EXAMPLE: sit + ing = sitting, hop + ed = hopped<br>fame + ous = famous<br>service + able = serviceable<br>rely + able = reliable, heavy + ness = heaviness
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Two-syllable words and ful
+CONTENT: In a word of two syllables, double the final consonant if the stress is on the second syllable, but not if the stress is on the first. When you add the suffix -ful, remember it has only one l.
+EXAMPLE: regret + ing = regretting<br>market + ing = marketing<br>beauty + ful = beautiful
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: i before e
+CONTENT: The usual rule is i before e except after c. There are exceptions, and the Handbook lists foreign, height, heir, leisure, seize, weight and weird.
+EXAMPLE: believe, receive<br>weird, seize, height
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Dictionary skills
+CONTENT: Words in a dictionary are arranged alphabetically. The guide words, or headwords, at the top of a page show the first and last word on that page. A dictionary gives spelling, meaning, pronunciation and word usage, and a thesaurus gives synonyms.
+EXAMPLE: A page with the guide words apple and bake contains avocado but not cabbage.
+@@ENDCARD
+
+TESTED:
+Add suffixes correctly
+Spell words using the i before e rule
+Spell two-syllable words with suffixes
+Use guide words
+Choose between a dictionary and a thesaurus
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which is the correct spelling of sit with -ing added?
+A: sitng
+B: siting
+C: sittting
+D: sitting
+CORRECT: D
+EXPLAIN:
+Sit has a short vowel and one consonant, so the consonant is doubled before ing.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which is the correct spelling of hop with -ed added?
+A: hoped
+B: hopped
+C: hoppped
+D: hopd
+CORRECT: B
+EXPLAIN:
+Hop has a short vowel and one consonant, so the consonant is doubled before ed. Hoped is the past of hope.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Words in a dictionary are arranged
+A: by meaning
+B: by length
+C: alphabetically
+D: by topic
+CORRECT: C
+EXPLAIN:
+Dictionaries list words in alphabetical order so they are easy to find.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+The guide words at the top of a dictionary page show
+A: the page number
+B: the meaning of every word
+C: the longest word
+D: the first and last words on that page
+CORRECT: D
+EXPLAIN:
+Guide words, or headwords, tell you which words appear on the page.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which is the correct spelling of fame with -ous added?
+A: famuous
+B: fameous
+C: famous
+D: famus
+CORRECT: C
+EXPLAIN:
+The final e is dropped before a vowel suffix, so fame and ous make famous.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which is the correct spelling of rely with -able added?
+A: relyable
+B: reliable
+C: relieable
+D: reliabel
+CORRECT: B
+EXPLAIN:
+A final y changes to i before a suffix, so rely and able make reliable.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which is the correct spelling of heavy with -ness added?
+A: heavieness
+B: heavyness
+C: heaviness
+D: heavness
+CORRECT: C
+EXPLAIN:
+The y changes to i before the suffix, giving heaviness.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which is the correct spelling of market with -ing added?
+A: markettting
+B: marketing
+C: markeing
+D: marketting
+CORRECT: B
+EXPLAIN:
+The stress in market is on the first syllable, so the consonant is not doubled.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which is the correct spelling of regret with -ing added?
+A: regrett
+B: regreting
+C: regrettting
+D: regretting
+CORRECT: D
+EXPLAIN:
+The stress in regret is on the second syllable, so the final consonant is doubled.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which is the correct spelling of service with -able added?
+A: servicible
+B: servicable
+C: servieceable
+D: serviceable
+CORRECT: D
+EXPLAIN:
+The e is kept after a soft c before able, which keeps the c sounding like s.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which is the correct spelling of beauty with the suffix -ful added?
+A: beautifull
+B: beautiful
+C: beautyful
+D: beutiful
+CORRECT: B
+EXPLAIN:
+The y changes to i and the suffix has one l.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which word is spelt correctly?
+A: receive
+B: recieve
+C: receeve
+D: receve
+CORRECT: A
+EXPLAIN:
+The rule is i before e except after c, so receive has ei.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which of these is an exception to the rule i before e except after c?
+A: weird
+B: field
+C: believe
+D: piece
+CORRECT: A
+EXPLAIN:
+Weird has ei but does not follow c. Field, believe and piece follow the rule.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which book would you use to find synonyms for a word?
+A: A thesaurus
+B: An atlas
+C: A telephone directory
+D: A diary
+CORRECT: A
+EXPLAIN:
+A thesaurus lists words with similar meanings. A dictionary gives meanings and spelling.
+@@ENDQ
+
+@@ENDQUESTIONS

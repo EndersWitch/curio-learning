@@ -1,0 +1,597 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: adjectives
+SUBTOPIC_DISPLAY: Adjectives
+LEVEL_ID: adjectives_1
+LEVEL_DISPLAY: Adjectives and Their Types
+LEVEL_DESC: Identify adjectives, their position and the main kinds of adjective.
+LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: An <strong>adjective</strong> describes a noun or pronoun. It tells us what kind, which one or how many. Adjectives can come before the noun or after a linking verb, and they come in several kinds.
+
+@@CARD
+TYPE: definition
+TITLE: What is an adjective?
+CONTENT: An adjective qualifies or describes a noun or pronoun. It adds detail. It answers the questions what kind, which one and how many.
+EXAMPLE: the tall, dark, handsome man<br>the loyal child<br>two clever girls
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Where adjectives go
+CONTENT: An adjective can come before the noun it describes. It can also come after a linking verb such as is, am, are, was or were. The meaning is the same in both positions.
+EXAMPLE: The clever boy won the prize. (before the noun)<br>The boy is clever. (after a linking verb)
+@@ENDCARD
+
+@@CARD
+TYPE: spot_difference
+TITLE: Kinds of adjective
+SIDE_A: Kind
+SIDE_B: Examples
+CONTENT: Descriptive, what kind | loyal, intelligent, creative<br>Proper, from a proper noun | the Cape Town beaches, the August winds<br>Quantity or number | two, many, several, few, some<br>Order | first, second, last<br>Demonstrative | this, that, these, those<br>Possessive | my, his, her, our, their, its<br>Interrogative | which, what, whose
+EXAMPLE: A proper adjective is a proper noun used to describe another noun, so it keeps its capital letter.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Compound adjectives and suffixes
+CONTENT: Adjectives joined by a hyphen are compound adjectives. Many adjectives can be spotted or made with endings such as -ful, -less, -ous, -able, -ible, -ive, -ary, -ant and -ish. Some are made from nouns.
+EXAMPLE: a well-deserved result, a feather-light cake<br>hopeful, painless, adventurous, comfortable<br>athlete → athletic
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Find the adjectives
+CONTENT: Write the adjectives in this sentence. Two hungry learners ate the delicious pap.
+EXAMPLE: Two, hungry and delicious. Two tells how many, hungry and delicious tell what kind. The is an article.
+@@ENDCARD
+
+TESTED:
+Identify adjectives in sentences
+Tell whether an adjective comes before the noun or after a linking verb
+Name proper, quantity, demonstrative and possessive adjectives
+Recognise compound adjectives
+Know common adjective endings
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is an adjective?
+A: quickly
+B: run
+C: tall
+D: Thabo
+CORRECT: C
+EXPLAIN:
+Tall describes a noun, so it is an adjective. Quickly is an adverb, run is a verb and Thabo is a proper noun.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is the adjective in this sentence? The clever girl won the prize.
+A: girl
+B: clever
+C: prize
+D: won
+CORRECT: B
+EXPLAIN:
+Clever describes the girl. Girl and prize are nouns and won is a verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which question does an adjective answer?
+A: Where?
+B: What kind?
+C: When?
+D: Why?
+CORRECT: B
+EXPLAIN:
+An adjective tells what kind, which one or how many. Where, when and why are questions answered by adverbs and adverbial phrases.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which phrase contains a proper adjective?
+A: the sandy beaches
+B: the long road
+C: the tall tree
+D: the African sunset
+CORRECT: D
+EXPLAIN:
+African comes from the proper noun Africa and describes the sunset, so it is a proper adjective and keeps its capital letter. Sandy, long and tall are ordinary descriptive adjectives.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is the linking verb in this sentence? The boy is clever.
+A: boy
+B: clever
+C: is
+D: The
+CORRECT: C
+EXPLAIN:
+Is links the noun boy to the adjective clever. Boy is a noun, clever is the adjective and the is an article.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is an adjective of quantity in this sentence? Several children sang.
+A: Several
+B: children
+C: sang
+D: None of them
+CORRECT: A
+EXPLAIN:
+Several tells how many children, so it is an adjective of quantity. Children is a noun and sang is a verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which adjective is formed from the noun athlete?
+A: athletic
+B: athleter
+C: athletely
+D: athletes
+CORRECT: A
+EXPLAIN:
+The ending -ic turns the noun into the adjective athletic, as in an athletic boy. Athletes is the plural noun, and the other forms are not words.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence contains a compound adjective?
+A: She baked a big cake.
+B: She baked a cake quickly.
+C: She baked a cake for Sipho.
+D: She baked a feather-light cake.
+CORRECT: D
+EXPLAIN:
+Feather-light is two words joined by a hyphen to describe the cake. The other sentences have a simple adjective, an adverb or a phrase.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: adjectives
+SUBTOPIC_DISPLAY: Adjectives
+LEVEL_ID: adjectives_2
+LEVEL_DISPLAY: Degrees of Comparison
+LEVEL_DESC: Use the positive, comparative and superlative forms of adjectives.
+LEVEL_ORDER: 2
+DIFFICULTY: Building
+ACCESS: Premium
+QUESTION_COUNT: 9
+INTRO: Adjectives change form when we compare things. The <strong>positive</strong> degree describes one thing, the <strong>comparative</strong> compares two, and the <strong>superlative</strong> compares more than two. The spelling follows patterns, with a few irregular exceptions.
+
+@@CARD
+TYPE: definition
+TITLE: Three degrees
+CONTENT: The positive degree refers to one thing. The comparative degree compares two things. The superlative degree compares more than two things and describes the best or the most.
+EXAMPLE: Joan is fit. (positive)<br>Mary is fitter than Joan. (comparative)<br>Sue is the fittest of the three. (superlative)
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Spelling the degrees
+CONTENT: Short adjectives add -er and -est. A short vowel before one final consonant doubles that consonant. Adjectives ending in e add -r and -st. A final y changes to i before -er and -est.
+EXAMPLE: clean, cleaner, cleanest<br>thin, thinner, thinnest<br>nice, nicer, nicest<br>easy, easier, easiest<br>pretty, prettier, prettiest
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Long adjectives
+CONTENT: Adjectives of more than two syllables use more and most. So do adjectives ending in -ful. Never use more with an -er ending, or most with an -est ending.
+EXAMPLE: comfortable, more comfortable, most comfortable<br>interesting, more interesting, most interesting<br>beautiful, more beautiful, most beautiful
+@@ENDCARD
+
+@@CARD
+TYPE: spot_difference
+TITLE: Irregular adjectives
+SIDE_A: Positive
+SIDE_B: Comparative and superlative
+CONTENT: good | better, best<br>bad | worse, worst<br>many, much | more, most<br>little | less, least<br>far | farther or further, farthest or furthest<br>old | older or elder, oldest or eldest
+EXAMPLE: Elder and eldest are normally used for members of a family.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Double comparison
+CONTENT: Do not use more with an -er form, and do not use most with an -est form. Also use the comparative for two things and the superlative for three or more.
+EXAMPLE: Wrong: more taller, most easiest, the tallest of the two<br>Right: taller, easiest, the taller of the two
+@@ENDCARD
+
+TESTED:
+Name the positive, comparative and superlative degrees
+Spell -er and -est forms with doubling, final e and final y
+Use more and most with long adjectives
+Use the irregular forms good, bad, many, little, far and old
+Avoid double comparisons
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the comparative form of tall?
+A: taller
+B: tallest
+C: more tall
+D: tallier
+CORRECT: A
+EXPLAIN:
+Short adjectives add -er to make the comparative. Tallest is the superlative, and the other forms are not used.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the superlative form of small?
+A: smaller
+B: most small
+C: smallier
+D: smallest
+CORRECT: D
+EXPLAIN:
+Short adjectives add -est to make the superlative. Smaller is the comparative, and the other forms are not used.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the comparative form of thin?
+A: thinner
+B: thiner
+C: more thin
+D: thinest
+CORRECT: A
+EXPLAIN:
+Thin has a short vowel and one final consonant, so the n is doubled before -er. Thiner has only one n, and thinest is a misspelt superlative.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the superlative form of easy?
+A: easyest
+B: easier
+C: most easy
+D: easiest
+CORRECT: D
+EXPLAIN:
+A final y changes to i before -est, giving easiest. Easier is the comparative form. Easyest keeps the y.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the comparative form of comfortable?
+A: more comfortable
+B: comfortabler
+C: most comfortable
+D: comfortabler than
+CORRECT: A
+EXPLAIN:
+Adjectives of more than two syllables use more for the comparative. Most comfortable is the superlative, and the other forms are not used.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Read the sentences. Joan is fit. Mary is fitter than Joan. Sue is the fittest of the three. Which degree is the word fittest?
+A: Positive
+B: Comparative
+C: Superlative
+D: None of these
+CORRECT: C
+EXPLAIN:
+Fittest compares Sue with two others and names the highest degree, so it is the superlative. Fit is the positive and fitter is the comparative.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What is the superlative form of bad?
+A: baddest
+B: worst
+C: worse
+D: most bad
+CORRECT: B
+EXPLAIN:
+Bad is irregular, and its forms are worse and worst. Worse is the comparative. The other forms are not correct.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: Sipho is more taller than Thabo.
+B: Sipho is taller than Thabo.
+C: Sipho is tallest than Thabo.
+D: Sipho is most tall than Thabo.
+CORRECT: B
+EXPLAIN:
+Two people are compared, so the comparative taller is needed, with than. More taller is a double comparison. Tallest cannot be used with than.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Three learners completed the sentence Of the three sisters, Zanele is the ___ singer.<br>Sipho wrote best.<br>Amara wrote better.<br>Naledi wrote most good.<br>Who is correct?
+A: Amara
+B: Naledi
+C: Sipho
+D: None of them
+CORRECT: C
+EXPLAIN:
+Three sisters are compared, so the superlative is needed, and good is irregular with the superlative best. Better is the comparative. Most good is not used.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: adjectives
+SUBTOPIC_DISPLAY: Adjectives
+LEVEL_ID: adjectives_mastery
+LEVEL_DISPLAY: Adjectives Mastery
+LEVEL_DESC: Mixed practice on types, position and degrees of adjectives.
+LEVEL_ORDER: 3
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: This challenge combines everything about <strong>adjectives</strong>. You will identify adjectives and their types, decide where they sit in a sentence, and choose the correct degree of comparison.
+
+@@CARD
+TYPE: spot_difference
+TITLE: Degrees at a glance
+SIDE_A: Degree
+SIDE_B: Example
+CONTENT: Positive | fit, pretty, comfortable<br>Comparative | fitter, prettier, more comfortable<br>Superlative | fittest, prettiest, most comfortable
+EXAMPLE: Irregular forms to learn are good, better, best and bad, worse, worst.
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Choosing the degree
+CONTENT: 1. Count the things being compared.<br>2. One thing, use the positive. Two things, use the comparative. Three or more, use the superlative.<br>3. Check the spelling pattern for the word.<br>4. Check that you have not used more with -er or most with -est.
+EXAMPLE: Mia is the (tall) girl of the three.<br>Three girls, so superlative. Tall adds -est, so tallest.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Types and position
+CONTENT: An adjective can come before a noun or after a linking verb. Proper adjectives keep their capital letters. Many adjectives can be formed from nouns, for example athlete to athletic.
+EXAMPLE: The tired boy slept. The boy is tired.<br>a Zulu dance<br>an athletic boy
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Common adjective mistakes
+CONTENT: The usual errors are double comparisons, using the superlative for two things and using the comparative for three or more. Spelling errors with doubled consonants and final y are also common.
+EXAMPLE: Wrong: more taller, the tallest of the two, prettyer<br>Right: taller, the taller of the two, prettier
+@@ENDCARD
+
+TESTED:
+Identify adjectives and their kinds
+Tell the position of an adjective
+Form the comparative and superlative correctly
+Use the irregular forms
+Spot double comparison and wrong degrees
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is an adjective?
+A: bakkie
+B: slowly
+C: lovely
+D: sing
+CORRECT: C
+EXPLAIN:
+Lovely describes a noun, so it is an adjective. Bakkie is a noun, slowly is an adverb and sing is a verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which ending often helps to form adjectives?
+A: -ful
+B: -tion
+C: -ment
+D: -ness
+CORRECT: A
+EXPLAIN:
+The ending -ful forms adjectives such as hopeful and painful. The endings -tion, -ment and -ness usually form nouns.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a possessive adjective?
+A: me
+B: mine
+C: my
+D: I
+CORRECT: C
+EXPLAIN:
+My comes before a noun and shows who owns it. Mine is a possessive pronoun, and me and I are personal pronouns.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In which sentence does the adjective come after a linking verb?
+A: The tired boy slept.
+B: Tired boys slept.
+C: A tired boy waited.
+D: The boy is tired.
+CORRECT: D
+EXPLAIN:
+In the boy is tired, the adjective follows the linking verb is. In the other sentences tired comes before the noun.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the comparative form of pretty?
+A: prettier
+B: more pretty
+C: prettiest
+D: prettyer
+CORRECT: A
+EXPLAIN:
+A final y changes to i before -er, giving prettier. Prettiest is the superlative, and prettyer keeps the y.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the superlative form of good?
+A: better
+B: best
+C: goodest
+D: most good
+CORRECT: B
+EXPLAIN:
+Good is irregular, and its forms are better and best. Better is the comparative.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the comparative form of interesting?
+A: more interesting
+B: most interesting
+C: interestinger
+D: interestingest
+CORRECT: A
+EXPLAIN:
+Long adjectives use more for the comparative. Most interesting is the superlative, and the other forms are not used.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence compares exactly two things?
+A: Thabo is the tallest.
+B: Thabo is tall.
+C: Thabo is the tallest of the three.
+D: Thabo is taller than Sipho.
+CORRECT: D
+EXPLAIN:
+Taller than compares two people, which is the comparative. Tall is the positive, and tallest is the superlative for three or more.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which phrase contains a proper adjective?
+A: a quick dance
+B: a long dance
+C: a Zulu dance
+D: a happy dance
+CORRECT: C
+EXPLAIN:
+Zulu is a proper noun used to describe the dance, and it keeps its capital letter. Quick, long and happy are ordinary descriptive adjectives.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: This is the most easiest test.
+B: This is the easyest test.
+C: This is the more easy test.
+D: This is the easiest test.
+CORRECT: D
+EXPLAIN:
+Easy ends in y, which changes to i before -est, giving easiest. Most easiest is a double superlative, and easyest keeps the y.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What is the superlative form of little when it means a small amount?
+A: littlest
+B: least
+C: most little
+D: less
+CORRECT: B
+EXPLAIN:
+Little is irregular, and its forms are less and least. Less is the comparative.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Three learners completed the sentence Mia is the ___ of the two sisters.<br>Sipho wrote tallest.<br>Amara wrote taller.<br>Naledi wrote more tall.<br>Who is correct?
+A: Sipho
+B: Amara
+C: Naledi
+D: None of them
+CORRECT: B
+EXPLAIN:
+Only two sisters are compared, so the comparative taller is correct. Tallest is for three or more, and more tall is not the normal comparative of a short adjective.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Read the passage.<br>My brother is more tall than me. He is the most good player in the team.<br>How many adjective mistakes are there?
+A: One
+B: Two
+C: Three
+D: Four
+CORRECT: B
+EXPLAIN:
+More tall should be taller, and most good should be best. Both are errors in the form of the adjective, so there are two mistakes.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence contains an adjective formed from a noun?
+A: He is running.
+B: He runs quickly.
+C: He is an athletic boy.
+D: He ran home.
+CORRECT: C
+EXPLAIN:
+Athletic is formed from the noun athlete. Quickly is an adverb, and running and ran are verb forms.
+@@ENDQ
+
+@@ENDQUESTIONS

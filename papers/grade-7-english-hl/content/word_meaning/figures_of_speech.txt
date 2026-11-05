@@ -1,0 +1,240 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: word_meaning
+BROAD_TOPIC_DISPLAY: Word Meaning
+SUBTOPIC_ID: figures_of_speech
+SUBTOPIC_DISPLAY: Figures of Speech
+LEVEL_ID: figures_of_speech_mastery
+LEVEL_DISPLAY: Figures of Speech Mastery
+LEVEL_DESC: Grade 7 exam-style revision of the main figures of speech.
+LEVEL_ORDER: 1
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: <strong>Figures of speech</strong> create pictures in the mind. This Grade 7 revision covers comparisons, sound devices, exaggeration and understatement, and contradictions.
+
+@@CARD
+TYPE: spot_difference
+TITLE: Comparisons
+SIDE_A: Figure
+SIDE_B: Example
+CONTENT: Simile, a direct comparison with as or like | He is as wealthy as Bill Gates.<br>Metaphor, a comparison without as or like | She is a bubble in a bottle of champagne.<br>Personification, human qualities given to things | The clouds looked down and wept on the earth.
+EXAMPLE: A metaphor says one thing is another. A simile says one thing is like another.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Sound devices
+CONTENT: Alliteration repeats consonant sounds at the beginning of words. Assonance repeats vowel sounds. Onomatopoeia uses words that imitate real sounds. Rhyme depends on sound.
+EXAMPLE: Football fever fuels fans. (alliteration)<br>crash, bang, hiss (onomatopoeia)
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Exaggeration and understatement
+CONTENT: Hyperbole is an over-exaggeration not meant to be taken literally. Litotes uses a negative and an opposite to understate. A euphemism softens an unpleasant idea.
+EXAMPLE: She prepared enough food to feed an army. (hyperbole)<br>He is no Einstein. (litotes)<br>He passed away. (euphemism)
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Contradictions
+CONTENT: An oxymoron places two seemingly contradictory words next to each other. Irony implies the opposite of what is said. Sarcasm is irony used to hurt or insult.
+EXAMPLE: a pretty ugly sight (oxymoron)<br>I can't wait for my detention on Friday afternoon. (irony)
+@@ENDCARD
+
+TESTED:
+Name common figures of speech
+Tell a simile from a metaphor
+Recognise sound devices
+Recognise exaggeration and understatement
+Recognise oxymoron and irony
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence contains a simile?
+A: He has money.
+B: He is a Bill Gates.
+C: He is wealthy.
+D: He is as wealthy as Bill Gates.
+CORRECT: D
+EXPLAIN:
+A simile compares directly using as or like. A metaphor makes the comparison without those words.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence contains a metaphor?
+A: The classroom was like a zoo.
+B: The classroom was a zoo.
+C: The classroom was as noisy as a zoo.
+D: The classroom was noisy.
+CORRECT: B
+EXPLAIN:
+A metaphor says one thing is another. The other sentences use like or as, or make no comparison.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence contains personification?
+A: The clouds covered the sky.
+B: The clouds were grey.
+C: The clouds looked down and wept on the earth.
+D: There were many clouds.
+CORRECT: C
+EXPLAIN:
+Looking down and weeping are human actions given to clouds, which is personification.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence contains alliteration?
+A: Football is played on a field.
+B: Football is exciting.
+C: Fans love football.
+D: Football fever fuels fans.
+CORRECT: D
+EXPLAIN:
+The repeated f sound at the beginning of words is alliteration.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which words in The sky exploded with a crash, bang and a hiss are examples of onomatopoeia?
+A: sky, exploded
+B: crash, bang, hiss
+C: with, and
+D: a, the
+CORRECT: B
+EXPLAIN:
+Crash, bang and hiss imitate real sounds, which is onomatopoeia.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence uses hyperbole?
+A: She prepared food for four.
+B: She prepared dinner.
+C: She prepared enough food to feed an army.
+D: She cooked rice.
+CORRECT: C
+EXPLAIN:
+Enough food to feed an army is an exaggeration not meant to be taken literally.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which phrase is an oxymoron?
+A: a very ugly sight
+B: a pretty ugly sight
+C: a big sight
+D: a sight to see
+CORRECT: B
+EXPLAIN:
+Pretty and ugly are contradictory words placed together.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+A simile always contains the word
+A: if or when
+B: and or but
+C: as or like
+D: not or no
+CORRECT: C
+EXPLAIN:
+A simile is a direct comparison with as or like.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence contains a euphemism?
+A: He ran away.
+B: He died suddenly.
+C: He was angry.
+D: He passed away.
+CORRECT: D
+EXPLAIN:
+Passed away softens the idea of death.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is an example of irony?
+A: Detention is boring.
+B: I am looking forward to my holiday.
+C: Detention is on Friday afternoon.
+D: I can't wait for my detention on Friday afternoon.
+CORRECT: D
+EXPLAIN:
+The speaker means the opposite of what is said, because nobody looks forward to detention.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is an example of litotes?
+A: He is a genius.
+B: He is no Einstein.
+C: He is smarter than a thousand scientists.
+D: He is like Einstein.
+CORRECT: B
+EXPLAIN:
+He is no Einstein understates by using a negative to mean he is not clever.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is personification?
+A: The wind whispered secrets to the trees.
+B: The wind was strong.
+C: The wind blew at forty kilometres an hour.
+D: Wind is moving air.
+CORRECT: A
+EXPLAIN:
+Whispering secrets is a human action given to the wind.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which pair is correctly matched?
+A: hyperbole and I've told you a million times
+B: simile and The sea is a mirror
+C: metaphor and as quiet as a mouse
+D: alliteration and bang
+CORRECT: A
+EXPLAIN:
+A million times is an exaggeration. The sea is a mirror is a metaphor, as quiet as a mouse is a simile, and bang is onomatopoeia.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+A metaphor is a comparison
+A: without the words as or like
+B: that always contains as or like
+C: that uses a rhyme
+D: that repeats a sound
+CORRECT: A
+EXPLAIN:
+A metaphor says that one thing is another without using as or like. A simile uses as or like.
+@@ENDQ
+
+@@ENDQUESTIONS

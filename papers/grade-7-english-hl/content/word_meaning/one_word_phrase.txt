@@ -1,0 +1,408 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: word_meaning
+BROAD_TOPIC_DISPLAY: Word Meaning
+SUBTOPIC_ID: one_word_phrase
+SUBTOPIC_DISPLAY: One Word for a Phrase
+LEVEL_ID: one_word_phrase_1
+LEVEL_DISPLAY: One Word for a Phrase
+LEVEL_DESC: Replace a group of words with one exact word.
+LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: Sometimes one word can say what a whole phrase says. A child whose parents have died is an <strong>orphan</strong>. Using the exact word makes your writing shorter and clearer.
+
+@@CARD
+TYPE: definition
+TITLE: One word for a phrase
+CONTENT: Many phrases have a single word with the same meaning. Using that word makes a sentence shorter. The Handbook does not cover this topic, so this level uses well-known words.
+EXAMPLE: a person who walks, a pedestrian<br>a child whose parents are dead, an orphan
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Animals and what they eat
+CONTENT: Special words name animals by what they eat.
+EXAMPLE: herbivore, an animal that eats only plants<br>carnivore, an animal that eats meat<br>omnivore, an animal that eats both plants and meat
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: People and activities
+CONTENT: Many one-word replacements name a kind of person or a state.
+EXAMPLE: orphan, a child whose parents are both dead<br>pedestrian, a person who walks<br>vegetarian, a person who does not eat meat<br>novice, a person who is new to a job or activity<br>nocturnal, active at night
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Prefixes help
+CONTENT: A prefix in the word can give you the meaning. The prefix bi means two, auto means self and mono means one.
+EXAMPLE: bilingual, able to speak two languages<br>autobiography, the story of your own life
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Say it in one word
+CONTENT: Write one word for an animal that eats only plants.
+EXAMPLE: herbivore.
+@@ENDCARD
+
+TESTED:
+Replace a phrase with one word
+Name animals by what they eat
+Name kinds of people with one word
+Use prefixes to work out meaning
+Tell similar words apart
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which one word means a child whose parents are both dead?
+A: novice
+B: pedestrian
+C: vegetarian
+D: orphan
+CORRECT: D
+EXPLAIN:
+An orphan is a child whose parents are both dead. A pedestrian walks, a vegetarian does not eat meat and a novice is a beginner.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which one word means a person who walks?
+A: vegetarian
+B: orphan
+C: pedestrian
+D: novice
+CORRECT: C
+EXPLAIN:
+A pedestrian is a person who travels on foot. The other words name different kinds of people.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which one word means an animal that eats only plants?
+A: carnivore
+B: herbivore
+C: omnivore
+D: insect
+CORRECT: B
+EXPLAIN:
+A herbivore eats only plants. A carnivore eats meat, an omnivore eats both, and insect names a kind of animal.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which one word means a person who does not eat meat?
+A: orphan
+B: carnivore
+C: pedestrian
+D: vegetarian
+CORRECT: D
+EXPLAIN:
+A vegetarian does not eat meat. A carnivore is an animal that eats meat, and the other words name different kinds of people.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which phrase means the same as bilingual?
+A: Able to speak no languages
+B: Able to speak two languages
+C: Able to speak many languages
+D: Able to read well
+CORRECT: B
+EXPLAIN:
+The prefix bi means two, so bilingual means able to speak two languages.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which one word means an animal that eats both plants and meat?
+A: herbivore
+B: carnivore
+C: omnivore
+D: predator
+CORRECT: C
+EXPLAIN:
+An omnivore eats both plants and meat. A carnivore eats meat, a herbivore eats plants, and a predator hunts other animals.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word describes animals that are active at night?
+A: nocturnal
+B: noisy
+C: nomadic
+D: native
+CORRECT: A
+EXPLAIN:
+Nocturnal means active at night, as owls and bats are. The other words have different meanings.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which one word means a person who is new to a job or activity?
+A: novice
+B: expert
+C: pedestrian
+D: veteran
+CORRECT: A
+EXPLAIN:
+A novice is a beginner. An expert and a veteran have a lot of experience, and a pedestrian is a person who walks.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: word_meaning
+BROAD_TOPIC_DISPLAY: Word Meaning
+SUBTOPIC_ID: one_word_phrase
+SUBTOPIC_DISPLAY: One Word for a Phrase
+LEVEL_ID: one_word_phrase_mastery
+LEVEL_DISPLAY: One Word for a Phrase Mastery
+LEVEL_DESC: Mixed practice replacing phrases with one exact word.
+LEVEL_ORDER: 2
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: This challenge brings together everything about <strong>one word for a phrase</strong>. You will name people, animals, periods of time and kinds of writing with a single exact word.
+
+@@CARD
+TYPE: key_rule
+TITLE: People and writing
+CONTENT: Many phrases describing people or writing have one-word replacements. Prefixes such as auto, mono and bi help you work out the meaning.
+EXAMPLE: biography, the story of a person's life written by someone else<br>autobiography, the story of your own life<br>monologue, a long speech by one person<br>anonymous, of unknown name<br>unanimous, agreed by everyone
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Time and animals
+CONTENT: Some words name a length of time, and others name animals by their habits.
+EXAMPLE: decade, ten years<br>century, one hundred years<br>millennium, one thousand years<br>nocturnal, active at night<br>carnivore, herbivore and omnivore
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Finding the exact word
+CONTENT: 1. Read the phrase and decide what it describes.<br>2. Look for a prefix or root you know.<br>3. Test each choice by putting it back into the sentence.<br>4. Pick the word that fits the whole phrase.
+EXAMPLE: a person who is new to a job<br>The word is novice, since the others describe experts or walkers.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Words that look alike
+CONTENT: Some words in this group are easy to mix up. Biography and autobiography differ by who wrote the story, and carnivore, herbivore and omnivore differ by what the animal eats.
+EXAMPLE: Wrong: A herbivore eats meat.<br>Right: A carnivore eats meat.
+@@ENDCARD
+
+TESTED:
+Replace phrases with one word
+Name periods of time with one word
+Name animals by habits and diet
+Use prefixes to work out meaning
+Tell similar words apart
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which one word means a period of ten years?
+A: month
+B: century
+C: millennium
+D: decade
+CORRECT: D
+EXPLAIN:
+A decade is ten years. A century is one hundred years, a millennium is one thousand years and a month is much shorter.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which one word means a period of one hundred years?
+A: millennium
+B: decade
+C: century
+D: week
+CORRECT: C
+EXPLAIN:
+A century is one hundred years. A decade is ten years and a millennium is one thousand years.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which one word means an animal that eats meat?
+A: herbivore
+B: carnivore
+C: omnivore
+D: pedestrian
+CORRECT: B
+EXPLAIN:
+A carnivore eats meat. A herbivore eats plants and an omnivore eats both. A pedestrian is a person who walks.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which one word means able to speak two languages?
+A: unanimous
+B: monologue
+C: anonymous
+D: bilingual
+CORRECT: D
+EXPLAIN:
+Bilingual means able to speak two languages, because bi means two. The other words have different meanings.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which one word means of unknown name, as in a writer whose name is not known?
+A: unanimous
+B: anonymous
+C: nocturnal
+D: bilingual
+CORRECT: B
+EXPLAIN:
+Anonymous means that the name is not known. Unanimous means that everyone agrees.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which one word means a long speech by one person?
+A: biography
+B: dialogue
+C: monologue
+D: decade
+CORRECT: C
+EXPLAIN:
+A monologue is a long speech by one person, because mono means one. A dialogue is a conversation between people.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which one word means the story of a person's life written by someone else?
+A: monologue
+B: autobiography
+C: diary
+D: biography
+CORRECT: D
+EXPLAIN:
+A biography is a life story written by another person. An autobiography is written by the person themselves.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which one word means a period of one thousand years?
+A: decade
+B: millennium
+C: century
+D: season
+CORRECT: B
+EXPLAIN:
+A millennium is one thousand years. A decade is ten years and a century is one hundred years.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which one word means active at night?
+A: native
+B: nomadic
+C: nocturnal
+D: nervous
+CORRECT: C
+EXPLAIN:
+Nocturnal means active at night. The other words have different meanings.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+In the word bilingual, what does the prefix bi mean?
+A: Two
+B: One
+C: Self
+D: Many
+CORRECT: A
+EXPLAIN:
+Bi means two, so bilingual means able to speak two languages. Mono means one, auto means self and multi means many.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which one word means the story of your own life, written by yourself?
+A: novel
+B: biography
+C: monologue
+D: autobiography
+CORRECT: D
+EXPLAIN:
+An autobiography is a life story written by the person themselves, because auto means self. A biography is written by someone else.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence means the same as The learners voted and everyone agreed?
+A: The vote was nocturnal.
+B: The vote was anonymous.
+C: The vote was unanimous.
+D: The vote was bilingual.
+CORRECT: C
+EXPLAIN:
+Unanimous means agreed by everyone. Anonymous means the name is not known, and nocturnal and bilingual do not describe a vote.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which pair is correctly matched?
+A: herbivore, eats only plants
+B: carnivore, eats only plants
+C: omnivore, eats only meat
+D: herbivore, eats only meat
+CORRECT: A
+EXPLAIN:
+A herbivore eats only plants. A carnivore eats meat and an omnivore eats both plants and meat.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+In the word autobiography, what does the prefix auto mean?
+A: Self
+B: Two
+C: Many
+D: One
+CORRECT: A
+EXPLAIN:
+Auto means self, so an autobiography is a life story written by the person themselves. Bi means two, multi means many and mono means one.
+@@ENDQ
+
+@@ENDQUESTIONS

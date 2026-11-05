@@ -1,0 +1,238 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: punctuation_spelling
+BROAD_TOPIC_DISPLAY: Punctuation and Spelling
+SUBTOPIC_ID: punctuation
+SUBTOPIC_DISPLAY: Punctuation
+LEVEL_ID: punctuation_mastery
+LEVEL_DISPLAY: Punctuation Mastery
+LEVEL_DESC: Grade 7 exam-style revision of punctuation.
+LEVEL_ORDER: 1
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: Punctuation marks make writing easier to read and understand. This Grade 7 revision covers capital letters, commas, semi-colons, colons, quotation marks, apostrophes, hyphens, dashes and ellipses.
+
+@@CARD
+TYPE: key_rule
+TITLE: Capitals, full stops and commas
+CONTENT: Sentences begin with capital letters, and so do proper nouns and the main words in titles. Commas separate items in a list, with no comma before and or or. They also separate introductory words and extra information such as however or a person's title.
+EXAMPLE: We bought books, pens, pencils and erasers.<br>She was, however, late.<br>Mr Jenkins, the Principal, addressed the parents.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Semi-colons, colons and the comma splice
+CONTENT: Do not use a comma to join two main clauses, which is a comma splice. Use a full stop, a semi-colon or a conjunction. A semi-colon balances two related ideas. A colon introduces a list, an explanation or a quotation.
+EXAMPLE: A census was taken. The government needed statistics.<br>In summer she swims; in winter she skates.<br>We need to buy the following items: lettuce, tomatoes and carrots.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Apostrophes
+CONTENT: An apostrophe shows where letters are left out in a contraction or shows possession. If the owner is singular, add 's. If the owners are plural and end in s, add the apostrophe after the s. Possessive pronouns such as ours and theirs take no apostrophe.
+EXAMPLE: didn't, we've<br>the boy's school, the boys' school<br>women's clothing
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Quotation marks, hyphens, dashes and ellipses
+CONTENT: Quotation marks enclose direct speech, and all punctuation falls inside them. A hyphen links a prefix or two words, and is used when a prefix ends in the vowel that begins the word. A dash gives a pause or afterthought. An ellipsis shows that a sentence is incomplete.
+EXAMPLE: Mr Thompson said, "There will be no homework this weekend."<br>re-examine, co-opt<br>He walked to the edge of the cliff and ...
+@@ENDCARD
+
+TESTED:
+Use capital letters correctly
+Use commas, semi-colons and colons
+Avoid the comma splice
+Use apostrophes for contractions and possession
+Use quotation marks, hyphens, dashes and ellipses
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence uses capital letters correctly?
+A: we visited mexico last year.
+B: We visited Mexico last year.
+C: We visited mexico last year.
+D: we visited Mexico last year.
+CORRECT: B
+EXPLAIN:
+A sentence begins with a capital letter and a proper noun such as Mexico has one too.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence uses commas in a list correctly?
+A: We bought books, pens, pencils, and, erasers.
+B: We bought books pens pencils and erasers.
+C: We bought books, pens, pencils and erasers.
+D: We bought, books pens pencils and erasers.
+CORRECT: C
+EXPLAIN:
+Commas separate the items, and there is no comma before and.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which mark ends a sentence that expresses sudden fear?
+A: A hyphen
+B: A comma
+C: A colon
+D: An exclamation mark
+CORRECT: D
+EXPLAIN:
+Exclamation marks follow words that express strong emotion such as fear.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Quotation marks are used to
+A: join two words
+B: show the exact words someone said
+C: end a sentence
+D: show a list
+CORRECT: B
+EXPLAIN:
+Quotation marks, or inverted commas, enclose direct speech.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence has commas in the right places?
+A: She, was however late for the appointment.
+B: She was however late, for the appointment.
+C: She was, however, late for the appointment.
+D: She was however, late for the, appointment.
+CORRECT: C
+EXPLAIN:
+Commas are placed before and after however when it interrupts the sentence.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence avoids the comma splice?
+A: A census was taken the, government needed statistics.
+B: A census was taken, the government needed statistics.
+C: A census was taken, and, the government needed statistics.
+D: A census was taken. The government needed statistics.
+CORRECT: D
+EXPLAIN:
+Two main clauses are joined with a full stop. A comma alone cannot join them.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence uses a semi-colon correctly?
+A: In summer; she swims in winter, she skates.
+B: In summer she swims; in winter she skates.
+C: In summer she swims in; winter she skates.
+D: In; summer she swims in winter she skates.
+CORRECT: B
+EXPLAIN:
+A semi-colon balances two related main clauses.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence uses a colon correctly to introduce a list?
+A: We need: to buy the following items lettuce, tomatoes and carrots.
+B: We need to buy: the following items lettuce, tomatoes and carrots.
+C: We need to buy the following items: lettuce, tomatoes and carrots.
+D: We need to buy the following items lettuce: tomatoes and carrots.
+CORRECT: C
+EXPLAIN:
+A colon comes after a complete clause that introduces the list.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence has the contraction written correctly?
+A: I did not' know the answer.
+B: I did'nt know the answer.
+C: I didnt know the answer.
+D: I didn't know the answer.
+CORRECT: D
+EXPLAIN:
+The apostrophe takes the place of the o in did not.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which phrase correctly shows that the school belongs to more than one boy?
+A: the boys school
+B: the boy's school
+C: the boys' school
+D: the boys's school
+CORRECT: C
+EXPLAIN:
+The owners are plural and end in s, so the apostrophe goes after the s.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: You should've of been there.
+B: You should of been there.
+C: You should off been there.
+D: You should have been there.
+CORRECT: D
+EXPLAIN:
+Should have, or the contraction should've, is correct. Should of is wrong.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Why is there a hyphen in re-examine?
+A: The prefix ends in the same vowel the word begins with
+B: It is the end of the line
+C: It shows possession
+D: It shows a list
+CORRECT: A
+EXPLAIN:
+A hyphen is inserted when a prefix ends in the vowel that begins the word.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+The three dots in He walked to the edge of the cliff and ... show that
+A: the sentence is incomplete
+B: a list follows
+C: someone is speaking
+D: the word is short
+CORRECT: A
+EXPLAIN:
+An ellipsis shows that a sentence is incomplete or that something has been left out.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence has the quotation marks and punctuation correct?
+A: "Open the windows! It's stifling in here."
+B: "Open the windows!" It's stifling in here."
+C: "Open the windows! It's stifling in here".
+D: "Open the windows" ! It's stifling in here."
+CORRECT: A
+EXPLAIN:
+All punctuation falls inside the quotation marks, and the quotation is opened and closed once.
+@@ENDQ
+
+@@ENDQUESTIONS

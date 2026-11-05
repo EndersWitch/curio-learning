@@ -1,0 +1,793 @@
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: pronouns
+SUBTOPIC_DISPLAY: Pronouns
+LEVEL_ID: pronouns_1
+LEVEL_DISPLAY: Personal and Possessive Pronouns
+LEVEL_DESC: Use subject, object and possessive pronouns correctly.
+LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: A <strong>pronoun</strong> takes the place of a noun so that we do not repeat it. <strong>Personal pronouns</strong> change form depending on whether they are the subject or the object of a sentence. <strong>Possessive pronouns</strong> show who owns something.
+
+@@CARD
+TYPE: definition
+TITLE: What is a pronoun?
+CONTENT: A pronoun stands in place of a noun. We use pronouns to avoid repetition. Personal pronouns refer to people or things.
+EXAMPLE: Joan plays the piano. She practises it daily.<br>She stands in place of Joan and it stands in place of the piano.
+@@ENDCARD
+
+@@CARD
+TYPE: spot_difference
+TITLE: Subject, object and possessive
+SIDE_A: Subject and object
+SIDE_B: Possessive
+CONTENT: I, me | mine<br>you, you | yours<br>he, him | his<br>she, her | hers<br>we, us | ours<br>they, them | theirs
+EXAMPLE: Subject pronouns do the action. Object pronouns receive it. Possessive pronouns show ownership.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Possessive pronouns or adjectives
+CONTENT: Possessive pronouns stand alone and replace a noun. Possessive adjectives such as my, your, her and their come before a noun. The Handbook points out that possessive adjectives are not pronouns. Possessive pronouns never take an apostrophe.
+EXAMPLE: This house was mine, but now it is ours.<br>This is my house. (my is an adjective)<br>This is theirs, not yours.
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: I or me
+CONTENT: 1. Take out the other person.<br>2. Read the sentence as if you are alone in it.<br>3. Use the pronoun that sounds right.
+EXAMPLE: Father gave the tickets to John and ___.<br>Father gave the tickets to me. So the answer is John and me.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Its and it's
+CONTENT: Its with no apostrophe shows possession. It's is short for it is. The Handbook warns that these two similar words are often confused.
+EXAMPLE: The bird is sitting on eggs in its nest.<br>It's getting colder by the day.
+@@ENDCARD
+
+TESTED:
+Name personal pronouns and tell subject from object forms
+Use I and me correctly
+Name the possessive pronouns
+Tell possessive pronouns from possessive adjectives
+Know that possessive pronouns take no apostrophe
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a personal pronoun?
+A: she
+B: Thabo
+C: table
+D: quickly
+CORRECT: A
+EXPLAIN:
+She takes the place of a female person's name, so it is a personal pronoun. Thabo and table are nouns, and quickly is an adverb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Choose the correct pronoun. Naledi is tired because ___ walked far.
+A: her
+B: hers
+C: herself
+D: she
+CORRECT: D
+EXPLAIN:
+The pronoun is the subject of walked, so the subject form she is needed. Her is the object form, hers is possessive, and herself is reflexive.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is an object pronoun?
+A: I
+B: he
+C: me
+D: they
+CORRECT: C
+EXPLAIN:
+Me is the object form, as in she called me. I, he and they are subject forms.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a possessive pronoun?
+A: my
+B: me
+C: mine
+D: I
+CORRECT: C
+EXPLAIN:
+Mine can stand alone to show ownership, as in this book is mine. My is a possessive adjective because it comes before a noun. Me and I are personal pronouns.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. The book belongs to me. This book is ___.
+A: mine
+B: me
+C: I
+D: my
+CORRECT: A
+EXPLAIN:
+The pronoun stands alone at the end of the sentence, so the possessive pronoun mine is needed. My must come before a noun, and me and I are personal pronouns.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. Father gave the tickets to John and ___.
+A: I
+B: mine
+C: myself
+D: me
+CORRECT: D
+EXPLAIN:
+Leave out John and the sentence reads Father gave the tickets to me. The object form me is needed after the word to. I is a subject form.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In the sentence This is my house, the word my comes before a noun and describes it. What is it called?
+A: A possessive pronoun
+B: A possessive adjective
+C: A personal pronoun
+D: A reflexive pronoun
+CORRECT: B
+EXPLAIN:
+My comes before the noun house and describes it, so it is a possessive adjective. A possessive pronoun stands alone, as in this house is mine.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: The house is their's.
+B: The house is theirs.
+C: The house is theirs'.
+D: The house is thiers.
+CORRECT: B
+EXPLAIN:
+Possessive pronouns such as theirs, ours and yours do not take an apostrophe. The other forms add an apostrophe or misspell the word.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: pronouns
+SUBTOPIC_DISPLAY: Pronouns
+LEVEL_ID: pronouns_2
+LEVEL_DISPLAY: Demonstrative and Relative Pronouns
+LEVEL_DESC: Use this, that, these and those, and join sentences with who, whom, whose, which and that.
+LEVEL_ORDER: 2
+DIFFICULTY: Building
+ACCESS: Premium
+QUESTION_COUNT: 9
+INTRO: <strong>Demonstrative pronouns</strong> point out a specific person or thing. <strong>Relative pronouns</strong> join one part of a sentence to another and take the place of a noun. Choosing between who, whom, whose, which and that is the main skill.
+
+@@CARD
+TYPE: definition
+TITLE: Demonstrative pronouns
+CONTENT: This, that, these and those point out a specific person or thing. This and these are near, and that and those are far. If one of these words is followed by a noun, it becomes an adjective.
+EXAMPLE: This is not the way we do things.<br>That has to go.<br>That picture has to go. (that describes picture, so it is an adjective here)
+@@ENDCARD
+
+@@CARD
+TYPE: definition
+TITLE: Relative pronouns
+CONTENT: Relative pronouns do the job of a conjunction by joining parts of a sentence. They also replace a noun or pronoun. Who, whom and whose refer to people. That, which and what refer to animals or things.
+EXAMPLE: This is my sister. She is visiting today.<br>This is my sister who is visiting today.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Who, whom and whose
+CONTENT: Use who when it replaces the subject. Use whom when it replaces an object, such as her or him. Use whose when it replaces a possessive such as her or his.
+EXAMPLE: This is my sister whom I am visiting today. (replaces her)<br>I felt proud of the girl whose results were excellent. (replaces her results)
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Keep it close
+CONTENT: A relative pronoun should sit close to the noun it refers to. If it does not, the meaning can become unclear. When which follows a preposition, the preposition usually comes first.
+EXAMPLE: I have a ring that sparkles in my jewellery box. (clear)<br>I have a ring in my jewellery box that sparkles. (unclear, does the ring or the box sparkle)
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Which for people
+CONTENT: Do not use which for people. Use who, whom or whose. Using whom as a subject is also a mistake.
+EXAMPLE: Wrong: The girl which won the race is my cousin.<br>Right: The girl who won the race is my cousin.
+@@ENDCARD
+
+TESTED:
+Identify demonstrative pronouns
+Tell a demonstrative pronoun from a demonstrative adjective
+Choose who, whom, whose, which and that
+Join two sentences with a relative pronoun
+Place a relative pronoun close to its noun
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+In the sentence These are my books, which word is the demonstrative pronoun?
+A: are
+B: my
+C: books
+D: These
+CORRECT: D
+EXPLAIN:
+These stands alone in place of a noun and points out particular things. My is a possessive adjective, books is a noun and are is a verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which relative pronoun refers to people?
+A: who
+B: which
+C: what
+D: where
+CORRECT: A
+EXPLAIN:
+Who is used for people. Which and what refer to things or animals, and where refers to a place.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. This is my sister ___ is visiting today.
+A: who
+B: which
+C: whose
+D: whom
+CORRECT: A
+EXPLAIN:
+The relative pronoun replaces she, the subject, and it refers to a person, so who is correct. Which is for things, and whose shows possession.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. I like the boy ___ honesty impressed me.
+A: who
+B: which
+C: whom
+D: whose
+CORRECT: D
+EXPLAIN:
+The word replaces his, which shows possession, so whose is needed. Who and whom do not show ownership, and which is not used for people.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word for formal English. This is my sister ___ I am visiting today.
+A: who
+B: whose
+C: which
+D: whom
+CORRECT: D
+EXPLAIN:
+The word replaces her, which is the object of am visiting, so the object form whom is used. Who is the subject form, and whose shows possession.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence makes it clear what sparkles?
+A: I have a ring in my jewellery box that sparkles.
+B: I have a ring that sparkles in my jewellery box.
+C: I have that sparkles a ring in my jewellery box.
+D: In my jewellery box that sparkles I have a ring.
+CORRECT: B
+EXPLAIN:
+The relative pronoun that sits right beside ring, so it is clear the ring sparkles. In the first sentence it could mean the jewellery box. The other two sentences are muddled.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+In which sentence is those a demonstrative pronoun and not a describing word?
+A: Those shoes are old.
+B: I like those flowers.
+C: Those are my shoes.
+D: Those books are heavy.
+CORRECT: C
+EXPLAIN:
+In those are my shoes, those stands alone in place of a noun. In the other sentences those comes before a noun and describes it.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Three learners completed the sentence The book ___ I borrowed was long.<br>Sipho wrote who.<br>Amara wrote which.<br>Naledi wrote whose.<br>Who is correct?
+A: Sipho
+B: Naledi
+C: Amara
+D: None of them
+CORRECT: C
+EXPLAIN:
+Book is a thing, so which is correct. Who is for people, and whose shows possession, which does not fit here.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: The girl which won the race is my cousin.
+B: The girl who won the race is my cousin.
+C: The girl whose won the race is my cousin.
+D: The girl whom won the race is my cousin.
+CORRECT: B
+EXPLAIN:
+The relative pronoun refers to a person and is the subject of won, so who is correct. Which is not used for people, whose shows ownership, and whom is for objects.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: pronouns
+SUBTOPIC_DISPLAY: Pronouns
+LEVEL_ID: pronouns_3
+LEVEL_DISPLAY: Reflexive and Interrogative Pronouns
+LEVEL_DESC: Use reflexive pronouns for actions that return to the subject and interrogative pronouns for questions.
+LEVEL_ORDER: 3
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 10
+INTRO: <strong>Reflexive pronouns</strong> reflect an action back to the subject, and they end in <em>-self</em> or <em>-selves</em>. <strong>Interrogative pronouns</strong> are used to ask questions. This level also revisits the tricky choice between I, me and myself.
+
+@@CARD
+TYPE: definition
+TITLE: Reflexive pronouns
+CONTENT: A reflexive pronoun refers back to the noun or pronoun that is the subject. It ends in self for one person and selves for more than one. The reflexive pronouns are myself, yourself, himself, herself, itself, ourselves, yourselves and themselves.
+EXAMPLE: Mary sees herself in the mirror.<br>Jack cut himself with the razor.<br>We taught ourselves to swim.
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Wrong reflexive forms
+CONTENT: Hisself and theirselves are not correct English. The correct forms are himself and themselves. Do not use myself as a polite replacement for I or me when there is no action coming back to you.
+EXAMPLE: Wrong: They enjoyed theirselves. Thabo and myself went.<br>Right: They enjoyed themselves. Thabo and I went.
+@@ENDCARD
+
+@@CARD
+TYPE: definition
+TITLE: Interrogative pronouns
+CONTENT: Interrogative pronouns ask questions. Who asks about a person who does something. Whom asks about a person who receives something. Whose asks about ownership. What asks about things or actions. Which asks about a choice.
+EXAMPLE: Who came to tea?<br>Whose is this?<br>To whom does this belong?<br>What are you doing?<br>Which is the hotel that you recommend?
+@@ENDCARD
+
+@@CARD
+TYPE: spot_difference
+TITLE: Whose and who's
+SIDE_A: Whose
+SIDE_B: Who's
+CONTENT: Asks about ownership | Short for who is or who has<br>Whose bag is this | Who's coming to the braai
+EXAMPLE: Test by replacing the word with who is. If the sentence still makes sense, use who's. If not, use whose.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Between you and me
+CONTENT: After the word between, use the object form me, not I. The Handbook gives the rule that me always follows between.
+EXAMPLE: Between you and me, we shall achieve our goals.<br>The prize will be shared between you and me.
+@@ENDCARD
+
+TESTED:
+Name and use reflexive pronouns
+Avoid hisself, theirselves and misuse of myself
+Identify interrogative pronouns
+Tell whose from who's
+Use me after between
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a reflexive pronoun?
+A: her
+B: she
+C: herself
+D: hers
+CORRECT: C
+EXPLAIN:
+Herself ends in self and refers back to the subject. Her is an object form, she is a subject form and hers is possessive.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+In the sentence Whose is this, which word is the interrogative pronoun?
+A: Whose
+B: is
+C: this
+D: is this
+CORRECT: A
+EXPLAIN:
+Whose asks who owns something, so it is the interrogative pronoun. Is is a verb, and this points out the thing and is a demonstrative pronoun.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. Mary sees ___ in the mirror.
+A: herself
+B: hers
+C: she
+D: her
+CORRECT: A
+EXPLAIN:
+Mary is the person who sees and who is seen, so a reflexive pronoun is needed. Her, hers and she do not reflect the action back.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. We taught ___ to swim.
+A: us
+B: ourself
+C: ourselves
+D: our
+CORRECT: C
+EXPLAIN:
+We is plural, so the reflexive form ends in selves. Ourself is not correct, us is an object form, and our is a possessive adjective.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. Jack cut ___ with the razor.
+A: hisself
+B: him
+C: his
+D: himself
+CORRECT: D
+EXPLAIN:
+Himself is the reflexive form of he. Hisself is not a correct word. Him and his do not show the action returning to Jack.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. ___ bag is this?
+A: Whose
+B: Who's
+C: Who
+D: Whom
+CORRECT: A
+EXPLAIN:
+The question asks about ownership, so whose is correct. Who's means who is and would not fit this sentence.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: They enjoyed theirselves.
+B: They enjoyed themselves.
+C: They enjoyed themself.
+D: They enjoyed their.
+CORRECT: B
+EXPLAIN:
+They is plural, so the reflexive form is themselves. Theirselves and themself are not correct standard forms, and their cannot stand alone as an object.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence misuses a reflexive pronoun?
+A: I hurt myself.
+B: She taught herself to sew.
+C: The cat washed itself.
+D: Thabo and myself went to the shop.
+CORRECT: D
+EXPLAIN:
+Myself should only be used when the action returns to the same person. Here it should be Thabo and I went to the shop. The other sentences use reflexives correctly.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which question is correct in formal writing?
+A: Who did you give the tickets to?
+B: To whom did you give the tickets?
+C: To who did you give the tickets?
+D: Whom did you give the tickets to who?
+CORRECT: B
+EXPLAIN:
+Whom is the object form, and it follows the preposition to. The Handbook uses To whom does this belong as the same pattern. To who uses the subject form, and the last version repeats the pronoun.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Three learners completed the sentence The prize will be shared between you and ___.<br>Sipho wrote I.<br>Amara wrote me.<br>Naledi wrote myself.<br>Who is correct?
+A: Sipho
+B: Naledi
+C: None of them
+D: Amara
+CORRECT: D
+EXPLAIN:
+Me is the object form and always follows between. I is a subject form, and myself is a reflexive that does not fit here.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: parts_of_speech
+BROAD_TOPIC_DISPLAY: Parts of Speech
+SUBTOPIC_ID: pronouns
+SUBTOPIC_DISPLAY: Pronouns
+LEVEL_ID: pronouns_mastery
+LEVEL_DISPLAY: Pronouns Mastery
+LEVEL_DESC: Mixed practice across all the pronoun types.
+LEVEL_ORDER: 4
+DIFFICULTY: Challenge
+ACCESS: Premium
+QUESTION_COUNT: 14
+INTRO: This challenge brings all the <strong>pronoun</strong> types together. You will choose between subject and object forms, possessive pronouns, relative pronouns and reflexive pronouns, and find mistakes in a short passage.
+
+@@CARD
+TYPE: spot_difference
+TITLE: Pronoun types
+SIDE_A: Type
+SIDE_B: Examples
+CONTENT: Personal | I, me, he, him, they, them<br>Possessive | mine, yours, hers, ours, theirs<br>Demonstrative | this, that, these, those<br>Relative | who, whom, whose, which, that<br>Reflexive | myself, himself, ourselves, themselves<br>Interrogative | who, whom, whose, what, which
+EXAMPLE: A word can be more than one type depending on how it is used. Who can be relative or interrogative.
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Choosing the right pronoun
+CONTENT: 1. Find the noun the pronoun replaces.<br>2. Decide whether it is the subject, the object or an owner.<br>3. Pick the matching form.<br>4. Read the sentence back with only that pronoun.
+EXAMPLE: Father gave the tickets to John and ___.<br>Object, so me. Test: Father gave the tickets to me.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Forms to remember
+CONTENT: Possessive pronouns take no apostrophe. Its shows possession and it's means it is. Hisself and theirselves do not exist. Me follows between. Who is the subject form and whom is the object form.
+EXAMPLE: ours, yours, theirs<br>in its nest, it's cold<br>himself, themselves<br>between you and me
+@@ENDCARD
+
+@@CARD
+TYPE: common_mistake
+TITLE: Common pronoun mistakes
+CONTENT: The usual errors are using I after a preposition, adding an apostrophe to a possessive pronoun, using which for people and using myself instead of I or me. Check each pronoun in a passage against these.
+EXAMPLE: Wrong: Thabo and me went. The book is her's.<br>Right: Thabo and I went. The book is hers.
+@@ENDCARD
+
+TESTED:
+Choose subject and object pronouns
+Use possessive pronouns without apostrophes
+Choose who, whom, whose, which and that
+Use reflexive and interrogative pronouns
+Spot pronoun mistakes in a passage
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a personal pronoun?
+A: slowly
+B: Thabo
+C: chair
+D: they
+CORRECT: D
+EXPLAIN:
+They takes the place of a group of people or things. Thabo and chair are nouns, and slowly is an adverb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a reflexive pronoun?
+A: him
+B: he
+C: his
+D: himself
+CORRECT: D
+EXPLAIN:
+Himself ends in self and reflects the action back to the subject. Him is an object form, his is possessive and he is a subject form.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. The teacher called Lerato and ___.
+A: me
+B: I
+C: myself
+D: mine
+CORRECT: A
+EXPLAIN:
+The pronoun is the object of called, so the object form me is needed. I is a subject form, myself is reflexive and mine is possessive.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+The book belongs to them. Choose the correct word. This book is ___.
+A: their
+B: them
+C: they
+D: theirs
+CORRECT: D
+EXPLAIN:
+The pronoun stands alone to show ownership, so the possessive pronoun theirs is needed. Their must come before a noun.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. The girl ___ sat next to me is Priya.
+A: whom
+B: who
+C: which
+D: whose
+CORRECT: B
+EXPLAIN:
+The word refers to a person and is the subject of sat, so who is correct. Whom is the object form, whose shows ownership and which is not used for people.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In the sentence Those are ours, which word is the demonstrative pronoun?
+A: Those
+B: ours
+C: are
+D: Those are
+CORRECT: A
+EXPLAIN:
+Those points out particular things and stands alone as a pronoun. Ours is a possessive pronoun, and are is a verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Choose the correct word. The bird is sitting on eggs in ___ nest.
+A: it's
+B: its'
+C: its
+D: it
+CORRECT: C
+EXPLAIN:
+Its with no apostrophe shows possession. It's means it is, and its' does not exist.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. The children enjoyed ___ at the party.
+A: themself
+B: theirselves
+C: themselves
+D: them
+CORRECT: C
+EXPLAIN:
+Children is plural, so the reflexive pronoun ends in selves. Theirselves and themself are not correct, and them does not reflect the action back.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Choose the correct word. ___ book is this?
+A: Whose
+B: Whom
+C: Who's
+D: Who
+CORRECT: A
+EXPLAIN:
+The question asks who owns the book, so whose is correct. Who's means who is.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is correct?
+A: The car is our's.
+B: The car is ours'.
+C: The car is ours.
+D: The car is ou'rs.
+CORRECT: C
+EXPLAIN:
+Possessive pronouns such as ours take no apostrophe. The other forms add an apostrophe in the wrong place.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence contains a mistake?
+A: She hurt herself.
+B: They taught theirselves.
+C: These are mine.
+D: Whose is this?
+CORRECT: B
+EXPLAIN:
+Theirselves is not correct. The reflexive form of they is themselves. The other sentences use pronouns correctly.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Three learners completed the sentence Father gave the tickets to John and ___.<br>Sipho wrote I.<br>Amara wrote me.<br>Naledi wrote myself.<br>Who is correct?
+A: Amara
+B: Sipho
+C: Naledi
+D: None of them
+CORRECT: A
+EXPLAIN:
+Take out John and the sentence reads Father gave the tickets to me, so the object form me is needed. I is a subject form, and myself does not reflect an action here.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Read the passage.<br>Thabo and me went to the shop. We bought bread for hisself and his sister. The bread that we bought was fresh.<br>How many pronoun mistakes are there?
+A: One
+B: Two
+C: Three
+D: Four
+CORRECT: B
+EXPLAIN:
+Thabo and me should be Thabo and I, because the pronoun is part of the subject. Hisself should be himself. The word that is correct in the last sentence, so there are two mistakes.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What does a pronoun do?
+A: It describes a noun.
+B: It shows an action.
+C: It takes the place of a noun.
+D: It tells how an action is done.
+CORRECT: C
+EXPLAIN:
+A pronoun stands in place of a noun so that the noun is not repeated. Describing a noun is the job of an adjective, showing action is the job of a verb, and telling how is the job of an adverb.
+@@ENDQ
+
+@@ENDQUESTIONS
