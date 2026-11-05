@@ -6,10 +6,173 @@ BROAD_TOPIC_ID: punctuation_spelling
 BROAD_TOPIC_DISPLAY: Punctuation and Spelling
 SUBTOPIC_ID: spelling_word_skills
 SUBTOPIC_DISPLAY: Spelling and Dictionary Skills
-LEVEL_ID: spelling_word_skills_mastery
-LEVEL_DISPLAY: Spelling and Dictionary Skills Mastery
-LEVEL_DESC: Grade 7 exam-style revision of spelling rules for suffixes and dictionary skills.
+LEVEL_ID: spelling_word_skills_1
+LEVEL_DISPLAY: Spelling Rules for Word Endings
+LEVEL_DESC: Learn how to add endings to words correctly.
 LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: Endings such as -ing, -ed and -ness sometimes change the spelling of a word. This level covers three spelling rules and how to use a <strong>dictionary</strong>.
+
+@@CARD
+TYPE: key_rule
+TITLE: Doubling the consonant
+CONTENT: If a word has a short vowel followed by one consonant, double the consonant before a vowel ending.
+EXAMPLE: sit + ing = sitting<br>hop + ed = hopped
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Dropping the e
+CONTENT: If a word ends in e, drop the e before an ending that begins with a vowel.
+EXAMPLE: hope + ing = hoping<br>fame + ous = famous
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Changing y to i
+CONTENT: If a word ends in y after a consonant, change the y to i before an ending.
+EXAMPLE: happy + ness = happiness<br>cry + ed = cried
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Add the ending
+CONTENT: Add -ing to the word run.
+EXAMPLE: running. The vowel is short, so the n is doubled.
+@@ENDCARD
+
+TESTED:
+Double a consonant before an ending
+Drop a final e
+Change y to i
+Use alphabetical order
+Spell words with endings
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the spelling of run with -ing added?
+A: runniing
+B: runing
+C: running
+D: runng
+CORRECT: C
+EXPLAIN:
+Run has a short vowel and one consonant, so the n is doubled.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the spelling of stop with -ed added?
+A: stopd
+B: stoped
+C: stoppped
+D: stopped
+CORRECT: D
+EXPLAIN:
+Stop has a short vowel and one consonant, so the p is doubled.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the spelling of happy with -ness added?
+A: happyness
+B: happiness
+C: happieness
+D: hapiness
+CORRECT: B
+EXPLAIN:
+A final y changes to i before the ending.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the spelling of hope with -ing added?
+A: hopng
+B: hopeing
+C: hopping
+D: hoping
+CORRECT: D
+EXPLAIN:
+The final e is dropped before an ending that begins with a vowel. Hopping comes from hop.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the spelling of cry with -ed added?
+A: cryed
+B: cried
+C: criied
+D: cryd
+CORRECT: B
+EXPLAIN:
+The y changes to i before ed.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the spelling of plan with -ed added?
+A: planeed
+B: planed
+C: planned
+D: plannned
+CORRECT: C
+EXPLAIN:
+Plan has a short vowel and one consonant, so the n is doubled.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word comes first in a dictionary?
+A: ant
+B: apple
+C: arm
+D: art
+CORRECT: A
+EXPLAIN:
+Words are in alphabetical order, and ant comes before apple because n comes before p.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What is the spelling of swim with -ing added?
+A: swimming
+B: swiming
+C: swimmming
+D: swimng
+CORRECT: A
+EXPLAIN:
+Swim has a short vowel and one consonant, so the m is doubled.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: punctuation_spelling
+BROAD_TOPIC_DISPLAY: Punctuation and Spelling
+SUBTOPIC_ID: spelling_word_skills
+SUBTOPIC_DISPLAY: Spelling and Dictionary Skills
+LEVEL_ID: spelling_word_skills_exam
+LEVEL_DISPLAY: Spelling and Dictionary Skills Exam Practice
+LEVEL_DESC: Test yourself on the whole topic with mixed questions.
+LEVEL_ORDER: 2
 DIFFICULTY: Challenge
 ACCESS: Premium
 QUESTION_COUNT: 14
@@ -57,11 +220,11 @@ Choose between a dictionary and a thesaurus
 DIFFICULTY: Starter
 QUESTION:
 Which is the correct spelling of sit with -ing added?
-A: sitng
+A: sitting
 B: siting
 C: sittting
-D: sitting
-CORRECT: D
+D: sitng
+CORRECT: A
 EXPLAIN:
 Sit has a short vowel and one consonant, so the consonant is doubled before ing.
 @@ENDQ
@@ -71,10 +234,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which is the correct spelling of hop with -ed added?
 A: hoped
-B: hopped
+B: hopd
 C: hoppped
-D: hopd
-CORRECT: B
+D: hopped
+CORRECT: D
 EXPLAIN:
 Hop has a short vowel and one consonant, so the consonant is doubled before ed. Hoped is the past of hope.
 @@ENDQ
@@ -83,11 +246,11 @@ Hop has a short vowel and one consonant, so the consonant is doubled before ed. 
 DIFFICULTY: Starter
 QUESTION:
 Words in a dictionary are arranged
-A: by meaning
+A: alphabetically
 B: by length
-C: alphabetically
+C: by meaning
 D: by topic
-CORRECT: C
+CORRECT: A
 EXPLAIN:
 Dictionaries list words in alphabetical order so they are easy to find.
 @@ENDQ
@@ -98,9 +261,9 @@ QUESTION:
 The guide words at the top of a dictionary page show
 A: the page number
 B: the meaning of every word
-C: the longest word
-D: the first and last words on that page
-CORRECT: D
+C: the first and last words on that page
+D: the longest word
+CORRECT: C
 EXPLAIN:
 Guide words, or headwords, tell you which words appear on the page.
 @@ENDQ
@@ -111,9 +274,9 @@ QUESTION:
 Which is the correct spelling of fame with -ous added?
 A: famuous
 B: fameous
-C: famous
-D: famus
-CORRECT: C
+C: famus
+D: famous
+CORRECT: D
 EXPLAIN:
 The final e is dropped before a vowel suffix, so fame and ous make famous.
 @@ENDQ
@@ -123,10 +286,10 @@ DIFFICULTY: Building
 QUESTION:
 Which is the correct spelling of rely with -able added?
 A: relyable
-B: reliable
-C: relieable
+B: relieable
+C: reliable
 D: reliabel
-CORRECT: B
+CORRECT: C
 EXPLAIN:
 A final y changes to i before a suffix, so rely and able make reliable.
 @@ENDQ
@@ -137,9 +300,9 @@ QUESTION:
 Which is the correct spelling of heavy with -ness added?
 A: heavieness
 B: heavyness
-C: heaviness
-D: heavness
-CORRECT: C
+C: heavness
+D: heaviness
+CORRECT: D
 EXPLAIN:
 The y changes to i before the suffix, giving heaviness.
 @@ENDQ
@@ -163,9 +326,9 @@ QUESTION:
 Which is the correct spelling of regret with -ing added?
 A: regrett
 B: regreting
-C: regrettting
-D: regretting
-CORRECT: D
+C: regretting
+D: regrettting
+CORRECT: C
 EXPLAIN:
 The stress in regret is on the second syllable, so the final consonant is doubled.
 @@ENDQ
@@ -176,9 +339,9 @@ QUESTION:
 Which is the correct spelling of service with -able added?
 A: servicible
 B: servicable
-C: servieceable
-D: serviceable
-CORRECT: D
+C: serviceable
+D: servieceable
+CORRECT: C
 EXPLAIN:
 The e is kept after a soft c before able, which keeps the c sounding like s.
 @@ENDQ
@@ -200,11 +363,11 @@ The y changes to i and the suffix has one l.
 DIFFICULTY: Challenge
 QUESTION:
 Which word is spelt correctly?
-A: receive
-B: recieve
+A: recieve
+B: receive
 C: receeve
 D: receve
-CORRECT: A
+CORRECT: B
 EXPLAIN:
 The rule is i before e except after c, so receive has ei.
 @@ENDQ
@@ -213,11 +376,11 @@ The rule is i before e except after c, so receive has ei.
 DIFFICULTY: Challenge
 QUESTION:
 Which of these is an exception to the rule i before e except after c?
-A: weird
+A: piece
 B: field
 C: believe
-D: piece
-CORRECT: A
+D: weird
+CORRECT: D
 EXPLAIN:
 Weird has ei but does not follow c. Field, believe and piece follow the rule.
 @@ENDQ

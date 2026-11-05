@@ -6,10 +6,173 @@ BROAD_TOPIC_ID: sentences
 BROAD_TOPIC_DISPLAY: Sentences
 SUBTOPIC_ID: phrases_clauses
 SUBTOPIC_DISPLAY: Phrases and Clauses
-LEVEL_ID: phrases_clauses_mastery
-LEVEL_DISPLAY: Phrases and Clauses Mastery
-LEVEL_DESC: Grade 7 exam-style revision of phrases, main and subordinate clauses and their types.
+LEVEL_ID: phrases_clauses_1
+LEVEL_DISPLAY: Phrases and Clauses
+LEVEL_DESC: Learn to tell a phrase from a clause.
 LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: Groups of words build sentences. A <strong>phrase</strong> has no finite verb, and a <strong>clause</strong> has one. A clause can be a main clause or a subordinate clause.
+
+@@CARD
+TYPE: definition
+TITLE: Phrase
+CONTENT: A phrase is a group of words without a finite verb. It conveys a single idea and can never stand alone.
+EXAMPLE: The shop around the corner
+@@ENDCARD
+
+@@CARD
+TYPE: definition
+TITLE: Clause
+CONTENT: A clause is a group of words that contains a finite verb. Underline the finite verbs to count the clauses.
+EXAMPLE: The van came to a halt.<br>after it had run out of petrol
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Main and subordinate
+CONTENT: A main clause can stand alone and makes complete sense. A subordinate clause has a verb but cannot stand alone.
+EXAMPLE: The van came to a halt (main) after it had run out of petrol (subordinate).
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Phrase or clause
+CONTENT: Say whether this group of words is a phrase or a clause. in the old house
+EXAMPLE: A phrase, because it has no finite verb.
+@@ENDCARD
+
+TESTED:
+Say what a phrase is
+Say what a clause is
+Find the main clause
+Find the subordinate clause
+Count clauses
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which group of words is a phrase?
+A: The shop is open
+B: The shop around the corner
+C: The shop opened
+D: The shop opens at nine
+CORRECT: B
+EXPLAIN:
+The shop around the corner has no finite verb. The other groups each have one.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which group of words is a clause?
+A: the old red van
+B: the van in the road
+C: the van stopped
+D: a van on the road
+CORRECT: C
+EXPLAIN:
+The van stopped has the finite verb stopped. The other groups have none.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+A phrase is a group of words with no
+A: space
+B: noun
+C: letter
+D: finite verb
+CORRECT: D
+EXPLAIN:
+A phrase has no finite verb. A clause has one.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+A clause is a group of words that contains a
+A: noun only
+B: finite verb
+C: capital letter
+D: prefix
+CORRECT: B
+EXPLAIN:
+A clause always contains a finite verb.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which is the main clause? The van stopped because it ran out of petrol.
+A: it ran out
+B: because it ran out of petrol
+C: The van stopped
+D: out of petrol
+CORRECT: C
+EXPLAIN:
+The van stopped makes complete sense on its own.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which is the subordinate clause? The van stopped because it ran out of petrol.
+A: stopped
+B: The van stopped
+C: The van
+D: because it ran out of petrol
+CORRECT: D
+EXPLAIN:
+Because it ran out of petrol has a verb but depends on the main clause.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+How many clauses are in this sentence? We left when the bell rang.
+A: Two
+B: One
+C: Three
+D: Four
+CORRECT: A
+EXPLAIN:
+Left and rang are two finite verbs, so there are two clauses.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which group of words is NOT a clause?
+A: the singer in the choir
+B: she sings
+C: when she sings
+D: she sang
+CORRECT: A
+EXPLAIN:
+The singer in the choir has no finite verb, so it is a phrase.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: sentences
+BROAD_TOPIC_DISPLAY: Sentences
+SUBTOPIC_ID: phrases_clauses
+SUBTOPIC_DISPLAY: Phrases and Clauses
+LEVEL_ID: phrases_clauses_exam
+LEVEL_DISPLAY: Phrases and Clauses Exam Practice
+LEVEL_DESC: Test yourself on the whole topic with mixed questions.
+LEVEL_ORDER: 2
 DIFFICULTY: Challenge
 ACCESS: Premium
 QUESTION_COUNT: 14
@@ -59,11 +222,11 @@ Count the clauses in a sentence
 DIFFICULTY: Starter
 QUESTION:
 A clause is a group of words that contains
-A: no verb
-B: a finite verb
+A: a finite verb
+B: no verb
 C: only nouns
 D: only adjectives
-CORRECT: B
+CORRECT: A
 EXPLAIN:
 A clause always contains a finite verb. A group of words without one is a phrase.
 @@ENDQ
@@ -86,10 +249,10 @@ DIFFICULTY: Starter
 QUESTION:
 A main clause is a clause that
 A: only asks a question
-B: cannot stand alone
+B: can stand alone and make complete sense
 C: has no verb
-D: can stand alone and make complete sense
-CORRECT: D
+D: cannot stand alone
+CORRECT: B
 EXPLAIN:
 A main clause makes complete sense on its own. A subordinate clause depends on it.
 @@ENDQ
@@ -98,11 +261,11 @@ A main clause makes complete sense on its own. A subordinate clause depends on i
 DIFFICULTY: Starter
 QUESTION:
 A subordinate clause is a clause that
-A: can stand alone
-B: depends on the main clause for its meaning
-C: has no finite verb
+A: depends on the main clause for its meaning
+B: has no finite verb
+C: can stand alone
 D: is always a question
-CORRECT: B
+CORRECT: A
 EXPLAIN:
 A subordinate clause contains a verb but cannot stand alone.
 @@ENDQ
@@ -164,10 +327,10 @@ DIFFICULTY: Building
 QUESTION:
 What type of clause is while the engine was running in While the engine was running, the man jumped out of the car?
 A: Noun clause
-B: Adjectival clause
-C: Adverbial clause of time
+B: Adverbial clause of time
+C: Adjectival clause
 D: Main clause
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 It tells when the man jumped, so it is an adverbial clause of time.
 @@ENDQ
@@ -177,10 +340,10 @@ DIFFICULTY: Challenge
 QUESTION:
 What type of clause is What they learnt at school in What they learnt at school helped them in the workplace?
 A: Adjectival clause
-B: Noun clause
-C: Adverbial clause
+B: Adverbial clause
+C: Noun clause
 D: Main clause
-CORRECT: B
+CORRECT: C
 EXPLAIN:
 It is the subject of the sentence and can be replaced by it, so it is a noun clause.
 @@ENDQ
@@ -191,9 +354,9 @@ QUESTION:
 What type of clause is because it was raining in She stayed indoors because it was raining?
 A: Adjectival clause
 B: Adverbial clause of time
-C: Adverbial clause of reason
-D: Noun clause
-CORRECT: C
+C: Noun clause
+D: Adverbial clause of reason
+CORRECT: D
 EXPLAIN:
 It tells why she stayed indoors, so it is an adverbial clause of reason.
 @@ENDQ
@@ -203,10 +366,10 @@ DIFFICULTY: Challenge
 QUESTION:
 Which sentence contains a subordinate clause of concession?
 A: The girl read her book.
-B: The girl, although she was tired, read her book.
-C: The girl read her book in the morning.
+B: The girl read her book in the morning.
+C: The girl, although she was tired, read her book.
 D: The girl read her book quickly.
-CORRECT: B
+CORRECT: C
 EXPLAIN:
 Although she was tired introduces a concession, a contrast with what is expected. The other sentences have no concession.
 @@ENDQ
@@ -215,11 +378,11 @@ Although she was tired introduces a concession, a contrast with what is expected
 DIFFICULTY: Challenge
 QUESTION:
 Which group of words is a subordinate clause?
-A: because it was raining
-B: in the rain
+A: in the rain
+B: because it was raining
 C: the old red umbrella
 D: Run home
-CORRECT: A
+CORRECT: B
 EXPLAIN:
 Because it was raining has a finite verb but cannot stand alone. In the rain and the old red umbrella are phrases, and Run home is a main clause.
 @@ENDQ

@@ -6,10 +6,173 @@ BROAD_TOPIC_ID: sentences
 BROAD_TOPIC_DISPLAY: Sentences
 SUBTOPIC_ID: speech
 SUBTOPIC_DISPLAY: Direct and Indirect Speech
-LEVEL_ID: speech_mastery
-LEVEL_DISPLAY: Direct and Indirect Speech Mastery
-LEVEL_DESC: Grade 7 exam-style revision of direct speech, reported speech and the changes between them.
+LEVEL_ID: speech_1
+LEVEL_DISPLAY: Direct and Reported Speech
+LEVEL_DESC: Learn how to write what someone said in two ways.
 LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: We can write what someone said in two ways. <strong>Direct speech</strong> uses the exact words in quotation marks, and <strong>reported speech</strong> tells what was said without quoting it.
+
+@@CARD
+TYPE: definition
+TITLE: Direct speech
+CONTENT: Direct speech uses the exact words of the speaker, inside quotation marks. A comma follows the introductory verb and the first spoken word begins with a capital letter.
+EXAMPLE: Mary said, "It is cold today."
+@@ENDCARD
+
+@@CARD
+TYPE: definition
+TITLE: Reported speech
+CONTENT: Reported speech tells what was said without the quotation marks. We often add that, and the verb goes one stage back in tense.
+EXAMPLE: Mary said that it was cold that day.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: What changes
+CONTENT: In reported speech the pronouns change to keep the meaning, and time words change as well. Today becomes that day.
+EXAMPLE: Joanne said, "I am feeling dizzy today."<br>Joanne said that she was feeling dizzy that day.
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Report it
+CONTENT: Change this to reported speech. Sipho said, "I am tired."
+EXAMPLE: Sipho said that he was tired.
+@@ENDCARD
+
+TESTED:
+Say what direct speech is
+Punctuate direct speech
+Recognise reported speech
+Change pronouns and tense
+Report a question
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Direct speech uses
+A: no punctuation
+B: a summary of what was said
+C: the exact words of the speaker
+D: only questions
+CORRECT: C
+EXPLAIN:
+Direct speech repeats the speaker's own words.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What marks show direct speech?
+A: Colons
+B: Brackets
+C: Hyphens
+D: Quotation marks
+CORRECT: D
+EXPLAIN:
+Quotation marks, also called inverted commas, enclose the spoken words.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is reported speech?
+A: Mary said, "I am tired."
+B: Mary said that she was tired.
+C: "I am tired," said Mary.
+D: Mary asked, "Are you tired?"
+CORRECT: B
+EXPLAIN:
+It does not quote the exact words and it uses that. The others are direct speech.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word often links the introductory verb to a reported statement?
+A: whose
+B: which
+C: that
+D: where
+CORRECT: C
+EXPLAIN:
+That links said and the reported words, as in he said that he was late.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Complete the reported speech. Mary said, "I am hungry." Mary said that she ___ hungry.
+A: has been
+B: is
+C: will be
+D: was
+CORRECT: D
+EXPLAIN:
+The introductory verb said is in the past, so am goes one stage back to was.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence is punctuated correctly?
+A: Tom said "I am ready."
+B: Tom said, "I am ready."
+C: Tom said, "i am ready."
+D: Tom said, "I am ready".
+CORRECT: B
+EXPLAIN:
+A comma follows the introductory verb, the first spoken word is a capital, and the full stop is inside the quotation marks.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In reported speech with a past tense introductory verb, today becomes
+A: that day
+B: now
+C: tomorrow
+D: yesterday
+CORRECT: A
+EXPLAIN:
+Today becomes that day when the introductory verb is in the past.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which is the reported form? Ben asked, "Is it cold?"
+A: Ben asked if it was cold.
+B: Ben asked that it is cold.
+C: Ben asked, if it was cold?
+D: Ben asked whether is it cold.
+CORRECT: A
+EXPLAIN:
+A yes or no question is reported with if or whether, the verb goes back a stage and the question mark is dropped.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: sentences
+BROAD_TOPIC_DISPLAY: Sentences
+SUBTOPIC_ID: speech
+SUBTOPIC_DISPLAY: Direct and Indirect Speech
+LEVEL_ID: speech_exam
+LEVEL_DISPLAY: Direct and Indirect Speech Exam Practice
+LEVEL_DESC: Test yourself on the whole topic with mixed questions.
+LEVEL_ORDER: 2
 DIFFICULTY: Challenge
 ACCESS: Premium
 QUESTION_COUNT: 14
@@ -72,11 +235,11 @@ Direct speech repeats the speaker's own words. Reported speech gives a summary.
 DIFFICULTY: Starter
 QUESTION:
 What marks show direct speech?
-A: Hyphens
+A: Quotation marks
 B: Brackets
-C: Quotation marks
+C: Hyphens
 D: Colons
-CORRECT: C
+CORRECT: A
 EXPLAIN:
 Quotation marks, also called inverted commas, enclose the spoken words.
 @@ENDQ
@@ -86,10 +249,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which sentence is direct speech?
 A: Mary said that it was cold.
-B: Mary said, "It is cold today."
-C: Mary said it was cold.
+B: Mary said it was cold.
+C: Mary said, "It is cold today."
 D: Mary told us about the cold.
-CORRECT: B
+CORRECT: C
 EXPLAIN:
 The exact words are in quotation marks. The others report what she said.
 @@ENDQ
@@ -111,11 +274,11 @@ It does not quote the exact words, and it uses that and the past tense. The othe
 DIFFICULTY: Building
 QUESTION:
 Which word links the introductory verb to a reported statement?
-A: which
-B: that
+A: that
+B: which
 C: whose
 D: where
-CORRECT: B
+CORRECT: A
 EXPLAIN:
 That is inserted to link said and the reported words, as in she said that she was tired.
 @@ENDQ
@@ -125,10 +288,10 @@ DIFFICULTY: Building
 QUESTION:
 Complete the reported speech. Joanne said, "I am feeling dizzy today." Joanne said that she ___ feeling dizzy that day.
 A: has been
-B: is
+B: was
 C: will be
-D: was
-CORRECT: D
+D: is
+CORRECT: B
 EXPLAIN:
 The introductory verb said is in the past, so the verb goes one stage back, from am to was.
 @@ENDQ
@@ -138,10 +301,10 @@ DIFFICULTY: Building
 QUESTION:
 Which word is used to report a yes or no question?
 A: because
-B: if
+B: that
 C: which
-D: that
-CORRECT: B
+D: if
+CORRECT: D
 EXPLAIN:
 If or whether links the introductory verb to a yes or no question, as in the teacher asked if we were ready.
 @@ENDQ
@@ -152,9 +315,9 @@ QUESTION:
 Complete the reported speech. Mother asked, "Where have I left my keys?" Mother asked where she ___ her keys.
 A: leaves
 B: has left
-C: had left
-D: will leave
-CORRECT: C
+C: will leave
+D: had left
+CORRECT: D
 EXPLAIN:
 Have left goes one stage back to had left, and I becomes she. The question mark disappears.
 @@ENDQ
@@ -165,9 +328,9 @@ QUESTION:
 In reported speech with a past tense introductory verb, tomorrow becomes
 A: now
 B: today
-C: yesterday
-D: the next day
-CORRECT: D
+C: the next day
+D: yesterday
+CORRECT: C
 EXPLAIN:
 Tomorrow becomes the next day or the following day when the introductory verb is in the past.
 @@ENDQ
@@ -178,9 +341,9 @@ QUESTION:
 Which is the correct reported form? The teacher ordered, "Children, do your homework!"
 A: The teacher ordered that children do your homework.
 B: The teacher ordered the children do your homework.
-C: The teacher ordered, the children to do their homework!
-D: The teacher ordered the children to do their homework.
-CORRECT: D
+C: The teacher ordered the children to do their homework.
+D: The teacher ordered, the children to do their homework!
+CORRECT: C
 EXPLAIN:
 A command is reported with to and the verb, and your changes to their. The other versions keep wrong pronouns or punctuation.
 @@ENDQ
@@ -202,11 +365,11 @@ A comma follows the introductory verb and the spoken words begin with a capital 
 DIFFICULTY: Challenge
 QUESTION:
 Which is the correct reported form of Shahida said, "My family and I are going to the flea market today."?
-A: Shahida said that she and her family would be going to the flea market that day.
-B: Shahida said that my family and I are going to the flea market today.
+A: Shahida said that my family and I are going to the flea market today.
+B: Shahida said that she and her family would be going to the flea market that day.
 C: Shahida said that she and her family are going to the flea market today.
 D: Shahida said that she and her family were going to the flea market today.
-CORRECT: A
+CORRECT: B
 EXPLAIN:
 The pronouns change to she and her, the verb goes back a stage, and today becomes that day. The other versions miss at least one change.
 @@ENDQ
@@ -215,11 +378,11 @@ The pronouns change to she and her, the verb goes back a stage, and today become
 DIFFICULTY: Challenge
 QUESTION:
 Which is the correct reported form? "Ouch! I've stubbed my toe!" screamed the girl.
-A: The girl screamed in pain that she had stubbed her toe.
+A: The girl screamed that ouch she had stubbed her toe.
 B: The girl screamed, "Ouch!" that she had stubbed her toe.
 C: The girl screamed ouch that she stubbed her toe.
-D: The girl screamed that ouch she had stubbed her toe.
-CORRECT: A
+D: The girl screamed in pain that she had stubbed her toe.
+CORRECT: D
 EXPLAIN:
 Exclamations such as ouch are described, here with in pain, and not repeated in reported speech.
 @@ENDQ

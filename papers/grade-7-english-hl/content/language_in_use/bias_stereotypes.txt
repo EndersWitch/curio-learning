@@ -234,11 +234,11 @@ Use euphemisms and neutral titles
 DIFFICULTY: Starter
 QUESTION:
 A stereotype is
-A: a proven fact about one person
-B: a fixed idea about a whole group of people
+A: a fixed idea about a whole group of people
+B: a proven fact about one person
 C: a word that rhymes
 D: a type of verb
-CORRECT: B
+CORRECT: A
 EXPLAIN:
 A stereotype treats everyone in a group as the same. It is not a proven fact about one person.
 @@ENDQ
@@ -260,11 +260,11 @@ All old people are forgetful treats the whole group the same. The other statemen
 DIFFICULTY: Building
 QUESTION:
 Why are stereotypes harmful?
-A: They give exact facts
+A: They treat every person in a group as the same
 B: They are always true
-C: They treat every person in a group as the same
+C: They give exact facts
 D: They improve friendships
-CORRECT: C
+CORRECT: A
 EXPLAIN:
 Stereotypes ignore individual differences and lead to unfair treatment. They are not true of everyone in a group.
 @@ENDQ
@@ -325,11 +325,11 @@ Some learners talks about particular people and does not label a whole group. Th
 DIFFICULTY: Challenge
 QUESTION:
 Which sentence uses fair language?
-A: The senior citizens enjoyed the concert.
+A: The oldies enjoyed the concert.
 B: The old fogies enjoyed the concert.
-C: The oldies enjoyed the concert.
+C: The senior citizens enjoyed the concert.
 D: The ancient ones enjoyed the concert.
-CORRECT: A
+CORRECT: C
 EXPLAIN:
 Senior citizens is respectful. The other phrases are disrespectful or mocking.
 @@ENDQ
@@ -338,11 +338,11 @@ Senior citizens is respectful. The other phrases are disrespectful or mocking.
 DIFFICULTY: Challenge
 QUESTION:
 What does a euphemism do?
-A: It replaces a harsh or offensive word with a gentler one
+A: It is always slang
 B: It makes language harsher
 C: It is a type of rhyme
-D: It is always slang
-CORRECT: A
+D: It replaces a harsh or offensive word with a gentler one
+CORRECT: D
 EXPLAIN:
 A euphemism softens a word that might offend. It does not make language harsher, and it is not always slang.
 @@ENDQ
@@ -413,10 +413,10 @@ DIFFICULTY: Starter
 QUESTION:
 A belief formed before knowing the facts is called
 A: a fact
-B: evidence
+B: prejudice
 C: a synonym
-D: prejudice
-CORRECT: D
+D: evidence
+CORRECT: B
 EXPLAIN:
 Prejudice is pre-judging without the facts. Evidence and facts are the opposite of prejudice.
 @@ENDQ
@@ -425,11 +425,11 @@ Prejudice is pre-judging without the facts. Evidence and facts are the opposite 
 DIFFICULTY: Starter
 QUESTION:
 Which statement is a stereotype?
-A: Sipho is a boy.
+A: Boys never cry.
 B: Some boys cry.
-C: Boys never cry.
+C: Sipho is a boy.
 D: Boys play sport at school.
-CORRECT: C
+CORRECT: A
 EXPLAIN:
 Boys never cry treats all boys as the same. The other statements are limited or neutral.
 @@ENDQ
@@ -439,10 +439,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which word makes Learners always forget their books a generalisation?
 A: Learners
-B: always
+B: books
 C: forget
-D: books
-CORRECT: B
+D: always
+CORRECT: D
 EXPLAIN:
 Always claims that it happens every time. The other words name the group, the action and the objects.
 @@ENDQ
@@ -464,11 +464,11 @@ The number of learners can be checked. The other sentences are opinions or insul
 DIFFICULTY: Building
 QUESTION:
 Why is All teachers are boring unfair?
-A: It is polite
-B: It judges a whole group without evidence
+A: It judges a whole group without evidence
+B: It names one person
 C: It is a fact
-D: It names one person
-CORRECT: B
+D: It is polite
+CORRECT: A
 EXPLAIN:
 The sentence generalises about every teacher without evidence. It is not a fact and it does not name one person.
 @@ENDQ
@@ -479,9 +479,9 @@ QUESTION:
 Which phrase is a respectful replacement for old people?
 A: the ancient
 B: the elderly fools
-C: senior citizens
-D: oldies
-CORRECT: C
+C: oldies
+D: senior citizens
+CORRECT: D
 EXPLAIN:
 Senior citizens is respectful and neutral. The other phrases are disrespectful.
 @@ENDQ
@@ -518,9 +518,9 @@ QUESTION:
 Bias often comes from
 A: reading widely
 B: careful research
-C: checking the facts
-D: ignorance or generalisations
-CORRECT: D
+C: ignorance or generalisations
+D: checking the facts
+CORRECT: C
 EXPLAIN:
 Bias grows from not knowing the facts and from sweeping generalisations. The other choices reduce bias.
 @@ENDQ
@@ -555,11 +555,11 @@ All people from the city are rude judges everyone in a group without evidence. T
 DIFFICULTY: Challenge
 QUESTION:
 Which statement about fair language is correct?
-A: It avoids words that insult people because of age, gender, race, appearance or disability
+A: It repeats stereotypes for effect
 B: It uses the most dramatic words
-C: It repeats stereotypes for effect
-D: It never uses titles
-CORRECT: A
+C: It never uses titles
+D: It avoids words that insult people because of age, gender, race, appearance or disability
+CORRECT: D
 EXPLAIN:
 Fair language respects people and avoids insulting words. It does not use dramatic words or repeat stereotypes.
 @@ENDQ
@@ -568,11 +568,11 @@ Fair language respects people and avoids insulting words. It does not use dramat
 DIFFICULTY: Challenge
 QUESTION:
 What does a euphemism do?
-A: It replaces a harsh word with a gentler one
-B: It makes language harsher
+A: It makes language harsher
+B: It replaces a harsh word with a gentler one
 C: It is a type of rhyme
 D: It repeats a word
-CORRECT: A
+CORRECT: B
 EXPLAIN:
 A euphemism softens a word that might offend. It does not make language harsher.
 @@ENDQ

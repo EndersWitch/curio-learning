@@ -6,10 +6,173 @@ BROAD_TOPIC_ID: sentences
 BROAD_TOPIC_DISPLAY: Sentences
 SUBTOPIC_ID: sentence_types
 SUBTOPIC_DISPLAY: Sentence Types
-LEVEL_ID: sentence_types_mastery
-LEVEL_DISPLAY: Sentence Types Mastery
-LEVEL_DESC: Grade 7 exam-style revision of statements, questions, commands and exclamations.
+LEVEL_ID: sentence_types_1
+LEVEL_DISPLAY: The Four Sentence Types
+LEVEL_DESC: Learn statements, questions, commands and exclamations.
 LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: Every sentence does a job. It can give information, ask for it, give an order or show strong feeling. These four jobs give us the four <strong>sentence types</strong>.
+
+@@CARD
+TYPE: definition
+TITLE: What is a sentence?
+CONTENT: A sentence is a group of words that expresses a complete thought. It begins with a capital letter and contains a finite verb. In a command the subject you is understood.
+EXAMPLE: The boy plays.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Statements and questions
+CONTENT: A statement supplies information. A question asks for information.
+EXAMPLE: Shaun is going to school.<br>Where is Shaun going?
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Commands and exclamations
+CONTENT: A command gives an order or an instruction. An exclamation expresses strong emotion such as surprise, fear, alarm or anger.
+EXAMPLE: Do not enter through that door.<br>It's a ghost!
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Name the type
+CONTENT: Name the type of this sentence. Close the door.
+EXAMPLE: A command, because it gives an order.
+@@ENDCARD
+
+TESTED:
+Say what a sentence is
+Name the four sentence types
+Tell a statement from a question
+Tell a command from an exclamation
+Match a sentence to its job
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is a statement?
+A: How bright the sun is!
+B: Where does the sun set?
+C: The sun sets in the west.
+D: Look at the sun.
+CORRECT: C
+EXPLAIN:
+A statement supplies information. The other sentences ask, order or exclaim.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is a question?
+A: The sun sets in the west.
+B: How bright the sun is!
+C: Look at the sun.
+D: Where does the sun set?
+CORRECT: D
+EXPLAIN:
+A question asks for information. The other sentences state, order or exclaim.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is a command?
+A: Where does the sun set?
+B: Look at the sun.
+C: The sun sets in the west.
+D: How bright the sun is!
+CORRECT: B
+EXPLAIN:
+A command gives an order. The other sentences state, ask or exclaim.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is an exclamation?
+A: Look at the sun.
+B: The sun sets in the west.
+C: How bright the sun is!
+D: Where does the sun set?
+CORRECT: C
+EXPLAIN:
+An exclamation expresses strong feeling. The other sentences state, ask or order.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What does a question do?
+A: It supplies information
+B: It expresses anger
+C: It gives an order
+D: It asks for information
+CORRECT: D
+EXPLAIN:
+A question asks for information. Statements supply it and commands order.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+A sentence is a group of words that expresses
+A: only a noun
+B: a complete thought
+C: a list of letters
+D: a single sound
+CORRECT: B
+EXPLAIN:
+A sentence expresses a complete thought. A single word, a list of letters or a sound does not.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What type of sentence is Close the door?
+A: A command
+B: A statement
+C: A question
+D: An exclamation
+CORRECT: A
+EXPLAIN:
+It gives an order, so it is a command.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is a command?
+A: Please bring me a glass of water.
+B: Could you bring me a glass of water?
+C: She brings me a glass of water.
+D: What a big glass of water!
+CORRECT: A
+EXPLAIN:
+Please bring me a glass of water gives an instruction. Could you bring me a glass of water asks for information, so it is a question.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: sentences
+BROAD_TOPIC_DISPLAY: Sentences
+SUBTOPIC_ID: sentence_types
+SUBTOPIC_DISPLAY: Sentence Types
+LEVEL_ID: sentence_types_exam
+LEVEL_DISPLAY: Sentence Types Exam Practice
+LEVEL_DESC: Test yourself on the whole topic with mixed questions.
+LEVEL_ORDER: 2
 DIFFICULTY: Challenge
 ACCESS: Premium
 QUESTION_COUNT: 14
@@ -59,11 +222,11 @@ Match sentences to their types
 DIFFICULTY: Starter
 QUESTION:
 Which sentence is a statement?
-A: Go to school.
+A: Shaun is going to school.
 B: Where is Shaun going?
-C: Shaun is going to school.
+C: Go to school.
 D: What a lovely day!
-CORRECT: C
+CORRECT: A
 EXPLAIN:
 A statement supplies information. The other sentences ask, order or express feeling.
 @@ENDQ
@@ -72,11 +235,11 @@ A statement supplies information. The other sentences ask, order or express feel
 DIFFICULTY: Starter
 QUESTION:
 Which sentence is a question?
-A: Shaun is going to school.
-B: It's a ghost!
+A: Where is Shaun going?
+B: Shaun is going to school.
 C: Leave the room.
-D: Where is Shaun going?
-CORRECT: D
+D: It's a ghost!
+CORRECT: A
 EXPLAIN:
 A question asks for information, and this one asks where. The other sentences state, order or exclaim.
 @@ENDQ
@@ -86,10 +249,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which sentence is a command?
 A: Shaun enters through the door.
-B: Do not enter through that door.
-C: How loud it is!
+B: How loud it is!
+C: Do not enter through that door.
 D: Who is at the door?
-CORRECT: B
+CORRECT: C
 EXPLAIN:
 A command gives an order or instruction. The other sentences state, exclaim or ask.
 @@ENDQ
@@ -99,10 +262,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which sentence is an exclamation?
 A: Where is the ghost?
-B: The ghost is here.
-C: It's a ghost!
+B: It's a ghost!
+C: The ghost is here.
 D: Find the ghost.
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 An exclamation expresses strong feeling such as fear or surprise. The other sentences state, ask or command.
 @@ENDQ
@@ -112,10 +275,10 @@ DIFFICULTY: Building
 QUESTION:
 What does a statement do?
 A: It asks for information
-B: It supplies information
-C: It gives an order
+B: It gives an order
+C: It supplies information
 D: It expresses strong emotion
-CORRECT: B
+CORRECT: C
 EXPLAIN:
 Statements supply information. Questions ask, commands order and exclamations express emotion.
 @@ENDQ
@@ -126,9 +289,9 @@ QUESTION:
 Another name for a command is
 A: a statement
 B: an interrogative
-C: an exclamation
-D: an imperative
-CORRECT: D
+C: an imperative
+D: an exclamation
+CORRECT: C
 EXPLAIN:
 Commands are also called imperatives. An interrogative sentence is a question.
 @@ENDQ
@@ -138,10 +301,10 @@ DIFFICULTY: Building
 QUESTION:
 Which punctuation mark ends a question?
 A: A comma
-B: A full stop
-C: A question mark
+B: A question mark
+C: A full stop
 D: A colon
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 A question ends with a question mark. The other marks do not end a question.
 @@ENDQ
@@ -191,9 +354,9 @@ QUESTION:
 Which sentence is punctuated correctly?
 A: Where do you live,
 B: Where do you live.
-C: Where do you live?
-D: Where do you live:
-CORRECT: C
+C: Where do you live:
+D: Where do you live?
+CORRECT: D
 EXPLAIN:
 A question ends with a question mark. The other endings do not suit a question.
 @@ENDQ
@@ -202,11 +365,11 @@ A question ends with a question mark. The other endings do not suit a question.
 DIFFICULTY: Challenge
 QUESTION:
 Which pair correctly matches a sentence with its type?
-A: It's a ghost! and exclamation
-B: Open the door and question
+A: Open the door and question
+B: The sun sets in the west and command
 C: Who won? and statement
-D: The sun sets in the west and command
-CORRECT: A
+D: It's a ghost! and exclamation
+CORRECT: D
 EXPLAIN:
 It's a ghost shows alarm, so it is an exclamation. Open the door is a command, Who won is a question and the last sentence is a statement.
 @@ENDQ
@@ -215,11 +378,11 @@ It's a ghost shows alarm, so it is an exclamation. Open the door is a command, W
 DIFFICULTY: Challenge
 QUESTION:
 Which sentence is a statement that contains the word what?
-A: I know what you mean.
-B: What do you mean?
+A: What do you mean?
+B: I know what you mean.
 C: What a mess!
 D: Tell me what you mean.
-CORRECT: A
+CORRECT: B
 EXPLAIN:
 I know what you mean supplies information, so it is a statement. The others are a question, an exclamation and a command.
 @@ENDQ

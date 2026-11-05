@@ -250,10 +250,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which question is a rhetorical question?
 A: Where is the library?
-B: What time does school start?
-C: Who doesn't want a safer school?
+B: Who doesn't want a safer school?
+C: What time does school start?
 D: Did you finish your homework?
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 Who doesn't want a safer school makes a point and expects no answer. The other questions ask for real information.
 @@ENDQ
@@ -262,11 +262,11 @@ Who doesn't want a safer school makes a point and expects no answer. The other q
 DIFFICULTY: Building
 QUESTION:
 Why do speakers use rhetorical questions?
-A: To test spelling
+A: To make the audience think about their point
 B: To get exact information
 C: To end the speech
-D: To make the audience think about their point
-CORRECT: D
+D: To test spelling
+CORRECT: A
 EXPLAIN:
 A rhetorical question draws the audience in and strengthens the argument. It is not used to get information.
 @@ENDQ
@@ -301,11 +301,11 @@ The phrase we must act is repeated for emphasis, which is repetition.
 DIFFICULTY: Building
 QUESTION:
 Which technique is used in the greatest snack in the history of the universe?
-A: Rhetorical question
-B: Exaggeration
+A: Repetition
+B: Rhetorical question
 C: Alliteration
-D: Repetition
-CORRECT: B
+D: Exaggeration
+CORRECT: D
 EXPLAIN:
 The claim is stretched far beyond what can be true, which is exaggeration.
 @@ENDQ
@@ -340,11 +340,11 @@ Sensationalism uses dramatic words to capture interest, especially in headlines.
 DIFFICULTY: Challenge
 QUESTION:
 Which headline is sensationalist?
-A: TERROR STRIKES AS SHOCKING STORM RIPS THROUGH TOWN
+A: Storm hits town on Monday
 B: Storm causes damage in town
-C: Storm hits town on Monday
+C: TERROR STRIKES AS SHOCKING STORM RIPS THROUGH TOWN
 D: Town reports storm damage
-CORRECT: A
+CORRECT: C
 EXPLAIN:
 Terror, shocking and rips are dramatic words chosen to excite the reader. The other headlines state the news plainly.
 @@ENDQ
@@ -414,11 +414,11 @@ Judge how a writer persuades
 DIFFICULTY: Starter
 QUESTION:
 Which sentence is a fact?
-A: Pretoria is the nicest city.
-B: Pretoria is in Gauteng.
+A: Pretoria is in Gauteng.
+B: Pretoria is the nicest city.
 C: Pretoria is boring.
 D: Pretoria is far too hot.
-CORRECT: B
+CORRECT: A
 EXPLAIN:
 The location of Pretoria can be checked. The other sentences are opinions.
 @@ENDQ
@@ -427,11 +427,11 @@ The location of Pretoria can be checked. The other sentences are opinions.
 DIFFICULTY: Starter
 QUESTION:
 Which sentence is an opinion?
-A: A football match has two teams.
+A: Football is the most exciting sport.
 B: Football is played with a ball.
-C: Football is the most exciting sport.
+C: A football match has two teams.
 D: Football is played on a field.
-CORRECT: C
+CORRECT: A
 EXPLAIN:
 Most exciting is a personal judgment. The other sentences state facts that can be checked.
 @@ENDQ
@@ -442,9 +442,9 @@ QUESTION:
 Which kind of language tries to make readers feel strongly?
 A: A dictionary definition
 B: Objective language
-C: A list of facts
-D: Emotive language
-CORRECT: D
+C: Emotive language
+D: A list of facts
+CORRECT: C
 EXPLAIN:
 Emotive language appeals to feelings. Objective language, lists of facts and definitions aim to stay neutral.
 @@ENDQ
@@ -519,10 +519,10 @@ DIFFICULTY: Building
 QUESTION:
 Which headline is the most sensational?
 A: Flood damages town
-B: HORROR AS DEADLY FLOOD SWALLOWS TOWN
-C: Flood hits town
-D: Town reports flood
-CORRECT: B
+B: Flood hits town
+C: Town reports flood
+D: HORROR AS DEADLY FLOOD SWALLOWS TOWN
+CORRECT: D
 EXPLAIN:
 Horror, deadly and swallows are dramatic words chosen to shock. The other headlines state the news plainly.
 @@ENDQ
@@ -546,9 +546,9 @@ QUESTION:
 Which sentence uses repetition for emphasis?
 A: Please give your answer.
 B: We will try.
-C: The result is not known.
-D: We will not give up, we will not give in, we will not go back.
-CORRECT: D
+C: We will not give up, we will not give in, we will not go back.
+D: The result is not known.
+CORRECT: C
 EXPLAIN:
 The phrase we will not is repeated for emphasis. The other sentences do not repeat anything.
 @@ENDQ
@@ -557,11 +557,11 @@ The phrase we will not is repeated for emphasis. The other sentences do not repe
 DIFFICULTY: Challenge
 QUESTION:
 Which sentence uses exaggeration?
-A: I have told you a million times to tidy your room.
-B: I have told you twice to tidy your room.
+A: I have told you twice to tidy your room.
+B: I have told you a million times to tidy your room.
 C: Please tidy your room.
 D: Your room is on the left.
-CORRECT: A
+CORRECT: B
 EXPLAIN:
 A million times is far more than the speaker could mean, so it is exaggeration.
 @@ENDQ
@@ -570,11 +570,11 @@ A million times is far more than the speaker could mean, so it is exaggeration.
 DIFFICULTY: Challenge
 QUESTION:
 Which statement about propaganda is correct?
-A: It states opinions as facts and chooses facts selectively
+A: It is found only in poetry
 B: It always gives both sides of a story
 C: It never uses emotive language
-D: It is found only in poetry
-CORRECT: A
+D: It states opinions as facts and chooses facts selectively
+CORRECT: D
 EXPLAIN:
 Propaganda distorts evidence by stating opinions as facts and choosing facts selectively. It is not balanced and it often uses emotive language.
 @@ENDQ

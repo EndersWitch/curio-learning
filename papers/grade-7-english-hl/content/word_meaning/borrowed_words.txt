@@ -234,11 +234,11 @@ Recognise words that are not from a given language
 DIFFICULTY: Starter
 QUESTION:
 What does the word indaba mean?
-A: A type of food
-B: A meeting or discussion
+A: A meeting or discussion
+B: A type of food
 C: A musical instrument
 D: A long trip
-CORRECT: B
+CORRECT: A
 EXPLAIN:
 Indaba comes from isiZulu and means a meeting or a matter for discussion. It is not a food, an instrument or a trip.
 @@ENDQ
@@ -247,11 +247,11 @@ Indaba comes from isiZulu and means a meeting or a matter for discussion. It is 
 DIFFICULTY: Starter
 QUESTION:
 What is a braai?
-A: A kind of hat
+A: An outdoor fire for cooking meat
 B: A type of dance
 C: A small bird
-D: An outdoor fire for cooking meat
-CORRECT: D
+D: A kind of hat
+CORRECT: A
 EXPLAIN:
 A braai is a barbecue, an outdoor fire for cooking meat. The other choices are not related to the word.
 @@ENDQ
@@ -325,11 +325,11 @@ Shampoo comes from Hindi. Pizza is Italian, braai is Afrikaans and sushi is Japa
 DIFFICULTY: Challenge
 QUESTION:
 Which of these words is NOT from Afrikaans?
-A: tsunami
+A: biltong
 B: veld
 C: trek
-D: biltong
-CORRECT: A
+D: tsunami
+CORRECT: D
 EXPLAIN:
 Tsunami comes from Japanese. Veld, trek and biltong are all Afrikaans words.
 @@ENDQ
@@ -338,11 +338,11 @@ Tsunami comes from Japanese. Veld, trek and biltong are all Afrikaans words.
 DIFFICULTY: Challenge
 QUESTION:
 What does the Afrikaans word spoor mean?
-A: The track left by an animal
+A: A sharp noise
 B: A type of grass
 C: A fast run
-D: A sharp noise
-CORRECT: A
+D: The track left by an animal
+CORRECT: D
 EXPLAIN:
 Spoor is the track or trail left by an animal. It is used in English by trackers and hunters.
 @@ENDQ
@@ -414,9 +414,9 @@ QUESTION:
 A word taken from another language and used in English is called
 A: a synonym
 B: a prefix
-C: a borrowed word
-D: a clipped word
-CORRECT: C
+C: a clipped word
+D: a borrowed word
+CORRECT: D
 EXPLAIN:
 A borrowed word comes from another language. A prefix, a synonym and a clipped word are different things.
 @@ENDQ
@@ -427,9 +427,9 @@ QUESTION:
 Which word comes from French?
 A: karaoke
 B: braai
-C: sushi
-D: ballet
-CORRECT: D
+C: ballet
+D: sushi
+CORRECT: C
 EXPLAIN:
 Ballet comes from French. Braai is Afrikaans, and sushi and karaoke are Japanese.
 @@ENDQ
@@ -439,10 +439,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which word comes from Japanese?
 A: pizza
-B: sushi
-C: ballet
-D: indaba
-CORRECT: B
+B: indaba
+C: sushi
+D: ballet
+CORRECT: C
 EXPLAIN:
 Sushi is Japanese. Pizza is Italian, ballet is French and indaba comes from isiZulu.
 @@ENDQ
@@ -451,11 +451,11 @@ Sushi is Japanese. Pizza is Italian, ballet is French and indaba comes from isiZ
 DIFFICULTY: Starter
 QUESTION:
 What is a café?
-A: A type of horn
+A: A small restaurant serving drinks and light meals
 B: A type of dance
 C: A bunch of flowers
-D: A small restaurant serving drinks and light meals
-CORRECT: D
+D: A type of horn
+CORRECT: A
 EXPLAIN:
 A café is a small restaurant that serves drinks and light meals. The word comes from French.
 @@ENDQ
@@ -465,10 +465,10 @@ DIFFICULTY: Building
 QUESTION:
 Which language gave English the word algebra?
 A: French
-B: Arabic
+B: Japanese
 C: isiZulu
-D: Japanese
-CORRECT: B
+D: Arabic
+CORRECT: D
 EXPLAIN:
 Algebra comes from Arabic. It is a branch of mathematics.
 @@ENDQ
@@ -477,11 +477,11 @@ Algebra comes from Arabic. It is a branch of mathematics.
 DIFFICULTY: Building
 QUESTION:
 Which language did the word impala come from?
-A: German
+A: isiZulu
 B: Italian
-C: isiZulu
-D: Hindi
-CORRECT: C
+C: Hindi
+D: German
+CORRECT: A
 EXPLAIN:
 Impala is an isiZulu word for a type of antelope. The other languages did not give English this word.
 @@ENDQ
@@ -504,10 +504,10 @@ DIFFICULTY: Building
 QUESTION:
 Which list contains only words borrowed from Italian?
 A: sushi, karaoke, tsunami
-B: braai, veld, trek
-C: pizza, piano, spaghetti
+B: pizza, piano, spaghetti
+C: braai, veld, trek
 D: kindergarten, ballet, café
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 Pizza, piano and spaghetti are all Italian. The other lists are Afrikaans, Japanese, and German and French.
 @@ENDQ
@@ -517,10 +517,10 @@ DIFFICULTY: Building
 QUESTION:
 Which sentence contains a word borrowed from Afrikaans?
 A: The ballet starts at eight.
-B: They ate biltong on the long drive.
-C: We sang karaoke.
-D: The pizza arrived.
-CORRECT: B
+B: The pizza arrived.
+C: They ate biltong on the long drive.
+D: We sang karaoke.
+CORRECT: C
 EXPLAIN:
 Biltong is an Afrikaans word for dried meat. Ballet is French, karaoke is Japanese and pizza is Italian.
 @@ENDQ
@@ -555,11 +555,11 @@ Kindergarten is a German word meaning a garden for children. The other words are
 DIFFICULTY: Challenge
 QUESTION:
 Which pair is correctly matched with its language?
-A: braai, Afrikaans
-B: pizza, Japanese
+A: pizza, Japanese
+B: braai, Afrikaans
 C: sushi, Italian
 D: indaba, French
-CORRECT: A
+CORRECT: B
 EXPLAIN:
 Braai is Afrikaans. Pizza is Italian, sushi is Japanese and indaba comes from isiZulu.
 @@ENDQ
@@ -568,11 +568,11 @@ Braai is Afrikaans. Pizza is Italian, sushi is Japanese and indaba comes from is
 DIFFICULTY: Challenge
 QUESTION:
 Which of these words is NOT borrowed from Hindi?
-A: pizza
-B: shampoo
+A: shampoo
+B: pizza
 C: jungle
 D: pyjamas
-CORRECT: A
+CORRECT: B
 EXPLAIN:
 Pizza is Italian. Shampoo, jungle and pyjamas all come from Hindi.
 @@ENDQ

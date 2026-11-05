@@ -6,10 +6,173 @@ BROAD_TOPIC_ID: word_meaning
 BROAD_TOPIC_DISPLAY: Word Meaning
 SUBTOPIC_ID: synonyms_antonyms
 SUBTOPIC_DISPLAY: Synonyms and Antonyms
-LEVEL_ID: synonyms_antonyms_mastery
-LEVEL_DISPLAY: Synonyms and Antonyms Mastery
-LEVEL_DESC: Grade 7 exam-style revision of synonyms and antonyms.
+LEVEL_ID: synonyms_antonyms_1
+LEVEL_DISPLAY: Words with Similar and Opposite Meanings
+LEVEL_DESC: Learn what synonyms and antonyms are.
 LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: Some words mean almost the same thing and some mean the opposite. Words with similar meanings are <strong>synonyms</strong> and words with opposite meanings are <strong>antonyms</strong>.
+
+@@CARD
+TYPE: definition
+TITLE: Synonyms
+CONTENT: Synonyms are words of the same or similar meaning. They are often interchangeable, but the best choice depends on the context.
+EXAMPLE: big, large<br>happy, cheerful
+@@ENDCARD
+
+@@CARD
+TYPE: definition
+TITLE: Antonyms
+CONTENT: Antonyms are words of opposite meaning.
+EXAMPLE: hot, cold<br>modern, old-fashioned
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: The thesaurus
+CONTENT: A thesaurus is the best source of reference for synonyms. A dictionary gives meanings and spelling.
+EXAMPLE: Look up big in a thesaurus to find large, huge and enormous.
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Opposite
+CONTENT: Write an antonym of the word ancient.
+EXAMPLE: modern.
+@@ENDCARD
+
+TESTED:
+Say what a synonym is
+Say what an antonym is
+Choose a synonym
+Choose an antonym
+Use a thesaurus
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is a synonym of big?
+A: tiny
+B: large
+C: narrow
+D: quiet
+CORRECT: B
+EXPLAIN:
+Large means big. The other words have different meanings.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which word is an antonym of hot?
+A: boiling
+B: warm
+C: cold
+D: sunny
+CORRECT: C
+EXPLAIN:
+Cold is the opposite of hot.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Synonyms are words with
+A: no meaning
+B: opposite meanings
+C: the same sound
+D: the same or similar meaning
+CORRECT: D
+EXPLAIN:
+Synonyms mean the same or nearly the same.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Antonyms are words with
+A: the same sound
+B: the same meaning
+C: the same spelling
+D: opposite meanings
+CORRECT: D
+EXPLAIN:
+Antonyms have opposite meanings.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is a synonym of happy?
+A: angry
+B: sad
+C: cheerful
+D: tired
+CORRECT: C
+EXPLAIN:
+Cheerful means happy. The other words describe other feelings.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is an antonym of ancient?
+A: old
+B: modern
+C: aged
+D: historic
+CORRECT: B
+EXPLAIN:
+Modern is the opposite of ancient. The other words are close to ancient in meaning.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which pair are antonyms?
+A: hot and cold
+B: big and large
+C: happy and cheerful
+D: quick and fast
+CORRECT: A
+EXPLAIN:
+Hot and cold are opposites. The other pairs are synonyms.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which word is NOT a synonym of fast?
+A: slow
+B: quick
+C: rapid
+D: speedy
+CORRECT: A
+EXPLAIN:
+Slow is the opposite of fast. The other words mean the same.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: word_meaning
+BROAD_TOPIC_DISPLAY: Word Meaning
+SUBTOPIC_ID: synonyms_antonyms
+SUBTOPIC_DISPLAY: Synonyms and Antonyms
+LEVEL_ID: synonyms_antonyms_exam
+LEVEL_DISPLAY: Synonyms and Antonyms Exam Practice
+LEVEL_DESC: Test yourself on the whole topic with mixed questions.
+LEVEL_ORDER: 2
 DIFFICULTY: Challenge
 ACCESS: Premium
 QUESTION_COUNT: 14
@@ -70,11 +233,11 @@ Synonyms are words of the same or similar meaning. Words with opposite meanings 
 DIFFICULTY: Starter
 QUESTION:
 Which word is a synonym of huge?
-A: narrow
-B: tiny
-C: enormous
+A: enormous
+B: narrow
+C: tiny
 D: quiet
-CORRECT: C
+CORRECT: A
 EXPLAIN:
 Enormous means very large, like huge. The other words have different meanings.
 @@ENDQ
@@ -97,10 +260,10 @@ DIFFICULTY: Starter
 QUESTION:
 The best source of synonyms is
 A: a calendar
-B: an atlas
-C: a thesaurus
+B: a thesaurus
+C: an atlas
 D: a map
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 A thesaurus lists words with similar meanings. The other books do not.
 @@ENDQ
@@ -109,11 +272,11 @@ A thesaurus lists words with similar meanings. The other books do not.
 DIFFICULTY: Building
 QUESTION:
 Which word is a synonym of brave?
-A: cowardly
-B: courageous
+A: courageous
+B: calm
 C: careful
-D: calm
-CORRECT: B
+D: cowardly
+CORRECT: A
 EXPLAIN:
 Courageous means brave. Cowardly is an antonym, and careful and calm have other meanings.
 @@ENDQ
@@ -137,9 +300,9 @@ QUESTION:
 Which antonym of useful is made by adding a suffix?
 A: disuseful
 B: unuseful
-C: misuseful
-D: useless
-CORRECT: D
+C: useless
+D: misuseful
+CORRECT: C
 EXPLAIN:
 Adding the suffix less gives the antonym useless. The other forms are not used in English.
 @@ENDQ
@@ -189,9 +352,9 @@ QUESTION:
 Which word is NOT a synonym of start?
 A: commence
 B: begin
-C: finish
-D: launch
-CORRECT: C
+C: launch
+D: finish
+CORRECT: D
 EXPLAIN:
 Finish is the opposite of start. Begin, commence and launch all mean to start.
 @@ENDQ
@@ -200,11 +363,11 @@ Finish is the opposite of start. Begin, commence and launch all mean to start.
 DIFFICULTY: Challenge
 QUESTION:
 Which pair are antonyms?
-A: comedy and tragedy
+A: brave and courageous
 B: huge and enormous
-C: brave and courageous
+C: comedy and tragedy
 D: calm and tranquil
-CORRECT: A
+CORRECT: C
 EXPLAIN:
 A comedy is funny and a tragedy is sad, so they are opposites. The other pairs are synonyms.
 @@ENDQ
@@ -213,11 +376,11 @@ A comedy is funny and a tragedy is sad, so they are opposites. The other pairs a
 DIFFICULTY: Challenge
 QUESTION:
 Which word is a synonym of despise?
-A: scorn
+A: adore
 B: admire
-C: adore
+C: scorn
 D: praise
-CORRECT: A
+CORRECT: C
 EXPLAIN:
 To scorn is to treat with contempt, which is close to despise. The other words show approval.
 @@ENDQ

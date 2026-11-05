@@ -6,10 +6,173 @@ BROAD_TOPIC_ID: sentences
 BROAD_TOPIC_DISPLAY: Sentences
 SUBTOPIC_ID: sentence_structure
 SUBTOPIC_DISPLAY: Subject, Predicate and Object
-LEVEL_ID: sentence_structure_mastery
-LEVEL_DISPLAY: Subject, Predicate and Object Mastery
-LEVEL_DESC: Grade 7 exam-style revision of subject, predicate, verb, objects and complement.
+LEVEL_ID: sentence_structure_1
+LEVEL_DISPLAY: Subject, Verb and Object
+LEVEL_DESC: Learn to find the subject, verb and object of a sentence.
 LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: Every sentence is built from parts. The <strong>subject</strong> is who or what the sentence is about, the <strong>verb</strong> is the action, and the <strong>object</strong> receives the action.
+
+@@CARD
+TYPE: definition
+TITLE: The subject
+CONTENT: The subject is who or what we are talking about. To find it, ask who or what before the verb.
+EXAMPLE: The boy plays soccer.<br>Who plays? The boy.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: The verb and the object
+CONTENT: The verb is the action or state. The direct object answers who or what after the verb.
+EXAMPLE: Anne reads a book.<br>Verb, reads. Direct object, a book.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: The predicate
+CONTENT: The predicate is the rest of the sentence after the subject. It contains the verb and says something about the subject.
+EXAMPLE: The dog | chased the cat.
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Find the subject
+CONTENT: Write the subject of this sentence. The girls sang loudly.
+EXAMPLE: The girls. Ask who sang.
+@@ENDCARD
+
+TESTED:
+Find the subject
+Find the verb
+Find the direct object
+Find the predicate
+Ask the right question
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the subject of this sentence? The boy plays soccer.
+A: soccer
+B: plays
+C: The boy
+D: The boy plays
+CORRECT: C
+EXPLAIN:
+Ask who plays, and the answer is the boy.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the verb in this sentence? Anne reads a book.
+A: Anne reads
+B: Anne
+C: a book
+D: reads
+CORRECT: D
+EXPLAIN:
+Reads is the action word. Anne is the subject and a book is the object.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+What is the object in this sentence? Anne reads a book.
+A: Anne
+B: a book
+C: reads
+D: Anne reads
+CORRECT: B
+EXPLAIN:
+Ask what Anne reads, and the answer is a book.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+How do you find the subject of a sentence?
+A: Look at the last word
+B: Ask how after the verb
+C: Ask who or what before the verb
+D: Look for the adjective
+CORRECT: C
+EXPLAIN:
+The question who or what before the verb gives the subject.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the predicate of this sentence? The dog chased the cat.
+A: The dog
+B: chased the cat
+C: The dog chased
+D: the cat
+CORRECT: B
+EXPLAIN:
+The predicate is the rest of the sentence after the subject.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word is the verb? The girls sang loudly.
+A: The
+B: girls
+C: loudly
+D: sang
+CORRECT: D
+EXPLAIN:
+Sang is the action. Loudly tells how, and girls is the subject.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the direct object in this sentence? Thabo kicked the ball.
+A: the ball
+B: Thabo
+C: kicked
+D: Thabo kicked
+CORRECT: A
+EXPLAIN:
+Ask what Thabo kicked, and the answer is the ball.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+What is the complete subject of this sentence? The tall girl in the red jersey won the race.
+A: The tall girl in the red jersey
+B: The tall girl
+C: the red jersey
+D: the race
+CORRECT: A
+EXPLAIN:
+The full subject includes the phrase that describes the girl. Won is the verb and the race is the object.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: sentences
+BROAD_TOPIC_DISPLAY: Sentences
+SUBTOPIC_ID: sentence_structure
+SUBTOPIC_DISPLAY: Subject, Predicate and Object
+LEVEL_ID: sentence_structure_exam
+LEVEL_DISPLAY: Subject, Predicate and Object Exam Practice
+LEVEL_DESC: Test yourself on the whole topic with mixed questions.
+LEVEL_ORDER: 2
 DIFFICULTY: Challenge
 ACCESS: Premium
 QUESTION_COUNT: 14
@@ -57,11 +220,11 @@ Tell an object from a complement
 DIFFICULTY: Starter
 QUESTION:
 What is the subject of this sentence? The boy plays soccer.
-A: The boy plays
+A: The boy
 B: plays
 C: soccer
-D: The boy
-CORRECT: D
+D: The boy plays
+CORRECT: A
 EXPLAIN:
 Ask who plays, and the answer is the boy. Plays is the verb and soccer is the object.
 @@ENDQ
@@ -72,9 +235,9 @@ QUESTION:
 What is the verb in this sentence? Anne reads a book.
 A: a book
 B: Anne
-C: reads
-D: Anne reads
-CORRECT: C
+C: Anne reads
+D: reads
+CORRECT: D
 EXPLAIN:
 Reads is the action word. Anne is the subject and a book is the object.
 @@ENDQ
@@ -84,10 +247,10 @@ DIFFICULTY: Starter
 QUESTION:
 What is the direct object in this sentence? Anne reads a book.
 A: Anne
-B: a book
+B: Anne reads
 C: reads
-D: Anne reads
-CORRECT: B
+D: a book
+CORRECT: D
 EXPLAIN:
 Ask what Anne reads, and the answer is a book.
 @@ENDQ
@@ -97,10 +260,10 @@ DIFFICULTY: Starter
 QUESTION:
 The subject of a sentence tells us
 A: where the action happens
-B: how the action is done
-C: who or what we are talking about
+B: who or what we are talking about
+C: how the action is done
 D: when the action happens
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 The subject is who or what the sentence is about. Adverbs tell how, where and when.
 @@ENDQ
@@ -110,10 +273,10 @@ DIFFICULTY: Building
 QUESTION:
 What is the predicate of this sentence? The boys in Grade 7 were happy to go to high school.
 A: The boys in Grade 7
-B: were happy to go to high school
-C: The boys
+B: The boys
+C: were happy to go to high school
 D: in Grade 7
-CORRECT: B
+CORRECT: C
 EXPLAIN:
 The predicate is the rest of the sentence after the subject, and it contains the verb were.
 @@ENDQ
@@ -122,11 +285,11 @@ The predicate is the rest of the sentence after the subject, and it contains the
 DIFFICULTY: Building
 QUESTION:
 What is the indirect object in this sentence? She threw her brother the ball.
-A: threw
+A: her brother
 B: the ball
-C: She
-D: her brother
-CORRECT: D
+C: threw
+D: She
+CORRECT: A
 EXPLAIN:
 The indirect object says to whom the action is done, and she threw her brother the ball. The ball is the direct object.
 @@ENDQ
@@ -162,10 +325,10 @@ DIFFICULTY: Building
 QUESTION:
 Which part of the sentence is everything after the subject?
 A: The adjective
-B: The subject
+B: The predicate
 C: The title
-D: The predicate
-CORRECT: D
+D: The subject
+CORRECT: B
 EXPLAIN:
 The predicate is the rest of the sentence after the subject, and it contains the verb.
 @@ENDQ
@@ -173,12 +336,12 @@ The predicate is the rest of the sentence after the subject, and it contains the
 @@Q
 DIFFICULTY: Challenge
 QUESTION:
-What is the subject of this sentence? The model with the dazzling smile came from Durban.
+What is the complete subject of this sentence? The model with the dazzling smile came from Durban.
 A: the dazzling smile
 B: The model
-C: The model with the dazzling smile
-D: Durban
-CORRECT: C
+C: Durban
+D: The model with the dazzling smile
+CORRECT: D
 EXPLAIN:
 The full subject includes the phrase that describes the model. Came is the verb and from Durban is part of the predicate.
 @@ENDQ
@@ -189,9 +352,9 @@ QUESTION:
 Which sentence contains a complement and not an object?
 A: The author read a poem.
 B: The author wrote a book.
-C: The author sent a letter to her editor.
-D: The author became famous.
-CORRECT: D
+C: The author became famous.
+D: The author sent a letter to her editor.
+CORRECT: C
 EXPLAIN:
 Became is a linking verb and famous describes the author, so it is a complement. The other sentences have objects after the verb.
 @@ENDQ
@@ -200,11 +363,11 @@ Became is a linking verb and famous describes the author, so it is a complement.
 DIFFICULTY: Challenge
 QUESTION:
 Which sentence contains both a direct and an indirect object?
-A: He gave his sister the book.
-B: He read the book.
-C: He is a teacher.
+A: He is a teacher.
+B: He gave his sister the book.
+C: He read the book.
 D: He ran quickly.
-CORRECT: A
+CORRECT: B
 EXPLAIN:
 The book is the direct object and his sister is the indirect object. The other sentences have one object, a complement or none.
 @@ENDQ
@@ -213,11 +376,11 @@ The book is the direct object and his sister is the indirect object. The other s
 DIFFICULTY: Challenge
 QUESTION:
 In which sentence is cake the direct object?
-A: Thandi baked a cake.
+A: The cake fell.
 B: The cake was delicious.
 C: Thandi sat near the cake.
-D: The cake fell.
-CORRECT: A
+D: Thandi baked a cake.
+CORRECT: D
 EXPLAIN:
 Ask what Thandi baked, and the answer is a cake, so it is the direct object. In the other sentences cake is a subject or follows a preposition.
 @@ENDQ

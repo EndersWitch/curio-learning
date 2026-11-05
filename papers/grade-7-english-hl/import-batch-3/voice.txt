@@ -6,10 +6,173 @@ BROAD_TOPIC_ID: sentences
 BROAD_TOPIC_DISPLAY: Sentences
 SUBTOPIC_ID: voice
 SUBTOPIC_DISPLAY: Active and Passive Voice
-LEVEL_ID: voice_mastery
-LEVEL_DISPLAY: Active and Passive Voice Mastery
-LEVEL_DESC: Grade 7 exam-style revision of active and passive voice.
+LEVEL_ID: voice_1
+LEVEL_DISPLAY: Active and Passive Sentences
+LEVEL_DESC: Learn the difference between active and passive sentences.
 LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: In an <strong>active</strong> sentence the subject does the action. In a <strong>passive</strong> sentence the subject receives it. You can change a sentence from one to the other.
+
+@@CARD
+TYPE: definition
+TITLE: Active voice
+CONTENT: In the active voice the subject of the sentence does the action.
+EXAMPLE: The boy kicks the ball.
+@@ENDCARD
+
+@@CARD
+TYPE: definition
+TITLE: Passive voice
+CONTENT: In the passive voice the subject receives the action. The object of the active sentence becomes the subject.
+EXAMPLE: The ball is kicked by the boy.
+@@ENDCARD
+
+@@CARD
+TYPE: step_by_step
+TITLE: Changing active to passive
+CONTENT: 1. Move the object to the front.<br>2. Use the correct tense of be plus the past participle.<br>3. Add by and the original subject.
+EXAMPLE: The boy kicked the ball.<br>The ball was kicked by the boy.
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Make it passive
+CONTENT: Change this sentence to the passive. The dog chased the cat.
+EXAMPLE: The cat was chased by the dog.
+@@ENDCARD
+
+TESTED:
+Recognise active sentences
+Recognise passive sentences
+Know the verb form used in the passive
+Change active to passive
+Change passive to active
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+In the active voice the subject
+A: is left out
+B: receives the action
+C: does the action
+D: is always a pronoun
+CORRECT: C
+EXPLAIN:
+In the active voice the subject performs the action.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is active?
+A: The mouse will be chased by the cat.
+B: The mouse was chased by the cat.
+C: The mouse is chased by the cat.
+D: The cat chased the mouse.
+CORRECT: D
+EXPLAIN:
+The cat is the subject and does the chasing. In the other sentences the mouse receives the action.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is passive?
+A: The cat chased the mouse.
+B: The mouse was chased by the cat.
+C: The cat chases the mouse.
+D: The cat will chase the mouse.
+CORRECT: B
+EXPLAIN:
+The mouse is the subject and receives the action.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+The passive voice uses a form of be plus
+A: the infinitive
+B: the past participle
+C: a gerund
+D: an adverb
+CORRECT: B
+EXPLAIN:
+The passive uses be and the past participle, as in is kicked.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which is the passive form of The boy kicks the ball?
+A: The boy is kicked by the ball.
+B: The ball was kicked by the boy.
+C: The ball will be kicked by the boy.
+D: The ball is kicked by the boy.
+CORRECT: D
+EXPLAIN:
+The present tense is kept with is kicked.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which is the active form of The window was broken by Sam?
+A: The window broke Sam.
+B: Sam breaks the window.
+C: Sam broke the window.
+D: Sam will break the window.
+CORRECT: C
+EXPLAIN:
+The tense stays in the simple past and Sam becomes the subject.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+In a passive sentence, by introduces
+A: the doer of the action
+B: the time
+C: the place
+D: the reason
+CORRECT: A
+EXPLAIN:
+By is followed by the agent, the person or thing that did the action.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is passive?
+A: The letter was written by Sipho.
+B: Sipho wrote the letter.
+C: Sipho is writing the letter.
+D: Sipho will write the letter.
+CORRECT: A
+EXPLAIN:
+The letter is the subject and receives the action. The other sentences are active.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: sentences
+BROAD_TOPIC_DISPLAY: Sentences
+SUBTOPIC_ID: voice
+SUBTOPIC_DISPLAY: Active and Passive Voice
+LEVEL_ID: voice_exam
+LEVEL_DISPLAY: Active and Passive Voice Exam Practice
+LEVEL_DESC: Test yourself on the whole topic with mixed questions.
+LEVEL_ORDER: 2
 DIFFICULTY: Challenge
 ACCESS: Premium
 QUESTION_COUNT: 14
@@ -59,11 +222,11 @@ Say when the passive is used
 DIFFICULTY: Starter
 QUESTION:
 In the active voice the subject
-A: is always a pronoun
+A: does the action
 B: receives the action
 C: is left out
-D: does the action
-CORRECT: D
+D: is always a pronoun
+CORRECT: A
 EXPLAIN:
 In the active voice the subject performs the action. In the passive it receives it.
 @@ENDQ
@@ -74,9 +237,9 @@ QUESTION:
 Which sentence is in the active voice?
 A: The ball was kicked by the boy.
 B: The ball is kicked by the boy.
-C: The boy kicks the ball.
-D: The ball will be kicked by the boy.
-CORRECT: C
+C: The ball will be kicked by the boy.
+D: The boy kicks the ball.
+CORRECT: D
 EXPLAIN:
 The boy is the subject and does the kicking. In the other sentences the ball receives the action.
 @@ENDQ
@@ -86,10 +249,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which sentence is in the passive voice?
 A: The boy kicks the ball.
-B: The ball is kicked by the boy.
-C: The boy kicked the ball.
-D: The boy will kick the ball.
-CORRECT: B
+B: The boy kicked the ball.
+C: The boy will kick the ball.
+D: The ball is kicked by the boy.
+CORRECT: D
 EXPLAIN:
 The ball is the subject and receives the action. In the other sentences the boy does the action.
 @@ENDQ
@@ -99,10 +262,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which verb form is used in the passive voice?
 A: A gerund
-B: Only the infinitive
+B: A form of be plus the past participle
 C: Only the base form
-D: A form of be plus the past participle
-CORRECT: D
+D: Only the infinitive
+CORRECT: B
 EXPLAIN:
 The passive uses be and the past participle, as in is kicked.
 @@ENDQ
@@ -125,10 +288,10 @@ DIFFICULTY: Building
 QUESTION:
 Which is the passive form of The boy will kick the ball?
 A: The ball was kicked by the boy.
-B: The ball is kicked by the boy.
-C: The ball will be kicked by the boy.
-D: The ball kicks the boy.
-CORRECT: C
+B: The ball kicks the boy.
+C: The ball is kicked by the boy.
+D: The ball will be kicked by the boy.
+CORRECT: D
 EXPLAIN:
 The future tense is kept with will be kicked. The other versions change the tense or swap the roles.
 @@ENDQ
@@ -164,10 +327,10 @@ DIFFICULTY: Building
 QUESTION:
 Why is the passive used in The diamonds were stolen?
 A: The diamonds did the stealing
-B: The sentence is a question
-C: The sentence is a command
-D: The doer is not known
-CORRECT: D
+B: The sentence is a command
+C: The doer is not known
+D: The sentence is a question
+CORRECT: C
 EXPLAIN:
 The passive is useful when we do not know who did the action.
 @@ENDQ
@@ -177,10 +340,10 @@ DIFFICULTY: Challenge
 QUESTION:
 The passive voice is often used when the doer is
 A: always a pronoun
-B: always the most important
-C: unknown, unimportant or obvious
+B: unknown, unimportant or obvious
+C: always the most important
 D: always named
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 The agent can be left out when it is unknown, unimportant or obvious.
 @@ENDQ
@@ -189,11 +352,11 @@ The agent can be left out when it is unknown, unimportant or obvious.
 DIFFICULTY: Challenge
 QUESTION:
 Which sentence is passive and has no agent?
-A: The waiter will serve refreshments.
-B: Refreshments will be served.
+A: Refreshments will be served.
+B: Refreshments were served by the waiter.
 C: We will serve refreshments.
-D: Refreshments were served by the waiter.
-CORRECT: B
+D: The waiter will serve refreshments.
+CORRECT: A
 EXPLAIN:
 Refreshments will be served is passive and does not say who serves them. The last sentence is passive too, but it names the waiter as the agent.
 @@ENDQ
@@ -202,11 +365,11 @@ Refreshments will be served is passive and does not say who serves them. The las
 DIFFICULTY: Challenge
 QUESTION:
 Which is the correct passive form of We keep our coffee cups here?
-A: Our coffee cups are kept here.
+A: Our coffee cups were keep here.
 B: Our coffee cups kept here.
-C: Our coffee cups were keep here.
+C: Our coffee cups are kept here.
 D: We are kept our coffee cups here.
-CORRECT: A
+CORRECT: C
 EXPLAIN:
 The present tense is kept with are kept, and the agent we is left out because it is obvious.
 @@ENDQ
@@ -215,11 +378,11 @@ The present tense is kept with are kept, and the agent we is left out because it
 DIFFICULTY: Challenge
 QUESTION:
 Which sentence cannot be made passive?
-A: The baby slept soundly.
+A: The baby dropped the cup.
 B: The baby ate the porridge.
 C: The baby kicked the ball.
-D: The baby dropped the cup.
-CORRECT: A
+D: The baby slept soundly.
+CORRECT: D
 EXPLAIN:
 Slept is not followed by a direct object, so it cannot become passive. The others have objects.
 @@ENDQ

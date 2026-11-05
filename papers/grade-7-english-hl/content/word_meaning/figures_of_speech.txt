@@ -6,10 +6,173 @@ BROAD_TOPIC_ID: word_meaning
 BROAD_TOPIC_DISPLAY: Word Meaning
 SUBTOPIC_ID: figures_of_speech
 SUBTOPIC_DISPLAY: Figures of Speech
-LEVEL_ID: figures_of_speech_mastery
-LEVEL_DISPLAY: Figures of Speech Mastery
-LEVEL_DESC: Grade 7 exam-style revision of the main figures of speech.
+LEVEL_ID: figures_of_speech_1
+LEVEL_DISPLAY: Simile, Metaphor and Personification
+LEVEL_DESC: Learn to spot three common figures of speech.
 LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: Figures of speech create pictures in the mind. This level covers three comparisons, the <strong>simile</strong>, the <strong>metaphor</strong> and <strong>personification</strong>.
+
+@@CARD
+TYPE: definition
+TITLE: Simile
+CONTENT: A simile is a direct comparison that always contains the words as or like.
+EXAMPLE: He is as wealthy as Bill Gates.<br>She runs like the wind.
+@@ENDCARD
+
+@@CARD
+TYPE: definition
+TITLE: Metaphor
+CONTENT: A metaphor is a comparison without the words as or like. It says that one thing is another.
+EXAMPLE: Time is a thief.<br>The classroom was a zoo.
+@@ENDCARD
+
+@@CARD
+TYPE: definition
+TITLE: Personification
+CONTENT: Personification gives human qualities to inanimate objects or abstract ideas.
+EXAMPLE: The wind whispered through the trees.
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Name the figure
+CONTENT: Name the figure of speech in this sentence. The sun smiled down on us.
+EXAMPLE: Personification, because the sun is given a human action.
+@@ENDCARD
+
+TESTED:
+Recognise a simile
+Recognise a metaphor
+Recognise personification
+Tell a simile from a metaphor
+Name the figure of speech
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+A simile always contains
+A: if or when
+B: and or but
+C: as or like
+D: not or no
+CORRECT: C
+EXPLAIN:
+A simile is a direct comparison using as or like.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is a simile?
+A: She runs fast.
+B: Time is a thief.
+C: The wind whispered.
+D: She runs like the wind.
+CORRECT: D
+EXPLAIN:
+It compares directly using like.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is a metaphor?
+A: She runs like the wind.
+B: Time is a thief.
+C: He is as brave as a lion.
+D: The wind whispered.
+CORRECT: B
+EXPLAIN:
+It says time is a thief, with no as or like.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence is personification?
+A: The wind was strong.
+B: The wind whispered through the trees.
+C: The wind blew hard.
+D: Wind is moving air.
+CORRECT: B
+EXPLAIN:
+Whispering is a human action given to the wind.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which words show the simile in as brave as a lion?
+A: a
+B: brave
+C: lion
+D: as ... as
+CORRECT: D
+EXPLAIN:
+The comparison is made with as ... as.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+What is the difference between a simile and a metaphor?
+A: There is no difference
+B: A metaphor uses as or like and a simile does not
+C: A simile uses as or like and a metaphor does not
+D: A simile is a sound word
+CORRECT: C
+EXPLAIN:
+A simile uses as or like. A metaphor says one thing is another.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+The sun smiled down on us is an example of
+A: personification
+B: a simile
+C: alliteration
+D: onomatopoeia
+CORRECT: A
+EXPLAIN:
+Smiling is a human action given to the sun.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is a metaphor and not a simile?
+A: He is a lion in battle.
+B: He fights like a lion.
+C: He is as brave as a lion.
+D: He fights bravely.
+CORRECT: A
+EXPLAIN:
+It says he is a lion without using like or as.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: word_meaning
+BROAD_TOPIC_DISPLAY: Word Meaning
+SUBTOPIC_ID: figures_of_speech
+SUBTOPIC_DISPLAY: Figures of Speech
+LEVEL_ID: figures_of_speech_exam
+LEVEL_DISPLAY: Figures of Speech Exam Practice
+LEVEL_DESC: Test yourself on the whole topic with mixed questions.
+LEVEL_ORDER: 2
 DIFFICULTY: Challenge
 ACCESS: Premium
 QUESTION_COUNT: 14
@@ -59,11 +222,11 @@ Recognise oxymoron and irony
 DIFFICULTY: Starter
 QUESTION:
 Which sentence contains a simile?
-A: He has money.
+A: He is as wealthy as Bill Gates.
 B: He is a Bill Gates.
 C: He is wealthy.
-D: He is as wealthy as Bill Gates.
-CORRECT: D
+D: He has money.
+CORRECT: A
 EXPLAIN:
 A simile compares directly using as or like. A metaphor makes the comparison without those words.
 @@ENDQ
@@ -73,10 +236,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which sentence contains a metaphor?
 A: The classroom was like a zoo.
-B: The classroom was a zoo.
-C: The classroom was as noisy as a zoo.
+B: The classroom was as noisy as a zoo.
+C: The classroom was a zoo.
 D: The classroom was noisy.
-CORRECT: B
+CORRECT: C
 EXPLAIN:
 A metaphor says one thing is another. The other sentences use like or as, or make no comparison.
 @@ENDQ
@@ -99,10 +262,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which sentence contains alliteration?
 A: Football is played on a field.
-B: Football is exciting.
+B: Football fever fuels fans.
 C: Fans love football.
-D: Football fever fuels fans.
-CORRECT: D
+D: Football is exciting.
+CORRECT: B
 EXPLAIN:
 The repeated f sound at the beginning of words is alliteration.
 @@ENDQ
@@ -112,10 +275,10 @@ DIFFICULTY: Building
 QUESTION:
 Which words in The sky exploded with a crash, bang and a hiss are examples of onomatopoeia?
 A: sky, exploded
-B: crash, bang, hiss
+B: a, the
 C: with, and
-D: a, the
-CORRECT: B
+D: crash, bang, hiss
+CORRECT: D
 EXPLAIN:
 Crash, bang and hiss imitate real sounds, which is onomatopoeia.
 @@ENDQ
@@ -126,9 +289,9 @@ QUESTION:
 Which sentence uses hyperbole?
 A: She prepared food for four.
 B: She prepared dinner.
-C: She prepared enough food to feed an army.
-D: She cooked rice.
-CORRECT: C
+C: She cooked rice.
+D: She prepared enough food to feed an army.
+CORRECT: D
 EXPLAIN:
 Enough food to feed an army is an exaggeration not meant to be taken literally.
 @@ENDQ
@@ -137,11 +300,11 @@ Enough food to feed an army is an exaggeration not meant to be taken literally.
 DIFFICULTY: Building
 QUESTION:
 Which phrase is an oxymoron?
-A: a very ugly sight
-B: a pretty ugly sight
+A: a pretty ugly sight
+B: a very ugly sight
 C: a big sight
 D: a sight to see
-CORRECT: B
+CORRECT: A
 EXPLAIN:
 Pretty and ugly are contradictory words placed together.
 @@ENDQ
@@ -164,10 +327,10 @@ DIFFICULTY: Building
 QUESTION:
 Which sentence contains a euphemism?
 A: He ran away.
-B: He died suddenly.
+B: He passed away.
 C: He was angry.
-D: He passed away.
-CORRECT: D
+D: He died suddenly.
+CORRECT: B
 EXPLAIN:
 Passed away softens the idea of death.
 @@ENDQ
@@ -177,10 +340,10 @@ DIFFICULTY: Challenge
 QUESTION:
 Which sentence is an example of irony?
 A: Detention is boring.
-B: I am looking forward to my holiday.
+B: I can't wait for my detention on Friday afternoon.
 C: Detention is on Friday afternoon.
-D: I can't wait for my detention on Friday afternoon.
-CORRECT: D
+D: I am looking forward to my holiday.
+CORRECT: B
 EXPLAIN:
 The speaker means the opposite of what is said, because nobody looks forward to detention.
 @@ENDQ
@@ -190,10 +353,10 @@ DIFFICULTY: Challenge
 QUESTION:
 Which sentence is an example of litotes?
 A: He is a genius.
-B: He is no Einstein.
+B: He is like Einstein.
 C: He is smarter than a thousand scientists.
-D: He is like Einstein.
-CORRECT: B
+D: He is no Einstein.
+CORRECT: D
 EXPLAIN:
 He is no Einstein understates by using a negative to mean he is not clever.
 @@ENDQ
@@ -202,11 +365,11 @@ He is no Einstein understates by using a negative to mean he is not clever.
 DIFFICULTY: Challenge
 QUESTION:
 Which sentence is personification?
-A: The wind whispered secrets to the trees.
-B: The wind was strong.
+A: The wind was strong.
+B: Wind is moving air.
 C: The wind blew at forty kilometres an hour.
-D: Wind is moving air.
-CORRECT: A
+D: The wind whispered secrets to the trees.
+CORRECT: D
 EXPLAIN:
 Whispering secrets is a human action given to the wind.
 @@ENDQ
@@ -215,11 +378,11 @@ Whispering secrets is a human action given to the wind.
 DIFFICULTY: Challenge
 QUESTION:
 Which pair is correctly matched?
-A: hyperbole and I've told you a million times
-B: simile and The sea is a mirror
+A: simile and The sea is a mirror
+B: hyperbole and I've told you a million times
 C: metaphor and as quiet as a mouse
 D: alliteration and bang
-CORRECT: A
+CORRECT: B
 EXPLAIN:
 A million times is an exaggeration. The sea is a mirror is a metaphor, as quiet as a mouse is a simile, and bang is onomatopoeia.
 @@ENDQ

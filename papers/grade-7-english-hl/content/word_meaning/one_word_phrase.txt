@@ -227,11 +227,11 @@ Tell similar words apart
 DIFFICULTY: Starter
 QUESTION:
 Which one word means a period of ten years?
-A: month
+A: decade
 B: century
 C: millennium
-D: decade
-CORRECT: D
+D: month
+CORRECT: A
 EXPLAIN:
 A decade is ten years. A century is one hundred years, a millennium is one thousand years and a month is much shorter.
 @@ENDQ
@@ -240,11 +240,11 @@ A decade is ten years. A century is one hundred years, a millennium is one thous
 DIFFICULTY: Starter
 QUESTION:
 Which one word means a period of one hundred years?
-A: millennium
-B: decade
-C: century
+A: century
+B: millennium
+C: decade
 D: week
-CORRECT: C
+CORRECT: A
 EXPLAIN:
 A century is one hundred years. A decade is ten years and a millennium is one thousand years.
 @@ENDQ
@@ -254,10 +254,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which one word means an animal that eats meat?
 A: herbivore
-B: carnivore
-C: omnivore
+B: omnivore
+C: carnivore
 D: pedestrian
-CORRECT: B
+CORRECT: C
 EXPLAIN:
 A carnivore eats meat. A herbivore eats plants and an omnivore eats both. A pedestrian is a person who walks.
 @@ENDQ
@@ -267,10 +267,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which one word means able to speak two languages?
 A: unanimous
-B: monologue
+B: bilingual
 C: anonymous
-D: bilingual
-CORRECT: D
+D: monologue
+CORRECT: B
 EXPLAIN:
 Bilingual means able to speak two languages, because bi means two. The other words have different meanings.
 @@ENDQ
@@ -280,10 +280,10 @@ DIFFICULTY: Building
 QUESTION:
 Which one word means of unknown name, as in a writer whose name is not known?
 A: unanimous
-B: anonymous
-C: nocturnal
+B: nocturnal
+C: anonymous
 D: bilingual
-CORRECT: B
+CORRECT: C
 EXPLAIN:
 Anonymous means that the name is not known. Unanimous means that everyone agrees.
 @@ENDQ
@@ -294,9 +294,9 @@ QUESTION:
 Which one word means a long speech by one person?
 A: biography
 B: dialogue
-C: monologue
-D: decade
-CORRECT: C
+C: decade
+D: monologue
+CORRECT: D
 EXPLAIN:
 A monologue is a long speech by one person, because mono means one. A dialogue is a conversation between people.
 @@ENDQ
@@ -306,10 +306,10 @@ DIFFICULTY: Building
 QUESTION:
 Which one word means the story of a person's life written by someone else?
 A: monologue
-B: autobiography
-C: diary
-D: biography
-CORRECT: D
+B: biography
+C: autobiography
+D: diary
+CORRECT: B
 EXPLAIN:
 A biography is a life story written by another person. An autobiography is written by the person themselves.
 @@ENDQ
@@ -319,10 +319,10 @@ DIFFICULTY: Building
 QUESTION:
 Which one word means a period of one thousand years?
 A: decade
-B: millennium
+B: season
 C: century
-D: season
-CORRECT: B
+D: millennium
+CORRECT: D
 EXPLAIN:
 A millennium is one thousand years. A decade is ten years and a century is one hundred years.
 @@ENDQ
@@ -332,10 +332,10 @@ DIFFICULTY: Building
 QUESTION:
 Which one word means active at night?
 A: native
-B: nomadic
-C: nocturnal
+B: nocturnal
+C: nomadic
 D: nervous
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 Nocturnal means active at night. The other words have different meanings.
 @@ENDQ
@@ -359,9 +359,9 @@ QUESTION:
 Which one word means the story of your own life, written by yourself?
 A: novel
 B: biography
-C: monologue
-D: autobiography
-CORRECT: D
+C: autobiography
+D: monologue
+CORRECT: C
 EXPLAIN:
 An autobiography is a life story written by the person themselves, because auto means self. A biography is written by someone else.
 @@ENDQ
@@ -372,9 +372,9 @@ QUESTION:
 Which sentence means the same as The learners voted and everyone agreed?
 A: The vote was nocturnal.
 B: The vote was anonymous.
-C: The vote was unanimous.
-D: The vote was bilingual.
-CORRECT: C
+C: The vote was bilingual.
+D: The vote was unanimous.
+CORRECT: D
 EXPLAIN:
 Unanimous means agreed by everyone. Anonymous means the name is not known, and nocturnal and bilingual do not describe a vote.
 @@ENDQ
@@ -383,11 +383,11 @@ Unanimous means agreed by everyone. Anonymous means the name is not known, and n
 DIFFICULTY: Challenge
 QUESTION:
 Which pair is correctly matched?
-A: herbivore, eats only plants
+A: herbivore, eats only meat
 B: carnivore, eats only plants
-C: omnivore, eats only meat
-D: herbivore, eats only meat
-CORRECT: A
+C: herbivore, eats only plants
+D: omnivore, eats only meat
+CORRECT: C
 EXPLAIN:
 A herbivore eats only plants. A carnivore eats meat and an omnivore eats both plants and meat.
 @@ENDQ

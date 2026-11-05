@@ -6,10 +6,173 @@ BROAD_TOPIC_ID: punctuation_spelling
 BROAD_TOPIC_DISPLAY: Punctuation and Spelling
 SUBTOPIC_ID: punctuation
 SUBTOPIC_DISPLAY: Punctuation
-LEVEL_ID: punctuation_mastery
-LEVEL_DISPLAY: Punctuation Mastery
-LEVEL_DESC: Grade 7 exam-style revision of punctuation.
+LEVEL_ID: punctuation_1
+LEVEL_DISPLAY: Capitals, Full Stops and Commas
+LEVEL_DESC: Learn the basic rules for capital letters, end marks and commas.
 LEVEL_ORDER: 1
+DIFFICULTY: Starter
+ACCESS: Free
+QUESTION_COUNT: 8
+INTRO: Punctuation makes writing easier to read. This level covers <strong>capital letters</strong>, the marks that end a sentence and the use of <strong>commas</strong>.
+
+@@CARD
+TYPE: key_rule
+TITLE: Capital letters
+CONTENT: Every sentence begins with a capital letter. Proper nouns, such as names of people and places, also need capital letters.
+EXAMPLE: We visited Cape Town last year.<br>My teacher, Mrs Jones, comes from England.
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Ending a sentence
+CONTENT: A statement ends with a full stop. A question ends with a question mark, and an exclamation ends with an exclamation mark.
+EXAMPLE: We bought popcorn.<br>Who won the match?<br>Ouch!
+@@ENDCARD
+
+@@CARD
+TYPE: key_rule
+TITLE: Commas in a list
+CONTENT: Commas separate the items in a list. There is no comma before and or or.
+EXAMPLE: We bought books, pens, pencils and erasers.
+@@ENDCARD
+
+@@CARD
+TYPE: try_it
+TITLE: Add the commas
+CONTENT: Add the commas to this sentence. We packed apples oranges bananas and grapes.
+EXAMPLE: We packed apples, oranges, bananas and grapes.
+@@ENDCARD
+
+TESTED:
+Use capital letters
+End sentences correctly
+Punctuate lists
+Use commas after introductory words
+Use commas for extra information
+@@ENDLEVEL
+
+@@QUESTIONS
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence uses capital letters correctly?
+A: we visited cape town last year.
+B: we visited Cape Town last year.
+C: We visited cape town last year.
+D: We visited Cape Town last year.
+CORRECT: D
+EXPLAIN:
+A sentence begins with a capital letter, and a proper noun such as Cape Town has capitals too.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which mark ends a question?
+A: A full stop
+B: A question mark
+C: A comma
+D: A colon
+CORRECT: B
+EXPLAIN:
+A question ends with a question mark.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which list is punctuated correctly?
+A: We bought books, pens, pencils, and, erasers.
+B: We bought books pens pencils and erasers.
+C: We bought books, pens, pencils and erasers.
+D: We bought, books pens pencils and erasers.
+CORRECT: C
+EXPLAIN:
+Commas separate the items, and there is no comma before and.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Starter
+QUESTION:
+Which sentence needs an exclamation mark at the end?
+A: I like apples
+B: We went to school
+C: Watch out
+D: The shop is open
+CORRECT: C
+EXPLAIN:
+Watch out is a warning that expresses alarm, so it ends with an exclamation mark.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence has the comma in the right place?
+A: Once again I was, ignored.
+B: Once, again I was ignored.
+C: Once again I, was ignored.
+D: Once again, I was ignored.
+CORRECT: D
+EXPLAIN:
+A comma separates the introductory words from the rest of the sentence.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which sentence has commas in the right places?
+A: Mr Jenkins the Principal, addressed the parents.
+B: Mr Jenkins, the Principal, addressed the parents.
+C: Mr Jenkins, the Principal addressed the parents.
+D: Mr, Jenkins the Principal addressed the parents.
+CORRECT: B
+EXPLAIN:
+Commas go before and after the extra information about Mr Jenkins.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Building
+QUESTION:
+Which word needs a capital letter in this sentence? We met sipho at the park.
+A: sipho
+B: met
+C: park
+D: we
+CORRECT: A
+EXPLAIN:
+Sipho is a person's name, so it begins with a capital letter.
+@@ENDQ
+
+@@Q
+DIFFICULTY: Challenge
+QUESTION:
+Which sentence is punctuated correctly?
+A: She was, however, late for the appointment.
+B: She was however late, for the appointment.
+C: She, was however late for the appointment.
+D: She was however, late for the, appointment.
+CORRECT: A
+EXPLAIN:
+Commas are placed before and after however when it interrupts the sentence.
+@@ENDQ
+
+@@ENDQUESTIONS
+
+================================================================================
+
+@@LEVEL
+PHASE: senior
+GRADE: 7
+SUBJECT: english
+BROAD_TOPIC_ID: punctuation_spelling
+BROAD_TOPIC_DISPLAY: Punctuation and Spelling
+SUBTOPIC_ID: punctuation
+SUBTOPIC_DISPLAY: Punctuation
+LEVEL_ID: punctuation_exam
+LEVEL_DISPLAY: Punctuation Exam Practice
+LEVEL_DESC: Test yourself on the whole topic with mixed questions.
+LEVEL_ORDER: 2
 DIFFICULTY: Challenge
 ACCESS: Premium
 QUESTION_COUNT: 14
@@ -58,10 +221,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which sentence uses capital letters correctly?
 A: we visited mexico last year.
-B: We visited Mexico last year.
+B: we visited Mexico last year.
 C: We visited mexico last year.
-D: we visited Mexico last year.
-CORRECT: B
+D: We visited Mexico last year.
+CORRECT: D
 EXPLAIN:
 A sentence begins with a capital letter and a proper noun such as Mexico has one too.
 @@ENDQ
@@ -71,10 +234,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which sentence uses commas in a list correctly?
 A: We bought books, pens, pencils, and, erasers.
-B: We bought books pens pencils and erasers.
-C: We bought books, pens, pencils and erasers.
+B: We bought books, pens, pencils and erasers.
+C: We bought books pens pencils and erasers.
 D: We bought, books pens pencils and erasers.
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 Commas separate the items, and there is no comma before and.
 @@ENDQ
@@ -84,10 +247,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which mark ends a sentence that expresses sudden fear?
 A: A hyphen
-B: A comma
-C: A colon
-D: An exclamation mark
-CORRECT: D
+B: An exclamation mark
+C: A comma
+D: A colon
+CORRECT: B
 EXPLAIN:
 Exclamation marks follow words that express strong emotion such as fear.
 @@ENDQ
@@ -97,10 +260,10 @@ DIFFICULTY: Starter
 QUESTION:
 Quotation marks are used to
 A: join two words
-B: show the exact words someone said
-C: end a sentence
-D: show a list
-CORRECT: B
+B: show a list
+C: show the exact words someone said
+D: end a sentence
+CORRECT: C
 EXPLAIN:
 Quotation marks, or inverted commas, enclose direct speech.
 @@ENDQ
@@ -110,10 +273,10 @@ DIFFICULTY: Building
 QUESTION:
 Which sentence has commas in the right places?
 A: She, was however late for the appointment.
-B: She was however late, for the appointment.
-C: She was, however, late for the appointment.
-D: She was however, late for the, appointment.
-CORRECT: C
+B: She was however, late for the, appointment.
+C: She was however late, for the appointment.
+D: She was, however, late for the appointment.
+CORRECT: D
 EXPLAIN:
 Commas are placed before and after however when it interrupts the sentence.
 @@ENDQ
@@ -122,11 +285,11 @@ Commas are placed before and after however when it interrupts the sentence.
 DIFFICULTY: Building
 QUESTION:
 Which sentence avoids the comma splice?
-A: A census was taken the, government needed statistics.
+A: A census was taken. The government needed statistics.
 B: A census was taken, the government needed statistics.
 C: A census was taken, and, the government needed statistics.
-D: A census was taken. The government needed statistics.
-CORRECT: D
+D: A census was taken the, government needed statistics.
+CORRECT: A
 EXPLAIN:
 Two main clauses are joined with a full stop. A comma alone cannot join them.
 @@ENDQ
@@ -135,11 +298,11 @@ Two main clauses are joined with a full stop. A comma alone cannot join them.
 DIFFICULTY: Building
 QUESTION:
 Which sentence uses a semi-colon correctly?
-A: In summer; she swims in winter, she skates.
-B: In summer she swims; in winter she skates.
-C: In summer she swims in; winter she skates.
+A: In summer she swims; in winter she skates.
+B: In summer she swims in; winter she skates.
+C: In summer; she swims in winter, she skates.
 D: In; summer she swims in winter she skates.
-CORRECT: B
+CORRECT: A
 EXPLAIN:
 A semi-colon balances two related main clauses.
 @@ENDQ
@@ -149,10 +312,10 @@ DIFFICULTY: Building
 QUESTION:
 Which sentence uses a colon correctly to introduce a list?
 A: We need: to buy the following items lettuce, tomatoes and carrots.
-B: We need to buy: the following items lettuce, tomatoes and carrots.
-C: We need to buy the following items: lettuce, tomatoes and carrots.
+B: We need to buy the following items: lettuce, tomatoes and carrots.
+C: We need to buy: the following items lettuce, tomatoes and carrots.
 D: We need to buy the following items lettuce: tomatoes and carrots.
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 A colon comes after a complete clause that introduces the list.
 @@ENDQ
@@ -163,9 +326,9 @@ QUESTION:
 Which sentence has the contraction written correctly?
 A: I did not' know the answer.
 B: I did'nt know the answer.
-C: I didnt know the answer.
-D: I didn't know the answer.
-CORRECT: D
+C: I didn't know the answer.
+D: I didnt know the answer.
+CORRECT: C
 EXPLAIN:
 The apostrophe takes the place of the o in did not.
 @@ENDQ
@@ -176,9 +339,9 @@ QUESTION:
 Which phrase correctly shows that the school belongs to more than one boy?
 A: the boys school
 B: the boy's school
-C: the boys' school
-D: the boys's school
-CORRECT: C
+C: the boys's school
+D: the boys' school
+CORRECT: D
 EXPLAIN:
 The owners are plural and end in s, so the apostrophe goes after the s.
 @@ENDQ
@@ -188,10 +351,10 @@ DIFFICULTY: Challenge
 QUESTION:
 Which sentence is correct?
 A: You should've of been there.
-B: You should of been there.
+B: You should have been there.
 C: You should off been there.
-D: You should have been there.
-CORRECT: D
+D: You should of been there.
+CORRECT: B
 EXPLAIN:
 Should have, or the contraction should've, is correct. Should of is wrong.
 @@ENDQ
@@ -200,11 +363,11 @@ Should have, or the contraction should've, is correct. Should of is wrong.
 DIFFICULTY: Challenge
 QUESTION:
 Why is there a hyphen in re-examine?
-A: The prefix ends in the same vowel the word begins with
+A: It shows possession
 B: It is the end of the line
-C: It shows possession
+C: The prefix ends in the same vowel the word begins with
 D: It shows a list
-CORRECT: A
+CORRECT: C
 EXPLAIN:
 A hyphen is inserted when a prefix ends in the vowel that begins the word.
 @@ENDQ
@@ -213,11 +376,11 @@ A hyphen is inserted when a prefix ends in the vowel that begins the word.
 DIFFICULTY: Challenge
 QUESTION:
 The three dots in He walked to the edge of the cliff and ... show that
-A: the sentence is incomplete
+A: someone is speaking
 B: a list follows
-C: someone is speaking
+C: the sentence is incomplete
 D: the word is short
-CORRECT: A
+CORRECT: C
 EXPLAIN:
 An ellipsis shows that a sentence is incomplete or that something has been left out.
 @@ENDQ

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex"/>
+<title>curio learning — Quiz Importer</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/admin-auth-shared.js"></script>
+<style>
+:root{--deep:#1B1611;--card:#2C2319;--cyan:#74B26C;--coral:#D2652F;--moon:#F3EADA;--amber:#D0A059;
+  --m55:rgba(243,234,218,0.55);--m30:rgba(243,234,218,0.35);--m06:rgba(243,234,218,0.08);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Work Sans',system-ui,sans-serif;background:var(--deep);color:var(--moon);min-height:100vh;}
+button{font-family:inherit;cursor:pointer;border:none;}
+.wrap{max-width:960px;margin:0 auto;padding:2.5rem 1.25rem 4rem;}
+h1{font-family:'Fraunces',Georgia,serif;font-size:1.8rem;font-weight:800;letter-spacing:-1px;margin-bottom:.4rem;}
+.sub{font-size:.85rem;color:var(--m55);line-height:1.7;margin-bottom:1.5rem;max-width:640px;}
+.card{background:var(--card);border:1px solid var(--m06);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:1.25rem;}
+.btn{background:var(--cyan);color:#1B1611;font-weight:700;font-size:.85rem;padding:.7rem 1.4rem;border-radius:8px;}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+.btn.alt{background:transparent;color:var(--moon);border:1px solid var(--m30);}
+input[type=file],input[type=email],input[type=password]{width:100%;padding:.7rem;border-radius:8px;border:1px solid var(--m30);background:#241D15;color:var(--moon);font-family:inherit;margin-bottom:.8rem;}
+table{width:100%;border-collapse:collapse;font-size:.78rem;}
+th,td{text-align:left;padding:.45rem .5rem;border-bottom:1px solid var(--m06);}
+th{color:var(--m55);font-weight:600;text-transform:uppercase;font-size:.62rem;letter-spacing:.08em;}
+.ok{color:var(--cyan);} .warn{color:var(--amber);} .bad{color:var(--coral);}
+#log{font-family:ui-monospace,Consolas,monospace;font-size:.75rem;line-height:1.6;white-space:pre-wrap;max-height:320px;overflow:auto;}
+#login{position:fixed;inset:0;background:var(--deep);display:flex;align-items:center;justify-content:center;z-index:10;padding:1rem;}
+#login .card{width:100%;max-width:360px;}
+#loginError{color:var(--coral);font-size:.8rem;display:none;margin-top:.6rem;}
+label{font-size:.7rem;color:var(--m55);display:block;margin-bottom:.3rem;}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="card">
+    <h1 style="font-size:1.3rem">curio · Importer</h1>
+    <p class="sub" style="margin-bottom:1rem">Restricted access</p>
+    <label>Email</label><input type="email" id="loginEmail" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <label>Password</label><input type="password" id="loginPassword" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="btn" id="loginBtn" onclick="doLogin()">Enter</button>
+    <div id="loginError"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <h1>Quiz Importer</h1>
+  <p class="sub">Choose one or more content files in the @@TAG format. Each file may hold many levels separated by a line of equals signs. The importer checks everything first, then saves each level and replaces that level's questions, so running it twice never creates duplicates.</p>
+
+  <div class="card">
+    <label>Content files (.txt)</label>
+    <input type="file" id="files" accept=".txt" multiple onchange="preview()"/>
+    <button class="btn" id="btnImport" disabled onclick="runImport()">Import to Supabase</button>
+  </div>
+
+  <div class="card" id="previewCard" style="display:none">
+    <div id="summary" style="margin-bottom:.8rem;font-size:.85rem"></div>
+    <table><thead><tr><th>Level</th><th>Grade</th><th>Access</th><th>Questions</th><th>Cards</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table>
+  </div>
+
+  <div class="card"><div id="log">Waiting for files.</div></div>
+</div>
+
+<script>
+const SB_URL = 'https://inmrsgujgfktapjnekjs.supabase.co';
+var parsedLevel = null, parsedQuestions = [], parseErrors = [];
+let items = [];
+
+async function sbFetch(path, options = {}) {
+  const res = await fetch(`${SB_URL}/rest/v1/${path}`, {
+    method: options.method || 'GET',
+    headers: { ...AdminAuth.authHeaders(), 'Content-Type': 'application/json', 'Prefer': options.prefer || '' },
+    body: options.body || undefined
+  });
+  if (!res.ok) throw new Error(`Supabase ${res.status}: ${await res.text()}`);
+  if (res.status === 204) return null;
+  const t = await res.text();
+  return t ? JSON.parse(t) : null;
+}
+
+function log(msg, cls) {
+  const el = document.getElementById('log');
+  el.innerHTML += (el.textContent === 'Waiting for files.' ? '' : '\n') + (cls ? `<span class="${cls}">${esc(msg)}</span>` : esc(msg));
+  if (el.textContent.startsWith('Waiting for files.')) el.innerHTML = el.innerHTML.replace('Waiting for files.', '');
+  el.scrollTop = el.scrollHeight;
+}
+function esc(s) { return String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pw = document.getElementById('loginPassword').value.trim();
+  if (!email || !pw) return;
+  const btn = document.getElementById('loginBtn'), err = document.getElementById('loginError');
+  btn.disabled = true; err.style.display = 'none';
+  try { await AdminAuth.login(email, pw); document.getElementById('login').style.display = 'none'; }
+  catch (e) { err.textContent = e.message || 'Access denied.'; err.style.display = 'block'; }
+  finally { btn.disabled = false; }
+}
+(async function () {
+  const s = await AdminAuth.trySilentLogin();
+  if (s) document.getElementById('login').style.display = 'none';
+})();
+
+// The parser is borrowed from the formatter so the two never disagree.
+async function loadParser() {
+  if (typeof parseContent === 'function') return;
+  const html = await (await fetch('/quiz-formatter.html', { cache: 'no-store' })).text();
+  const s = html.indexOf('function parseContent'), e = html.indexOf('// ── Render Preview');
+  if (s < 0 || e < 0) throw new Error('Could not find the parser in quiz-formatter.html');
+  (0, eval)(html.slice(s, e));
+}
+
+async function preview() {
+  const files = [...document.getElementById('files').files];
+  items = [];
+  document.getElementById('btnImport').disabled = true;
+  if (!files.length) return;
+  await loadParser();
+  const seen = new Set();
+  for (const f of files) {
+    const raw = (await f.text()).replace(/\r\n/g, '\n');
+    const chunks = raw.split(/^={20,}\s*$/m).map(c => c.trim()).filter(Boolean);
+    for (const c of chunks) {
+      const r = parseContent(c);
+      const lv = r.level, qs = r.questions;
+      const problems = [...r.errors];
+      if (!lv) { problems.push('No @@LEVEL block'); }
+      else {
+        if (!lv.level_id) problems.push('Missing LEVEL_ID');
+        if (qs.length !== lv.question_count) problems.push(`QUESTION_COUNT says ${lv.question_count}, found ${qs.length}`);
+        const key = `${lv.grade}|${lv.subject}|${lv.level_id}`;
+        if (seen.has(key)) problems.push('Duplicate level in the selected files');
+        seen.add(key);
+        qs.forEach((q, i) => { if (!q.question_text || !q.option_a || !q.option_b || !/^[A-D]$/.test(q.correct_option || '')) problems.push(`Question ${i + 1} is incomplete`); });
+      }
+      items.push({ file: f.name, lv, qs, concepts: lv ? (lv.concepts || []).length : 0, problems, existing: null });
+    }
+  }
+  // look up what already exists
+  try {
+    for (const it of items) {
+      if (!it.lv || !it.lv.level_id) continue;
+      const ex = await sbFetch(`quiz_levels?select=id&level_id=eq.${encodeURIComponent(it.lv.level_id)}&grade=eq.${it.lv.grade}&subject=eq.${encodeURIComponent(it.lv.subject)}`);
+      it.existing = ex && ex.length ? ex[0].id : null;
+    }
+  } catch (e) {
+    log('Could not check existing levels. Log in, then choose the files again. (' + e.message + ')', 'bad');
+    document.getElementById('summary').innerHTML = '<span class="bad">Could not check which levels already exist. Log in, then choose the files again. Import is blocked.</span>';
+    document.getElementById('rows').innerHTML = '';
+    document.getElementById('previewCard').style.display = 'block';
+    return;
+  }
+
+  const bad = items.filter(i => i.problems.length).length;
+  const totalQ = items.reduce((n, i) => n + i.qs.length, 0);
+  const nNew = items.filter(i => !i.existing).length;
+  document.getElementById('summary').innerHTML =
+    `<b>${items.length}</b> levels · <b>${totalQ}</b> questions · <span class="ok">${nNew} new</span> · <span class="warn">${items.length - nNew} will be replaced</span>` +
+    (bad ? ` · <span class="bad">${bad} with problems (import is blocked)</span>` : ' · <span class="ok">no problems</span>');
+  document.getElementById('rows').innerHTML = items.map(i => `<tr>
+    <td>${esc(i.lv ? i.lv.level_id : '?')}</td><td>${i.lv ? i.lv.grade : ''}</td>
+    <td>${i.lv && i.lv.is_premium ? 'Premium' : 'Free'}</td><td>${i.qs.length}</td><td>${i.concepts}</td>
+    <td class="${i.problems.length ? 'bad' : (i.existing ? 'warn' : 'ok')}">${i.problems.length ? esc(i.problems.join('; ')) : (i.existing ? 'replace' : 'new')}</td></tr>`).join('');
+  document.getElementById('previewCard').style.display = 'block';
+  document.getElementById('btnImport').disabled = bad > 0 || !items.length;
+}
+
+async function runImport() {
+  const btn = document.getElementById('btnImport');
+  btn.disabled = true;
+  let done = 0, qTotal = 0;
+  for (const it of items) {
+    const lv = it.lv;
+    try {
+      const lzPayload = {
+        phase: lv.phase || null, grade: lv.grade, subject: lv.subject,
+        broad_topic: lv.broad_topic || null, broad_topic_display: lv.broad_topic_display || null,
+        subtopic_id: lv.subtopic_id || null, subtopic_display: lv.subtopic_display || null,
+        level_id: lv.level_id, level_display: lv.level_display || null, description: lv.description || null,
+        level_order: lv.level_order || 1, difficulty: lv.difficulty || 'Starter', is_premium: lv.is_premium || false,
+        question_count: lv.question_count || 10, intro: lv.intro || null,
+        concepts: lv.concepts && lv.concepts.length ? lv.concepts : null,
+        tested: lv.tested && lv.tested.length ? lv.tested : null,
+        section_type: 'learning_level'
+      };
+      // Questions first, so a failure never leaves a level pointing at nothing.
+      const qRows = it.qs.map(q => ({
+        phase: lv.phase || null, grade: lv.grade, subject: lv.subject,
+        topic: lv.broad_topic || null, broad_topic: lv.broad_topic || null, broad_topic_display: lv.broad_topic_display || null,
+        section_type: 'learning_level', subtopic_id: lv.subtopic_id || null, subtopic_display: lv.subtopic_display || null,
+        level_id: lv.level_id, level_display: lv.level_display || null, level_order: lv.level_order || 1,
+        question_text: q.question_text, option_a: q.option_a, option_b: q.option_b,
+        option_c: q.option_c || null, option_d: q.option_d || null,
+        correct_option: q.correct_option, explanation: q.explanation,
+        difficulty: q.difficulty || 'Starter', is_premium: lv.is_premium || false
+      }));
+      const scope = `level_id=eq.${encodeURIComponent(lv.level_id)}&grade=eq.${lv.grade}&subject=eq.${encodeURIComponent(lv.subject)}`;
+      await sbFetch(`questions?${scope}`, { method: 'DELETE' });
+      await sbFetch('questions', { method: 'POST', body: JSON.stringify(qRows) });
+      if (it.existing) await sbFetch(`quiz_levels?id=eq.${it.existing}`, { method: 'PATCH', body: JSON.stringify(lzPayload) });
+      else await sbFetch('quiz_levels', { method: 'POST', body: JSON.stringify(lzPayload) });
+      done++; qTotal += qRows.length;
+      log(`✓ ${lv.level_id} (${qRows.length} questions)`, 'ok');
+    } catch (e) {
+      log(`✗ ${lv.level_id}: ${e.message}`, 'bad');
+      log('Stopped. Levels before this one were saved; fix the problem and run again.', 'warn');
+      btn.disabled = false;
+      return;
+    }
+  }
+  log(`Done. ${done} levels and ${qTotal} questions saved.`, 'ok');
+  btn.disabled = false;
+}
+</script>
+</body>
+</html>

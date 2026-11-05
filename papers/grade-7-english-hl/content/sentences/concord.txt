@@ -242,10 +242,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which pronoun completes the sentence? The woman paid for ___ ticket.
 A: his
-B: their
-C: her
+B: her
+C: their
 D: its
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 The noun woman is singular and female, so the pronoun her agrees with it.
 @@ENDQ
@@ -256,9 +256,9 @@ QUESTION:
 Which pronoun completes the sentence? The women paid for ___ tickets.
 A: its
 B: her
-C: his
-D: their
-CORRECT: D
+C: their
+D: his
+CORRECT: C
 EXPLAIN:
 The noun women is plural, so the plural pronoun their agrees with it.
 @@ENDQ
@@ -280,11 +280,11 @@ Each is singular and takes a singular verb. The plural noun learners comes after
 DIFFICULTY: Building
 QUESTION:
 Which verb completes the sentence? Neither of us ___ afraid of this task.
-A: are
+A: is
 B: were
-C: is
+C: are
 D: be
-CORRECT: C
+CORRECT: A
 EXPLAIN:
 Neither is always paired with a singular verb, so is is correct. Are and were are plural.
 @@ENDQ
@@ -306,11 +306,11 @@ Nobody is singular, so the singular verb is is needed. Are and were are plural, 
 DIFFICULTY: Building
 QUESTION:
 Treat the group as a single unit. Which verb completes the sentence? A group of teenagers ___ planning a trip.
-A: is
+A: were
 B: are
-C: were
+C: is
 D: be
-CORRECT: A
+CORRECT: C
 EXPLAIN:
 The subject is the group, a single unit, so the singular verb is is used. The word teenagers is part of the phrase after the subject.
 @@ENDQ
@@ -333,10 +333,10 @@ DIFFICULTY: Challenge
 QUESTION:
 Which sentence is correct?
 A: The bunch of flowers are wilting.
-B: The bunch of flowers is wilting.
+B: The bunch of flowers be wilting.
 C: The bunch of flowers were wilting.
-D: The bunch of flowers be wilting.
-CORRECT: B
+D: The bunch of flowers is wilting.
+CORRECT: D
 EXPLAIN:
 The subject is the bunch, a single unit, so the verb is singular. The other verbs are plural or not finite.
 @@ENDQ
@@ -417,11 +417,11 @@ Correct agreement errors
 DIFFICULTY: Starter
 QUESTION:
 Which verb completes the sentence? Thandi ___ the piano every day.
-A: play
+A: plays
 B: played
 C: playing
-D: plays
-CORRECT: D
+D: play
+CORRECT: A
 EXPLAIN:
 Thandi is third person singular, so the present form plays takes an s. Played would change the tense.
 @@ENDQ
@@ -430,11 +430,11 @@ Thandi is third person singular, so the present form plays takes an s. Played wo
 DIFFICULTY: Starter
 QUESTION:
 Which verb completes the sentence? We ___ ready.
-A: is
+A: are
 B: be
 C: am
-D: are
-CORRECT: D
+D: is
+CORRECT: A
 EXPLAIN:
 We is plural and takes are. Is is singular and am goes only with I.
 @@ENDQ
@@ -445,9 +445,9 @@ QUESTION:
 Which verb completes the sentence? You ___ welcome.
 A: is
 B: am
-C: are
-D: be
-CORRECT: C
+C: be
+D: are
+CORRECT: D
 EXPLAIN:
 You takes are in the present tense. Is and am do not match you.
 @@ENDQ
@@ -457,10 +457,10 @@ DIFFICULTY: Starter
 QUESTION:
 What is the subject of this sentence? The dogs in the yard bark all night.
 A: all night
-B: the yard
-C: The dogs
+B: The dogs
+C: the yard
 D: bark
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 The sentence is about the dogs, and bark agrees with them. The yard is part of the phrase in the yard.
 @@ENDQ
@@ -483,10 +483,10 @@ DIFFICULTY: Building
 QUESTION:
 Which verb completes the sentence? Everyone ___ here.
 A: are
-B: am
-C: were
-D: is
-CORRECT: D
+B: were
+C: is
+D: am
+CORRECT: C
 EXPLAIN:
 Everyone is always paired with a singular verb, so is is correct.
 @@ENDQ
@@ -497,9 +497,9 @@ QUESTION:
 Which verb completes the sentence? Either of the answers ___ correct.
 A: are
 B: were
-C: is
-D: be
-CORRECT: C
+C: be
+D: is
+CORRECT: D
 EXPLAIN:
 Either takes a singular verb. The plural noun answers does not decide the verb.
 @@ENDQ
@@ -509,10 +509,10 @@ DIFFICULTY: Building
 QUESTION:
 Which pronoun completes the sentence? The girls lost ___ bags.
 A: its
-B: her
+B: their
 C: his
-D: their
-CORRECT: D
+D: her
+CORRECT: B
 EXPLAIN:
 Girls is plural, so the plural pronoun their agrees with it.
 @@ENDQ
@@ -522,10 +522,10 @@ DIFFICULTY: Building
 QUESTION:
 Which verb completes the sentence? My friend and I ___ in the same class.
 A: am
-B: are
-C: is
+B: is
+C: are
 D: be
-CORRECT: B
+CORRECT: C
 EXPLAIN:
 My friend and I is a plural subject, which can be replaced with we, so are is needed.
 @@ENDQ
@@ -534,11 +534,11 @@ My friend and I is a plural subject, which can be replaced with we, so are is ne
 DIFFICULTY: Challenge
 QUESTION:
 Which verb completes the sentence? The box of pencils ___ on the desk.
-A: is
-B: are
-C: were
+A: are
+B: were
+C: is
 D: be
-CORRECT: A
+CORRECT: C
 EXPLAIN:
 The head word is box, which is singular, so is is needed. The nearer noun pencils does not decide the verb.
 @@ENDQ
@@ -547,11 +547,11 @@ The head word is box, which is singular, so is is needed. The nearer noun pencil
 DIFFICULTY: Challenge
 QUESTION:
 Treat the flock as a single unit. Which verb completes the sentence? A flock of birds ___ over the hill.
-A: is
-B: are
+A: are
+B: is
 C: were
 D: be
-CORRECT: A
+CORRECT: B
 EXPLAIN:
 The flock is a single unit, so the singular verb is is used. The word birds is part of the phrase after the subject.
 @@ENDQ
@@ -561,10 +561,10 @@ DIFFICULTY: Challenge
 QUESTION:
 Which sentence is correct?
 A: The learners and the teacher is ready.
-B: The learners and the teacher are ready.
+B: The learners and the teacher am ready.
 C: The learners and the teacher be ready.
-D: The learners and the teacher am ready.
-CORRECT: B
+D: The learners and the teacher are ready.
+CORRECT: D
 EXPLAIN:
 The learners and the teacher is a plural subject, so are is needed.
 @@ENDQ
@@ -574,10 +574,10 @@ DIFFICULTY: Challenge
 QUESTION:
 Which sentence is correct?
 A: Nobody know the answer.
-B: Nobody knows the answer.
+B: Nobody known the answer.
 C: Nobody knowing the answer.
-D: Nobody known the answer.
-CORRECT: B
+D: Nobody knows the answer.
+CORRECT: D
 EXPLAIN:
 Nobody is singular, so the verb takes an s. The other forms are plural or not finite verbs.
 @@ENDQ

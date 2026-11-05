@@ -231,11 +231,11 @@ Avoid common mix-ups
 DIFFICULTY: Starter
 QUESTION:
 What are homophones?
-A: Words with opposite meanings
+A: Words that sound the same but are spelt differently
 B: Words spelt and pronounced the same
-C: Words that sound the same but are spelt differently
+C: Words with opposite meanings
 D: Words that rhyme
-CORRECT: C
+CORRECT: A
 EXPLAIN:
 Homophones sound alike but are spelt differently, as in hear and here. Words that are spelt and pronounced the same are homonyms.
 @@ENDQ
@@ -245,10 +245,10 @@ DIFFICULTY: Starter
 QUESTION:
 Which word is a homophone of hear?
 A: hair
-B: her
+B: here
 C: heard
-D: here
-CORRECT: D
+D: her
+CORRECT: B
 EXPLAIN:
 Here sounds the same as hear but has a different spelling and meaning. Her, heard and hair do not sound exactly the same.
 @@ENDQ
@@ -258,10 +258,10 @@ DIFFICULTY: Starter
 QUESTION:
 Choose the correct word. I can ___ the birds singing.
 A: heir
-B: here
-C: hear
+B: hear
+C: here
 D: hare
-CORRECT: C
+CORRECT: B
 EXPLAIN:
 Hear means to take in sound with your ears. Here means in this place, and heir and hare are different words.
 @@ENDQ
@@ -270,11 +270,11 @@ Hear means to take in sound with your ears. Here means in this place, and heir a
 DIFFICULTY: Starter
 QUESTION:
 Choose the correct word. The learners packed ___ bags.
-A: the
+A: their
 B: there
 C: they're
-D: their
-CORRECT: D
+D: the
+CORRECT: A
 EXPLAIN:
 Their shows that the bags belong to the learners. There shows place and they're means they are.
 @@ENDQ
@@ -335,11 +335,11 @@ Bark of the tree is the outer covering of the tree. In the other sentences it is
 DIFFICULTY: Building
 QUESTION:
 Which word has the same sound as write but a different spelling?
-A: right
+A: writing
 B: wrote
-C: writing
+C: right
 D: rewrite
-CORRECT: A
+CORRECT: C
 EXPLAIN:
 Right sounds the same as write but is spelt differently, so it is a homophone. The other words are forms of write.
 @@ENDQ
@@ -348,11 +348,11 @@ Right sounds the same as write but is spelt differently, so it is a homophone. T
 DIFFICULTY: Challenge
 QUESTION:
 Which sentence uses the correct word?
-A: There going to the park.
-B: They're going to the park.
-C: Their going to the park.
+A: Their going to the park.
+B: There going to the park.
+C: They're going to the park.
 D: Theyre going to the park.
-CORRECT: B
+CORRECT: C
 EXPLAIN:
 They're is short for they are, which fits the sentence. There and their have other meanings, and theyre has no apostrophe.
 @@ENDQ
@@ -361,11 +361,11 @@ They're is short for they are, which fits the sentence. There and their have oth
 DIFFICULTY: Challenge
 QUESTION:
 Which sentence is correct?
-A: I ate the hole cake.
-B: I ate the whole cake.
+A: I ate the whole cake.
+B: I ate the hole cake.
 C: The whole in my sock is big.
 D: I ate the wholl cake.
-CORRECT: B
+CORRECT: A
 EXPLAIN:
 Whole means all of something, so I ate the whole cake is correct. A hole is an opening, and wholl is not a word.
 @@ENDQ
@@ -374,11 +374,11 @@ Whole means all of something, so I ate the whole cake is correct. A hole is an o
 DIFFICULTY: Challenge
 QUESTION:
 Which pair of words are homophones and not homonyms?
-A: to and too
+A: cold and cold
 B: bark and bark
 C: bat and bat
-D: cold and cold
-CORRECT: A
+D: to and too
+CORRECT: D
 EXPLAIN:
 To and too sound the same but are spelt differently, so they are homophones. The other pairs are spelt exactly alike, so they are homonyms.
 @@ENDQ
@@ -400,11 +400,11 @@ In the jam sentence preserve names a thing. In the others it is a verb meaning t
 DIFFICULTY: Challenge
 QUESTION:
 Which statement is correct?
-A: Homonyms have identical spelling and pronunciation.
+A: Homophones have the same meaning.
 B: Homophones are spelt the same.
 C: Homonyms always sound different.
-D: Homophones have the same meaning.
-CORRECT: A
+D: Homonyms have identical spelling and pronunciation.
+CORRECT: D
 EXPLAIN:
 Homonyms are spelt and pronounced the same but have different meanings. Homophones are spelt differently.
 @@ENDQ
