@@ -36,3 +36,6 @@ next-env.d.ts
 # python
 __pycache__/
 *.pyc
+
+# local working files, never commit (exam papers and unpublished quiz content)
+papers/
