@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
+import type { CatalogLevel } from '@/lib/levelCatalog'
 import QuizRunner from '@/components/quiz/QuizRunner'
 import ResultsScreen from '@/components/quiz/ResultsScreen'
 import { fetchLevelQuestions } from '@/lib/questions'
@@ -19,7 +20,7 @@ export default function PlayPage() {
   // levelId in URL = quiz_levels.id (UUID)
   const levelUUID = params.levelId as string
   const { user, loading: authLoading } = useAuth()
-  const isPremium = user?.isPremium || user?.isFounder || false
+  const isPremium = user?.isPremium || false
 
   const [questions, setQuestions] = useState<ShuffledQuestion[]>([])
   const [levelMeta, setLevelMeta] = useState<any>(null)
@@ -42,12 +43,13 @@ export default function PlayPage() {
 
   async function load() {
     try {
-      // Fetch level by UUID
+      // Level details from the content-free catalogue (works for locked levels too)
       const { data: lvl, error: lvlErr } = await sb
-        .from('quiz_levels')
+        .rpc('quiz_level_catalog')
         .select('*')
         .eq('id', levelUUID)
-        .single()
+        .maybeSingle()
+        .overrideTypes<CatalogLevel, { merge: false }>()
 
       if (lvlErr || !lvl) throw new Error('Level not found.')
 
@@ -57,8 +59,10 @@ export default function PlayPage() {
 
       setLevelMeta(lvl)
 
-      // fetchLevelQuestions now queries questions.level_id = quiz_levels.id (UUID)
+      // The database only hands Premium questions to paid-up members, so an
+      // empty result on a Premium level means access has lapsed.
       const qs = await fetchLevelQuestions(levelUUID)
+      if (qs.length === 0 && lvl.is_premium) { setAccessDenied(true); setLoading(false); return }
       if (qs.length === 0) throw new Error('No questions available for this level yet.')
       setQuestions(qs)
     } catch (e: any) {

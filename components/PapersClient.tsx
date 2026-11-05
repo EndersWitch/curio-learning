@@ -108,7 +108,7 @@ export default function PapersClient() {
     setAdDismissed(sessionStorage.getItem('curio_ad_dismissed_adTopbar') === '1')
   }, [])
 
-  const showAd = !user || !(user.isPremium || user.isFounder)
+  const showAd = !user || !user.isPremium
 
   const grades = useMemo(() => {
     if (!allPapers) return []

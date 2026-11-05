@@ -7,6 +7,7 @@ import Bloom from '@/components/Bloom'
 import Footer from '@/components/Footer'
 import ThemeToggle from '@/components/ThemeToggle'
 import { sb } from '@/lib/supabase'
+import type { CatalogLevel } from '@/lib/levelCatalog'
 import { useAuth } from '@/lib/auth-context'
 import { useAccountDrawer } from '@/components/AccountDrawerProvider'
 import { Flame, FileText, PenLine, User, Star, Check, Brain, Heart, ListChecks, Trophy } from '@/components/icons'
@@ -196,10 +197,10 @@ export default function HomePage() {
       const recent = progressRows.slice(0, 3)
       const levelIds = recent.map((r) => r.level_id)
       const { data: levels } = await sb
-        .from('quiz_levels')
+        .rpc('quiz_level_catalog')
         .select('level_id, level_display, broad_topic_display')
         .in('level_id', levelIds)
-      const levelMap = new Map((levels ?? []).map((l: any) => [l.level_id, l]))
+      const levelMap = new Map(((levels ?? []) as CatalogLevel[]).map((l) => [l.level_id, l]))
 
       setQuizHistory(recent.map((r) => ({
         topic: levelMap.get(r.level_id)?.level_display ?? levelMap.get(r.level_id)?.broad_topic_display ?? r.level_id,
@@ -494,8 +495,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Premium upsell — hidden for premium/founder users */}
-            {!(user.isPremium || user.isFounder) && (
+            {/* Premium upsell — hidden for premium users */}
+            {!user.isPremium && (
               <div className="pu">
                 <div className="spread-deco o1 lp-float" style={{ bottom: '-30px', right: '2%' }}>
                   <Bloom size={150} tone="paper" />

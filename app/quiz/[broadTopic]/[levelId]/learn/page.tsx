@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
+import type { CatalogLevel } from '@/lib/levelCatalog'
 import LearningCard from '@/components/quiz/LearningCard'
 import { buildLearningZone } from '@/lib/learningZone'
 import type { QuizLevel } from '@/types/quiz'
@@ -16,7 +17,7 @@ export default function LearnPage() {
   // levelId in URL is the quiz_levels UUID (primary key)
   const levelUUID = params.levelId as string
   const { user, loading: authLoading } = useAuth()
-  const isPremium = user?.isPremium || user?.isFounder || false
+  const isPremium = user?.isPremium || false
 
   const [level, setLevel] = useState<QuizLevel | null>(null)
   const [loading, setLoading] = useState(true)
@@ -32,18 +33,32 @@ export default function LearnPage() {
   }, [authLoading, levelUUID])
 
   async function loadLevel() {
-    // Fetch by UUID id — the primary key
+    // Lock state from the content-free catalogue (works for locked levels too)
+    const { data: meta } = await sb
+      .rpc('quiz_level_catalog')
+      .select('id, is_premium')
+      .eq('id', levelUUID)
+      .maybeSingle()
+      .overrideTypes<CatalogLevel, { merge: false }>()
+
+    if (!meta) { setLoading(false); return }
+
+    // Premium gate — only block if level is premium AND user is not premium
+    if (meta.is_premium && !isPremium) {
+      setAccessDenied(true); setLoading(false); return
+    }
+
+    // Full level incl. learning cards. The database only returns Premium
+    // rows to paid-up members, so no row here means access has lapsed.
     const { data, error } = await sb
       .from('quiz_levels')
       .select('*')
       .eq('id', levelUUID)
-      .single()
+      .maybeSingle()
 
-    if (error || !data) { setLoading(false); return }
-
-    // Premium gate — only block if level is premium AND user is not premium
-    if (data.is_premium && !isPremium) {
-      setAccessDenied(true); setLoading(false); return
+    if (error || !data) {
+      if (meta.is_premium) setAccessDenied(true)
+      setLoading(false); return
     }
 
     setLevel(data as QuizLevel)

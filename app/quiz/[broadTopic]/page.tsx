@@ -48,7 +48,7 @@ export default function BroadTopicPage() {
   const params = useParams()
   const broadTopic = decodeURIComponent(params.broadTopic as string)
   const { user, loading: authLoading } = useAuth()
-  const isPremium = user?.isPremium || user?.isFounder || false
+  const isPremium = user?.isPremium || false
 
   const [levels, setLevels] = useState<Level[]>([])
   const [progressMap, setProgressMap] = useState<Map<string, LevelProgress>>(new Map())
@@ -68,8 +68,10 @@ export default function BroadTopicPage() {
     const gradeParam = sp.get('grade')
     const subjectParam = sp.get('subject')
 
+    // Catalogue = every level's name/order/lock state, no content, so locked
+    // Premium levels still show with a padlock for free users.
     let query = sb
-      .from('quiz_levels')
+      .rpc('quiz_level_catalog')
       .select('*')
       .eq('broad_topic', broadTopic)
 

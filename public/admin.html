@@ -1051,8 +1051,8 @@ function renderUsersTable(){
   const tbody=document.getElementById('uBody');
   if(rows.length===0){tbody.innerHTML=`<tr class="loading-row"><td colspan="5">No users match.</td></tr>`;return;}
   tbody.innerHTML=rows.map(p=>{
-    const plan=p.is_founder?'Founder':p.is_premium?'Premium':p.is_trial?'Trial':'Free';
-    const chipClass=(p.is_founder||p.is_premium)?'chip-premium':'chip-free';
+    const plan=p.is_premium?(p.is_founder?'Founder':'Premium'):(p.subscription_status==='expired'?'Expired':p.is_trial?'Trial':'Free');
+    const chipClass=p.is_premium?'chip-premium':'chip-free';
     const joined=p.created_at?new Date(p.created_at).toLocaleDateString('en-ZA',{day:'numeric',month:'short',year:'numeric'}):'—';
     return `<tr><td>${p.full_name||'—'}</td><td>${p.grade?'Grade '+p.grade:'—'}</td><td><span class="chip-small ${chipClass}">${plan}</span></td><td>${p.streak_days||0}</td><td>${joined}</td></tr>`;
   }).join('');
@@ -1135,7 +1135,7 @@ async function loadRevenue(){
       sbFetch('founder_slots?select=*'),
     ]);
     if(!profiles)return;
-    const active=profiles.filter(p=>p.is_premium||p.is_founder).length;
+    const active=profiles.filter(p=>p.is_premium).length;
     document.getElementById('rActive').textContent=active;
     document.getElementById('rFree').textContent=profiles.length-active;
     document.getElementById('rMRR').textContent='R'+(active*49).toLocaleString();
