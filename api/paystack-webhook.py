@@ -1,102 +1,103 @@
+"""
+api/paystack-webhook.py
+Curio Learning — Paystack webhook.
+
+Every signed event is stored in paystack_events first, then applied.
+Users are matched by exact identifiers only (see _billing.find_profile).
+Premium is granted only for a successful charge of at least the plan
+price, and only up to the end of the period that charge paid for.
+Revoking access when a period runs out is done by the daily job
+(api/expire-subscriptions.py), which double-checks with Paystack.
+"""
+
 import hashlib
 import hmac
 import json
 import os
-import urllib.request
-from datetime import datetime, timezone
+import sys
 from http.server import BaseHTTPRequestHandler
 
-PAYSTACK_SECRET = os.environ.get("PAYSTACK_SECRET_KEY", "")
-SUPABASE_URL = "https://inmrsgujgfktapjnekjs.supabase.co"
-SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_KEY", "")
+sys.path.insert(0, os.path.dirname(__file__))
+import _billing as b  # noqa: E402
 
 
-def add_one_month(dt):
-    year = dt.year + (1 if dt.month == 12 else 0)
-    month = 1 if dt.month == 12 else dt.month + 1
-    # Clamp the day so e.g. Jan 31 + 1 month lands on Feb 28/29, not an error.
-    day = min(dt.day, [31, 29 if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0) else 28,
-                       31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1])
-    return dt.replace(year=year, month=month, day=day)
+def handle_event(event_type, data):
+    """Apply one verified event. Returns a short description for the logs."""
 
+    if event_type == "charge.success":
+        problem = b.premium_charge_problem(data)
+        if problem:
+            return f"ignored charge: {problem}"
 
-def next_payment_date(data):
-    """Best-effort 'paid through' date for a monthly plan charge/subscription."""
-    raw = data.get("next_payment_date") or (data.get("subscription") or {}).get("next_payment_date")
-    if raw:
-        try:
-            return datetime.fromisoformat(raw.replace("Z", "+00:00")).isoformat()
-        except Exception:
-            pass
-    paid_at = data.get("paid_at") or data.get("createdAt")
-    try:
-        base = datetime.fromisoformat(paid_at.replace("Z", "+00:00")) if paid_at else datetime.now(timezone.utc)
-    except Exception:
-        base = datetime.now(timezone.utc)
-    return add_one_month(base).isoformat()
+        profile = b.find_profile(data)
+        if not profile:
+            return "charge: no matching user"
 
+        paid_through = b.paid_through_from_charge(data)
+        current = b.parse_dt(profile.get("subscription_expires_at"))
+        if current and current > paid_through:
+            paid_through = current  # duplicate/out-of-order event: never shorten
 
-def supabase_patch(path, data):
-    body = json.dumps(data).encode()
-    req = urllib.request.Request(
-        f"{SUPABASE_URL}/rest/v1/{path}",
-        data=body, method="PATCH"
-    )
-    req.add_header("apikey", SUPABASE_KEY)
-    req.add_header("Authorization", f"Bearer {SUPABASE_KEY}")
-    req.add_header("Content-Type", "application/json")
-    req.add_header("Prefer", "return=minimal")
-    try:
-        urllib.request.urlopen(req, timeout=5)
-    except Exception as e:
-        print(f"Supabase PATCH error: {e}")
+        patch = {
+            "is_premium": True,
+            "subscription_status": "active",
+            "subscription_expires_at": b.iso(paid_through),
+        }
+        customer_code = (data.get("customer") or {}).get("customer_code")
+        if customer_code:
+            patch["paystack_customer_code"] = customer_code
+        sub_code = b.subscription_code_of(data)
+        if sub_code:
+            patch["paystack_subscription_code"] = sub_code
+        if not profile.get("subscription_started_at"):
+            patch["subscription_started_at"] = data.get("paid_at") or b.iso(b.now_utc())
 
+        b.patch_profile(profile["id"], patch)
+        founder = profile.get("is_founder") or b.claim_founder_slot(profile["id"])
+        return f"premium until {patch['subscription_expires_at']} for {profile['id']} (founder={bool(founder)})"
 
-def get_user_id_by_email(email):
-    encoded = urllib.parse.quote(email)
-    req = urllib.request.Request(
-        f"{SUPABASE_URL}/auth/v1/admin/users?email={encoded}"
-    )
-    req.add_header("apikey", SUPABASE_KEY)
-    req.add_header("Authorization", f"Bearer {SUPABASE_KEY}")
-    try:
-        with urllib.request.urlopen(req, timeout=5) as r:
-            data = json.loads(r.read())
-            users = data.get("users", [])
-            return users[0]["id"] if users else None
-    except Exception as e:
-        print(f"get_user_id error: {e}")
-        return None
+    if event_type == "subscription.create":
+        profile = b.find_profile(data)
+        if not profile:
+            return "subscription.create: no matching user"
+        patch = {}
+        customer_code = (data.get("customer") or {}).get("customer_code")
+        if customer_code:
+            patch["paystack_customer_code"] = customer_code
+        if data.get("subscription_code"):
+            patch["paystack_subscription_code"] = data["subscription_code"]
+        if data.get("email_token"):
+            patch["paystack_email_token"] = data["email_token"]
+        # Note: this does NOT grant Premium — only a successful charge does.
+        if patch:
+            b.patch_profile(profile["id"], patch)
+        return f"stored subscription details for {profile['id']}"
 
+    if event_type == "invoice.payment_failed":
+        profile = b.find_profile(data)
+        if not profile:
+            return "payment_failed: no matching user"
+        # The period they paid for ends now. The daily job removes Premium
+        # once the grace period passes, unless Paystack shows a payment.
+        now = b.now_utc()
+        current = b.parse_dt(profile.get("subscription_expires_at"))
+        end = current if current and current < now else now
+        b.patch_profile(profile["id"], {
+            "subscription_status": "payment_failed",
+            "subscription_expires_at": b.iso(end),
+        })
+        return f"payment failed for {profile['id']}, paid period ended {b.iso(end)}"
 
-def get_founder_slots():
-    req = urllib.request.Request(
-        f"{SUPABASE_URL}/rest/v1/founder_slots?id=eq.1"
-    )
-    req.add_header("apikey", SUPABASE_KEY)
-    req.add_header("Authorization", f"Bearer {SUPABASE_KEY}")
-    try:
-        with urllib.request.urlopen(req, timeout=5) as r:
-            data = json.loads(r.read())
-            return data[0] if data else {"claimed": 0, "total": 200}
-    except:
-        return {"claimed": 0, "total": 200}
+    if event_type in ("subscription.not_renew", "subscription.disable"):
+        profile = b.find_profile(data)
+        if not profile:
+            return f"{event_type}: no matching user"
+        # Access continues until the paid period ends; the daily job revokes it.
+        if profile.get("subscription_status") in ("active", "payment_failed", None):
+            b.patch_profile(profile["id"], {"subscription_status": "cancelled"})
+        return f"marked cancelled for {profile['id']}"
 
-
-def increment_founder_slots():
-    req = urllib.request.Request(
-        f"{SUPABASE_URL}/rest/v1/founder_slots?id=eq.1",
-        data=json.dumps({"claimed": get_founder_slots()["claimed"] + 1}).encode(),
-        method="PATCH"
-    )
-    req.add_header("apikey", SUPABASE_KEY)
-    req.add_header("Authorization", f"Bearer {SUPABASE_KEY}")
-    req.add_header("Content-Type", "application/json")
-    req.add_header("Prefer", "return=minimal")
-    try:
-        urllib.request.urlopen(req, timeout=5)
-    except Exception as e:
-        print(f"increment_founder_slots error: {e}")
+    return "no action"
 
 
 class handler(BaseHTTPRequestHandler):
@@ -105,112 +106,37 @@ class handler(BaseHTTPRequestHandler):
         self._respond(200, {"status": "webhook active"})
 
     def do_POST(self):
-        import urllib.parse
+        if not b.PAYSTACK_SECRET or not b.SUPABASE_KEY:
+            # Without the secret, anyone could forge a "payment". Refuse everything.
+            print("paystack-webhook: PAYSTACK_SECRET_KEY or SUPABASE_SERVICE_KEY missing")
+            return self._respond(500, {"error": "not configured"})
 
-        length = int(self.headers.get("Content-Length", 0))
+        length = int(self.headers.get("Content-Length", 0) or 0)
         body = self.rfile.read(length)
 
-        # ── Verify Paystack signature ─────────────────────────────
         sig = self.headers.get("x-paystack-signature", "")
-        expected = hmac.new(
-            PAYSTACK_SECRET.encode("utf-8"),
-            body,
-            hashlib.sha512
-        ).hexdigest()
-
-        if not hmac.compare_digest(sig, expected):
-            print(f"Signature mismatch. Got: {sig[:20]}... Expected: {expected[:20]}...")
-            self._respond(401, {"error": "invalid signature"})
-            return
+        expected = hmac.new(b.PAYSTACK_SECRET.encode("utf-8"), body, hashlib.sha512).hexdigest()
+        if not sig or not hmac.compare_digest(sig, expected):
+            print("paystack-webhook: signature mismatch")
+            return self._respond(401, {"error": "invalid signature"})
 
         try:
             event = json.loads(body)
-        except Exception:
-            self._respond(400, {"error": "invalid json"})
-            return
+        except ValueError:
+            return self._respond(400, {"error": "invalid json"})
 
         event_type = event.get("event", "")
-        data = event.get("data", {})
-        print(f"Paystack event: {event_type}")
+        data = event.get("data") or {}
+        b.log_event(event_type, event)
 
-        customer = data.get("customer", {})
-        email = customer.get("email", "")
-        customer_code = customer.get("customer_code", "")
+        try:
+            result = handle_event(event_type, data)
+        except Exception as e:
+            # 500 makes Paystack retry later; handlers are safe to repeat.
+            print(f"paystack-webhook: {event_type} failed: {e}")
+            return self._respond(500, {"error": "processing failed"})
 
-        # ── charge.success ────────────────────────────────────────
-        if event_type == "charge.success":
-            # Note: subscription_code here must come only from Paystack's
-            # own subscription_code field. A previous version fell back to
-            # plan.get("plan_code") when it was absent, which silently
-            # stored a PLAN code (PLN_...) as if it were a SUBSCRIPTION
-            # code (SUB_...) — those are different Paystack objects, and
-            # calling the subscription API with a plan code 404s.
-            subscription_code = data.get("subscription_code", "")
-
-            user_id = get_user_id_by_email(email)
-            if user_id:
-                slots = get_founder_slots()
-                is_founder = slots["claimed"] < slots["total"]
-
-                patch = {
-                    "is_premium": True,
-                    "paystack_customer_code": customer_code,
-                    "subscription_status": "active",
-                    "subscription_started_at": data.get("paid_at"),
-                    "subscription_expires_at": next_payment_date(data),
-                    "is_founder": is_founder,
-                }
-                if subscription_code:
-                    patch["paystack_subscription_code"] = subscription_code
-
-                supabase_patch(f"profiles?id=eq.{user_id}", patch)
-                if is_founder:
-                    increment_founder_slots()
-                print(f"Activated premium for {email}, founder={is_founder}")
-            else:
-                print(f"User not found for email: {email}")
-
-        # ── subscription created (captures the code + token needed ─
-        # ── to cancel via API later) ───────────────────────────────
-        elif event_type == "subscription.create":
-            subscription_code = data.get("subscription_code", "")
-            email_token = data.get("email_token", "")
-            user_id = get_user_id_by_email(email)
-            if user_id:
-                supabase_patch(
-                    f"profiles?id=eq.{user_id}",
-                    {
-                        "paystack_customer_code": customer_code,
-                        "paystack_subscription_code": subscription_code,
-                        "paystack_email_token": email_token,
-                        "subscription_expires_at": next_payment_date(data),
-                    }
-                )
-                print(f"Stored subscription code/token for {email}")
-
-        # ── subscription cancelled / set to not renew ──────────────
-        # Access is NOT revoked here — the user already paid for the
-        # current period. A daily cron (api/expire-subscriptions.py)
-        # flips is_premium off once subscription_expires_at passes.
-        elif event_type in ("subscription.disable", "subscription.not_renew"):
-            user_id = get_user_id_by_email(email)
-            if user_id:
-                supabase_patch(
-                    f"profiles?id=eq.{user_id}",
-                    {"subscription_status": "cancelled"}
-                )
-                print(f"Marked subscription cancelled (access continues until period end) for {email}")
-
-        # ── payment failed ────────────────────────────────────────
-        elif event_type == "invoice.payment_failed":
-            user_id = get_user_id_by_email(email)
-            if user_id:
-                supabase_patch(
-                    f"profiles?id=eq.{user_id}",
-                    {"subscription_status": "payment_failed"}
-                )
-                print(f"Payment failed for {email}")
-
+        print(f"paystack-webhook: {event_type}: {result}")
         self._respond(200, {"status": "ok"})
 
     def _respond(self, code, data):
