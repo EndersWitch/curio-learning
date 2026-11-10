@@ -28,8 +28,7 @@ interface Turn {
 type PageState = 'loading' | 'signin' | 'closed' | 'setup' | 'error' | 'ready'
 
 // Starters per CAPS phase: something to explain, a specific problem (which
-// should get coaching, not an answer) and a curious one, so a quick tap-test
-// covers both of Bloom's modes.
+// gets a full worked solution) and a curious one, for a quick tap-test.
 const STARTERS = {
   intermediate: ['What is photosynthesis?', 'Help me with 3/4 + 1/8', 'Why do we have day and night?'],
   senior: ['What is an ecosystem?', 'How do I solve 3x + 5 = 20?', "What's the difference between a simile and a metaphor?"],
