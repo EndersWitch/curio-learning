@@ -153,6 +153,15 @@ export async function POST(req: Request) {
           if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') emit(event.delta.text)
         }
         const final = await stream.finalMessage()
+        // Every finished reply is paid for, declined ones included, so log it
+        // before deciding what to keep. A logging failure never costs the
+        // learner their answer.
+        const { error: logError } = await sb.rpc('log_ai_usage', {
+          p_feature: 'bloom_chat',
+          p_model: final.model,
+          p_usage: final.usage,
+        })
+        if (logError) console.error('[bloom] log usage failed', logError)
         if (!opened && opening.trim()) send({ type: 'text', text: opening.trim() })
 
         if (final.stop_reason === 'refusal') {
