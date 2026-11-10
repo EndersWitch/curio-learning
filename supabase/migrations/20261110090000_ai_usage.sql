@@ -116,7 +116,9 @@ as $$
 declare
   v_start timestamptz := date_trunc('month', coalesce(p_month, (now() at time zone 'Africa/Johannesburg')::date)) at time zone 'Africa/Johannesburg';
 begin
-  if not exists (select 1 from public.profiles where id = auth.uid() and is_admin) then
+  -- Signed-in callers must be admins. No auth.uid() means the SQL editor or the
+  -- service role (anon can't execute this), which may read it too.
+  if auth.uid() is not null and not exists (select 1 from public.profiles where id = auth.uid() and is_admin) then
     raise exception 'admins only';
   end if;
   return query
