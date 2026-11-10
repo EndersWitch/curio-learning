@@ -95,10 +95,9 @@ export async function POST(req: Request) {
   const stream = anthropic.beta.messages.stream({
     model: BLOOM_MODEL,
     max_tokens: BLOOM_MAX_TOKENS,
-    betas: ['server-side-fallback-2026-07-01', 'thinking-binding-controls-2026-08-01'],
-    // If a safety classifier wrongly declines a school question, the API
-    // re-runs it on Anthropic's recommended fallback model instead of failing.
-    fallbacks: 'default',
+    // Haiku 5.5 has no server-side fallback, so a declined question ends in
+    // stop_reason 'refusal', which the reply loop below already handles.
+    betas: ['thinking-binding-controls-2026-08-01'],
     thinking: {
       type: 'adaptive',
       display: 'omitted',
@@ -113,6 +112,19 @@ export async function POST(req: Request) {
     cache_control: { type: 'ephemeral' },
     messages,
   })
+
+  // Every reply that reached the API is paid for: finished, declined, failed
+  // partway or abandoned when the learner closed the page. Log it exactly once,
+  // with whatever usage the stream has seen. A logging failure never costs the
+  // learner their answer.
+  let logged = false
+  const logUsage = async (model: string | undefined, usage: unknown) => {
+    if (logged || !usage) return
+    logged = true
+    const { error } = await sb.rpc('log_ai_usage', { p_feature: 'bloom_chat', p_model: model ?? BLOOM_MODEL, p_usage: usage })
+    if (error) console.error('[bloom] log usage failed', error)
+  }
+  const logPartial = () => logUsage(stream.currentMessage?.model, stream.currentMessage?.usage)
 
   const encoder = new TextEncoder()
   const remaining = learner.limit - used
@@ -153,15 +165,7 @@ export async function POST(req: Request) {
           if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') emit(event.delta.text)
         }
         const final = await stream.finalMessage()
-        // Every finished reply is paid for, declined ones included, so log it
-        // before deciding what to keep. A logging failure never costs the
-        // learner their answer.
-        const { error: logError } = await sb.rpc('log_ai_usage', {
-          p_feature: 'bloom_chat',
-          p_model: final.model,
-          p_usage: final.usage,
-        })
-        if (logError) console.error('[bloom] log usage failed', logError)
+        await logUsage(final.model, final.usage)
         if (!opened && opening.trim()) send({ type: 'text', text: opening.trim() })
 
         if (final.stop_reason === 'refusal') {
@@ -190,6 +194,7 @@ export async function POST(req: Request) {
 
         send({ type: 'done', truncated: final.stop_reason === 'max_tokens' })
       } catch (err) {
+        await logPartial()
         if (!stream.aborted) console.error('[bloom] reply failed', err)
         send({ type: 'error', message: friendlyError(err) })
       } finally {
@@ -203,6 +208,7 @@ export async function POST(req: Request) {
     // The learner closed the page mid-reply: stop paying for tokens nobody will read.
     cancel() {
       stream.abort()
+      void logPartial()
     },
   })
 

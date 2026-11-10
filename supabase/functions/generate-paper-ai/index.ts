@@ -171,8 +171,21 @@ function stripArtefacts(raw: string): string {
     .trim();
 }
 
+// ── USAGE LOGGING ────────────────────────────────────────────────────────────
+// Every paid call (tokens and web searches) goes to public.ai_usage under the admin.
+type Logger = (data: { model?: string; usage?: unknown }) => Promise<void>;
+// deno-lint-ignore no-explicit-any
+function usageLogger(sb: any, userId: string): Logger {
+  return async (data) => {
+    const { error } = await sb.rpc('log_ai_usage_service', {
+      p_user: userId, p_feature: 'paper_generator', p_model: data.model ?? MODEL, p_usage: data.usage ?? {},
+    });
+    if (error) console.error('log usage failed', error.message);
+  };
+}
+
 // ── CLAUDE CALLS ─────────────────────────────────────────────────────────────────
-async function callClaudeWithSearch(prompt: string): Promise<string> {
+async function callClaudeWithSearch(prompt: string, log: Logger): Promise<string> {
   const resp = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-api-key': ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
@@ -185,20 +198,23 @@ async function callClaudeWithSearch(prompt: string): Promise<string> {
   });
   if (!resp.ok) throw new Error(`Claude search ${resp.status}: ${await resp.text()}`);
   const data = await resp.json();
+  await log(data);
   // Only take the LAST text block — intermediate blocks are thinking/narration
   const textBlocks = (data.content ?? []).filter((b: {type:string}) => b.type === 'text');
   const raw = textBlocks.length > 0 ? (textBlocks[textBlocks.length - 1] as {text:string}).text.trim() : '';
   return stripArtefacts(raw);
 }
 
-async function callClaude(prompt: string): Promise<string> {
+async function callClaude(prompt: string, log: Logger): Promise<string> {
   const resp = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-api-key': ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
     body: JSON.stringify({ model: MODEL, max_tokens: 4096, messages: [{ role: 'user', content: prompt }] }),
   });
   if (!resp.ok) throw new Error(`Claude ${resp.status}: ${await resp.text()}`);
-  return (await resp.json()).content[0].text.trim();
+  const data = await resp.json();
+  await log(data);
+  return data.content[0].text.trim();
 }
 
 // ── PROMPT FACTORY ───────────────────────────────────────────────────────────
@@ -426,7 +442,7 @@ MEMORANDUM
 EXISTING SETS TO AVOID: ${existingList}`;
 }
 
-// ── PARSER ───────────────────────────────────────────────────────────────────
+// ── PARSER ─────────────────────────────────────────────────────────────────────
 function parse(raw: string) {
   const lines = raw.split('\n');
   let qStart = -1, mStart = -1;
@@ -475,10 +491,10 @@ function parse(raw: string) {
   return { source, passage, questions, memo, totalMarks };
 }
 
-// ── AUTH ─────────────────────────────────────────────────────────────────────
-// Returns the caller's access token if it belongs to an admin, otherwise null.
+// ── AUTH ───────────────────────────────────────────────────────────────────────
+// Returns the caller's access token and id if they are an admin, otherwise null.
 // The token is passed on to the PDF API, which runs the same admin check.
-async function adminToken(req: Request, sb: ReturnType<typeof createClient>): Promise<string | null> {
+async function adminToken(req: Request, sb: ReturnType<typeof createClient>): Promise<{ token: string; userId: string } | null> {
   const auth = req.headers.get('Authorization') ?? '';
   if (!auth.startsWith('Bearer ')) return null;
   const token = auth.slice('Bearer '.length);
@@ -486,7 +502,7 @@ async function adminToken(req: Request, sb: ReturnType<typeof createClient>): Pr
     const { data: { user }, error } = await sb.auth.getUser(token);
     if (error || !user) return null;
     const { data: profile } = await sb.from('profiles').select('is_admin').eq('id', user.id).single();
-    return profile?.is_admin ? token : null;
+    return profile?.is_admin ? { token, userId: user.id } : null;
   } catch {
     return null;
   }
@@ -504,14 +520,14 @@ async function uploadFile(sb: ReturnType<typeof createClient>, path: string, byt
   return `${SUPABASE_URL}/storage/v1/object/public/Papers/${path}`;
 }
 
-// ── HANDLER ──────────────────────────────────────────────────────────────────
+// ── HANDLER ──────────────────────────────────────────────────────────────────────
 Deno.serve(async (req: Request) => {
   const cors = corsHeaders(req);
   if (req.method === 'OPTIONS') return new Response(null, { headers: cors });
 
   const sb = createClient(SUPABASE_URL, SB_SERVICE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
-  const token = await adminToken(req, sb);
-  if (!token) {
+  const admin = await adminToken(req, sb);
+  if (!admin) {
     return new Response(JSON.stringify({ error: 'Admin sign-in required.' }), {
       status: 401, headers: { ...cors, 'Content-Type': 'application/json' },
     });
@@ -567,7 +583,8 @@ Deno.serve(async (req: Request) => {
 
         const prompt = buildPrompt(grade, term, sectionType, topic, existingTitles, qCount);
         const usesSearch = ['Comprehension','Poetry Analysis','Visual Literacy','Summary'].includes(sectionType);
-        const raw = usesSearch ? await callClaudeWithSearch(prompt) : await callClaude(prompt);
+        const log = usageLogger(sb, admin.userId);
+        const raw = usesSearch ? await callClaudeWithSearch(prompt, log) : await callClaude(prompt, log);
 
         const parsed = parse(raw);
         if (parsed.questions.length === 0) throw new Error('No questions parsed. Raw: ' + raw.slice(0, 400));
@@ -586,7 +603,7 @@ Deno.serve(async (req: Request) => {
           questions: parsed.questions, memo: parsed.memo,
         };
 
-        const [paperPdf, memoPdf] = await Promise.all([genPdf(pdfPayload, 'paper', token), genPdf(pdfPayload, 'memo', token)]);
+        const [paperPdf, memoPdf] = await Promise.all([genPdf(pdfPayload, 'paper', admin.token), genPdf(pdfPayload, 'memo', admin.token)]);
 
         const slug = paperTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
         const uid = crypto.randomUUID().slice(0, 8);
