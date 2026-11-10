@@ -7,10 +7,11 @@ import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@/lib/supabaseConfig'
 import { CHEER_MARKER } from '@/lib/bloom/rulebook'
 import { BLOOM_GRADES, DAILY_LIMITS, type BloomErrorCode, type BloomTier } from '@/lib/bloom/shared'
 
-export const BLOOM_MODEL = 'claude-opus-5-5'
-// Thinking is always on for this model; effort sets how much. A chat wants a
-// quick first word more than long deliberation. Try 'medium' if the test
-// questions show it cutting corners.
+// Haiku 5.5 to start: cheap enough to be generous with learners. Set
+// BLOOM_MODEL in Vercel (e.g. claude-sonnet-5-5) to move up without a code change.
+export const BLOOM_MODEL = process.env.BLOOM_MODEL?.trim() || 'claude-haiku-5-5'
+// Thinking is adaptive; effort sets how much. Anthropic suggests 'low' for chat
+// on Haiku 5.5. Try 'medium' if the test questions show it cutting corners.
 export const BLOOM_EFFORT = 'low' as const
 // Thinking counts toward this as well, so leave room above the longest reply.
 export const BLOOM_MAX_TOKENS = 8000
