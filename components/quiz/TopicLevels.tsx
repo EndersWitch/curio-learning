@@ -42,6 +42,7 @@ export default function TopicLevels({ levels }: { levels: LevelSummary[] }) {
   useEffect(() => { window.scrollTo(0, 0) }, [broadTopic])
   // level_id slugs (e.g. "nouns_1") are reused across grades, so progress
   // must be grade-scoped too.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { if (!authLoading) loadProgress() }, [authLoading, user?.id, broadTopic, grade])
 
   async function loadProgress() {
