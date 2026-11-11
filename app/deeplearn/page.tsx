@@ -6,7 +6,10 @@ import Bloom from '@/components/Bloom'
 
 export const metadata: Metadata = {
   title: 'Bloom',
-  description: "Curio's AI tutor breaks down concepts from first principles, in plain language, with real examples, until it actually clicks.",
+  description: "Bloom, the AI tutor coming to Curio, will break down concepts from first principles, in plain language, with real examples, until they actually click.",
+  // "Coming soon" pages read as an unfinished site to Google and AdSense.
+  // Drop this once Bloom is open to everyone.
+  robots: { index: false, follow: true },
 }
 
 export default function DeepLearnPage() {
@@ -39,12 +42,12 @@ export default function DeepLearnPage() {
               </h1>
 
               <p className="spread-lede rv">
-                Bloom is Curio&apos;s AI tutor. Ask it anything. It breaks down concepts{' '}
+                Bloom is the AI tutor we&apos;re building for Curio. Ask it anything, and it will break concepts down{' '}
                 <strong>from first principles</strong>, in plain language, with real examples, until it actually clicks.
               </p>
 
               <div className="dl-hero-actions rv rv-d1">
-                <a href="/subscription" className="cs-cta">Get early access &rarr;</a>
+                <a href="/quiz" className="cs-cta">Try a free quiz &rarr;</a>
                 <a href="/" className="cs-soft">&larr; Back home</a>
               </div>
             </div>

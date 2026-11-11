@@ -6,8 +6,9 @@ import Bloom from '@/components/Bloom'
 import { getGradeIndex } from '@/lib/subjectsData'
 
 export const metadata: Metadata = {
-  title: 'Browse by Subject & Grade | CAPS Study Materials | Curio Learning',
-  description: 'Find CAPS-aligned study materials for every grade and subject, from Grade 4 to Grade 12. Free papers, memos and AI-powered explanations.',
+  title: { absolute: 'Browse by Subject & Grade | CAPS Study Materials | Curio Learning' },
+  description: 'CAPS subject guides for Grades 4 to 12: what each subject covers, with free practice papers and quizzes where we have them.',
+  alternates: { canonical: '/subjects' },
 }
 
 const PHASES = [
@@ -32,7 +33,7 @@ export default function SubjectsHubPage() {
           <div className="hub-eyebrow">CAPS-aligned · Grade 4 to 12</div>
           <h1 className="hub-title">Pick your<br /><em>grade.</em></h1>
           <p className="hub-sub">
-            Find detailed study guides, term-by-term breakdowns and free practice papers for every CAPS subject. Select your grade to get started.
+            Find a CAPS study guide for every subject, with term-by-term breakdowns, mark weightings and study tips. Grades 4 to 9 also have free English Home Language practice papers with memos. Select your grade to get started.
           </p>
 
           {PHASES.map((phase, pi) => {

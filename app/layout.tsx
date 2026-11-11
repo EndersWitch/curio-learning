@@ -8,6 +8,7 @@ import { AccountDrawerProvider } from '@/components/AccountDrawerProvider'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { themeBootScript } from '@/lib/theme'
 import { AuthProvider } from '@/lib/auth-context'
+import { ADSENSE_CLIENT_ID } from '@/lib/ads'
 
 // Raleway for headings, buttons and UI; Merriweather for running text.
 const raleway = Raleway({
@@ -42,29 +43,29 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.curiolearning.co.za'),
   title: {
-    default: 'curio learning · CAPS-aligned exam prep for Grades 4–12',
+    default: 'curio learning · free CAPS practice papers, quizzes and subject guides',
     template: '%s · curio learning',
   },
   description:
-    'Free CAPS-aligned exam papers, memos and interactive quizzes for South African learners, Grades 4–12. Practise smarter with curio learning.',
+    'Free CAPS-aligned practice papers with full memos, English Home Language quizzes for Grades 4 to 7, and subject guides for Grades 4 to 12. More is added all the time.',
   keywords: [
-    'CAPS', 'exam papers', 'practice papers', 'memos', 'South Africa',
-    'Grade 4', 'Grade 12', 'quizzes', 'study', 'DBE',
+    'CAPS', 'practice papers', 'memos', 'South Africa', 'English Home Language',
+    'Grade 4', 'Grade 7', 'quizzes', 'subject guides', 'study',
   ],
   openGraph: {
     type: 'website',
     locale: 'en_ZA',
     url: 'https://www.curiolearning.co.za',
     siteName: 'curio learning',
-    title: 'curio learning · CAPS-aligned exam prep for Grades 4–12',
+    title: 'curio learning · free CAPS practice papers, quizzes and subject guides',
     description:
-      'Free CAPS-aligned exam papers, memos and interactive quizzes for South African learners, Grades 4–12.',
+      'Free CAPS-aligned practice papers with full memos, English Home Language quizzes for Grades 4 to 7, and subject guides for Grades 4 to 12.',
   },
   twitter: {
     card: 'summary',
-    title: 'curio learning · CAPS-aligned exam prep for Grades 4–12',
+    title: 'curio learning · free CAPS practice papers, quizzes and subject guides',
     description:
-      'Free CAPS-aligned exam papers, memos and interactive quizzes for South African learners.',
+      'Free CAPS-aligned practice papers, memos and quizzes for South African learners.',
   },
   // Home-screen install (iOS ignores the manifest icons, so it needs these).
   icons: {
@@ -73,7 +74,10 @@ export const metadata: Metadata = {
   },
   appleWebApp: { capable: true, title: 'curio', statusBarStyle: 'default' },
   robots: { index: true, follow: true },
-  alternates: { canonical: '/' },
+  // No site-wide canonical here: metadata is inherited, so a canonical of '/'
+  // in this root layout told Google every page was a duplicate of the
+  // homepage. Pages that need one set their own.
+  other: { 'google-adsense-account': ADSENSE_CLIENT_ID },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

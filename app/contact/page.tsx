@@ -9,6 +9,7 @@ import Bloom from '@/components/Bloom'
 export const metadata: Metadata = {
   title: 'Contact Us',
   description: 'Get in touch with the Curio Learning team — general enquiries, technical support, billing and privacy requests.',
+  alternates: { canonical: '/contact' },
 }
 
 const CARDS = [

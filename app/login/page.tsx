@@ -157,12 +157,12 @@ export default function LoginPage() {
             Everything you need to <strong>actually prepare</strong> for exams, free to start, always.
           </p>
           <ul className="bp-features">
-            {['Exam papers & memos, free forever','AI-powered topic quizzes','Bloom AI tutor','Grades 4 – 12 · every subject'].map((f) => (
+            {['Practice papers & memos, free forever','English HL quizzes, Grades 4 – 7','Subject guides, Grades 4 – 12','Bloom AI tutor, coming soon'].map((f) => (
               <li key={f} className="bp-feature"><span className="bp-chk"><Check size={11} /></span>{f}</li>
             ))}
           </ul>
           <div className="bp-stats">
-            <div className="bp-stat"><div className="bp-stat-val cy">30+</div><div className="bp-stat-lbl">Subjects</div></div>
+            <div className="bp-stat"><div className="bp-stat-val cy">81</div><div className="bp-stat-lbl">Subject guides</div></div>
             <div className="bp-stat"><div className="bp-stat-val">R0</div><div className="bp-stat-lbl">To start</div></div>
             <div className="bp-stat"><div className="bp-stat-val cy">Free</div><div className="bp-stat-lbl">Papers</div></div>
           </div>

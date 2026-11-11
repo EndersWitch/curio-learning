@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Open-source licences',
   description: 'The open-source software curio learning is built on.',
+  alternates: { canonical: '/licences' },
 }
 
 const ITEMS = [

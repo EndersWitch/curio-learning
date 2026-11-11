@@ -6,6 +6,9 @@ Disallow: /formatter
 Disallow: /formatter.html
 Disallow: /quiz-formatter
 Disallow: /quiz-formatter.html
+Disallow: /quiz-importer
+Disallow: /quiz-importer.html
+Disallow: /api/
 Disallow: /profile
 Disallow: /profile.html
 

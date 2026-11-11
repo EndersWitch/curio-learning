@@ -7,6 +7,7 @@ import Bloom from '@/components/Bloom'
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: 'How Curio Learning collects, uses and protects your personal information, in line with POPIA.',
+  alternates: { canonical: '/privacy' },
 }
 
 export default function PrivacyPage() {

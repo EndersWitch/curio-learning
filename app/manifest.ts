@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'curio learning',
     short_name: 'curio',
-    description: 'CAPS-aligned exam papers, memos and interactive quizzes for South African learners, Grades 4–12.',
+    description: 'Free CAPS-aligned practice papers, memos, quizzes and subject guides for South African learners.',
     start_url: '/',
     scope: '/',
     display: 'standalone',

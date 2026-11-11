@@ -4,7 +4,10 @@ import QuizNav from '@/components/quiz/QuizNav'
 import Footer from '@/components/Footer'
 import RevealObserver from '@/components/RevealObserver'
 import Bloom from '@/components/Bloom'
-import { ALL_GRADES, getGradeIndex } from '@/lib/subjectsData'
+import { ALL_GRADES, getGradeIndex, getSubjectPage } from '@/lib/subjectsData'
+import { getPapers } from '@/lib/content'
+
+export const revalidate = 3600
 
 interface Props {
   params: { grade: string }
@@ -23,15 +26,27 @@ export function generateMetadata({ params }: Props): Metadata {
   const grade = parseGradeParam(params.grade)
   const idx = grade ? getGradeIndex(grade) : undefined
   if (!idx) return {}
-  return { title: idx.title, description: idx.description }
+  return {
+    title: { absolute: idx.title }, // already ends in "| Curio Learning"
+    description: idx.description,
+    alternates: { canonical: `/subjects/grade-${idx.grade}` },
+  }
 }
 
-export default function GradeSubjectsPage({ params }: Props) {
+export default async function GradeSubjectsPage({ params }: Props) {
   const grade = parseGradeParam(params.grade)
   const idx = grade ? getGradeIndex(grade) : undefined
   if (!idx) notFound()
 
   const otherGrades = ALL_GRADES.filter((g) => g !== grade)
+
+  // Highlight the subjects that really have papers right now (the JSON's
+  // hasPapers flag is a hand-kept snapshot that goes stale).
+  const paperKeys = new Set((await getPapers()).filter((p) => p.grade === idx.grade).map((p) => p.subject))
+  const hasPapers = (slug: string) => {
+    const key = getSubjectPage(idx.grade, slug)?.papersSubjectKey
+    return !!key && paperKeys.has(key)
+  }
 
   return (
     <div style={{ background: 'var(--paper)' }}>
@@ -67,7 +82,7 @@ export default function GradeSubjectsPage({ params }: Props) {
                 <a
                   key={card.slug}
                   href={`/subjects/grade-${idx.grade}/${card.slug}`}
-                  className={`subj-card rv${delayClass}${card.hasPapers ? ' has-papers' : ''}`}
+                  className={`subj-card rv${delayClass}${hasPapers(card.slug) ? ' has-papers' : ''}`}
                 >
                   <div className="subj-card-name">{card.name}</div>
                   <div className="subj-card-desc">{card.hubDescription}</div>
