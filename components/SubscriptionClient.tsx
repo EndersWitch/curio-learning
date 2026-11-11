@@ -7,6 +7,7 @@ import { useAuth } from '@/lib/auth-context'
 import { Check, FileText, PenLine, Brain } from '@/components/icons'
 import Bloom from '@/components/Bloom'
 import { longDay, premiumEndsAt } from '@/lib/billing'
+import { useBloomHref } from '@/lib/bloom/useBloomHref'
 
 const PAYSTACK_KEY = 'pk_live_6540061572fe506bdb52063847dedb801c38765b'
 const PLAN_CODE = 'PLN_rgv78ij4cj0ky3d'
@@ -32,6 +33,7 @@ const PLAN_ROWS = [
 
 export default function SubscriptionClient() {
   const { user, loading, refreshUser } = useAuth()
+  const bloomHref = useBloomHref()
   const [ready, setReady] = useState(false)
   const [startedAt, setStartedAt] = useState<string | null>(null)
   const [subStatus, setSubStatus] = useState<string | null>(null)
@@ -301,7 +303,7 @@ export default function SubscriptionClient() {
                 <div className="quick-grid">
                   <a href="/papers" className="premqa"><span className="premqa-icon"><FileText size={22} /></span><span className="premqa-lbl">Papers</span></a>
                   <a href="/quiz" className="premqa"><span className="premqa-icon"><PenLine size={22} /></span><span className="premqa-lbl">Quiz</span></a>
-                  <a href="/deeplearn" className="premqa"><span className="premqa-icon"><Brain size={22} /></span><span className="premqa-lbl">Bloom</span></a>
+                  <a href={bloomHref} className="premqa"><span className="premqa-icon"><Brain size={22} /></span><span className="premqa-lbl">Bloom</span></a>
                 </div>
               </section>
 

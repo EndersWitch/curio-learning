@@ -10,7 +10,8 @@ import { sb } from '@/lib/supabase'
 import type { CatalogLevel } from '@/lib/levelCatalog'
 import { useAuth } from '@/lib/auth-context'
 import { useAccountDrawer } from '@/components/AccountDrawerProvider'
-import { Flame, FileText, PenLine, User, Star, Check, Brain, Heart, ListChecks, Trophy } from '@/components/icons'
+import { useBloomHref } from '@/lib/bloom/useBloomHref'
+import { Flame, FileText, PenLine, User, Star, Check, Brain, Heart, Trophy } from '@/components/icons'
 
 const SUPABASE_URL = 'https://inmrsgujgfktapjnekjs.supabase.co'
 const SUPABASE_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU'
@@ -68,6 +69,7 @@ const PLAN_FEATURES = [
 export default function HomePage() {
   const { user, loading: authLoading, refreshUser } = useAuth()
   const { openDrawer } = useAccountDrawer()
+  const bloomHref = useBloomHref()
   const ddRef = useRef<HTMLDivElement>(null)
 
   // Splash stays up until the auth check resolves AND a minimum beat has
@@ -415,7 +417,7 @@ export default function HomePage() {
               <div className="quick-actions">
                 <a href="/papers" className="qa-btn q1"><FileText size={22} className="qa-icon" /><span className="qa-label">Browse papers</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
                 <a href="/quiz" className="qa-btn q2"><PenLine size={22} className="qa-icon" /><span className="qa-label">Start a quiz</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
-                <a href="/deeplearn" className="qa-btn q3"><Brain size={22} className="qa-icon" /><span className="qa-label">Bloom</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
+                <a href={bloomHref} className="qa-btn q3"><Brain size={22} className="qa-icon" /><span className="qa-label">Bloom</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
                 <a href="/subscription" className="qa-btn q4"><Star size={22} className="qa-icon" /><span className="qa-label">My plan</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
               </div>
             </div>
@@ -469,7 +471,10 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="dash-two-col">
+            {/* Study streak on its own row: the "Recent activity" panel beside it
+                only ever said "No activity yet", and quiz history already shows
+                the latest attempts above. */}
+            <div className="dash-two-col" style={{ gridTemplateColumns: '1fr' }}>
               <div className="dash-panel">
                 <div className="dash-ph"><span className="dash-pt dash-pt-icon"><Flame size={16} /> Study streak</span></div>
                 <div className="dash-pb">
@@ -490,12 +495,6 @@ export default function HomePage() {
                   <div style={{ fontSize: '0.7rem', color: 'var(--ink35)', marginTop: '0.7rem' }}>
                     {streak > 0 ? `${streak} day${streak !== 1 ? 's' : ''} studied. Keep it up!` : 'Open a paper or take a quiz to start your streak!'}
                   </div>
-                </div>
-              </div>
-              <div className="dash-panel">
-                <div className="dash-ph"><span className="dash-pt dash-pt-icon"><ListChecks size={16} /> Recent activity</span></div>
-                <div className="dash-pb">
-                  <div className="dash-empty">No activity yet.</div>
                 </div>
               </div>
             </div>
