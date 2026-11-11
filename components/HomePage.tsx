@@ -606,7 +606,7 @@ export default function HomePage() {
             <div className="lp-cards rv">
               {[
                 { href: '/papers', title: 'Free papers and memos', text: 'English Home Language practice papers for Grades 4 to 9, each with a full marking memo. Download them and keep them.', t: 't1' },
-                { href: '/deeplearn', title: 'Explained, not just marked', text: 'Got something wrong? Bloom breaks the idea down from the start until it clicks.', t: 't2' },
+                { href: '/deeplearn', title: 'Explained, not just marked', text: 'Coming soon: Bloom, our AI tutor, will break a tricky idea down from the start until it clicks.', t: 't2' },
                 { href: '/quiz', title: 'Quizzes that teach', text: 'English Home Language quizzes for Grades 4 to 7: a short lesson, then instant feedback. More subjects are on the way.', t: 't3' },
                 { href: '/subjects', title: 'Your grade, your subjects', text: 'Subject guides for Grades 4 to 12 show what your CAPS year covers, with papers and quizzes where we have them.', t: 't4' },
                 { href: '/login?tab=signup', title: 'Progress you can see', text: 'Streaks and quiz history show what you have practised and where to go next.', t: 't2' },
