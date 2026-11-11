@@ -6,6 +6,10 @@ import RevealObserver from '@/components/RevealObserver'
 import Bloom from '@/components/Bloom'
 import { SubjectPapersGrid, SubjectPapersSidebar } from '@/components/subjects/SubjectPapers'
 import { ALL_SUBJECTS, getSubjectPage } from '@/lib/subjectsData'
+import { getLevelSummaries, getPapers, groupTopics } from '@/lib/content'
+import { topicHref } from '@/lib/quizUrls'
+
+export const revalidate = 3600
 
 interface Props {
   params: { grade: string; subject: string }
@@ -25,15 +29,23 @@ export function generateMetadata({ params }: Props): Metadata {
   const subject = grade ? getSubjectPage(grade, params.subject) : undefined
   if (!subject) return {}
   return {
-    title: subject.title,
+    title: { absolute: subject.title }, // already ends in "| Curio Learning"
     description: subject.description,
+    alternates: { canonical: `/subjects/grade-${subject.grade}/${subject.slug}` },
   }
 }
 
-export default function SubjectGuidePage({ params }: Props) {
+export default async function SubjectGuidePage({ params }: Props) {
   const grade = parseGradeParam(params.grade)
   const subject = grade ? getSubjectPage(grade, params.subject) : undefined
   if (!subject) notFound()
+
+  // Fetched on the server so papers and lesson links are in the HTML. Sections
+  // with nothing in them are left out rather than showing "coming soon".
+  const key = subject.papersSubjectKey
+  const [allPapers, allLevels] = await Promise.all([getPapers(), getLevelSummaries()])
+  const papers = allPapers.filter((p) => p.subject === key && p.grade === subject.grade)
+  const topics = groupTopics(allLevels.filter((l) => l.subject === key && l.grade === subject.grade))
 
   return (
     <div style={{ background: 'var(--paper)' }}>
@@ -65,7 +77,8 @@ export default function SubjectGuidePage({ params }: Props) {
             <div className="subject-meta">
               <span className="meta-pill cy">Grade {subject.grade}</span>
               <span className="meta-pill">CAPS Aligned</span>
-              <span className="meta-pill co">Free Papers + Memos</span>
+              {papers.length > 0 && <span className="meta-pill co">Free Papers + Memos</span>}
+              {topics.length > 0 && <span className="meta-pill co">Free Lessons</span>}
             </div>
             {subject.otherGrades.length > 0 && (
               <div className="grade-selector">
@@ -142,11 +155,34 @@ export default function SubjectGuidePage({ params }: Props) {
               </div>
             </div>
 
-            <div className="papers-section rv rv-d2">
-              <div className="section-eyebrow">Practice materials</div>
-              <div className="section-title">Grade {subject.grade} papers &amp; memos</div>
-              <SubjectPapersGrid subjectKey={subject.papersSubjectKey} grade={subject.grade} />
-            </div>
+            {topics.length > 0 && (
+              <div className="papers-section rv rv-d2">
+                <div className="section-eyebrow">Free lessons</div>
+                <div className="section-title">Grade {subject.grade} lessons &amp; quizzes</div>
+                <div className="subjpapers-grid">
+                  {topics.map((t) => (
+                    <div className="subjpaper-card" key={t.broad_topic}>
+                      <div className="subjpaper-title">{t.broad_topic_display}</div>
+                      <div className="subjpaper-meta">
+                        {t.level_count} level{t.level_count !== 1 ? 's' : ''} · {t.free_level_count} free
+                      </div>
+                      <div className="subjpaper-footer">
+                        <span className="subjpaper-badge">Lesson + quiz</span>
+                        <a href={topicHref(t)} className="subjpaper-btn">Start →</a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {papers.length > 0 && (
+              <div className="papers-section rv rv-d2">
+                <div className="section-eyebrow">Practice materials</div>
+                <div className="section-title">Grade {subject.grade} papers &amp; memos</div>
+                <SubjectPapersGrid papers={papers} />
+              </div>
+            )}
 
             <div className="tips-section rv rv-d3">
               <div className="section-eyebrow">Study smarter</div>
@@ -178,15 +214,17 @@ export default function SubjectGuidePage({ params }: Props) {
               <p className="premium-price">R49/month · 7-day free trial</p>
             </div>
 
-            <div className="sidebar-card rv rv-d1">
-              <div className="sidebar-card-head">
-                <span className="sidebar-card-title">Grade {subject.grade} Papers</span>
-                <a href="/papers" className="sidebar-card-link">View all →</a>
+            {papers.length > 0 && (
+              <div className="sidebar-card rv rv-d1">
+                <div className="sidebar-card-head">
+                  <span className="sidebar-card-title">Grade {subject.grade} Papers</span>
+                  <a href="/papers" className="sidebar-card-link">View all →</a>
+                </div>
+                <div className="sidebar-card-body">
+                  <SubjectPapersSidebar papers={papers} />
+                </div>
               </div>
-              <div className="sidebar-card-body">
-                <SubjectPapersSidebar subjectKey={subject.papersSubjectKey} grade={subject.grade} />
-              </div>
-            </div>
+            )}
 
             {subject.relatedSubjects.length > 0 && (
               <div className="sidebar-card rv rv-d2">

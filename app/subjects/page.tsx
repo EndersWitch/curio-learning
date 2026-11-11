@@ -6,8 +6,9 @@ import Bloom from '@/components/Bloom'
 import { getGradeIndex } from '@/lib/subjectsData'
 
 export const metadata: Metadata = {
-  title: 'Browse by Subject & Grade | CAPS Study Materials | Curio Learning',
+  title: { absolute: 'Browse by Subject & Grade | CAPS Study Materials | Curio Learning' },
   description: 'Find CAPS-aligned study materials for every grade and subject, from Grade 4 to Grade 12. Free papers, memos and AI-powered explanations.',
+  alternates: { canonical: '/subjects' },
 }
 
 const PHASES = [
