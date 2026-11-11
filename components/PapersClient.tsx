@@ -111,7 +111,7 @@ export default function PapersClient({ papers: allPapers }: { papers: Paper[] })
           <div className="ad-topbar">
             <div className="ad-topbar-left">
               <span className="ad-pill">Ad</span>
-              <span className="ad-topbar-text"><strong>Remove ads and add AI quizzes and Bloom</strong> with Curio Premium, from R49/month.</span>
+              <span className="ad-topbar-text"><strong>Remove ads and unlock every quiz level</strong> with Curio Premium, R49/month.</span>
             </div>
             <div className="ad-topbar-right">
               <a href="/login?tab=signup" className="ad-cta">Go Premium →</a>

@@ -201,17 +201,17 @@ export default async function SubjectGuidePage({ params }: Props) {
           <aside className="sidebar">
             <div className="premium-card rv">
               <div className="premium-eyebrow">Curio Premium</div>
-              <div className="premium-title">AI-powered practice</div>
+              <div className="premium-title">Every quiz level</div>
               <div className="premium-desc">
-                Instant explanations, adaptive quizzes and personalised feedback — built for Grade {subject.grade} CAPS.
+                Premium unlocks every level in our quizzes (English Home Language, Grades 4 to 7 for now) and takes the ads away.
               </div>
               <div className="premium-feats">
-                <span className="premium-feat">AI Quizzes</span>
-                <span className="premium-feat">Bloom</span>
-                <span className="premium-feat">Writing Feedback</span>
+                <span className="premium-feat">All quiz levels</span>
+                <span className="premium-feat">No ads</span>
+                <span className="premium-feat">Bloom, coming soon</span>
               </div>
-              <a href="/login?tab=signup" className="premium-cta">Start free trial →</a>
-              <p className="premium-price">R49/month · 7-day free trial</p>
+              <a href="/subscription" className="premium-cta">See Premium →</a>
+              <p className="premium-price">R49/month · cancel any time</p>
             </div>
 
             {papers.length > 0 && (

@@ -7,7 +7,7 @@ import { ArrowRight } from '@/components/icons'
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description: 'Curio Learning is a free, CAPS-aligned exam prep platform for Grade 4–12 students in South Africa. Here’s who we are and why we built it.',
+  description: 'Curio Learning is a free, CAPS-aligned study site for South African learners: practice papers, quizzes and subject guides. Here’s who we are and why we built it.',
   alternates: { canonical: '/about' },
 }
 
@@ -34,7 +34,7 @@ export default function AboutPage() {
             <span className="spread-kicker-line" />
             Curio Learning
           </div>
-          <p className="spread-tagline">Free, CAPS-aligned exam prep for Grade 4–12 &mdash; built in South Africa, for South African students.</p>
+          <p className="spread-tagline">Free, CAPS-aligned study help &mdash; built in South Africa, for South African students.</p>
 
           <h1 className="spread-h">
             <span className="ln">who</span>
@@ -43,7 +43,7 @@ export default function AboutPage() {
           </h1>
 
           <p className="spread-lede rv">
-            Curio turns real past papers into <strong>quizzes that mark themselves</strong>, so studying
+            Curio writes CAPS practice papers and <strong>quizzes that mark themselves</strong>, so studying
             feels less like a chore and more like a game you&apos;re actually winning.
           </p>
 
@@ -74,11 +74,11 @@ export default function AboutPage() {
           <div className="spread-stats">
             <div className="spread-stat c1 rv rv-d1">
               <div className="spread-stat-val">R0</div>
-              <div className="spread-stat-label">to start. Every past paper and memo is free &mdash; no account required, no strings attached.</div>
+              <div className="spread-stat-label">to start. Every practice paper and memo is free &mdash; no account required, no strings attached.</div>
             </div>
             <div className="spread-stat c2 rv rv-d2">
               <div className="spread-stat-val">Gr 4&ndash;12</div>
-              <div className="spread-stat-label">Every core CAPS subject, mapped grade by grade.</div>
+              <div className="spread-stat-label">Subject guides for the CAPS subjects, mapped grade by grade. Quizzes start with English Home Language, Grades 4&ndash;7, and more are on the way.</div>
             </div>
             <div className="spread-stat c3 rv rv-d3">
               <div className="spread-stat-val">24/7</div>
@@ -101,10 +101,10 @@ export default function AboutPage() {
           </div>
 
           <p className="spread-blurb-head rv">
-            Real past papers turned into practice that actually sticks:
+            CAPS practice that actually sticks:
           </p>
           <div className="spread-blurb-cols rv rv-d1">
-            <p>Past papers &amp; memos, topic-by-topic quizzes, subject guides mapped to the curriculum.</p>
+            <p>Practice papers &amp; memos, topic-by-topic quizzes, subject guides mapped to the curriculum.</p>
             <p>Instant marking, streaks that build the habit, progress you can actually see.</p>
           </div>
 
@@ -206,8 +206,8 @@ export default function AboutPage() {
 
           <div className="spread-closing-row">
             <p className="spread-closing-sub">
-              Free forever for past papers and quizzes. Upgrade to Premium whenever you want
-              AI-marked essays and deeper practice.
+              Practice papers and memos are free forever, and so is a share of every quiz topic.
+              Upgrade to Premium whenever you want every quiz level and no ads.
             </p>
             <div className="spread-closing-actions">
               <a href="/papers" className="spread-closing-cta">

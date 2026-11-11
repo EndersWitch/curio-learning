@@ -22,41 +22,46 @@ function localDateKey(d: Date): string {
 }
 
 // ─── Quiz demo data ────────────────────────────────────────────────────────────
+// Every set here is a real quiz topic (English Home Language is the only
+// subject with quizzes so far), so the demo never promises what isn't there.
 const SETS = [
   {
     topic: 'English HL · Grade 4',
+    name: 'Parts of Speech',
     questions: [
       { q: 'Which word is the verb in:\n"The girl quickly ran to school."', opts: ['girl','quickly','ran','school'], correct: 2, ok: 'Correct! "Ran" is the verb. It shows the action.', err: '"Ran" is the verb. Verbs are doing/action words.' },
       { q: 'What type of word is "beautiful" in:\n"She wore a beautiful dress."', opts: ['Verb','Noun','Adverb','Adjective'], correct: 3, ok: 'Correct! "Beautiful" is an adjective. It describes the noun.', err: '"Beautiful" is an adjective. Adjectives describe nouns.' },
     ],
   },
   {
-    topic: 'Mathematics · Grade 6',
+    topic: 'English HL · Grade 5',
+    name: 'Punctuation',
     questions: [
-      { q: 'What is ¾ + ½?', opts: ['1','1¼','1½','1¾'], correct: 1, ok: 'Correct! Convert ½ to ²⁄₄, then ¾ + ²⁄₄ = ⁵⁄₄ = 1¼.', err: 'Answer is 1¼. Convert ½ to ²⁄₄ then add.' },
-      { q: 'Which fraction equals ²⁄₄?', opts: ['³⁄₄','⁴⁄₈','²⁄₆','⁵⁄₆'], correct: 1, ok: 'Correct! ⁴⁄₈ = ²⁄₄. Multiply top and bottom by 2.', err: '⁴⁄₈ equals ²⁄₄. Multiply top and bottom by 2.' },
+      { q: 'Which sentence is punctuated correctly?', opts: ['where is my bag?','Where is my bag?','Where is my bag.','where is my bag.'], correct: 1, ok: 'Correct! A sentence starts with a capital letter, and a question ends with a question mark.', err: '"Where is my bag?" is correct. Start with a capital letter and end a question with a question mark.' },
+      { q: 'Which word needs a capital letter in:\n"My cousin lives in durban."', opts: ['cousin','lives','in','durban'], correct: 3, ok: 'Correct! "Durban" is the name of a place, a proper noun, so it starts with a capital letter.', err: '"Durban" needs a capital letter. Names of places are proper nouns.' },
     ],
   },
   {
-    topic: 'Natural Sciences · Grade 5',
+    topic: 'English HL · Grade 7',
+    name: 'Tenses',
     questions: [
-      { q: 'What is the main function of the heart?', opts: ['Digest food','Pump blood','Filter waste','Control breathing'], correct: 1, ok: 'Correct! The heart pumps blood to deliver oxygen.', err: 'The heart pumps blood. Kidneys filter waste.' },
-      { q: 'Which organ produces urine?', opts: ['Liver','Stomach','Kidney','Lungs'], correct: 2, ok: 'Correct! Kidneys filter blood and produce urine.', err: 'The kidneys filter waste and produce urine.' },
+      { q: 'Which sentence is in the past tense?', opts: ['She walks to school.','She will walk to school.','She walked to school.','She is walking to school.'], correct: 2, ok: 'Correct! "Walked" tells us the action already happened.', err: '"She walked to school." is the past tense. The action already happened.' },
+      { q: 'Choose the correct verb:\n"Yesterday, we ___ a film."', opts: ['watch','watched','will watch','are watching'], correct: 1, ok: 'Correct! "Yesterday" tells us it happened in the past, so we use "watched".', err: '"Watched" is correct. "Yesterday" means the past tense.' },
     ],
   },
 ]
 
 // Feature rows for the pricing cards — `free` marks what the free plan includes.
+// Only list what exists today. Keep in step with PLAN_ROWS in
+// components/SubscriptionClient.tsx.
 const PLAN_FEATURES = [
-  { label: 'Full past paper library', free: true },
+  { label: 'Practice paper library', free: true },
   { label: 'Download papers as PDF', free: true },
   { label: 'Full marking memos', free: true },
-  { label: 'All grades & subjects', free: true },
-  { label: 'AI-powered quiz mode', free: false },
-  { label: 'Bloom AI tutor', free: false },
-  { label: 'Custom test generator', free: false },
-  { label: 'Progress tracking & streaks', free: false },
-  { label: 'Topic-sorted question sets', free: false },
+  { label: 'Subject guides, Grades 4–12', free: true },
+  { label: 'Free quiz levels with lessons', free: true },
+  { label: 'Progress tracking & streaks', free: true },
+  { label: 'Every quiz level, incl. Premium', free: false },
   { label: 'No ads', free: false },
 ]
 
@@ -507,11 +512,9 @@ export default function HomePage() {
                 <div>
                   <div className="pu-ey">Curio Premium</div>
                   <div className="pu-title">Ready for more than papers?</div>
-                  <div className="pu-sub">You&apos;re on the free plan. Upgrade to access AI quizzes, Bloom, custom tests and more.</div>
+                  <div className="pu-sub">You&apos;re on the free plan. Upgrade to unlock every quiz level and study without ads.</div>
                   <div className="pu-feats">
-                    <span className="pu-feat">AI Quizzes</span>
-                    <span className="pu-feat">Bloom</span>
-                    <span className="pu-feat">Custom Tests</span>
+                    <span className="pu-feat">Every Quiz Level</span>
                     <span className="pu-feat">No Ads</span>
                   </div>
                 </div>
@@ -549,7 +552,7 @@ export default function HomePage() {
                 <span className="lp-pill-icon"><Bloom size={44} className="lp-spin" /></span>
                 <h1 className="lp-h1">Your <span className="lp-accent squiggle">study</span> friend</h1>
               </div>
-              <p className="lp-lead">Past papers, quizzes and explanations that actually make sense, made for South African students.</p>
+              <p className="lp-lead">Practice papers, quizzes and subject guides that actually make sense, made for South African students.</p>
               <p className="lp-lead-sm">Free to start. Papers and memos are free, always.</p>
               <div className="lp-actions">
                 <a href="/login?tab=signup" className="btn-primary">Start for free</a>
@@ -574,8 +577,8 @@ export default function HomePage() {
 
             <div className="lp-stats rv">
               {[
-                { n: '30+', l: 'Subjects', t: 't1' },
-                { n: '4–12', l: 'Grades covered', t: 't2' },
+                { n: '81', l: 'CAPS subject guides', t: 't1' },
+                { n: '4–12', l: 'Grades with guides', t: 't2' },
                 { n: 'R0', l: 'Papers and memos, always', t: 't3' },
                 { n: 'CAPS', l: 'Aligned to the curriculum', t: 't4' },
               ].map((s) => (
@@ -597,18 +600,18 @@ export default function HomePage() {
             <div className="lp-head rv">
               <div>
                 <h2 className="lp-h2"><Bloom size={36} className="lp-h2-bloom" />Why students love Curio</h2>
-                <p>One place for past papers, practice and the explanations that make them make sense.</p>
+                <p>One place for practice papers, quizzes and the lessons that make them make sense.</p>
               </div>
               <a href="/subjects" className="btn-soft">All subjects</a>
             </div>
             <div className="lp-cards rv">
               {[
-                { href: '/papers', title: 'Free papers and memos', text: 'Past exam papers with full marking memos for every grade and subject. Download them and keep them.', t: 't1' },
+                { href: '/papers', title: 'Free papers and memos', text: 'English Home Language practice papers for Grades 4 to 9, each with a full marking memo. Download them and keep them.', t: 't1' },
                 { href: '/deeplearn', title: 'Explained, not just marked', text: 'Got something wrong? Bloom breaks the idea down from the start until it clicks.', t: 't2' },
-                { href: '/quiz', title: 'Quizzes that teach', text: 'Topic-sorted quizzes with instant feedback, plus custom tests you build yourself.', t: 't3' },
-                { href: '/subjects', title: 'Your grade, your subjects', text: 'Pick your grade and go straight to the papers and practice that match your CAPS year.', t: 't4' },
+                { href: '/quiz', title: 'Quizzes that teach', text: 'English Home Language quizzes for Grades 4 to 7: a short lesson, then instant feedback. More subjects are on the way.', t: 't3' },
+                { href: '/subjects', title: 'Your grade, your subjects', text: 'Subject guides for Grades 4 to 12 show what your CAPS year covers, with papers and quizzes where we have them.', t: 't4' },
                 { href: '/login?tab=signup', title: 'Progress you can see', text: 'Streaks and quiz history show what you have practised and where to go next.', t: 't2' },
-                { href: '/subscription', title: 'No student left behind', text: 'Papers and memos stay free. Premium adds the AI features for R49 a month.', t: 't1' },
+                { href: '/subscription', title: 'No student left behind', text: 'Papers and memos stay free. Premium unlocks every quiz level and removes ads for R49 a month.', t: 't1' },
               ].map((c, i) => (
                 <a href={c.href} className={`lp-card ${c.t}`} key={c.title}>
                   <span className="lp-num">
@@ -635,15 +638,15 @@ export default function HomePage() {
             <div className="lp-head rv">
               <div>
                 <h2 className="lp-h2"><Bloom size={36} className="lp-h2-bloom" />Where are you in school?</h2>
-                <p>Pick your phase and we&apos;ll show you the papers, memos and practice for your grades.</p>
+                <p>Pick your phase and we&apos;ll show you the subject guides for your grades, plus papers and quizzes where we have them.</p>
               </div>
               <a href="/subjects" className="btn-soft">View all</a>
             </div>
             <div className="lp-phases rv">
               {[
-                { img: '/images/home/phase-intermediate.jpg', pos: '50% 35%', alt: 'Smiling primary school learners outdoors', grades: 'Grades 4–6', title: 'Intermediate phase', text: 'Build solid foundations in English, Maths and Natural Sciences.', href: '/subjects#int', t: 't1' },
-                { img: '/images/home/phase-senior.jpg', pos: '50% 40%', alt: 'A learner absorbed in a book', grades: 'Grades 7–9', title: 'Senior phase', text: 'Get ready for high school with the full range of subjects.', href: '/subjects#sen', t: 't2' },
-                { img: '/images/home/phase-fet.jpg', pos: '50% 30%', alt: 'Two learners reading a book together', grades: 'Grades 10–12', title: 'FET phase', text: 'Past papers and memos for the years that count, up to matric.', href: '/subjects#fet', t: 't3' },
+                { img: '/images/home/phase-intermediate.jpg', pos: '50% 35%', alt: 'Smiling primary school learners outdoors', grades: 'Grades 4–6', title: 'Intermediate phase', text: 'Subject guides for your subjects, plus English quizzes and practice papers.', href: '/subjects#int', t: 't1' },
+                { img: '/images/home/phase-senior.jpg', pos: '50% 40%', alt: 'A learner absorbed in a book', grades: 'Grades 7–9', title: 'Senior phase', text: 'Subject guides for your subjects, plus English papers and Grade 7 quizzes.', href: '/subjects#sen', t: 't2' },
+                { img: '/images/home/phase-fet.jpg', pos: '50% 30%', alt: 'Two learners reading a book together', grades: 'Grades 10–12', title: 'FET phase', text: 'Subject guides for languages and maths, up to matric. Papers and quizzes are coming.', href: '/subjects#fet', t: 't3' },
               ].map((p) => (
                 <div className={`lp-phase ${p.t}`} key={p.title}>
                   <div className="lp-phase-photo">
@@ -659,7 +662,8 @@ export default function HomePage() {
               ))}
             </div>
             <div className="lp-subjects rv">
-              {['English HL', 'Mathematics', 'Life Sciences', 'Physical Sciences', 'History', 'Geography', 'Accounting', 'Afrikaans HL', 'Business Studies', 'Economics', 'Natural Sciences', 'Social Sciences'].map((s) => (
+              {/* Subjects that have guides on /subjects (lib/data/subjects.json) */}
+              {['English HL', 'English FAL', 'Mathematics', 'Afrikaans HL', 'Afrikaans FAL', 'Natural Sciences', 'Social Sciences', 'Life Skills', 'Life Orientation', 'Technology', 'EMS', 'Maths Literacy'].map((s) => (
                 <span className="lp-subj" key={s}>{s}</span>
               ))}
               <a href="/subjects" className="lp-subj more">+ more</a>
@@ -677,8 +681,8 @@ export default function HomePage() {
               <div>
                 <h2 className="lp-h2"><Bloom size={36} className="lp-h2-bloom" />Exam papers. Full memos. Yours to keep.</h2>
                 <p>
-                  Papers for every grade and subject, complete with full marking memos. Download them, study from them,
-                  own them. We never charge for this, because access to good study material shouldn&apos;t depend on who you are.
+                  English Home Language practice papers for Grades 4 to 9, each with a full marking memo, and more on the way.
+                  Download them, study from them, own them. We never charge for this, because access to good study material shouldn&apos;t depend on who you are.
                 </p>
               </div>
               <a href="/papers" className="btn-primary">Browse papers</a>
@@ -692,11 +696,12 @@ export default function HomePage() {
                 <span className="lp-tag free">Always free</span>
                 <div className="plist">
                   {[
-                    { title: 'English HL · Paper 1 · Grade 12', meta: 'Language in Context · Comprehensive' },
-                    { title: 'Mathematics · Paper 2 · Grade 12', meta: 'Geometry & Statistics · Full paper' },
-                    { title: 'Life Sciences · Paper 1 · Grade 12', meta: 'Biochemistry & Cells · Full paper' },
-                    { title: 'History · Paper 1 · Grade 11', meta: 'SA History · Source-based' },
-                    { title: 'Geography · Paper 2 · Grade 10', meta: 'Human Geography · Full paper' },
+                    // Real papers from the library (keep these in step with what's on /papers)
+                    { title: 'English HL · Language Practice · Grade 4', meta: 'Paper 1 · A market day at a South African primary school' },
+                    { title: 'English HL · Language Practice · Grade 5', meta: 'Paper 1 · How a simple machine like a lever works' },
+                    { title: 'English HL · Language Practice · Grade 6', meta: 'Paper 1 · How rainbows are formed' },
+                    { title: 'English HL · Language Practice · Grade 7', meta: 'Paper 1 · Load-shedding and South African schools' },
+                    { title: 'English HL · Language Practice · Grade 9', meta: 'Paper 1 · Plastic pollution on SA coastlines' },
                   ].map((p, i) => (
                     <div className="prow" key={i}>
                       <div className="pbar">{String(i + 1).padStart(2, '0')}</div>
@@ -736,12 +741,12 @@ export default function HomePage() {
               </div>
             </div>
             <div className="lp-split-copy">
-              <span className="lp-tag pro">Premium feature</span>
+              <span className="lp-tag pro">Coming soon</span>
               <h2 className="lp-h2">Not just right or wrong. <span className="lp-accent squiggle">Actually</span> explained.</h2>
               <p>
-                When you get something wrong, Curio doesn&apos;t just mark you down and move on. Bloom
-                breaks down the concept from first principles, in plain language, with real examples,
-                until it actually clicks.
+                Bloom is the AI tutor we&apos;re building for Curio, and a small group is testing it now. Ask it about
+                something you got wrong and it breaks the idea down from first principles, in plain language,
+                with real examples, until it actually clicks.
               </p>
               <a href="/deeplearn" className="btn-soft">See how Bloom works</a>
             </div>
@@ -755,11 +760,11 @@ export default function HomePage() {
           </div>
           <div className="lp-wrap lp-split rv">
             <div className="lp-split-copy">
-              <span className="lp-tag pro">Premium feature</span>
+              <span className="lp-tag free">Free to start</span>
               <h2 className="lp-h2">Questions that <span className="lp-accent squiggle">actually</span> teach you.</h2>
               <p>
-                Topic-sorted quizzes with instant, meaningful feedback. Build your own custom test.
-                Work at your own pace. Every question is a chance to understand something better.
+                English Home Language quizzes for Grades 4 to 7, sorted by topic, with instant, meaningful feedback.
+                Every level starts with a short lesson. Some levels in every topic are free; Premium unlocks the rest.
               </p>
               <div className="topic-tabs">
                 {SETS.map((s, i) => (
@@ -768,7 +773,7 @@ export default function HomePage() {
                     className={`ttab${activeSet === i ? ' on' : ''}`}
                     onClick={() => loadSet(i)}
                   >
-                    <span className="ttab-label">{s.topic.split(' · ')[0]} · {s.topic.split(' · ')[0] === 'English HL' ? 'Parts of Speech' : s.topic.split(' · ')[0] === 'Mathematics' ? 'Fractions' : 'Human Body'}</span>
+                    <span className="ttab-label">{s.topic.split(' · ')[0]} · {s.name}</span>
                     <span className="ttab-grade">Grade {s.topic.split('Grade ')[1]}</span>
                   </div>
                 ))}
@@ -829,7 +834,7 @@ export default function HomePage() {
               <div>
                 <h2 className="lp-h2"><Bloom size={36} className="lp-h2-bloom" />Honest pricing. For every student.</h2>
                 <p>
-                  Papers and memos are free, always. Premium adds the AI quizzes and explanations,
+                  Papers and memos are free, always. Premium unlocks every quiz level and removes ads,
                   for less than a takeaway a month.
                 </p>
               </div>

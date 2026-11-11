@@ -38,10 +38,10 @@ export default function QuizBrowse({ topics }: { topics: TopicSummary[] }) {
         <div className="spread-deco o1" style={{ bottom: '5%', left: '-40px' }}>
           <Bloom size={160} />
         </div>
-        <div className="hub-eyebrow">Quizzes &amp; mastery challenges</div>
+        <div className="hub-eyebrow">Quizzes &amp; lessons</div>
         <h1 className="hub-title">Pick a <em>topic</em>.</h1>
         <p className="hub-sub">
-          Choose a subject, work through the levels, and see how much you know.
+          Each level starts with a short lesson, then a quiz. Right now that&apos;s English Home Language for Grades 4 to 7, with more subjects on the way.
         </p>
 
         {!authLoading && (

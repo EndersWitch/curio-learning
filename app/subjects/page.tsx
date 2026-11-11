@@ -7,7 +7,7 @@ import { getGradeIndex } from '@/lib/subjectsData'
 
 export const metadata: Metadata = {
   title: { absolute: 'Browse by Subject & Grade | CAPS Study Materials | Curio Learning' },
-  description: 'Find CAPS-aligned study materials for every grade and subject, from Grade 4 to Grade 12. Free papers, memos and AI-powered explanations.',
+  description: 'CAPS subject guides for Grades 4 to 12: what each subject covers, with free practice papers and quizzes where we have them.',
   alternates: { canonical: '/subjects' },
 }
 

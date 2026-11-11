@@ -7,7 +7,7 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: 'CAPS quizzes & lessons',
   description:
-    'Free CAPS-aligned lessons and quizzes for South African learners. Every level starts with a short lesson, then tests what you have learned with instant feedback.',
+    'Free CAPS-aligned English Home Language lessons and quizzes for Grades 4 to 7. Every level starts with a short lesson, then tests what you have learned with instant feedback.',
   alternates: { canonical: '/quiz' },
 }
 

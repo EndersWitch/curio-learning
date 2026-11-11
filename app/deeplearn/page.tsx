@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Bloom',
   description: "Curio's AI tutor breaks down concepts from first principles, in plain language, with real examples, until it actually clicks.",
   // "Coming soon" pages read as an unfinished site to Google and AdSense.
-  // Drop this once Deep Learn is live.
+  // Drop this once Bloom is open to everyone.
   robots: { index: false, follow: true },
 }
 
@@ -47,7 +47,7 @@ export default function DeepLearnPage() {
               </p>
 
               <div className="dl-hero-actions rv rv-d1">
-                <a href="/subscription" className="cs-cta">Get early access &rarr;</a>
+                <a href="/quiz" className="cs-cta">Try a free quiz &rarr;</a>
                 <a href="/" className="cs-soft">&larr; Back home</a>
               </div>
             </div>
