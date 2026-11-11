@@ -33,7 +33,7 @@ export default function SubjectsHubPage() {
           <div className="hub-eyebrow">CAPS-aligned · Grade 4 to 12</div>
           <h1 className="hub-title">Pick your<br /><em>grade.</em></h1>
           <p className="hub-sub">
-            Find detailed study guides, term-by-term breakdowns and free practice papers for every CAPS subject. Select your grade to get started.
+            Find a CAPS study guide for every subject, with term-by-term breakdowns, mark weightings and study tips. Grades 4 to 9 also have free English Home Language practice papers with memos. Select your grade to get started.
           </p>
 
           {PHASES.map((phase, pi) => {
