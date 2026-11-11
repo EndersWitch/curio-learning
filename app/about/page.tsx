@@ -8,6 +8,7 @@ import { ArrowRight } from '@/components/icons'
 export const metadata: Metadata = {
   title: 'About Us',
   description: 'Curio Learning is a free, CAPS-aligned exam prep platform for Grade 4–12 students in South Africa. Here’s who we are and why we built it.',
+  alternates: { canonical: '/about' },
 }
 
 export default function AboutPage() {

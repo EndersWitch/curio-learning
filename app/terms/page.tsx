@@ -7,6 +7,7 @@ import Bloom from '@/components/Bloom'
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description: 'The terms governing your use of Curio Learning.',
+  alternates: { canonical: '/terms' },
 }
 
 export default function TermsPage() {
