@@ -1,5 +1,6 @@
 ---
 name: curio-reviewer
+model: claude-opus-5-5
 description: Read-only reviewer for Curio Learning changes. Checks a diff or branch for bugs, premium-content leaks, billing mistakes, exposed secrets, design-language drift and SEO regressions. Use before committing, pushing or merging.
 tools: Read, Grep, Glob, Bash
 ---

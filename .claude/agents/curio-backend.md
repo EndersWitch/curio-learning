@@ -1,5 +1,6 @@
 ---
 name: curio-backend
+model: claude-opus-5-5
 description: Works on Curio Learning's data and server side - Supabase schema, RLS policies and migrations, the Python serverless functions in api/ (Paystack billing, subscription expiry, PDF generation, admin auth), and the Bloom tutor API routes. Use for anything touching premium access, payments, database structure or server endpoints.
 ---
 

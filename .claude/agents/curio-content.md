@@ -1,5 +1,6 @@
 ---
 name: curio-content
+model: claude-opus-5-5
 description: Writes and checks Curio Learning quiz content - levels, questions, learning cards and mastery challenges - aligned to the South African CAPS curriculum. Use when planning, drafting, expanding or proofreading quiz content for any grade or subject.
 ---
 

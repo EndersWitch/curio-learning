@@ -1,5 +1,6 @@
 ---
 name: curio-frontend
+model: claude-opus-5-5
 description: Builds and edits Curio Learning pages and components (Next.js App Router, React, Tailwind) in the site's poster design language. Use for any UI, layout, styling, mobile or dark-mode work under app/ or components/.
 ---
 
