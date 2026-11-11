@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import QuizNav from '@/components/quiz/QuizNav'
 
 export const metadata: Metadata = {
-  // A plain-string title here would drop the root "· curio learning"
-  // template for every page below this layout, so restate it.
-  title: { default: 'Quiz · curio learning', template: '%s · curio learning' },
+  // The root layout's template already adds "· curio learning" to this
+  // default, so it must not contain the brand itself (it showed twice). The
+  // template is restated so pages below this layout keep the suffix.
+  title: { default: 'Quiz', template: '%s · curio learning' },
   description: 'CAPS-aligned quizzes for South African learners.',
 }
 
