@@ -46,3 +46,5 @@ export type BloomErrorReason =
   | 'not-tester'  // closed: testers-only, and this account isn't one
   | 'no-key'      // setup: ANTHROPIC_API_KEY isn't set on this server
   | 'no-tables'   // setup: the Bloom database migration hasn't been applied
+  | 'no-service-key' // setup: SUPABASE_SERVICE_ROLE_KEY isn't set (test builder only)
+  | 'wrong-state' // invalid: the test is not at the stage this step needs

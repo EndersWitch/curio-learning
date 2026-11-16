@@ -36,3 +36,11 @@ export interface TopicsResponse {
   sessionId: string
   topics: TopicView[]
 }
+
+// POST /api/tests/generate
+export interface GenerateResponse {
+  sessionId: string
+  questionCount: number
+  // The learner asked for written questions, which come in a later step.
+  writtenPending: boolean
+}

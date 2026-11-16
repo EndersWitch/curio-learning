@@ -9,6 +9,7 @@ import {
   MAX_SCOPE_CHARS,
   TEST_LENGTHS,
   type QuestionMix,
+  type GenerateResponse,
   type TestLength,
   type TopicsResponse,
 } from '@/lib/testbuilder/shared'
@@ -36,6 +37,7 @@ export default function TestBuilderStart() {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<TopicsResponse | null>(null)
+  const [made, setMade] = useState<GenerateResponse | null>(null)
 
   const noTypes = !mix.mcq && !mix.short && !mix.long
 
@@ -65,6 +67,28 @@ export default function TestBuilderStart() {
     }
   }
 
+  async function generate() {
+    if (busy || !result) return
+    setBusy(true)
+    setError(null)
+    try {
+      const { data: { session } } = await sb.auth.getSession()
+      if (!session) return setError(ERRORS.signin!)
+      const res = await fetch('/api/tests/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
+        body: JSON.stringify({ sessionId: result.sessionId }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) return setError(ERRORS[data.error as BloomErrorCode] ?? 'Could not make the questions. Try again.')
+      setMade(data as GenerateResponse)
+    } catch {
+      setError('Could not make the questions. Try again.')
+    } finally {
+      setBusy(false)
+    }
+  }
+
   if (loading) return null
   if (!user) return <p style={{ padding: 24 }}>Sign in to build a test.</p>
 
@@ -77,8 +101,20 @@ export default function TestBuilderStart() {
             <li key={t.id}>{t.title}</li>
           ))}
         </ol>
-        <p>Next step: generating the questions for these topics.</p>
-        <button type="button" onClick={() => setResult(null)}>Start over</button>
+        {made ? (
+          <p>
+            {made.questionCount} multiple-choice questions are ready.
+            {made.writtenPending ? ' Written questions are coming in the next step.' : ''}
+          </p>
+        ) : (
+          <>
+            {error && <p role="alert">{error}</p>}
+            <button type="button" onClick={generate} disabled={busy}>
+              {busy ? 'Writing questions…' : 'Generate questions'}
+            </button>{' '}
+          </>
+        )}
+        <button type="button" onClick={() => { setResult(null); setMade(null); setError(null) }}>Start over</button>
       </section>
     )
   }
