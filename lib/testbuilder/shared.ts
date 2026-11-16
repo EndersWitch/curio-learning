@@ -44,3 +44,10 @@ export interface GenerateResponse {
   // The learner asked for written questions, which come in a later step.
   writtenPending: boolean
 }
+
+// POST /api/tests/submit
+export interface SubmitResponse {
+  status: 'marked' | 'submitted'
+  marksAwarded: number
+  marksTotal: number
+}

@@ -131,8 +131,7 @@ export async function POST(req: Request) {
   if (session.status !== 'topics_ready') return apiError('invalid', 409, { reason: 'wrong-state' })
 
   const mix = session.question_mix as QuestionMix
-  const total = mcqTotal(session.length as TestLength, mix)
-  if (!total) return apiError('invalid', 400)
+  if (!mcqTotal(session.length as TestLength, mix)) return apiError('invalid', 400)
 
   const { data: topics, error: topicError } = await learner.sb
     .from('test_topics')
@@ -142,6 +141,10 @@ export async function POST(req: Request) {
     .order('position')
   if (topicError) return serverError('load topics', topicError)
   if (!topics?.length) return apiError('invalid', 400, { reason: 'no-topics' })
+
+  // Every topic the learner kept gets at least one question, even if that
+  // takes the test a little past its usual size.
+  const total = Math.max(mcqTotal(session.length as TestLength, mix), topics.length)
 
   // Claim the session so a double tap cannot start two generations.
   const { data: claimed, error: claimError } = await svc
