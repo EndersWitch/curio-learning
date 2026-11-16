@@ -20,6 +20,9 @@ export interface CleanWritten {
 
 const HESITATION = /\b(wait|actually|hmm|let me|on second thought|recheck|re-check|needs? checking|need to check|i mean|oops|correction)\b/i
 
+// Sub-parts like (a) / b) mean several small questions glued into one.
+const SUBPARTS = /(\(\s*[a-eA-E]\s*\)|(^|\s)[a-eA-E]\)\s|\(\s*(i{1,3}|iv|v)\s*\))/
+
 // Returns null for a question that should be dropped rather than shown. One
 // mark point is worth exactly one mark, so the number of points must equal the
 // marks, and no two points may say the same thing.
@@ -27,6 +30,10 @@ export function cleanWritten(raw: Record<string, unknown>, want: WrittenType): C
   if (raw.type !== want) return null
   const question = typeof raw.question === 'string' ? raw.question.trim() : ''
   if (question.length < 10 || question.length > 700 || HESITATION.test(question)) return null
+  // One task per question. A long answer is a single extended task, never a
+  // bundle of small questions, so sub-parts and several questions are refused.
+  if (SUBPARTS.test(question)) return null
+  if ((question.match(/\?/g) ?? []).length > (want === 'long' ? 1 : 2)) return null
 
   const [lo, hi] = MARK_RANGE[want]
   const marks = raw.marks
