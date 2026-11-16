@@ -43,6 +43,8 @@ export interface CleanMcq {
   explanation: string
 }
 
+const HESITATION = /\b(wait|actually|hmm|let me|on second thought|recheck|re-check|needs? checking|need to check|i mean|oops|correction)\b/i
+
 const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length
 
 // Applies the quiz rules from the content guide. Returns null for a question
@@ -52,6 +54,10 @@ export function cleanMcq(raw: RawMcq, rand: () => number = Math.random): CleanMc
   const question = raw.question.trim()
   const explanation = raw.explanation.trim()
   if (!question || !explanation || question.length > 600) return null
+
+  // A question or explanation that hesitates or corrects itself means the
+  // model was not sure of its own answer. Drop it.
+  if (HESITATION.test(question) || HESITATION.test(explanation)) return null
 
   // No "Why...?" multiple choice: those test explaining, not identifying or applying.
   if (/^\s*why\b/i.test(question)) return null

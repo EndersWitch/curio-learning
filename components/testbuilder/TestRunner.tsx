@@ -179,7 +179,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
             ) : (
               (q.options ?? []).map(o => {
                 const picked = choices[q.id] === o.key
-                const isRight = marked && key?.mcq_correct === o.key
+                const isRight = marked && (key?.mcq_correct?.split(',') ?? []).includes(o.key)
                 const isWrongPick = marked && picked && !isRight
                 return (
                   <label key={o.key} style={{ display: 'block' }}>

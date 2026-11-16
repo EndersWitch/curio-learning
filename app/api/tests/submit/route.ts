@@ -75,7 +75,7 @@ export async function POST(req: Request) {
       const given = answerOf.get(q.id as string)
       const choice = (given?.mcq_choice as string | null) ?? null
       const correctKey = keyOf.get(q.id as string) ?? null
-      const correct = choice !== null && choice === correctKey
+      const correct = choice !== null && (correctKey?.split(',') ?? []).includes(choice)
       const got = correct ? marks : 0
       awarded += got
       rows.push({
