@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from 'react'
 import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
-import { BLOOM_GRADES, type BloomErrorCode } from '@/lib/bloom/shared'
+import { BLOOM_GRADES, type BloomErrorCode, type BloomErrorReason } from '@/lib/bloom/shared'
 import {
   LENGTH_QUESTIONS,
   MAX_SCOPE_CHARS,
@@ -18,6 +18,21 @@ import {
 // length and question types, then check the topics Bloom found. Question
 // generation comes in the next step; this page stops at the topic list.
 // Plain markup on purpose: styling follows once the flow works.
+
+// Says why a request was turned away, so the owner is not left guessing.
+function describe(data: { error?: BloomErrorCode; reason?: BloomErrorReason }): string {
+  if (data.error === 'closed') {
+    return data.reason === 'not-tester'
+      ? 'Bloom is open to testers only, and this account is not one. Use an admin account, or add this email to BLOOM_TESTERS.'
+      : 'Bloom is switched off on this deployment. Set BLOOM_ACCESS to testers (or everyone) for this environment in Vercel, then redeploy.'
+  }
+  if (data.error === 'setup' && data.reason === 'no-service-key') {
+    return 'SUPABASE_SERVICE_ROLE_KEY is not reaching this deployment. Check it is set for this environment, then redeploy.'
+  }
+  if (data.error === 'setup' && data.reason === 'no-key') return 'ANTHROPIC_API_KEY is not set on this deployment.'
+  if (data.error === 'setup' && data.reason === 'no-tables') return 'The test builder database tables are missing.'
+  return ERRORS[data.error as BloomErrorCode] ?? 'Something went wrong. Try again.'
+}
 
 const ERRORS: Partial<Record<BloomErrorCode, string>> = {
   signin: 'Please sign in to build a test.',
@@ -57,7 +72,7 @@ export default function TestBuilderStart() {
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {
         if (data.reason === 'no-topics') return setError("I couldn't find any topics in that. Try listing what your test covers.")
-        return setError(ERRORS[data.error as BloomErrorCode] ?? 'Something went wrong. Try again.')
+        return setError(describe(data))
       }
       setResult(data as TopicsResponse)
     } catch {
@@ -80,7 +95,7 @@ export default function TestBuilderStart() {
         body: JSON.stringify({ sessionId: result.sessionId }),
       })
       const data = await res.json().catch(() => ({}))
-      if (!res.ok) return setError(ERRORS[data.error as BloomErrorCode] ?? 'Could not make the questions. Try again.')
+      if (!res.ok) return setError(describe(data))
       setMade(data as GenerateResponse)
     } catch {
       setError('Could not make the questions. Try again.')
