@@ -118,8 +118,7 @@ export default function TestBuilderStart() {
         </ol>
         {made ? (
           <p>
-            {made.questionCount} multiple-choice questions are ready.
-            {made.writtenPending ? ' Written questions are coming in the next step.' : ''}{' '}
+            {made.questionCount} questions are ready, worth {made.marksTotal} marks.{' '}
             <a href={`/bloom/tests/${made.sessionId}`}>Start the test</a>
           </p>
         ) : (

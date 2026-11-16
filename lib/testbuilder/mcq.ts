@@ -88,3 +88,52 @@ export function cleanMcq(raw: RawMcq, rand: () => number = Math.random): CleanMc
   const shuffled = order.map(i => options[i])
   return { question, options: shuffled, correct: LETTERS[order.indexOf(ci)], explanation }
 }
+
+export interface TopicPlan {
+  mcq: number
+  short: number
+  long: number
+}
+
+// How many of each question type every topic gets. The total follows the
+// chosen length, but never drops below one question per topic. Multiple
+// choice weighs most, then short answer, then long answer, and each type the
+// learner picked appears at least once when there is room.
+export function planTest(length: TestLength, mix: QuestionMix, topicCount: number): TopicPlan[] {
+  if (topicCount === 0) return []
+  const types = (['mcq', 'short', 'long'] as const).filter(t => mix[t])
+  if (!types.length) return []
+  const weight = { mcq: 3, short: 2, long: 1 }
+  const total = Math.max(LENGTH_QUESTIONS[length], topicCount)
+  const sum = types.reduce((n, t) => n + weight[t], 0)
+
+  const counts: Record<(typeof types)[number], number> = { mcq: 0, short: 0, long: 0 }
+  const fractions = types.map(t => {
+    const exact = (total * weight[t]) / sum
+    counts[t] = Math.floor(exact)
+    return { t, frac: exact - Math.floor(exact) }
+  })
+  let left = total - types.reduce((n, t) => n + counts[t], 0)
+  for (const { t } of fractions.sort((a, b) => b.frac - a.frac)) {
+    if (left <= 0) break
+    counts[t]++
+    left--
+  }
+  if (total >= types.length) {
+    for (const t of types) {
+      if (counts[t] === 0) {
+        const biggest = types.reduce((a, b) => (counts[a] >= counts[b] ? a : b))
+        counts[biggest]--
+        counts[t]++
+      }
+    }
+  }
+
+  // Deal each type out over the topics, carrying on from where the last type stopped.
+  const plans: TopicPlan[] = Array.from({ length: topicCount }, () => ({ mcq: 0, short: 0, long: 0 }))
+  let cursor = 0
+  for (const t of types) {
+    for (let k = 0; k < counts[t]; k++) plans[cursor++ % topicCount][t]++
+  }
+  return plans
+}

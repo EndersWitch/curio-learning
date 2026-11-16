@@ -41,8 +41,7 @@ export interface TopicsResponse {
 export interface GenerateResponse {
   sessionId: string
   questionCount: number
-  // The learner asked for written questions, which come in a later step.
-  writtenPending: boolean
+  marksTotal: number
 }
 
 // POST /api/tests/submit
