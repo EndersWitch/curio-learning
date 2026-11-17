@@ -1,6 +1,6 @@
 import { apiError, getLearner, serverError } from '@/lib/bloom/server'
 import { serviceClient } from '@/lib/testbuilder/admin'
-import { MARKING_VERSION, markBatch, type MarkItem, type PointResult } from '@/lib/testbuilder/marking'
+import { MARKING_VERSION, markBatch, type MarkItem, type MarkedAnswer } from '@/lib/testbuilder/marking'
 import type { SubmitResponse } from '@/lib/testbuilder/shared'
 
 export const dynamic = 'force-dynamic'
@@ -134,11 +134,11 @@ export async function POST(req: Request) {
         return
       }
       for (const item of batches[i]) {
-        const results: PointResult[] = r.value.get(item.questionId) ?? []
+        const marked: MarkedAnswer = r.value.get(item.questionId) ?? { points: [], tips: [] }
         rows.push({
           ...base(item.questionId, answerOf.get(item.questionId)),
-          marks_awarded: Math.min(item.marks, results.filter(p => p.awarded).length),
-          feedback: { points: results },
+          marks_awarded: Math.min(item.marks, marked.points.filter(p => p.awarded).length),
+          feedback: { points: marked.points, tips: marked.tips },
           marked_by: 'ai',
           marking_version: MARKING_VERSION,
         })

@@ -4,8 +4,14 @@
 export const TEST_LENGTHS = ['short', 'medium', 'long'] as const
 export type TestLength = (typeof TEST_LENGTHS)[number]
 
-// Rough question counts per length. The generator treats these as targets.
-export const LENGTH_QUESTIONS: Record<TestLength, number> = { short: 10, medium: 25, long: 50 }
+// Questions per topic for each length: [fewest, most]. Topics take turns at
+// the higher number, so a short test over 4 topics is 2, 1, 2, 1 questions.
+export const PER_TOPIC: Record<TestLength, [number, number]> = { short: [1, 2], medium: [3, 4], long: [5, 6] }
+
+export function perTopicLabel(length: TestLength): string {
+  const [lo, hi] = PER_TOPIC[length]
+  return `${lo} to ${hi} questions per topic`
+}
 
 export const MAX_SCOPE_CHARS = 6000
 export const MAX_TOPICS = 20

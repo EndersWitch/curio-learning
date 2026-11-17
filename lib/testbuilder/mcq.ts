@@ -1,29 +1,13 @@
 // Pure helpers for multiple-choice generation: how many questions to ask for,
 // and checks that apply Curio's quiz rules to what the model sends back.
 
-import { LENGTH_QUESTIONS, type QuestionMix, type TestLength } from '@/lib/testbuilder/shared'
+import { PER_TOPIC, type QuestionMix, type TestLength } from '@/lib/testbuilder/shared'
+import { breaksTypingRule } from '@/lib/testbuilder/rules'
 
 export type Difficulty = 'easy' | 'medium' | 'hard'
 const DIFFICULTY_SPREAD: Difficulty[] = ['easy', 'medium', 'medium', 'hard', 'medium', 'easy', 'hard', 'medium', 'easy', 'medium']
 
 export const LETTERS = ['A', 'B', 'C', 'D'] as const
-
-// How many multiple-choice questions this test gets. Multiple choice weighs
-// more than written types when the learner picks a mix.
-export function mcqTotal(length: TestLength, mix: QuestionMix): number {
-  if (!mix.mcq) return 0
-  const weights = { mcq: 3, short: mix.short ? 2 : 0, long: mix.long ? 1 : 0 }
-  const share = weights.mcq / (weights.mcq + weights.short + weights.long)
-  return Math.max(1, Math.round(LENGTH_QUESTIONS[length] * share))
-}
-
-// Spreads the total over topics as evenly as possible, earlier topics taking the remainder.
-export function perTopic(total: number, topics: number): number[] {
-  if (topics === 0) return []
-  const base = Math.floor(total / topics)
-  const extra = total % topics
-  return Array.from({ length: topics }, (_, i) => base + (i < extra ? 1 : 0))
-}
 
 export function difficultiesFor(count: number, offset: number): Difficulty[] {
   return Array.from({ length: count }, (_, i) => DIFFICULTY_SPREAD[(offset + i) % DIFFICULTY_SPREAD.length])
@@ -59,12 +43,15 @@ export function cleanMcq(raw: RawMcq, rand: () => number = Math.random): CleanMc
   // model was not sure of its own answer. Drop it.
   if (HESITATION.test(question) || HESITATION.test(explanation)) return null
 
+  // Everything must be answerable by choosing an option: no paper-only actions or emphasis markers.
+  if (breaksTypingRule(question)) return null
+
   // No "Why...?" multiple choice: those test explaining, not identifying or applying.
   if (/^\s*why\b/i.test(question)) return null
 
   if (!Array.isArray(raw.options) || raw.options.length !== 4) return null
   const options = raw.options.map(o => (typeof o === 'string' ? o.trim() : ''))
-  if (options.some(o => !o || o.length > 240)) return null
+  if (options.some(o => !o || o.length > 240 || breaksTypingRule(o))) return null
   if (new Set(options.map(o => o.toLowerCase())).size !== 4) return null
 
   const ci = raw.correctIndex
@@ -95,18 +82,21 @@ export interface TopicPlan {
   long: number
 }
 
-// How many of each question type every topic gets. The total follows the
-// chosen length, but never drops below one question per topic. Multiple
-// choice weighs most, then short answer, then long answer, and each type the
-// learner picked appears at least once when there is room.
+// How many of each question type every topic gets. The length sets how many
+// questions each topic gets (short 1-2, medium 3-4, long 5-6), with topics
+// taking turns at the higher number. Multiple choice weighs most, then short
+// answer, then long answer, and each type the learner picked appears at least
+// once when there is room.
 export function planTest(length: TestLength, mix: QuestionMix, topicCount: number): TopicPlan[] {
   if (topicCount === 0) return []
   const types = (['mcq', 'short', 'long'] as const).filter(t => mix[t])
   if (!types.length) return []
-  const weight = { mcq: 3, short: 2, long: 1 }
-  const total = Math.max(LENGTH_QUESTIONS[length], topicCount)
-  const sum = types.reduce((n, t) => n + weight[t], 0)
+  const [lo, hi] = PER_TOPIC[length]
+  const capacity = Array.from({ length: topicCount }, (_, i) => (i % 2 === 0 ? hi : lo))
+  const total = capacity.reduce((n, c) => n + c, 0)
 
+  const weight = { mcq: 3, short: 2, long: 1 }
+  const sum = types.reduce((n, t) => n + weight[t], 0)
   const counts: Record<(typeof types)[number], number> = { mcq: 0, short: 0, long: 0 }
   const fractions = types.map(t => {
     const exact = (total * weight[t]) / sum
@@ -129,11 +119,20 @@ export function planTest(length: TestLength, mix: QuestionMix, topicCount: numbe
     }
   }
 
-  // Deal each type out over the topics, carrying on from where the last type stopped.
+  // Deal the scarcer types out first so they spread across topics, each topic
+  // ending with exactly its own number of questions.
   const plans: TopicPlan[] = Array.from({ length: topicCount }, () => ({ mcq: 0, short: 0, long: 0 }))
+  const room = [...capacity]
   let cursor = 0
-  for (const t of types) {
-    for (let k = 0; k < counts[t]; k++) plans[cursor++ % topicCount][t]++
+  for (const t of (['long', 'short', 'mcq'] as const).filter(t => mix[t])) {
+    for (let k = 0; k < counts[t]; k++) {
+      let steps = 0
+      while (room[cursor % topicCount] === 0 && steps++ < topicCount) cursor++
+      const idx = cursor % topicCount
+      plans[idx][t]++
+      room[idx]--
+      cursor = idx + 1
+    }
   }
   return plans
 }

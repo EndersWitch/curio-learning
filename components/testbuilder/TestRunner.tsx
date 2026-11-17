@@ -1,98 +1,210 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import Link from 'next/link'
 import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
+import BloomBuddy, { type BloomMood } from '@/components/bloom/BloomBuddy'
 import { MAX_ANSWER_CHARS, type WrittenType } from '@/lib/testbuilder/written'
+import { checkBasics, cleanTips, type WritingTip } from '@/lib/testbuilder/writing'
 
-// Taking a test and seeing the marks. Answers save as the learner works
-// (straight to the database, held to RLS). The correct answers, the memo and
-// the explanations stay on the server until the test is marked.
-// Plain markup on purpose: styling follows once the flow works.
+// Taking a test, the mark screen, and the marked paper. Answers save as the
+// learner works (straight to the database, held to RLS). The correct answers,
+// the memo and the explanations stay on the server until the test is marked.
 
-interface Option {
-  key: string
-  text: string
-}
-
+interface Option { key: string; text: string }
 interface Question {
   id: string
+  topic_id: string | null
   position: number
   qtype: string
   question_text: string
   marks: number
   options: Option[] | null
 }
-
-interface Key {
-  question_id: string
-  mcq_correct: string | null
-  explanation: string | null
-}
-
-interface MarkPoint {
-  id: string
-  question_id: string
-  point_text: string
-}
-
-interface PointFeedback {
-  pointId: string
-  awarded: boolean
-  reason: string
-}
-
-interface Result {
-  marks: number | null
-  points: PointFeedback[]
-}
-
-interface Session {
-  id: string
-  status: string
-  marks_total: number | null
-  marks_awarded: number | null
-}
-
+interface Key { question_id: string; mcq_correct: string | null; explanation: string | null }
+interface MarkPoint { id: string; question_id: string; point_text: string }
+interface PointFeedback { pointId: string; awarded: boolean; reason: string }
+interface Result { answerId: string; marks: number | null; points: PointFeedback[]; tips: WritingTip[] }
+interface Topic { id: string; title: string; position: number }
+interface Session { id: string; status: string; marks_total: number | null; marks_awarded: number | null }
 type Patch = { mcq_choice: string } | { answer_text: string }
+
+const QUESTION_REASONS: [string, string][] = [
+  ['wrong_answer', 'The answer is wrong'],
+  ['no_right_answer', 'No option is right'],
+  ['two_right_answers', 'Two options are right'],
+  ['unclear', "I can't understand it"],
+  ['other', 'Something else'],
+]
+const MARK_REASONS: [string, string][] = [
+  ['unfair_mark', 'I should have got more marks'],
+  ['wrong_answer', 'The memo is wrong'],
+  ['other', 'Something else'],
+]
+
+type Band = 'strong' | 'mid' | 'weak'
+const band = (pct: number): Band => (pct >= 80 ? 'strong' : pct >= 60 ? 'mid' : 'weak')
+const BAND_LABEL: Record<Band, string> = { strong: 'Strong', mid: 'Getting there', weak: 'Needs work' }
+
+function useCountUp(target: number) {
+  const [n, setN] = useState(0)
+  useEffect(() => {
+    if (target <= 0) return setN(0)
+    let i = 0
+    const t = setInterval(() => {
+      i += 1
+      setN(Math.min(target, Math.round((target * i) / 24)))
+      if (i >= 24) clearInterval(t)
+    }, 45)
+    return () => clearInterval(t)
+  }, [target])
+  return n
+}
+
+const CONFETTI = ['var(--rust)', 'var(--moss)', 'var(--ochre)', 'var(--brick)']
+function Confetti() {
+  return (
+    <div className="tb-confetti" aria-hidden="true">
+      {Array.from({ length: 28 }, (_, i) => (
+        <i key={i} style={{ left: `${(i * 37) % 100}%`, background: CONFETTI[i % 4], animationDelay: `${(i % 9) * 120}ms`, animationDuration: `${1.8 + (i % 5) * 0.3}s` }} />
+      ))}
+    </div>
+  )
+}
+
+// The learner's own answer, with the capital letter and full stop that "fell
+// off the page" shown literally, and a tap to put them back.
+function WordsFallOff({ text }: { text: string }) {
+  const basics = useMemo(() => checkBasics(text), [text])
+  const [fixedStart, setFixedStart] = useState(false)
+  const [fixedEnd, setFixedEnd] = useState(false)
+  const trimmed = text.trim()
+  const firstAt = trimmed.search(/[A-Za-z]/)
+  const startBad = basics.startsLower && !fixedStart
+  const endBad = basics.missingEnd && !fixedEnd
+
+  let head = ''
+  let first = ''
+  let rest = trimmed
+  if (firstAt >= 0) {
+    head = trimmed.slice(0, firstAt)
+    first = trimmed[firstAt]!
+    rest = trimmed.slice(firstAt + 1)
+  }
+  if (basics.startsLower && fixedStart) first = first.toUpperCase()
+
+  // Split off the last word so it can slide off the page when the full stop is missing.
+  let middle = rest
+  let last = ''
+  let tail = ''
+  if (basics.missingEnd && basics.lastWord) {
+    const at = rest.lastIndexOf(basics.lastWord)
+    if (at >= 0) {
+      middle = rest.slice(0, at)
+      last = basics.lastWord
+      tail = rest.slice(at + basics.lastWord.length)
+    }
+  }
+
+  return (
+    <div className="tb-stack" style={{ gap: '0.5rem' }}>
+      <div className="tb-page">
+        {head}
+        {startBad ? <span className="hide">{first}</span> : <span className={basics.startsLower ? 'caught' : undefined}>{first}</span>}
+        {middle}
+        {last && (endBad ? <span className="fall">{last}</span> : <span>{last}</span>)}
+        {last && fixedEnd && <span className="caught">.</span>}
+        {tail}
+      </div>
+      {(startBad || endBad) && (
+        <div className="tb-actions">
+          <p className="tb-muted" style={{ flex: 1 }}>
+            {endBad
+              ? `Uh-oh, with no full stop "${basics.lastWord}" is slipping off the page!`
+              : 'Your first letter is hiding. Sentences start with a capital letter.'}
+          </p>
+          {startBad && <button type="button" className="tb-btn soft" onClick={() => setFixedStart(true)}>Add the capital</button>}
+          {endBad && <button type="button" className="tb-btn soft" onClick={() => setFixedEnd(true)}>Catch the word!</button>}
+        </div>
+      )}
+      {basics.missingEnd && fixedEnd && <p className="tb-muted">Caught it! A full stop keeps your words safe on the page.</p>}
+      {basics.startsLower && fixedStart && <p className="tb-muted">Lovely. A capital letter says &ldquo;a new sentence starts here&rdquo;.</p>}
+    </div>
+  )
+}
+
+function ReportBox({ kind, onSend, onCancel }: { kind: 'question' | 'mark'; onSend: (reason: string, note: string) => Promise<boolean>; onCancel: () => void }) {
+  const [reason, setReason] = useState('')
+  const [note, setNote] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [failed, setFailed] = useState(false)
+  const reasons = kind === 'question' ? QUESTION_REASONS : MARK_REASONS
+  return (
+    <div className="tb-report">
+      <strong style={{ fontFamily: 'var(--h)' }}>{kind === 'question' ? "What's wrong with this question?" : "What's wrong with this mark?"}</strong>
+      <div className="tb-reasons">
+        {reasons.map(([value, label]) => (
+          <button key={value} type="button" aria-pressed={reason === value} onClick={() => setReason(value)}>{label}</button>
+        ))}
+      </div>
+      <textarea className="tb-text" rows={2} maxLength={500} placeholder="Tell us more (optional)" value={note} onChange={e => setNote(e.target.value)} />
+      {failed && <p role="alert" className="tb-muted">That didn&apos;t send. Try again.</p>}
+      <div className="tb-actions">
+        <button
+          type="button"
+          className="tb-btn"
+          disabled={!reason || busy}
+          onClick={async () => {
+            setBusy(true)
+            setFailed(!(await onSend(reason, note.trim())))
+            setBusy(false)
+          }}
+        >
+          Send report
+        </button>
+        <button type="button" className="tb-link" onClick={onCancel}>Cancel</button>
+      </div>
+    </div>
+  )
+}
 
 export default function TestRunner({ sessionId }: { sessionId: string }) {
   const { user, loading: authLoading } = useAuth()
   const [state, setState] = useState<'loading' | 'missing' | 'ready'>('loading')
   const [session, setSession] = useState<Session | null>(null)
   const [questions, setQuestions] = useState<Question[]>([])
+  const [topics, setTopics] = useState<Topic[]>([])
   const [choices, setChoices] = useState<Record<string, string>>({})
   const [texts, setTexts] = useState<Record<string, string>>({})
   const [keys, setKeys] = useState<Record<string, Key>>({})
   const [points, setPoints] = useState<Record<string, MarkPoint[]>>({})
   const [results, setResults] = useState<Record<string, Result>>({})
+  const [reported, setReported] = useState<Set<string>>(new Set())
+  const [reporting, setReporting] = useState<string | null>(null)
+  const [view, setView] = useState<'summary' | 'paper'>('summary')
+  const [only, setOnly] = useState<string | null>(null)
+  const [confirming, setConfirming] = useState(false)
+  const [showMissing, setShowMissing] = useState(false)
   const [busy, setBusy] = useState(false)
+  const [practising, setPracticing] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  // Which questions already have an answer row, each question's save queue so
-  // quick changes land in the order they were made, and pending typing timers.
   const known = useRef(new Set<string>())
   const queue = useRef<Record<string, Promise<void>>>({})
   const timers = useRef<Record<string, ReturnType<typeof setTimeout>>>({})
   const latestText = useRef<Record<string, string>>({})
 
   const load = useCallback(async () => {
-    const { data: s } = await sb
-      .from('test_sessions')
-      .select('id, status, marks_total, marks_awarded')
-      .eq('id', sessionId)
-      .maybeSingle()
+    const { data: s } = await sb.from('test_sessions').select('id, status, marks_total, marks_awarded').eq('id', sessionId).maybeSingle()
     if (!s) return setState('missing')
 
-    const { data: qs } = await sb
-      .from('test_questions')
-      .select('id, position, qtype, question_text, marks, options')
-      .eq('session_id', sessionId)
-      .order('position')
-    const { data: answers } = await sb
-      .from('test_answers')
-      .select('question_id, mcq_choice, answer_text, marks_awarded, feedback')
-      .eq('session_id', sessionId)
+    const [{ data: qs }, { data: answers }, { data: tps }, { data: flags }] = await Promise.all([
+      sb.from('test_questions').select('id, topic_id, position, qtype, question_text, marks, options').eq('session_id', sessionId).order('position'),
+      sb.from('test_answers').select('id, question_id, mcq_choice, answer_text, marks_awarded, feedback').eq('session_id', sessionId),
+      sb.from('test_topics').select('id, title, position').eq('session_id', sessionId).order('position'),
+      sb.from('test_flags').select('question_id, kind'),
+    ])
 
     known.current = new Set((answers ?? []).map(a => a.question_id as string))
     setChoices(Object.fromEntries((answers ?? []).filter(a => a.mcq_choice).map(a => [a.question_id as string, a.mcq_choice as string])))
@@ -100,6 +212,8 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
     setTexts(savedText)
     latestText.current = { ...savedText }
     setQuestions((qs ?? []) as Question[])
+    setTopics((tps ?? []) as Topic[])
+    setReported(new Set((flags ?? []).map(f => `${f.kind}:${f.question_id}`)))
 
     const ids = (qs ?? []).map(q => q.id as string)
     if (s.status === 'marked') {
@@ -113,10 +227,10 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
       setPoints(grouped)
       setResults(
         Object.fromEntries(
-          (answers ?? []).map(a => [
-            a.question_id as string,
-            { marks: a.marks_awarded as number | null, points: ((a.feedback as { points?: PointFeedback[] } | null)?.points ?? []) as PointFeedback[] },
-          ]),
+          (answers ?? []).map(a => {
+            const fb = a.feedback as { points?: PointFeedback[]; tips?: unknown } | null
+            return [a.question_id as string, { answerId: a.id as string, marks: a.marks_awarded as number | null, points: fb?.points ?? [], tips: cleanTips(fb?.tips) }]
+          }),
         ),
       )
     }
@@ -137,7 +251,6 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
     const { error: e } = await sb.from('test_answers').insert({ session_id: sessionId, question_id: questionId, ...patch })
     if (e && e.code !== '23505') throw e
     known.current.add(questionId)
-    // A row already existed (a quick second change): write this over it.
     if (e) {
       const { error: u } = await sb.from('test_answers').update(patch).eq('session_id', sessionId).eq('question_id', questionId)
       if (u) throw u
@@ -173,8 +286,25 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
     timers.current[questionId] = setTimeout(() => flushText(questionId), 800)
   }
 
+  const isBlank = useCallback(
+    (q: Question) => (q.qtype === 'mcq' ? !choices[q.id] : !texts[q.id]?.trim()),
+    [choices, texts],
+  )
+  const missing = questions.filter(isBlank)
+
+  function tryHandIn() {
+    if (missing.length > 0) {
+      setShowMissing(true)
+      setConfirming(true)
+      document.getElementById(`q-${missing[0]!.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      return
+    }
+    void submit()
+  }
+
   async function submit() {
     if (busy) return
+    setConfirming(false)
     setBusy(true)
     setError(null)
     try {
@@ -188,7 +318,9 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
         body: JSON.stringify({ sessionId }),
       })
       if (!res.ok) return setError('Could not hand in the test. Try again.')
+      setView('summary')
       await load()
+      window.scrollTo({ top: 0 })
     } catch {
       setError('Could not hand in the test. Try again.')
     } finally {
@@ -196,101 +328,327 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
     }
   }
 
+  async function report(q: Question, kind: 'question' | 'mark', reason: string, note: string): Promise<boolean> {
+    const { error: e } = await sb.from('test_flags').insert({
+      question_id: q.id,
+      answer_id: kind === 'mark' ? results[q.id]?.answerId ?? null : null,
+      kind,
+      reason,
+      note: note || null,
+    })
+    if (e && e.code !== '23505') return false
+    setReported(r => new Set(r).add(`${kind}:${q.id}`))
+    setReporting(null)
+    return true
+  }
+
+  async function practise(topicIds: string[]) {
+    if (practising) return
+    setPracticing(true)
+    setError(null)
+    try {
+      const { data: { session: auth } } = await sb.auth.getSession()
+      if (!auth) return setError('Please sign in again.')
+      const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${auth.access_token}` }
+      const made = await fetch('/api/tests/practice', { method: 'POST', headers, body: JSON.stringify({ sessionId, topicIds }) })
+      const { sessionId: next } = (await made.json().catch(() => ({}))) as { sessionId?: string }
+      if (!made.ok || !next) return setError("Couldn't set up the practice test. Try again.")
+      const gen = await fetch('/api/tests/generate', { method: 'POST', headers, body: JSON.stringify({ sessionId: next }) })
+      if (!gen.ok) return setError("Couldn't write the practice questions. Try again.")
+      window.location.href = `/bloom/tests/${next}`
+    } catch {
+      setError("Couldn't set up the practice test. Try again.")
+    } finally {
+      setPracticing(false)
+    }
+  }
+
+  // Marks per topic, for the mark screen.
+  const breakdown = useMemo(() => {
+    return topics
+      .map(t => {
+        const qs = questions.filter(q => q.topic_id === t.id)
+        const by = (type: string) => {
+          const list = qs.filter(q => q.qtype === type)
+          return { total: list.reduce((n, q) => n + q.marks, 0), got: list.reduce((n, q) => n + (results[q.id]?.marks ?? 0), 0), count: list.length }
+        }
+        const total = qs.reduce((n, q) => n + q.marks, 0)
+        const got = qs.reduce((n, q) => n + (results[q.id]?.marks ?? 0), 0)
+        return { topic: t, total, got, pct: total ? Math.round((got / total) * 100) : 0, mcq: by('mcq'), short: by('short'), long: by('long') }
+      })
+      .filter(b => b.total > 0)
+  }, [topics, questions, results])
+
+  const total = session?.marks_total ?? 0
+  const awarded = session?.marks_awarded ?? 0
+  const overall = total ? Math.round((awarded / total) * 100) : 0
+  const shownScore = useCountUp(session?.status === 'marked' ? awarded : 0)
+
   if (authLoading || state === 'loading') return null
-  if (!user) return <p style={{ padding: 24 }}>Sign in to take this test.</p>
-  if (state === 'missing' || !session) return <p style={{ padding: 24 }}>That test was not found.</p>
+  if (!user) return <p>Sign in to take this test.</p>
+  if (state === 'missing' || !session) return <p>That test was not found.</p>
 
   const marked = session.status === 'marked'
   const waiting = session.status === 'submitted'
-  const unanswered = questions.filter(q => (q.qtype === 'mcq' ? !choices[q.id] : !texts[q.id]?.trim())).length
+  const answeredCount = questions.length - missing.length
+  const pctDone = questions.length ? Math.round((answeredCount / questions.length) * 100) : 0
+  const allDone = questions.length > 0 && missing.length === 0
 
+  const mood: BloomMood = busy || waiting ? 'thinking' : marked ? (overall >= 60 ? 'cheer' : 'talking') : allDone ? 'cheer' : 'idle'
+  const quip = busy
+    ? 'Marking your answers. Give me a moment…'
+    : marked
+      ? overall >= 80 ? "You're in full bloom!" : overall >= 60 ? 'Nicely grown. A little more water and you will bloom.' : "Every flower starts as a seed. Let's find what to water."
+      : allDone
+        ? 'Every question has an answer. Ready when you are!'
+        : pctDone === 0
+          ? "Take your time. I'll save everything as you go."
+          : pctDone < 50
+            ? 'Lovely start. Keep going!'
+            : `Over halfway. ${missing.length} to go!`
+
+  const topicOf = (q: Question) => topics.find(t => t.id === q.topic_id)?.title
+  const paperQuestions = marked && only ? questions.filter(q => q.topic_id === only) : questions
+
+  const header = (
+    <div className="tb-head">
+      <BloomBuddy mood={mood} size={64} entrance />
+      <div className="tb-bubble">{quip}</div>
+    </div>
+  )
+
+  // ---------- The mark screen ----------
+  if (marked && view === 'summary') {
+    const weak = breakdown.filter(b => b.pct < 60).map(b => b.topic.id)
+    return (
+      <div className="tb-stack" style={{ gap: '1.4rem' }}>
+        {header}
+        <div className="tb-hero">
+          {overall >= 60 && <Confetti />}
+          <div className="tb-score">
+            <svg viewBox="0 0 180 180" aria-hidden="true">
+              <circle className="track" cx="90" cy="90" r="80" />
+              <circle className={`fill ${overall >= 60 ? 'good' : ''}`} cx="90" cy="90" r="80" style={{ ['--off' as string]: 502 * (1 - overall / 100) }} />
+            </svg>
+            <div className="tb-score-num">
+              {shownScore}
+              <small>out of {total} · {overall}%</small>
+            </div>
+          </div>
+        </div>
+
+        <div className="tb-stack">
+          <h2>How you did, topic by topic</h2>
+          <div className="tb-topics">
+            {breakdown.map(b => {
+              const bd = band(b.pct)
+              return (
+                <div key={b.topic.id} className="tb-trow">
+                  <div className="tb-trow-top">
+                    <span className="tb-trow-name">{b.topic.title}</span>
+                    <span className="tb-trow-score">{b.got}/{b.total}</span>
+                  </div>
+                  <div className="tb-meter"><i className={bd} style={{ ['--w' as string]: `${b.pct}%` }} /></div>
+                  <div className="tb-chips">
+                    <span className={`tb-chip ${bd}`}>{BAND_LABEL[bd]} · {b.pct}%</span>
+                    {b.mcq.count > 0 && <span className="tb-chip">Multiple choice {b.mcq.got}/{b.mcq.total}</span>}
+                    {b.short.count > 0 && <span className="tb-chip">Short answers {b.short.got}/{b.short.total}</span>}
+                    {b.long.count > 0 && <span className="tb-chip">Long answers {b.long.got}/{b.long.total}</span>}
+                  </div>
+                  <div className="tb-actions">
+                    <button type="button" className="tb-link" onClick={() => { setOnly(b.topic.id); setView('paper'); window.scrollTo({ top: 0 }) }}>
+                      See my answers for this topic
+                    </button>
+                    {b.pct < 80 && (
+                      <button type="button" className="tb-link" disabled={practising} onClick={() => practise([b.topic.id])}>
+                        {practising ? 'Setting up…' : 'Practise this topic'}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        {error && <p role="alert">{error}</p>}
+        <div className="tb-actions">
+          <button type="button" className="tb-btn" onClick={() => { setOnly(null); setView('paper'); window.scrollTo({ top: 0 }) }}>
+            Look through my marked paper
+          </button>
+          {weak.length > 0 && (
+            <button type="button" className="tb-btn soft" disabled={practising} onClick={() => practise(weak)}>
+              {practising ? 'Setting up…' : `Practise my ${weak.length === 1 ? 'weak topic' : 'weak topics'}`}
+            </button>
+          )}
+        </div>
+        <div className="tb-actions">
+          <Link className="tb-link" href="/bloom/tests">My tests</Link>
+          <Link className="tb-link" href="/bloom/tests/new">Build another test</Link>
+        </div>
+      </div>
+    )
+  }
+
+  // ---------- The test itself, and the marked paper ----------
   return (
-    <section style={{ maxWidth: 680, margin: '0 auto', padding: 24, display: 'grid', gap: 20 }}>
+    <div className="tb-stack" style={{ gap: '1.2rem' }}>
+      {header}
+
       {marked ? (
-        <h1>
-          Your mark: {session.marks_awarded} / {session.marks_total}
-        </h1>
+        <div className="tb-actions">
+          <button type="button" className="tb-btn soft" onClick={() => { setView('summary'); window.scrollTo({ top: 0 }) }}>Back to my marks</button>
+          {only && <button type="button" className="tb-link" onClick={() => setOnly(null)}>Show all topics</button>}
+        </div>
       ) : (
-        <h1>Your test</h1>
+        isOpen && (
+          <div className="tb-progress">
+            <div className="tb-progress-label"><span>{answeredCount} of {questions.length} answered</span><span>{pctDone}%</span></div>
+            <div className={`tb-bar ${allDone ? 'done' : ''}`}><i style={{ width: `${pctDone}%` }} /></div>
+          </div>
+        )
       )}
 
       {waiting && (
-        <p>
-          Your test is handed in, but the marking did not finish. Tap the button to try again.{' '}
-          <button type="button" onClick={submit} disabled={busy}>
-            {busy ? 'Marking…' : 'Mark my test'}
-          </button>
-        </p>
+        <div className="tb-confirm">
+          <p>Your test is handed in, but the marking did not finish. Tap the button to try again.</p>
+          <div><button type="button" className="tb-btn" onClick={submit} disabled={busy}>{busy ? 'Marking…' : 'Mark my test'}</button></div>
+        </div>
       )}
 
-      {questions.map(q => {
+      {paperQuestions.map((q, idx) => {
         const key = keys[q.id]
         const result = results[q.id]
         const memo = points[q.id] ?? []
+        const blank = isBlank(q)
+        const prevTopic = idx > 0 ? paperQuestions[idx - 1]!.topic_id : undefined
+        const text = texts[q.id] ?? ''
+        const reportKind: 'question' | 'mark' = marked && q.qtype !== 'mcq' ? 'mark' : 'question'
         return (
-          <div key={q.id} style={{ display: 'grid', gap: 6 }}>
-            <strong>
-              {q.position}. {q.question_text} ({q.marks} {q.marks === 1 ? 'mark' : 'marks'})
-            </strong>
-
-            {q.qtype === 'mcq' ? (
-              (q.options ?? []).map(o => {
-                const picked = choices[q.id] === o.key
-                const isRight = marked && (key?.mcq_correct?.split(',') ?? []).includes(o.key)
-                const isWrongPick = marked && picked && !isRight
-                return (
-                  <label key={o.key} style={{ display: 'block' }}>
-                    <input type="radio" name={q.id} checked={picked} disabled={!isOpen} onChange={() => choose(q.id, o.key)} /> {o.key}. {o.text}
-                    {isRight ? '  ✓ correct' : ''}
-                    {isWrongPick ? '  ✗ your answer' : ''}
-                  </label>
-                )
-              })
-            ) : (
-              <textarea
-                value={texts[q.id] ?? ''}
-                disabled={!isOpen}
-                rows={q.qtype === 'long' ? 8 : 3}
-                maxLength={MAX_ANSWER_CHARS[q.qtype as WrittenType] ?? 1500}
-                placeholder="Type your answer here"
-                onChange={e => type(q.id, e.target.value)}
-                onBlur={() => timers.current[q.id] && flushText(q.id)}
-                style={{ width: '100%' }}
-              />
-            )}
-
-            {marked && q.qtype === 'mcq' && key?.explanation && <p>{key.explanation}</p>}
-
-            {marked && q.qtype !== 'mcq' && result && (
-              <div style={{ display: 'grid', gap: 4 }}>
-                <em>
-                  You got {result.marks ?? 0} / {q.marks}
-                </em>
-                {memo.map(p => {
-                  const fb = result.points.find(x => x.pointId === p.id)
-                  return (
-                    <div key={p.id}>
-                      {fb?.awarded ? '✓' : '✗'} {p.point_text}
-                      {fb?.reason ? <div>{fb.reason}</div> : null}
-                    </div>
-                  )
-                })}
+          <div key={q.id} className="tb-stack" style={{ gap: '0.4rem' }}>
+            {(idx === 0 || q.topic_id !== prevTopic) && topicOf(q) && <div className="tb-topic-label">{topicOf(q)}</div>}
+            <div id={`q-${q.id}`} className={`tb-card ${!marked && !blank ? 'answered' : ''} ${showMissing && blank && isOpen ? 'missing' : ''}`} style={{ ['--n' as string]: Math.min(idx, 10) }}>
+              <div className="tb-qhead">
+                <span className="tb-num">{q.position}</span>
+                <span className="tb-qtext">{q.question_text}</span>
+                <span className="tb-marks">{marked && result ? `${result.marks ?? 0}/${q.marks}` : `${q.marks} ${q.marks === 1 ? 'mark' : 'marks'}`}</span>
               </div>
-            )}
+
+              {q.qtype === 'mcq' ? (
+                (q.options ?? []).map(o => {
+                  const picked = choices[q.id] === o.key
+                  const isRight = marked && (key?.mcq_correct?.split(',') ?? []).includes(o.key)
+                  const isWrongPick = marked && picked && !isRight
+                  return (
+                    <label key={o.key} className={`tb-opt ${picked && !marked ? 'picked' : ''} ${isRight ? 'right' : ''} ${isWrongPick ? 'wrong' : ''}`}>
+                      <input type="radio" name={q.id} checked={picked} disabled={!isOpen} onChange={() => choose(q.id, o.key)} />
+                      <span><span className="tb-letter">{o.key}.</span> {o.text}</span>
+                      {isRight && <span style={{ marginLeft: 'auto' }}>✓</span>}
+                      {isWrongPick && <span style={{ marginLeft: 'auto' }}>✗ your answer</span>}
+                    </label>
+                  )
+                })
+              ) : marked ? (
+                text.trim() ? <WordsFallOff text={text} /> : <p className="tb-muted">You didn&apos;t answer this one.</p>
+              ) : (
+                <>
+                  <textarea
+                    className="tb-text"
+                    value={text}
+                    disabled={!isOpen}
+                    rows={q.qtype === 'long' ? 8 : 3}
+                    maxLength={MAX_ANSWER_CHARS[q.qtype as WrittenType] ?? 1500}
+                    placeholder="Type your answer here"
+                    onChange={e => type(q.id, e.target.value)}
+                    onBlur={() => timers.current[q.id] && flushText(q.id)}
+                  />
+                  {q.qtype === 'long' && <div className="tb-count">{text.length} / {MAX_ANSWER_CHARS.long}</div>}
+                </>
+              )}
+
+              {marked && q.qtype === 'mcq' && key?.explanation && <div className="tb-expl">{key.explanation}</div>}
+
+              {marked && q.qtype !== 'mcq' && result && (
+                <div className="tb-mp">
+                  {memo.map(p => {
+                    const fb = result.points.find(x => x.pointId === p.id)
+                    return (
+                      <div key={p.id} style={{ display: 'block' }}>
+                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                          <span className={`tb-tick ${fb?.awarded ? 'y' : 'n'}`}>{fb?.awarded ? '✓' : '✗'}</span>
+                          <span>{p.point_text}</span>
+                        </div>
+                        {fb?.reason && <p className="tb-why">{fb.reason}</p>}
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+
+              {marked && q.qtype !== 'mcq' && text.trim() && (() => {
+                const b = checkBasics(text)
+                const extra: string[] = []
+                if (b.lowerAfterStop > 0) extra.push('A new sentence starts with a capital letter, even in the middle of your answer.')
+                if (b.lonelyI > 0) extra.push('When "I" is on its own it always gets a capital letter.')
+                const tips = result?.tips ?? []
+                const clean = b.isSentence && !b.startsLower && !b.missingEnd && extra.length === 0
+                if (tips.length === 0 && extra.length === 0 && !clean) return null
+                return (
+                  <div className="tb-tips">
+                    <h3>Bloom&apos;s little tips (these don&apos;t change your marks)</h3>
+                    {clean && tips.length === 0 && <p className="tb-tip">Capital letter at the start, full stop at the end. Every word is safe on the page!</p>}
+                    {extra.map(e => <p key={e} className="tb-tip">{e}</p>)}
+                    {tips.map(t => (
+                      <p key={t.said + t.better} className="tb-tip"><s>{t.said}</s> → <b>{t.better}</b>. {t.why}</p>
+                    ))}
+                  </div>
+                )
+              })()}
+
+              {(marked || isOpen) && (
+                <div>
+                  {reported.has(`${reportKind}:${q.id}`) ? (
+                    <span className="tb-muted">Thanks, reported. We&apos;ll take a look.</span>
+                  ) : reporting === `${reportKind}:${q.id}` ? (
+                    <ReportBox kind={reportKind} onSend={(r, n) => report(q, reportKind, r, n)} onCancel={() => setReporting(null)} />
+                  ) : (
+                    <button type="button" className="tb-link" onClick={() => setReporting(`${reportKind}:${q.id}`)}>
+                      {reportKind === 'mark' ? 'Report this mark' : 'Report this question'}
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         )
       })}
 
       {error && <p role="alert">{error}</p>}
+
       {isOpen && (
-        <div>
-          {unanswered > 0 && <p>{unanswered} not answered yet.</p>}
-          <button type="button" onClick={submit} disabled={busy}>
-            {busy ? 'Marking your answers… this can take a little while' : 'Hand in test'}
-          </button>
+        <div className="tb-stack">
+          {confirming && missing.length > 0 && (
+            <div className="tb-confirm" role="alert">
+              <strong style={{ fontFamily: 'var(--h)' }}>
+                {missing.length === 1 ? '1 question has no answer.' : `${missing.length} questions have no answer.`}
+              </strong>
+              <p>They&apos;re marked in red above. Unanswered questions get no marks. Do you want to go back or hand in anyway?</p>
+              <div className="tb-actions">
+                <button type="button" className="tb-btn" onClick={() => setConfirming(false)}>Go back and answer</button>
+                <button type="button" className="tb-btn soft" onClick={submit} disabled={busy}>Hand in anyway</button>
+              </div>
+            </div>
+          )}
+          {!confirming && (
+            <div className="tb-actions">
+              <button type="button" className="tb-btn" onClick={tryHandIn} disabled={busy}>
+                {busy ? 'Marking your answers… this can take a little while' : 'Hand in test'}
+              </button>
+              {missing.length > 0 && <span className="tb-muted">{missing.length} not answered yet</span>}
+            </div>
+          )}
         </div>
       )}
-      {marked && <a href="/bloom/tests/new">Build another test</a>}
-    </section>
+    </div>
   )
 }

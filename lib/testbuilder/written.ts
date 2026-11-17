@@ -20,6 +20,8 @@ export interface CleanWritten {
 
 const HESITATION = /\b(wait|actually|hmm|let me|on second thought|recheck|re-check|needs? checking|need to check|i mean|oops|correction)\b/i
 
+import { breaksTypingRule } from '@/lib/testbuilder/rules'
+
 // Sub-parts like (a) / b) mean several small questions glued into one.
 const SUBPARTS = /(\(\s*[a-eA-E]\s*\)|(^|\s)[a-eA-E]\)\s|\(\s*(i{1,3}|iv|v)\s*\))/
 
@@ -33,6 +35,8 @@ export function cleanWritten(raw: Record<string, unknown>, want: WrittenType): C
   // One task per question. A long answer is a single extended task, never a
   // bundle of small questions, so sub-parts and several questions are refused.
   if (SUBPARTS.test(question)) return null
+  // Everything must be answerable by typing: no underlining, circling and so on.
+  if (breaksTypingRule(question)) return null
   if ((question.match(/\?/g) ?? []).length > (want === 'long' ? 1 : 2)) return null
 
   const [lo, hi] = MARK_RANGE[want]

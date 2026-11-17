@@ -1,10 +1,10 @@
 import Anthropic from '@anthropic-ai/sdk'
 import {
-  LENGTH_QUESTIONS,
   MAX_SCOPE_CHARS,
   MAX_TOPICS,
   MAX_TOPIC_CHARS,
   TEST_LENGTHS,
+  perTopicLabel,
   type QuestionMix,
   type TestLength,
   type TopicsResponse,
@@ -88,7 +88,7 @@ export async function POST(req: Request) {
       messages: [
         {
           role: 'user',
-          content: `Grade ${grade}${subject ? `, ${subject}` : ''}. A ${length} test (about ${LENGTH_QUESTIONS[length]} questions).\n\n<scope>\n${scope}\n</scope>`,
+          content: `Grade ${grade}${subject ? `, ${subject}` : ''}. A ${length} test (${perTopicLabel(length)}).\n\n<scope>\n${scope}\n</scope>`,
         },
       ],
     })

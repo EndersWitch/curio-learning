@@ -3,9 +3,10 @@
 import { useState, type FormEvent } from 'react'
 import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
+import BloomBuddy from '@/components/bloom/BloomBuddy'
 import { BLOOM_GRADES, type BloomErrorCode, type BloomErrorReason } from '@/lib/bloom/shared'
 import {
-  LENGTH_QUESTIONS,
+  perTopicLabel,
   MAX_SCOPE_CHARS,
   TEST_LENGTHS,
   type QuestionMix,
@@ -105,11 +106,11 @@ export default function TestBuilderStart() {
   }
 
   if (loading) return null
-  if (!user) return <p style={{ padding: 24 }}>Sign in to build a test.</p>
+  if (!user) return <p>Sign in to build a test.</p>
 
   if (result) {
     return (
-      <section style={{ maxWidth: 640, margin: '0 auto', padding: 24 }}>
+      <section className="tb-stack">
         <h1>Topics for your test</h1>
         <ol>
           {result.topics.map(t => (
@@ -119,40 +120,45 @@ export default function TestBuilderStart() {
         {made ? (
           <p>
             {made.questionCount} questions are ready, worth {made.marksTotal} marks.{' '}
-            <a href={`/bloom/tests/${made.sessionId}`}>Start the test</a>
+            <a className="tb-btn" style={{ display: 'inline-block', textDecoration: 'none' }} href={`/bloom/tests/${made.sessionId}`}>Start the test</a>
           </p>
         ) : (
           <>
             {error && <p role="alert">{error}</p>}
-            <button type="button" onClick={generate} disabled={busy}>
+            <button className="tb-btn" type="button" onClick={generate} disabled={busy}>
               {busy ? 'Writing questions…' : 'Generate questions'}
             </button>{' '}
           </>
         )}
-        <button type="button" onClick={() => { setResult(null); setMade(null); setError(null) }}>Start over</button>
+        <button className="tb-btn soft" type="button" onClick={() => { setResult(null); setMade(null); setError(null) }}>Start over</button>
       </section>
     )
   }
 
   return (
-    <form onSubmit={submit} style={{ maxWidth: 640, margin: '0 auto', padding: 24, display: 'grid', gap: 16 }}>
+    <form onSubmit={submit} className="tb-stack" style={{ gap: '1.1rem' }}>
+      <div className="tb-head">
+        <BloomBuddy mood={busy ? 'thinking' : 'idle'} size={64} entrance />
+        <div className="tb-bubble">Tell me what your test covers and I&apos;ll build you practice questions.</div>
+      </div>
       <h1>Build a test</h1>
 
       <label>
         What is in your test?
         <textarea
+          className="tb-text"
           value={scope}
           onChange={e => setScope(e.target.value)}
           maxLength={MAX_SCOPE_CHARS}
           rows={7}
           placeholder="e.g. Fractions, decimals and percentages, then the water cycle"
-          style={{ display: 'block', width: '100%' }}
+          style={{ display: 'block', marginTop: 6 }}
         />
       </label>
 
       <label>
         Grade
-        <select value={grade} onChange={e => setGrade(Number(e.target.value))}>
+        <select className="tb-text" style={{ display: 'block', marginTop: 6 }} value={grade} onChange={e => setGrade(Number(e.target.value))}>
           {BLOOM_GRADES.map(g => (
             <option key={g} value={g}>Grade {g}</option>
           ))}
@@ -161,19 +167,19 @@ export default function TestBuilderStart() {
 
       <label>
         Subject (optional)
-        <input value={subject} onChange={e => setSubject(e.target.value)} maxLength={80} />
+        <input className="tb-text" style={{ display: 'block', marginTop: 6 }} value={subject} onChange={e => setSubject(e.target.value)} maxLength={80} />
       </label>
 
-      <fieldset>
+      <fieldset style={{ border: '2px solid var(--ink)', borderRadius: 12, padding: '0.7rem 1rem' }}>
         <legend>Length</legend>
         {TEST_LENGTHS.map(l => (
           <label key={l} style={{ marginRight: 16 }}>
-            <input type="radio" name="length" checked={length === l} onChange={() => setLength(l)} /> {l} (about {LENGTH_QUESTIONS[l]} questions)
+            <input type="radio" name="length" checked={length === l} onChange={() => setLength(l)} /> {l} ({perTopicLabel(l)})
           </label>
         ))}
       </fieldset>
 
-      <fieldset>
+      <fieldset style={{ border: '2px solid var(--ink)', borderRadius: 12, padding: '0.7rem 1rem' }}>
         <legend>Question types</legend>
         {([['mcq', 'Multiple choice'], ['short', 'Short answer'], ['long', 'Long answer']] as const).map(([key, label]) => (
           <label key={key} style={{ marginRight: 16 }}>
@@ -183,7 +189,8 @@ export default function TestBuilderStart() {
       </fieldset>
 
       {error && <p role="alert">{error}</p>}
-      <button type="submit" disabled={busy || noTypes || !scope.trim()}>
+      <div className="tb-actions"><a className="tb-link" href="/bloom/tests">My tests</a></div>
+      <button className="tb-btn" type="submit" disabled={busy || noTypes || !scope.trim()}>
         {busy ? 'Finding topics…' : 'Find topics'}
       </button>
     </form>

@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import { BLOOM_MODEL, apiError, getLearner, serverError, type Learner } from '@/lib/bloom/server'
 import { serviceClient } from '@/lib/testbuilder/admin'
 import { cleanMcq, difficultiesFor, planTest, LETTERS, type CleanMcq, type Difficulty } from '@/lib/testbuilder/mcq'
+import { TYPING_RULE_PROMPT } from '@/lib/testbuilder/rules'
 import { cleanWritten, MARK_RANGE, type CleanWritten, type WrittenType } from '@/lib/testbuilder/written'
 import { type GenerateResponse, type QuestionMix, type TestLength } from '@/lib/testbuilder/shared'
 
@@ -18,6 +19,7 @@ Rules for every question:
 - Exactly four options. Exactly ONE is correct, and the other three are plausible mistakes that are clearly wrong. Before you write a question, check every option against it. If a sentence is quoted, check every word in it. A question must never have two defensible answers, and never zero. If you cannot make one option clearly right, write a different question.
 - All four options must be about the same length and style. The correct one must never be the longest or most detailed.
 - Keep the wording plain and fitted to the grade given. No trick questions.
+- ${TYPING_RULE_PROMPT}
 - When a question needs a person's name, use a mix of South African names (Zulu, Xhosa, Sotho, Afrikaans, Indian, English) and international names, naturally and not forced.
 - Do not mention years, past papers or exam boards.
 - Write like a teacher, not like an AI: no filler, no "delve", no "in the realm of".
@@ -194,6 +196,7 @@ Marks and memo:
 - A question is worth exactly as many marks as it has mark points. One mark point is one distinct idea the learner must give to earn one mark. Never split one idea into two points, and never write two points that overlap.
 - For a long answer, the mark points are the main ideas a good answer includes. When the task is to write something (a paragraph, a description, a letter), the mark points describe what good writing does ("Opens with a sentence that introduces the topic", "Gives at least two clear details", "Stays on the topic") instead of fixed facts.
 - Make it clear how many things to give when that matters ("State TWO ...", "Name THREE ..."). Use the command words CAPS uses at that grade. Never ask for an opinion.
+- ${TYPING_RULE_PROMPT}
 - Each mark point is a short plain phrase saying what a good answer contains. When more than one answer would be correct, write the point as "Any ONE correct <thing>" (or "Any TWO ...") and put at least three examples in "alternatives". Otherwise "alternatives" lists other correct wordings and may be empty.
 - Only write mark points you are sure are correct for the grade and the CAPS curriculum. If you are unsure of a fact, write a different question.
 - Marking is by meaning, so never depend on the learner using an exact phrase.
