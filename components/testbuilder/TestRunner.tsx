@@ -393,6 +393,8 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
   const answeredCount = questions.length - missing.length
   const pctDone = questions.length ? Math.round((answeredCount / questions.length) * 100) : 0
   const allDone = questions.length > 0 && missing.length === 0
+  // The warning only applies while something is still unanswered.
+  const showConfirm = confirming && missing.length > 0
 
   const mood: BloomMood = busy || waiting ? 'thinking' : marked ? (overall >= 60 ? 'cheer' : 'talking') : allDone ? 'cheer' : 'idle'
   const quip = busy
@@ -627,7 +629,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
 
       {isOpen && (
         <div className="tb-stack">
-          {confirming && missing.length > 0 && (
+          {showConfirm && (
             <div className="tb-confirm" role="alert">
               <strong style={{ fontFamily: 'var(--h)' }}>
                 {missing.length === 1 ? '1 question has no answer.' : `${missing.length} questions have no answer.`}
@@ -639,7 +641,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
               </div>
             </div>
           )}
-          {!confirming && (
+          {!showConfirm && (
             <div className="tb-actions">
               <button type="button" className="tb-btn" onClick={tryHandIn} disabled={busy}>
                 {busy ? 'Marking your answers… this can take a little while' : 'Hand in test'}
