@@ -199,6 +199,7 @@ Marks and memo:
 - ${TYPING_RULE_PROMPT}
 - Each mark point is a short plain phrase saying what a good answer contains. When more than one answer would be correct, write the point as "Any ONE correct <thing>" (or "Any TWO ...") and put at least three examples in "alternatives". Otherwise "alternatives" lists other correct wordings and may be empty.
 - Only write mark points you are sure are correct for the grade and the CAPS curriculum. If you are unsure of a fact, write a different question.
+- For any calculation, rounding, conversion or number question, work the answer out step by step and check it twice before you write the mark point. The mark point must be exactly what the question asks for (rounding to the nearest hundred is not the nearest thousand). Give the final answer in the mark point.
 - Marking is by meaning, so never depend on the learner using an exact phrase.
 - When a question needs a person's name, use a mix of South African names (Zulu, Xhosa, Sotho, Afrikaans, Indian, English) and international names, naturally and not forced.
 - Do not mention years, past papers or exam boards.
@@ -273,6 +274,67 @@ async function draftWritten(learner: Learner, topic: TopicRow, need: Record<Writ
   return Array.isArray(raw) ? (raw as Record<string, unknown>[]) : []
 }
 
+
+const WRITTEN_VERIFY_SYSTEM = `You are a careful teacher checking a marking memo before it is used. For each question, first work out the correct answer yourself, step by step, WITHOUT looking at the memo. Then compare it with the memo's mark points. Mark a question as not ok when any mark point is factually wrong, answers a different question from the one asked, gives the wrong number or result, contradicts another mark point, or is something a learner at that grade could not be expected to know from the curriculum. Mark it ok only when every mark point is correct and the question has a clear, fair answer. Be strict: a wrong memo costs a learner marks they earned.`
+
+const WRITTEN_VERIFY_TOOL: Anthropic.Tool = {
+  name: 'record_checks',
+  description: 'Record whether each question and its memo are correct.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      checks: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            index: { type: 'integer' },
+            workings: { type: 'string', description: 'Your own answer to the question, worked out briefly.' },
+            ok: { type: 'boolean' },
+          },
+          required: ['index', 'workings', 'ok'],
+        },
+      },
+    },
+    required: ['checks'],
+  },
+}
+
+// A blind second look at each written question and its memo. Anything the
+// checker disagrees with is dropped, and the topic is asked for again.
+async function verifyWritten(learner: Learner, items: CleanWritten[], ctx: Ctx): Promise<CleanWritten[]> {
+  if (!items.length) return []
+  try {
+    anthropic ??= new Anthropic()
+    const res = await anthropic.messages.create({
+      model: BLOOM_MODEL,
+      max_tokens: 3000,
+      system: WRITTEN_VERIFY_SYSTEM,
+      tools: [WRITTEN_VERIFY_TOOL],
+      tool_choice: { type: 'tool', name: 'record_checks' },
+      messages: [
+        {
+          role: 'user',
+          content:
+            `Grade ${ctx.grade}${ctx.subject ? `, ${ctx.subject}` : ''}.\n\n` +
+            items
+              .map((q, i) => `Question ${i} (${q.marks} marks): ${q.question}\nMark points:\n` + q.points.map(p => `- ${p.text}${p.alternatives.length ? ` (also: ${p.alternatives.join('; ')})` : ''}`).join('\n'))
+              .join('\n\n'),
+        },
+      ],
+    })
+    await logUse(learner, 'test_check', res)
+    const block = res.content.find((b): b is Anthropic.ToolUseBlock => b.type === 'tool_use')
+    const checks = (block?.input as { checks?: unknown } | undefined)?.checks
+    if (!Array.isArray(checks)) throw new Error('no checks recorded')
+    return items.filter((_, i) => checks.find((c): c is { index: number; ok: boolean } => c?.index === i)?.ok === true)
+  } catch (err) {
+    // If the check itself fails, keep the questions rather than lose the test.
+    console.error('[tests] written check failed', err)
+    return items
+  }
+}
+
 async function writtenForTopic(learner: Learner, topic: TopicRow, plan: Record<WrittenType, number>, ctx: Ctx): Promise<CleanWritten[]> {
   const kept: CleanWritten[] = []
   const have = (t: WrittenType) => kept.filter(k => k.type === t).length
@@ -281,10 +343,14 @@ async function writtenForTopic(learner: Learner, topic: TopicRow, plan: Record<W
     const need = { short: plan.short - have('short'), long: plan.long - have('long') }
     if (need.short <= 0 && need.long <= 0) break
     const drafted = await draftWritten(learner, topic, { short: Math.max(0, need.short), long: Math.max(0, need.long) }, ctx)
+    const cleaned: CleanWritten[] = []
     for (const item of drafted) {
       const type = item?.type === 'long' ? 'long' : 'short'
       const clean = cleanWritten(item ?? {}, type)
-      if (clean && have(type) < plan[type]) kept.push(clean)
+      if (clean) cleaned.push(clean)
+    }
+    for (const clean of await verifyWritten(learner, cleaned, ctx)) {
+      if (have(clean.type) < plan[clean.type]) kept.push(clean)
     }
   }
   return kept

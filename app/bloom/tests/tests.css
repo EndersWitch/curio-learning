@@ -94,7 +94,7 @@
 .tb-tip b { color: var(--moss); }
 
 /* Words falling off the page */
-.tb-page { background: #fff; border: 1.5px solid var(--paper-dim); border-radius: 8px; padding: 0.7rem 0.85rem; line-height: 1.6; position: relative; overflow: hidden; min-height: 2.8rem; }
+.tb-page { background: var(--paper); color: var(--ink); border: 1.5px solid var(--paper-dim); border-radius: 8px; padding: 0.7rem 0.85rem; line-height: 1.6; position: relative; overflow: hidden; min-height: 2.8rem; }
 .tb-page .fall { display: inline-block; color: var(--brick); animation: tb-drop 2.6s ease-in infinite; transform-origin: 0 0; }
 .tb-page .hide { display: inline-block; color: var(--brick); text-decoration: underline wavy var(--brick); animation: tb-peek 2s ease-in-out infinite; }
 .tb-page .caught { display: inline-block; color: var(--moss); font-weight: 700; animation: tb-stamp .4s cubic-bezier(.3,1.8,.5,1) both; }

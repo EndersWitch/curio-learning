@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
 import BloomBuddy, { type BloomMood } from '@/components/bloom/BloomBuddy'
+import { BloomScore, useBloomReveal } from '@/components/quiz/ResultsScreen'
 import { MAX_ANSWER_CHARS, type WrittenType } from '@/lib/testbuilder/written'
 import { checkBasics, cleanTips, type WritingTip } from '@/lib/testbuilder/writing'
 
@@ -47,31 +48,9 @@ type Band = 'strong' | 'mid' | 'weak'
 const band = (pct: number): Band => (pct >= 80 ? 'strong' : pct >= 60 ? 'mid' : 'weak')
 const BAND_LABEL: Record<Band, string> = { strong: 'Strong', mid: 'Getting there', weak: 'Needs work' }
 
-function useCountUp(target: number) {
-  const [n, setN] = useState(0)
-  useEffect(() => {
-    if (target <= 0) return setN(0)
-    let i = 0
-    const t = setInterval(() => {
-      i += 1
-      setN(Math.min(target, Math.round((target * i) / 24)))
-      if (i >= 24) clearInterval(t)
-    }, 45)
-    return () => clearInterval(t)
-  }, [target])
-  return n
-}
-
-const CONFETTI = ['var(--rust)', 'var(--moss)', 'var(--ochre)', 'var(--brick)']
-function Confetti() {
-  return (
-    <div className="tb-confetti" aria-hidden="true">
-      {Array.from({ length: 28 }, (_, i) => (
-        <i key={i} style={{ left: `${(i * 37) % 100}%`, background: CONFETTI[i % 4], animationDelay: `${(i % 9) * 120}ms`, animationDuration: `${1.8 + (i % 5) * 0.3}s` }} />
-      ))}
-    </div>
-  )
-}
+const PASS_MESSAGES = ['You absolutely smashed it!', "Outstanding work! You're on fire!", 'That was brilliant! Keep it up!', "Wow! You're a real star!"]
+const FAIL_MESSAGES = ["So close! Let's find what to practise.", "Don't give up! Every attempt makes you stronger!", 'Nice try! Look at the topics below and go again!']
+const CONFETTI_COLORS = ['var(--rust)', 'var(--rust)', 'var(--ochre)', 'var(--moss)']
 
 // The learner's own answer, with the capital letter and full stop that "fell
 // off the page" shown literally, and a tap to put them back.
@@ -382,7 +361,21 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
   const total = session?.marks_total ?? 0
   const awarded = session?.marks_awarded ?? 0
   const overall = total ? Math.round((awarded / total) * 100) : 0
-  const shownScore = useCountUp(session?.status === 'marked' ? awarded : 0)
+  const reveal = useBloomReveal(session?.status === 'marked' ? overall : 0)
+  const passed = overall >= 60
+  const message = useMemo(() => {
+    const list = passed ? PASS_MESSAGES : FAIL_MESSAGES
+    return list[Math.floor(Math.random() * list.length)]
+  }, [passed])
+  const particles = useMemo(
+    () => Array.from({ length: 36 }, (_, i) => ({ id: i, left: (i * 53) % 100, top: (i * 29) % 70, color: CONFETTI_COLORS[i % 4]!, duration: 0.6 + ((i * 7) % 12) / 10, delay: ((i * 5) % 8) / 10, size: 6 + (i % 8) })),
+    [],
+  )
+  const [showConfetti, setShowConfetti] = useState(true)
+  useEffect(() => {
+    const t = setTimeout(() => setShowConfetti(false), 3500)
+    return () => clearTimeout(t)
+  }, [])
 
   if (authLoading || state === 'loading') return null
   if (!user) return <p>Sign in to take this test.</p>
@@ -423,19 +416,47 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
   if (marked && view === 'summary') {
     const weak = breakdown.filter(b => b.pct < 60).map(b => b.topic.id)
     return (
-      <div className="tb-stack" style={{ gap: '1.4rem' }}>
-        {header}
-        <div className="tb-hero">
-          {overall >= 60 && <Confetti />}
-          <div className="tb-score">
-            <svg viewBox="0 0 180 180" aria-hidden="true">
-              <circle className="track" cx="90" cy="90" r="80" />
-              <circle className={`fill ${overall >= 60 ? 'good' : ''}`} cx="90" cy="90" r="80" style={{ ['--off' as string]: 502 * (1 - overall / 100) }} />
-            </svg>
-            <div className="tb-score-num">
-              {shownScore}
-              <small>out of {total} · {overall}%</small>
-            </div>
+      <div className="tb-stack" style={{ gap: '1.1rem' }}>
+        {passed && showConfetti && (
+          <div className="fixed inset-0 pointer-events-none overflow-hidden z-50" aria-hidden="true">
+            {particles.map(p => (
+              <span key={p.id} className="absolute rounded-full animate-bounce" style={{ left: `${p.left}%`, top: `${p.top}%`, backgroundColor: p.color, width: p.size, height: p.size, animationDuration: `${p.duration}s`, animationDelay: `${p.delay}s` }} />
+            ))}
+          </div>
+        )}
+
+        <div className="rounded p-8 text-center" style={{ background: 'var(--paper-raised)', border: `2px solid ${overall >= 80 ? 'var(--moss)' : overall >= 60 ? 'var(--ochre)' : 'var(--brick)'}40` }}>
+          <div className="flex justify-center mb-3">
+            <BloomScore percent={overall} passed={passed} reveal={reveal} />
+          </div>
+          <div className="mb-1">
+            <span className="text-6xl tabular-nums" style={{ color: 'var(--ink)', fontFamily: 'var(--h)', fontWeight: 800, letterSpacing: '-0.03em' }}>{reveal.displayPercent}%</span>
+          </div>
+          <p className="text-sm font-bold mb-4" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>{awarded}/{total} marks</p>
+          <div className="flex justify-center gap-1 mb-4">
+            {[0, 1, 2, 3, 4].map(i => (
+              <div key={i} className="w-2 h-2 rounded-full transition-all duration-300" style={{ background: i < reveal.revealed ? 'var(--rust)' : 'rgba(var(--rust-rgb),0.15)', boxShadow: i < reveal.revealed ? '0 0 6px rgba(var(--rust-rgb),0.6)' : 'none' }} />
+            ))}
+          </div>
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded font-black text-sm mb-4 text-white" style={{ background: passed ? 'var(--moss)' : 'var(--brick)' }}>
+            {passed ? '✓ Passed!' : '✕ Not passed yet'}
+          </div>
+          <h2 className="text-2xl mb-1 leading-tight" style={{ color: 'var(--ink)', fontFamily: 'var(--h)', fontWeight: 800, letterSpacing: '-0.02em' }}>{message}</h2>
+          <p className="text-sm" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>Your test</p>
+        </div>
+
+        <div className="rounded p-5" style={{ background: 'var(--paper-raised)', border: '1px solid rgba(var(--ink-rgb),0.1)' }}>
+          <div className="grid grid-cols-3 gap-0 divide-x" style={{ borderColor: 'rgba(var(--ink-rgb),0.1)' }}>
+            {[
+              { val: String(awarded), label: 'Marks earned', color: 'var(--moss)' },
+              { val: String(total - awarded), label: 'Marks missed', color: 'var(--brick)' },
+              { val: String(questions.length), label: 'Questions', color: 'rgba(var(--ink-rgb),0.55)' },
+            ].map(({ val, label, color }) => (
+              <div key={label} className="text-center px-3">
+                <div className="text-2xl font-black" style={{ color }}>{val}</div>
+                <div className="text-xs mt-0.5" style={{ color: 'rgba(var(--ink-rgb),0.55)' }}>{label}</div>
+              </div>
+            ))}
           </div>
         </div>
 
