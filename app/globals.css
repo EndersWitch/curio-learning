@@ -1368,7 +1368,9 @@ a, button, label, select, summary { -webkit-tap-highlight-color: transparent; to
    The face is a fixed dark brown so it reads on the ochre centre in both themes. */
 .bb { display: block; flex-shrink: 0; overflow: visible; }
 .bb-petals, .bb-petal { transform-box: view-box; transform-origin: 50% 50%; }
-.bb-petal { fill: var(--rust); }
+.bb-petal { fill: color-mix(in srgb, var(--rust) calc(var(--o, 1) * 100%), var(--bb-under, var(--rust-dark))); }
+/* Dark mode keeps the soft fade into the page; light mode blends toward a deeper rust so the petals stay rich instead of washing out to pink. */
+html.dark .bb { --bb-under: var(--paper); }
 .bb-core { fill: var(--ochre); }
 .bb-cheek { fill: var(--rust); opacity: 0.28; transition: opacity .3s; }
 .bb-eye, .bb-mouth-talk, .bb-mouth-o, .bb-mouth-grin { fill: #2A1D12; }

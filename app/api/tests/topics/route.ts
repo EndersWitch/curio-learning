@@ -45,8 +45,8 @@ const TOPICS_TOOL: Anthropic.Tool = {
 function parseMix(value: unknown): QuestionMix | null {
   if (!value || typeof value !== 'object') return null
   const v = value as Record<string, unknown>
-  const mix = { mcq: v.mcq === true, short: v.short === true, long: v.long === true }
-  return mix.mcq || mix.short || mix.long ? mix : null
+  const mix = { mcq: v.mcq === true, short: v.short === true, long: v.long === true, interactive: v.interactive === true }
+  return mix.mcq || mix.short || mix.long || mix.interactive ? mix : null
 }
 
 // Step one of the test builder: take the learner's typed scope, start a

@@ -1,5 +1,7 @@
 import { apiError, getLearner, serverError } from '@/lib/bloom/server'
 import { serviceClient } from '@/lib/testbuilder/admin'
+import { markInteractive } from '@/lib/testbuilder/interactiveMark'
+import { isInteractive } from '@/lib/testbuilder/interactive'
 import { MARKING_VERSION, markBatch, type MarkItem, type MarkedAnswer } from '@/lib/testbuilder/marking'
 import type { SubmitResponse } from '@/lib/testbuilder/shared'
 
@@ -55,19 +57,20 @@ export async function POST(req: Request) {
   try {
     const { data: questions, error: qError } = await svc
       .from('test_questions')
-      .select('id, qtype, marks, question_text')
+      .select('id, qtype, marks, question_text, spec')
       .eq('session_id', session.id)
     if (qError || !questions) throw qError ?? new Error('no questions')
 
     const ids = questions.map(q => q.id as string)
     const [keysRes, answersRes, pointsRes] = await Promise.all([
-      svc.from('test_question_keys').select('question_id, mcq_correct').in('question_id', ids),
-      svc.from('test_answers').select('question_id, answer_text, mcq_choice, marked_by').eq('session_id', session.id),
+      svc.from('test_question_keys').select('question_id, mcq_correct, answer_spec').in('question_id', ids),
+      svc.from('test_answers').select('question_id, answer_text, mcq_choice, answer_json, marked_by').eq('session_id', session.id),
       svc.from('test_mark_points').select('id, question_id, position, point_text, accepted_alternatives').in('question_id', ids).order('position'),
     ])
     if (keysRes.error || answersRes.error || pointsRes.error) throw keysRes.error ?? answersRes.error ?? pointsRes.error
 
     const keyOf = new Map((keysRes.data ?? []).map(k => [k.question_id as string, k.mcq_correct as string | null]))
+    const answerSpecOf = new Map((keysRes.data ?? []).map(k => [k.question_id as string, k.answer_spec as unknown]))
     const answerOf = new Map((answersRes.data ?? []).map(a => [a.question_id as string, a]))
     const pointsOf = new Map<string, { id: string; text: string; alternatives: string[] }[]>()
     for (const p of pointsRes.data ?? []) {
@@ -77,12 +80,13 @@ export async function POST(req: Request) {
     }
 
     const rows: Record<string, unknown>[] = []
-    const base = (qid: string, given: { answer_text?: unknown; mcq_choice?: unknown } | undefined) => ({
+    const base = (qid: string, given: { answer_text?: unknown; mcq_choice?: unknown; answer_json?: unknown } | undefined) => ({
       session_id: session.id,
       question_id: qid,
       user_id: learner.id,
       answer_text: (given?.answer_text as string | null) ?? null,
       mcq_choice: (given?.mcq_choice as string | null) ?? null,
+      answer_json: given?.answer_json ?? null,
     })
 
     // Multiple choice: marked in code.
@@ -100,10 +104,25 @@ export async function POST(req: Request) {
       })
     }
 
+    // Interactive (draw, drag, sort, activity): marked in code, one mark point at a time.
+    for (const q of questions.filter(q => isInteractive(q.qtype as string))) {
+      const given = answerOf.get(q.id as string)
+      if (given?.marked_by) continue
+      const pointIds = (pointsOf.get(q.id as string) ?? []).map(p => p.id)
+      const result = markInteractive(q.qtype as string, q.spec, answerSpecOf.get(q.id as string), given?.answer_json ?? null, pointIds)
+      rows.push({
+        ...base(q.id as string, given),
+        marks_awarded: Math.min(q.marks as number, result.marks),
+        feedback: { points: result.points, tips: [] },
+        marked_by: 'code',
+        marking_version: 'interactive-v1',
+      })
+    }
+
     // Written: blank answers score nothing without asking the AI; the rest are
     // marked in small batches. Answers already marked on an earlier try are left alone.
     const todo: MarkItem[] = []
-    for (const q of questions.filter(q => q.qtype !== 'mcq')) {
+    for (const q of questions.filter(q => q.qtype === 'short' || q.qtype === 'long')) {
       const given = answerOf.get(q.id as string)
       if (given?.marked_by) continue
       const points = pointsOf.get(q.id as string) ?? []

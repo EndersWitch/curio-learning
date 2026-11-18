@@ -4,6 +4,7 @@ import { serviceClient } from '@/lib/testbuilder/admin'
 import { cleanMcq, difficultiesFor, planTest, LETTERS, type CleanMcq, type Difficulty } from '@/lib/testbuilder/mcq'
 import { TYPING_RULE_PROMPT } from '@/lib/testbuilder/rules'
 import { cleanWritten, MARK_RANGE, type CleanWritten, type WrittenType } from '@/lib/testbuilder/written'
+import { interactiveForTopic, type InteractiveQuestion } from '@/lib/testbuilder/interactiveGen'
 import { type GenerateResponse, type QuestionMix, type TestLength } from '@/lib/testbuilder/shared'
 
 export const dynamic = 'force-dynamic'
@@ -359,6 +360,7 @@ async function writtenForTopic(learner: Learner, topic: TopicRow, plan: Record<W
 type Item =
   | { kind: 'mcq'; topicId: string; q: Built }
   | { kind: 'written'; topicId: string; q: CleanWritten; difficulty: Difficulty }
+  | { kind: 'interactive'; topicId: string; q: InteractiveQuestion }
 
 // Step two of the test builder: write the multiple-choice questions for the
 // topics the learner confirmed. Only the learner's own session is touched
@@ -390,7 +392,7 @@ export async function POST(req: Request) {
   if (session.status !== 'topics_ready') return apiError('invalid', 409, { reason: 'wrong-state' })
 
   const mix = session.question_mix as QuestionMix
-  if (!mix.mcq && !mix.short && !mix.long) return apiError('invalid', 400)
+  if (!mix.mcq && !mix.short && !mix.long && !mix.interactive) return apiError('invalid', 400)
 
   const { data: topics, error: topicError } = await learner.sb
     .from('test_topics')
@@ -403,7 +405,10 @@ export async function POST(req: Request) {
 
   // Every topic the learner kept gets at least one question, even if that
   // takes the test a little past its usual size.
-  const plans = planTest(session.length as TestLength, mix, topics.length)
+  // An interactive-only test still needs ordinary questions for topics where nothing interactive fits.
+  const baseMix: QuestionMix = mix.mcq || mix.short || mix.long ? mix : { mcq: true, short: false, long: false }
+  const plans = planTest(session.length as TestLength, baseMix, topics.length)
+  const wantsInteractive = mix.interactive === true
 
   // Claim the session so a double tap cannot start two generations.
   const { data: claimed, error: claimError } = await svc
@@ -428,8 +433,21 @@ export async function POST(req: Request) {
       await Promise.all(
         batch.map(async (t, j) => {
           const idx = i + j
-          const plan = plans[idx]
+          const plan = { ...plans[idx] }
           const topic = t as TopicRow
+          // Interactive questions come first; they take the place of ordinary ones in the plan.
+          let interactive: InteractiveQuestion[] = []
+          if (wantsInteractive) {
+            const room = plan.mcq + plan.short + plan.long
+            interactive = await interactiveForTopic(learner, topic, room >= 5 ? 2 : 1, ctx)
+            let take = interactive.length
+            for (const k of ['mcq', 'short', 'long'] as const) {
+              const d = Math.min(plan[k], take)
+              plan[k] -= d
+              take -= d
+            }
+            perTopicItems[idx].push(...interactive.map((q): Item => ({ kind: 'interactive', topicId: topic.id, q })))
+          }
           const diffs = difficultiesFor(plan.mcq + plan.short + plan.long, offset)
           offset += plan.mcq + plan.short + plan.long
           const [mcq, written] = await Promise.allSettled([
@@ -457,7 +475,19 @@ export async function POST(req: Request) {
       .from('test_questions')
       .insert(
         items.map((it, i) =>
-          it.kind === 'mcq'
+          it.kind === 'interactive'
+            ? {
+                session_id: session.id,
+                topic_id: it.topicId,
+                position: i + 1,
+                qtype: it.q.type,
+                difficulty: 'medium',
+                question_text: it.q.question,
+                marks: it.q.marks,
+                options: null,
+                spec: it.q.spec,
+              }
+            : it.kind === 'mcq'
             ? {
                 session_id: session.id,
                 topic_id: it.topicId,
@@ -467,6 +497,7 @@ export async function POST(req: Request) {
                 question_text: it.q.question,
                 marks: 1,
                 options: it.q.options.map((text, k) => ({ key: LETTERS[k], text })),
+                spec: null,
               }
             : {
                 session_id: session.id,
@@ -477,6 +508,7 @@ export async function POST(req: Request) {
                 question_text: it.q.question,
                 marks: it.q.marks,
                 options: null,
+                spec: null,
               },
         ),
       )
@@ -487,11 +519,17 @@ export async function POST(req: Request) {
     }
 
     const idAt = new Map(inserted.map(r => [r.position as number, r.id as string]))
-    const keyRows = items.flatMap((it, i) =>
-      it.kind === 'mcq' ? [{ question_id: idAt.get(i + 1), mcq_correct: it.q.accepted.join(','), explanation: it.q.explanation }] : [],
+    const keyRows = items.flatMap((it, i): Record<string, unknown>[] =>
+      it.kind === 'mcq'
+        ? [{ question_id: idAt.get(i + 1), mcq_correct: it.q.accepted.join(','), explanation: it.q.explanation, answer_spec: null }]
+        : it.kind === 'interactive'
+          ? [{ question_id: idAt.get(i + 1), mcq_correct: null, explanation: null, answer_spec: it.q.answerSpec }]
+          : [],
     )
     const pointRows = items.flatMap((it, i) =>
-      it.kind === 'written'
+      it.kind === 'interactive'
+        ? it.q.points.map((text, k) => ({ question_id: idAt.get(i + 1), position: k + 1, point_text: text, mode: 'concept', accepted_alternatives: [] as string[] }))
+        : it.kind === 'written'
         ? it.q.points.map((p, k) => ({
             question_id: idAt.get(i + 1),
             position: k + 1,

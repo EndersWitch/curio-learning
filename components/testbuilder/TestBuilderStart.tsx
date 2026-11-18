@@ -52,7 +52,7 @@ export default function TestBuilderStart() {
   const [grade, setGrade] = useState<number>(7)
   const [subject, setSubject] = useState('')
   const [length, setLength] = useState<TestLength>('medium')
-  const [mix, setMix] = useState<QuestionMix>({ mcq: true, short: true, long: false })
+  const [mix, setMix] = useState<QuestionMix>({ mcq: true, short: true, long: false, interactive: true })
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<TopicsResponse | null>(null)
@@ -71,7 +71,7 @@ export default function TestBuilderStart() {
     return () => clearInterval(t)
   }, [busy])
 
-  const noTypes = !mix.mcq && !mix.short && !mix.long
+  const noTypes = !mix.mcq && !mix.short && !mix.long && !mix.interactive
 
   async function submit(e: FormEvent) {
     e.preventDefault()
@@ -235,6 +235,7 @@ export default function TestBuilderStart() {
     ['mcq', 'Multiple choice', 'Pick the right answer'],
     ['short', 'Short answer', 'A word or a few lines'],
     ['long', 'Long answer', 'Explain it properly'],
+    ['interactive', 'Hands-on', 'Draw, drag and sort'],
   ] as const
 
   return (
@@ -287,10 +288,10 @@ export default function TestBuilderStart() {
 
       <fieldset className="tb-field">
         <legend className="tb-label">What kinds of questions?</legend>
-        <div className="tb-pick three">
+        <div className="tb-pick four">
           {TYPES.map(([key, label, hint]) => (
             <label key={key} className={`tb-pickcard ${mix[key] ? 'on' : ''}`}>
-              <input type="checkbox" checked={mix[key]} onChange={e => setMix({ ...mix, [key]: e.target.checked })} />
+              <input type="checkbox" checked={mix[key] === true} onChange={e => setMix({ ...mix, [key]: e.target.checked })} />
               <b>{label}</b>
               <span>{hint}</span>
             </label>

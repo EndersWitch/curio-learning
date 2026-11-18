@@ -8,6 +8,11 @@ import BloomBuddy, { type BloomMood } from '@/components/bloom/BloomBuddy'
 import { BloomScore, useBloomReveal } from '@/components/quiz/ResultsScreen'
 import { MAX_ANSWER_CHARS, type WrittenType } from '@/lib/testbuilder/written'
 import { checkBasics, cleanTips, type WritingTip } from '@/lib/testbuilder/writing'
+import ActivityFrame from '@/components/ActivityFrame'
+import SymmetryWidget from '@/components/testbuilder/interactive/SymmetryWidget'
+import BondWidget from '@/components/testbuilder/interactive/BondWidget'
+import SortWidget from '@/components/testbuilder/interactive/SortWidget'
+import { cleanAssign, cleanLines, cleanMoves, isInteractive, type SortAnswer, type SortSpec } from '@/lib/testbuilder/interactive'
 
 // Taking a test, the mark screen, and the marked paper. Answers save as the
 // learner works (straight to the database, held to RLS). The correct answers,
@@ -22,14 +27,15 @@ interface Question {
   question_text: string
   marks: number
   options: Option[] | null
+  spec: unknown
 }
-interface Key { question_id: string; mcq_correct: string | null; explanation: string | null }
+interface Key { question_id: string; mcq_correct: string | null; explanation: string | null; answer_spec: unknown }
 interface MarkPoint { id: string; question_id: string; point_text: string }
 interface PointFeedback { pointId: string; awarded: boolean; reason: string }
 interface Result { answerId: string; marks: number | null; points: PointFeedback[]; tips: WritingTip[] }
 interface Topic { id: string; title: string; position: number }
 interface Session { id: string; status: string; marks_total: number | null; marks_awarded: number | null }
-type Patch = { mcq_choice: string } | { answer_text: string }
+type Patch = { mcq_choice: string } | { answer_text: string } | { answer_json: unknown }
 
 const QUESTION_REASONS: [string, string][] = [
   ['wrong_answer', 'The answer is wrong'],
@@ -156,6 +162,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
   const [topics, setTopics] = useState<Topic[]>([])
   const [choices, setChoices] = useState<Record<string, string>>({})
   const [texts, setTexts] = useState<Record<string, string>>({})
+  const [json, setJson] = useState<Record<string, unknown>>({})
   const [keys, setKeys] = useState<Record<string, Key>>({})
   const [points, setPoints] = useState<Record<string, MarkPoint[]>>({})
   const [results, setResults] = useState<Record<string, Result>>({})
@@ -179,8 +186,8 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
     if (!s) return setState('missing')
 
     const [{ data: qs }, { data: answers }, { data: tps }, { data: flags }] = await Promise.all([
-      sb.from('test_questions').select('id, topic_id, position, qtype, question_text, marks, options').eq('session_id', sessionId).order('position'),
-      sb.from('test_answers').select('id, question_id, mcq_choice, answer_text, marks_awarded, feedback').eq('session_id', sessionId),
+      sb.from('test_questions').select('id, topic_id, position, qtype, question_text, marks, options, spec').eq('session_id', sessionId).order('position'),
+      sb.from('test_answers').select('id, question_id, mcq_choice, answer_text, answer_json, marks_awarded, feedback').eq('session_id', sessionId),
       sb.from('test_topics').select('id, title, position').eq('session_id', sessionId).order('position'),
       sb.from('test_flags').select('question_id, kind'),
     ])
@@ -189,6 +196,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
     setChoices(Object.fromEntries((answers ?? []).filter(a => a.mcq_choice).map(a => [a.question_id as string, a.mcq_choice as string])))
     const savedText = Object.fromEntries((answers ?? []).filter(a => a.answer_text).map(a => [a.question_id as string, a.answer_text as string]))
     setTexts(savedText)
+    setJson(Object.fromEntries((answers ?? []).filter(a => a.answer_json).map(a => [a.question_id as string, a.answer_json])))
     latestText.current = { ...savedText }
     setQuestions((qs ?? []) as Question[])
     setTopics((tps ?? []) as Topic[])
@@ -197,7 +205,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
     const ids = (qs ?? []).map(q => q.id as string)
     if (s.status === 'marked') {
       const [{ data: k }, { data: p }] = await Promise.all([
-        sb.from('test_question_keys').select('question_id, mcq_correct, explanation').in('question_id', ids),
+        sb.from('test_question_keys').select('question_id, mcq_correct, explanation, answer_spec').in('question_id', ids),
         sb.from('test_mark_points').select('id, question_id, point_text, position').in('question_id', ids).order('position'),
       ])
       setKeys(Object.fromEntries((k ?? []).map(row => [row.question_id as string, row as Key])))
@@ -251,6 +259,12 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
     enqueue(questionId, { mcq_choice: key })
   }
 
+  function setAnswer(questionId: string, value: unknown) {
+    if (!isOpen) return
+    setJson(j => ({ ...j, [questionId]: value }))
+    enqueue(questionId, { answer_json: value })
+  }
+
   function flushText(questionId: string) {
     clearTimeout(timers.current[questionId])
     delete timers.current[questionId]
@@ -266,8 +280,19 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
   }
 
   const isBlank = useCallback(
-    (q: Question) => (q.qtype === 'mcq' ? !choices[q.id] : !texts[q.id]?.trim()),
-    [choices, texts],
+    (q: Question) => {
+      if (q.qtype === 'mcq') return !choices[q.id]
+      if (!isInteractive(q.qtype)) return !texts[q.id]?.trim()
+      const v = json[q.id] as Record<string, unknown> | undefined
+      if (q.qtype === 'symmetry') return cleanLines(v?.lines).length === 0
+      if (q.qtype === 'bond') return Object.keys(cleanMoves(v?.moves)).length === 0
+      if (q.qtype === 'sort') {
+        const spec = q.spec as SortSpec
+        return Object.keys(cleanAssign(v?.assign, spec)).length < spec.items.length
+      }
+      return !v
+    },
+    [choices, texts, json],
   )
   const missing = questions.filter(isBlank)
 
@@ -353,7 +378,9 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
         }
         const total = qs.reduce((n, q) => n + q.marks, 0)
         const got = qs.reduce((n, q) => n + (results[q.id]?.marks ?? 0), 0)
-        return { topic: t, total, got, pct: total ? Math.round((got / total) * 100) : 0, mcq: by('mcq'), short: by('short'), long: by('long') }
+        const handsList = qs.filter(q => isInteractive(q.qtype))
+        const hands = { total: handsList.reduce((n, q) => n + q.marks, 0), got: handsList.reduce((n, q) => n + (results[q.id]?.marks ?? 0), 0), count: handsList.length }
+        return { topic: t, total, got, pct: total ? Math.round((got / total) * 100) : 0, mcq: by('mcq'), short: by('short'), long: by('long'), hands }
       })
       .filter(b => b.total > 0)
   }, [topics, questions, results])
@@ -477,6 +504,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
                     {b.mcq.count > 0 && <span className="tb-chip">Multiple choice {b.mcq.got}/{b.mcq.total}</span>}
                     {b.short.count > 0 && <span className="tb-chip">Short answers {b.short.got}/{b.short.total}</span>}
                     {b.long.count > 0 && <span className="tb-chip">Long answers {b.long.got}/{b.long.total}</span>}
+                    {b.hands.count > 0 && <span className="tb-chip">Hands-on {b.hands.got}/{b.hands.total}</span>}
                   </div>
                   <div className="tb-actions">
                     <button type="button" className="tb-link" onClick={() => { setOnly(b.topic.id); setView('paper'); window.scrollTo({ top: 0 }) }}>
@@ -571,6 +599,39 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
                     </label>
                   )
                 })
+              ) : isInteractive(q.qtype) ? (
+                (() => {
+                  const locked = !isOpen
+                  const spec = (q.spec ?? {}) as Record<string, unknown>
+                  const value = json[q.id]
+                  if (q.qtype === 'symmetry') return <SymmetryWidget shape={spec.shape as never} value={value} onChange={v => setAnswer(q.id, v)} locked={locked} reveal={marked} />
+                  if (q.qtype === 'bond') return <BondWidget compoundId={spec.compound as string} value={value} onChange={v => setAnswer(q.id, v)} locked={locked} reveal={marked} />
+                  if (q.qtype === 'sort') {
+                    const ans = (keys[q.id]?.answer_spec as { answer?: SortAnswer } | undefined)?.answer
+                    return <SortWidget spec={spec as unknown as SortSpec} value={value} onChange={v => setAnswer(q.id, v)} locked={locked} answer={marked ? ans : undefined} />
+                  }
+                  // maths activity: the tool reports how many the learner got right
+                  const done = value as { correct?: number; total?: number } | undefined
+                  return (
+                    <div className="tb-widget">
+                      {isOpen && !done && (
+                        <div className="tb-frame">
+                          <ActivityFrame
+                            activity={spec.ref as string}
+                            showDone={false}
+                            onComplete={d => {
+                              const correct = Number(d.correct)
+                              const total = Number(d.total)
+                              if (Number.isFinite(correct) && Number.isFinite(total)) setAnswer(q.id, { correct, total })
+                            }}
+                          />
+                        </div>
+                      )}
+                      {done && <p className="tb-muted">{marked ? `You got ${done.correct} of ${done.total} right.` : 'Finished. Your answer is saved.'}</p>}
+                      {marked && !done && <p className="tb-muted">You didn&apos;t finish this activity.</p>}
+                    </div>
+                  )
+                })()
               ) : marked ? (
                 text.trim() ? <WordsFallOff text={text} /> : <p className="tb-muted">You didn&apos;t answer this one.</p>
               ) : (

@@ -21,6 +21,8 @@ export interface QuestionMix {
   mcq: boolean
   short: boolean
   long: boolean
+  // Draw, drag and sort questions, and the maths tools.
+  interactive?: boolean
 }
 
 export interface TopicView {

@@ -37,7 +37,7 @@ export default function BloomBuddy({ mood = 'idle', size = 64, still = false, en
       <g className="bb-petals">
         {PETALS.map(({ angle, opacity }, i) => (
           <g key={angle} transform={`rotate(${angle} 100 100)`}>
-            <path className="bb-petal" d={PETAL} style={{ opacity, '--i': i } as CSSProperties} />
+            <path className="bb-petal" d={PETAL} style={{ '--o': opacity, '--i': i } as CSSProperties} />
           </g>
         ))}
       </g>
