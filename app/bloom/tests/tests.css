@@ -257,3 +257,5 @@
 .tb-maptarget.done { border-color: var(--moss); }
 .tb-maptarget.right { border-color: var(--moss); background: var(--moss12); }
 .tb-maptarget.wrong { border-color: var(--brick); background: var(--brick10); }
+.tb-figure { background: #fff; border: 1px solid var(--ink15); border-radius: 12px; padding: 0.6rem; text-align: center; }
+.tb-figure img { max-width: 100%; max-height: 320px; height: auto; display: inline-block; }

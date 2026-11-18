@@ -591,6 +591,11 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
                 <span className="tb-marks">{marked && result ? `${result.marks ?? 0}/${q.marks}` : `${q.marks} ${q.marks === 1 ? 'mark' : 'marks'}`}</span>
               </div>
 
+              {(() => {
+                const fig = (q.spec as { figure?: string } | null)?.figure
+                // eslint-disable-next-line @next/next/no-img-element
+                return fig ? <div className="tb-figure"><img src={fig} alt="Diagram for this question" /></div> : null
+              })()}
               {q.qtype === 'mcq' ? (
                 (q.options ?? []).map(o => {
                   const picked = choices[q.id] === o.key

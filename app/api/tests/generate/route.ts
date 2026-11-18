@@ -4,6 +4,7 @@ import { serviceClient } from '@/lib/testbuilder/admin'
 import { cleanMcq, difficultiesFor, planTest, LETTERS, type CleanMcq, type Difficulty } from '@/lib/testbuilder/mcq'
 import { TYPING_RULE_PROMPT } from '@/lib/testbuilder/rules'
 import { cleanWritten, MARK_RANGE, type CleanWritten, type WrittenType } from '@/lib/testbuilder/written'
+import { figureNote, pickFigure, type Figure } from '@/lib/testbuilder/figures'
 import { interactiveForTopic, type InteractiveQuestion } from '@/lib/testbuilder/interactiveGen'
 import { type GenerateResponse, type QuestionMix, type TestLength } from '@/lib/testbuilder/shared'
 
@@ -89,6 +90,7 @@ interface TopicRow {
 interface Built extends CleanMcq {
   topicId: string
   difficulty: Difficulty
+  figure?: string
   // Every option that is correct. Normally one; two when a question turns out
   // to have two right answers, in which case either one earns the mark.
   accepted: string[]
@@ -102,7 +104,7 @@ async function logUse(learner: Learner, feature: string, res: Anthropic.Message)
   if (error) console.error('[tests] log usage failed', error)
 }
 
-async function draftQuestions(learner: Learner, topic: TopicRow, ask: number, difficulties: Difficulty[], ctx: Ctx): Promise<CleanMcq[]> {
+async function draftQuestions(learner: Learner, topic: TopicRow, ask: number, difficulties: Difficulty[], ctx: Ctx, figure?: Figure): Promise<CleanMcq[]> {
   anthropic ??= new Anthropic()
   const res = await anthropic.messages.create({
     model: BLOOM_MODEL,
@@ -116,6 +118,7 @@ async function draftQuestions(learner: Learner, topic: TopicRow, ask: number, di
         content:
           `Grade ${ctx.grade}${ctx.subject ? `, ${ctx.subject}` : ''}. Topic: ${topic.title}.\n` +
           `Write ${ask} multiple-choice questions on this topic. Difficulty for each, in order: ${[...difficulties, 'medium', 'medium'].slice(0, ask).join(', ')}.\n` +
+          (figure ? figureNote(figure) + '\n' : '') +
           `Stay inside what the learner said their test covers:\n<scope>\n${ctx.scope}\n</scope>`,
       },
     ],
@@ -135,7 +138,7 @@ async function draftQuestions(learner: Learner, topic: TopicRow, ask: number, di
 // kept only if the checker also finds the intended answer correct. A question
 // the checker finds no right answer for is dropped; one with two right answers
 // accepts either.
-async function checkQuestions(learner: Learner, qs: CleanMcq[], ctx: Ctx): Promise<{ q: CleanMcq; accepted: string[] }[]> {
+async function checkQuestions(learner: Learner, qs: CleanMcq[], ctx: Ctx, figure?: Figure): Promise<{ q: CleanMcq; accepted: string[] }[]> {
   if (!qs.length) return []
   try {
     anthropic ??= new Anthropic()
@@ -150,6 +153,7 @@ async function checkQuestions(learner: Learner, qs: CleanMcq[], ctx: Ctx): Promi
           role: 'user',
           content:
             `Grade ${ctx.grade}${ctx.subject ? `, ${ctx.subject}` : ''}.\n\n` +
+            (figure ? `The learner is shown this diagram above every question. Title: "${figure.title}". What it shows: ${figure.description}\n\n` : '') +
             qs.map((q, i) => `Question ${i}: ${q.question}\n` + q.options.map((o, k) => `${LETTERS[k]}. ${o}`).join('\n')).join('\n\n'),
         },
       ],
@@ -174,14 +178,14 @@ async function checkQuestions(learner: Learner, qs: CleanMcq[], ctx: Ctx): Promi
   }
 }
 
-async function questionsForTopic(learner: Learner, topic: TopicRow, count: number, difficulties: Difficulty[], ctx: Ctx): Promise<Built[]> {
+async function questionsForTopic(learner: Learner, topic: TopicRow, count: number, difficulties: Difficulty[], ctx: Ctx, figure?: Figure): Promise<Built[]> {
   const kept: Built[] = []
   // Up to two rounds: if the checks drop some, ask once more for the shortfall.
   for (let round = 0; round < 2 && kept.length < count; round++) {
     const need = count - kept.length
-    const drafted = await draftQuestions(learner, topic, need + 1, difficulties.slice(kept.length), ctx)
-    for (const { q, accepted } of await checkQuestions(learner, drafted, ctx)) {
-      if (kept.length < count) kept.push({ ...q, accepted, topicId: topic.id, difficulty: difficulties[kept.length] ?? 'medium' })
+    const drafted = await draftQuestions(learner, topic, need + 1, difficulties.slice(kept.length), ctx, figure)
+    for (const { q, accepted } of await checkQuestions(learner, drafted, ctx, figure)) {
+      if (kept.length < count) kept.push({ ...q, accepted, topicId: topic.id, difficulty: difficulties[kept.length] ?? 'medium', figure: figure?.src })
     }
   }
   return kept
@@ -450,6 +454,16 @@ export async function POST(req: Request) {
           }
           const diffs = difficultiesFor(plan.mcq + plan.short + plan.long, offset)
           offset += plan.mcq + plan.short + plan.long
+          // A diagram from the figure library, when one suits the topic, goes above one multiple-choice question.
+          let figureQs: Built[] = []
+          if (plan.mcq >= 1) {
+            const fig = await pickFigure(learner, topic.title, ctx).catch(() => null)
+            if (fig) {
+              figureQs = await questionsForTopic(learner, topic, 1, ['medium'], ctx, fig).catch(() => [] as Built[])
+              plan.mcq -= figureQs.length
+              perTopicItems[idx].push(...figureQs.map((q): Item => ({ kind: 'mcq', topicId: topic.id, q })))
+            }
+          }
           const [mcq, written] = await Promise.allSettled([
             plan.mcq > 0 ? questionsForTopic(learner, topic, plan.mcq, diffs.slice(0, plan.mcq), ctx) : Promise.resolve([] as Built[]),
             plan.short + plan.long > 0 ? writtenForTopic(learner, topic, { short: plan.short, long: plan.long }, ctx) : Promise.resolve([] as CleanWritten[]),
@@ -497,7 +511,7 @@ export async function POST(req: Request) {
                 question_text: it.q.question,
                 marks: 1,
                 options: it.q.options.map((text, k) => ({ key: LETTERS[k], text })),
-                spec: null,
+                spec: it.q.figure ? { figure: it.q.figure } : null,
               }
             : {
                 session_id: session.id,
