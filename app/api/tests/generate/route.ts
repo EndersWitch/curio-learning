@@ -18,6 +18,7 @@ const SYSTEM = `You write multiple-choice questions for South African school lea
 Rules for every question:
 - Test one clear thing. Ask the learner to identify, apply or correct something. Never ask them to explain why.
 - Never begin a question with "Why".
+- One question only, ending in a single question mark. Never join two questions together. The question must make sense on its own: never write about a "diagram-free" statement or "the statement below". Never describe a figure in words when the learner needs to see it, and never ask the learner to picture a diagram: ask about a property or a fact they can answer without one, or about a diagram only when one is shown.
 - Exactly four options. Exactly ONE is correct, and the other three are plausible mistakes that are clearly wrong. Before you write a question, check every option against it. If a sentence is quoted, check every word in it. A question must never have two defensible answers, and never zero. If you cannot make one option clearly right, write a different question.
 - All four options must be about the same length and style. The correct one must never be the longest or most detailed.
 - Keep the wording plain and fitted to the grade given. No trick questions.
@@ -185,7 +186,8 @@ async function questionsForTopic(learner: Learner, topic: TopicRow, count: numbe
   for (let round = 0; round < 2 && kept.length < count; round++) {
     const need = count - kept.length
     const drafted = await draftQuestions(learner, topic, need + 1, difficulties.slice(kept.length), ctx, figure)
-    for (const { q, accepted } of await checkQuestions(learner, drafted, ctx, figure)) {
+    const usable = figure ? drafted.filter(d => /diagram|figure|picture|shown|graph/i.test(d.question)) : drafted
+    for (const { q, accepted } of await checkQuestions(learner, usable, ctx, figure)) {
       if (kept.length < count) kept.push({ ...q, accepted, topicId: topic.id, difficulty: difficulties[kept.length] ?? 'medium', figure: figure?.src })
     }
   }

@@ -46,6 +46,10 @@ export function cleanMcq(raw: RawMcq, rand: () => number = Math.random): CleanMc
   // Everything must be answerable by choosing an option: no paper-only actions or emphasis markers.
   if (breaksTypingRule(question)) return null
 
+  // One question only, and no talk of "diagram-free" or "the statement below": the text must stand on its own.
+  if ((question.match(/\?/g) ?? []).length > 1) return null
+  if (/diagram[- ]free|statement below|text below|as described/i.test(question)) return null
+
   // No "Why...?" multiple choice: those test explaining, not identifying or applying.
   if (/^\s*why\b/i.test(question)) return null
 
