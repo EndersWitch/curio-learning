@@ -1368,11 +1368,11 @@ a, button, label, select, summary { -webkit-tap-highlight-color: transparent; to
    The face is a fixed dark brown so it reads on the ochre centre in both themes. */
 .bb { display: block; flex-shrink: 0; overflow: visible; }
 .bb-petals, .bb-petal { transform-box: view-box; transform-origin: 50% 50%; }
-.bb-petal { fill: color-mix(in srgb, var(--rust) calc(var(--o, 1) * 100%), var(--bb-under, var(--rust-dark))); }
-/* Dark mode keeps the soft fade into the page; light mode blends toward a deeper rust so the petals stay rich instead of washing out to pink. */
-html.dark .bb { --bb-under: var(--paper); }
-.bb-core { fill: var(--ochre); }
-.bb-cheek { fill: var(--rust); opacity: 0.28; transition: opacity .3s; }
+/* Bloom keeps the same bright colours in light and dark mode (the dark-mode look), so he never goes dull on the cream page. */
+.bb { --bb-rust: #D2652F; --bb-gold: #E0AE5E; --bb-under: #1B1611; }
+.bb-petal { fill: color-mix(in srgb, var(--bb-rust) calc(var(--o, 1) * 100%), var(--bb-under)); }
+.bb-core { fill: var(--bb-gold); }
+.bb-cheek { fill: var(--bb-rust); opacity: 0.28; transition: opacity .3s; }
 .bb-eye, .bb-mouth-talk, .bb-mouth-o, .bb-mouth-grin { fill: #2A1D12; }
 .bb-eyes-happy, .bb-mouth-smile { fill: none; stroke: #2A1D12; stroke-width: 3.4; stroke-linecap: round; }
 .bb-eye, .bb-mouth-talk { transform-box: fill-box; transform-origin: center; }
