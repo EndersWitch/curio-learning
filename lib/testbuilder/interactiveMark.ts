@@ -1,6 +1,7 @@
 // Marks the interactive questions in code, one mark point at a time, so the
 // marked paper shows ticks and reasons exactly like a written answer does.
 
+import { markAuthored } from '@/lib/testbuilder/authored'
 import { cleanGeometry, reasonLabel, toNumber } from '@/lib/testbuilder/geometry'
 import {
   COMPOUNDS, checkBond, checkMapLine, checkSymmetry, cleanActivity, cleanAssign, cleanLines, cleanMapLine, cleanMoves, cleanPicks, isCompoundId, isShapeId,
@@ -87,15 +88,23 @@ export function markInteractive(type: string, spec: unknown, answerSpec: unknown
     const fieldIds = Object.keys(vals)
     const ans = cleanGeometry(given, fieldIds)
     const working = String(key.working ?? '')
-    const got = toNumber(ans?.fields.v)
-    flags.push(
-      got !== null && got === vals.v
-        ? { awarded: true, reason: 'Yes, that is the right value.' }
-        : { awarded: false, reason: got === null ? "You didn't give a value." : `You gave ${got}. Work it out again: ${working}` },
-      ans?.reason && accepted.includes(ans.reason)
-        ? { awarded: true, reason: `Yes: ${reasonLabel(ans.reason).toLowerCase()}.` }
-        : { awarded: false, reason: ans?.reason ? `You chose "${reasonLabel(ans.reason)}". The reason here is "${reasonLabel(accepted[0] ?? '')}".` : "You didn't choose a reason." },
-    )
+    const tol = typeof key.tol === 'number' ? key.tol : 0
+    for (const id of fieldIds) {
+      const got = toNumber(ans?.fields[id])
+      const want = vals[id]!
+      flags.push(
+        got !== null && Math.abs(got - want) <= tol + 1e-9
+          ? { awarded: true, reason: 'Yes, that is the right value.' }
+          : { awarded: false, reason: got === null ? "You didn't give a value." : `You gave ${got}. Work it out again: ${working}` },
+      )
+    }
+    if (accepted.length) {
+      flags.push(
+        ans?.reason && accepted.includes(ans.reason)
+          ? { awarded: true, reason: `Yes: ${reasonLabel(ans.reason).toLowerCase()}.` }
+          : { awarded: false, reason: ans?.reason ? `You chose "${reasonLabel(ans.reason)}". The reason here is "${reasonLabel(accepted[0] ?? '')}".` : "You didn't choose a reason." },
+      )
+    }
   } else if (type === 'mapline') {
     const dots = (Array.isArray(s.dots) ? s.dots : []) as MapDot[]
     const names = obj(key.names) as Record<string, string>
@@ -108,6 +117,9 @@ export function markInteractive(type: string, spec: unknown, answerSpec: unknown
       r.end ? { awarded: true, reason: 'And it ends on the right dot.' } : { awarded: false, reason: line ? `Your line didn't end at ${names[to]}. Check the green line on the marked map.` : "You didn't draw a line." },
     )
   }
+
+  const authored = markAuthored(type, spec, answerSpec, given, pointIds.length)
+  if (authored) flags.push(...authored)
 
   const points = pointIds.map((pointId, k) => ({ pointId, ...(flags[k] ?? { awarded: false, reason: "You didn't answer this one." }) }))
   return { marks: points.filter(p => p.awarded).length, points }

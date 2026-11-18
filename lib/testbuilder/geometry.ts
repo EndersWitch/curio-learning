@@ -12,6 +12,13 @@ export const REASONS = [
   { id: 'tri', label: 'Sum of the angles in a triangle' },
   { id: 'ext', label: 'Exterior angle of a triangle' },
   { id: 'iso', label: 'Base angles of an isosceles triangle' },
+  { id: 'quad', label: 'Sum of the angles in a quadrilateral' },
+  { id: 'centre', label: 'Angle at the centre is twice the angle at the circumference' },
+  { id: 'semi', label: 'Angle in a semicircle' },
+  { id: 'same', label: 'Angles in the same segment' },
+  { id: 'cyc', label: 'Opposite angles of a cyclic quadrilateral' },
+  { id: 'tan', label: 'Tangent is perpendicular to the radius' },
+  { id: 'rad', label: 'Radii are equal (isosceles triangle)' },
 ] as const
 export type ReasonId = (typeof REASONS)[number]['id']
 export const REASON_IDS = REASONS.map(r => r.id) as string[]
@@ -20,21 +27,21 @@ export const reasonLabel = (id: string) => REASONS.find(r => r.id === id)?.label
 export type AngleKind = 'line' | 'opposite' | 'parallel' | 'triangle' | 'isosceles' | 'exterior'
 export const ANGLE_KINDS: AngleKind[] = ['line', 'opposite', 'parallel', 'triangle', 'isosceles', 'exterior']
 
-export interface GeometrySpec { svg: string; fields: { id: string; label: string }[]; reasons: { id: string; label: string }[] }
-export interface GeometryKey { values: Record<string, number>; reasons: string[]; working: string }
+export interface GeometrySpec { svg: string; fields: { id: string; label: string; unit?: string }[]; reasons: { id: string; label: string }[] }
+export interface GeometryKey { values: Record<string, number>; reasons: string[]; working: string; tol?: number }
 export interface GeometryQuestion { question: string; spec: GeometrySpec; key: GeometryKey; marks: number; points: string[] }
 
-const rnd = (lo: number, hi: number) => lo + Math.floor(Math.random() * (hi - lo + 1))
-const pick = <T,>(xs: readonly T[]): T => xs[Math.floor(Math.random() * xs.length)]!
-const rad = (d: number) => (d * Math.PI) / 180
-const f = (n: number) => Math.round(n * 10) / 10
+export const rnd = (lo: number, hi: number) => lo + Math.floor(Math.random() * (hi - lo + 1))
+export const pick = <T,>(xs: readonly T[]): T => xs[Math.floor(Math.random() * xs.length)]!
+export const rad = (d: number) => (d * Math.PI) / 180
+export const f = (n: number) => Math.round(n * 10) / 10
 const MINUS = '−'
 
 // ---- drawing ---------------------------------------------------------------
-const INK = '#222', RUST = '#b2431f'
-const W = 360, H = 240
+export const INK = '#222', RUST = '#b2431f'
+export const W = 360, H = 240
 
-class Svg {
+export class Svg {
   parts: string[] = []
   line(x1: number, y1: number, x2: number, y2: number, w = 2, c = INK) {
     this.parts.push(`<line x1="${f(x1)}" y1="${f(y1)}" x2="${f(x2)}" y2="${f(y2)}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`)
@@ -88,17 +95,23 @@ function pair(mode: 'equal' | 'sum180', lo = 65, hi = 115): { v: number; m1: num
 }
 
 const coef = (m: number, v: string) => `${m === 1 ? '' : m}${v}`
-const FIELDS_X = (v: string) => [{ id: 'v', label: `${v} =` }]
 
-function build(question: string, svg: string, v: string | null, answer: number, reasons: ReasonId[], working: string, unitless = false): GeometryQuestion {
-  const label = v ?? 'x'
+/** A diagram question: one or more typed fields (each worth a mark) and, when reasons are given, a reason (one more mark). */
+export function mk(
+  question: string, svg: string, fields: { id: string; label: string; unit?: string }[], values: Record<string, number>,
+  reasons: string[], working: string, tol = 0,
+): GeometryQuestion {
   return {
     question,
-    spec: { svg, fields: FIELDS_X(label).map(x => ({ ...x, label: unitless ? x.label : `${x.label}` })), reasons: REASONS.map(r => ({ id: r.id, label: r.label })) },
-    key: { values: { v: answer }, reasons, working },
-    marks: 2,
-    points: [`Found the correct value of ${label}`, 'Gave the correct geometry reason'],
+    spec: { svg, fields, reasons: reasons.length ? REASONS.map(r => ({ id: r.id, label: r.label })) : [] },
+    key: { values, reasons, working, ...(tol ? { tol } : {}) },
+    marks: fields.length + (reasons.length ? 1 : 0),
+    points: [...fields.map(fl => `Found the correct ${fl.label.replace(/\s*=\s*$/, '')}`), ...(reasons.length ? ['Gave the correct geometry reason'] : [])],
   }
+}
+
+function build(question: string, svg: string, v: string | null, answer: number, reasons: ReasonId[], working: string): GeometryQuestion {
+  return mk(question, svg, [{ id: 'v', label: `${v ?? 'x'} =`, unit: '\u00b0' }], { v: answer }, reasons, working)
 }
 
 // ---- templates -------------------------------------------------------------

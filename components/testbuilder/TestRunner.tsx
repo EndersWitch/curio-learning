@@ -12,6 +12,8 @@ import ActivityFrame from '@/components/ActivityFrame'
 import SymmetryWidget from '@/components/testbuilder/interactive/SymmetryWidget'
 import BondWidget from '@/components/testbuilder/interactive/BondWidget'
 import SortWidget from '@/components/testbuilder/interactive/SortWidget'
+import { FillWidget, MatchWidget, OrderWidget, PickWidget, PlotWidget, ShadeWidget } from '@/components/testbuilder/interactive/AuthoredWidgets'
+import { cleanCells, cleanFills, cleanMatch, cleanOrder, cleanPicked, cleanPlot } from '@/lib/testbuilder/authored'
 import GeometryWidget from '@/components/testbuilder/interactive/GeometryWidget'
 import MapWidget from '@/components/testbuilder/interactive/MapWidget'
 import { cleanGeometry } from '@/lib/testbuilder/geometry'
@@ -298,9 +300,20 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
         return Object.keys(cleanPicks(v, ids)).length < ids.length
       }
       if (q.qtype === 'mapline') return !cleanMapLine(v)
+      if (['plot', 'shade', 'order', 'match', 'pick', 'fill'].includes(q.qtype)) {
+        const sp = q.spec as never
+        if (q.qtype === 'plot') return !cleanPlot(v, sp)
+        if (q.qtype === 'shade') return cleanCells(v, sp).length === 0
+        if (q.qtype === 'order') return !(json[q.id] && cleanOrder(v, sp))
+        if (q.qtype === 'match') return Object.keys(cleanMatch(v, sp)).length < (sp as { left: unknown[] }).left.length
+        if (q.qtype === 'pick') return cleanPicked(v, sp).length === 0
+        return Object.keys(cleanFills(v, sp)).length < (sp as { parts: unknown[] }).parts.length - 1
+      }
       if (q.qtype === 'geometry') {
-        const g = cleanGeometry(v, ['v'])
-        return !g || !g.fields.v || !g.reason
+        const sp = q.spec as { fields?: { id: string }[]; reasons?: unknown[] }
+        const ids = (sp.fields ?? []).map(f => f.id)
+        const g = cleanGeometry(v, ids)
+        return !g || ids.some(id => !g.fields[id]) || ((sp.reasons?.length ?? 0) > 0 && !g.reason)
       }
       return !cleanActivity(v)
     },
@@ -626,6 +639,15 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
                   if (q.qtype === 'sort') {
                     const ans = (keys[q.id]?.answer_spec as { answer?: SortAnswer } | undefined)?.answer
                     return <SortWidget spec={spec as unknown as SortSpec} value={value} onChange={v => setAnswer(q.id, v)} locked={locked} answer={marked ? ans : undefined} />
+                  }
+                  if (['plot', 'shade', 'order', 'match', 'pick', 'fill'].includes(q.qtype)) {
+                    const common = { value, onChange: (v: unknown) => setAnswer(q.id, v), locked, answer: marked ? ((keys[q.id]?.answer_spec as Record<string, unknown>) ?? {}) : undefined }
+                    if (q.qtype === 'plot') return <PlotWidget spec={spec as never} {...common} />
+                    if (q.qtype === 'shade') return <ShadeWidget spec={spec as never} {...common} />
+                    if (q.qtype === 'order') return <OrderWidget spec={spec as never} {...common} />
+                    if (q.qtype === 'match') return <MatchWidget spec={spec as never} {...common} />
+                    if (q.qtype === 'pick') return <PickWidget spec={spec as never} {...common} />
+                    return <FillWidget spec={spec as never} {...common} />
                   }
                   if (q.qtype === 'geometry') {
                     return (
