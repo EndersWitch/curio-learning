@@ -259,3 +259,10 @@
 .tb-maptarget.wrong { border-color: var(--brick); background: var(--brick10); }
 .tb-figure { background: #fff; border: 1px solid var(--ink15); border-radius: 12px; padding: 0.6rem; text-align: center; }
 .tb-figure img { max-width: 100%; max-height: 320px; height: auto; display: inline-block; }
+.tb-geo { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+.tb-geo label { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--h); font-weight: 700; color: var(--ink); }
+.tb-geo input, .tb-geo select { font: inherit; font-weight: 600; color: var(--ink); background: var(--paper-raised); border: 1.5px solid var(--ink15); border-radius: 10px; padding: 0.45rem 0.6rem; }
+.tb-geo input { width: 5.5rem; text-align: center; }
+.tb-geo select { max-width: 100%; }
+.tb-geo .right input, .tb-geo .right select { border-color: var(--moss); background: var(--moss12); }
+.tb-geo .wrong input, .tb-geo .wrong select { border-color: var(--brick); background: var(--brick10); }

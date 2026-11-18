@@ -1,6 +1,7 @@
 // Marks the interactive questions in code, one mark point at a time, so the
 // marked paper shows ticks and reasons exactly like a written answer does.
 
+import { cleanGeometry, reasonLabel, toNumber } from '@/lib/testbuilder/geometry'
 import {
   COMPOUNDS, checkBond, checkMapLine, checkSymmetry, cleanActivity, cleanAssign, cleanLines, cleanMapLine, cleanMoves, cleanPicks, isCompoundId, isShapeId,
   type MapDot,
@@ -80,6 +81,21 @@ export function markInteractive(type: string, spec: unknown, answerSpec: unknown
       else if (!got) flags.push({ awarded: false, reason: `You didn't find ${names[t]}. It is shown in green on the marked map.` })
       else flags.push({ awarded: false, reason: `You picked ${names[got] ?? 'another place'}, but ${names[t]} is somewhere else. Look for it in green on the marked map.` })
     }
+  } else if (type === 'geometry') {
+    const vals = obj(key.values) as Record<string, number>
+    const accepted = (Array.isArray(key.reasons) ? key.reasons : []) as string[]
+    const fieldIds = Object.keys(vals)
+    const ans = cleanGeometry(given, fieldIds)
+    const working = String(key.working ?? '')
+    const got = toNumber(ans?.fields.v)
+    flags.push(
+      got !== null && got === vals.v
+        ? { awarded: true, reason: 'Yes, that is the right value.' }
+        : { awarded: false, reason: got === null ? "You didn't give a value." : `You gave ${got}. Work it out again: ${working}` },
+      ans?.reason && accepted.includes(ans.reason)
+        ? { awarded: true, reason: `Yes: ${reasonLabel(ans.reason).toLowerCase()}.` }
+        : { awarded: false, reason: ans?.reason ? `You chose "${reasonLabel(ans.reason)}". The reason here is "${reasonLabel(accepted[0] ?? '')}".` : "You didn't choose a reason." },
+    )
   } else if (type === 'mapline') {
     const dots = (Array.isArray(s.dots) ? s.dots : []) as MapDot[]
     const names = obj(key.names) as Record<string, string>

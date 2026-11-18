@@ -11,6 +11,7 @@ import {
   COMPOUNDS, COMPOUND_IDS, MAP_TARGETS, SHAPES, SHAPE_IDS, cleanSort, isCompoundId, isMapId, isShapeId, solveBond,
   type InteractiveType, type SortAnswer, type SortSpec,
 } from '@/lib/testbuilder/interactive'
+import { ANGLE_KINDS, makeGeometry, type AngleKind } from '@/lib/testbuilder/geometry'
 import { breaksTypingRule } from '@/lib/testbuilder/rules'
 
 export interface InteractiveQuestion {
@@ -33,7 +34,8 @@ async function logUse(learner: Learner, feature: string, res: Anthropic.Message)
 const PLAN_SYSTEM = `You choose hands-on, interactive questions for a South African school test (CAPS curriculum). A learner answers them by drawing or dragging on screen, not by typing.
 
 The kinds you can choose from:
-- symmetry: the learner draws the lines of symmetry on a shape. Use only for maths topics about lines of symmetry, symmetry, or 2D shapes and their properties (roughly Grades 4 to 9). Pick the shape from the list.
+- angles: a drawn diagram (angles on a straight line, vertically opposite angles, parallel lines cut by a transversal, angles in a triangle, isosceles triangles, exterior angles) where the learner finds an angle or the value of x and gives the geometry reason. This is the kind for Euclidean geometry, geometry of straight lines and triangles, and angle questions, roughly Grades 8 to 10. Pick the angleKind that fits the topic, and set algebra true for harder questions with expressions like (3x+10) degrees.
+- symmetry: the learner draws the lines of symmetry on a shape. Use ONLY when the topic itself is about symmetry or lines of symmetry (roughly Grades 4 to 7). Never use it for Euclidean geometry, angles, triangles or parallel lines.
 - bond: the learner drags outer electrons from a metal atom to a non-metal atom to show an ionic bond. Use only for chemistry or physical sciences topics about ionic bonding, electron transfer or ions. Pick the compound from the list.
 - sort: the learner drags 4 to 6 items into 2 or 3 groups. Works for most subjects where things belong to groups: states of matter, living and non-living, nouns and verbs, even and odd, renewable and non-renewable, continents and oceans, and so on. You write the groups and the items.
 - rounding: the learner rounds numbers on a number line. Use only for topics about rounding or estimating numbers.
@@ -60,7 +62,9 @@ const PLAN_TOOL: Anthropic.Tool = {
         items: {
           type: 'object',
           properties: {
-            kind: { type: 'string', enum: ['symmetry', 'bond', 'sort', 'rounding', 'fractions', 'algebra', 'maplocate', 'mapline'] },
+            kind: { type: 'string', enum: ['angles', 'symmetry', 'bond', 'sort', 'rounding', 'fractions', 'algebra', 'maplocate', 'mapline'] },
+            angleKind: { type: 'string', enum: ANGLE_KINDS },
+            algebra: { type: 'boolean' },
             fracN: { type: 'integer', minimum: 1, maximum: 11 },
             fracD: { type: 'integer', minimum: 2, maximum: 12 },
             fracOf: { type: 'integer', minimum: 2, maximum: 60, description: 'A multiple of the denominator, at most 60' },
@@ -110,7 +114,7 @@ const CLASSIFY_TOOL: Anthropic.Tool = {
   },
 }
 
-interface Raw { kind?: string; fracN?: unknown; fracD?: unknown; fracOf?: unknown; algebraType?: unknown; algebraExpr?: unknown; map?: unknown; targets?: unknown; fromPlace?: unknown; toPlace?: unknown; shape?: unknown; compound?: unknown; roundTo?: unknown; roundMax?: unknown; roundCount?: unknown; instruction?: unknown; categories?: unknown; sortItems?: unknown }
+interface Raw { kind?: string; angleKind?: unknown; algebra?: unknown; fracN?: unknown; fracD?: unknown; fracOf?: unknown; algebraType?: unknown; algebraExpr?: unknown; map?: unknown; targets?: unknown; fromPlace?: unknown; toPlace?: unknown; shape?: unknown; compound?: unknown; roundTo?: unknown; roundMax?: unknown; roundCount?: unknown; instruction?: unknown; categories?: unknown; sortItems?: unknown }
 
 export async function interactiveForTopic(learner: Learner, topic: { id: string; title: string }, max: number, ctx: Ctx): Promise<InteractiveQuestion[]> {
   if (max <= 0) return []
@@ -141,7 +145,14 @@ export async function interactiveForTopic(learner: Learner, topic: { id: string;
     const seen = new Set<string>()
     const sorts: { q: InteractiveQuestion; spec: SortSpec; answer: SortAnswer }[] = []
     for (const r of (raw as Raw[]).slice(0, max)) {
-      if (r?.kind === 'symmetry' && isShapeId(r.shape) && !seen.has(`s:${r.shape}`)) {
+      if (r?.kind === 'angles' && ANGLE_KINDS.includes(r.angleKind as AngleKind)) {
+        const alg = r.algebra === true
+        const key = `g:${r.angleKind}:${alg}`
+        if (seen.has(key)) continue
+        seen.add(key)
+        const g = makeGeometry(r.angleKind as AngleKind, alg)
+        built.push({ type: 'geometry', question: g.question, marks: g.marks, spec: g.spec, answerSpec: g.key, points: g.points })
+      } else if (r?.kind === 'symmetry' && isShapeId(r.shape) && !seen.has(`s:${r.shape}`)) {
         seen.add(`s:${r.shape}`)
         const shape = SHAPES[r.shape]
         built.push({

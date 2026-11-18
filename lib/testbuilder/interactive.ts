@@ -13,8 +13,8 @@
 // answers are always right. Sort questions are written by the AI and checked by a
 // second blind AI pass (in the generate route) before a learner ever sees them.
 
-export type InteractiveType = 'symmetry' | 'bond' | 'sort' | 'activity' | 'maplocate' | 'mapline'
-export const INTERACTIVE_TYPES: InteractiveType[] = ['symmetry', 'bond', 'sort', 'activity', 'maplocate', 'mapline']
+export type InteractiveType = 'symmetry' | 'bond' | 'sort' | 'activity' | 'maplocate' | 'mapline' | 'geometry'
+export const INTERACTIVE_TYPES: InteractiveType[] = ['symmetry', 'bond', 'sort', 'activity', 'maplocate', 'mapline', 'geometry']
 export const isInteractive = (t: string): t is InteractiveType => (INTERACTIVE_TYPES as string[]).includes(t)
 
 // ───────────────────────── Lines of symmetry ─────────────────────────

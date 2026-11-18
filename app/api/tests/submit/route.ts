@@ -1,6 +1,7 @@
 import { apiError, getLearner, serverError } from '@/lib/bloom/server'
 import { serviceClient } from '@/lib/testbuilder/admin'
 import { markInteractive } from '@/lib/testbuilder/interactiveMark'
+import { skipsWritingTips } from '@/lib/testbuilder/writing'
 import { isInteractive } from '@/lib/testbuilder/interactive'
 import { MARKING_VERSION, markBatch, type MarkItem, type MarkedAnswer } from '@/lib/testbuilder/marking'
 import type { SubmitResponse } from '@/lib/testbuilder/shared'
@@ -157,7 +158,7 @@ export async function POST(req: Request) {
         rows.push({
           ...base(item.questionId, answerOf.get(item.questionId)),
           marks_awarded: Math.min(item.marks, marked.points.filter(p => p.awarded).length),
-          feedback: { points: marked.points, tips: marked.tips },
+          feedback: { points: marked.points, tips: skipsWritingTips(session.subject as string | null) ? [] : marked.tips },
           marked_by: 'ai',
           marking_version: MARKING_VERSION,
         })

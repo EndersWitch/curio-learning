@@ -51,3 +51,8 @@ export function cleanTips(value: unknown): WritingTip[] {
   }
   return tips
 }
+
+/** Maths, sciences and the like are marked on the work, not on capital letters or full stops. */
+export function skipsWritingTips(subject: string | null | undefined): boolean {
+  return /math|physic|chem|account|econom|technolog|engineering|computer|natural science/i.test(subject ?? '')
+}

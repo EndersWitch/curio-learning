@@ -7,12 +7,14 @@ import { useAuth } from '@/lib/auth-context'
 import BloomBuddy, { type BloomMood } from '@/components/bloom/BloomBuddy'
 import { BloomScore, useBloomReveal } from '@/components/quiz/ResultsScreen'
 import { MAX_ANSWER_CHARS, type WrittenType } from '@/lib/testbuilder/written'
-import { checkBasics, cleanTips, type WritingTip } from '@/lib/testbuilder/writing'
+import { checkBasics, cleanTips, skipsWritingTips, type WritingTip } from '@/lib/testbuilder/writing'
 import ActivityFrame from '@/components/ActivityFrame'
 import SymmetryWidget from '@/components/testbuilder/interactive/SymmetryWidget'
 import BondWidget from '@/components/testbuilder/interactive/BondWidget'
 import SortWidget from '@/components/testbuilder/interactive/SortWidget'
+import GeometryWidget from '@/components/testbuilder/interactive/GeometryWidget'
 import MapWidget from '@/components/testbuilder/interactive/MapWidget'
+import { cleanGeometry } from '@/lib/testbuilder/geometry'
 import { cleanActivity, cleanAssign, cleanLines, cleanMapLine, cleanMoves, cleanPicks, isInteractive, type SortAnswer, type SortSpec } from '@/lib/testbuilder/interactive'
 
 // Taking a test, the mark screen, and the marked paper. Answers save as the
@@ -35,7 +37,7 @@ interface MarkPoint { id: string; question_id: string; point_text: string }
 interface PointFeedback { pointId: string; awarded: boolean; reason: string }
 interface Result { answerId: string; marks: number | null; points: PointFeedback[]; tips: WritingTip[] }
 interface Topic { id: string; title: string; position: number }
-interface Session { id: string; status: string; marks_total: number | null; marks_awarded: number | null }
+interface Session { id: string; subject: string | null; status: string; marks_total: number | null; marks_awarded: number | null }
 type Patch = { mcq_choice: string } | { answer_text: string } | { answer_json: unknown }
 
 const QUESTION_REASONS: [string, string][] = [
@@ -183,7 +185,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
   const latestText = useRef<Record<string, string>>({})
 
   const load = useCallback(async () => {
-    const { data: s } = await sb.from('test_sessions').select('id, status, marks_total, marks_awarded').eq('id', sessionId).maybeSingle()
+    const { data: s } = await sb.from('test_sessions').select('id, subject, status, marks_total, marks_awarded').eq('id', sessionId).maybeSingle()
     if (!s) return setState('missing')
 
     const [{ data: qs }, { data: answers }, { data: tps }, { data: flags }] = await Promise.all([
@@ -296,6 +298,10 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
         return Object.keys(cleanPicks(v, ids)).length < ids.length
       }
       if (q.qtype === 'mapline') return !cleanMapLine(v)
+      if (q.qtype === 'geometry') {
+        const g = cleanGeometry(v, ['v'])
+        return !g || !g.fields.v || !g.reason
+      }
       return !cleanActivity(v)
     },
     [choices, texts, json],
@@ -621,6 +627,17 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
                     const ans = (keys[q.id]?.answer_spec as { answer?: SortAnswer } | undefined)?.answer
                     return <SortWidget spec={spec as unknown as SortSpec} value={value} onChange={v => setAnswer(q.id, v)} locked={locked} answer={marked ? ans : undefined} />
                   }
+                  if (q.qtype === 'geometry') {
+                    return (
+                      <GeometryWidget
+                        spec={spec as never}
+                        value={value}
+                        onChange={v => setAnswer(q.id, v)}
+                        locked={locked}
+                        answer={marked ? (keys[q.id]?.answer_spec as never) ?? {} : undefined}
+                      />
+                    )
+                  }
                   if (q.qtype === 'maplocate' || q.qtype === 'mapline') {
                     const key = keys[q.id]?.answer_spec as { targets?: string[]; names?: Record<string, string>; from?: string; to?: string } | undefined
                     return (
@@ -656,7 +673,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
                   )
                 })()
               ) : marked ? (
-                text.trim() ? <WordsFallOff text={text} /> : <p className="tb-muted">You didn&apos;t answer this one.</p>
+                text.trim() ? (skipsWritingTips(session.subject) ? <div className="tb-page">{text.trim()}</div> : <WordsFallOff text={text} />) : <p className="tb-muted">You didn&apos;t answer this one.</p>
               ) : (
                 <>
                   <textarea
@@ -692,7 +709,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
                 </div>
               )}
 
-              {marked && q.qtype !== 'mcq' && text.trim() && (() => {
+              {marked && q.qtype !== 'mcq' && text.trim() && !skipsWritingTips(session.subject) && (() => {
                 const b = checkBasics(text)
                 const extra: string[] = []
                 if (b.lowerAfterStop > 0) extra.push('A new sentence starts with a capital letter, even in the middle of your answer.')
