@@ -230,3 +230,30 @@
 .tb-frame { border: 1px solid var(--ink15); border-radius: 14px; overflow: hidden; }
 .tb-pick.four { grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 640px) { .tb-pick.four { grid-template-columns: repeat(4, 1fr); } }
+
+/* Maps */
+.tb-map { width: 100%; max-width: 560px; margin: 0 auto; background: var(--paper); border: 1px solid var(--ink15); border-radius: 14px; user-select: none; }
+.tb-map-context { fill: var(--paper-dim); stroke: var(--ink15); stroke-width: 1; }
+.tb-region { fill: var(--rust-tint); stroke: var(--rust); stroke-width: 1; stroke-linejoin: round; transition: fill .15s; }
+.tb-region.click { cursor: pointer; }
+.tb-region.click:hover { fill: var(--rust18); }
+.tb-region.picked { fill: var(--ochre30); stroke: var(--ochre); stroke-width: 1.6; }
+.tb-region.right { fill: var(--moss30); stroke: var(--moss); stroke-width: 1.6; }
+.tb-region.wrong { fill: var(--brick28); stroke: var(--brick); stroke-width: 1.6; }
+.tb-region.answer { fill: var(--moss30); stroke: var(--moss); stroke-width: 1.6; }
+.tb-map-pin { font: 800 16px var(--h); fill: var(--ink); pointer-events: none; }
+.tb-map-label { font: 700 11px var(--h); fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; pointer-events: none; }
+.tb-map-label.left { text-anchor: start; }
+.tb-map-line { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.tb-map-line.live { stroke: var(--rust); stroke-dasharray: 6 5; }
+.tb-map-line.good { stroke: var(--moss); }
+.tb-map-line.bad { stroke: var(--brick); }
+.tb-map-answer { stroke: var(--moss); stroke-width: 2; stroke-dasharray: 6 5; }
+.tb-dot { fill: var(--ink); stroke: var(--paper); stroke-width: 2; cursor: crosshair; }
+.tb-dot-letter { font: 800 12px var(--h); fill: var(--paper); pointer-events: none; }
+.tb-maptargets { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tb-maptarget { font: inherit; font-size: 0.92rem; padding: 0.4rem 0.9rem; border-radius: 99px; border: 1px solid var(--ink15); background: var(--paper-raised); color: var(--ink); cursor: pointer; box-shadow: 0 2px 0 var(--ink15); transition: transform .12s; }
+.tb-maptarget.on { border-color: var(--rust); background: var(--rust-tint); transform: translateY(-2px); }
+.tb-maptarget.done { border-color: var(--moss); }
+.tb-maptarget.right { border-color: var(--moss); background: var(--moss12); }
+.tb-maptarget.wrong { border-color: var(--brick); background: var(--brick10); }

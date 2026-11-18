@@ -12,7 +12,8 @@ import ActivityFrame from '@/components/ActivityFrame'
 import SymmetryWidget from '@/components/testbuilder/interactive/SymmetryWidget'
 import BondWidget from '@/components/testbuilder/interactive/BondWidget'
 import SortWidget from '@/components/testbuilder/interactive/SortWidget'
-import { cleanAssign, cleanLines, cleanMoves, isInteractive, type SortAnswer, type SortSpec } from '@/lib/testbuilder/interactive'
+import MapWidget from '@/components/testbuilder/interactive/MapWidget'
+import { cleanActivity, cleanAssign, cleanLines, cleanMapLine, cleanMoves, cleanPicks, isInteractive, type SortAnswer, type SortSpec } from '@/lib/testbuilder/interactive'
 
 // Taking a test, the mark screen, and the marked paper. Answers save as the
 // learner works (straight to the database, held to RLS). The correct answers,
@@ -290,7 +291,12 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
         const spec = q.spec as SortSpec
         return Object.keys(cleanAssign(v?.assign, spec)).length < spec.items.length
       }
-      return !v
+      if (q.qtype === 'maplocate') {
+        const ids = ((q.spec as { targets?: { id: string }[] })?.targets ?? []).map(t => t.id)
+        return Object.keys(cleanPicks(v, ids)).length < ids.length
+      }
+      if (q.qtype === 'mapline') return !cleanMapLine(v)
+      return !cleanActivity(v)
     },
     [choices, texts, json],
   )
@@ -610,8 +616,24 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
                     const ans = (keys[q.id]?.answer_spec as { answer?: SortAnswer } | undefined)?.answer
                     return <SortWidget spec={spec as unknown as SortSpec} value={value} onChange={v => setAnswer(q.id, v)} locked={locked} answer={marked ? ans : undefined} />
                   }
-                  // maths activity: the tool reports how many the learner got right
-                  const done = value as { correct?: number; total?: number } | undefined
+                  if (q.qtype === 'maplocate' || q.qtype === 'mapline') {
+                    const key = keys[q.id]?.answer_spec as { targets?: string[]; names?: Record<string, string>; from?: string; to?: string } | undefined
+                    return (
+                      <MapWidget
+                        kind={q.qtype}
+                        map={spec.map as never}
+                        targets={spec.targets as never}
+                        dots={spec.dots as never}
+                        value={value}
+                        onChange={v => setAnswer(q.id, v)}
+                        locked={locked}
+                        answer={marked ? key ?? {} : undefined}
+                      />
+                    )
+                  }
+                  // maths activity: the tool reports how it went
+                  const done = cleanActivity(value)
+                  const tool = (keys[q.id]?.answer_spec as { tool?: string } | undefined)?.tool
                   return (
                     <div className="tb-widget">
                       {isOpen && !done && (
@@ -619,15 +641,11 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
                           <ActivityFrame
                             activity={spec.ref as string}
                             showDone={false}
-                            onComplete={d => {
-                              const correct = Number(d.correct)
-                              const total = Number(d.total)
-                              if (Number.isFinite(correct) && Number.isFinite(total)) setAnswer(q.id, { correct, total })
-                            }}
+                            onComplete={d => setAnswer(q.id, { done: true, correct: d.correct, total: d.total, mistakes: d.mistakes, watch: d.watch, solved: d.solved !== undefined && d.solved !== false && d.solved !== '' })}
                           />
                         </div>
                       )}
-                      {done && <p className="tb-muted">{marked ? `You got ${done.correct} of ${done.total} right.` : 'Finished. Your answer is saved.'}</p>}
+                      {done && <p className="tb-muted">{marked && tool === 'rounding' && done.total ? `You got ${done.correct} of ${done.total} right.` : 'Finished. Your answer is saved.'}</p>}
                       {marked && !done && <p className="tb-muted">You didn&apos;t finish this activity.</p>}
                     </div>
                   )

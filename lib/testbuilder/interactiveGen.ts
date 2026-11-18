@@ -6,8 +6,9 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { BLOOM_MODEL, type Learner } from '@/lib/bloom/server'
 import { parseActivity } from '@/lib/activities'
+import { MAPS } from '@/lib/testbuilder/mapData'
 import {
-  COMPOUNDS, COMPOUND_IDS, SHAPES, SHAPE_IDS, cleanSort, isCompoundId, isShapeId, solveBond,
+  COMPOUNDS, COMPOUND_IDS, MAP_TARGETS, SHAPES, SHAPE_IDS, cleanSort, isCompoundId, isMapId, isShapeId, solveBond,
   type InteractiveType, type SortAnswer, type SortSpec,
 } from '@/lib/testbuilder/interactive'
 import { breaksTypingRule } from '@/lib/testbuilder/rules'
@@ -36,6 +37,10 @@ The kinds you can choose from:
 - bond: the learner drags outer electrons from a metal atom to a non-metal atom to show an ionic bond. Use only for chemistry or physical sciences topics about ionic bonding, electron transfer or ions. Pick the compound from the list.
 - sort: the learner drags 4 to 6 items into 2 or 3 groups. Works for most subjects where things belong to groups: states of matter, living and non-living, nouns and verbs, even and odd, renewable and non-renewable, continents and oceans, and so on. You write the groups and the items.
 - rounding: the learner rounds numbers on a number line. Use only for topics about rounding or estimating numbers.
+- fractions: the learner shares out a donut to find a fraction of a whole number (like 3/4 of 24). Use only for topics about fractions of numbers (roughly Grades 4 to 7).
+- algebra: the learner works through algebra tiles to multiply two brackets, factorise a trinomial, or solve a simple equation. Use only for those algebra topics (roughly Grades 8 to 10). Give a valid expression.
+- maplocate: the learner clicks provinces on a map of South Africa (map "za") or countries on a map of Africa (map "africa"). Use only for geography topics about South Africa's provinces or the countries of Africa. Give 3 to 5 targets from the list.
+- mapline: the learner draws a line between two cities on a map. Use only for geography topics about places, locations or capital cities in South Africa (map "za") or Africa (map "africa"). Give two different places from the list.
 
 Rules:
 - Choose only kinds that truly fit the topic. If none fit, return no items. Never force a kind onto a topic it does not suit.
@@ -55,7 +60,16 @@ const PLAN_TOOL: Anthropic.Tool = {
         items: {
           type: 'object',
           properties: {
-            kind: { type: 'string', enum: ['symmetry', 'bond', 'sort', 'rounding'] },
+            kind: { type: 'string', enum: ['symmetry', 'bond', 'sort', 'rounding', 'fractions', 'algebra', 'maplocate', 'mapline'] },
+            fracN: { type: 'integer', minimum: 1, maximum: 11 },
+            fracD: { type: 'integer', minimum: 2, maximum: 12 },
+            fracOf: { type: 'integer', minimum: 2, maximum: 60, description: 'A multiple of the denominator, at most 60' },
+            algebraType: { type: 'string', enum: ['multiply', 'factor', 'solve'] },
+            algebraExpr: { type: 'string', description: 'multiply: (x+2)(x-3). factor: x^2-x-6. solve: 2x+3=7. Only digits, x, ^, +, -, brackets and =.' },
+            map: { type: 'string', enum: ['za', 'africa'] },
+            targets: { type: 'array', items: { type: 'string', enum: [...new Set([...MAP_TARGETS.za, ...MAP_TARGETS.africa])] }, description: 'Region ids to find (maplocate)' },
+            fromPlace: { type: 'string', enum: [...new Set([...MAPS.za.places, ...MAPS.africa.places].map(p => p.id))] },
+            toPlace: { type: 'string', enum: [...new Set([...MAPS.za.places, ...MAPS.africa.places].map(p => p.id))] },
             shape: { type: 'string', enum: SHAPE_IDS },
             compound: { type: 'string', enum: COMPOUND_IDS },
             roundTo: { type: 'number', enum: [0.1, 1, 10, 100, 1000] },
@@ -96,7 +110,7 @@ const CLASSIFY_TOOL: Anthropic.Tool = {
   },
 }
 
-interface Raw { kind?: string; shape?: unknown; compound?: unknown; roundTo?: unknown; roundMax?: unknown; roundCount?: unknown; instruction?: unknown; categories?: unknown; sortItems?: unknown }
+interface Raw { kind?: string; fracN?: unknown; fracD?: unknown; fracOf?: unknown; algebraType?: unknown; algebraExpr?: unknown; map?: unknown; targets?: unknown; fromPlace?: unknown; toPlace?: unknown; shape?: unknown; compound?: unknown; roundTo?: unknown; roundMax?: unknown; roundCount?: unknown; instruction?: unknown; categories?: unknown; sortItems?: unknown }
 
 export async function interactiveForTopic(learner: Learner, topic: { id: string; title: string }, max: number, ctx: Ctx): Promise<InteractiveQuestion[]> {
   if (max <= 0) return []
@@ -163,8 +177,78 @@ export async function interactiveForTopic(learner: Learner, topic: { id: string;
           question: `Round ${n} numbers on the number line. Finish all ${n}.`,
           marks: n,
           spec: { ref: frame.ref, count: n },
-          answerSpec: { count: n },
+          answerSpec: { count: n, tool: 'rounding' },
           points: Array.from({ length: n }, (_, k) => `Rounded number ${k + 1} correctly`),
+        })
+      } else if (r?.kind === 'fractions' && !seen.has('f')) {
+        const d = Number(r.fracD), n = Number(r.fracN), of = Number(r.fracOf)
+        const frame = parseActivity(`fraction-fun?n=${n}&d=${d}&of=${of}`)
+        if (!frame) continue
+        seen.add('f')
+        built.push({
+          type: 'activity',
+          question: `Use the donut to find ${n}/${d} of ${of}. Work through the whole activity.`,
+          marks: 3,
+          spec: { ref: frame.ref, count: 3 },
+          answerSpec: { count: 3, tool: 'fraction-fun' },
+          points: ['Worked all the way through the activity', 'Made two mistakes or fewer', 'Made no mistakes'],
+        })
+      } else if (r?.kind === 'algebra' && !seen.has('a')) {
+        const type = String(r.algebraType), p = String(r.algebraExpr ?? '')
+        const frame = parseActivity(`algebra-tiles?type=${type}&p=${encodeURIComponent(p)}`)
+        if (!frame) continue
+        seen.add('a')
+        const verb = type === 'multiply' ? 'Multiply' : type === 'factor' ? 'Factorise' : 'Solve'
+        built.push({
+          type: 'activity',
+          question: `${verb} ${p.replace(/-/g, '\u2212').replace(/\^2/g, '\u00b2')} using the algebra tiles. Work through every step.`,
+          marks: 1,
+          spec: { ref: frame.ref, count: 1 },
+          answerSpec: { count: 1, tool: 'algebra-tiles' },
+          points: ['Worked through every step with the tiles'],
+        })
+      } else if (r?.kind === 'maplocate' && isMapId(r.map) && Array.isArray(r.targets)) {
+        const mapId = r.map
+        const targets = [...new Set((r.targets as unknown[]).filter((t): t is string => typeof t === 'string' && MAP_TARGETS[mapId].includes(t)))].slice(0, 5)
+        if (targets.length < 3 || seen.has(`ml:${mapId}`)) continue
+        seen.add(`ml:${mapId}`)
+        const names = Object.fromEntries(MAPS[mapId].regions.map(g => [g.id, g.name]))
+        built.push({
+          type: 'maplocate',
+          question: `Find these ${mapId === 'za' ? 'provinces' : 'countries'} on the map: ${targets.map(t => names[t]).join(', ')}. Tap a name, then tap its place on the map.`,
+          marks: targets.length,
+          spec: { map: mapId, targets: targets.map(t => ({ id: t, name: names[t] })) },
+          answerSpec: { targets, names },
+          points: targets.map(t => `Found ${names[t]}`),
+        })
+      } else if (r?.kind === 'mapline' && isMapId(r.map) && typeof r.fromPlace === 'string' && typeof r.toPlace === 'string' && r.fromPlace !== r.toPlace) {
+        const mapId = r.map
+        const places = MAPS[mapId].places
+        const from = places.find(p => p.id === r.fromPlace)
+        const to = places.find(p => p.id === r.toPlace)
+        if (!from || !to || seen.has(`mp:${mapId}`)) continue
+        // Six dots, kept well apart, with the two asked-for places among them.
+        const dots = [from, to]
+        for (const p of places) {
+          if (dots.length >= 6) break
+          if (!dots.includes(p) && dots.every(q => Math.hypot(q.x - p.x, q.y - p.y) >= 38)) dots.push(p)
+        }
+        if (Math.hypot(from.x - to.x, from.y - to.y) < 38 || dots.length < 4) continue
+        seen.add(`mp:${mapId}`)
+        const shuffled = [...dots].sort(() => Math.random() - 0.5)
+        const letters = 'ABCDEF'
+        const withLetters = shuffled.map((p, i) => ({ letter: letters[i]!, x: p.x, y: p.y, name: p.name, id: p.id }))
+        built.push({
+          type: 'mapline',
+          question: `Draw a line from ${from.name} to ${to.name}. Press on one dot and drag to the other.`,
+          marks: 2,
+          spec: { map: mapId, dots: withLetters.map(({ letter, x, y }) => ({ letter, x, y })) },
+          answerSpec: {
+            from: withLetters.find(p => p.id === from.id)!.letter,
+            to: withLetters.find(p => p.id === to.id)!.letter,
+            names: Object.fromEntries(withLetters.map(p => [p.letter, p.name])),
+          },
+          points: [`Started the line at ${from.name}`, `Ended the line at ${to.name}`],
         })
       } else if (r?.kind === 'sort') {
         const cleaned = cleanSort({

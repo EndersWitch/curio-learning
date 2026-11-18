@@ -2,7 +2,8 @@
 // marked paper shows ticks and reasons exactly like a written answer does.
 
 import {
-  COMPOUNDS, checkBond, checkSymmetry, cleanAssign, cleanLines, cleanMoves, isCompoundId, isShapeId,
+  COMPOUNDS, checkBond, checkMapLine, checkSymmetry, cleanActivity, cleanAssign, cleanLines, cleanMapLine, cleanMoves, cleanPicks, isCompoundId, isShapeId,
+  type MapDot,
   type SortAnswer, type SortSpec,
 } from '@/lib/testbuilder/interactive'
 
@@ -52,12 +53,44 @@ export function markInteractive(type: string, spec: unknown, answerSpec: unknown
       }
     }
   } else if (type === 'activity') {
+    const done = cleanActivity(given)
+    const tool = typeof key.tool === 'string' ? key.tool : 'rounding'
     const count = typeof key.count === 'number' ? key.count : pointIds.length
-    const total = typeof a.total === 'number' ? a.total : 0
-    const correct = total === count && typeof a.correct === 'number' ? Math.max(0, Math.min(count, Math.floor(a.correct))) : 0
-    pointIds.forEach((_, k) => {
-      flags.push(k < correct ? { awarded: true, reason: 'You got this one right in the activity.' } : { awarded: false, reason: total === 0 ? "You didn't finish the activity." : 'This one needed another look. Try the activity again to practise.' })
-    })
+    const unfinished = "You didn't finish the activity."
+    if (tool === 'rounding') {
+      const correct = done && done.total === count && typeof done.correct === 'number' ? Math.min(count, done.correct) : 0
+      pointIds.forEach((_, k) => flags.push(k < correct ? { awarded: true, reason: 'You got this one right in the activity.' } : { awarded: false, reason: done ? 'This one needed another look. Try the activity again to practise.' : unfinished }))
+    } else if (tool === 'fraction-fun') {
+      const m = done && !done.watch && typeof done.mistakes === 'number' ? done.mistakes : null
+      flags.push(
+        m !== null ? { awarded: true, reason: 'You worked all the way through the activity.' } : { awarded: false, reason: unfinished },
+        m !== null && m <= 2 ? { awarded: true, reason: 'Two mistakes or fewer. Nicely done.' } : { awarded: false, reason: m === null ? unfinished : `You made ${m} mistakes along the way. Watch how the sprinkles share out equally and try again.` },
+        m === 0 ? { awarded: true, reason: 'Not a single mistake!' } : { awarded: false, reason: m === null ? unfinished : 'Look for the groups that need to be equal first, then count the sprinkles in the groups you keep.' },
+      )
+    } else {
+      flags.push(done && !done.watch ? { awarded: true, reason: 'You worked through every step with the tiles.' } : { awarded: false, reason: unfinished })
+    }
+  } else if (type === 'maplocate') {
+    const targets = Array.isArray(key.targets) ? (key.targets as string[]) : []
+    const names = obj(key.names) as Record<string, string>
+    const picks = cleanPicks(given, targets)
+    for (const t of targets) {
+      const got = picks[t]
+      if (got === t) flags.push({ awarded: true, reason: `Yes, that's ${names[t]}.` })
+      else if (!got) flags.push({ awarded: false, reason: `You didn't find ${names[t]}. It is shown in green on the marked map.` })
+      else flags.push({ awarded: false, reason: `You picked ${names[got] ?? 'another place'}, but ${names[t]} is somewhere else. Look for it in green on the marked map.` })
+    }
+  } else if (type === 'mapline') {
+    const dots = (Array.isArray(s.dots) ? s.dots : []) as MapDot[]
+    const names = obj(key.names) as Record<string, string>
+    const from = String(key.from)
+    const to = String(key.to)
+    const r = checkMapLine(dots, from, to, cleanMapLine(given))
+    const line = cleanMapLine(given)
+    flags.push(
+      r.start ? { awarded: true, reason: 'Your line starts on the right dot.' } : { awarded: false, reason: line ? `Your line didn't start at ${names[from]}. Check the green line on the marked map.` : "You didn't draw a line." },
+      r.end ? { awarded: true, reason: 'And it ends on the right dot.' } : { awarded: false, reason: line ? `Your line didn't end at ${names[to]}. Check the green line on the marked map.` : "You didn't draw a line." },
+    )
   }
 
   const points = pointIds.map((pointId, k) => ({ pointId, ...(flags[k] ?? { awarded: false, reason: "You didn't answer this one." }) }))

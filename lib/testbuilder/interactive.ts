@@ -5,14 +5,16 @@
 //   symmetry  draw the lines of symmetry on a shape
 //   bond      drag outer electrons from a metal to a non-metal (ionic bonding)
 //   sort      drag items into the group they belong to
-//   activity  one of curio's maths tools (rounding number line)
+//   activity  one of curio's maths tools (rounding, fraction fun, algebra tiles)
+//   maplocate click the province or country on a map
+//   mapline   draw a line between two places on a map
 //
 // Symmetry, bond and activity questions are built from code templates, so their
 // answers are always right. Sort questions are written by the AI and checked by a
 // second blind AI pass (in the generate route) before a learner ever sees them.
 
-export type InteractiveType = 'symmetry' | 'bond' | 'sort' | 'activity'
-export const INTERACTIVE_TYPES: InteractiveType[] = ['symmetry', 'bond', 'sort', 'activity']
+export type InteractiveType = 'symmetry' | 'bond' | 'sort' | 'activity' | 'maplocate' | 'mapline'
+export const INTERACTIVE_TYPES: InteractiveType[] = ['symmetry', 'bond', 'sort', 'activity', 'maplocate', 'mapline']
 export const isInteractive = (t: string): t is InteractiveType => (INTERACTIVE_TYPES as string[]).includes(t)
 
 // ───────────────────────── Lines of symmetry ─────────────────────────
@@ -234,4 +236,66 @@ export function cleanAssign(value: unknown, spec: SortSpec): SortAnswer {
 
 // ───────────────────────── Maths activity ─────────────────────────
 
-export interface ActivityAnswer { correct: number; total: number }
+export interface ActivityAnswer { done?: boolean; correct?: number; total?: number; mistakes?: number; watch?: boolean; solved?: boolean }
+
+export function cleanActivity(value: unknown): ActivityAnswer | null {
+  if (!value || typeof value !== 'object') return null
+  const v = value as Record<string, unknown>
+  if (v.done !== true) return null
+  const num = (x: unknown) => (typeof x === 'number' && Number.isFinite(x) && x >= 0 && x < 1000 ? Math.floor(x) : undefined)
+  return { done: true, correct: num(v.correct), total: num(v.total), mistakes: num(v.mistakes), watch: v.watch === true, solved: v.solved === true }
+}
+
+// ───────────────────────── Maps ─────────────────────────
+
+export type MapId = 'za' | 'africa'
+export const isMapId = (v: unknown): v is MapId => v === 'za' || v === 'africa'
+
+/** Regions worth asking about (ids match lib/testbuilder/mapData.ts). */
+export const MAP_TARGETS: Record<MapId, string[]> = {
+  za: ['northern_cape', 'kwazulu_natal', 'free_state', 'eastern_cape', 'limpopo', 'north_west', 'mpumalanga', 'western_cape', 'gauteng'],
+  africa: ['egypt', 'nigeria', 'kenya', 'ethiopia', 'south_africa', 'namibia', 'botswana', 'zimbabwe', 'zambia', 'mozambique', 'angola', 'tanzania', 'morocco', 'algeria', 'ghana', 'madagascar', 'dem_rep_congo', 'sudan', 'libya', 'mali', 'senegal', 'uganda', 'somalia', 'chad'],
+}
+
+export interface MapDot { letter: string; x: number; y: number }
+export interface MapLineAnswer { x1: number; y1: number; x2: number; y2: number }
+
+export function cleanPicks(value: unknown, targets: string[]): Record<string, string> {
+  const out: Record<string, string> = {}
+  const v = (value && typeof value === 'object' ? (value as Record<string, unknown>).picks : null) as Record<string, unknown> | null
+  if (!v || typeof v !== 'object') return out
+  for (const t of targets) if (typeof v[t] === 'string' && /^[a-z0-9_]{1,40}$/.test(v[t] as string)) out[t] = v[t] as string
+  return out
+}
+
+export function cleanMapLine(value: unknown): MapLineAnswer | null {
+  const l = (value && typeof value === 'object' ? (value as Record<string, unknown>).line : null) as Record<string, unknown> | null
+  if (!l) return null
+  const n = ['x1', 'y1', 'x2', 'y2'].map(k => l[k])
+  return n.every(x => typeof x === 'number' && Number.isFinite(x) && (x as number) > -50 && (x as number) < 800)
+    ? { x1: n[0] as number, y1: n[1] as number, x2: n[2] as number, y2: n[3] as number }
+    : null
+}
+
+const DOT_REACH = 26
+const nearest = (dots: MapDot[], x: number, y: number) => {
+  let best: MapDot | null = null
+  let bd = Infinity
+  for (const d of dots) {
+    const dist = Math.hypot(d.x - x, d.y - y)
+    if (dist < bd) { bd = dist; best = d }
+  }
+  return bd <= DOT_REACH ? best : null
+}
+
+/** Did the line connect the two right dots? Either direction counts. */
+export function checkMapLine(dots: MapDot[], from: string, to: string, line: MapAnswerLike | null): { start: boolean; end: boolean } {
+  if (!line) return { start: false, end: false }
+  const a = nearest(dots, line.x1, line.y1)?.letter
+  const b = nearest(dots, line.x2, line.y2)?.letter
+  const direct = { start: a === from, end: b === to }
+  const reversed = { start: a === to, end: b === from }
+  const score = (r: { start: boolean; end: boolean }) => Number(r.start) + Number(r.end)
+  return score(reversed) > score(direct) ? reversed : direct
+}
+type MapAnswerLike = MapLineAnswer
