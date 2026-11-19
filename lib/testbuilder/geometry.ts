@@ -27,7 +27,7 @@ export const reasonLabel = (id: string) => REASONS.find(r => r.id === id)?.label
 export type AngleKind = 'line' | 'opposite' | 'parallel' | 'triangle' | 'isosceles' | 'exterior'
 export const ANGLE_KINDS: AngleKind[] = ['line', 'opposite', 'parallel', 'triangle', 'isosceles', 'exterior']
 
-export interface GeometrySpec { svg: string; fields: { id: string; label: string; unit?: string }[]; reasons: { id: string; label: string }[] }
+export interface GeometrySpec { svg: string; fields: { id: string; label: string; unit?: string }[]; reasons: { id: string; label: string }[]; plain?: boolean }
 export interface GeometryKey { values: Record<string, number>; reasons: string[]; working: string; tol?: number }
 export interface GeometryQuestion { question: string; spec: GeometrySpec; key: GeometryKey; marks: number; points: string[] }
 
@@ -306,6 +306,6 @@ export function cleanGeometry(v: unknown, fieldIds: string[]): { fields: Record<
 
 export function toNumber(s: string | undefined): number | null {
   if (!s) return null
-  const t = s.replace(/[\s°]/g, '').replace(',', '.').replace(/[−–]/g, '-')
+  const t = s.replace(/[\s°%]/g, '').replace(/^R/i, '').replace(',', '.').replace(/[−–]/g, '-')
   return /^-?\d+(\.\d+)?$/.test(t) ? Number(t) : null
 }

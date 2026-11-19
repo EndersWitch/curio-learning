@@ -21,8 +21,8 @@ export default function GeometryWidget({
     <div className="tb-widget">
       <div className="tb-figure">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={img} alt="Geometry diagram. Not drawn to scale." />
-        <p className="tb-muted" style={{ margin: '0.3rem 0 0' }}>Not drawn to scale</p>
+        <img src={img} alt={spec.plain ? 'Information for the question' : 'Geometry diagram. Not drawn to scale.'} />
+        {!spec.plain && <p className="tb-muted" style={{ margin: '0.3rem 0 0' }}>Not drawn to scale</p>}
       </div>
       <div className="tb-geo">
         {spec.fields.map(f => {
