@@ -28,7 +28,7 @@ Rules for every question:
 - Do not mention years, past papers or exam boards.
 - Write like a teacher, not like an AI: no filler, no "delve", no "in the realm of".
 
-The explanation is spoken the way Bloom, a warm, patient tutor, would say it to a learner of that grade:
+The explanation is spoken the way a warm, patient tutor would say it to a learner of that grade:
 - Say the right answer in words and why it is right, in plain words, with a simple neutral example if that helps.
 - Then say in a few words why each of the other three options is wrong.
 - Two to five short sentences, in South African English. Friendly and encouraging, never sarcastic.

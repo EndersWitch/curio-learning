@@ -14,6 +14,8 @@ import BondWidget from '@/components/testbuilder/interactive/BondWidget'
 import SortWidget from '@/components/testbuilder/interactive/SortWidget'
 import { FillWidget, MatchWidget, OrderWidget, PickWidget, PlotWidget, ShadeWidget } from '@/components/testbuilder/interactive/AuthoredWidgets'
 import { cleanCells, cleanFills, cleanMatch, cleanOrder, cleanPicked, cleanPlot } from '@/lib/testbuilder/authored'
+import { AngleWidget, ClockWidget, LabelWidget, LineWidget, PeriodicWidget } from '@/components/testbuilder/interactive/HandsOnWidgets'
+import { cleanAngle, cleanClock, cleanElements, cleanLabels, cleanLinePts } from '@/lib/testbuilder/handson'
 import GeometryWidget from '@/components/testbuilder/interactive/GeometryWidget'
 import MapWidget from '@/components/testbuilder/interactive/MapWidget'
 import { cleanGeometry } from '@/lib/testbuilder/geometry'
@@ -309,6 +311,11 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
         if (q.qtype === 'pick') return cleanPicked(v, sp).length === 0
         return Object.keys(cleanFills(v, sp)).length < (sp as { parts: unknown[] }).parts.length - 1
       }
+      if (q.qtype === 'label') return Object.keys(cleanLabels(v, q.spec as never)).length < ((q.spec as { pins: unknown[] }).pins.length)
+      if (q.qtype === 'clockset') return !cleanClock(v, q.spec as never)
+      if (q.qtype === 'linedraw') return cleanLinePts(v, (q.spec as { range: number }).range).length < 2
+      if (q.qtype === 'angledraw') return !cleanAngle(v)
+      if (q.qtype === 'periodic') return cleanElements(v).length === 0
       if (q.qtype === 'geometry') {
         const sp = q.spec as { fields?: { id: string }[]; reasons?: unknown[] }
         const ids = (sp.fields ?? []).map(f => f.id)
@@ -384,7 +391,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
       if (!made.ok || !next) return setError("Couldn't set up the practice test. Try again.")
       const gen = await fetch('/api/tests/generate', { method: 'POST', headers, body: JSON.stringify({ sessionId: next }) })
       if (!gen.ok) return setError("Couldn't write the practice questions. Try again.")
-      window.location.href = `/bloom/tests/${next}`
+      window.location.href = `/dryrun/${next}`
     } catch {
       setError("Couldn't set up the practice test. Try again.")
     } finally {
@@ -445,7 +452,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
   const quip = busy
     ? 'Marking your answers. Give me a moment…'
     : marked
-      ? overall >= 80 ? "You're in full bloom!" : overall >= 60 ? 'Nicely grown. A little more water and you will bloom.' : "Every flower starts as a seed. Let's find what to water."
+      ? overall >= 80 ? "Excellent work!" : overall >= 60 ? 'Good progress. A little more practice and you will get there.' : "Everyone starts somewhere. Let's find what to work on."
       : allDone
         ? 'Every question has an answer. Ready when you are!'
         : pctDone === 0
@@ -559,8 +566,8 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
           )}
         </div>
         <div className="tb-actions">
-          <Link className="tb-link" href="/bloom/tests">My tests</Link>
-          <Link className="tb-link" href="/bloom/tests/new">Build another test</Link>
+          <Link className="tb-link" href="/dryrun">My dry runs</Link>
+          <Link className="tb-link" href="/dryrun/new">Start another dry run</Link>
         </div>
       </div>
     )
@@ -648,6 +655,14 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
                     if (q.qtype === 'match') return <MatchWidget spec={spec as never} {...common} />
                     if (q.qtype === 'pick') return <PickWidget spec={spec as never} {...common} />
                     return <FillWidget spec={spec as never} {...common} />
+                  }
+                  if (['label', 'clockset', 'linedraw', 'angledraw', 'periodic'].includes(q.qtype)) {
+                    const common = { value, onChange: (v: unknown) => setAnswer(q.id, v), locked, answer: marked ? ((keys[q.id]?.answer_spec as Record<string, unknown>) ?? {}) : undefined }
+                    if (q.qtype === 'label') return <LabelWidget spec={spec as never} {...common} />
+                    if (q.qtype === 'clockset') return <ClockWidget spec={spec as never} {...common} />
+                    if (q.qtype === 'linedraw') return <LineWidget spec={spec as never} {...common} />
+                    if (q.qtype === 'angledraw') return <AngleWidget spec={spec as never} {...common} />
+                    return <PeriodicWidget spec={spec as never} {...common} />
                   }
                   if (q.qtype === 'geometry') {
                     return (
@@ -741,7 +756,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
                 if (tips.length === 0 && extra.length === 0 && !clean) return null
                 return (
                   <div className="tb-tips">
-                    <h3>Bloom&apos;s little tips (these don&apos;t change your marks)</h3>
+                    <h3>Writing tips (these don&apos;t change your marks)</h3>
                     {clean && tips.length === 0 && <p className="tb-tip">Capital letter at the start, full stop at the end. Every word is safe on the page!</p>}
                     {extra.map(e => <p key={e} className="tb-tip">{e}</p>)}
                     {tips.map(t => (

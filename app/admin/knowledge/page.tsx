@@ -14,6 +14,7 @@ export default function KnowledgeAdmin() {
   const [approved, setApproved] = useState<Entry[]>([])
   const [flags, setFlags] = useState<Flag[]>([])
   const [msg, setMsg] = useState('')
+  const [def, setDef] = useState({ subject: '', grade: '', term: '', definition: '', source: '' })
   const [form, setForm] = useState({ kind: 'term', title: '', body: '', subjects: '', gradeMin: '1', gradeMax: '12', sourceUrl: '' })
 
   const call = useCallback(async (method: 'GET' | 'POST', body?: unknown) => {
@@ -77,6 +78,15 @@ export default function KnowledgeAdmin() {
         <input placeholder="grade min" value={form.gradeMin} onChange={e => setForm({ ...form, gradeMin: e.target.value })} style={{ width: 90, padding: '0.4rem', border: '2px solid #222', marginRight: '0.4rem' }} />
         <input placeholder="grade max" value={form.gradeMax} onChange={e => setForm({ ...form, gradeMax: e.target.value })} style={{ width: 90, padding: '0.4rem', border: '2px solid #222', marginRight: '0.4rem' }} />
         <button style={btn} onClick={() => act('add', { entry: form })}>Add (goes live)</button>
+      </div>
+
+      <h2>Add an exact definition</h2>
+      <div style={box}>
+        <p style={{ margin: '0 0 0.5rem', fontSize: '0.9rem' }}>For wording that must be learnt exactly (for example a physical science law). Questions that ask for it will use this wording in the memo.</p>
+        {(['subject', 'grade', 'term', 'definition', 'source'] as const).map(k => (
+          <input key={k} placeholder={k} value={def[k]} onChange={e => setDef({ ...def, [k]: e.target.value })} style={{ display: 'block', width: '100%', padding: '0.4rem', border: '2px solid #222', marginBottom: '0.4rem', boxSizing: 'border-box' }} />
+        ))}
+        <button style={btn} onClick={() => act('definition', { entry: def })}>Save definition</button>
       </div>
 
       <h2>Live reference ({approved.length})</h2>

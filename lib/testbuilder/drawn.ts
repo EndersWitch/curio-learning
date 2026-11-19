@@ -36,6 +36,8 @@ export const DRAWN: DrawnInfo[] = [
   { id: 'reflection', use: 'Grades 7-10 science: the angle of reflection at a drawn mirror.' },
   { id: 'supplydemand', use: 'Grades 10-12 economics: read the equilibrium price and quantity from a supply and demand graph.' },
   { id: 'atom', use: 'Grades 8-10 science: count the electrons in a drawn Bohr atom (atomic number and outer electrons).' },
+  { id: 'contour', use: 'Grades 10-12 geography map work: read the contour interval and the heights of two points on a contour map (topographic map skills).' },
+  { id: 'mapscale', use: 'Grades 7-12 geography/maths map work: use a map scale such as 1 : 50 000 to turn a measured map distance into a real distance, or the reverse.' },
   { id: 'balance', use: 'Grades 9-11 chemistry/physical science: balance a chemical equation by typing the coefficients.' },
 ]
 export const DRAWN_IDS = DRAWN.map(d => d.id)
@@ -610,7 +612,87 @@ function balance(): GeometryQuestion {
   return mk('Balance the equation. Give the number (coefficient) that goes in front of each substance.', s.out(), fields, values, [], `${full.slice(0, react).join(' + ')} → ${full.slice(react).join(' + ')}`)
 }
 
+
+// ---- geography map work -----------------------------------------------------
+function contour(): GeometryQuestion {
+  const I = pick([10, 20, 25, 50]), base = pick([1000, 1100, 1200, 1300, 1400, 1500]), n = 5
+  const s = new Svg()
+  const ring = (i: number) => ({ cx: 175 + 9 * i, cy: 125 - 5 * i, rx: 150 - 28 * i, ry: 100 - 19 * i })
+  for (let i = 0; i < n; i++) {
+    const r = ring(i)
+    s.parts.push(`<ellipse cx="${f(r.cx)}" cy="${f(r.cy)}" rx="${f(r.rx)}" ry="${f(r.ry)}" fill="${i === 0 ? '#f3ead3' : 'none'}" stroke="#a0662a" stroke-width="${i % 2 === 0 ? 2 : 1.4}"/>`)
+  }
+  for (let i = 0; i < n; i++) {
+    const r = ring(i), x = r.cx - r.rx, y = r.cy
+    s.parts.push(`<rect x="${f(x - 15)}" y="${f(y - 7)}" width="30" height="14" fill="#f9f4e6"/>`)
+    s.text(x, y, String(base + I * i), '#6b4311', 10.5, 700)
+  }
+  const a = rnd(0, 3), b = (a + rnd(1, 2)) % n === a ? (a + 1) % n : (a + rnd(1, 2)) % n
+  const at = (i: number, deg: number) => { const r = ring(i); return { x: r.cx + r.rx * Math.cos(rad(deg)), y: r.cy - r.ry * Math.sin(rad(deg)) } }
+  const pa = at(a, 55), pb = at(b, -50)
+  for (const [pt, name] of [[pa, 'A'], [pb, 'B']] as const) {
+    s.dot(pt.x, pt.y, 4)
+    s.text(pt.x + 12, pt.y - 9, name, INK, 15, 800)
+  }
+  s.parts.push(`<polygon points="${f(ring(n - 1).cx)},${f(ring(n - 1).cy - 6)} ${f(ring(n - 1).cx - 6)},${f(ring(n - 1).cy + 5)} ${f(ring(n - 1).cx + 6)},${f(ring(n - 1).cy + 5)}" fill="${INK}"/>`)
+  const hA = base + I * a, hB = base + I * b
+  return mk('The map shows contour lines. The numbers are heights above sea level in metres. Point A and point B each lie on a contour line. Work out the contour interval and the height of A and B.', s.out(),
+    [{ id: 'i', label: 'Contour interval =', unit: 'm' }, { id: 'a', label: 'Height of A =', unit: 'm' }, { id: 'b', label: 'Height of B =', unit: 'm' }], { i: I, a: hA, b: hB }, [],
+    `The labels go up by ${I} m from one line to the next, so the contour interval is ${I} m. A is on the ${hA} m line and B is on the ${hB} m line.`)
+}
+
+function mapscale(): GeometryQuestion {
+  const scale = pick([10000, 25000, 50000, 100000])
+  const s = new Svg()
+  const A = { x: 70, y: 150 }, B = { x: 290, y: 80 }
+  rect(s, 20, 30, 320, 180, '#f4f1e4', INK, 2)
+  s.line(A.x, A.y, B.x, B.y, 2, RUST)
+  for (const [p, n] of [[A, 'Town P'], [B, 'Town Q']] as const) { circle(s, p.x, p.y, 6, INK, INK, 1); s.text(p.x, p.y + 22, n, INK, 13, 700) }
+  const kmPerCm = scale / 100000
+  const reverse = Math.random() < 0.35
+  let cm: number, km: number
+  for (;;) {
+    cm = rnd(2, 16); km = Math.round(cm * kmPerCm * 1000) / 1000
+    if (!reverse || Number.isInteger(km * 2)) break
+  }
+  const label = reverse ? `Real distance: ${String(km).replace('.', ',')} km` : `Map distance: ${cm} cm`
+  s.text(180, 52, label, RUST, 13, 700)
+  s.text(180, 195, `Scale 1 : ${scale.toLocaleString('en-ZA').replace(/[  ]/g, ' ')}`, INK, 14, 700)
+  if (reverse) {
+    return mk(`Town P and town Q are ${String(km).replace('.', ',')} km apart in real life. The map has the scale shown. How far apart are they on the map?`, s.out(), one('v', 'Map distance =', 'cm'), { v: cm }, [], `1 cm on the map is ${scale} cm in real life, which is ${String(kmPerCm).replace('.', ',')} km. ${String(km).replace('.', ',')} km ÷ ${String(kmPerCm).replace('.', ',')} km per cm = ${cm} cm.`, 0.01)
+  }
+  return mk(`On the map, town P and town Q are ${cm} cm apart. Use the scale to work out the real distance between them.`, s.out(), one('v', 'Real distance =', 'km'), { v: km }, [], `1 cm on the map is ${scale} cm in real life, which is ${String(kmPerCm).replace('.', ',')} km. ${cm} cm × ${String(kmPerCm).replace('.', ',')} km = ${String(km).replace('.', ',')} km.`, 0.01)
+}
+
+/** Round a few numbers by typing the answers. Marked by code, so the score cannot be faked from the browser. */
+export function makeRounding(to: number, max: number, n: number): GeometryQuestion {
+  const unit = [0.1, 1, 10, 100, 1000].includes(to) ? to : 10
+  const dec = unit < 1
+  const lim = Math.max(max, unit * 10)
+  const nums: number[] = []
+  let guard = 0
+  while (nums.length < n && guard++ < 500) {
+    const raw = dec ? rnd(11, 990) / 100 : unit === 1 ? rnd(11, Math.max(60, lim * 10)) / 10 : rnd(Math.ceil(unit * 1.2), lim)
+    const x = dec ? Math.round(raw * 100) / 100 : unit === 1 ? Math.round(raw * 10) / 10 : raw
+    const r = (x / unit) % 1
+    if (Math.abs(r - 0.5) < 1e-9 || Math.abs(r) < 1e-9) continue // no exact halves, no numbers that need no rounding
+    if (nums.includes(x)) continue
+    nums.push(x)
+  }
+  const round = (x: number) => Math.round(Math.round((x / unit) + 1e-9) * unit * 1000) / 1000
+  const label = unit === 0.1 ? 'one decimal place (the nearest tenth)' : unit === 1 ? 'the nearest whole number' : `the nearest ${unit}`
+  const fmt = (x: number) => String(x).replace('.', ',')
+  const s = new Svg()
+  rect(s, 20, 30, 320, 40 + nums.length * 0, '#fff', 'none', 0)
+  s.text(180, 22, `Round to ${label}`, RUST, 14, 800)
+  nums.forEach((x, i) => { const y = 62 + i * 34; rect(s, 100, y - 14, 160, 28, '#f6f1e3', INK, 1.5); s.text(180, y, fmt(x), INK, 16, 700) })
+  const values: Record<string, number> = {}
+  const fields = nums.map((x, i) => { values[`r${i}`] = round(x); return { id: `r${i}`, label: `${fmt(x)} rounds to` } })
+  return mk(`Round each number to ${label}.`, s.out(), fields, values, [], nums.map(x => `${fmt(x)} rounds to ${fmt(round(x))}.`).join(' '), unit < 1 ? 0.001 : 0)
+}
+
 const MAKERS: Record<string, () => GeometryQuestion> = {
+  contour, mapscale,
   pythagoras, trig, area, perimeter, quadrilateral, circle: circleGeo, clock, ruler, protractor, fraction, barchart, dotplot, pie,
   coordinates, gradient, linegraph, blocks, thermometer, cylinder, circuit, wave, speedgraph, forces, reflection, supplydemand, atom, balance,
 }

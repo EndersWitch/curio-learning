@@ -2,6 +2,7 @@
 // marked paper shows ticks and reasons exactly like a written answer does.
 
 import { markAuthored } from '@/lib/testbuilder/authored'
+import { markHandsOn } from '@/lib/testbuilder/handson'
 import { cleanGeometry, reasonLabel, toNumber } from '@/lib/testbuilder/geometry'
 import {
   COMPOUNDS, checkBond, checkMapLine, checkSymmetry, cleanActivity, cleanAssign, cleanLines, cleanMapLine, cleanMoves, cleanPicks, isCompoundId, isShapeId,
@@ -120,6 +121,8 @@ export function markInteractive(type: string, spec: unknown, answerSpec: unknown
 
   const authored = markAuthored(type, spec, answerSpec, given, pointIds.length)
   if (authored) flags.push(...authored)
+  const hands = markHandsOn(type, spec, answerSpec, given)
+  if (hands) flags.push(...hands)
 
   const points = pointIds.map((pointId, k) => ({ pointId, ...(flags[k] ?? { awarded: false, reason: "You didn't answer this one." }) }))
   return { marks: points.filter(p => p.awarded).length, points }

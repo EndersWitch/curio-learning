@@ -43,6 +43,15 @@ export async function POST(req: Request) {
     })
     return error ? NextResponse.json({ error: error.message }, { status: 400 }) : NextResponse.json({ ok: true })
   }
+  if (b.action === 'definition' && b.entry) {
+    const e = b.entry
+    if (!e.subject || !e.term || !e.definition) return NextResponse.json({ error: 'missing fields' }, { status: 400 })
+    const { error } = await sb.from('verified_definitions').upsert({
+      subject: String(e.subject).toLowerCase().slice(0, 60), grade: Number(e.grade) || null, term: String(e.term).slice(0, 120),
+      definition_text: String(e.definition).slice(0, 1200), source: e.source ? String(e.source) : null,
+    }, { onConflict: 'subject,grade,term' })
+    return error ? NextResponse.json({ error: error.message }, { status: 400 }) : NextResponse.json({ ok: true })
+  }
   if (b.action === 'flag' && b.flagId && (b.flagStatus === 'accepted' || b.flagStatus === 'rejected')) {
     await sb.from('test_flags').update({ status: b.flagStatus }).eq('id', b.flagId)
     return NextResponse.json({ ok: true })

@@ -11,7 +11,8 @@ import {
   COMPOUNDS, COMPOUND_IDS, MAP_TARGETS, SHAPES, SHAPE_IDS, cleanSort, isCompoundId, isMapId, isShapeId, solveBond,
   type InteractiveType, type SortAnswer, type SortSpec,
 } from '@/lib/testbuilder/interactive'
-import { DRAWN, DRAWN_IDS, makeDrawn } from '@/lib/testbuilder/drawn'
+import { DRAWN, DRAWN_IDS, makeDrawn, makeRounding } from '@/lib/testbuilder/drawn'
+import { DIAGRAMS, DIAGRAM_IDS, buildHandsOn } from '@/lib/testbuilder/handson-gen'
 import { ACCOUNTING, ACCOUNTING_IDS, makeAccounting } from '@/lib/testbuilder/accounting'
 import { stripWord, type FillSpec, type MatchSpec, type OrderSpec, type PickSpec, type PlotSpec } from '@/lib/testbuilder/authored'
 import { ANGLE_KINDS, makeGeometry, type AngleKind } from '@/lib/testbuilder/geometry'
@@ -48,10 +49,16 @@ ${ACCOUNTING.map(d => `    ${d.id}: ${d.use}`).join('\n')}
 - match: the learner connects 3 to 5 pairs. Use for terms and meanings, countries and capitals, animals and their groups, symbols and their names, words and opposites. Give matchTitle and matchPairs. Each left item matches exactly one right item, and no right item could fit two lefts.
 - pick: the learner taps the words in one short sentence that fit a rule. Use for language topics (nouns, verbs, adjectives, adverbs, pronouns, spelling mistakes, punctuation words) and also for finding words in a short text. Give pickInstruction (for example "Tap all the verbs in the sentence."), pickText (one sentence of at most 25 words) and pickTargets (the 1 to 4 correct words, each word appearing only once in the sentence, no other word fitting the rule).
 - fill: the learner drags words into the gaps of a short text. Use for any subject: key terms in a definition, a short paragraph with missing words, a sentence with missing vocabulary. Give fillText with three underscores ___ for each gap (2 to 4 gaps), fillAnswers (the missing words in order, one word each), and fillDistractors (1 or 2 wrong words that clearly do not fit any gap).
+- label: the learner names the numbered parts of a drawn diagram by choosing from a list. Set labelDiagram to the diagram that fits the topic:
+${DIAGRAMS.map(d => `    ${d.id}: ${d.use}`).join('\n')}
+- clockset: the learner drags the hands of a clock to show a given time. Grades 2 to 6, topics on telling the time.
+- linedraw: the learner draws a straight-line graph such as y = 2x + 1 by clicking two points on a grid. Grades 8 to 11, topics on straight-line graphs, linear functions, the Cartesian plane.
+- angledraw: the learner draws an angle of a given size by dragging the arm of an angle on a protractor. Grades 5 to 8, topics on measuring and drawing angles.
+- periodic: the learner taps elements on a periodic table (an element by symbol or name, a position, or a whole group such as the noble gases). Grades 8 to 11 physical sciences/chemistry, topics on the periodic table.
 - symmetry: the learner draws the lines of symmetry on a shape. Use ONLY when the topic itself is about symmetry or lines of symmetry (roughly Grades 4 to 7). Never use it for Euclidean geometry, angles, triangles or parallel lines.
 - bond: the learner drags outer electrons from a metal atom to a non-metal atom to show an ionic bond. Use only for chemistry or physical sciences topics about ionic bonding, electron transfer or ions. Pick the compound from the list.
 - sort: the learner drags 4 to 6 items into 2 or 3 groups. Works for most subjects where things belong to groups: states of matter, living and non-living, nouns and verbs, even and odd, renewable and non-renewable, continents and oceans, and so on. You write the groups and the items.
-- rounding: the learner rounds numbers on a number line. Use only for topics about rounding or estimating numbers.
+- rounding: the learner types the rounded value of a few numbers. Use only for topics about rounding or estimating numbers.
 - fractions: the learner shares out a donut to find a fraction of a whole number (like 3/4 of 24). Use only for topics about fractions of numbers (roughly Grades 4 to 7).
 - algebra: the learner works through algebra tiles to multiply two brackets, factorise a trinomial, or solve a simple equation. Use only for those algebra topics (roughly Grades 8 to 10). Give a valid expression.
 - maplocate: the learner clicks provinces on a map of South Africa (map "za") or countries on a map of Africa (map "africa"). Use only for geography topics about South Africa's provinces or the countries of Africa. Give 3 to 5 targets from the list.
@@ -75,7 +82,8 @@ const PLAN_TOOL: Anthropic.Tool = {
         items: {
           type: 'object',
           properties: {
-            kind: { type: 'string', enum: ['drawn', 'plot', 'shade', 'order', 'match', 'pick', 'fill', 'angles', 'symmetry', 'bond', 'sort', 'rounding', 'fractions', 'algebra', 'maplocate', 'mapline'] },
+            kind: { type: 'string', enum: ['drawn', 'plot', 'shade', 'order', 'match', 'pick', 'fill', 'angles', 'symmetry', 'bond', 'sort', 'rounding', 'fractions', 'algebra', 'maplocate', 'mapline', 'label', 'clockset', 'linedraw', 'angledraw', 'periodic'] },
+            labelDiagram: { type: 'string', enum: DIAGRAM_IDS },
             drawnKind: { type: 'string', enum: [...DRAWN_IDS, ...ACCOUNTING_IDS] },
             plotKind: { type: 'string', enum: ['grid', 'line'] },
             shadeN: { type: 'integer', minimum: 1, maximum: 11 },
@@ -141,7 +149,7 @@ const CLASSIFY_TOOL: Anthropic.Tool = {
   },
 }
 
-interface Raw { kind?: string; drawnKind?: unknown; plotKind?: unknown; shadeN?: unknown; shadeD?: unknown; orderTitle?: unknown; orderItems?: unknown; matchTitle?: unknown; matchPairs?: unknown; pickInstruction?: unknown; pickText?: unknown; pickTargets?: unknown; fillText?: unknown; fillAnswers?: unknown; fillDistractors?: unknown; angleKind?: unknown; algebra?: unknown; fracN?: unknown; fracD?: unknown; fracOf?: unknown; algebraType?: unknown; algebraExpr?: unknown; map?: unknown; targets?: unknown; fromPlace?: unknown; toPlace?: unknown; shape?: unknown; compound?: unknown; roundTo?: unknown; roundMax?: unknown; roundCount?: unknown; instruction?: unknown; categories?: unknown; sortItems?: unknown }
+interface Raw { kind?: string; labelDiagram?: unknown; drawnKind?: unknown; plotKind?: unknown; shadeN?: unknown; shadeD?: unknown; orderTitle?: unknown; orderItems?: unknown; matchTitle?: unknown; matchPairs?: unknown; pickInstruction?: unknown; pickText?: unknown; pickTargets?: unknown; fillText?: unknown; fillAnswers?: unknown; fillDistractors?: unknown; angleKind?: unknown; algebra?: unknown; fracN?: unknown; fracD?: unknown; fracOf?: unknown; algebraType?: unknown; algebraExpr?: unknown; map?: unknown; targets?: unknown; fromPlace?: unknown; toPlace?: unknown; shape?: unknown; compound?: unknown; roundTo?: unknown; roundMax?: unknown; roundCount?: unknown; instruction?: unknown; categories?: unknown; sortItems?: unknown }
 
 export async function interactiveForTopic(learner: Learner, topic: { id: string; title: string }, max: number, ctx: Ctx): Promise<InteractiveQuestion[]> {
   if (max <= 0) return []
@@ -202,6 +210,13 @@ export async function interactiveForTopic(learner: Learner, topic: { id: string;
       } else if (r?.kind === 'order' || r?.kind === 'match' || r?.kind === 'pick' || r?.kind === 'fill') {
         const a = buildAuthored(r)
         if (a) authored.push(a)
+      } else if (r?.kind === 'label' || r?.kind === 'clockset' || r?.kind === 'linedraw' || r?.kind === 'angledraw' || r?.kind === 'periodic') {
+        const dg = typeof r.labelDiagram === 'string' && DIAGRAM_IDS.includes(r.labelDiagram) ? r.labelDiagram : undefined
+        const key = `h:${r.kind}:${dg ?? ''}`
+        if (seen.has(key) && r.kind === 'label') continue
+        seen.add(key)
+        const h = buildHandsOn(r.kind, { grade: ctx.grade, diagram: dg })
+        if (h) built.push({ type: h.type, question: h.question, marks: h.marks, spec: h.spec, answerSpec: h.answerSpec, points: h.points })
       } else if (r?.kind === 'angles' && ANGLE_KINDS.includes(r.angleKind as AngleKind)) {
         const alg = r.algebra === true
         const key = `g:${r.angleKind}:${alg}`
@@ -236,18 +251,10 @@ export async function interactiveForTopic(learner: Learner, topic: { id: string;
         })
       } else if (r?.kind === 'rounding' && !seen.has('r')) {
         const n = typeof r.roundCount === 'number' ? Math.min(5, Math.max(3, Math.round(r.roundCount))) : 4
-        const ref = `rounding?to=${r.roundTo ?? 10}&max=${r.roundMax ?? 100}&n=${n}&mode=quick`
-        const frame = parseActivity(ref)
-        if (!frame) continue
+        const to = typeof r.roundTo === 'number' ? r.roundTo : 10
+        const g = makeRounding(to, typeof r.roundMax === 'number' ? r.roundMax : 100, n)
         seen.add('r')
-        built.push({
-          type: 'activity',
-          question: `Round ${n} numbers on the number line. Finish all ${n}.`,
-          marks: n,
-          spec: { ref: frame.ref, count: n },
-          answerSpec: { count: n, tool: 'rounding' },
-          points: Array.from({ length: n }, (_, k) => `Rounded number ${k + 1} correctly`),
-        })
+        built.push({ type: 'geometry', question: g.question, marks: g.marks, spec: g.spec, answerSpec: g.key, points: g.points })
       } else if (r?.kind === 'fractions' && !seen.has('f')) {
         const d = Number(r.fracD), n = Number(r.fracN), of = Number(r.fracOf)
         const frame = parseActivity(`fraction-fun?n=${n}&d=${d}&of=${of}`)

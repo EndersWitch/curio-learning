@@ -309,3 +309,16 @@
 .tb-bank { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .tb-chip { font: inherit; padding: 0.4rem 0.9rem; border-radius: 99px; border: 1.5px solid var(--ink15); background: var(--paper-raised); color: var(--ink); cursor: pointer; box-shadow: 0 2px 0 var(--ink15); }
 .tb-chip.used { opacity: 0.4; }
+
+/* ---- hands-on: clock, line, angle, periodic table ---- */
+.tb-clock { width: 100%; max-width: 280px; margin: 0 auto; display: block; user-select: none; cursor: grab; }
+.tb-angle { width: 100%; max-width: 420px; margin: 0 auto; display: block; border: 1px solid var(--ink15); border-radius: 12px; user-select: none; cursor: grab; }
+.tb-pt { display: grid; gap: 2px; width: 100%; max-width: 640px; margin: 0 auto; }
+.tb-ptcell { display: grid; place-items: center; padding: 0.15rem 0; min-width: 0; line-height: 1.05; background: var(--paper-raised); color: var(--ink); border: 1.5px solid var(--ink15); border-radius: 5px; cursor: pointer; font-family: var(--h); }
+.tb-ptcell small { font-size: 0.5rem; color: var(--ink70); }
+.tb-ptcell b { font-size: 0.78rem; }
+.tb-ptcell.on { border-color: var(--rust); background: var(--rust-tint); }
+.tb-ptcell.right { border-color: var(--moss); background: var(--moss12); }
+.tb-ptcell.missed { border-color: var(--moss); border-style: dashed; }
+.tb-ptcell.wrong { border-color: var(--brick); background: var(--brick10); }
+@media (max-width: 520px) { .tb-ptcell b { font-size: 0.62rem; } .tb-ptcell small { font-size: 0.42rem; } }

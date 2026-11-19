@@ -27,8 +27,8 @@ import {
 function describe(data: { error?: BloomErrorCode; reason?: BloomErrorReason }): string {
   if (data.error === 'closed') {
     return data.reason === 'not-tester'
-      ? 'Bloom is open to testers only, and this account is not one. Use an admin account, or add this email to BLOOM_TESTERS.'
-      : 'Bloom is switched off on this deployment. Set BLOOM_ACCESS to testers (or everyone) for this environment in Vercel, then redeploy.'
+      ? 'Dry Run is open to testers only, and this account is not one. Use an admin account, or add this email to BLOOM_TESTERS.'
+      : 'Dry Run is switched off on this deployment. Set BLOOM_ACCESS to testers (or everyone) for this environment in Vercel, then redeploy.'
   }
   if (data.error === 'setup' && data.reason === 'no-service-key') {
     return 'SUPABASE_SERVICE_ROLE_KEY is not reaching this deployment. Check it is set for this environment, then redeploy.'
@@ -41,7 +41,7 @@ function describe(data: { error?: BloomErrorCode; reason?: BloomErrorReason }): 
 const ERRORS: Partial<Record<BloomErrorCode, string>> = {
   signin: 'Please sign in to build a test.',
   closed: 'The test builder is not open yet.',
-  limit: 'Lots of learners are using Bloom right now. Try again in a minute.',
+  limit: 'Lots of learners are using Dry Run right now. Try again in a minute.',
   invalid: 'Check the details and try again.',
   setup: 'The test builder is not set up on this server yet.',
 }
@@ -64,7 +64,7 @@ export default function TestBuilderStart() {
   useEffect(() => {
     if (result) setTopicList(result.topics)
   }, [result])
-  // Rotates Bloom's line while questions are being written.
+  // Rotates the waiting line while questions are being written.
   useEffect(() => {
     if (!busy) return
     const t = setInterval(() => setTick(n => n + 1), 3500)
@@ -211,7 +211,7 @@ export default function TestBuilderStart() {
 
         <div className="tb-actions">
           {made ? (
-            <a className="btn-primary" href={`/bloom/tests/${made.sessionId}`}>Start the test</a>
+            <a className="btn-primary" href={`/dryrun/${made.sessionId}`}>Start the test</a>
           ) : (
             <button type="button" className="btn-primary" onClick={generate} disabled={busy}>
               {busy ? 'Writing questions…' : 'Make my test'}
@@ -235,7 +235,7 @@ export default function TestBuilderStart() {
     ['mcq', 'Multiple choice', 'Pick the right answer'],
     ['short', 'Short answer', 'A word or a few lines'],
     ['long', 'Long answer', 'Explain it properly'],
-    ['interactive', 'Hands-on', 'Draw, drag and sort'],
+    ['interactive', 'Hands-on', 'Draw, drag, label and tap'],
   ] as const
 
   return (
@@ -244,7 +244,7 @@ export default function TestBuilderStart() {
       <div className="tb-hello">
         <BloomBuddy mood={busy ? 'thinking' : scope ? 'listening' : 'idle'} size={84} entrance />
         <h1>What is your test <em>on</em>?</h1>
-        <p className="tb-sub">Type or paste what you need to know. Bloom will turn it into practice questions and mark them for you.</p>
+        <p className="tb-sub">Type or paste what your test covers. Curio will build a practice test, mark it, and show you where to improve.</p>
       </div>
 
       <label className="tb-field">
@@ -305,7 +305,7 @@ export default function TestBuilderStart() {
         <button type="submit" className="btn-primary" disabled={busy || noTypes || !scope.trim()}>
           {busy ? 'Finding topics…' : 'Find my topics'}
         </button>
-        <Link className="tb-link" href="/bloom/tests">My tests</Link>
+        <Link className="tb-link" href="/dryrun">My dry runs</Link>
       </div>
     </form>
   )

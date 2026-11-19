@@ -34,6 +34,8 @@ const nextConfig = {
   async redirects() {
     return [
       // Legacy .html links that floated around old pages → real routes
+      { source: '/bloom/tests', destination: '/dryrun', permanent: false },
+      { source: '/bloom/tests/:path*', destination: '/dryrun/:path*', permanent: false },
       { source: '/index.html', destination: '/', permanent: true },
       { source: '/login.html', destination: '/login', permanent: true },
       { source: '/quiz.html', destination: '/quiz', permanent: true },

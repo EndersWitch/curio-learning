@@ -35,13 +35,31 @@ export function matches(row: Row, grade: number, hay: string): boolean {
 export async function knowledgeFor(grade: number, subject: string | null, scope: string): Promise<string> {
   const hay = `${subject ?? ''} ${scope}`.toLowerCase()
   const rows = (await allApproved()).filter(r => matches(r, grade, hay))
-  if (!rows.length) return ''
-  const lines = rows.map(r => `- [${LABEL[r.kind] ?? r.kind}] ${r.title}: ${r.body}`)
+  const defs = await definitionsFor(grade, hay)
+  if (!rows.length && !defs.length) return ''
+  const lines = [
+    ...rows.map(r => `- [${LABEL[r.kind] ?? r.kind}] ${r.title}: ${r.body}`),
+    ...defs.map(d => `- [EXACT DEFINITION] ${d.term}: ${d.definition_text}`),
+  ]
   return (
     `VERIFIED REFERENCE (checked against South African sources). Follow it exactly. It overrides your own memory. ` +
     `If a question would need a term, rule or figure that is not covered here and you are not completely certain of it, write a different question.\n` +
     lines.join('\n')
   )
+}
+
+type Def = { subject: string; grade: number | null; term: string; definition_text: string }
+let defCache: { at: number; rows: Def[] } | null = null
+
+/** Definitions an admin has verified word for word. Questions that ask for one must use this wording in the memo. */
+async function definitionsFor(grade: number, hay: string): Promise<Def[]> {
+  if (!defCache || Date.now() - defCache.at > 5 * 60_000) {
+    const sb = serviceClient()
+    if (!sb) return []
+    const { data } = await sb.from('verified_definitions').select('subject, grade, term, definition_text').limit(500)
+    defCache = { at: Date.now(), rows: (data ?? []) as Def[] }
+  }
+  return defCache.rows.filter(d => (d.grade === null || Math.abs(d.grade - grade) <= 1) && new RegExp(`\\b${d.subject.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(hay)).slice(0, 40)
 }
 
 /** Forbidden names for a cheap code-side filter on generated text. */
