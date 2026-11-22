@@ -17,7 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const levels = await getLevelSummaries()
 
   return [
-    ...['/', '/papers', '/quiz', '/subjects', '/about', '/contact', '/privacy', '/terms'].map((p) => ({ url: loc(p) })),
+    ...['/', '/papers', '/quiz', '/whizz', '/subjects', '/about', '/contact', '/privacy', '/terms'].map((p) => ({ url: loc(p) })),
     ...ALL_GRADES.map((g) => ({ url: loc(`/subjects/grade-${g}`) })),
     ...ALL_SUBJECTS.map((s) => ({ url: loc(`/subjects/grade-${s.grade}/${s.slug}`) })),
     ...groupTopics(levels).map((t) => ({ url: loc(topicHref(t)) })),

@@ -350,3 +350,9 @@
   .wz-hero { padding: 1.4rem 1.1rem 1.3rem; box-shadow: 4px 4px 0 var(--ink); }
   .wz-cta { width: 100%; text-align: center; }
 }
+
+.wz-faq { display: grid; gap: 0.5rem; }
+.wz-faq details { border: 2px solid var(--ink15); border-radius: 14px; background: var(--paper-raised); padding: 0.7rem 0.9rem; }
+.wz-faq summary { cursor: pointer; font-family: var(--h); font-weight: 700; }
+.wz-faq details[open] { border-color: var(--ink); }
+.wz-faq p { margin-top: 0.5rem; opacity: 0.85; }

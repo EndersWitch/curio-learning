@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
+import { WHIZZ_FAQ } from '@/lib/testbuilder/whizzFaq'
 import { Zap, PenLine, ListChecks, Trophy } from '@/components/icons'
 
 interface Row {
@@ -82,7 +83,16 @@ export default function MyTests() {
     </>
   )
 
-  if (loading || rows === null || !user) return <div className="tb-stack" style={{ gap: '1.2rem' }}>{hero}</div>
+  const faq = (
+    <section className="wz-faq" aria-label="Questions about Whizz">
+      <h2 className="wz-h2">Questions</h2>
+      {WHIZZ_FAQ.map(f => (
+        <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>
+      ))}
+    </section>
+  )
+
+  if (loading || rows === null || !user) return <div className="tb-stack" style={{ gap: '1.2rem' }}>{hero}{faq}</div>
 
   const done = rows.filter(r => r.status === 'marked' && r.marks_total)
   const earned = done.reduce((n, r) => n + (r.marks_awarded ?? 0), 0)
@@ -99,6 +109,7 @@ export default function MyTests() {
           <div className="tb-stat"><b>{best}%</b><span>best score</span></div>
         </div>
       )}
+      {rows.length === 0 && faq}
       <div className="tb-list">
         {rows.map(r => {
           const isMarked = r.status === 'marked' && r.marks_total

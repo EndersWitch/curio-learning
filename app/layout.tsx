@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     template: '%s · curio learning',
   },
   description:
-    'Free CAPS-aligned practice papers with full memos, English Home Language quizzes for Grades 4 to 7, and subject guides for Grades 4 to 12. More is added all the time.',
+    'Free CAPS-aligned practice papers with full memos, quizzes, and subject guides for Grades 4 to 12. Premium adds Whizz, a practice-test maker, and Bloom, an AI tutor.',
   keywords: [
     'CAPS', 'practice papers', 'memos', 'South Africa', 'English Home Language',
     'Grade 4', 'Grade 7', 'quizzes', 'subject guides', 'study',
