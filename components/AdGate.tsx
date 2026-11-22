@@ -19,7 +19,7 @@ export default function AdGate() {
     let cancelled = false
 
     // Auto Ads can pin an anchor ad over the Bloom chat's question box.
-    if (window.location.pathname.startsWith('/bloom') || window.location.pathname.startsWith('/dryrun')) return
+    if (window.location.pathname.startsWith('/bloom') || window.location.pathname.startsWith('/whizz')) return
 
     async function check() {
       try {

@@ -70,7 +70,7 @@ export default function MyTests() {
 
   return (
     <div className="tb-stack" style={{ gap: '1.2rem' }}>
-      <h1>My dry runs</h1>
+      <h1>My Whizz tests</h1>
       {done.length > 0 && (
         <div className="tb-stats">
           <div className="tb-stat"><b>{earned}</b><span>marks earned</span></div>
@@ -78,8 +78,8 @@ export default function MyTests() {
           <div className="tb-stat"><b>{best}%</b><span>best score</span></div>
         </div>
       )}
-      <div className="tb-actions"><Link className="tb-btn" href="/dryrun/new">Start a new dry run</Link></div>
-      {rows.length === 0 && <p className="tb-muted">No dry runs yet. Tell Curio what your test covers and it will build one.</p>}
+      <div className="tb-actions"><Link className="tb-btn" href="/whizz/new">Start a new test</Link></div>
+      {rows.length === 0 && <p className="tb-muted">No tests yet. Tell Curio what your test covers and it will build one.</p>}
       <div className="tb-list">
         {rows.map(r => {
           const isMarked = r.status === 'marked' && r.marks_total
@@ -88,7 +88,7 @@ export default function MyTests() {
           const resumable = ['ready', 'in_progress', 'submitted'].includes(r.status)
           if (!isMarked && !resumable) return null
           return (
-            <Link key={r.id} href={`/dryrun/${r.id}`} className="tb-test">
+            <Link key={r.id} href={`/whizz/${r.id}`} className="tb-test">
               <div className="tb-trow-top">
                 <span className="tb-trow-name">{r.subject || 'Test'}{r.grade ? ` · Grade ${r.grade}` : ''}</span>
                 {isMarked ? <span className="tb-medal" style={{ background: m.bg }}>{m.label}</span> : <span className="tb-medal">{r.status === 'submitted' ? 'Waiting for marks' : 'In progress'}</span>}

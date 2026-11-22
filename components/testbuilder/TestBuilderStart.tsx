@@ -28,8 +28,8 @@ import {
 function describe(data: { error?: BloomErrorCode; reason?: BloomErrorReason }): string {
   if (data.error === 'closed') {
     return data.reason === 'not-tester'
-      ? 'Dry Run is open to testers only, and this account is not one. Use an admin account, or add this email to BLOOM_TESTERS.'
-      : 'Dry Run is switched off on this deployment. Set BLOOM_ACCESS to testers (or everyone) for this environment in Vercel, then redeploy.'
+      ? 'Curio Whizz is open to testers only, and this account is not one. Use an admin account, or add this email to BLOOM_TESTERS.'
+      : 'Curio Whizz is switched off on this deployment. Set BLOOM_ACCESS to testers (or everyone) for this environment in Vercel, then redeploy.'
   }
   if (data.error === 'limit' && data.reason === 'daily') return 'You have built all your tests for today. They come back tomorrow, and Premium gets more.'
   if (data.error === 'setup' && data.reason === 'no-service-key') {
@@ -43,7 +43,7 @@ function describe(data: { error?: BloomErrorCode; reason?: BloomErrorReason }): 
 const ERRORS: Partial<Record<BloomErrorCode, string>> = {
   signin: 'Please sign in to build a test.',
   closed: 'The test builder is not open yet.',
-  limit: 'Lots of learners are using Dry Run right now. Try again in a minute.',
+  limit: 'Lots of learners are using Curio Whizz right now. Try again in a minute.',
   invalid: 'Check the details and try again.',
   setup: 'The test builder is not set up on this server yet.',
 }
@@ -214,7 +214,7 @@ export default function TestBuilderStart() {
 
         <div className="tb-actions">
           {made ? (
-            <a className="btn-primary" href={`/dryrun/${made.sessionId}`}>Start the test</a>
+            <a className="btn-primary" href={`/whizz/${made.sessionId}`}>Start the test</a>
           ) : (
             <button type="button" className="btn-primary" onClick={generate} disabled={busy}>
               {busy ? 'Writing questions…' : 'Make my test'}
@@ -310,7 +310,7 @@ export default function TestBuilderStart() {
         <button type="submit" className="btn-primary" disabled={busy || noTypes || !scope.trim()}>
           {busy ? 'Finding topics…' : 'Find my topics'}
         </button>
-        <Link className="tb-link" href="/dryrun">My dry runs</Link>
+        <Link className="tb-link" href="/whizz">My Whizz tests</Link>
       </div>
     </form>
   )

@@ -19,7 +19,7 @@ const TABS = [
 // the focused quiz-taking / lesson flows (they have their own exit), and the
 // Bloom chat, whose question box lives where the bar would be.
 function isHidden(pathname: string) {
-  if (pathname.startsWith('/login') || pathname.startsWith('/bloom') || pathname.startsWith('/dryrun')) return true
+  if (pathname.startsWith('/login') || pathname.startsWith('/bloom') || pathname.startsWith('/whizz')) return true
   return /^\/quiz\/[^/]+\/[^/]+\/(play|learn)/.test(pathname)
 }
 

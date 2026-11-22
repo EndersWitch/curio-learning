@@ -9,7 +9,7 @@ export const BLOOM_GRADES = [4, 5, 6, 7, 8, 9, 10, 11, 12] as const
 export const DAILY_LIMITS = { free: 3, premium: 20, tester: 150 } as const
 export type BloomTier = keyof typeof DAILY_LIMITS
 
-// Dry Run tests a learner can build per South African day. Building one costs many AI calls, so this is the main cost guard.
+// Whizz tests a learner can build per South African day. Building one costs many AI calls, so this is the main cost guard.
 export const TEST_DAILY_LIMITS = { free: 2, premium: 30, tester: 30 } as const
 
 export const MAX_QUESTION_CHARS = 1500

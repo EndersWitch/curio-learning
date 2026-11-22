@@ -394,7 +394,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
       if (!made.ok || !next) return setError("Couldn't set up the practice test. Try again.")
       const gen = await fetch('/api/tests/generate', { method: 'POST', headers, body: JSON.stringify({ sessionId: next }) })
       if (!gen.ok) return setError("Couldn't write the practice questions. Try again.")
-      window.location.href = `/dryrun/${next}`
+      window.location.href = `/whizz/${next}`
     } catch {
       setError("Couldn't set up the practice test. Try again.")
     } finally {
@@ -569,8 +569,8 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
           )}
         </div>
         <div className="tb-actions">
-          <Link className="tb-link" href="/dryrun">My dry runs</Link>
-          <Link className="tb-link" href="/dryrun/new">Start another dry run</Link>
+          <Link className="tb-link" href="/whizz">My Whizz tests</Link>
+          <Link className="tb-link" href="/whizz/new">Start another test</Link>
         </div>
         <QuizRating sessionId={sessionId} />
       </div>
