@@ -13,6 +13,7 @@ import {
 } from '@/lib/testbuilder/interactive'
 import { DRAWN, DRAWN_IDS, makeDrawn, makeRounding } from '@/lib/testbuilder/drawn'
 import { DIAGRAMS, DIAGRAM_IDS, buildHandsOn } from '@/lib/testbuilder/handson-gen'
+import { TOPO, TOPO_IDS, makeTopo } from '@/lib/testbuilder/topo'
 import { ACCOUNTING, ACCOUNTING_IDS, makeAccounting } from '@/lib/testbuilder/accounting'
 import { stripWord, type FillSpec, type MatchSpec, type OrderSpec, type PickSpec, type PlotSpec } from '@/lib/testbuilder/authored'
 import { ANGLE_KINDS, makeGeometry, type AngleKind } from '@/lib/testbuilder/geometry'
@@ -41,6 +42,8 @@ The kinds you can choose from:
 - angles: a drawn diagram (angles on a straight line, vertically opposite angles, parallel lines cut by a transversal, angles in a triangle, isosceles triangles, exterior angles) where the learner finds an angle or the value of x and gives the geometry reason. This is the kind for Euclidean geometry, geometry of straight lines and triangles, and angle questions, roughly Grades 8 to 10. Pick the angleKind that fits the topic, and set algebra true for harder questions with expressions like (3x+10) degrees.
 - drawn: a picture drawn for the learner (a clock, ruler, protractor, shaded fraction, bar chart, dot plot, pie chart, coordinate grid, line graph, base-ten blocks, thermometer, measuring cylinder, circuit, wave, distance-time graph, force arrows, mirror, supply and demand graph, Bohr atom, shapes with measurements, circle geometry, or an equation to balance) where the learner reads or works out a value and types it. Choose drawnKind to match the topic and grade:
 ${DRAWN.map(d => `    ${d.id}: ${d.use}`).join('\n')}
+- topo: a topographic map in the style of a South African 1:50 000 sheet (made-up terrain, 20 m contours) where the learner reads heights, works out a real distance or a gradient. Use for geography mapwork, and use drawnKind to give the id:
+${TOPO.map(d => `    ${d.id}: ${d.use}`).join('\n')}
 - accounting: a small table of figures (an invoice, a journal, a budget, an asset, a creditor's account) where the learner works out amounts and types them; the code calculates every answer. ALWAYS use these for accounting, EMS and financial literacy topics that involve calculations, and use drawnKind to give the id, choosing by grade:
 ${ACCOUNTING.map(d => `    ${d.id}: ${d.use}`).join('\n')}
 - plot: the learner clicks a point on a coordinate grid (plotKind "grid", Grades 7 to 10) or clicks a number on a number line (plotKind "line", Grades 3 to 8, for whole numbers, decimals, negative numbers). Use for topics on coordinates, the Cartesian plane, number lines, ordering or placing numbers.
@@ -84,7 +87,7 @@ const PLAN_TOOL: Anthropic.Tool = {
           properties: {
             kind: { type: 'string', enum: ['drawn', 'plot', 'shade', 'order', 'match', 'pick', 'fill', 'angles', 'symmetry', 'bond', 'sort', 'rounding', 'fractions', 'algebra', 'maplocate', 'mapline', 'label', 'clockset', 'linedraw', 'angledraw', 'periodic'] },
             labelDiagram: { type: 'string', enum: DIAGRAM_IDS },
-            drawnKind: { type: 'string', enum: [...DRAWN_IDS, ...ACCOUNTING_IDS] },
+            drawnKind: { type: 'string', enum: [...DRAWN_IDS, ...ACCOUNTING_IDS, ...TOPO_IDS] },
             plotKind: { type: 'string', enum: ['grid', 'line'] },
             shadeN: { type: 'integer', minimum: 1, maximum: 11 },
             shadeD: { type: 'integer', minimum: 2, maximum: 12 },
@@ -181,10 +184,10 @@ export async function interactiveForTopic(learner: Learner, topic: { id: string;
     const sorts: { q: InteractiveQuestion; spec: SortSpec; answer: SortAnswer }[] = []
     const authored: Authored[] = []
     for (const r of (raw as Raw[]).slice(0, max)) {
-      if (r?.kind === 'drawn' && typeof r.drawnKind === 'string' && (DRAWN_IDS.includes(r.drawnKind) || ACCOUNTING_IDS.includes(r.drawnKind))) {
+      if (r?.kind === 'drawn' && typeof r.drawnKind === 'string' && (DRAWN_IDS.includes(r.drawnKind) || ACCOUNTING_IDS.includes(r.drawnKind) || TOPO_IDS.includes(r.drawnKind))) {
         const key = `d:${r.drawnKind}`
         if (seen.has(key)) continue
-        const g = ACCOUNTING_IDS.includes(r.drawnKind) ? makeAccounting(r.drawnKind) : makeDrawn(r.drawnKind)
+        const g = TOPO_IDS.includes(r.drawnKind) ? makeTopo(r.drawnKind) : ACCOUNTING_IDS.includes(r.drawnKind) ? makeAccounting(r.drawnKind) : makeDrawn(r.drawnKind)
         if (!g) continue
         seen.add(key)
         built.push({ type: 'geometry', question: g.question, marks: g.marks, spec: g.spec, answerSpec: g.key, points: g.points })
