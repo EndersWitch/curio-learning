@@ -356,3 +356,8 @@
 .wz-faq summary { cursor: pointer; font-family: var(--h); font-weight: 700; }
 .wz-faq details[open] { border-color: var(--ink); }
 .wz-faq p { margin-top: 0.5rem; opacity: 0.85; }
+
+.tb-ask-btn { display: inline-flex; align-items: center; gap: 0.45rem; justify-self: start; font-family: var(--h); font-weight: 700; font-size: 0.95rem; background: var(--paper-raised); color: var(--ink); border: 2px solid var(--ink); border-radius: 99px; padding: 0.4rem 0.95rem; box-shadow: 3px 3px 0 var(--ink); cursor: pointer; transition: transform .12s, box-shadow .12s; }
+.tb-ask-btn:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); }
+.tb-ask-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tb-chip-btn { font: inherit; font-size: 0.85rem; background: var(--rust-tint); color: var(--ink); border: 1.5px solid var(--rust); border-radius: 99px; padding: 0.25rem 0.7rem; cursor: pointer; }

@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 import { sb } from '@/lib/supabase'
+import Bloom from '@/components/Bloom'
 
-// A small chat under one question on the marked paper. It uses the same
+// Bloom, under one question on the marked paper. It uses the same
 // daily allowance as the tutor chat, so the limit is shown after each reply.
 export default function AskAboutQuestion({ questionId }: { questionId: string }) {
   const [open, setOpen] = useState(false)
@@ -13,8 +14,8 @@ export default function AskAboutQuestion({ questionId }: { questionId: string })
   const [note, setNote] = useState('')
   const [left, setLeft] = useState<number | null>(null)
 
-  async function send() {
-    const message = text.trim()
+  async function send(preset?: string) {
+    const message = (preset ?? text).trim()
     if (!message || busy) return
     setBusy(true); setNote('')
     try {
@@ -39,7 +40,7 @@ export default function AskAboutQuestion({ questionId }: { questionId: string })
     }
   }
 
-  if (!open) return <button type="button" className="tb-link" onClick={() => setOpen(true)}>Ask about this question</button>
+  if (!open) return <button type="button" className="tb-ask-btn" onClick={() => setOpen(true)}><Bloom size={22} />Ask Bloom why</button>
   return (
     <div className="tb-ask">
       {turns.map((t, i) => (
@@ -48,9 +49,15 @@ export default function AskAboutQuestion({ questionId }: { questionId: string })
           <p className="tb-ask-a">{t.a}</p>
         </div>
       ))}
+      {turns.length === 0 && !busy && (
+        <div className="tb-ask-chips">
+          <button type="button" className="tb-chip-btn" onClick={() => send('Why did I lose marks here?')}>Why did I lose marks?</button>
+          <button type="button" className="tb-chip-btn" onClick={() => send('Can you explain this another way?')}>Explain it another way</button>
+        </div>
+      )}
       <div style={{ display: 'flex', gap: '0.4rem' }}>
         <input className="tb-text" style={{ minHeight: 0, flex: 1 }} value={text} maxLength={800} placeholder={turns.length ? 'Ask a follow-up' : 'Why did I lose marks here?'} onChange={e => setText(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') send() }} disabled={busy} />
-        <button type="button" className="tb-btn" onClick={send} disabled={busy || !text.trim()}>{busy ? 'Thinking…' : 'Ask'}</button>
+        <button type="button" className="tb-btn" onClick={() => send()} disabled={busy || !text.trim()}>{busy ? 'Thinking…' : 'Ask'}</button>
       </div>
       {note && <p className="tb-muted">{note}</p>}
       {left !== null && <p className="tb-muted">{left} {left === 1 ? 'question' : 'questions'} left today.</p>}
