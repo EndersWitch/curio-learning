@@ -1,6 +1,7 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { sb } from '@/lib/supabase'
 
 type Entry = { id: string; kind: string; title: string; body?: string; subjects: string[]; grade_min: number; grade_max: number; source_url?: string | null; origin?: string; note?: string | null; verified_at?: string | null }
 type Rating = { id: string; rating: number; comment: string | null; triage: string | null; created_at: string }
@@ -10,7 +11,7 @@ const box: React.CSSProperties = { border: '2px solid #222', padding: '0.8rem', 
 const btn: React.CSSProperties = { border: '2px solid #222', background: '#fff', padding: '0.35rem 0.7rem', fontWeight: 700, cursor: 'pointer', marginRight: '0.4rem' }
 
 export default function KnowledgeAdmin() {
-  const [pw, setPw] = useState('')
+  const [signedIn, setSignedIn] = useState<boolean | null>(null)
   const [proposed, setProposed] = useState<Entry[]>([])
   const [approved, setApproved] = useState<Entry[]>([])
   const [flags, setFlags] = useState<Flag[]>([])
@@ -20,13 +21,16 @@ export default function KnowledgeAdmin() {
   const [form, setForm] = useState({ kind: 'term', title: '', body: '', subjects: '', gradeMin: '1', gradeMax: '12', sourceUrl: '' })
 
   const call = useCallback(async (method: 'GET' | 'POST', body?: unknown) => {
-    const res = await fetch('/api/admin/knowledge', { method, headers: { 'x-admin-password': pw, 'content-type': 'application/json' }, body: body ? JSON.stringify(body) : undefined })
+    const { data: s } = await sb.auth.getSession()
+    const token = s.session?.access_token
+    if (!token) return { ok: false, data: { error: 'signin' } }
+    const res = await fetch('/api/admin/knowledge', { method, headers: { Authorization: `Bearer ${token}`, 'content-type': 'application/json' }, body: body ? JSON.stringify(body) : undefined })
     return { ok: res.ok, data: await res.json().catch(() => ({})) }
-  }, [pw])
+  }, [])
 
   const load = useCallback(async () => {
     const { ok, data } = await call('GET')
-    if (!ok) return setMsg('Wrong password or the server is not set up.')
+    if (!ok) return setMsg('This page is for Curio admins. Sign in with your admin account, then reload.')
     setProposed(data.proposed ?? []); setApproved(data.approved ?? []); setFlags(data.flags ?? []); setRatings(data.ratings ?? []); setMsg('')
   }, [call])
 
@@ -37,11 +41,13 @@ export default function KnowledgeAdmin() {
     await load()
   }
 
+  useEffect(() => { sb.auth.getSession().then(({ data }) => { setSignedIn(!!data.session); if (data.session) load() }) }, [load])
+
   return (
     <main style={{ maxWidth: 820, margin: '0 auto', padding: '1.2rem', fontFamily: 'Arial, sans-serif', color: '#222', background: '#f7f3ea', minHeight: '100vh' }}>
       <h1 style={{ margin: '0 0 0.8rem' }}>Test builder: knowledge review</h1>
       <div style={box}>
-        <input type="password" placeholder="Admin password" value={pw} onChange={e => setPw(e.target.value)} style={{ padding: '0.4rem', border: '2px solid #222', marginRight: '0.5rem' }} />
+        {signedIn === false && <p style={{ margin: '0 0 0.5rem' }}>You are not signed in. Sign in to Curio with your admin account in this browser, then reload this page.</p>}
         <button style={btn} onClick={load}>Load</button>
         <button style={btn} onClick={() => act('run')}>Run learning now</button>
         {msg && <p style={{ margin: '0.5rem 0 0' }}>{msg}</p>}

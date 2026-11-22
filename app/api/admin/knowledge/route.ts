@@ -1,17 +1,15 @@
 import { NextResponse } from 'next/server'
-import { sameSecret } from '@/lib/testbuilder/secret'
+import { isAdminRequest } from '@/lib/testbuilder/adminAuth'
 import { serviceClient } from '@/lib/testbuilder/admin'
 import { refreshFacts, triageFeedback, triageFlags } from '@/lib/testbuilder/learn'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 300
 
-function authed(req: Request): boolean {
-  return sameSecret(req.headers.get('x-admin-password'), process.env.ADMIN_PASSWORD)
-}
+const authed = isAdminRequest
 
 export async function GET(req: Request) {
-  if (!authed(req)) return NextResponse.json({ error: 'unauthorised' }, { status: 401 })
+  if (!(await authed(req))) return NextResponse.json({ error: 'unauthorised' }, { status: 401 })
   const sb = serviceClient()
   if (!sb) return NextResponse.json({ error: 'no service key' }, { status: 500 })
   const [{ data: proposed }, { data: approved }, { data: flags }, { data: ratings }] = await Promise.all([
@@ -25,7 +23,7 @@ export async function GET(req: Request) {
 
 // { action: 'approve' | 'reject' | 'add' | 'run' , id?, entry? }
 export async function POST(req: Request) {
-  if (!authed(req)) return NextResponse.json({ error: 'unauthorised' }, { status: 401 })
+  if (!(await authed(req))) return NextResponse.json({ error: 'unauthorised' }, { status: 401 })
   const sb = serviceClient()
   if (!sb) return NextResponse.json({ error: 'no service key' }, { status: 500 })
   const b = (await req.json().catch(() => ({}))) as { action?: string; id?: string; entry?: Record<string, unknown>; flagId?: string; flagStatus?: string }
