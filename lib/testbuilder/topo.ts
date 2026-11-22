@@ -19,7 +19,10 @@ function noise(seed: number) {
   }
 }
 
-interface Terrain { h: number[][]; min: number; max: number; peak: { x: number; y: number } }
+export interface Terrain { h: number[][]; min: number; max: number; peak: { x: number; y: number } }
+/** Real-world features in map pixels (0 to 480), already clipped to the sheet. */
+export interface Overlay { roads: [number, number][][]; water: [number, number][][]; buildings: [number, number][] }
+export interface Sheet { terrain: Terrain; overlay?: Overlay; credit?: string; place?: string }
 function makeTerrain(): Terrain {
   const base = pick([980, 1120, 1240, 1380, 1460]), seed = Math.random() * 1000, nz = noise(seed)
   const hills = Array.from({ length: rnd(3, 4) }, () => ({ x: Math.random(), y: Math.random(), s: 0.16 + Math.random() * 0.14, a: 70 + Math.random() * 90 }))
@@ -79,8 +82,15 @@ function riverPath(t: Terrain): [number, number][] {
   return path.map(([a, b]) => [Math.min(MAP, Math.max(0, a)), Math.min(MAP, Math.max(0, b))] as [number, number])
 }
 
-export function drawTopo(): { svg: string; t: Terrain; segs: Map<number, Seg[]> } {
-  const t = makeTerrain(), segs = new Map<number, Seg[]>()
+export const GRID = N
+export function terrainFromGrid(h: number[][]): Terrain {
+  let min = Infinity, max = -Infinity, peak = { x: 0, y: 0 }
+  for (let j = 0; j <= N; j++) for (let i = 0; i <= N; i++) { const z = h[j]![i]!; if (z < min) min = z; if (z > max) { max = z; peak = { x: i, y: j } } }
+  return { h, min, max, peak }
+}
+
+export function drawTopo(sheet?: Sheet): { svg: string; t: Terrain; segs: Map<number, Seg[]> } {
+  const t = sheet?.terrain ?? makeTerrain(), segs = new Map<number, Seg[]>(), ov = sheet?.overlay
   const lo = Math.ceil(t.min / INTERVAL) * INTERVAL, hi = Math.floor(t.max / INTERVAL) * INTERVAL
   for (let L = lo; L <= hi; L += INTERVAL) segs.set(L, contourSegs(t, L))
   const body: string[] = []
@@ -90,24 +100,28 @@ export function drawTopo(): { svg: string; t: Terrain; segs: Map<number, Seg[]> 
     const idx = L % 100 === 0
     body.push(`<path d="${ss.map(s => `M${s[0].toFixed(1)} ${s[1].toFixed(1)}L${s[2].toFixed(1)} ${s[3].toFixed(1)}`).join('')}" fill="none" stroke="#b5702f" stroke-width="${idx ? 1.9 : 0.9}" stroke-linecap="round"/>`)
   }
-  // river
-  const rp = riverPath(t)
-  body.push(`<polyline points="${rp.map(p => p.map(v => v.toFixed(1)).join(',')).join(' ')}" fill="none" stroke="#2f7fd1" stroke-width="2.2" stroke-linejoin="round"/>`)
-  // road along low ground, left to right
-  const road: [number, number][] = []
-  for (let i = 0; i <= 24; i++) {
-    const x = (i / 24) * MAP; let bestY = MAP / 2, bz = Infinity
-    for (let y = 60; y < MAP - 60; y += 8) { const z = heightAt(t, x, y) + Math.abs(y - MAP / 2) * 0.05; if (z < bz) { bz = z; bestY = y } }
-    road.push([x, bestY])
-  }
-  const sm = road.map((p, i) => { const a = road[Math.max(0, i - 1)]!, b = road[Math.min(road.length - 1, i + 1)]!; return [(a[0] + p[0] + b[0]) / 3, (a[1] + p[1] + b[1]) / 3] as [number, number] })
-  const rd = sm.map(p => p.map(v => v.toFixed(1)).join(',')).join(' ')
-  body.push(`<polyline points="${rd}" fill="none" stroke="#7a2a1a" stroke-width="4.2" stroke-linejoin="round"/><polyline points="${rd}" fill="none" stroke="#f0a58a" stroke-width="2.4" stroke-linejoin="round"/>`)
-  for (let k = 0; k < 5; k++) { const p = sm[rnd(2, sm.length - 3)]!, off = (Math.random() < 0.5 ? -1 : 1) * rnd(9, 16); body.push(`<rect x="${(p[0] + rnd(-6, 6)).toFixed(1)}" y="${(p[1] + off).toFixed(1)}" width="6" height="6" fill="#222"/>`) }
-  // trig beacon on the highest point
+  const line = (pts: [number, number][]) => pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ')
   const px = t.peak.x * CELL, py = t.peak.y * CELL
-  body.push(`<polygon points="${px},${py - 7} ${px - 6},${py + 4} ${px + 6},${py + 4}" fill="none" stroke="#222" stroke-width="1.6"/><circle cx="${px}" cy="${py}" r="1.3" fill="#222"/>`)
-  body.push(`<text x="${px + 9}" y="${py + 3}" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="700" fill="#222">${comma(Math.round(t.max * 10) / 10)}</text>`)
+  if (ov) {
+    for (const w of ov.water) body.push(`<polyline points="${line(w)}" fill="none" stroke="#2f7fd1" stroke-width="1.8" stroke-linejoin="round"/>`)
+    for (const r of ov.roads) body.push(`<polyline points="${line(r)}" fill="none" stroke="#7a2a1a" stroke-width="3.6" stroke-linejoin="round"/><polyline points="${line(r)}" fill="none" stroke="#f0a58a" stroke-width="2" stroke-linejoin="round"/>`)
+    for (const b of ov.buildings.slice(0, 60)) body.push(`<rect x="${(b[0] - 2.5).toFixed(1)}" y="${(b[1] - 2.5).toFixed(1)}" width="5" height="5" fill="#222"/>`)
+    body.push(`<circle cx="${px}" cy="${py}" r="2.6" fill="#222"/><text x="${Math.min(px + 7, MAP - 30)}" y="${Math.max(py + 3, 12)}" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="700" fill="#222">${Math.round(t.max)}</text>`)
+  } else {
+    const rp = riverPath(t)
+    body.push(`<polyline points="${line(rp)}" fill="none" stroke="#2f7fd1" stroke-width="2.2" stroke-linejoin="round"/>`)
+    const road: [number, number][] = []
+    for (let i = 0; i <= 24; i++) {
+      const x = (i / 24) * MAP; let bestY = MAP / 2, bz = Infinity
+      for (let y = 60; y < MAP - 60; y += 8) { const z = heightAt(t, x, y) + Math.abs(y - MAP / 2) * 0.05; if (z < bz) { bz = z; bestY = y } }
+      road.push([x, bestY])
+    }
+    const sm = road.map((p, i) => { const a = road[Math.max(0, i - 1)]!, b = road[Math.min(road.length - 1, i + 1)]!; return [(a[0] + p[0] + b[0]) / 3, (a[1] + p[1] + b[1]) / 3] as [number, number] })
+    body.push(`<polyline points="${line(sm)}" fill="none" stroke="#7a2a1a" stroke-width="4.2" stroke-linejoin="round"/><polyline points="${line(sm)}" fill="none" stroke="#f0a58a" stroke-width="2.4" stroke-linejoin="round"/>`)
+    for (let k = 0; k < 5; k++) { const p = sm[rnd(2, sm.length - 3)]!, off = (Math.random() < 0.5 ? -1 : 1) * rnd(9, 16); body.push(`<rect x="${(p[0] + rnd(-6, 6)).toFixed(1)}" y="${(p[1] + off).toFixed(1)}" width="6" height="6" fill="#222"/>`) }
+    body.push(`<polygon points="${px},${py - 7} ${px - 6},${py + 4} ${px + 6},${py + 4}" fill="none" stroke="#222" stroke-width="1.6"/><circle cx="${px}" cy="${py}" r="1.3" fill="#222"/>`)
+    body.push(`<text x="${px + 9}" y="${py + 3}" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="700" fill="#222">${comma(Math.round(t.max * 10) / 10)}</text>`)
+  }
   // index contour labels
   for (const [L, ss] of segs) {
     if (L % 100 !== 0 || ss.length < 12) continue
@@ -116,9 +130,9 @@ export function drawTopo(): { svg: string; t: Terrain; segs: Map<number, Seg[]> 
     const s = cand[Math.floor(cand.length * (0.25 + Math.random() * 0.5))]!
     body.push(`<rect x="${(s[0] - 14).toFixed(1)}" y="${(s[1] - 6).toFixed(1)}" width="28" height="12" fill="#fbf8ef"/><text x="${s[0].toFixed(1)}" y="${(s[1] + 3.6).toFixed(1)}" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9.5" font-weight="700" fill="#7a4a14">${L}</text>`)
   }
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${MAP + OX * 2} ${MAP + OY * 2 + 36}" width="${MAP + OX * 2}" height="${MAP + OY * 2 + 36}"><rect width="100%" height="100%" fill="#fff"/><g transform="translate(${OX},${OY})">${body.join('')}</g>`
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${MAP + OX * 2} ${MAP + OY * 2 + 62}" width="${MAP + OX * 2}" height="${MAP + OY * 2 + 62}"><rect width="100%" height="100%" fill="#fff"/><g transform="translate(${OX},${OY})">${body.join('')}</g>`
     + `<rect x="${OX}" y="${OY}" width="${MAP}" height="${MAP}" fill="none" stroke="#222" stroke-width="2"/>`
-    + `<g font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#222"><text x="${OX}" y="${OY + MAP + 24}">1 : 50 000 (1 cm = 500 m)</text><text x="${OX + MAP - 4}" y="${OY + MAP + 24}" text-anchor="end">Contour interval ${INTERVAL} m</text></g>`
+    + `<g font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#222"><text x="${OX}" y="${OY + MAP + 24}">1 : 50 000 (1 cm = 500 m)</text><text x="${OX + MAP - 4}" y="${OY + MAP + 24}" text-anchor="end">Contour interval ${INTERVAL} m</text>${sheet?.credit ? sheet.credit.split('; ').map((ln, i) => `<text x="${OX}" y="${OY + MAP + 42 + i * 12}" font-size="9" fill="#555">${ln.replace(/&/g, '&amp;')}${i === 0 ? ';' : ''}</text>`).join('') : ''}</g>`
     + `<g transform="translate(${OX + MAP - 20},${OY + 26})"><polygon points="0,-16 6,6 0,2 -6,6" fill="#222"/><text x="0" y="20" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#222">N</text></g></svg>`
   return { svg, t, segs }
 }
@@ -142,15 +156,16 @@ export const TOPO = [
 ]
 export const TOPO_IDS = TOPO.map(t => t.id)
 
-function twoPoints(kind: 'heights' | 'gradient' | 'distance'): { svg: string; a: Pt; b: Pt; cm: number } | null {
+function twoPoints(sheet?: Sheet): { svg: string; a: Pt; b: Pt; cm: number } | null {
   for (let tries = 0; tries < 40; tries++) {
-    const { svg, segs } = drawTopo()
+    const { svg, segs, t } = drawTopo(sheet)
     const levels = [...segs.keys()]
     const idxLevels = levels.filter(l => l % 100 === 0), other = levels.filter(l => l % 100 !== 0)
     if (!idxLevels.length || !other.length) continue
-    const a = pickOnContour(segs, pick(idxLevels), [])
+    const peak = { x: t.peak.x * CELL, y: t.peak.y * CELL }
+    const a = pickOnContour(segs, pick(idxLevels), [peak])
     if (!a) continue
-    const b = pickOnContour(segs, pick(other), [a])
+    const b = pickOnContour(segs, pick(other), [a, peak])
     if (!b) continue
     const px = Math.hypot(a.x - b.x, a.y - b.y)
     if (px < 150 || px > 330 || a.h === b.h) continue
@@ -160,14 +175,14 @@ function twoPoints(kind: 'heights' | 'gradient' | 'distance'): { svg: string; a:
   return null
 }
 
-export function makeTopo(id: string): GeometryQuestion | null {
+export function makeTopo(id: string, sheet?: Sheet): GeometryQuestion | null {
   const kind = id === 'topoHeights' ? 'heights' : id === 'topoGradient' ? 'gradient' : id === 'topoDistance' ? 'distance' : null
   if (!kind) return null
-  const r = twoPoints(kind)
+  const r = twoPoints(sheet)
   if (!r) return null
   const { svg, a, b, cm } = r
   const vi = Math.abs(a.h - b.h), km = cm * 0.5, m = cm * 500
-  const note = 'This map is made up for practice. The scale is 1 : 50 000 and the contour interval is 20 m. Contours with a number are index contours.'
+  const note = (sheet?.place ? `This practice map shows the area near ${sheet.place}, drawn in the style of a 1 : 50 000 topographic map from open elevation and map data (it is not an official sheet). ` : 'This map is made up for practice. ') + 'The scale is 1 : 50 000 and the contour interval is 20 m. Contours with a number are index contours.'
   if (kind === 'heights') {
     return mk(`${note} Point A and point B each lie on a contour line. Give the height above sea level of A and of B, and the difference in height between them.`, svg,
       [{ id: 'a', label: 'Height of A =', unit: 'm' }, { id: 'b', label: 'Height of B =', unit: 'm' }, { id: 'd', label: 'Height difference =', unit: 'm' }], { a: a.h, b: b.h, d: vi }, [],
@@ -182,4 +197,11 @@ export function makeTopo(id: string): GeometryQuestion | null {
   return mk(`${note} Point A and point B each lie on a contour line. The distance from A to B on the map is ${comma(cm)} cm. Work out the vertical interval (VI), the horizontal equivalent (HE) in metres, and the gradient as 1 : n (round n to the nearest whole number).`, svg,
     [{ id: 'vi', label: 'VI =', unit: 'm' }, { id: 'he', label: 'HE =', unit: 'm' }, { id: 'g', label: 'Gradient 1 :' }], { vi, he: m, g: gradient }, [],
     `VI = ${Math.max(a.h, b.h)} − ${Math.min(a.h, b.h)} = ${vi} m. HE = ${comma(cm)} cm × 500 = ${comma(m)} m. Gradient = HE ÷ VI = ${comma(m)} ÷ ${vi} = 1 : ${gradient}.`, 1)
+}
+
+/** A real-terrain sheet when the open data is reachable, otherwise the drawn one. */
+export async function makeTopoAny(id: string): Promise<GeometryQuestion | null> {
+  const { loadRealSheet } = await import('@/lib/testbuilder/realtopo')
+  const sheet = await loadRealSheet().catch(() => null)
+  return (sheet ? makeTopo(id, sheet) : null) ?? makeTopo(id)
 }

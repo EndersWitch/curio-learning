@@ -13,7 +13,7 @@ import {
 } from '@/lib/testbuilder/interactive'
 import { DRAWN, DRAWN_IDS, makeDrawn, makeRounding } from '@/lib/testbuilder/drawn'
 import { DIAGRAMS, DIAGRAM_IDS, buildHandsOn } from '@/lib/testbuilder/handson-gen'
-import { TOPO, TOPO_IDS, makeTopo } from '@/lib/testbuilder/topo'
+import { TOPO, TOPO_IDS, makeTopoAny } from '@/lib/testbuilder/topo'
 import { ACCOUNTING, ACCOUNTING_IDS, makeAccounting } from '@/lib/testbuilder/accounting'
 import { stripWord, type FillSpec, type MatchSpec, type OrderSpec, type PickSpec, type PlotSpec } from '@/lib/testbuilder/authored'
 import { ANGLE_KINDS, makeGeometry, type AngleKind } from '@/lib/testbuilder/geometry'
@@ -42,7 +42,7 @@ The kinds you can choose from:
 - angles: a drawn diagram (angles on a straight line, vertically opposite angles, parallel lines cut by a transversal, angles in a triangle, isosceles triangles, exterior angles) where the learner finds an angle or the value of x and gives the geometry reason. This is the kind for Euclidean geometry, geometry of straight lines and triangles, and angle questions, roughly Grades 8 to 10. Pick the angleKind that fits the topic, and set algebra true for harder questions with expressions like (3x+10) degrees.
 - drawn: a picture drawn for the learner (a clock, ruler, protractor, shaded fraction, bar chart, dot plot, pie chart, coordinate grid, line graph, base-ten blocks, thermometer, measuring cylinder, circuit, wave, distance-time graph, force arrows, mirror, supply and demand graph, Bohr atom, shapes with measurements, circle geometry, or an equation to balance) where the learner reads or works out a value and types it. Choose drawnKind to match the topic and grade:
 ${DRAWN.map(d => `    ${d.id}: ${d.use}`).join('\n')}
-- topo: a topographic map in the style of a South African 1:50 000 sheet (made-up terrain, 20 m contours) where the learner reads heights, works out a real distance or a gradient. Use for geography mapwork, and use drawnKind to give the id:
+- topo: a topographic map in the style of a South African 1:50 000 sheet (real terrain near a South African landmark when open data is reachable, otherwise made-up terrain; 20 m contours) where the learner reads heights, works out a real distance or a gradient. Use for geography mapwork, and use drawnKind to give the id:
 ${TOPO.map(d => `    ${d.id}: ${d.use}`).join('\n')}
 - accounting: a small table of figures (an invoice, a journal, a budget, an asset, a creditor's account) where the learner works out amounts and types them; the code calculates every answer. ALWAYS use these for accounting, EMS and financial literacy topics that involve calculations, and use drawnKind to give the id, choosing by grade:
 ${ACCOUNTING.map(d => `    ${d.id}: ${d.use}`).join('\n')}
@@ -187,7 +187,7 @@ export async function interactiveForTopic(learner: Learner, topic: { id: string;
       if (r?.kind === 'drawn' && typeof r.drawnKind === 'string' && (DRAWN_IDS.includes(r.drawnKind) || ACCOUNTING_IDS.includes(r.drawnKind) || TOPO_IDS.includes(r.drawnKind))) {
         const key = `d:${r.drawnKind}`
         if (seen.has(key)) continue
-        const g = TOPO_IDS.includes(r.drawnKind) ? makeTopo(r.drawnKind) : ACCOUNTING_IDS.includes(r.drawnKind) ? makeAccounting(r.drawnKind) : makeDrawn(r.drawnKind)
+        const g = TOPO_IDS.includes(r.drawnKind) ? await makeTopoAny(r.drawnKind) : ACCOUNTING_IDS.includes(r.drawnKind) ? makeAccounting(r.drawnKind) : makeDrawn(r.drawnKind)
         if (!g) continue
         seen.add(key)
         built.push({ type: 'geometry', question: g.question, marks: g.marks, spec: g.spec, answerSpec: g.key, points: g.points })
