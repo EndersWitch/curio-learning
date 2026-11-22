@@ -122,7 +122,7 @@ export async function markBatch(
               `  ${k}. ${p.text}${p.alternatives.length ? ` [also accept: ${p.alternatives.join(' | ')}]` : ''}${p.exact ? ` [EXACT WORDING REQUIRED: ${p.exact}]` : ''}`,
           )
           .join('\n') +
-        `\n<answer>\n${it.answer}\n</answer>`,
+        `\n<answer>\n${it.answer.replace(/<\/?answer>/gi, '[answer]')}\n</answer>`,
     )
     .join('\n\n')
 

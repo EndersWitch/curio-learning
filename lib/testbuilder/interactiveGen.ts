@@ -429,12 +429,20 @@ interface Authored {
   solution: number[]
 }
 
+/** Ids that say nothing about the right answer (the learner can read the spec while the test is open). */
+export function freshIds(prefix: string, n: number): string[] {
+  const out = new Set<string>()
+  while (out.size < n) out.add(prefix + Math.random().toString(36).slice(2, 8))
+  return [...out]
+}
+
 function buildAuthored(r: Raw): Authored | null {
   if (r.kind === 'order') {
     const raw = Array.isArray(r.orderItems) ? r.orderItems : []
     const texts = raw.filter((t): t is string => okText(t, 50)).map(nice)
     if (texts.length < 4 || texts.length > 5 || new Set(texts.map(t => t.toLowerCase())).size !== texts.length) return null
-    const items = texts.map((text, i) => ({ id: `o${i}`, text }))
+    const ids = freshIds('o', texts.length)
+    const items = texts.map((text, i) => ({ id: ids[i]!, text }))
     const shown = shuffled(items, a => a.every((x, i) => x.id === items[i]!.id))
     const spec: OrderSpec = { items: shown }
     const title = cleanTitle(r.orderTitle, 'Put these in the right order.')
@@ -449,15 +457,16 @@ function buildAuthored(r: Raw): Authored | null {
     const ps = pairs.filter(p => okText(p?.left, 40) && okText(p?.right, 40)).map(p => ({ left: nice(p.left as string), right: nice(p.right as string) }))
     if (ps.length < 3 || ps.length > 5) return null
     if (new Set(ps.map(p => p.left.toLowerCase())).size !== ps.length || new Set(ps.map(p => p.right.toLowerCase())).size !== ps.length) return null
-    const left = ps.map((p, i) => ({ id: `l${i}`, text: p.left }))
-    const right = ps.map((p, i) => ({ id: `r${i}`, text: p.right }))
-    const rShown = shuffled(right, a => a.every((x, i) => x.id === `r${i}`))
+    const lids = freshIds('l', ps.length), rids = freshIds('r', ps.length)
+    const left = ps.map((p, i) => ({ id: lids[i]!, text: p.left }))
+    const right = ps.map((p, i) => ({ id: rids[i]!, text: p.right }))
+    const rShown = shuffled(right, a => a.every((x, i) => x.id === right[i]!.id))
     const spec: MatchSpec = { left, right: rShown }
     const title = cleanTitle(r.matchTitle, 'Match each item on the left to the right one.')
     return {
-      q: { type: 'match', question: `${title} Tap an item on the left, then its partner on the right.`, marks: ps.length, spec, answerSpec: { pairs: Object.fromEntries(left.map((l, i) => [l.id, `r${i}`])) }, points: ps.map(p => `"${p.left}" matched with "${p.right}"`) },
+      q: { type: 'match', question: `${title} Tap an item on the left, then its partner on the right.`, marks: ps.length, spec, answerSpec: { pairs: Object.fromEntries(left.map((l, i) => [l.id, right[i]!.id])) }, points: ps.map(p => `"${p.left}" matched with "${p.right}"`) },
       view: `Match each left item to its right partner. Task: ${title}\nLeft: ${left.map((l, i) => `${i}. ${l.text}`).join(' | ')}\nRight: ${rShown.map((x, i) => `${i}. ${x.text}`).join(' | ')}`,
-      solution: left.map((_, i) => rShown.findIndex(x => x.id === `r${i}`)),
+      solution: left.map((_, i) => rShown.findIndex(x => x.id === right[i]!.id)),
     }
   }
   if (r.kind === 'pick') {

@@ -37,9 +37,17 @@ const toLatLon = (x: number, y: number) => {
   return { lat: (180 / Math.PI) * Math.atan(Math.sinh(n)), lon: (x / W) * 360 - 180 }
 }
 
-async function withTimeout(f: Fetcher, url: string, init: RequestInit = {}, ms = 20000) {
+/** One request, with the timer running until the whole body has arrived, and a cap on its size. */
+async function getBytes(f: Fetcher, url: string, init: RequestInit = {}, ms = 15000, maxBytes = 2_000_000): Promise<{ ok: boolean; status: number; buf: Buffer }> {
   const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), ms)
-  try { return await f(url, { ...init, signal: ctl.signal, headers: { 'User-Agent': UA, ...(init.headers ?? {}) } }) } finally { clearTimeout(t) }
+  try {
+    const r = await f(url, { ...init, signal: ctl.signal, headers: { 'User-Agent': UA, ...(init.headers ?? {}) } })
+    const len = Number(r.headers.get('content-length') ?? 0)
+    if (len > maxBytes) throw new Error('response too large')
+    const buf = Buffer.from(await r.arrayBuffer())
+    if (buf.length > maxBytes) throw new Error('response too large')
+    return { ok: r.ok, status: r.status, buf }
+  } finally { clearTimeout(t) }
 }
 
 /** Heights (metres) on a (GRID+1) x (GRID+1) grid covering the sheet. */
@@ -51,9 +59,9 @@ async function elevationGrid(f: Fetcher, lat: number, lon: number): Promise<{ h:
   for (let tx = Math.floor(x0 / 256); tx <= Math.floor((x0 + span) / 256); tx++) for (let ty = Math.floor(y0 / 256); ty <= Math.floor((y0 + span) / 256); ty++) need.push([tx, ty])
   if (need.length > 9) return null
   const got = await Promise.all(need.map(async ([tx, ty]) => {
-    const r = await withTimeout(f, `https://s3.amazonaws.com/elevation-tiles-prod/terrarium/${Z}/${tx}/${ty}.png`)
+    const r = await getBytes(f, `https://s3.amazonaws.com/elevation-tiles-prod/terrarium/${Z}/${tx}/${ty}.png`)
     if (!r.ok) return null
-    return { k: `${tx}:${ty}`, png: PNG.sync.read(Buffer.from(await r.arrayBuffer())) }
+    return { k: `${tx}:${ty}`, png: PNG.sync.read(r.buf) }
   }))
   for (const g of got) { if (!g) return null; tiles.set(g.k, g.png) }
   const at = (px: number, py: number) => {
@@ -83,9 +91,9 @@ async function osmOverlay(f: Fetcher, g: { x0: number; y0: number; span: number 
   const a = toLatLon(g.x0, g.y0 + g.span), b = toLatLon(g.x0 + g.span, g.y0)
   const bbox = `${a.lat.toFixed(5)},${a.lon.toFixed(5)},${b.lat.toFixed(5)},${b.lon.toFixed(5)}`
   const q = `[out:json][timeout:25];(way["highway"~"^(motorway|trunk|primary|secondary|tertiary|unclassified|residential|track)$"](${bbox});way["waterway"~"^(river|stream)$"](${bbox});way["building"](${bbox}););out geom 400;`
-  const r = await withTimeout(f, 'https://overpass-api.de/api/interpreter', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'data=' + encodeURIComponent(q) }, 28000)
+  const r = await getBytes(f, 'https://overpass-api.de/api/interpreter', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'data=' + encodeURIComponent(q) }, 15000, 3_000_000)
   if (!r.ok) throw new Error(`overpass ${r.status}`)
-  const j = (await r.json()) as { elements?: OsmWay[] }
+  const j = JSON.parse(r.buf.toString('utf8')) as { elements?: OsmWay[] }
   const scale = 480 / g.span
   const toMap = (p: { lat: number; lon: number }): [number, number] => { const w = worldPx(p.lat, p.lon); return [(w.x - g.x0) * scale, (w.y - g.y0) * scale] }
   const inside = (p: [number, number]) => p[0] >= 0 && p[0] <= 480 && p[1] >= 0 && p[1] <= 480
@@ -111,7 +119,8 @@ type Stored = { h: number[][]; overlay: Overlay; place: string }
 /** One real sheet, or null when the open data cannot be reached (callers then use the drawn map). */
 export async function loadRealSheet(f: Fetcher = fetch, rng: () => number = Math.random): Promise<Sheet | null> {
   const sb = serviceClient()
-  for (let attempt = 0; attempt < 3; attempt++) {
+  const deadline = Date.now() + 30_000 // the whole call, so one slow server cannot use up the generate route's time
+  for (let attempt = 0; attempt < 3 && Date.now() < deadline; attempt++) {
     const pl = PLACES[Math.floor(rng() * PLACES.length)]!
     const dx = Math.floor(rng() * 3) - 1, dy = Math.floor(rng() * 3) - 1
     // Move the sheet by whole kilometres so a handful of sheets per place can be cached.

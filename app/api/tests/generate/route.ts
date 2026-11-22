@@ -1,5 +1,6 @@
 import { knowledgeFor, forbiddenFor, mentionsForbidden, gradeNote } from '@/lib/testbuilder/knowledge'
 import Anthropic from '@anthropic-ai/sdk'
+import { TEST_DAILY_LIMITS } from '@/lib/bloom/shared'
 import { BLOOM_MODEL, apiError, getLearner, serverError, type Learner } from '@/lib/bloom/server'
 import { serviceClient } from '@/lib/testbuilder/admin'
 import { cleanMcq, difficultiesFor, planTest, LETTERS, type CleanMcq, type Difficulty } from '@/lib/testbuilder/mcq'
@@ -402,12 +403,14 @@ export async function POST(req: Request) {
   // RLS: this only returns the learner's own session.
   const { data: session, error: loadError } = await learner.sb
     .from('test_sessions')
-    .select('id, grade, subject, scope_text, length, question_mix, status, note_ids')
+    .select('id, grade, subject, scope_text, length, question_mix, status, note_ids, build_charged, generating_since')
     .eq('id', body.sessionId)
     .maybeSingle()
   if (loadError) return serverError('load session', loadError)
   if (!session) return apiError('invalid', 404)
-  if (session.status !== 'topics_ready') return apiError('invalid', 409, { reason: 'wrong-state' })
+  const staleBefore = Date.now() - 10 * 60_000
+  const stuck = session.status === 'generating' && !!session.generating_since && new Date(session.generating_since as string).getTime() < staleBefore
+  if (session.status !== 'topics_ready' && !stuck) return apiError('invalid', 409, { reason: 'wrong-state' })
 
   const mix = session.question_mix as QuestionMix
   if (!mix.mcq && !mix.short && !mix.long && !mix.interactive) return apiError('invalid', 400)
@@ -428,16 +431,27 @@ export async function POST(req: Request) {
   const plans = planTest(session.length as TestLength, baseMix, topics.length)
   const wantsInteractive = mix.interactive === true
 
-  // Claim the session so a double tap cannot start two generations.
-  const { data: claimed, error: claimError } = await svc
+  // Claim the session so a double tap cannot start two generations. A generation
+  // that was cut off ten minutes ago can be claimed again.
+  let claimQuery = svc
     .from('test_sessions')
-    .update({ status: 'generating' })
+    .update({ status: 'generating', generating_since: new Date().toISOString() })
     .eq('id', session.id)
     .eq('user_id', learner.id)
-    .eq('status', 'topics_ready')
-    .select('id')
+  claimQuery = stuck ? claimQuery.eq('status', 'generating').lt('generating_since', new Date(staleBefore).toISOString()) : claimQuery.eq('status', 'topics_ready')
+  const { data: claimed, error: claimError } = await claimQuery.select('id')
   if (claimError) return serverError('claim session', claimError)
   if (!claimed?.length) return apiError('invalid', 409, { reason: 'wrong-state' })
+
+  // Every test is charged once, here, where the AI spend happens, so building sessions by hand cannot skip the limit.
+  if (!session.build_charged) {
+    const { data: usedBuilds, error: buildError } = await learner.sb.rpc('test_use_build', { p_limit: TEST_DAILY_LIMITS[learner.tier] })
+    if (buildError || typeof usedBuilds !== 'number' || usedBuilds < 0) {
+      await svc.from('test_sessions').update({ status: 'topics_ready' }).eq('id', session.id)
+      return buildError ? serverError('count test build', buildError) : apiError('limit', 429, { reason: 'daily', limit: TEST_DAILY_LIMITS[learner.tier] })
+    }
+    await svc.from('test_sessions').update({ build_charged: true }).eq('id', session.id)
+  }
 
   const revert = (status: 'topics_ready' | 'failed') => svc.from('test_sessions').update({ status }).eq('id', session.id)
 

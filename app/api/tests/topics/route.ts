@@ -10,6 +10,7 @@ import {
   type TopicsResponse,
 } from '@/lib/testbuilder/shared'
 import { TEST_DAILY_LIMITS } from '@/lib/bloom/shared'
+import { serviceClient } from '@/lib/testbuilder/admin'
 import { BLOOM_MODEL, apiError, getLearner, parseGrade, serverError } from '@/lib/bloom/server'
 
 export const dynamic = 'force-dynamic'
@@ -131,6 +132,7 @@ export async function POST(req: Request) {
     .select('id')
     .single()
   if (sessionError) return serverError('start test session', sessionError)
+  await serviceClient()?.from('test_sessions').update({ build_charged: true }).eq('id', session.id)
 
   const { data: saved, error: topicsError } = await sb
     .from('test_topics')

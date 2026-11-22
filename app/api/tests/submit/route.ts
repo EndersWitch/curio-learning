@@ -55,6 +55,7 @@ export async function POST(req: Request) {
     claimedHere = true
   }
 
+  let wrote = false
   try {
     const { data: questions, error: qError } = await svc
       .from('test_questions')
@@ -127,7 +128,7 @@ export async function POST(req: Request) {
       const given = answerOf.get(q.id as string)
       if (given?.marked_by) continue
       const points = pointsOf.get(q.id as string) ?? []
-      const text = ((given?.answer_text as string | null) ?? '').trim()
+      const text = ((given?.answer_text as string | null) ?? '').trim().slice(0, 6000)
       if (!text) {
         rows.push({
           ...base(q.id as string, given),
@@ -168,6 +169,7 @@ export async function POST(req: Request) {
     if (rows.length) {
       const { error: markError } = await svc.from('test_answers').upsert(rows, { onConflict: 'session_id,question_id' })
       if (markError) throw markError
+      wrote = true
     }
 
     const { data: scored, error: sumError } = await svc.from('test_answers').select('marks_awarded').eq('session_id', session.id)
@@ -191,7 +193,7 @@ export async function POST(req: Request) {
     return Response.json(out, { headers: { 'Cache-Control': 'no-store' } })
   } catch (err) {
     // Nothing was marked: let the learner hand in again rather than leave the test stuck.
-    if (claimedHere) await svc.from('test_sessions').update({ status: 'ready' }).eq('id', session.id)
+    if (claimedHere && !wrote) await svc.from('test_sessions').update({ status: 'ready' }).eq('id', session.id)
     return serverError('mark test', err)
   }
 }

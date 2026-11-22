@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { sameSecret } from '@/lib/testbuilder/secret'
 import { serviceClient } from '@/lib/testbuilder/admin'
 import { refreshFacts, triageFeedback, triageFlags } from '@/lib/testbuilder/learn'
 
@@ -6,8 +7,7 @@ export const dynamic = 'force-dynamic'
 export const maxDuration = 300
 
 function authed(req: Request): boolean {
-  const pw = process.env.ADMIN_PASSWORD
-  return !!pw && req.headers.get('x-admin-password') === pw
+  return sameSecret(req.headers.get('x-admin-password'), process.env.ADMIN_PASSWORD)
 }
 
 export async function GET(req: Request) {

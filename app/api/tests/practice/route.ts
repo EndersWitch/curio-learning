@@ -1,3 +1,4 @@
+import { serviceClient } from '@/lib/testbuilder/admin'
 import { apiError, getLearner, serverError } from '@/lib/bloom/server'
 import { TEST_DAILY_LIMITS } from '@/lib/bloom/shared'
 
@@ -49,6 +50,7 @@ export async function POST(req: Request) {
     .select('id')
     .single()
   if (cError || !created) return serverError('practice create', cError)
+  await serviceClient()?.from('test_sessions').update({ build_charged: true }).eq('id', created.id)
 
   const { error: iError } = await learner.sb
     .from('test_topics')

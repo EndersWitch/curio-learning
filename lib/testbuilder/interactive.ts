@@ -214,13 +214,16 @@ export function cleanSort(raw: unknown): { spec: SortSpec; answer: SortAnswer } 
     const cat = it?.category
     if (!text || text.length > 40 || typeof cat !== 'number' || !Number.isInteger(cat) || cat < 0 || cat >= categories.length) continue
     if (items.some(x => x.text.toLowerCase() === text.toLowerCase())) continue
-    const id = `i${items.length}`
+    const id = `i${Math.random().toString(36).slice(2, 8)}`
+    if (answer[id] !== undefined) continue
     items.push({ id, text })
     answer[id] = cat
   }
   if (items.length < 4 || items.length > 6) return null
   // Each group needs at least one item, or the sort is a giveaway.
   if (categories.some((_, k) => !Object.values(answer).includes(k))) return null
+  // The AI lists items grouped by category: shuffle so the order does not give the answer away.
+  for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [items[i], items[j]] = [items[j]!, items[i]!] }
   return { spec: { categories, items }, answer }
 }
 
