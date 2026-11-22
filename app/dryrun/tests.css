@@ -322,3 +322,7 @@
 .tb-ptcell.missed { border-color: var(--moss); border-style: dashed; }
 .tb-ptcell.wrong { border-color: var(--brick); background: var(--brick10); }
 @media (max-width: 520px) { .tb-ptcell b { font-size: 0.5rem; } .tb-ptcell small { font-size: 0.36rem; } }
+
+.tb-ask { display: grid; gap: 0.5rem; margin-top: 0.5rem; padding: 0.75rem; border: 1.5px dashed var(--ink15); border-radius: 10px; }
+.tb-ask-q { font-family: var(--h); margin: 0; }
+.tb-ask-a { margin: 0.2rem 0 0.5rem; white-space: pre-wrap; }

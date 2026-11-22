@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { sb } from '@/lib/supabase'
+import AskAboutQuestion from '@/components/testbuilder/AskAboutQuestion'
 import { useAuth } from '@/lib/auth-context'
 import BloomBuddy, { type BloomMood } from '@/components/bloom/BloomBuddy'
 import { BloomScore, useBloomReveal } from '@/components/quiz/ResultsScreen'
@@ -765,6 +766,8 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
                   </div>
                 )
               })()}
+
+              {marked && <AskAboutQuestion questionId={q.id} />}
 
               {(marked || isOpen) && (
                 <div>
