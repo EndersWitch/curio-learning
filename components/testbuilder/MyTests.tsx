@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
+import { Zap, PenLine, ListChecks, Trophy } from '@/components/icons'
 
 interface Row {
   id: string
@@ -61,8 +62,27 @@ export default function MyTests() {
     })()
   }, [loading, user])
 
-  if (loading || rows === null) return null
-  if (!user) return <p>Sign in to see your tests.</p>
+  const hero = (
+    <>
+      <section className="wz-hero">
+        <Zap size={150} className="wz-hero-bolt" aria-hidden="true" />
+        <span className="wz-pill"><Zap size={14} /> Whizz</span>
+        <h1 className="wz-h">Tell Whizz what your test covers. <em>Get a test made for you.</em></h1>
+        <p className="wz-lede">Whizz builds a practice test for exactly what you are writing, marks it, and shows you where every mark went.</p>
+        <div className="wz-cta-row">
+          <Link className="tb-btn wz-cta" href={user ? '/whizz/new' : '/login'}>{user ? 'Make my test' : 'Log in to start'}</Link>
+          <span className="wz-hint">Takes about a minute to build</span>
+        </div>
+      </section>
+      <div className="wz-steps">
+        <div className="wz-step s1"><span className="wz-step-ic"><PenLine size={22} /></span><b>1. Tell Whizz</b><span>Type your subject and what the test covers, or add your notes.</span></div>
+        <div className="wz-step s2"><span className="wz-step-ic"><ListChecks size={22} /></span><b>2. Write it</b><span>Answer the questions: pick, type, drag, sort, even read a map.</span></div>
+        <div className="wz-step s3"><span className="wz-step-ic"><Trophy size={22} /></span><b>3. See your marks</b><span>Get a marked paper with the memo and where you slipped.</span></div>
+      </div>
+    </>
+  )
+
+  if (loading || rows === null || !user) return <div className="tb-stack" style={{ gap: '1.2rem' }}>{hero}</div>
 
   const done = rows.filter(r => r.status === 'marked' && r.marks_total)
   const earned = done.reduce((n, r) => n + (r.marks_awarded ?? 0), 0)
@@ -70,7 +90,8 @@ export default function MyTests() {
 
   return (
     <div className="tb-stack" style={{ gap: '1.2rem' }}>
-      <h1>My Whizz tests</h1>
+      {hero}
+      {rows.length > 0 && <h2 className="wz-h2">My tests</h2>}
       {done.length > 0 && (
         <div className="tb-stats">
           <div className="tb-stat"><b>{earned}</b><span>marks earned</span></div>
@@ -78,8 +99,6 @@ export default function MyTests() {
           <div className="tb-stat"><b>{best}%</b><span>best score</span></div>
         </div>
       )}
-      <div className="tb-actions"><Link className="tb-btn" href="/whizz/new">Start a new test</Link></div>
-      {rows.length === 0 && <p className="tb-muted">No tests yet. Tell Curio what your test covers and it will build one.</p>}
       <div className="tb-list">
         {rows.map(r => {
           const isMarked = r.status === 'marked' && r.marks_total

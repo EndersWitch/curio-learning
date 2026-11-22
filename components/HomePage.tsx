@@ -290,8 +290,10 @@ export default function HomePage() {
         <ul className="nav-links">
           <li><a href="/papers">Papers</a></li>
           <li><a href="/quiz">Quiz</a></li>
+          <li><a href="/whizz">Whizz</a></li>
+          <li><a href="/bloom">Bloom</a></li>
           <li><a href="/subjects">Subjects</a></li>
-          <li><a href="/subscription">Subscription</a></li>
+          <li><a href="/subscription">Plans</a></li>
         </ul>
         <div className="nav-right">
           {user ? (
@@ -608,7 +610,7 @@ export default function HomePage() {
                 { href: '/bloom', title: 'Explained, not just marked', text: 'Bloom, our AI tutor, breaks a tricky idea down from the start until it clicks.', t: 't2' },
                 { href: '/quiz', title: 'Quizzes that teach', text: 'English Home Language quizzes for Grades 4 to 7: a short lesson, then instant feedback. More subjects are on the way.', t: 't3' },
                 { href: '/subjects', title: 'Your grade, your subjects', text: 'Subject guides for Grades 4 to 12 show what your CAPS year covers, with papers and quizzes where we have them.', t: 't4' },
-                { href: '/whizz', title: 'A test made for you', text: 'Curio Whizz builds a practice test from what you are being tested on, marks it, and shows you where the marks went.', t: 't2' },
+                { href: '/whizz', title: 'A test made for you', text: 'Whizz builds a practice test from what you are being tested on, marks it, and shows you where the marks went.', t: 't2' },
                 { href: '/subscription', title: 'No student left behind', text: 'Papers and memos stay free. Premium unlocks every quiz level and removes ads for R49 a month.', t: 't1' },
               ].map((c, i) => (
                 <a href={c.href} className={`lp-card ${c.t}`} key={c.title}>

@@ -28,8 +28,8 @@ import {
 function describe(data: { error?: BloomErrorCode; reason?: BloomErrorReason }): string {
   if (data.error === 'closed') {
     return data.reason === 'not-tester'
-      ? 'Curio Whizz is open to Premium members while we test it. Go Premium to start building tests.'
-      : 'Curio Whizz is switched off on this deployment. Set BLOOM_ACCESS to testers (or everyone) for this environment in Vercel, then redeploy.'
+      ? 'Whizz is open to Premium members while we test it. Go Premium to start building tests.'
+      : 'Whizz is switched off on this deployment. Set BLOOM_ACCESS to testers (or everyone) for this environment in Vercel, then redeploy.'
   }
   if (data.error === 'limit' && data.reason === 'daily') return 'You have built all your tests for today. They come back tomorrow, and Premium gets more.'
   if (data.error === 'setup' && data.reason === 'no-service-key') {
@@ -43,7 +43,7 @@ function describe(data: { error?: BloomErrorCode; reason?: BloomErrorReason }): 
 const ERRORS: Partial<Record<BloomErrorCode, string>> = {
   signin: 'Please sign in to build a test.',
   closed: 'The test builder is not open yet.',
-  limit: 'Lots of learners are using Curio Whizz right now. Try again in a minute.',
+  limit: 'Lots of learners are using Whizz right now. Try again in a minute.',
   invalid: 'Check the details and try again.',
   setup: 'The test builder is not set up on this server yet.',
 }

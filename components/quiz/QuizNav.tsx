@@ -77,7 +77,7 @@ export default function QuizNav() {
               </div>
               <a href="/papers" className="profile-dd-item dd-item-icon"><FileText size={15} /> Papers</a>
               <a href="/quiz" className="profile-dd-item dd-item-icon"><PenLine size={15} /> Start a quiz</a>
-              <a href="/whizz" className="profile-dd-item dd-item-icon"><Zap size={15} /> Curio Whizz</a>
+              <a href="/whizz" className="profile-dd-item dd-item-icon"><Zap size={15} /> Whizz</a>
               <a href="/bloom" className="profile-dd-item dd-item-icon"><Brain size={15} /> Bloom</a>
               <button
                 className="profile-dd-item dd-item-icon"
