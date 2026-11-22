@@ -3,6 +3,10 @@
     {
       "path": "/api/expire-subscriptions",
       "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/knowledge",
+      "schedule": "0 4 * * 1"
     }
   ]
 }

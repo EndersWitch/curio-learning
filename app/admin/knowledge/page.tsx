@@ -1,0 +1,127 @@
+'use client'
+
+import { useCallback, useEffect, useState } from 'react'
+import { sb } from '@/lib/supabase'
+
+type Entry = { id: string; kind: string; title: string; body?: string; subjects: string[]; grade_min: number; grade_max: number; source_url?: string | null; origin?: string; note?: string | null; verified_at?: string | null }
+type Rating = { id: string; rating: number; comment: string | null; triage: string | null; created_at: string }
+type Flag = { id: string; kind: string; reason: string | null; note: string | null; triage: string | null; created_at: string }
+
+const box: React.CSSProperties = { border: '2px solid #222', padding: '0.8rem', margin: '0 0 0.8rem', background: '#fff', color: '#222' }
+const btn: React.CSSProperties = { border: '2px solid #222', background: '#fff', padding: '0.35rem 0.7rem', fontWeight: 700, cursor: 'pointer', marginRight: '0.4rem' }
+
+export default function KnowledgeAdmin() {
+  const [signedIn, setSignedIn] = useState<boolean | null>(null)
+  const [proposed, setProposed] = useState<Entry[]>([])
+  const [approved, setApproved] = useState<Entry[]>([])
+  const [flags, setFlags] = useState<Flag[]>([])
+  const [ratings, setRatings] = useState<Rating[]>([])
+  const [msg, setMsg] = useState('')
+  const [login, setLogin] = useState({ email: '', password: '' })
+  const [def, setDef] = useState({ subject: '', grade: '', term: '', definition: '', source: '' })
+  const [form, setForm] = useState({ kind: 'term', title: '', body: '', subjects: '', gradeMin: '1', gradeMax: '12', sourceUrl: '' })
+
+  const call = useCallback(async (method: 'GET' | 'POST', body?: unknown) => {
+    const { data: s } = await sb.auth.getSession()
+    const token = s.session?.access_token
+    if (!token) return { ok: false, data: { error: 'signin' } }
+    const res = await fetch('/api/admin/knowledge', { method, headers: { Authorization: `Bearer ${token}`, 'content-type': 'application/json' }, body: body ? JSON.stringify(body) : undefined })
+    return { ok: res.ok, data: await res.json().catch(() => ({})) }
+  }, [])
+
+  const load = useCallback(async () => {
+    const { ok, data } = await call('GET')
+    if (!ok) return setMsg('This page is for Curio admins. Sign in with your admin account, then reload.')
+    setProposed(data.proposed ?? []); setApproved(data.approved ?? []); setFlags(data.flags ?? []); setRatings(data.ratings ?? []); setMsg('')
+  }, [call])
+
+  const act = async (action: string, extra: object = {}) => {
+    setMsg('Working…')
+    const { ok, data } = await call('POST', { action, ...extra })
+    setMsg(ok ? (action === 'run' ? `Done: ${JSON.stringify(data)}` : 'Saved.') : data.error ?? 'Failed.')
+    await load()
+  }
+
+  const signIn = async () => {
+    setMsg('Signing in…')
+    const { error } = await sb.auth.signInWithPassword({ email: login.email.trim(), password: login.password })
+    if (error) return setMsg(error.message)
+    setSignedIn(true); setLogin({ email: '', password: '' }); await load()
+  }
+
+  useEffect(() => { sb.auth.getSession().then(({ data }) => { setSignedIn(!!data.session); if (data.session) load() }) }, [load])
+
+  return (
+    <main style={{ maxWidth: 820, margin: '0 auto', padding: '1.2rem', fontFamily: 'Arial, sans-serif', color: '#222', background: '#f7f3ea', minHeight: '100vh' }}>
+      <h1 style={{ margin: '0 0 0.8rem' }}>Test builder: knowledge review</h1>
+      <div style={box}>
+        {signedIn === false && (
+          <div style={{ margin: '0 0 0.6rem' }}>
+            <p style={{ margin: '0 0 0.5rem' }}>Not signed in on this address. Sign-ins do not carry over between curiolearning.co.za and a preview link, so sign in here with your admin account.</p>
+            <input type="email" placeholder="Email" value={login.email} onChange={e => setLogin({ ...login, email: e.target.value })} style={{ border: '2px solid #222', padding: '0.35rem', marginRight: '0.4rem' }} />
+            <input type="password" placeholder="Password" value={login.password} onChange={e => setLogin({ ...login, password: e.target.value })} onKeyDown={e => { if (e.key === 'Enter') signIn() }} style={{ border: '2px solid #222', padding: '0.35rem', marginRight: '0.4rem' }} />
+            <button style={btn} onClick={signIn}>Sign in</button>
+          </div>
+        )}
+        <button style={btn} onClick={load}>Load</button>
+        <button style={btn} onClick={() => act('run')}>Run learning now</button>
+        {msg && <p style={{ margin: '0.5rem 0 0' }}>{msg}</p>}
+      </div>
+
+      <h2>Proposed lessons ({proposed.length})</h2>
+      {proposed.map(p => (
+        <div key={p.id} style={box}>
+          <strong>[{p.kind}] {p.title}</strong> <small>({p.origin}, grades {p.grade_min} to {p.grade_max}, {p.subjects.join(', ')})</small>
+          <p style={{ margin: '0.4rem 0' }}>{p.body}</p>
+          {p.note && <p style={{ margin: '0.4rem 0', fontSize: '0.85rem' }}>Why: {p.note}</p>}
+          {p.source_url && <p style={{ margin: '0.4rem 0', fontSize: '0.85rem' }}>Source: <a href={p.source_url} target="_blank" rel="noreferrer">{p.source_url}</a></p>}
+          <button style={btn} onClick={() => act('approve', { id: p.id })}>Approve</button>
+          <button style={btn} onClick={() => act('reject', { id: p.id })}>Reject</button>
+        </div>
+      ))}
+
+      <h2>Open learner reports ({flags.length})</h2>
+      {flags.map(fl => (
+        <div key={fl.id} style={box}>
+          <strong>{fl.kind}</strong>: {fl.reason} {fl.note ? `· ${fl.note}` : ''}
+          <p style={{ margin: '0.4rem 0', fontSize: '0.9rem' }}>{fl.triage ? `Investigation: ${fl.triage}` : 'Not investigated yet.'}</p>
+          <button style={btn} onClick={() => act('flag', { flagId: fl.id, flagStatus: 'accepted' })}>Report was right</button>
+          <button style={btn} onClick={() => act('flag', { flagId: fl.id, flagStatus: 'rejected' })}>Report was wrong</button>
+        </div>
+      ))}
+
+      <h2>Quiz ratings ({ratings.length}{ratings.length ? `, average ${(ratings.reduce((n, r) => n + r.rating, 0) / ratings.length).toFixed(1)}` : ''})</h2>
+      {ratings.map(r => (
+        <div key={r.id} style={box}>
+          <strong>{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</strong> {r.comment ? `· ${r.comment}` : ''}
+          <p style={{ margin: '0.4rem 0 0', fontSize: '0.9rem' }}>{r.triage ? `Review: ${r.triage}` : 'Not reviewed yet.'}</p>
+        </div>
+      ))}
+
+      <h2>Add a lesson yourself</h2>
+      <div style={box}>
+        <select value={form.kind} onChange={e => setForm({ ...form, kind: e.target.value })} style={{ padding: '0.3rem', marginBottom: '0.4rem' }}>
+          <option value="term">term</option><option value="rule">rule</option><option value="fact">current fact</option><option value="avoid">does not exist (never use)</option>
+        </select>
+        {(['title', 'body', 'subjects', 'sourceUrl'] as const).map(k => (
+          <input key={k} placeholder={k === 'subjects' ? 'subjects, comma separated (e.g. accounting, ems)' : k} value={form[k]} onChange={e => setForm({ ...form, [k]: e.target.value })} style={{ display: 'block', width: '100%', padding: '0.4rem', border: '2px solid #222', marginBottom: '0.4rem', boxSizing: 'border-box' }} />
+        ))}
+        <input placeholder="grade min" value={form.gradeMin} onChange={e => setForm({ ...form, gradeMin: e.target.value })} style={{ width: 90, padding: '0.4rem', border: '2px solid #222', marginRight: '0.4rem' }} />
+        <input placeholder="grade max" value={form.gradeMax} onChange={e => setForm({ ...form, gradeMax: e.target.value })} style={{ width: 90, padding: '0.4rem', border: '2px solid #222', marginRight: '0.4rem' }} />
+        <button style={btn} onClick={() => act('add', { entry: form })}>Add (goes live)</button>
+      </div>
+
+      <h2>Add an exact definition</h2>
+      <div style={box}>
+        <p style={{ margin: '0 0 0.5rem', fontSize: '0.9rem' }}>For wording that must be learnt exactly (for example a physical science law). Questions that ask for it will use this wording in the memo.</p>
+        {(['subject', 'grade', 'term', 'definition', 'source'] as const).map(k => (
+          <input key={k} placeholder={k} value={def[k]} onChange={e => setDef({ ...def, [k]: e.target.value })} style={{ display: 'block', width: '100%', padding: '0.4rem', border: '2px solid #222', marginBottom: '0.4rem', boxSizing: 'border-box' }} />
+        ))}
+        <button style={btn} onClick={() => act('definition', { entry: def })}>Save definition</button>
+      </div>
+
+      <h2>Live reference ({approved.length})</h2>
+      {approved.map(a => <div key={a.id} style={{ ...box, padding: '0.4rem 0.6rem' }}>[{a.kind}] {a.title} <small>· grades {a.grade_min}-{a.grade_max} · {a.subjects.join(', ')} · checked {a.verified_at?.slice(0, 10) ?? 'never'}</small></div>)}
+    </main>
+  )
+}

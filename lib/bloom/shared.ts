@@ -9,6 +9,9 @@ export const BLOOM_GRADES = [4, 5, 6, 7, 8, 9, 10, 11, 12] as const
 export const DAILY_LIMITS = { free: 3, premium: 20, tester: 150 } as const
 export type BloomTier = keyof typeof DAILY_LIMITS
 
+// Whizz tests a learner can build per South African day. Building one costs many AI calls, so this is the main cost guard.
+export const TEST_DAILY_LIMITS = { free: 2, premium: 30, tester: 30 } as const
+
 export const MAX_QUESTION_CHARS = 1500
 // Long chats re-send their whole history every turn, so cap them and start fresh.
 export const MAX_TURNS_PER_CHAT = 20
@@ -46,3 +49,6 @@ export type BloomErrorReason =
   | 'not-tester'  // closed: testers-only, and this account isn't one
   | 'no-key'      // setup: ANTHROPIC_API_KEY isn't set on this server
   | 'no-tables'   // setup: the Bloom database migration hasn't been applied
+  | 'no-service-key' // setup: SUPABASE_SERVICE_ROLE_KEY isn't set (test builder only)
+  | 'daily'       // limit: today's test-building allowance is used up
+  | 'wrong-state' // invalid: the test is not at the stage this step needs

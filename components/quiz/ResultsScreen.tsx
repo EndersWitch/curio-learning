@@ -36,7 +36,7 @@ interface Particle { id:number; left:number; top:number; color:string; duration:
 // Drives the pop-in + sequential petal reveal + percent count-up timing.
 // Shared by the bloom SVG, the score text, and the petal legend dots so
 // everything stays in sync.
-function useBloomReveal(percent: number) {
+export function useBloomReveal(percent: number) {
   const litPetals = Math.round(percent / 20) // 0-5
 
   const [popped, setPopped]       = useState(false)
@@ -94,7 +94,7 @@ function useBloomReveal(percent: number) {
 // `transition`/`transform` to an element that also has an SVG `transform`
 // attribute makes the browser drop the attribute-based transform entirely,
 // which is what made every petal collapse into one unrotated stack before.
-function BloomScore({ percent, passed, reveal }: {
+export function BloomScore({ percent, passed, reveal }: {
   percent: number; passed: boolean; reveal: ReturnType<typeof useBloomReveal>
 }) {
   const petalAngles = [0, 72, 144, 216, 288]

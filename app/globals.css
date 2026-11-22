@@ -355,7 +355,7 @@ button { font-family: var(--h); cursor: pointer; border: none; background: none;
 .ds-val-icon { display: flex; align-items: center; gap: 0.35rem; }
 .ds-val-icon svg { color: var(--ochre); }
 .ds-sub { font-size: 0.68rem; color: var(--ink35); margin-top: 0.3rem; }
-.quick-actions { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border: 1px solid var(--ink15); position: relative; z-index: 2; }
+.quick-actions { display: grid; grid-template-columns: repeat(5,1fr); gap: 0; border: 1px solid var(--ink15); position: relative; z-index: 2; }
 .qa-btn { display: flex; flex-direction: column; align-items: center; gap: 0.55rem; background: var(--paper-raised); border-left: 1px solid var(--ink15); padding: 1.3rem 0.8rem; text-decoration: none; transition: all .2s; }
 .qa-btn:first-child { border-left: none; }
 .qa-btn:hover { background: var(--rust10); transform: translateY(-2px); }
@@ -847,7 +847,7 @@ select.field-input { cursor: pointer; }
 .prem-badge-text { font-size: 0.72rem; font-weight: 600; color: var(--rust-text); }
 .prem-title { font-family: var(--h); font-size: clamp(2.2rem,5.5vw,3.8rem); font-weight: 800; letter-spacing: -0.03em; color: var(--ink); line-height: 0.98; margin-bottom: 0.8rem; position: relative; z-index: 2; }
 .prem-sub { font-size: 0.9rem; color: var(--ink55); line-height: 1.8; max-width: 400px; margin: 0 auto 2.5rem; }
-.quick-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.8rem; max-width: 440px; width: 100%; margin: 0 auto; }
+.quick-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.6rem; max-width: 440px; width: 100%; margin: 0 auto; }
 .premqa { display: flex; flex-direction: column; align-items: center; gap: 0.45rem; background: var(--paper-raised); border: 1px solid var(--ink15); border-radius: 6px; padding: 1rem 0.5rem; transition: all .2s; }
 .premqa:hover { border-color: var(--rust30); transform: translateY(-2px); }
 .premqa-icon { color: var(--rust-text); }
@@ -1201,6 +1201,7 @@ a, button, label, select, summary { -webkit-tap-highlight-color: transparent; to
   .dash-stat:nth-child(n+3) { border-top: 1px solid var(--ink15); }
   .quick-actions .qa-btn:nth-child(odd) { border-left: none; }
   .quick-actions .qa-btn:nth-child(n+3) { border-top: 1px solid var(--ink15); }
+  .quick-actions .qa-btn:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .qa-btn { padding: 1.15rem 0.6rem; min-height: 88px; justify-content: center; }
   .dash-ph, .dash-pb { padding-left: 1rem; padding-right: 1rem; }
   .pu { padding: 1.5rem 1.25rem; gap: 1.25rem; }
@@ -1368,9 +1369,11 @@ a, button, label, select, summary { -webkit-tap-highlight-color: transparent; to
    The face is a fixed dark brown so it reads on the ochre centre in both themes. */
 .bb { display: block; flex-shrink: 0; overflow: visible; }
 .bb-petals, .bb-petal { transform-box: view-box; transform-origin: 50% 50%; }
-.bb-petal { fill: var(--rust); }
-.bb-core { fill: var(--ochre); }
-.bb-cheek { fill: var(--rust); opacity: 0.28; transition: opacity .3s; }
+/* Bloom keeps the same bright colours in light and dark mode (the dark-mode look), so he never goes dull on the cream page. */
+.bb { --bb-rust: #D2652F; --bb-gold: #E0AE5E; --bb-under: #1B1611; }
+.bb-petal { fill: color-mix(in srgb, var(--bb-rust) calc(var(--o, 1) * 100%), var(--bb-under)); }
+.bb-core { fill: var(--bb-gold); }
+.bb-cheek { fill: var(--bb-rust); opacity: 0.28; transition: opacity .3s; }
 .bb-eye, .bb-mouth-talk, .bb-mouth-o, .bb-mouth-grin { fill: #2A1D12; }
 .bb-eyes-happy, .bb-mouth-smile { fill: none; stroke: #2A1D12; stroke-width: 3.4; stroke-linecap: round; }
 .bb-eye, .bb-mouth-talk { transform-box: fill-box; transform-origin: center; }
@@ -1849,6 +1852,7 @@ html.dark { --rust-shadow: #8A3A17; }
 .qa-btn.q2 { --tint: var(--tint-moss); }
 .qa-btn.q3 { --tint: var(--tint-ochre); }
 .qa-btn.q4 { --tint: var(--tint-brick); }
+.qa-btn.q5 { --tint: var(--tint-ochre); }
 .quick-actions .qa-btn:nth-child(n):hover { transform: translateY(-6px) rotate(-1deg); border-color: var(--ink); box-shadow: 0 6px 0 var(--ink); background: linear-gradient(var(--tint), var(--tint)), var(--paper-raised); }
 .qa-icon { width: 54px; height: 54px; padding: 13px; border: 2px solid var(--ink); border-radius: 16px; background: var(--paper-raised); color: var(--ink); transition: transform .5s var(--spring); }
 .qa-btn:hover .qa-icon { transform: rotate(-10deg) scale(1.1); }
@@ -2017,3 +2021,23 @@ body.has-paybar .bloom-composer { padding-bottom: 1rem; }
 .renew-actions { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin: -1rem auto 2.5rem; max-width: 360px; }
 .renew-cta { width: auto; min-width: 220px; font-size: 0.95rem; padding: 0.9rem 1.6rem; }
 .renew-note { font-size: 0.76rem; color: var(--ink55); line-height: 1.6; text-align: center; }
+
+/* Wider top-bar link set (Papers, Quiz, Whizz, Bloom, Subjects, Plans): tighten
+   between phone and large-desktop widths so the bar never wraps or overflows. */
+@media (min-width: 761px) and (max-width: 1000px) {
+  .curio-nav { padding: 0 1rem; }
+  .nav-links { gap: 0; }
+  .nav-links a { padding: 0.45rem 0.55rem; font-size: 0.84rem; }
+  .nav-right .btn-ghost { padding: 0.45rem 0.6rem; font-size: 0.84rem; }
+  .nav-right .btn-nav { padding: 0.55rem 0.9rem; font-size: 0.84rem; }
+}
+@media (min-width: 601px) and (max-width: 1000px) {
+  .simple-nav { padding: 0 1rem; }
+  .simple-nav-links { gap: 0; }
+  .simple-nav-links a { padding: 0.45rem 0.55rem; font-size: 0.84rem; }
+  .simple-nav .nav-back { display: none; }
+}
+@media (max-width: 380px) {
+  .mtab-item span { font-size: 0.56rem; letter-spacing: 0; }
+  .quick-grid { gap: 0.4rem; }
+}

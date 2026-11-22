@@ -82,7 +82,7 @@ export async function getLearner(req: Request): Promise<Learner | Response> {
   const access = bloomAccess()
   const isTester = profile?.is_admin === true || testerEmails().has((user.email ?? '').toLowerCase())
   if (access === 'off') return apiError('closed', 403, { reason: 'off' })
-  if (access === 'testers' && !isTester) return apiError('closed', 403, { reason: 'not-tester' })
+  if (access === 'testers' && !isTester && profile?.is_premium !== true) return apiError('closed', 403, { reason: 'not-tester' })
 
   // Same premium rule as the rest of the site: only is_premium grants access
   // (is_founder is founder pricing, not access).
