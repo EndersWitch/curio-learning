@@ -4,10 +4,9 @@ import { useEffect, useRef, useState } from 'react'
 import Script from 'next/script'
 import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
-import { Check, FileText, PenLine, Brain } from '@/components/icons'
+import { Check, FileText, PenLine, Brain, Zap } from '@/components/icons'
 import Bloom from '@/components/Bloom'
 import { longDay, premiumEndsAt } from '@/lib/billing'
-import { useBloomHref } from '@/lib/bloom/useBloomHref'
 
 const PAYSTACK_KEY = 'pk_live_6540061572fe506bdb52063847dedb801c38765b'
 const PLAN_CODE = 'PLN_rgv78ij4cj0ky3d'
@@ -33,7 +32,6 @@ const PLAN_ROWS = [
 
 export default function SubscriptionClient() {
   const { user, loading, refreshUser } = useAuth()
-  const bloomHref = useBloomHref()
   const [ready, setReady] = useState(false)
   const [startedAt, setStartedAt] = useState<string | null>(null)
   const [subStatus, setSubStatus] = useState<string | null>(null)
@@ -200,7 +198,7 @@ export default function SubscriptionClient() {
                 <div className="sub-eyebrow">curio premium</div>
                 <h1 className="sub-hero-title">Papers get you started.<br /><span className="cy">This gets you through it.</span></h1>
                 <p className="sub-hero-sub">
-                  Papers are always free. Premium unlocks <strong>every quiz level</strong> (about three in four are Premium) and takes the ads away. Bloom, our AI tutor, is coming soon.
+                  Papers are always free. Premium unlocks <strong>every quiz level</strong> (about three in four are Premium) and takes the ads away. Bloom, our AI tutor, and Curio Whizz, our practice-test maker, are part of Premium.
                 </p>
 
                 {slotsLeft !== null && (
@@ -303,7 +301,8 @@ export default function SubscriptionClient() {
                 <div className="quick-grid">
                   <a href="/papers" className="premqa"><span className="premqa-icon"><FileText size={22} /></span><span className="premqa-lbl">Papers</span></a>
                   <a href="/quiz" className="premqa"><span className="premqa-icon"><PenLine size={22} /></span><span className="premqa-lbl">Quiz</span></a>
-                  <a href={bloomHref} className="premqa"><span className="premqa-icon"><Brain size={22} /></span><span className="premqa-lbl">Bloom</span></a>
+                  <a href="/whizz" className="premqa"><span className="premqa-icon"><Zap size={22} /></span><span className="premqa-lbl">Whizz</span></a>
+                  <a href="/bloom" className="premqa"><span className="premqa-icon"><Brain size={22} /></span><span className="premqa-lbl">Bloom</span></a>
                 </div>
               </section>
 

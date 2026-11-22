@@ -10,8 +10,7 @@ import { sb } from '@/lib/supabase'
 import type { CatalogLevel } from '@/lib/levelCatalog'
 import { useAuth } from '@/lib/auth-context'
 import { useAccountDrawer } from '@/components/AccountDrawerProvider'
-import { useBloomHref } from '@/lib/bloom/useBloomHref'
-import { Flame, FileText, PenLine, User, Star, Check, Brain, Heart, Trophy } from '@/components/icons'
+import { Flame, FileText, PenLine, User, Star, Check, Brain, Heart, Trophy, Zap } from '@/components/icons'
 
 const SUPABASE_URL = 'https://inmrsgujgfktapjnekjs.supabase.co'
 const SUPABASE_KEY = 'sb_publishable__15Lhb_ZGbKC2NHJVwB_HA_Z2BW_UoU'
@@ -69,7 +68,6 @@ const PLAN_FEATURES = [
 export default function HomePage() {
   const { user, loading: authLoading, refreshUser } = useAuth()
   const { openDrawer } = useAccountDrawer()
-  const bloomHref = useBloomHref()
   const ddRef = useRef<HTMLDivElement>(null)
 
   // Splash stays up until the auth check resolves AND a minimum beat has
@@ -415,9 +413,10 @@ export default function HomePage() {
                 Quick actions
               </div>
               <div className="quick-actions">
-                <a href="/papers" className="qa-btn q1"><FileText size={22} className="qa-icon" /><span className="qa-label">Browse papers</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
-                <a href="/quiz" className="qa-btn q2"><PenLine size={22} className="qa-icon" /><span className="qa-label">Start a quiz</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
-                <a href={bloomHref} className="qa-btn q3"><Brain size={22} className="qa-icon" /><span className="qa-label">Bloom</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
+                <a href="/papers" className="qa-btn q1"><FileText size={22} className="qa-icon" /><span className="qa-label">Papers</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
+                <a href="/quiz" className="qa-btn q2"><PenLine size={22} className="qa-icon" /><span className="qa-label">Quiz</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
+                <a href="/whizz" className="qa-btn q5"><Zap size={22} className="qa-icon" /><span className="qa-label">Whizz</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
+                <a href="/bloom" className="qa-btn q3"><Brain size={22} className="qa-icon" /><span className="qa-label">Bloom</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
                 <a href="/subscription" className="qa-btn q4"><Star size={22} className="qa-icon" /><span className="qa-label">My plan</span><span className="qa-arrow" aria-hidden="true">↗</span></a>
               </div>
             </div>
@@ -606,10 +605,10 @@ export default function HomePage() {
             <div className="lp-cards rv">
               {[
                 { href: '/papers', title: 'Free papers and memos', text: 'English Home Language practice papers for Grades 4 to 9, each with a full marking memo. Download them and keep them.', t: 't1' },
-                { href: '/deeplearn', title: 'Explained, not just marked', text: 'Coming soon: Bloom, our AI tutor, will break a tricky idea down from the start until it clicks.', t: 't2' },
+                { href: '/bloom', title: 'Explained, not just marked', text: 'Bloom, our AI tutor, breaks a tricky idea down from the start until it clicks.', t: 't2' },
                 { href: '/quiz', title: 'Quizzes that teach', text: 'English Home Language quizzes for Grades 4 to 7: a short lesson, then instant feedback. More subjects are on the way.', t: 't3' },
                 { href: '/subjects', title: 'Your grade, your subjects', text: 'Subject guides for Grades 4 to 12 show what your CAPS year covers, with papers and quizzes where we have them.', t: 't4' },
-                { href: '/login?tab=signup', title: 'Progress you can see', text: 'Streaks and quiz history show what you have practised and where to go next.', t: 't2' },
+                { href: '/whizz', title: 'A test made for you', text: 'Curio Whizz builds a practice test from what you are being tested on, marks it, and shows you where the marks went.', t: 't2' },
                 { href: '/subscription', title: 'No student left behind', text: 'Papers and memos stay free. Premium unlocks every quiz level and removes ads for R49 a month.', t: 't1' },
               ].map((c, i) => (
                 <a href={c.href} className={`lp-card ${c.t}`} key={c.title}>
@@ -717,7 +716,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* DEEP LEARN */}
+        {/* BLOOM */}
         <section className="lp-section">
           <div className="spread-deco o2 lp-float" style={{ top: '6%', right: '-70px' }}>
             <Bloom size={170} tone="moss" />
@@ -740,14 +739,13 @@ export default function HomePage() {
               </div>
             </div>
             <div className="lp-split-copy">
-              <span className="lp-tag pro">Coming soon</span>
+              <span className="lp-tag pro">Premium</span>
               <h2 className="lp-h2">Not just right or wrong. <span className="lp-accent squiggle">Actually</span> explained.</h2>
               <p>
-                Bloom is the AI tutor we&apos;re building for Curio, and a small group is testing it now. Ask it about
-                something you got wrong and it breaks the idea down from first principles, in plain language,
-                with real examples, until it actually clicks.
+                Bloom is Curio&apos;s AI tutor. Ask it about something you got wrong and it breaks the idea down
+                from first principles, in plain language, with real examples, until it actually clicks.
               </p>
-              <a href="/deeplearn" className="btn-soft">See how Bloom works</a>
+              <a href="/bloom" className="btn-soft">Meet Bloom</a>
             </div>
           </div>
         </section>

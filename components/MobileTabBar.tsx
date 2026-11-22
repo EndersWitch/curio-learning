@@ -2,15 +2,16 @@
 
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { Home, FileText, PenLine, GraduationCap, Star } from '@/components/icons'
+import { FileText, PenLine, GraduationCap, Star, Zap, Brain } from '@/components/icons'
 
 // Phone-only bottom navigation (hidden ≥761px via CSS). The desktop top-nav
 // links are hidden on phones, so this is the primary way around the site
 // there — thumb-reachable, like a native app.
 const TABS = [
-  { href: '/', label: 'Home', Icon: Home, match: (p: string) => p === '/' },
   { href: '/papers', label: 'Papers', Icon: FileText, match: (p: string) => p.startsWith('/papers') },
   { href: '/quiz', label: 'Quiz', Icon: PenLine, match: (p: string) => p.startsWith('/quiz') },
+  { href: '/whizz', label: 'Whizz', Icon: Zap, match: (p: string) => p.startsWith('/whizz') },
+  { href: '/bloom', label: 'Bloom', Icon: Brain, match: (p: string) => p.startsWith('/bloom') },
   { href: '/subjects', label: 'Subjects', Icon: GraduationCap, match: (p: string) => p.startsWith('/subjects') },
   { href: '/subscription', label: 'Plans', Icon: Star, match: (p: string) => p.startsWith('/subscription') },
 ]
@@ -19,7 +20,9 @@ const TABS = [
 // the focused quiz-taking / lesson flows (they have their own exit), and the
 // Bloom chat, whose question box lives where the bar would be.
 function isHidden(pathname: string) {
-  if (pathname.startsWith('/login') || pathname.startsWith('/bloom') || pathname.startsWith('/whizz')) return true
+  if (pathname.startsWith('/login') || pathname.startsWith('/bloom')) return true
+  // Whizz: the bar stays on the start and list pages but gets out of the way while a test is open.
+  if (/^\/whizz\/(?!new\/?$)[^/]+/.test(pathname)) return true
   return /^\/quiz\/[^/]+\/[^/]+\/(play|learn)/.test(pathname)
 }
 

@@ -28,7 +28,7 @@ import {
 function describe(data: { error?: BloomErrorCode; reason?: BloomErrorReason }): string {
   if (data.error === 'closed') {
     return data.reason === 'not-tester'
-      ? 'Curio Whizz is open to testers only, and this account is not one. Use an admin account, or add this email to BLOOM_TESTERS.'
+      ? 'Curio Whizz is open to Premium members while we test it. Go Premium to start building tests.'
       : 'Curio Whizz is switched off on this deployment. Set BLOOM_ACCESS to testers (or everyone) for this environment in Vercel, then redeploy.'
   }
   if (data.error === 'limit' && data.reason === 'daily') return 'You have built all your tests for today. They come back tomorrow, and Premium gets more.'

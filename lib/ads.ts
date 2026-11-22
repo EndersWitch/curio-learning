@@ -10,7 +10,6 @@ export function isAdFreePath(pathname: string): boolean {
   return (
     pathname === '/login' ||
     pathname === '/subscription' ||
-    pathname === '/deeplearn' ||
     /^\/quiz\/[^/]+\/[^/]+\/play\/?$/.test(pathname)
   )
 }

@@ -439,14 +439,14 @@ function BloomStateScreen({ page, reason, email, onRetry, onSwitchAccount }: Sta
       <div className="bloom-state">
         <BloomBuddy size={110} entrance />
         <h1>Bloom is <em>still growing.</em></h1>
-        <p>Curio&apos;s AI study buddy is being tested right now. It&apos;s coming soon.</p>
+        <p>Curio&apos;s AI study buddy is open to Premium members while we test it.</p>
         {reason === 'off' && <p className="bloom-state-note">Bloom is switched off on this server for now.</p>}
         {reason === 'not-tester' && (
           <p className="bloom-state-note">
-            You&apos;re signed in{email ? <> as <strong>{email}</strong></> : null}, which isn&apos;t on the tester list yet.
+            You&apos;re signed in{email ? <> as <strong>{email}</strong></> : null}, which doesn&apos;t have Premium yet.
           </p>
         )}
-        <a href="/deeplearn" className="btn-soft">What&apos;s Bloom?</a>
+        <a href="/subscription" className="btn-soft">See Premium</a>
         {reason === 'not-tester' && (
           <button type="button" className="bloom-state-link" onClick={onSwitchAccount}>Use a different account</button>
         )}

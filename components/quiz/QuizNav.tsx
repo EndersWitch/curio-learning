@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import { useAuth } from '@/lib/auth-context'
 import { sb } from '@/lib/supabase'
 import { useAccountDrawer } from '@/components/AccountDrawerProvider'
-import { Flame, FileText, PenLine, User, Star } from '@/components/icons'
+import { Flame, FileText, PenLine, User, Star, Zap, Brain } from '@/components/icons'
 import Bloom from '@/components/Bloom'
 import ThemeToggle from '@/components/ThemeToggle'
 
@@ -41,8 +41,10 @@ export default function QuizNav() {
       <ul className="nav-links">
         <li><a href="/papers">Papers</a></li>
         <li><a href="/quiz">Quiz</a></li>
+        <li><a href="/whizz">Whizz</a></li>
+        <li><a href="/bloom">Bloom</a></li>
         <li><a href="/subjects">Subjects</a></li>
-        <li><a href="/subscription">Subscription</a></li>
+        <li><a href="/subscription">Plans</a></li>
       </ul>
 
       <div className="nav-right">
@@ -75,6 +77,8 @@ export default function QuizNav() {
               </div>
               <a href="/papers" className="profile-dd-item dd-item-icon"><FileText size={15} /> Papers</a>
               <a href="/quiz" className="profile-dd-item dd-item-icon"><PenLine size={15} /> Start a quiz</a>
+              <a href="/whizz" className="profile-dd-item dd-item-icon"><Zap size={15} /> Curio Whizz</a>
+              <a href="/bloom" className="profile-dd-item dd-item-icon"><Brain size={15} /> Bloom</a>
               <button
                 className="profile-dd-item dd-item-icon"
                 onClick={() => { document.getElementById('profileDD')?.classList.remove('open'); openDrawer() }}
