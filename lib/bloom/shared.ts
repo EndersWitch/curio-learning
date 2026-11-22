@@ -10,7 +10,7 @@ export const DAILY_LIMITS = { free: 3, premium: 20, tester: 150 } as const
 export type BloomTier = keyof typeof DAILY_LIMITS
 
 // Dry Run tests a learner can build per South African day. Building one costs many AI calls, so this is the main cost guard.
-export const TEST_DAILY_LIMITS = { free: 2, premium: 6, tester: 30 } as const
+export const TEST_DAILY_LIMITS = { free: 2, premium: 30, tester: 30 } as const
 
 export const MAX_QUESTION_CHARS = 1500
 // Long chats re-send their whole history every turn, so cap them and start fresh.
