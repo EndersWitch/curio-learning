@@ -4,6 +4,7 @@ import { useEffect, useState, type FormEvent } from 'react'
 import Link from 'next/link'
 import { sb } from '@/lib/supabase'
 import { useAuth } from '@/lib/auth-context'
+import NotesLibrary from '@/components/testbuilder/NotesLibrary'
 import BloomBuddy from '@/components/bloom/BloomBuddy'
 import { BLOOM_GRADES, type BloomErrorCode, type BloomErrorReason } from '@/lib/bloom/shared'
 import {
@@ -53,6 +54,7 @@ export default function TestBuilderStart() {
   const [subject, setSubject] = useState('')
   const [length, setLength] = useState<TestLength>('medium')
   const [mix, setMix] = useState<QuestionMix>({ mcq: true, short: true, long: false, interactive: true })
+  const [noteIds, setNoteIds] = useState<string[]>([])
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<TopicsResponse | null>(null)
@@ -84,7 +86,7 @@ export default function TestBuilderStart() {
       const res = await fetch('/api/tests/topics', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
-        body: JSON.stringify({ scope, grade, subject, length, questionMix: mix }),
+        body: JSON.stringify({ scope, grade, subject, length, questionMix: mix, noteIds }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {
@@ -259,6 +261,8 @@ export default function TestBuilderStart() {
         />
         <span className="tb-count">{scope.length} / {MAX_SCOPE_CHARS}</span>
       </label>
+
+      <NotesLibrary picked={noteIds} onPick={setNoteIds} />
 
       <div className="tb-two">
         <label className="tb-field">
