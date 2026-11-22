@@ -66,17 +66,17 @@ export async function POST(req: Request) {
     const [keysRes, answersRes, pointsRes] = await Promise.all([
       svc.from('test_question_keys').select('question_id, mcq_correct, answer_spec').in('question_id', ids),
       svc.from('test_answers').select('question_id, answer_text, mcq_choice, answer_json, marked_by').eq('session_id', session.id),
-      svc.from('test_mark_points').select('id, question_id, position, point_text, accepted_alternatives').in('question_id', ids).order('position'),
+      svc.from('test_mark_points').select('id, question_id, position, point_text, accepted_alternatives, mode, exact_text').in('question_id', ids).order('position'),
     ])
     if (keysRes.error || answersRes.error || pointsRes.error) throw keysRes.error ?? answersRes.error ?? pointsRes.error
 
     const keyOf = new Map((keysRes.data ?? []).map(k => [k.question_id as string, k.mcq_correct as string | null]))
     const answerSpecOf = new Map((keysRes.data ?? []).map(k => [k.question_id as string, k.answer_spec as unknown]))
     const answerOf = new Map((answersRes.data ?? []).map(a => [a.question_id as string, a]))
-    const pointsOf = new Map<string, { id: string; text: string; alternatives: string[] }[]>()
+    const pointsOf = new Map<string, { id: string; text: string; alternatives: string[]; exact?: string }[]>()
     for (const p of pointsRes.data ?? []) {
       const list = pointsOf.get(p.question_id as string) ?? []
-      list.push({ id: p.id as string, text: p.point_text as string, alternatives: (p.accepted_alternatives as string[]) ?? [] })
+      list.push({ id: p.id as string, text: p.point_text as string, alternatives: (p.accepted_alternatives as string[]) ?? [], ...(p.mode === 'exact' && p.exact_text ? { exact: p.exact_text as string } : {}) })
       pointsOf.set(p.question_id as string, list)
     }
 

@@ -204,7 +204,7 @@ export function PeriodicWidget({ value, onChange, locked, answer }: Common & { s
   }
   return (
     <div className="tb-widget">
-      <div className="tb-pt" style={{ gridTemplateColumns: `repeat(${ELEMENT_COLS}, 1fr)`, gridTemplateRows: `repeat(${ELEMENT_ROWS}, auto)` }} role="group" aria-label="Periodic table, periods 1 to 5">
+      <div className="tb-pt" style={{ gridTemplateColumns: `repeat(${ELEMENT_COLS}, 1fr)`, gridTemplateRows: `repeat(7, auto) 0.5rem repeat(2, auto)` }} role="group" aria-label="Periodic table">
         {ELEMENTS.map(e => {
           const on = sel.includes(e.z)
           const state = targets ? (targets.includes(e.z) ? (on ? 'right' : 'missed') : on ? 'wrong' : '') : on ? 'on' : ''

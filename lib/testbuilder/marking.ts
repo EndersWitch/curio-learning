@@ -2,6 +2,7 @@
 // time. The memo is a guide, not the only right answer, and how strict the
 // marking is depends on the learner's grade.
 
+import { exactHolds } from '@/lib/testbuilder/exact'
 import Anthropic from '@anthropic-ai/sdk'
 import { BLOOM_MODEL, type Learner } from '@/lib/bloom/server'
 import { cleanTips, type WritingTip } from '@/lib/testbuilder/writing'
@@ -87,7 +88,7 @@ export interface MarkItem {
   questionId: string
   question: string
   marks: number
-  points: { id: string; text: string; alternatives: string[] }[]
+  points: { id: string; text: string; alternatives: string[]; exact?: string }[]
   answer: string
 }
 
@@ -118,7 +119,7 @@ export async function markBatch(
         it.points
           .map(
             (p, k) =>
-              `  ${k}. ${p.text}${p.alternatives.length ? ` [also accept: ${p.alternatives.join(' | ')}]` : ''}`,
+              `  ${k}. ${p.text}${p.alternatives.length ? ` [also accept: ${p.alternatives.join(' | ')}]` : ''}${p.exact ? ` [EXACT WORDING REQUIRED: ${p.exact}]` : ''}`,
           )
           .join('\n') +
         `\n<answer>\n${it.answer}\n</answer>`,
@@ -149,6 +150,10 @@ export async function markBatch(
       const hit = (entry.points as { pointIndex?: unknown; awarded?: unknown; reason?: unknown }[]).find(x => x?.pointIndex === k)
       if (!hit || typeof hit.awarded !== 'boolean') throw new Error(`marking reply missed point ${k} of answer ${i}`)
       const reason = typeof hit.reason === 'string' ? hit.reason.trim().slice(0, 400) : ''
+      if (hit.awarded && p.exact) {
+        const check = exactHolds(it.answer, p.exact)
+        if (!check.ok) return { pointId: p.id, awarded: false, reason: `This one has to be word for word. Your answer is missing: ${check.missing.slice(0, 4).join(', ')}.` }
+      }
       return { pointId: p.id, awarded: hit.awarded, reason }
     })
     out.set(it.questionId, { points, tips: cleanTips(entry.tips) })

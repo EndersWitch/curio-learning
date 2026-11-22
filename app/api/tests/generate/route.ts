@@ -555,6 +555,15 @@ export async function POST(req: Request) {
           ? [{ question_id: idAt.get(i + 1), mcq_correct: null, explanation: null, answer_spec: it.q.answerSpec }]
           : [],
     )
+    // Memo lines that state a verified definition are marked word for word.
+    const { data: defRows } = await svc.from('verified_definitions').select('id, subject, grade, term, definition_text').limit(500)
+    const subj = (base.subject ?? '').toLowerCase()
+    const defs = (defRows ?? []).filter(d => subj && subj.includes(String(d.subject).toLowerCase()) && (d.grade === null || Math.abs((d.grade as number) - base.grade) <= 1))
+    const exactFor = (text: string) => {
+      const t = text.toLowerCase()
+      const d = defs.find(x => new RegExp(`\\b${String(x.term).toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(t))
+      return d ? { mode: 'exact', exact_text: d.definition_text as string, verified: true, source_definition_id: d.id as string } : { mode: 'concept' }
+    }
     const pointRows = items.flatMap((it, i) =>
       it.kind === 'interactive'
         ? it.q.points.map((text, k) => ({ question_id: idAt.get(i + 1), position: k + 1, point_text: text, mode: 'concept', accepted_alternatives: [] as string[] }))
@@ -563,7 +572,7 @@ export async function POST(req: Request) {
             question_id: idAt.get(i + 1),
             position: k + 1,
             point_text: p.text,
-            mode: 'concept',
+            ...exactFor(p.text),
             accepted_alternatives: p.alternatives,
           }))
         : [],

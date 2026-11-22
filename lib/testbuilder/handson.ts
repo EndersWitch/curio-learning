@@ -118,13 +118,13 @@ function buildAngle(grade: number): Built {
 export interface PeriodicSpec { instruction: string; count: number }
 export function cleanElements(v: unknown): number[] {
   const a = obj(v).sel
-  return Array.isArray(a) ? [...new Set(a.filter((n): n is number => typeof n === 'number' && Number.isInteger(n) && n >= 1 && n <= 54))].sort((x, y) => x - y) : []
+  return Array.isArray(a) ? [...new Set(a.filter((n): n is number => typeof n === 'number' && Number.isInteger(n) && n >= 1 && n <= 118))].sort((x, y) => x - y) : []
 }
 function buildPeriodic(grade: number): Built {
   const kind = pick(['symbol', 'name', 'group', 'group', 'position'] as const)
   let instruction = '', targets: El[] = []
   if (kind === 'symbol' || kind === 'name') {
-    const e = pick(ELEMENTS.filter(x => x.z <= (grade <= 9 ? 20 : 36)))
+    const e = pick(ELEMENTS.filter(x => x.z <= (grade <= 9 ? 20 : grade <= 10 ? 36 : 86)))
     targets = [e]
     instruction = kind === 'symbol' ? `Tap the element with the symbol ${e.sym}.` : `Tap the element ${e.name.toLowerCase()}.`
   } else if (kind === 'group') {
