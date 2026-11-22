@@ -1,4 +1,5 @@
 import { apiError, getLearner, serverError } from '@/lib/bloom/server'
+import { TEST_DAILY_LIMITS } from '@/lib/bloom/shared'
 
 export const dynamic = 'force-dynamic'
 
@@ -30,6 +31,10 @@ export async function POST(req: Request) {
   if (tError) return serverError('practice topics', tError)
   const chosen = (topics ?? []).filter(t => wanted.has(t.id as string))
   if (chosen.length === 0) return apiError('invalid', 400)
+
+  const { data: usedBuilds, error: buildError } = await learner.sb.rpc('test_use_build', { p_limit: TEST_DAILY_LIMITS[learner.tier] })
+  if (buildError) return serverError('count practice build', buildError)
+  if (typeof usedBuilds !== 'number' || usedBuilds < 0) return apiError('limit', 429, { reason: 'daily', limit: TEST_DAILY_LIMITS[learner.tier] })
 
   const { data: created, error: cError } = await learner.sb
     .from('test_sessions')

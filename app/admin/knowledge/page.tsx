@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react'
 
 type Entry = { id: string; kind: string; title: string; body?: string; subjects: string[]; grade_min: number; grade_max: number; source_url?: string | null; origin?: string; note?: string | null; verified_at?: string | null }
+type Rating = { id: string; rating: number; comment: string | null; triage: string | null; created_at: string }
 type Flag = { id: string; kind: string; reason: string | null; note: string | null; triage: string | null; created_at: string }
 
 const box: React.CSSProperties = { border: '2px solid #222', padding: '0.8rem', margin: '0 0 0.8rem', background: '#fff', color: '#222' }
@@ -13,6 +14,7 @@ export default function KnowledgeAdmin() {
   const [proposed, setProposed] = useState<Entry[]>([])
   const [approved, setApproved] = useState<Entry[]>([])
   const [flags, setFlags] = useState<Flag[]>([])
+  const [ratings, setRatings] = useState<Rating[]>([])
   const [msg, setMsg] = useState('')
   const [def, setDef] = useState({ subject: '', grade: '', term: '', definition: '', source: '' })
   const [form, setForm] = useState({ kind: 'term', title: '', body: '', subjects: '', gradeMin: '1', gradeMax: '12', sourceUrl: '' })
@@ -25,7 +27,7 @@ export default function KnowledgeAdmin() {
   const load = useCallback(async () => {
     const { ok, data } = await call('GET')
     if (!ok) return setMsg('Wrong password or the server is not set up.')
-    setProposed(data.proposed ?? []); setApproved(data.approved ?? []); setFlags(data.flags ?? []); setMsg('')
+    setProposed(data.proposed ?? []); setApproved(data.approved ?? []); setFlags(data.flags ?? []); setRatings(data.ratings ?? []); setMsg('')
   }, [call])
 
   const act = async (action: string, extra: object = {}) => {
@@ -64,6 +66,14 @@ export default function KnowledgeAdmin() {
           <p style={{ margin: '0.4rem 0', fontSize: '0.9rem' }}>{fl.triage ? `Investigation: ${fl.triage}` : 'Not investigated yet.'}</p>
           <button style={btn} onClick={() => act('flag', { flagId: fl.id, flagStatus: 'accepted' })}>Report was right</button>
           <button style={btn} onClick={() => act('flag', { flagId: fl.id, flagStatus: 'rejected' })}>Report was wrong</button>
+        </div>
+      ))}
+
+      <h2>Quiz ratings ({ratings.length}{ratings.length ? `, average ${(ratings.reduce((n, r) => n + r.rating, 0) / ratings.length).toFixed(1)}` : ''})</h2>
+      {ratings.map(r => (
+        <div key={r.id} style={box}>
+          <strong>{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</strong> {r.comment ? `· ${r.comment}` : ''}
+          <p style={{ margin: '0.4rem 0 0', fontSize: '0.9rem' }}>{r.triage ? `Review: ${r.triage}` : 'Not reviewed yet.'}</p>
         </div>
       ))}
 

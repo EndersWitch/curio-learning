@@ -66,6 +66,13 @@ const TRIAGE_TOOL: Anthropic.Tool = {
   },
 }
 
+async function knownTitles(sb: NonNullable<ReturnType<typeof serviceClient>>, subject: string | null): Promise<string> {
+  const { data } = await sb.from('test_knowledge').select('title, subjects, status').in('status', ['approved', 'proposed']).limit(300)
+  const s = (subject ?? '').toLowerCase()
+  const rows = (data ?? []).filter(r => !s || (r.subjects as string[]).some(x => x === '*' || s.includes(x)))
+  return rows.map(r => r.title).slice(0, 80).join('; ')
+}
+
 type Lesson = { kind: string; title: string; body: string; subjects: string[]; gradeMin?: number; gradeMax?: number; sourceUrl?: string }
 
 export async function triageFlags(max = 6): Promise<{ triaged: number; proposed: number }> {
@@ -85,7 +92,7 @@ export async function triageFlags(max = 6): Promise<{ triaged: number; proposed:
       const trim = (v: unknown) => JSON.stringify(v ?? null).slice(0, 2500)
       const out = await research<{ verdict: string; explanation: string; lesson?: Lesson }>(
         'You investigate learner reports about a South African school test (CAPS curriculum). Use web search to check the facts against CAPS-aligned or official South African sources before deciding. Be honest: if the learner is mistaken, say so. Propose a lesson only for something verified that future question writers need to know (a correct term, rule, current fact, a topic that is above the grade, or a non-existent term to avoid). Never invent facts or sources.',
-        `Grade ${sess?.grade}, subject: ${sess?.subject ?? 'not given'}.\nLearner's scope: ${String(sess?.scope_text ?? '').slice(0, 600)}\n\nQuestion record: ${trim(q)}\nHidden key / memo: ${trim(key)}\nLearner's answer: ${trim(ans)}\n\nReport type: ${fl.kind}. Reason: ${fl.reason ?? ''}. Note: ${fl.note ?? ''}`,
+        `Grade ${sess?.grade}, subject: ${sess?.subject ?? 'not given'}.\nLessons already known (do not propose these again): ${await knownTitles(sb, (sess?.subject as string | null) ?? null)}\nLearner's scope: ${String(sess?.scope_text ?? '').slice(0, 600)}\n\nQuestion record: ${trim(q)}\nHidden key / memo: ${trim(key)}\nLearner's answer: ${trim(ans)}\n\nReport type: ${fl.kind}. Reason: ${fl.reason ?? ''}. Note: ${fl.note ?? ''}`,
         TRIAGE_TOOL,
       )
       if (!out) continue
@@ -108,6 +115,65 @@ export async function triageFlags(max = 6): Promise<{ triaged: number; proposed:
     }
   }
   return { triaged, proposed }
+}
+
+const FEEDBACK_TOOL: Anthropic.Tool = {
+  ...TRIAGE_TOOL,
+  name: 'record_feedback_review',
+  description: 'Record what the rating and comment show about the quiz.',
+  input_schema: {
+    ...(TRIAGE_TOOL.input_schema as object),
+    properties: {
+      ...((TRIAGE_TOOL.input_schema as { properties: Record<string, unknown> }).properties),
+      verdict: { type: 'string', enum: ['content_problem', 'too_hard', 'too_easy', 'format_problem', 'marking_problem', 'praise', 'unclear', 'cannot_tell'] },
+    },
+    required: ['verdict', 'explanation'],
+  } as Anthropic.Tool.InputSchema,
+}
+
+/** Learner ratings and comments: low or commented ones are reviewed with the quiz they are about. */
+export async function triageFeedback(max = 6): Promise<{ reviewed: number; proposed: number }> {
+  const sb = serviceClient()
+  if (!sb) return { reviewed: 0, proposed: 0 }
+  const { data: rows } = await sb.from('test_feedback').select('id, session_id, rating, comment').is('triage', null).order('created_at', { ascending: true }).limit(40)
+  const todo = (rows ?? []).filter(r => (r.rating as number) <= 3 || String(r.comment ?? '').trim().length >= 10).slice(0, max)
+  // Ratings that need no review are closed so they are not looked at again.
+  const skipIds = (rows ?? []).filter(r => !todo.includes(r)).map(r => r.id)
+  if (skipIds.length) await sb.from('test_feedback').update({ triage: 'no review needed' }).in('id', skipIds)
+  let reviewed = 0, proposed = 0
+  for (const fb of todo) {
+    try {
+      const [{ data: sess }, { data: qs }] = await Promise.all([
+        sb.from('test_sessions').select('grade, subject, scope_text, marks_awarded, marks_total').eq('id', fb.session_id).maybeSingle(),
+        sb.from('test_questions').select('id, qtype, marks, question_text').eq('session_id', fb.session_id).order('position').limit(40),
+      ])
+      const { data: flags } = await sb.from('test_flags').select('kind, note, triage').in('question_id', (qs ?? []).map(q => q.id as string)).limit(10)
+      if (!sess) continue
+      const list = (qs ?? []).map((q, i) => `${i + 1}. [${q.qtype}, ${q.marks}m] ${String(q.question_text).slice(0, 220)}`).join('\n')
+      const out = await research<{ verdict: string; explanation: string; lesson?: Lesson }>(
+        'You review a learner\'s rating of a practice test for a South African school (CAPS). Work out what the comment really says about the quiz. Check any factual claim with web search against South African sources before you believe it. Propose a lesson only for something verified that future question writers need to know, or a clear pattern of wrong grade level or confusing wording that a rule would fix. If it is only praise, or too vague to act on, say so and propose nothing. Never invent facts or sources.',
+        `Grade ${sess.grade}, subject: ${sess.subject ?? 'not given'}. Learner scored ${sess.marks_awarded ?? '?'}/${sess.marks_total ?? '?'}.\nLessons already known (do not propose these again): ${await knownTitles(sb, (sess.subject as string | null) ?? null)}\nScope: ${String(sess.scope_text ?? '').slice(0, 500)}\n\nQuestions on the test:\n${list}\n\nReports on this test: ${JSON.stringify(flags ?? []).slice(0, 1200)}\n\nRating: ${fb.rating}/5. Comment: ${String(fb.comment ?? '(none)').slice(0, 1000)}`,
+        FEEDBACK_TOOL,
+      )
+      if (!out) continue
+      const text = `${out.verdict}: ${out.explanation}`.slice(0, 1500)
+      await sb.from('test_feedback').update({ triage: text }).eq('id', fb.id)
+      reviewed++
+      const l = out.lesson
+      if (l && l.title && l.body && Array.isArray(l.subjects) && l.subjects.length && ['term', 'rule', 'fact', 'avoid'].includes(l.kind)) {
+        const { error } = await sb.from('test_knowledge').insert({
+          subjects: l.subjects.map(s => s.toLowerCase()).slice(0, 6),
+          grade_min: Math.max(1, Math.min(12, l.gradeMin ?? sess.grade ?? 1)), grade_max: Math.max(1, Math.min(12, l.gradeMax ?? 12)),
+          kind: l.kind, title: l.title.slice(0, 120), body: l.body.slice(0, 1200), source_url: l.sourceUrl ?? null,
+          status: 'proposed', origin: 'feedback', note: `From a ${fb.rating}/5 rating: ${text}`.slice(0, 600),
+        })
+        if (!error) proposed++
+      }
+    } catch (err) {
+      console.error('[learn] feedback review failed', fb.id, err)
+    }
+  }
+  return { reviewed, proposed }
 }
 
 const FACT_TOOL: Anthropic.Tool = {

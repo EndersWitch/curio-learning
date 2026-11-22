@@ -31,6 +31,7 @@ function describe(data: { error?: BloomErrorCode; reason?: BloomErrorReason }): 
       ? 'Dry Run is open to testers only, and this account is not one. Use an admin account, or add this email to BLOOM_TESTERS.'
       : 'Dry Run is switched off on this deployment. Set BLOOM_ACCESS to testers (or everyone) for this environment in Vercel, then redeploy.'
   }
+  if (data.error === 'limit' && data.reason === 'daily') return 'You have built all your tests for today. They come back tomorrow, and Premium gets more.'
   if (data.error === 'setup' && data.reason === 'no-service-key') {
     return 'SUPABASE_SERVICE_ROLE_KEY is not reaching this deployment. Check it is set for this environment, then redeploy.'
   }

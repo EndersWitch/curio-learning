@@ -9,6 +9,7 @@ import {
   type TestLength,
   type TopicsResponse,
 } from '@/lib/testbuilder/shared'
+import { TEST_DAILY_LIMITS } from '@/lib/bloom/shared'
 import { BLOOM_MODEL, apiError, getLearner, parseGrade, serverError } from '@/lib/bloom/server'
 
 export const dynamic = 'force-dynamic'
@@ -75,6 +76,11 @@ export async function POST(req: Request) {
   const mix = parseMix(body.questionMix)
   const subject = typeof body.subject === 'string' ? body.subject.trim().slice(0, 80) || null : null
   if (!scope || scope.length > MAX_SCOPE_CHARS || grade === null || !length || !mix) return apiError('invalid', 400)
+
+  // One test counts against today's allowance before any AI call is made.
+  const { data: usedBuilds, error: buildError } = await learner.sb.rpc('test_use_build', { p_limit: TEST_DAILY_LIMITS[learner.tier] })
+  if (buildError) return serverError('count test build', buildError)
+  if (typeof usedBuilds !== 'number' || usedBuilds < 0) return apiError('limit', 429, { reason: 'daily', limit: TEST_DAILY_LIMITS[learner.tier] })
 
   // Notes the learner picked: read as the learner, so only their own come back.
   const wanted = Array.isArray(body.noteIds) ? body.noteIds.filter((x): x is string => typeof x === 'string').slice(0, 5) : []

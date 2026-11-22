@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { serviceClient } from '@/lib/testbuilder/admin'
-import { refreshFacts, triageFlags } from '@/lib/testbuilder/learn'
+import { refreshFacts, triageFeedback, triageFlags } from '@/lib/testbuilder/learn'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 300
@@ -14,12 +14,13 @@ export async function GET(req: Request) {
   if (!authed(req)) return NextResponse.json({ error: 'unauthorised' }, { status: 401 })
   const sb = serviceClient()
   if (!sb) return NextResponse.json({ error: 'no service key' }, { status: 500 })
-  const [{ data: proposed }, { data: approved }, { data: flags }] = await Promise.all([
+  const [{ data: proposed }, { data: approved }, { data: flags }, { data: ratings }] = await Promise.all([
     sb.from('test_knowledge').select('*').eq('status', 'proposed').order('created_at', { ascending: false }).limit(100),
     sb.from('test_knowledge').select('id, kind, title, subjects, grade_min, grade_max, verified_at').eq('status', 'approved').order('created_at', { ascending: false }).limit(200),
     sb.from('test_flags').select('id, kind, reason, note, status, triage, created_at').eq('status', 'open').order('created_at', { ascending: false }).limit(50),
+    sb.from('test_feedback').select('id, rating, comment, triage, created_at').order('created_at', { ascending: false }).limit(40),
   ])
-  return NextResponse.json({ proposed, approved, flags })
+  return NextResponse.json({ proposed, approved, flags, ratings })
 }
 
 // { action: 'approve' | 'reject' | 'add' | 'run' , id?, entry? }
@@ -58,8 +59,9 @@ export async function POST(req: Request) {
   }
   if (b.action === 'run') {
     const flags = await triageFlags(6)
+    const feedback = await triageFeedback(6)
     const facts = await refreshFacts(6)
-    return NextResponse.json({ flags, facts })
+    return NextResponse.json({ flags, feedback, facts })
   }
   return NextResponse.json({ error: 'unknown action' }, { status: 400 })
 }

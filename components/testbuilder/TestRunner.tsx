@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { sb } from '@/lib/supabase'
+import QuizRating from '@/components/testbuilder/QuizRating'
 import AskAboutQuestion from '@/components/testbuilder/AskAboutQuestion'
 import { useAuth } from '@/lib/auth-context'
 import BloomBuddy, { type BloomMood } from '@/components/bloom/BloomBuddy'
@@ -389,6 +390,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
       const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${auth.access_token}` }
       const made = await fetch('/api/tests/practice', { method: 'POST', headers, body: JSON.stringify({ sessionId, topicIds }) })
       const { sessionId: next } = (await made.json().catch(() => ({}))) as { sessionId?: string }
+      if (made.status === 429) return setError('You have built all your tests for today. They come back tomorrow, and Premium gets more.')
       if (!made.ok || !next) return setError("Couldn't set up the practice test. Try again.")
       const gen = await fetch('/api/tests/generate', { method: 'POST', headers, body: JSON.stringify({ sessionId: next }) })
       if (!gen.ok) return setError("Couldn't write the practice questions. Try again.")
@@ -570,6 +572,7 @@ export default function TestRunner({ sessionId }: { sessionId: string }) {
           <Link className="tb-link" href="/dryrun">My dry runs</Link>
           <Link className="tb-link" href="/dryrun/new">Start another dry run</Link>
         </div>
+        <QuizRating sessionId={sessionId} />
       </div>
     )
   }

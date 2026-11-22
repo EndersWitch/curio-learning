@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { refreshFacts, triageFlags } from '@/lib/testbuilder/learn'
+import { refreshFacts, triageFeedback, triageFlags } from '@/lib/testbuilder/learn'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 300
@@ -9,6 +9,7 @@ export async function GET(req: Request) {
   const secret = process.env.CRON_SECRET
   if (!secret || req.headers.get('authorization') !== `Bearer ${secret}`) return NextResponse.json({ error: 'unauthorised' }, { status: 401 })
   const flags = await triageFlags(8)
+  const feedback = await triageFeedback(8)
   const facts = await refreshFacts(8)
-  return NextResponse.json({ flags, facts })
+  return NextResponse.json({ flags, feedback, facts })
 }
