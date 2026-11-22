@@ -17,6 +17,7 @@ export default function KnowledgeAdmin() {
   const [flags, setFlags] = useState<Flag[]>([])
   const [ratings, setRatings] = useState<Rating[]>([])
   const [msg, setMsg] = useState('')
+  const [login, setLogin] = useState({ email: '', password: '' })
   const [def, setDef] = useState({ subject: '', grade: '', term: '', definition: '', source: '' })
   const [form, setForm] = useState({ kind: 'term', title: '', body: '', subjects: '', gradeMin: '1', gradeMax: '12', sourceUrl: '' })
 
@@ -41,13 +42,27 @@ export default function KnowledgeAdmin() {
     await load()
   }
 
+  const signIn = async () => {
+    setMsg('Signing in…')
+    const { error } = await sb.auth.signInWithPassword({ email: login.email.trim(), password: login.password })
+    if (error) return setMsg(error.message)
+    setSignedIn(true); setLogin({ email: '', password: '' }); await load()
+  }
+
   useEffect(() => { sb.auth.getSession().then(({ data }) => { setSignedIn(!!data.session); if (data.session) load() }) }, [load])
 
   return (
     <main style={{ maxWidth: 820, margin: '0 auto', padding: '1.2rem', fontFamily: 'Arial, sans-serif', color: '#222', background: '#f7f3ea', minHeight: '100vh' }}>
       <h1 style={{ margin: '0 0 0.8rem' }}>Test builder: knowledge review</h1>
       <div style={box}>
-        {signedIn === false && <p style={{ margin: '0 0 0.5rem' }}>You are not signed in. Sign in to Curio with your admin account in this browser, then reload this page.</p>}
+        {signedIn === false && (
+          <div style={{ margin: '0 0 0.6rem' }}>
+            <p style={{ margin: '0 0 0.5rem' }}>Not signed in on this address. Sign-ins do not carry over between curiolearning.co.za and a preview link, so sign in here with your admin account.</p>
+            <input type="email" placeholder="Email" value={login.email} onChange={e => setLogin({ ...login, email: e.target.value })} style={{ border: '2px solid #222', padding: '0.35rem', marginRight: '0.4rem' }} />
+            <input type="password" placeholder="Password" value={login.password} onChange={e => setLogin({ ...login, password: e.target.value })} onKeyDown={e => { if (e.key === 'Enter') signIn() }} style={{ border: '2px solid #222', padding: '0.35rem', marginRight: '0.4rem' }} />
+            <button style={btn} onClick={signIn}>Sign in</button>
+          </div>
+        )}
         <button style={btn} onClick={load}>Load</button>
         <button style={btn} onClick={() => act('run')}>Run learning now</button>
         {msg && <p style={{ margin: '0.5rem 0 0' }}>{msg}</p>}
