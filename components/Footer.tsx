@@ -13,7 +13,7 @@ export default function Footer() {
           <a href="/papers">Papers</a>
           <a href="/quiz">Quiz</a>
           <a href="/subjects">Subjects</a>
-          <a href="/whizz">Curio Whizz</a>
+          <a href="/whizz">Whizz</a>
           <a href="/bloom">Bloom</a>
         </div>
         <div className="footer-col">

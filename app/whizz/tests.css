@@ -326,3 +326,27 @@
 .tb-ask { display: grid; gap: 0.5rem; margin-top: 0.5rem; padding: 0.75rem; border: 1.5px dashed var(--ink15); border-radius: 10px; }
 .tb-ask-q { font-family: var(--h); margin: 0; }
 .tb-ask-a { margin: 0.2rem 0 0.5rem; white-space: pre-wrap; }
+
+/* Whizz landing */
+.wz-hero { position: relative; overflow: hidden; border: 2px solid var(--ink); border-radius: 22px; padding: 1.8rem 1.4rem 1.6rem; background: linear-gradient(var(--tint-ochre), var(--tint-ochre)), var(--paper-raised); box-shadow: 6px 6px 0 var(--ink); display: grid; gap: 0.9rem; justify-items: start; }
+.wz-hero-bolt { position: absolute; right: -14px; top: -10px; width: 150px; height: 150px; color: var(--rust); opacity: 0.16; transform: rotate(14deg); pointer-events: none; }
+.wz-pill { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--h); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; background: var(--ink); color: var(--paper); padding: 0.3rem 0.7rem; border-radius: 99px; position: relative; }
+.tb .wz-h { font-size: clamp(1.9rem, 7vw, 3.1rem); line-height: 1.02; letter-spacing: -0.03em; font-weight: 800; position: relative; max-width: 560px; }
+.wz-h em { display: block; color: var(--rust-text); font-style: italic; font-weight: 600; }
+.wz-lede { max-width: 520px; font-size: 1.02rem; color: var(--ink80); position: relative; }
+.wz-cta-row { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; position: relative; }
+.wz-cta { padding: 0.85rem 1.7rem; font-size: 1.05rem; text-decoration: none; }
+.wz-hint { font-size: 0.85rem; opacity: 0.7; }
+.wz-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+.wz-step { display: grid; gap: 0.35rem; align-content: start; border: 2px solid var(--ink15); border-radius: 18px; padding: 1rem; background: linear-gradient(var(--tint), var(--tint)), var(--paper-raised); font-size: 0.9rem; line-height: 1.4; }
+.wz-step b { font-family: var(--h); font-size: 1rem; }
+.wz-step-ic { color: var(--rust-text); }
+.wz-step.s1 { --tint: var(--tint-rust); }
+.wz-step.s2 { --tint: var(--tint-moss); }
+.wz-step.s3 { --tint: var(--tint-ochre); }
+.tb .wz-h2 { margin-top: 0.4rem; }
+@media (max-width: 640px) {
+  .wz-steps { grid-template-columns: 1fr; }
+  .wz-hero { padding: 1.4rem 1.1rem 1.3rem; box-shadow: 4px 4px 0 var(--ink); }
+  .wz-cta { width: 100%; text-align: center; }
+}

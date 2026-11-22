@@ -198,7 +198,7 @@ export default function SubscriptionClient() {
                 <div className="sub-eyebrow">curio premium</div>
                 <h1 className="sub-hero-title">Papers get you started.<br /><span className="cy">This gets you through it.</span></h1>
                 <p className="sub-hero-sub">
-                  Papers are always free. Premium unlocks <strong>every quiz level</strong> (about three in four are Premium) and takes the ads away. Bloom, our AI tutor, and Curio Whizz, our practice-test maker, are part of Premium.
+                  Papers are always free. Premium unlocks <strong>every quiz level</strong> (about three in four are Premium) and takes the ads away. Bloom, our AI tutor, and Whizz, our practice-test maker, are part of Premium.
                 </p>
 
                 {slotsLeft !== null && (
