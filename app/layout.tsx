@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Raleway, Merriweather } from 'next/font/google'
 import './globals.css'
+import { Analytics } from '@vercel/analytics/next'
 import AdGate from '@/components/AdGate'
 import MobileTabBar from '@/components/MobileTabBar'
 import PaymentBanner from '@/components/PaymentBanner'
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <AdGate />
           </AuthProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
