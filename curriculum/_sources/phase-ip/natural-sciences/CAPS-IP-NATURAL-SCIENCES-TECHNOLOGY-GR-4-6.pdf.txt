@@ -1,0 +1,4479 @@
+=== page 1 ===
+
+
+
+
+NATURAL SCIENCES AND TECHNOLOGY
+Curriculum and Assessment 
+Policy Statement
+Intermediate Phase
+Grades 4-6
+National Curriculum Statement (NCS)
+
+=== page 2 ===
+CAPS
+Curriculum and Assessment Policy Statement 
+GRADES 4-6
+NATURAL SCIENCES AND TECHNOLOGY 
+
+=== page 3 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+DISCLAIMER
+In view of the stringent time requirements encountered by the Department of Basic Education to effect the necessary editorial changes and layout 
+to the Curriculum and Assessment Policy Statements and the supplementary policy documents, possible errors may occur in the said documents 
+placed on the official departmental websites.
+There may also be vernacular inconsistencies in the language documents at Home-, First and Second Additional Language levels which have been 
+translated in the various African Languages. Please note that the content of the documents translated and versioned in the African Languages are 
+correct as they are based on the English generic language documents at all three language levels to be implemented in all four school phases.
+If any editorial, layout or vernacular inconsistencies are detected, the user is kindly requested to bring this to the attention of the Department of 
+Basic Education.
+E-mail:  capslangcomments@dbe.gov.za or fax (012) 328 9828
+Department of Basic Education
+222 Struben Street
+Private Bag X895
+Pretoria 0001
+South Africa
+Tel:  +27 12 357 3000
+Fax: +27 12 323 0601
+120 Plein Street Private Bag X9023
+Cape Town 8000
+South Africa 
+Tel:  +27 21 465 1701
+Fax: +27 21 461 8110
+Website: http://www.education.gov.za
+© 2011 Department of Basic Education
+Isbn:978-1-4315-0490-9
+Design and Layout by: Ndabase Printing Solution
+Printed by: Government Printing Works
+
+=== page 4 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+CAPS
+FOREWORD by the minister
+Our national curriculum is the culmination of our efforts over a period of seventeen 
+years to transform the curriculum bequeathed to us by apartheid. From the start of 
+democracy we have built our curriculum on the values that inspired our Constitution 
+(Act 108 of 1996). The Preamble to the Constitution states that the aims of the 
+Constitution are to:
+•	
+heal the divisions of the past and establish a society based on democratic 
+values, social justice and fundamental human rights;
+•	
+improve the quality of life of all citizens and free the potential of each person;
+•	
+lay the foundations for a democratic and open society in which government is 
+based on the will of the people and every citizen is equally protected by law; 
+and
+•	
+build a united and democratic South Africa able to take its rightful place as a sovereign state in the family of 
+nations.
+Education and the curriculum have an important role to play in realising these aims. 
+In 1997 we introduced outcomes-based education to overcome the curricular divisions of the past, but the experience 
+of implementation prompted a review in 2000. This led to the first curriculum revision: the Revised National Curriculum 
+Statement Grades R-9 and the National Curriculum Statement Grades 10-12 (2002).
+Ongoing implementation challenges resulted in another review in 2009 and we revised the Revised National 
+Curriculum Statement (2002) and the National Curriculum Statement Grades 10-12 to produce this document.
+From 2012 the two National Curriculum Statements, for Grades R-9 and Grades 10-12 respectively, are combined 
+in a single document and will simply be known as the National Curriculum Statement Grades R-12. The National 
+Curriculum Statement for Grades R-12 builds on the previous curriculum but also updates it and aims to provide 
+clearer specification of what is to be taught and learnt on a term-by-term basis. 
+The National Curriculum Statement Grades R-12 represents a policy statement for learning and teaching in South 
+African schools and comprises of the following: 
+(a)	
+Curriculum and Assessment Policy Statements (CAPS) for all approved subjects listed in this document;
+(b)	
+National policy pertaining to the programme and promotion requirements of the National Curriculum Statement 
+Grades R-12; and
+(c)	
+National Protocol for Assessment Grades R-12.
+ 
+MRS ANGIE MOTSHEKGA, MP 
+MINISTER OF BASIC EDUCATION 
+
+=== page 5 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+
+=== page 6 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+1
+CAPS
+CONTENTS
+Section 1: INTRODUCTION TO THE Curriculum and Assessment Policy Statement..... 3
+1.1	
+Background...................................................................................................................................................... 3
+1.2	
+Overview........................................................................................................................................................... 3
+1.3	
+General aims of the South African Curriculum............................................................................................. 4
+1.4	
+Time Allocation................................................................................................................................................ 6
+1.4.1	 Foundation Phase.................................................................................................................................... 6
+1.4.2	 Intermediate Phase.................................................................................................................................. 6
+1.4.3	 Senior Phase........................................................................................................................................... 7
+1.4.4	 Grades 10-12........................................................................................................................................... 7
+SECTION 2: introduction to natural sciences and technology..................................... 8
+2.1	
+Introduction...................................................................................................................................................... 8
+2.2	
+Teaching Natural Sciences and Technology................................................................................................. 8
+2.3	
+How Natural Sciences and Technology complement each other................................................................ 9
+2.4	
+Organisation of the Natural Sciences and Technology Curriculum......................................................... 10
+2.5	
+Allocation of teaching time........................................................................................................................... 10
+2.6 
+Specific aims.................................................................................................................................................. 10
+2.7	
+Major Process and Design Skills.................................................................................................................. 11
+2.8	
+Resource......................................................................................................................................................... 12
+2.9	
+Progression map of Natural Sciences and Technology content knowledge and concepts................... 13
+2.10	 Detailed summary of Natural Sciences and Technology concepts and content,  
+and time allocations...................................................................................................................................... 15
+SECTION 3: CONTENT TABLES............................................................................................................ 16
+Natural Sciences and Technology: Grade 4.......................................................................................................... 16
+Natural Sciences and Technology: Grade 5.......................................................................................................... 31
+Natural Sciences and Technology: Grade 6.......................................................................................................... 47
+
+=== page 7 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+2
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+Section 4: assessment.................................................................................................................... 65
+4.1	
+Introduction.................................................................................................................................................... 65
+4.2	
+Informal assessment or daily assessment.................................................................................................. 65
+4.3	
+Formal assessment....................................................................................................................................... 66
+4.4	
+Programme of formal assessment for natural sciences and technology grades 4, 5 and 6.................. 67
+4.5	
+Recording and reporting............................................................................................................................... 68
+4.6	
+Moderation of assessment............................................................................................................................ 74
+4.7	
+General............................................................................................................................................................ 74
+
+=== page 8 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+3
+CAPS
+Section 
+1: 
+INTRODUCTION 
+TO 
+THE 
+Curriculum 
+and 
+Assessment Policy Statement
+1.1	
+Background
+The National Curriculum Statement Grades R-12 (NCS) stipulates policy on curriculum and assessment in the 
+schooling sector.
+To improve implementation, the National Curriculum Statement was amended, with the amendments coming into 
+effect in January 2012. A single comprehensive Curriculum and Assessment Policy document was developed for 
+each subject to replace Subject Statements, Learning Programme Guidelines and Subject Assessment Guidelines 
+in Grades R-12. 
+1.2	
+Overview
+(a)	
+The National Curriculum Statement Grades R-12 (January 2012) represents a policy statement for learning 
+and teaching in South African schools and comprises the following: 
+(i)	
+Curriculum and Assessment Policy Statements for each approved school subject;
+(ii)	
+The policy document, National policy pertaining to the programme and promotion requirements of the 
+National Curriculum Statement Grades R-12; and
+(iii)	
+The policy document, National Protocol for Assessment Grades R-12 (January 2012).
+(b)	
+The National Curriculum Statement Grades R-12 (January 2012) replaces the two current national curricula 
+statements, namely the 
+(i)	
+Revised National Curriculum Statement Grades R-9, Government Gazette No. 23406 of 31 May 2002, 
+and
+(ii)	
+National Curriculum Statement Grades 10-12 Government Gazettes, No. 25545 of 6 October 2003 and 
+No. 27594 of 17 May 2005.
+(c)	
+The national curriculum statements contemplated in subparagraphs b(i) and (ii) comprise the following policy 
+documents which will be incrementally repealed by the National Curriculum Statement Grades R-12 (January 
+2012) during the period 2012-2014: 
+(i)	
+The Learning Area/Subject Statements, Learning Programme Guidelines and Subject Assessment 
+Guidelines for Grades R-9 and Grades 10-12;
+(ii) 
+The policy document, National Policy on assessment and qualifications for schools in the General 
+Education and Training Band, promulgated in Government Notice No. 124 in Government Gazette No. 
+29626 of 12 February 2007;
+(iii) 
+The policy document, the National Senior Certificate: A qualification at Level 4 on the National 
+Qualifications Framework (NQF), promulgated in Government Gazette No.27819 of 20 July 2005;
+
+=== page 9 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+4
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+(iv) 
+The policy document, An addendum to the policy document, the National Senior Certificate: A 
+qualification at Level 4 on the National Qualifications Framework (NQF), regarding learners with special 
+needs, published in Government Gazette, No.29466 of 11 December 2006, is incorporated in the policy 
+document, National policy pertaining to the programme and promotion requirements of the National 
+Curriculum Statement Grades R-12; and
+(v) 
+The policy document, An addendum to the policy document, the National Senior Certificate: A 
+qualification at Level 4 on the National Qualifications Framework (NQF), regarding the National Protocol 
+for Assessment (Grades R-12), promulgated in Government Notice No.1267 in Government Gazette 
+No. 29467 of 11 December 2006.
+(d)	
+The policy document, National policy pertaining to the programme and promotion requirements of the 
+National Curriculum Statement Grades R-12, and the sections on the Curriculum and Assessment Policy as 
+contemplated in Chapters 2, 3 and 4 of this document constitute the norms and standards of the National 
+Curriculum Statement Grades R-12. It will therefore, in terms of section 6A of the South African Schools Act, 
+1996 (Act No. 84 of 1996,) form the basis for the Minister of Basic Education to determine minimum outcomes 
+and standards, as well as the processes and procedures for the assessment of learner achievement to be 
+applicable to public and independent schools.
+1.3	
+General aims of the South African Curriculum
+(a)	
+The National Curriculum Statement Grades R-12 gives expression to the knowledge, skills and values worth 
+learning in South African schools. This curriculum aims to ensure that children acquire and apply knowledge 
+and skills in ways that are meaningful to their own lives. In this regard, the curriculum promotes knowledge in 
+local contexts, while being sensitive to global imperatives.
+(b)	
+The National Curriculum Statement Grades R-12 serves the purposes of: 
+•	 equipping learners, irrespective of their socio-economic background, race, gender, physical ability or 
+intellectual ability, with the knowledge, skills and values necessary for self-fulfilment, and meaningful 
+participation in society as citizens of a free country;
+•	 providing access to higher education;
+•	 facilitating the transition of learners from education institutions to the workplace; and
+•	 providing employers with a sufficient profile of a learner’s competences.
+(c)	
+The National Curriculum Statement Grades R-12 is based on the following principles: 
+•	 Social transformation: ensuring that the educational imbalances of the past are redressed, and that equal 
+educational opportunities are provided for all sections of the population;
+•	 Active and critical learning: encouraging an active and critical approach to learning, rather than rote and 
+uncritical learning of given truths;
+•	 High knowledge and high skills: the minimum standards of knowledge and skills to be achieved at each 
+grade are specified and set high, achievable standards in all subjects;
+•	 Progression: content and context of each grade shows progression from simple to complex;
+
+=== page 10 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+5
+CAPS
+•	 Human rights, inclusivity, environmental and social justice: infusing the principles and practices of social and 
+environmental justice and human rights as defined in the Constitution of the Republic of South Africa. The 
+National Curriculum Statement Grades R-12 is sensitive to issues of diversity such as poverty, inequality, 
+race, gender, language, age, disability and other factors;
+•	 Valuing indigenous knowledge systems: acknowledging the rich history and heritage of this country as 
+important contributors to nurturing the values contained in the Constitution; and
+•	 Credibility, quality and efficiency: providing an education that is comparable in quality, breadth and depth to 
+those of other countries.
+(d)	
+The National Curriculum Statement Grades R-12 aims to produce learners that are able to: 
+•	 identify and solve problems and make decisions using critical and creative thinking;
+•	 work effectively as individuals and with others as members of a team;
+•	 organise and manage themselves and their activities responsibly and effectively;
+•	 collect, analyse, organise and critically evaluate information;
+•	 communicate effectively using visual, symbolic and/or language skills in various modes;
+•	 use science and technology effectively and critically showing responsibility towards the environment and 
+the health of others; and
+•	 demonstrate an understanding of the world as a set of related systems by recognising that problem solving 
+contexts do not exist in isolation.
+(e)	
+Inclusivity should become a central part of the organisation, planning and teaching at each school. This can 
+only happen if all teachers have a sound understanding of how to recognise and address barriers to learning, 
+and how to plan for diversity.
+	
+The key to managing inclusivity is ensuring that barriers are identified and addressed by all the relevant support 
+structures within the school community, including teachers, District-Based Support Teams, Institutional-Level 
+Support Teams, parents and Special Schools as Resource Centres. To address barriers in the classroom, 
+teachers should use various curriculum differentiation strategies such as those included in the Department of 
+Basic Education’s Guidelines for Inclusive Teaching and Learning (2010).
+
+=== page 11 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+6
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+1.4	
+Time Allocation
+1.4.1	 Foundation Phase
+(a)	
+The instructional time in the Foundation Phase is as follows: 
+SUBJECT
+GRADE R 
+(HOURS)
+GRADES 1-2 
+(HOURS)
+GRADE 3 
+(HOURS)
+Home Language
+10
+8/7
+8/7
+First Additional Language
+2/3
+3/4
+Mathematics
+7
+7
+7
+Life Skills
+•	 Beginning Knowledge
+•	 Creative Arts
+•	 Physical Education
+•	 Personal and Social Well-being
+6
+(1)
+(2)
+(2)
+(1)
+6
+(1)
+(2)
+(2)
+(1)
+7
+(2)
+(2)
+(2)
+(1)
+TOTAL
+23
+23
+25
+(b)	
+Instructional time for Grades R, 1 and 2 is 23 hours and for Grade 3 is 25 hours. 
+(c)	
+Ten hours are allocated for languages in Grades R-2 and 11 hours in Grade 3. A maximum of 8 hours and a 
+minimum of 7 hours are allocated for Home Language and a minimum of 2 hours and a maximum of 3 hours for 
+Additional Language in Grades 1-2. In Grade 3 a maximum of 8 hours and a minimum of 7 hours are allocated 
+for Home Language and a minimum of 3 hours and a maximum of 4 hours for First Additional Language. 
+(d)	
+In Life Skills Beginning Knowledge is allocated 1 hour in Grades R – 2 and 2 hours as indicated by the hours 
+in brackets for Grade 3.
+1.4.2	 Intermediate Phase
+(a)	
+The instructional time in the Intermediate Phase is as follows: 
+SUBJECT
+HOURS
+Home Language
+6
+First Additional Language
+5
+Mathematics
+6
+Natural Sciences and Technology
+3,5
+Social Sciences
+3
+Life Skills
+• 
+Creative Arts
+• 
+Physical Education
+• 
+Personal and Social Well-being
+4
+(1,5)
+(1)
+(1,5)
+TOTAL
+27,5
+
+=== page 12 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+7
+CAPS
+1.4.3	 Senior Phase
+(a)	
+The instructional time in the Senior Phase is as follows: 
+SUBJECT
+HOURS
+Home Language
+5
+First Additional Language
+4
+Mathematics
+4,5
+Natural Sciences
+3
+Social Sciences
+3
+Technology
+2
+Economic Management Sciences
+2
+Life Orientation
+2
+Creative Arts
+2
+TOTAL
+27,5
+1.4.4	 Grades 10-12
+(a)	
+The instructional time in Grades 10-12 is as follows: 
+Subject
+Time allocation per week (hours)
+Home Language
+4.5
+First Additional Language
+4.5
+Mathematics
+4.5
+Life Orientation
+2
+A minimum of any three subjects selected from Group B 
+Annexure B, Tables B1-B8 of the policy document, National policy 
+pertaining to the programme and promotion requirements of 
+the National Curriculum Statement Grades R-12, subject to the 
+provisos stipulated in paragraph 28 of the said policy document.
+12 (3x4h)
+TOTAL
+27,5
+	
+The allocated time per week may be utilised only for the minimum required NCS subjects as specified above, 
+and may not be used for any additional subjects added to the list of minimum subjects. Should a learner wish 
+to offer additional subjects, additional time must be allocated for the offering of these subjects.
+
+=== page 13 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+8
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+SECTION  2:  INTRODUCTION TO NATURAL SCIENCES AND 
+TECHNOLOGY: 
+2.1	
+Introduction
+Science as we know it today has roots in African, Arabic, Asian, European and American cultures. It has been shaped 
+by the search to understand the natural world through observation, testing and proving of ideas, and has evolved to 
+become part of the cultural heritage of all nations. In all cultures and in all times people have wanted to understand 
+how the physical world works and have needed explanations that satisfy them. 
+What is Science & Technology?
+Science is a systematic way of looking for explanations and connecting the ideas we have. In Science certain methods 
+of inquiry and investigation are generally used. These methods lend themselves to replication and a systematic 
+approach to scientific inquiry that attempts at objectivity. The methods include formulating hypotheses, and designing 
+and carrying out experiments to test the hypotheses. Repeated investigations are undertaken, and the resulting 
+methods and results are carefully examined and debated before they are accepted as valid. 
+The science knowledge we teach at school is not in doubt – most of it has been tested and known since the 1800s – 
+but a good teacher will tell the learners something of the arguments and confusion among the people who were the 
+first to investigate this knowledge. And of course we do touch on some science at the frontiers of the unknown – Why 
+is climate changing around the world? What is making the universe expand? What causes the earth’s magnetic field 
+to change? Nobody knows for sure.
+Technology has also existed throughout history. People use the combination of knowledge, skills and available 
+resources to develop solutions that meet their daily needs and wants. Economic and environmental factors and a wide 
+range of attitudes and values need to be taken into account when developing technological solutions. Technology 
+also advances as our knowledge and needs expand.
+Technological methods include identifying needs, planning, designing, making and evaluating products. The 
+knowledge and skills used to make stone-age tools are an example of this.
+Science and Technology have made a major impact, both positive and negative, on our world. Knowledge grows out 
+of a view of how the world works. One of the differences between modern Science and Technology and traditional, 
+indigenous knowledge systems is that they have their origins in different world views. As with all knowledge, scientific 
+knowledge changes over time as scientists acquire new information and people change their ways of viewing the 
+world.
+2.2	
+Teaching Natural Sciences and Technology
+Careful selection of content, and use of a variety of ways of teaching and learning Science and Technology, should 
+promote understanding of: 
+•	
+Science and Technology as activities that sustain enjoyment and curiosity about the world and natural 
+phenomena
+•	
+the history of Science and the relationship between Natural Sciences and Technology and other subjects. 
+Learners should understand the different cultural contexts in which indigenous knowledge systems were 
+developed.
+
+=== page 14 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+9
+CAPS
+•	
+the contribution of Science and Technology to social justice and societal development 
+•	
+the need for using scientific and technological knowledge responsibly in the interest of ourselves, of society 
+and the environment 
+•	
+the practical and ethical consequences of decisions based on Science and Technology. Natural Sciences 
+and Technology lays the basis of further studies in Science and Technology. It prepares learners for active 
+participation in a democratic society that values human rights and promotes responsibility towards the 
+environment. Natural Sciences and Technology can also prepare learners for economic activity and self-
+expression.
+2.3	
+How Natural Sciences and Technology complement each other
+Natural Sciences 
+Technology
+Goal
+Pursuit of new knowledge and 
+understanding of the world around us 
+and of natural phenomena
+The creation of structures, systems and 
+processes to meet peoples’ needs and 
+improving the quality of life
+Focus
+Focus is on understanding the natural 
+world
+Focus is on understanding the 
+need for human–made objects and 
+environments to solve problems
+Developmental methods 
+Discovery through carrying out 
+investigations
+Making products though design, 
+invention and production 
+Major processes 
+Investigative and logical processes
+•	 planning investigations
+•	 conducting investigations and 
+collecting data
+•	 evaluating data and communicating 
+findings
+Practical solution-orientated processes 
+•	 identifying a need
+•	 planning and designing
+•	 making (constructing)
+•	 evaluating and improving products
+•	 communicating
+Evaluation methods
+Analysis, generalisation and creation of 
+theories
+Analysis and application of design 
+ideas
+
+=== page 15 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+10
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+2.4	
+Organisation of the Natural Sciences and Technology Curriculum 
+In this curriculum, Grades 4 to 6 Natural Sciences and Technology are combined into one subject which is compulsory 
+for all learners. Natural Sciences and Technology are also both compulsory subjects for all learners in Grades 7 to 9.
+The Knowledge Strands in Natural Sciences and Technology 
+In this curriculum, the knowledge strands below are used as a tool for organising the content of the subject Natural 
+Sciences and Technology. 
+Natural Sciences Strands
+Technology Strands
+Life and Living
+Matter and Materials
+Energy and Change
+Planet Earth and Beyond 
+Structures
+Processing
+Systems and Control 
+2.5	
+Allocation of teaching time
+Time for Natural Sciences and Technology has been allocated in the following way: 
+•	
+10 weeks per term, with 3½ hours per week 
+•	
+Grades 4, 5 and 6 have been designed to be completed within 38 weeks 
+•	
+7 hours have been included for assessment in terms 1, 2 & 3
+•	
+Term 4 work will cover 8 weeks plus 2 weeks for revision and examinations
+The time allocated per topic is a guideline and should be applied flexibly according to circumstances in the classroom 
+and to accommodate the interests of the learners. 
+The time allocations given to the different topics provide an indication of the weighting of each topic.
+In all Grades, a significant amount of time should be spent on doing practical tasks and investigations which are an 
+integral part of the teaching and learning process. See detailed time allocation in Section 2.9
+2.6	
+Specific aims
+This curriculum aims to provide learners with opportunities to put together ideas they have about nature so that they 
+make sense. It also encourages learners to ask questions that could lead to further research and investigation. 
+There are three specific aims in Natural Sciences and Technology: 
+Specific Aim 1: ‘Doing Science and Technology’
+Learners should be able to complete investigations, analyse problems and use practical processes and 
+skills in designing and evaluating solutions. 
+This means that learners plan and do simple investigations and solve problems that need some practical ability. 
+There are attitudes and values that underpin this ability. Respect for living things is an example of this – learners 
+
+=== page 16 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+11
+CAPS
+should not strip leaves off bushes just to compare them; if they examine small animals they should care for them and 
+release them unharmed in the place they found them.
+Specific Aim 2: ‘Understanding and connecting ideas’ 
+Learners should have a grasp of scientific, technological and environmental knowledge and be able to apply 
+it in new contexts. 
+The main task of teaching is to build a framework of knowledge for learners and to help them make connections 
+between the ideas and concepts in their minds – this is different to learners just knowing a lot of facts. When 
+learners do an activity, just answering the set questions is not enough. Discussion must relate to previously acquired 
+knowledge and experience and connections must be made. 
+Specific Aim 3: ‘Science, Technology and Society’
+Learners should understand the practical uses of Natural Sciences and Technology in society and the 
+environment and have values that make them caring and creative citizens.
+Science and Technology learnt at school should produce learners who understand that school science can be relevant 
+to their lives outside of school. Issues such as improving water quality, growing food without damaging the land, and 
+building energy-efficient houses are examples of everyday applications. Similarly, Science and Technology can lead 
+learners to a range of career and job possibilities. 
+An appreciation of the history of scientific discoveries and technological solutions, and their relationship to indigenous 
+knowledge and different world views, enriches our understanding of the connections between Science, Technology 
+and Society. 
+2.7	
+Major Process and Design Skills 
+The teaching and learning of Natural Sciences and Technology involves the development of a range of process and 
+design skills that may be used in everyday life, in the community and in the workplace. Learners also develop the 
+ability to think objectively and use a variety of forms of reasoning while they use these skills. Learners can gain these 
+skills in an environment that taps into their curiosity about the world, and that supports creativity, responsibility and 
+growing confidence. 
+The following are the cognitive and practical process and design skills that learners will be able to develop in Natural 
+Sciences and Technology 
+1.	
+Accessing and recalling information – being able to use a variety of sources to acquire information, and to 
+remember relevant facts and key ideas, and to build a conceptual framework
+2.	
+Observing – noting in detail objects, organisms and events
+3.	
+Comparing – noting similarities and differences between things
+4.	
+Measuring – using measuring instruments such as rulers, thermometers, clocks and syringes (for volume) 
+5.	
+Sorting and classifying – applying criteria in order to sort items into a table, mind-map, key, list or other format
+6.	
+Identifying problems and issues – being able to articulate the needs and wants of people in society
+
+=== page 17 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+12
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+7.	
+Raising questions – being able to think of, and articulate relevant questions about problems, issues, and 
+natural phenomena 
+8.	
+Predicting – stating, before an investigation, what you think the results will be for that particular investigation
+9.	
+Hypothesizing – putting forward a suggestion or possible explanation to account for certain facts. A hypothesis 
+is used as a basis for further investigation which will prove or disprove the hypothesis
+10.	
+Planning investigations – thinking through the method for an activity or investigation in advance. Identifying 
+the need to make an investigation a fair test by keeping some things (variables) the same whilst other things 
+will vary
+11.	
+Doing investigations – this involves carrying out methods using appropriate apparatus and equipment, and 
+collecting data by observing and comparing, measuring and estimating, sequencing, or sorting and classifying. 
+Sometimes an investigation has to be repeated to verify the results.
+12.	
+Recording information – recording data from an investigation in a systematic way, including drawings, 
+descriptions, tables and graphs 
+13.	
+Interpreting information – explaining what the results of an activity or investigation mean (this includes reading 
+skills) 
+14.	
+Designing – showing (e.g. by drawing) how something is to be made taking into account the design brief, 
+specifications and constraints
+15.	
+Making/constructing – building or assembling an object using appropriate materials and tools and using skills 
+such as measuring, cutting, folding, rolling, gluing
+16.	
+Evaluating and Improving products – using criteria to assess a constructed object and then stating or carrying 
+out ways to refine that object
+17.	
+Communicating – using written, oral, visual, graphic and other forms of communication to make information 
+available to other people
+Developing Language Skills: Reading and Writing
+The ability to read well is central to successful learning across the curriculum. Writing is also a powerful instrument 
+of communication. Writing allows learners to construct and communicate thoughts and ideas coherently. Frequent 
+reading and writing practice across a variety of tasks and subjects enables learners to communicate functionally and 
+creatively.
+Learners are required to read and write particular genres of texts (including instructions, reports and explanations) 
+during Natural Sciences and Technology lessons. Learners need regular opportunities to read and write a range 
+of genres in order to improve their reading and writing skills. The ability to read and write well is also critical when 
+learners are assessed, both informally and formally.
+2.8	
+Resources
+The resources needed for teaching Natural Sciences and Technology are listed against each topic in order to assist 
+teachers with planning and preparation. The list is a guide and suitable alternative tools and materials may be used.
+
+=== page 18 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+13
+CAPS
+Every learner must have his/her own textbook. Teachers should ensure that a system is in place for recovering 
+textbooks at the end of every year. Schools must provide secure storage space where textbooks, and other equipment, 
+can be stored safely.
+Ideally every learner should have access to sufficient workspace and equipment to carry out investigations and for 
+designing and making things. For safety and educational reasons it is recommended that no more than three learners 
+share space and equipment. Teachers should ensure that learners are familiar with rules regarding the safe use of 
+equipment.
+Schools must make every effort to ensure that the essential equipment is provided. Tools, apparatus, materials 
+and consumables must be acquired through a planned budgeting process. Secure storage for equipment must be 
+provided by the school.
+While it is acknowledged that it is not ideal to have to improvise equipment, teachers should remember that it is more 
+important for learners to have the experience of carrying out a variety of investigations and for learners to make their 
+own technology models than to depend on the availability of equipment. In instances where equipment is limited, 
+teachers should be encouraged to improvise. The same knowledge and skills can be successfully developed using 
+improvised equipment. 
+In instances where there is no alternative, it is more effective for teachers to demonstrate an investigation than not to 
+do investigations or construct models due to a lack of equipment. 
+2.9	
+Progression map of Natural Sciences and Technology content knowledge 
+and concepts 
+In all Grades, learners must be supported when doing Investigations and addressing the technological design 
+process. They need to expand on the concepts or knowledge to which they have been introduced and to deepen 
+their understanding of the subject matter.
+•	
+Each term includes a Natural Sciences and Technology strand
+•	
+The strands are organised to promote clear progression of concepts across the Grades and in the phase.
+•	
+It is important to emphasise the conceptual links between the Science and Technology in the different topics. 
+However in certain topics the conceptual links are stronger and more obvious.
+•	
+At least two Technology strands will be developed in each Grade. All strands will have been developed over 
+the Intermediate phase.
+
+=== page 19 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+14
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+Grade 4
+Strands
+NS & Tech
+Strands
+NS & Tech
+Strands
+NS & Tech
+Strands
+NS & Tech
+Life and 
+Living
+Structures
+Matter and 
+Materials
+Structures
+Energy and 
+Change
+Systems 
+and control
+Planet Earth 
+and Beyond
+Systems 
+and control
+Living and 
+non- living 
+things
+Structure of 
+plants and 
+animals
+What plants 
+need to grow
+Habitats of 
+animals
+Structures 
+for animal 
+shelters
+Materials 
+around us
+Solid 
+materials
+Strength-
+ening 
+materials
+Strong 
+frame 
+structures
+Energy and 
+Energy 
+transfer
+Energy 
+around us
+Energy and 
+sound 
+Movement 
+energy in a 
+system 
+Planet Earth
+The Sun
+The Earth & 
+the Sun
+The Moon
+Rocket 
+systems
+Grade 5
+Strands
+NS & Tech
+Strands
+NS & Tech
+Strands
+NS & Tech
+Strands
+NS & Tech
+Life and 
+Living
+Structures
+Matter and 
+materials
+Processing
+Energy and 
+change
+Systems 
+and control
+Planet Earth 
+and Beyond
+Systems 
+and control
+Plants and 
+animals on 
+Earth
+Animal 
+skeletons
+Food chains 
+Life cycles
+Skeletons as 
+structures
+Metals and 
+non-metals
+Uses of 
+metals
+Processing 
+materials
+Processed 
+materials
+Stored 
+energy in 
+fuels
+Energy and 
+electricity 
+Energy and 
+movement
+Systems 
+for moving 
+things
+Planet Earth 
+Surface of 
+the Earth
+Sedimentary 
+rocks 
+Fossils
+Grade 6
+Strands
+NS & Tech
+Strands
+NS & Tech
+Strands
+NS & Tech
+Strands
+NS & Tech
+Life and 
+Living
+Processing
+Matter and 
+materials
+Processing
+Energy and 
+change
+Systems 
+and control
+Planet Earth 
+and Beyond
+Systems 
+and control
+Photosyn-
+thesis
+Nutrients in 
+food
+Nutrition 
+Ecosystems 
+and Food 
+webs 
+Food 
+Processing 
+Solids, 
+liquids and 
+gases
+Mixtures 
+Solutions 
+as special 
+mixtures
+Dissolving
+Mixtures 
+and water 
+resources
+Processes to 
+purify water
+Electric 
+circuits 
+Electrical 
+conductors 
+and 
+insulators 
+Mains 
+electricity
+Systems 
+to solve 
+problems
+The Solar 
+System 
+Movements 
+of the Earth 
+and planets
+The 
+movement of 
+the Moon
+ 
+Systems for 
+looking into 
+space 
+Systems to 
+explore the 
+Moon and 
+Mars
+Teachers have the freedom to expand concepts and to design and organise learning experiences according to their 
+own local circumstances.
+Examples of indigenous knowledge that teachers select for study should, as far as possible, reflect different South 
+African cultural groupings. They should also link directly to specific content in the Natural Sciences and Technology.
+
+=== page 20 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+15
+CAPS
+2.10	 Detailed summary of Natural Sciences and Technology concepts and 
+content, and time allocations
+GRADE 4
+GRADE 5
+GRADE 6
+TERM
+TOPIC
+TIME IN 
+WEEKS
+TOPIC
+TIME IN 
+WEEKS
+TOPIC
+TIME IN 
+WEEKS
+TERM 1
+Life & Living
+•	 Living and non- 
+living things
+•	 Structures of 
+plants and 
+animals
+•	 What plants need 
+to grow
+•	 Habitats of 
+animals
+•	 Structures for 
+animal shelters 
+2
+2 ½
+1
+2
+2 ½
+(10 weeks)
+•	 Plants and 
+animals on Earth
+•	 Animal skeletons
+•	 Skeletons as 
+structures
+•	 Food chains 
+•	 Life cycles	
+2 ½
+1 ½
+2 ½
+1 ½
+2
+(10 weeks)
+•	 Photosynthesis
+•	 Nutrients in food
+•	 Nutrition 
+•	 Food Processing
+•	 Ecosystems  
+and  
+Food webs 
+ 
+2 ½
+1 ½
+1 ½
+2 ½
+2
+(10 weeks)
+TERM 2
+Matter & 
+Materials
+•	 Materials around 
+us
+•	 Solid materials
+•	 Strengthening 
+materials
+•	 Strong frame 
+structures
+3 ½ 
+2
+2
+2 ½
+(10 weeks)
+•	 Metals and non-
+metals
+•	 Uses of metals
+•	 Processing 
+materials
+•	 Processed 
+materials
+2
+2 ½ 
+3 ½ 
+2
+(10 weeks)
+•	 Solids, liquids 
+and gases
+•	 Mixtures 
+•	 Solutions as 
+special mixtures
+•	 Dissolving
+•	 Mixtures and 
+water resources
+•	 Processes to 
+purify water
+½
+1
+2 ½
+1
+2 ½
+2 ½
+(10 weeks)
+TERM 3
+Energy & 
+Change
+•	 Energy and 
+Energy transfer
+•	 Energy around us
+•	 Movement 
+energy in a 
+system
+•	 Energy and 
+sound
+2 ½
+2 ½
+2 ½ 
+2 ½
+(10 weeks)
+•	 Stored energy in 
+fuels
+•	 Energy and 
+electricity
+•	 Energy and 
+movement
+•	 Systems for 
+moving things
+3
+3
+1
+3
+(10 weeks)
+•	 Electric circuits 
+•	 Electrical 
+conductors and 
+insulators 
+•	 Systems to solve 
+problems
+•	 Mains electricity
+2 ½
+2
+2 ½
+3
+(10 weeks)
+TERM 4
+Planet Earth & 
+Beyond
+•	 Planet Earth
+•	 The Sun
+•	 The Earth & the 
+Sun
+•	 The Moon
+•	 Rocket systems
+2
+1
+1
+2
+2
+(8 weeks)
+•	 Planet Earth 
+•	 Surface of the 
+Earth
+•	 Sedimentary 
+rocks 
+•	 Fossils
+1
+2 ½
+2
+2 ½
+(8 weeks)
+•	 The Solar 
+System 
+•	 Movements of 
+the Earth and 
+planets
+•	 The movement of 
+the Moon
+•	 Systems for 
+looking into 
+space 
+•	 Systems to 
+explore the Moon 
+and Mars
+2 ½
+1
+1
+1
+2 ½
+(8 weeks)
+Totals*
+38 weeks
+38 weeks
+38 weeks
+Notes: * These totals include the 7 hours per term for continuous assessment but exclude the 2 weeks set aside for 
+the end of year examinations
+General: Time spent on each topic should serve as a guideline for weighting of marks in Tests and Exams. The 
+purpose of using times as guidelines is to ensure that all topics are assessed.
+
+=== page 21 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+16
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+section 3: content tables
+Natural Sciences and Technology: Grade 4
+GRADE 4 TERM 1
+STRANDS:    NATURAL SCIENCES: LIFE & LIVING
+          TECHNOLOGY: STRUCTURES
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 weeks
+(7 hours)
+Living and 
+non-living 
+things
+Living things
+•	 there are many different kinds of living things
+•	 living plants and animals can carry out all the seven life 
+processes - feeding, growing, reproducing, breathing, 
+excreting, sensing, moving
+•	 some things appear not to be living (such as dried beans, 
+dried yeast, a fertilised bird egg), but carry on ‘living’ given 
+the right conditions
+Non-living things
+•	 non-living things cannot carry out  all of the seven life 
+processes
+•	 some things were living and are now dead: dead wood, dry 
+leaves.
+• begin Intermediate Phase by  looking at pictures and/or 
+real examples of different living things, including plants, 
+animals, bread mould, germs*
+•	 germinating bean seeds (providing warmth, and 
+moisture)**
+•	 growing yeast (in warm water with sugar)
+•	 looking at pictures of hatched eggs (warmth)
+•	 identifying, sorting and comparing a selection of living and 
+non-living things (including fire, rivers, rocks) and all the 
+interesting differences between them.
+•	 Examples and 
+pictures of living and 
+non-living things, 
+including plants, 
+animals, bread 
+mould
+•	 Seeds
+•	 Yeast
+•	 Pictures of hatched 
+eggs
+Notes:	 *    Point out that germs are living although they are too small to be seen with the naked eye
+	
+	 **  The germinated seeds can be used for the investigation below
+
+=== page 22 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+17
+CAPS
+GRADE 4 TERM 1
+STRANDS:    NATURAL SCIENCES: LIFE & LIVING
+          TECHNOLOGY: STRUCTURES
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ weeks 
+(8 ¾ 
+hours)
+Structure of 
+plants and 
+animals
+Structure of plants
+•	 basic structure of plants: roots, stems, leaves, flowers, 
+fruits, seeds
+•	 visible differences between plants: such as size, shape and 
+colour of roots, stems, leaves, flowers, fruits and seeds
+Structure of animals
+•	 basic structure of animals: head, tail, body, limbs, sense 
+organs
+•	 visible differences between animals: such as size, shape, 
+body covering and sense organs
+•	 identifying, labelling and describing the parts of a plant
+•	 describing the visible differences between at least three 
+plants
+•	 drawing, labelling and describing the parts of at least one 
+animal
+•	 describing the visible differences between at least three 
+animals
+•	 Pictures / examples 
+of plant parts
+•	 Pictures of animals
+1 week (3 
+½ hours)
+What plants 
+need to grow
+Conditions for growth
+•	 plants need light, water and air to grow
+•	 new plants can grow from cuttings and seeds
+•	 seeds need water and warmth to grow (germination of 
+seeds)
+• Investigating the growth of plants from seeds and cuttings 
+by observing, measuring*** and recording the growth over 
+time **** [This can be used as a possible project]
+•	 Seeds and cuttings
+•	 Rulers and 
+measuring tape
+Notes:	 ***   Learners can count the number of leaves as the plant grows and measure the height of the stem
+	
+**** The investigation and observations of this practical task will be done over time while learners continue with further work
+
+=== page 23 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+18
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 4 TERM 1
+STRANDS:      NATURAL SCIENCES: LIFE & LIVING 
+             TECHNOLOGY: STRUCTURES
+Equipment and
+Resources:
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 weeks
+(7 hours)
+Habitats of 
+animals
+Different habitats
+•	 a habitat is the place where a plant or animal lives
+•	 there are different kinds of habitats such as grassland, 
+forest, river, sea
+Need for a habitat
+•	 animals need a habitat for food, water, a place to shelter, 
+have babies and escape from dangers
+•	 identifying, drawing and describing a habitat on or close to 
+the school grounds
+•	 matching different animals to their habitats and giving 
+reasons why the animal can live there
+•	 describing and writing about habitats of three African* wild 
+animals and why they are suited to living in those habitats
+•	 Pictures of plants 
+and animals and 
+their habitats
+2 ½ weeks 
+(8 ¾ 
+hours)
+Structures 
+for animal 
+shelters
+Animal shelters
+•	 animal shelters can be natural including nests, shells, 
+hollow trees, wasp nests or human made including dog 
+kennels, cages, kraals, stables
+•	 animal shelters can be shell or frame structures, can have 
+different shapes and sizes, and can be made from different 
+materials
+•	 identifying natural and human made animal shelters
+•	 looking at pictures of different shell and frame structures 
+for sheltering animals
+•	 case study about the need for an animal shelter
+• designing and drawing an animal shelter, taking into 
+account its:
+-- purpose
+-- shape and size
+-- materials
+•	 evaluating the suitability of the design
+•	 Pictures and 
+examples of animal 
+shelters
+Notes:	 * This refers to animals that are indigenous to Africa
+
+=== page 24 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+19
+CAPS
+GRADE 4 TERM 1
+STRANDS:      NATURAL SCIENCES: LIFE & LIVING 
+             TECHNOLOGY: STRUCTURES
+Equipment and
+Resources:
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+Assessment
+guidelines
+This content and the associated concepts must be integrated 
+with the aims and skills for
+Natural Sciences and Technology (refer to Section 2).
+•	 Learners should read, write, draw and do practical tasks 
+regularly
+•	 Evidence of learner’s work, including assessments, should 
+be kept in the learner’s notebook
+School-based assessment (including practical tasks and 
+class tests), checking for correctness, and providing 
+constructive feedback should be done regularly.
+Allow for a maximum of 7 hours to be used for assessment 
+throughout the term. For more detailed guidelines on 
+assessment, refer to Section 4.
+Check the learner’s knowledge and that they can:
+•	 sort a selection of living and non-living things
+•	 identify and describe the parts of a plant
+•	 identify and describe the parts of an animal
+•	 grow plants from seeds and measure and record their growth
+•	 describe different habitats
+•	 design, draw and evaluate an animal shelter
+
+=== page 25 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+20
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 4 TERM 2
+STRANDS:        NATURAL SCIENCES: MATTER & MATERIALS
+TECHNOLOGY: STRUCTURES
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+3 ½ weeks
+(12 ¼ 
+hours)
+Materials 
+around us
+Solids, liquids and gases
+•	 solids, liquids and gases make up all the materials around 
+us
+•	 some properties of solids, liquids and gases
+-- solids keep their shape
+-- liquids flow and take the shape of their container
+-- gases, such as air, tend to spread out, have no definite 
+shape but can be contained (like in a balloon)
+Change of state
+•	 heating and cooling (removing heat) cause solids, liquids 
+and gases to change state
+-- a solid first changes to a liquid (melting) when heated and 
+then the liquid changes to a gas (evaporating) on further 
+heating
+-- gas first changes to a liquid (condensing) when cooled 
+and then the liquid changes to a solid (freezing/solidifying) 
+when cooled further
+The water cycle
+•	 water evaporates, condenses, freezes and melts in the 
+water cycle
+•	 sorting examples of common materials into solids, liquids 
+and gases including wood, stone, plastic, fabric, water, 
+juice, tea, air, cooking oil, cooking gas, and describing 
+them
+ 
+• Investigating evaporating, condensing, freezing and 
+melting using water and ice
+• Investigating melting and solidifying using different 
+substances such as butter/ fat/ margarine, wax, icecream, 
+chocolate
+ 
+ 
+•	 drawing and writing about the water cycle
+•	 Examples of 
+materials and 
+substances including 
+wood, stone, plastic, 
+fabric, water, juice, 
+tea, air, cooking oil, 
+cooking gas
+•	 Examples of different 
+substances such as 
+ice, butter, wax, ice 
+cream, chocolate
+•	 Video clips from 
+internet
+
+=== page 26 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+21
+CAPS
+GRADE 4 TERM 2
+STRANDS:        NATURAL SCIENCES: MATTER & MATERIALS
+TECHNOLOGY: STRUCTURES
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 weeks
+(7 hours)
+Solid 
+materials
+Raw and manufactured materials
+•	 examples of some raw materials we use to make other 
+useful materials
+-- sand is used to make glass
+-- clay is used to make ceramics
+-- coal and oil are used to make plastics, paints and fabrics
+-- wood and fibre from plants are used to make paper
+-- animal wool and hide are used to make fabrics and leather
+Properties of materials
+•	 raw and manufactured materials have specific properties. 
+These properties can include being hard or soft, stiff or 
+flexible, strong or weak, light or heavy, waterproof or 
+absorbent
+ 
+•	 reading about how paper is made from plant fibres
+•	 describing the properties of raw and manufactured 
+materials
+•	 Examples of raw 
+and manufactured 
+materials to examine 
+the properties such 
+as glass products, 
+leather, ceramics, 
+fabrics, wooden 
+items, plastic 
+products
+
+=== page 27 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+22
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 4 TERM 2
+STRANDS:       NATURAL SCIENCES: MATTER & MATERIALS 
+TECHNOLOGY: STRUCTURES
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 weeks
+(7 hours)
+Strengthening 
+materials
+Ways to strengthen materials
+•	 there are different ways to strengthen materials (such as 
+paper) to build a strong structure:
+-- we can fold paper into hollow pillars which are circular, 
+triangular or square
+-- we can roll paper into long thin tubes (struts)
+• Investigating which shape of pillar is the strongest (can 
+support the most weight). Draw a bar graph of the results
+•	 making paper struts by rolling into long thin tubes (struts)
+•	 Paper, wooden 
+dowels (30cm X 
+10mm) or sticks, 
+sticky tape, paper 
+fasteners to make 
+struts
+2 ½ weeks
+(8 ¾ 
+hours)
+Strong frame 
+structures
+Struts and frame structures
+•	 struts are joined into triangular shapes making a strong, 
+stable structure, such as in roof trusses, bridges, cranes, 
+pylons and skeletons (limb bones are struts)
+Indigenous structures
+•	 indigenous, traditional homes such as a Zulu hut 
+(uguqa), Xhosa (rontabile and ungqu-phantsi) and Nama 
+(matjieshuis) make use of a framework of struts (such as 
+branches)
+•	 looking at pictures of frame structures strengthened with 
+struts
+•	 exploring ways to join struts to make a strong structure 
+(joining struts into triangular and square shapes)
+• designing, making and evaluating a strong structure 
+using tubular struts, such as a model of a tower, bridge, 
+pylon, chair [This can be used as a possible project]
+•	 Pictures of frame 
+structures
+•	 Paper, wooden 
+dowels (30cm X 
+10mm) or sticks, 
+sticky tape, paper 
+fasteners
+Assessment
+guidelines
+This content and the associated concepts must be integrated 
+with the aims and skills for
+Natural Sciences and Technology (refer to Section 2).
+•	 Learners should read, write, draw and do practical tasks 
+regularly
+•	 Evidence of learner’s work, including assessments, should 
+be kept in the learner’s notebook
+School-based assessment (including practical tasks 
+and class tests), checking for correctness and providing 
+constructive feedback should be done regularly.
+Allow for a maximum of 7 hours to be used for assessment 
+throughout the term. For more detailed guidelines on 
+assessment, refer to Section 4.
+Check the learner’s knowledge and that they can:
+•	 distinguish between solids, liquids and gases
+•	 explain how selected materials may change their state
+•	 explain the water cycle in terms of change of state of water
+•	 give examples of raw materials used to make manufactured materials
+•	 describe the properties of raw and manufactured materials
+•	 demonstrate ways of strengthening materials
+•	 demonstrate ways of making and joining paper struts
+•	 design, make and evaluate a strong structure
+
+=== page 28 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+23
+CAPS
+GRADE 4 TERM 3
+STRANDS:      NATURAL SCIENCES: ENERGY & CHANGE
+                 TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ weeks
+(8 ¾ 
+hours)
+Energy 
+and Energy 
+transfer
+Energy for life
+•	 we use energy for everything we do
+•	 we get our energy from food
+•	 energy in our food comes from the Sun (plants use the 
+energy from the Sun to make food for themselves and for 
+animals and people)
+Energy from the Sun
+•	 energy is transferred from the Sun, to plants, to animals in 
+a sequence known as an energy chain/ food chain
+•	 identifying things that people and animals do that require 
+energy such as carrying out the life processes and all other 
+actions
+•	 drawing and writing about how the energy from the Sun is 
+transferred through the food made by plants, to animals/a 
+person’s body (energy chain – use arrows to show the 
+direction in which the energy is transferred from the Sun)
+•	 Pictures and 
+examples of 
+a selection of 
+machines and 
+appliances including 
+a kettle, stove, torch, 
+radio, iron, fan/hair 
+dryer, car/bicycle, 
+drum
+•	 Video clips from the 
+internet
+2 ½ weeks
+(8 ¾ 
+hours)
+Energy 
+around us
+Energy
+•	 we are aware of energy around us, including movement, 
+heat, light, sound
+•	 energy is also stored in sources such as food, wood, coal, 
+oil products*, natural gas
+•	 energy can be transferred from a source to where it is 
+needed
+Input and output energy
+•	 machines and appliances need an input of energy to make 
+them work
+•	 machines and appliances provide an output of energy 
+(work) useful to us
+•	 Using pictures to identify situations where energy is 
+involved or transferred
+•	 describing the input and output of energy of a selection of 
+machines and appliances including a kettle, stove, torch, 
+radio, iron, fan/hair dryer, car/bicycle, drum
+Notes:    * petrol, diesel, paraffin, jet fuel, candle wax are all products made from natural crude oil
+
+=== page 29 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+24
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 4 TERM 3
+STRANDS:      NATURAL SCIENCES: ENERGY & CHANGE
+                 TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ weeks
+(8 ¾ 
+hours)
+Movement 
+and Energy in 
+a system
+Movement and musical instruments
+•	 many musical instruments (systems) use movement input 
+energy (such as blowing, beating and plucking) to make 
+them work
+•	 many instruments have parts that can move or vibrate
+•	 musical instruments produce sound as the main output 
+energy
+•	 reading about / looking at indigenous musical instruments 
+and how they work
+•	 researching, designing, making and evaluating a musical 
+instrument (such as a guitar, shaker, drum, blowing 
+instrument such as pan pipes, whistles, flutes) that uses 
+movement energy to make sounds [This can be used as a 
+possible project]
+•	 Examples of musical 
+instruments
+•	 Materials to make 
+musical instruments
+
+=== page 30 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+25
+CAPS
+GRADE 4 TERM 3
+STRANDS:      NATURAL SCIENCES: ENERGY & CHANGE 
+                  TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ weeks
+(8 ¾ 
+hours)
+Energy and 
+Sound
+Vibrations and sound
+•	 musical instruments make sounds through vibrations
+-- the sound always moves outwards from the part that is 
+vibrating
+-- we can feel or hear vibrations
+-- vibrations travel through materials such as air, water, 
+plastic, metal and wood
+Making sounds
+•	 sounds can be made loud or soft (volume)
+•	 sounds can be made high or low (pitch)
+Noise pollution
+•	 sound that is loud, unpleasant or harmful to our ears and 
+continues for a long time, is described as noise pollution
+•	 noise pollution can cause permanent damage to hearing 
+(hearing aids can help people who are hearing-impaired)
+•	 looking at pictures of the human ear, its parts and how 
+sound travels through it
+ 
+•	 making loud and soft sounds with your voice and/or 
+musical instruments
+•	 making high and low pitched sounds with your voice and/or 
+musical instruments
+•	 describing sources of noise pollution including at home, 
+school, in the community and how best to protect ourselves 
+from it
+•	 Pictures of the 
+human ear, it’s parts 
+and how one hears
+•	 Examples of musical 
+instruments made by 
+learners
+•	 Video clips from the 
+internet
+
+=== page 31 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+26
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 4 TERM 3
+STRANDS:      NATURAL SCIENCES: ENERGY & CHANGE 
+                  TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+Assessment
+guidelines
+This content and the associated concepts must be integrated 
+with the aims and skills for
+Natural Sciences and Technology (refer to Section 2).
+•	 Learners should read, write, draw and do practical tasks 
+regularly
+•	 Evidence of learner’s work, including assessments, should 
+be kept in the learner’s notebook
+School-based assessment (including practical tasks and 
+class tests), checking for correctness, and providing 
+constructive feedback should be done regularly.
+Allow for a maximum of 7 hours to be used for assessment 
+throughout the term.
+For more detailed guidelines on assessment, refer to 
+Section 4.
+Check the learner’s knowledge and that they can:
+•	 sequence an energy / food chain showing how the energy from the Sun is transferred 
+through the food made by plants, to animals/a person’s body
+•	 explain the input and output of energy of a selection of machines and appliances
+•	 design, make and evaluate a musical instrument
+•	 describe noise pollution and how best to protect our hearing
+
+=== page 32 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+27
+CAPS
+GRADE 4 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND
+     TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 weeks
+(7 hours)
+Planet Earth
+Features of the Earth
+•	 the Earth is round like a ball (sphere) and is made of rock
+•	 the main surface features of the Earth are land (rocks and 
+soil), water and air
+•	 most of the surface of the Earth is covered with water 
+(oceans and seas)
+•	 the land we can see is made up of continents* and islands
+•	 there is a thin layer of air surrounding the Earth
+•	 the Earth has many different habitats for living things
+Earth and space
+•	 the Earth is a planet in space
+•	 from the Earth we can see the Sun, Moon and stars
+•	 interpreting pictures and models showing features of the 
+Earth including visible features such as oceans, seas, 
+lakes, continents, islands and polar ice caps
+•	 making drawings or models of the Earth
+•	 writing descriptions of the Earth and its features
+•	 Pictures of Earth 
+showing its main 
+features
+•	 Pictures of the Moon, 
+Sun and planets
+•	 Models of the Earth, 
+Moon and the Sun
+•	 Video clips
+1 week
+(3 ½ 
+hours)
+The Sun
+Our closest star
+•	 the Sun is a star
+-- the Sun is made of hot gas and gives out heat and light
+-- the Sun is very big (much bigger than the Earth)
+-- the Sun is very far away, but is the closest star to the Earth
+-- the Sun provides heat and light to the Earth for living 
+things
+•	 interpreting pictures and models of the Sun
+•	 making drawings or models of the Sun
+•	 writing descriptions of the Sun
+Notes:	 *    Continents refer to larger land masses on the surface of the Earth
+
+=== page 33 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+28
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 4 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND
+     TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+1 week
+(3 ½ 
+hours)
+The Earth 
+and the Sun
+Moving around the Sun
+•	 the Earth moves around the Sun in a pathway called the 
+orbit
+-- the Sun is a star and is at the centre of the solar system**
+-- the Earth is one of eight planets*** in the solar system
+The Sun and life
+•	 the Earth gets the right amount of light and heat from the 
+Sun for supporting life
+•	 interpreting pictures and models of the solar system
+•	 making drawings and writing about the Earth and its orbit 
+around the Sun
+Notes:	 **   This is a basic introduction to the concept of the solar system
+	
+***  Pluto is now called a dwarf planet, and is therefore not included as a planet
+
+=== page 34 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+29
+CAPS
+GRADE 4 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND 
+     TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources:
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 weeks
+(7 hours)
+The Moon
+Features of the Moon
+•	 the Moon is a ball of rock in space
+-- there is no air and water on the Moon
+-- the Moon is smaller than the Earth
+-- the Moon is closer to the Earth than the Sun
+Phases of the Moon
+•	 the Sun’s light shines onto the surface of the Moon
+-- we can only see that part of the Moon which the sunlight 
+shines on
+-- the changing pattern of sunlight on the Moon is called the 
+phases of the moon
+-- the pattern repeats every 29 ½ days (about a month)
+Moon stories
+•	 cultural stories about the Moon tell us about the importance 
+of the Moon in people’s lives
+•	 interpreting pictures and models of the Moon
+•	 making drawings or models of the Moon
+•	 writing descriptions of the Moon
+ 
+• Investigating - observing and recording the changing 
+shape of light on the Moon each night for at least a month 
+(Moon watch)*
+•	 Calendar for 
+recording phases of 
+the Moon
+•	 Cultural stories about 
+the Moon
+•	 video clips
+2 weeks
+(7 hours)
+Rocket 
+systems
+Modelling a rocket
+•	 people have used rockets to go into space and to travel to 
+the Moon
+•	 a rocket is a system used to propel vehicles into space
+-- A rocket moves by pushing exhaust gases out through its 
+back end
+• Designing, making and evaluating a rocket model using 
+a balloon
+-- attach a balloon to a drinking straw threaded onto a fishing 
+line pulled tight between two points
+-- release the inflated balloon and measure how far it travels 
+along the fishing line. Draw bar graphs and evaluate 
+different balloon rockets [This can be used as a possible 
+project]
+•	 Apparatus including 
+balloons of different 
+sizes, straws and 
+fishing line, hooks, 
+measuring tapes
+Notes:	 * carry out the Moon watch while continuing with other work
+
+=== page 35 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+30
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 4 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND 
+     TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources:
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+Assessment
+guidelines
+This content and the associated concepts must be integrated 
+with the aims and skills for
+Natural Sciences and Technology (refer to Section 2).
+•	 Learners should read, write, draw and do practical tasks 
+regularly
+•	 Evidence of learner’s work, including assessments, should 
+be kept in the learner’s notebook
+School-based assessment (including practical tasks and 
+class tests), checking for correctness, and providing 
+constructive feedback should be done regularly.
+As this is the exam term, the final two weeks may be required 
+for revision of the year’s work and for examinations.
+For more detailed guidelines on assessment, refer to 
+Section 4.
+Check the learner’s knowledge and that they can:
+•	 identify and describe the main features of the Earth
+•	 describe the main features of the Sun and the Moon
+•	 explain how Earth moves around the Sun
+•	 recognise that the phases of the Moon are a result of the changing pattern of sunlight 
+that we can see on the Moon
+•	 make a model of a balloon rocket, and test it
+•	 record and compare the distances travelled by different balloon rockets
+•	 evaluate balloon rockets
+
+=== page 36 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+31
+CAPS
+Natural Sciences and Technology: Grade 5
+GRADE 5 TERM 1
+STRANDS:      NATURAL SCIENCES: LIFE & LIVING
+              TECHNOLOGY: STRUCTURES
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ weeks
+(8 ¾ 
+hours)
+Plants and 
+animals on 
+Earth
+Many different plants and animals
+•	 there are many different plants and animals living in 
+different habitats on Earth* (South Africa has a wide 
+variety of indigenous plants and animals and their habitats)
+Inter-dependence
+•	 plants and animals depend on each other
+•	 they also depend on the resources available (such as air, 
+water, soil, food, and places to hide) in their own habitats
+Animal types
+•	 there are many different kinds of animals,
+-- some do not have bones, and some have hard outer 
+‘skins’ or shells (invertebrates)
+-- some have bones (vertebrates)
+•	 counting the number of plants in a given area and 
+distinguishing them apart by looking at the shapes and 
+colours of their leaves or flowers or fruits
+ 
+•	 describing
+-- animals without bones, such as worms, millipedes, 
+insects, spiders, scorpions, crabs
+-- animals with bones, such as fish, frogs, reptiles, birds, 
+mammals
+•	 Pictures of plants 
+and animals
+Notes:	 *    Plants and animals, and their habitats make up the total biodiversity of the Earth
+
+=== page 37 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+32
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 5 TERM 1
+STRANDS:      NATURAL SCIENCES: LIFE & LIVING
+              TECHNOLOGY: STRUCTURES
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+1 ½ weeks
+(5 ¼ 
+hours)
+Animal 
+skeletons
+Skeletons of vertebrates
+•	 a vertebrate skeleton consists of bones and joints, and is 
+inside the body
+•	 bones are hard and form a strong frame structure
+•	 a skeleton provides support for an animal’s body and 
+protection for its organs;
+-- skull - protects the brain
+-- backbone with vertebrae - protects the spinal cord
+-- ribs - protect the lungs and heart
+-- shoulder blades, arms, legs, hip bones – for movement
+Movement
+•	 vertebrate animals can move because there are
+-- muscles attached to the skeleton
+-- joints between the bones***
+•	 looking at examples of skeletons including - fish, frogs, 
+birds, reptiles, mammals (including humans), and 
+identifying the following parts:
+-- the skull
+-- the backbone
+-- ribs
+-- limbs
+-- shoulder and hip girdles**
+ 
+•	 describing how different vertebrate animals move 
+(including humans)
+•	 Pictures and 
+examples of animal 
+skeletons / bones
+Notes:	 **   Not all animals have shoulder and hip girdles or limbs (such as fish and snakes)
+	
+*** In this grade, details about how muscles are attached, and the structure of joints are not required
+
+=== page 38 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+33
+CAPS
+GRADE 5 TERM 1
+STRANDS:      NATURAL SCIENCES: LIFE & LIVING 
+              TECHNOLOGY: STRUCTURES
+Equipment and
+Resources:
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ weeks
+(8 ¾ 
+hours)
+Skeletons as 
+structures
+Frame and shell structures
+•	 a vertebrate skeleton is a frame structure (also refer to 
+grade 4 Matter & Materials)
+•	 some invertebrate skeletons are shell structures such as 
+that of a crab
+•	 making a model* of a vertebrate skeleton using struts 
+made from rolled paper or drinking straws [This can be 
+used as a possible project]
+•	 Paper, drinking 
+straws, wooden 
+dowels or sticks 
+(30cm X 10mm), 
+sticky tape, metal 
+paper fasteners
+1 ½ week
+(5 ¼ 
+hours)
+Food chains
+Food and feeding
+•	 green plants make their own food** and build their 
+branches and stems using water and carbon dioxide 
+from the air, and energy from sunlight. Plants use carbon 
+dioxide from the air and release oxygen into the air
+•	 animals need food to carry out their life processes (to 
+move, feed, grow, sense the environment, excrete, breathe 
+and reproduce)
+•	 all animals depend on plants as their primary source of 
+food (herbivores, carnivores and omnivores)
+•	 a food chain describes the feeding relationships between 
+plants and animals.
+•	 a food chain
+-- starts with a plant, (produces foods)
+-- then follows with an animal that eats the plant
+-- after that with an animal that eats that animal
+-- includes the transfer of energy which flows from the plant 
+through to the last animal in the chain
+•	 sequencing pictures and drawing plants and animals 
+which form food chains with up to four organisms each, 
+describing their relationships
+•	 Pictures of various 
+plants and animals
+Notes:	 *    This is a problem solving activity, where learners have to work out how a skeleton fits together
+	
+**  This important process is called “photosynthesis.” However no further detail is required in this grade, learners will deal with it in detail only in higher grades
+
+=== page 39 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+34
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 5 TERM 1
+STRANDS:      NATURAL SCIENCES: LIFE & LIVING 
+             TECHNOLOGY: STRUCTURES
+Equipment and
+Resources:
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 weeks
+(7 hours)
+Life Cycles
+Growth and development
+•	 plants and animals grow and develop throughout their lives
+•	 a life cycle describes the stages and processes that take 
+place as a plant or animal grows and develops
+•	 a life cycle describes how one generation of a plant 
+or animal gives rise to the next generation through 
+reproduction
+•	 death can occur at any stage of the life cycle
+•	 many animals care for their young in order for them to grow 
+and develop
+•	 sequencing pictures and drawings of the stages of 
+development in life cycles of
+-- a plant – identifying and labelling the stages (including 
+seed, seedling, adult plant, flowering plant, fruiting 
+plant) and some of the processes that occur (including 
+germinating, 
+growing, 
+maturing, 
+flowering, 
+being 
+pollinated and dispersing seeds)
+-- a vertebrate animal - identifying and labelling the stages 
+[including baby, young animal, mature adults (male & 
+female)] and some of the processes that occur including 
+growing, maturing, mating, producing eggs and babies
+•	 Pictures of different 
+stages in the 
+development of 
+various plants and 
+animals
+Assessment
+guidelines
+This content and the associated concepts must be integrated 
+with the aims and skills for
+Natural Sciences and Technology (refer to Section 2).
+•	 Learners should read, write, draw and do practical tasks 
+regularly
+•	 Evidence of learner’s work, including assessments, should 
+be kept in the learner’s notebook
+School-based assessment (including practical tasks and 
+class tests), checking for correctness, and providing 
+constructive feedback should be done regularly.
+Allow for a maximum of 7 hours to be used for assessment 
+throughout the term. For more detailed guidelines on 
+assessment, refer to Section 4.
+Check the learner’s knowledge and that they can:
+•	 demonstrate an understanding of the variety of plants and animals on Earth and their 
+inter-dependence
+•	 identify animals with and without bones
+•	 identify and describe different bones and their functions in a vertebrate skeleton
+•	 use struts to make a model of a vertebrate animal skeleton
+•	 show the links and relationships in different food chains
+•	 show the stages and processes in the life cycle of a plant and an animal
+
+=== page 40 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+35
+CAPS
+GRADE 5 TERM 2
+STRANDS:        NATURAL SCIENCES: MATTER & MATERIALS
+TECHNOLOGY: PROCESSING
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2  weeks
+(7 hours)
+Metals and 
+non-metals
+Properties of metals
+•	 metals are used to make things because they have certain 
+properties
+•	 some properties of metals
+-- shiny
+-- hard
+-- strong
+-- can be hammered, shaped (malleable) and made into thin 
+wires without breaking (ductile)
+-- melt at high temperatures
+•	 metals are mined from the Earth*
+Properties of non-metals
+•	 non-metals are used to make things because they have 
+certain properties
+•	 some properties** of solid non-metals
+-- dull
+-- can break easily (brittle)
+• Investigating, comparing and recording the properties 
+of some metal objects (such as copper wire, coins, nails, 
+cooking pots, knives and forks) and some non-metal 
+objects (such as a piece of chalk, a stone, a pile of sand, a 
+piece of coal)
+• Investigating ways to make old and dull metal objects 
+shiny again
+•	 Examples of metal 
+objects such as 
+copper wire, coins, 
+nails, cooking pots, 
+knives and forks
+•	 Examples of non- 
+metal objects such 
+as a piece of chalk, a 
+pile of sand, a piece 
+of coal
+Notes:	 *      How and where metals are mined is covered in Social Sciences
+	
+**    There are many different non-metals and they have a variety of different properties. Here the focus is only on two of the most general properties
+
+=== page 41 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+36
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 5 TERM 2
+STRANDS:        NATURAL SCIENCES: MATTER & MATERIALS
+TECHNOLOGY: PROCESSING
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ weeks
+(8 ¾ 
+hours)
+Uses of 
+metals
+Other properties of metals
+•	 metals are useful because of their special properties
+-- metals conduct heat
+-- some metals are magnetic and some are not
+-- only iron rusts (some metals tarnish or become dull)
+Uses of metals
+•	 metals are used to make things such as coins, wire, 
+jewellery, furniture, buildings and bridges, motor cars, 
+kitchen utensils, roofs
+•	 testing different metal objects (such as coins, iron filings, 
+nails, drawing pins, paper clips, wire) to see if they are 
+attracted by a magnet
+•	 placing different objects in water (such as coins, iron 
+filings, nails, drawing pins, paper clips, wire) to see if they 
+rust***
+• researching and writing about the uses of metals and 
+giving reasons for their use**** [This can be used as a 
+possible project]
+•	 Magnets and objects 
+such as coins, iron 
+filings, nails, drawing 
+pins, paper clips, 
+wire
+Notes:	 ***   Rusting is a slow process; learners carry on with other work while waiting for the results
+	
+**** Focus on uses of metals in daily life
+
+=== page 42 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+37
+CAPS
+GRADE 5 TERM 2
+STRANDS:       NATURAL SCIENCES: MATTER & MATERIALS 
+TECHNOLOGY: PROCESSING
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+3 ½ 
+weeks
+(12 ¼ 
+hours)
+Processing 
+materials
+Combining materials
+•	 materials can be processed to make new materials/
+products, such as
+-- mixing and setting (such as plaster of Paris (or Polyfilla) 
+and water to make plaster)
+-- mixing and setting (such as sand, gravel, cement and 
+water to make concrete)
+-- mixing (such as flour and water to make a sticky paste 
+that can be used as glue)
+-- mixing and cooking (such as making dough)
+-- mixing and cooling (such as jelly powder and water to 
+make jelly)
+-- mixing, drying and/or firing (such as wet clay and straw to 
+make clay bricks)
+•	 the properties of the new materials/products may be 
+different from the properties of the materials we started 
+with
+•	 processing selected* different materials, recording and 
+comparing their properties before and after
+•	 writing about the uses of these processed materials/
+products
+•	 Materials and 
+substances such 
+as: plaster of 
+Paris(or Polyfilla), 
+sand,gravel, cement, 
+flour, ingredients to 
+make dough, jelly 
+powder, wet clay and 
+straw
+Notes:	 * Leaners need not carry out all these examples, but should experience at least two of them.
+
+=== page 43 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+38
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 5 TERM 2
+STRANDS:       NATURAL SCIENCES: MATTER & MATERIALS 
+TECHNOLOGY: PROCESSING
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 weeks
+(7 hours)
+Processed 
+materials
+Properties and uses
+•	 materials such as plaster of Paris, concrete, fabrics, 
+ceramics and glass, plastics and paints, have their own 
+special properties
+•	 processed materials are useful because of their special 
+properties. They can be strong, durable, waterproof, fire 
+resistant, have interesting colours or textures
+Traditional processing
+•	 in Africa people have processed materials for hundreds of 
+years to make
+-- clay pots and bricks
+-- baskets, hats, mats, thatched roofs made from plant fibre 
+such as grasses and reeds
+•	 finding examples of where and how different non-metal 
+materials are used at home, school and in the community 
+and explaining the properties that make them useful
+-- presenting findings through writing, drawing and pictures 
+[This can be used as a possible project]
+•	 making an object from clay (modelling)
+•	 finding examples of objects made from plant fibre (by 
+weaving and stitching)
+•	 Clay
+•	 Pictures and 
+examples of objects 
+made by weaving 
+plant material
+Assessment
+guidelines
+This content and the associated concepts must be integrated 
+with the aims and skills for
+Natural Sciences and Technology (refer to Section 2).
+•	 Learners should read, write, draw and do practical tasks 
+regularly
+•	 Evidence of learner’s work, including assessments, should 
+be kept in the learner’s notebook
+School-based assessment (including practical tasks and 
+class tests), checking for correctness, and providing 
+constructive feedback should be done regularly.
+Allow for a maximum of 7 hours to be used for assessment 
+throughout the term. For more detailed guidelines on 
+assessment, refer to Section 4.
+Check the learner’s knowledge and that they can:
+•	 compare the properties of some metal and some non-metal objects
+•	 identify objects that are attracted by magnets
+•	 identify objects that can rust in water
+•	 process selected materials by mixing them and describe their properties before and 
+after mixing
+•	 describe the usefulness of different materials at home, school or community
+
+=== page 44 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+39
+CAPS
+GRADE 5 TERM 3
+STRANDS:      NATURAL SCIENCES: ENERGY & CHANGE
+                  TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+3 weeks
+(10 ½ 
+hours)
+Stored 
+energy in 
+fuels
+Fuels
+•	 energy is stored in fuels (including food*)
+•	 we use fuels as sources of useful energy
+•	 everyday fuels that we use include coal, wood, petrol, 
+paraffin, gas and candle wax
+•	 when we burn these fuels we get useful output energy 
+such as heat and light
+Burning fuels
+•	 fuels need heat to set them alight, and air (oxygen) to keep 
+on burning
+Safety with fire
+•	 fires can be a threat in our communities
+•	 examining various fuels including wood, coal, candle (wax), 
+paraffin, peanut, a biscuit. Burning three different fuels 
+from above, and comparing and describing the
+-- input energy needed to make them burn
+-- output energy obtained from the fuel
+• Investigating how long a candle will burn when covered 
+with different sized glass containers (the candles will stop 
+burning when all the oxygen is used up)
+•	 writing and drawing about fires in our communities 
+including causes, prevention and act out what action to 
+take during a fire [This can be used as a possible project]
+•	 Examples of 
+substances including 
+wood, coal, candle 
+(wax), paraffin, 
+peanut, a biscuit.
+•	 Candles and 
+different sized glass 
+containers
+Notes:	 *  Food is often described as fuel for the body. Oxygen is required to release energy from food. This process is called respiration and is not a focus for grade 5
+
+=== page 45 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+40
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 5 TERM 3
+STRANDS:      NATURAL SCIENCES: ENERGY & CHANGE
+                  TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+3 weeks
+(10 ½ 
+hours)
+Energy and 
+electricity
+Cells and batteries
+•	 energy can be stored in torch cells and batteries
+•	 a circuit is a system that transfers electrical energy to 
+where it is needed
+Mains electricity
+•	 electricity from the power station is transferred in a circuit 
+to our homes and back to the power station
+•	 a power station needs a source of energy
+•	 the source of energy in a power station can be a fuel such 
+as coal**
+Safety with electricity
+•	 safety precautions should be taken when using electricity
+•	 connecting up a cell, wires, and a light bulb to make a 
+simple circuit
+•	 drawing and writing to trace how the electricity comes from 
+the power station to our homes/schools, including power 
+station, pylons, substation, electricity boxes, wall sockets, 
+plugs and appliances
+•	 Cells (batteries), 
+lengths of wire, light 
+bulbs
+Notes:	 ** The focus here is on coal-fired power stations. There are also other power stations such as hydro-electric and nuclear power stations
+
+=== page 46 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+41
+CAPS
+GRADE 5 TERM 3
+STRANDS:      NATURAL SCIENCES: ENERGY & CHANGE 
+                 TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+1 week
+(3 ½ 
+hours)
+Energy and 
+movement
+Elastic and springs
+•	 we can make things move using stretched or twisted 
+elastic and compressed springs
+•	 when we stretch or twist elastic or compress a spring, we 
+store energy in it
+•	 when we release the elastic or spring again, we get 
+movement energy
+•	 describing how things work that use stretched elastic 
+bands and compressed springs in order to move, including 
+a catapult*, elastic powered aeroplanes, ‘jack-in-a-box’
+•	 Elastic bands and 
+and compressed 
+springs, a catapult, 
+elastic powered 
+aeroplanes, ‘jack-in- 
+a- box’
+3 weeks
+(10 ½  
+hours)
+Systems 
+for moving 
+things
+Wheels and axles
+•	 many vehicles are systems that use wheels and axles
+•	 wheels and axles help vehicles to move more easily
+•	 identifying different vehicles that have wheels and axles 
+including prams, bicycles, motor bikes, cars, trucks
+•	 making wheels and axles and evaluating whether they 
+move easily (use materials such as bottle tops, round 
+tins or cardboard circles for the wheels, sosatie sticks or 
+dowels and straws for the axles)
+•	 Apparatus including 
+cardboard, bottle 
+tops, round tins or 
+cardboard circles for 
+the wheels, sosatie 
+sticks or dowels and 
+straws for the axles
+Assessment guidelines
+This content and the associated concepts must be integrated 
+with the aims and skills for
+Natural Sciences and Technology (refer to Section 2).
+•	 Learners should read, write, draw and do practical tasks 
+regularly
+•	 Evidence of learner’s work, including assessments, should 
+be kept in the learner’s notebook
+School-based assessment (including practical tasks and 
+class tests), checking for correctness, and providing 
+constructive feedback should be done regularly.
+Allow for a maximum of 7 hours to be used for assessment 
+throughout the term. For more detailed guidelines on 
+assessment, refer to Section 4.
+Check the learner’s knowledge and that they can:
+•	 describe the output energy we get from burning most fuels
+•	 explain what a fire needs to start and continue burning (fuel, heat, oxygen)
+•	 demonstrate an understanding of the causes of fire, along with methods of prevention 
+and what actions to take during a fire
+•	 draw and label the components of a simple circuit correctly
+•	 trace the electricity from the power station to our homes/schools
+•	 describe the output energy (movement) obtained from a stretched elastic band or 
+compressed spring
+•	 make and evaluate sets of wheels and axles
+Notes:	 * A catapult can be extremely dangerous – Teacher demonstration only
+
+=== page 47 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+42
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 5 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND
+     TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+1 week
+(3 ½ 
+hours)
+Planet Earth
+The Earth moves
+•	 the Earth travels in an orbit (pathway) around the Sun
+•	 the Earth takes about 365 days to travel once around the 
+Sun, this is called a year
+•	 the Earth spins on its own axis
+•	 the Earth takes about 24 hours to spin once, this is called 
+a day
+•	 interpreting pictures and models of the solar system
+•	 making drawings and writing about the Earth and its orbit 
+around the Sun
+•	 Pictures and models 
+of Earth, Moon, Sun 
+and planets.
+•	 Light source such 
+as torch, lamp, or 
+candle
+•	 Samples of different 
+types of soil
+•	 Measuring cylinders, 
+funnels and filter 
+paper, beakers
+•	 Seeds and rulers to 
+measure length
+
+=== page 48 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+43
+CAPS
+GRADE 5 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND
+     TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ weeks
+(8 ¾ 
+hours)
+Surface of 
+the Earth
+Rocks
+•	 the surface of the Earth is called the crust, and consists of 
+rocks (even under the oceans), and soil
+•	 soil, air, water and sunlight support life on Earth
+Soil comes from rocks
+•	 the land is made up of rocks, subsoil and top soil
+•	 soil supports life on Earth
+•	 top soil lies on the surface
+-- top soil is formed when rocks break into small grains over 
+time
+Soil types
+•	 soil is usually a mixture of different types of soil grains in 
+different proportions
+-- sandy soil – has a high proportion of course sand grains
+-- clayey soil – has a high proportion of fine grains of clay
+-- loamy soil – has a mixture of sand, clay and other soil 
+grains. Loamy soil also contains humus (decomposed 
+compost)
+•	 the soil also has air, water, remains of dead organisms and 
+very small living organisms in it
+•	 soil forms very slowly in nature – once topsoil is lost, it 
+cannot be replaced, and thus we need to conserve it
+ 
+• Investigating – different soil types
+-- writing and drawing about the colour, smell and texture 
+of the soil
+-- measuring and recording on a table how much water 
+different soils can hold*
+-- using the results to draw bar graphs
+and / or 
+Investigating – growing seedlings in different soil types** 
+(Integrating with Life & Living)
+-- measuring, recording and comparing the heights of the 
+seedlings
+-- using the results to draw bar graphs [This can be used as 
+a possible project]
+Notes:	 *  The same volumes of soil and water must be used to make it a fair test
+	
+** This investigation can be done while continuing with other work
+
+=== page 49 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+44
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 5 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND 
+     TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 weeks
+(7 hours)
+Sedimentary 
+rocks
+Formation of sedimentary rock
+•	 sedimentary rocks are formed over a very long time in the 
+following way:
+-- first, rocks break down into small grains
+-- then, mud and sand is moved by wind and water
+-- after that, mud and sand gets deposited in low lying areas
+-- over time, new layers of mud and sand are deposited on 
+top of existing layers
+-- after a very long time, these layers become compacted 
+and hardened and form sedimentary rock
+•	 sedimentary rocks always have visible layers within the 
+rock
+•	 examples of sedimentary rock are shale, sandstone and 
+limestone
+Uses of sedimentary rock
+•	 limestone is used to make cement
+•	 sandstone and shale are used in buildings
+•	 making a series of drawings to show a rock breaking down 
+into smaller grains over time
+•	 drawing and explaining how sedimentary rocks are formed
+ 
+•	 interpreting pictures showing the layers in sedimentary 
+rocks
+•	 looking at specimens/pictures of sedimentary rock 
+including shale, sandstone and limestone
+•	 Pictures and 
+or samples of 
+sedimentary rocks 
+such as limestone 
+and sandstone
+
+=== page 50 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+45
+CAPS
+GRADE 5 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND 
+     TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and 
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ weeks
+(8 ¾ 
+hours)
+Fossils
+Fossils in rock
+•	 fossils are the remains of ancient plants and animals 
+preserved in rock
+-- fossils are found in some layers of sedimentary rock
+-- fossils are evidence/a record of the history of life on Earth
+•	 there are two main types of fossils; body and trace fossils
+Body and trace fossils
+•	 body fossils form from the hard parts of plant and animal 
+bodies including teeth, bones, shells, stems, leaves and 
+seeds
+•	 trace fossils form from traces left by animals including 
+footprints, nests, eggs and droppings
+•	 some features of fossils resemble the features of plants 
+and animals living today
+Importance of South African fossils
+•	 South Africa has a particularly rich fossil record of plants, 
+animals and early humans
+•	 important fossils found in South Africa include the 
+Coelacanth and African dinosaurs
+•	 the “Cradle of humankind” is one of the sites where 
+important fossils of humankind have been found in South 
+Africa
+•	 making a model to show the layers of sedimentary rocks 
+with fossils embedded in them (using a medium such as 
+play dough, clay, plaster of Paris, and remains of living 
+things such as leaves, shells and bones)
+ 
+•	 interpreting pictures of fossils and comparing them to 
+plants and animals living today
+ 
+•	 reading about fossils including the Coelacanth and African 
+dinosaurs
+•	 Pictures and 
+or samples of 
+sedimentary rocks
+•	 Play dough, clay, 
+plaster of Paris, 
+variety of parts of 
+plants and animals
+•	 Pictures of fossils
+•	 Information texts 
+about South African 
+fossils
+
+=== page 51 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+46
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 5 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND 
+     TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and 
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+Assessment
+guidelines
+This content and the associated concepts must be integrated 
+with the aims and skills for
+Natural Sciences and Technology (refer to Section 2).
+•	 Learners should read, write, draw and do practical tasks 
+regularly
+•	 Evidence of learner’s work, including assessments, should 
+be kept in the learner’s notebook
+School-based assessment (including practical tasks and 
+class tests), checking for correctness, and providing 
+constructive feedback should be done regularly.
+As this is the exam term, the final two weeks may be required 
+for revision of the year’s
+work and for examinations.
+For more detailed guidelines on assessment, refer to 
+Section 4.
+Check the learner’s knowledge and that they can:
+•	 demonstrate the Earth’s movement in its orbit around the Sun
+•	 describe the Earth’s movement on its own axis
+•	 identify the main elements (soil, air, water, sunlight) that support life on Earth
+•	 identify and describe different soil types correctly
+•	 explain the formation of sedimentary rock
+•	 distinguish between body and trace fossils
+•	 explain aspects of South Africa’s fossil record
+
+=== page 52 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+47
+CAPS
+Natural Sciences and Technology: Grade 6
+GRADE 6 TERM 1
+STRANDS:      NATURAL SCIENCES: LIFE & LIVING
+             TECHNOLOGY: PROCESSING
+Equipment and 
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ 
+weeks
+(8 ¾ 
+hours)
+Photosynthesis
+Plants and food
+•	 plants make their own food (glucose sugar) by a process 
+called photosynthesis
+•	 photosynthesis takes place mainly in the leaves
+•	 during photosynthesis the plant uses sunlight energy, 
+carbon dioxide (from the air) and water to make glucose 
+sugar
+•	 plants change some of the glucose sugar into starch which 
+they store in their leaves, stems and roots, flowers, fruits 
+and seeds
+Plants and air
+•	 during photosynthesis the plant uses carbon dioxide from 
+the air and gives off oxygen into the air
+•	 animals, including people, use the oxygen from the air for 
+breathing and give out carbon dioxide which is used by 
+plants for photosynthesis
+•	 drawing and writing about how plants make food and the 
+things they take in and give out during this process
+ 
+ 
+•	 comparing glucose sugar (such as glucose sweets) and 
+starch (such as maize flour) according to their taste and 
+colour
+•	 testing starch with iodine solution to show the colour 
+change*
+•	 testing foods for starch including cooked rice, flour, potato, 
+bread, oil, boiled egg, cheese**
+•	 Glucose powder, 
+maize flour, 
+iodine solution, 
+plastic droppers, 
+examples of foods 
+such as cooked 
+rice, flour, potato, 
+bread, oil, boiled 
+egg, cheese
+•	 Video clips from 
+the internet
+Notes:	 *   Iodine solution is used as an indicator - when dropped onto starch it turns from brown to a blue-black colour
+	
+** Many foods that come directly from plants contain starch while foods that come directly from animals do not contain starch
+
+=== page 53 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+48
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 6 TERM 1
+STRANDS:      NATURAL SCIENCES: LIFE & LIVING
+             TECHNOLOGY: PROCESSING
+Equipment and 
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+1 ½ week
+(5 ¼ 
+hours)
+Nutrients in 
+food
+Food Groups
+•	 foods can be grouped according to their functions in the 
+body and the main nutrients they supply:
+-- foods for energy -  carbohydrates
+-- foods for growth and repair - proteins
+-- foods for storing energy (in the form of body fats) and 
+providing insulation and protection for nerves and organs 
+- fats and oils
+-- foods for building bones and teeth, and maintaining a 
+healthy immune system - vitamins and minerals
+•	 most natural foods contain a mixture of more than one 
+nutrient group
+•	 most processed (manufactured) foods have added salt, 
+sugar, preservatives, flavourings and colourings
+•	 sorting foods into the four different nutrient groups
+-- carbohydrates in foods such as bread, sugar, mealie 
+meal, potato, rice, pasta
+-- proteins in foods such as eggs, beans, meat, fish, cheese
+-- fats and oils in foods such as margarine, cooking oil, 
+butter
+-- vitamins and minerals in foods such as fresh fruits and 
+vegetables, milk (source of calcium)
+ 
+•	 reading labels on food packaging to look for the nutrients 
+and/or the additives in the food
+•	 Examples of 
+different foods 
+representing the 
+different food 
+groups and food 
+packaging.
+
+=== page 54 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+49
+CAPS
+GRADE 6 TERM 1
+STRANDS:      NATURAL SCIENCES: LIFE & LIVING 
+              TECHNOLOGY: PROCESSING
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+1 ½ weeks
+(5 ¼ 
+hours)
+Nutrition
+Balanced diets
+•	 a diet refers to the selection of foods we eat everyday
+•	 a balanced diet contains sufficient quantities of food from 
+all four nutrient groups, as well as water and fibre
+•	 some diseases can be related to diet
+•	 evaluating a given diet to determine if it contains food from 
+all nutrient groups
+•	 finding out about a disease that could be diet related, such 
+as tooth decay, obesity, diabetes or deficiency diseases
+•	 Lists of different 
+diets
+•	 Pictures and 
+information about 
+food-related 
+illnesses
+2 ½ weeks
+(8 ¾ 
+hours)
+Food 
+processing
+Need for processing food
+•	 food is processed to:
+-- make it edible (preparing, cooking)
+-- make it last longer (preserving)
+-- improve its nutrient value (fermenting)
+•	 during processing many foods may lose some of their 
+nutrients
+Methods for processing food
+•	 there are many different methods (ways) to process food
+• researching how to process food (raw material) by 
+combining, cooking, freezing, pickling, fermenting, drying 
+and salting to make a product, including indigenous ways 
+of processing of food in different communities
+•	 choosing a food and processing it in some way
+•	 Pictures and 
+information about 
+how food is 
+processed
+•	 Foods for processing
+
+=== page 55 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+50
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 6 TERM 1
+STRANDS:      NATURAL SCIENCES: LIFE & LIVING 
+             TECHNOLOGY: PROCESSING
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 weeks
+(7 hours)
+Ecosystems 
+and Food 
+webs
+Different ecosystems
+•	 an ecosystem is an area where living and non-living things 
+depend on each other in many different ways
+•	 there are many different ecosystems such as rivers, 
+mountains, sea, rocky shore, ponds, wetlands, grasslands, 
+forests and deserts, which support different kinds of living 
+things
+Living and non-living things in ecosystems
+•	 in an ecosystem there are certain relationships between 
+living things (plants, animals/people, microorganisms), and 
+non-living things (air, water, sunlight, soil) in a particular 
+area*
+Food webs
+•	 in an ecosystem plants and animals are connected by their 
+feeding relationships. This is called a food web
+•	 a food web consists of:
+-- plants (producers) which produce food for themselves 
+and animals
+-- animals (consumers) which are herbivores, carnivores, 
+omnivores
+-- microorganisms (decomposers) that break down dead 
+plant and animal matter and return nutrients to the soil
+•	 selecting an ecosystem on/near the school grounds for this 
+study. Roughly measure an area of 5m x 5m square.
+•	 drawing and writing about three plants and three animals 
+that are found there
+-- describing the food, water, amount of sunlight and shelter 
+available
+-- describing the feeding relationships (food webs)
+-- identifying the possible threats to this ecosystem and 
+possible ways to overcome them
+•	 drawing and labelling simple food webs
+•	 Pictures of 
+ecosystems such as 
+rivers, mountains, 
+sea, rocky shore, 
+ponds, wetlands, 
+grasslands, forests 
+and deserts
+Notes:	 * Healthy ecosystems depend on sufficient biodiversity of plants, animals and their habitats
+
+=== page 56 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+51
+CAPS
+GRADE 6 TERM 1
+STRANDS:      NATURAL SCIENCES: LIFE & LIVING 
+             TECHNOLOGY: PROCESSING
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+Assessment
+guidelines
+This content and the associated concepts must be integrated 
+with the aims and skills for
+Natural Sciences and Technology (refer to Section 2).
+•	 Learners should read, write, draw and do practical tasks 
+regularly
+•	 Evidence of learner’s work, including assessments, should 
+be kept in the learner’s notebook
+School-based assessment (including practical tasks and 
+class tests), checking for correctness, and providing 
+constructive feedback should be done regularly.
+Allow for a maximum of 7 hours to be used for assessment 
+throughout the term. For more detailed guidelines on 
+assessment, refer to Section 4.
+Check the learner’s knowledge and that they can:
+•	 explain how plants make their own food (photosynthesis)
+•	 sort food into the four nutrient groups
+•	 describe a balanced diet
+•	 process food in some way
+•	 describe an ecosystem
+•	 elaborate on feeding relationships (food webs)
+
+=== page 57 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+52
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 6 TERM 2
+STRANDS:        NATURAL SCIENCES: MATTER & MATERIALS
+TECHNOLOGY: PROCESSING
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+½ week
+(1¾ 
+hours)
+Solids, 
+liquids and 
+gases
+Arrangement of particles
+•	 all matter (solids, liquids and gases) is made up of particles
+•	 the particles are arranged differently in solids, liquids and 
+gases
+-- in solids the particles are closely packed in a regular 
+pattern – spaces between the particles are small and 
+particles vibrate in one place
+-- in liquids the particles are closely packed in no fixed 
+pattern – spaces between the particles are small but 
+particles can move around each other
+-- in gases the particles are far apart from each other – 
+spaces between the particles are big and particles move 
+in all directions
+•	 drawing* and writing about how particles are arranged in a 
+solid, liquid and gas
+•	 Video clips from the 
+internet
+1 week
+(3½ 
+hours)
+Mixtures
+Mixtures of materials
+•	 a mixture consists of at least two different substances/
+materials mixed together
+•	 in some mixtures, the different substances are still clearly 
+visible after mixing
+-- the substances in such mixtures can be separated by 
+physical means such as sieving, filtering, hand sorting, 
+settling and decanting
+•	 making mixtures including:
+-- two solids - salt and sand, sugar and tea leaves, peanuts 
+and dried beans, different coins, mixture of different 
+sweets
+-- a solid and a liquid -  sand and water, chalk and water, 
+curry powder and water, grated cheese and milk
+-- two liquids – oil and water,
+•	 drawing and writing about mixtures
+•	 Examples of 
+materials and 
+substances such as: 
+salt, sand, sugar, 
+tea leaves, peanuts, 
+dried beans, coins, 
+sweets, curry 
+powder, grated 
+cheese, milk, oil
+•	 Video clips from the 
+internet
+Notes:	 *  The drawings must show the same number of particles in the solid, the liquid and the gas. The particles must all be the same size.
+
+=== page 58 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+53
+CAPS
+GRADE 6 TERM 2
+STRANDS:       NATURAL SCIENCES: MATTER & MATERIALS 
+TECHNOLOGY: PROCESSING
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2½ weeks
+(8¾ 
+hours)
+Solutions 
+as special 
+mixtures
+Solutions
+•	 solutions are also mixtures
+•	 some solutions can be made by mixing a solid and a liquid 
+together such as sugar and water, salt and water
+•	 solutions are uniform in appearance and the solid cannot 
+be seen after mixing
+Soluble substances
+•	 soluble solids (solutes) can dissolve* in water (solvent)
+•	 the substances in solutions cannot be separated by 
+sieving, filtering, hand sorting, settling and decanting
+•	 some solutes can be recovered (separated) by evaporating 
+the solvent (such as recovering salt from sea water)
+•	 when substances dissolve, solute particles become 
+dispersed in the spaces between the solvent particles
+Saturated solutions
+•	 a solution is saturated when no more solute can dissolve in 
+a given amount of solvent
+Insoluble substances
+•	 Some solids will not form a solution in water (insoluble 
+solids)
+• Investigating different solids to see if they dissolve in 
+water including:
+-- salt, sugar (soluble substances)
+-- sand, mealie meal, flour, maize flour, samp, curry powder, 
+custard powder (insoluble substances)
+•	 drawing and writing about what happens to solids in 
+solutions
+ 
+ 
+• Investigating solutions to see if we can recover the solute 
+by:
+-- filtering
+-- settling
+-- evaporating the water (crystallisation)
+•	 drawing and writing about crystallisation
+•	 Examples of 
+materials and 
+substances such as 
+salt, sugar, sand, 
+mealie meal, flour, 
+maize flour, samp, 
+curry powder, 
+custard powder
+•	 Measuring cylinders, 
+funnels, filter paper, 
+beakers, evaporating 
+dish, salt, food 
+colouring
+Notes:	 * A common misconception is that sugar or salt “melts” away when added to water. Dissolving (in the case of sugar and salt in water) requires two materials to be mixed 	
+	
+	
+  together. 
+	
+  This is different from melting (in the case of ice) which is a result of heating one material to change its state.
+
+=== page 59 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+54
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 6 TERM 2
+STRANDS:       NATURAL SCIENCES: MATTER & MATERIALS 
+TECHNOLOGY: PROCESSING
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+1 week
+(3 ½ 
+hours)
+Dissolving
+Rates of dissolving
+•	 Factors that affect the rate (time taken) of dissolving
+-- temperature of the mixture
+-- stirring or shaking the mixture
+-- grain size of the solute
+• Investigating, measuring and drawing graphs of the 
+time taken to dissolve a solute:**
+-- in hot or cold water
+-- when stirring/shaking or not stirring/shaking
+-- using coarse or fine salt
+•	 Containers, beakers, 
+ice cream sticks for 
+stirring, measuring 
+spoons, hot water, 
+salt (coarse and fine)
+Notes:	 ** For a fair test, make sure to use a given amount of solute [for example 1 teaspoon (5 ml)], and a given amount of water [for example ½ cup (125ml)], each time
+
+=== page 60 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+55
+CAPS
+GRADE 6 TERM 2
+STRANDS:        NATURAL SCIENCES: MATTER & MATERIALS 
+ TECHNOLOGY: PROCESSING
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2½ weeks
+(8¾ 
+hours)
+Mixtures 
+and water 
+resources
+Water pollution
+•	 in the environment, many things mix or dissolve in water
+•	 water can be polluted by
+-- insoluble substances, such as oil, plastics, tyres, tins, 
+glass, toilet waste
+-- soluble substances such as soaps, fertilizers, insecticides, 
+acids and other poisons
+-- living germs from toilet waste causing water-borne 
+illnesses such as diarrhoea
+Importance of wetlands
+•	 natural wetlands are important for
+•	 removing soluble and insoluble substances from water
+•	 acting like sponges and regulating the flow of water
+•	 reading about/visit a specific wetland
+•	 writing a brief report on the importance of wetlands 
+including:
+-- habitats and biodiversity
+-- water quality
+or
+•	 writing about the impact of loss of wetlands for biodiversity 
+and water quality
+•	 Texts for reading 
+about water pollution
+•	 Video clips from the 
+internet
+2½ weeks
+(8¾ 
+hours)
+Processes to 
+purify water
+Clean water
+•	 a clean supply of water is important for people, plants and 
+animals
+•	 water can be cleaned by processes such as sieving, 
+filtering, settling, decanting, boiling and adding chemicals 
+to kill germs
+•	 municipal water is cleaned before and after we use it
+• Investigating how to best purify dirty water in class or/and 
+at home*
+• designing, making and evaluating a simple system 
+to clean dirty water, (such as a sand filter) according to 
+specifications and constraints (refer to Section 2.7) [This 
+can be used as a possible project]
+•	 Sieves, filter paper, 
+funnels, containers, 
+kettle, water 
+purification tablets (if 
+possible)
+Notes:	 * Learners should not drink this water
+
+=== page 61 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+56
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 6 TERM 2
+STRANDS:        NATURAL SCIENCES: MATTER & MATERIALS 
+ TECHNOLOGY: PROCESSING
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+Assessment
+guidelines
+This content and the associated concepts must be integrated 
+with the aims and skills for
+Natural Sciences and Technology (refer to Section 2).
+•	 Learners should read, write, draw and do practical tasks 
+regularly
+•	 Evidence of learner’s work, including assessments, should 
+be kept in the learner’s notebook
+School-based assessment (including practical tasks and 
+class tests), checking for correctness, and providing 
+constructive feedback should be done regularly.
+Allow for a maximum of 7 hours to be used for assessment 
+throughout the term. For more detailed guidelines on 
+assessment, refer to Section 4.
+Check the learner’s knowledge and that they can:
+•	 describe solids, liquids and gases in terms of the arrangement of their particles
+•	 explain different kinds of mixtures (including solutions)
+•	 distinguish between soluble and insoluble substances
+•	 recover the solute from the solvent and draw and write about the process
+•	 tell what factors affect the rate of dissolving
+•	 show an understanding of the importance of wetlands
+•	 design, make and evaluate a system to process and purify dirty water
+
+=== page 62 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+57
+CAPS
+GRADE 6 TERM 3
+STRANDS:      NATURAL SCIENCES: ENERGY & CHANGE
+                 TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ weeks
+(8 ¾ 
+hours)
+Electric 
+circuits
+A simple circuit
+•	 an electric circuit is a system for transferring energy
+•	 a simple circuit always has the following components:
+-- source of energy (such as a cell/battery)
+-- conducting material (such as wires)
+-- device (such as a light bulb, buzzers, motors) for changing 
+electricity into a useful output energy
+•	 a circuit is a complete, unbroken pathway for electricity
+•	 a switch can be added to break or complete the circuit 
+pathway
+Circuit diagrams
+•	 symbols are used when drawing circuit diagrams
+•	 investigating how to make a simple circuit using cell/
+battery, conducting wires, light bulb and design and make a 
+switch to control the circuit
+ 
+ 
+•	 drawing simple electrical closed circuit diagrams including 
+the symbols for cell/battery, bulb, conducting wire, switch
+•	 Equipment such 
+as cells/batteries, 
+conducting wires, 
+light bulbs and 
+switches
+
+=== page 63 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+58
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 6 TERM 3
+STRANDS:      NATURAL SCIENCES: ENERGY & CHANGE
+                 TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 weeks
+(7 hours)
+Electrical 
+conductors 
+and 
+insulators
+Conductors
+•	 some materials conduct electricity and are called 
+conductors
+-- most metals, especially copper, conduct electricity
+Insulators
+•	 some materials do not conduct electricity and are called 
+insulators
+-- most non-metals, such as plastics, do not conduct 
+electricity
+•	 testing different materials (such as metal paper clips, nails, 
+wire, steel-wool, coins, plastic, glass, ceramic, cardboard, 
+paper, wood, rubber, chalk) in an electric circuit to see if 
+they are conductors or insulators, and recording the results 
+on a table
+ 
+•	 Identifying where electrical insulators are used such as in 
+plastic insulated wires, rubber gloves used by electricians, 
+glass and ceramic insulators on power lines
+•	 Different materials 
+including metal 
+paper clips, nails, 
+wire, steel-wool, 
+coins, plastic, glass, 
+ceramic, cardboard, 
+paper, wood, rubber, 
+chalk
+•	 Different materials 
+including plastic 
+insulated wires, 
+rubber gloves used 
+by electricians, glass 
+and ceramic
+2 ½ weeks
+(8 ¼ 
+hours)
+Systems 
+to solve 
+problems
+Using electric circuits
+•	 electric circuits are often used to solve problems that 
+require energy, such as street lighting, alarms, electric 
+gates, traffic lights, fans and heaters
+•	 electric circuits can also be used in models and toys
+• designing, making, evaluating and presenting a system 
+that uses a circuit to produce movement, light, sound or 
+heat* in a structure such as a steady hand game, house, 
+light house or a toy. The circuit should include components 
+such as cell/s, light bulb/s, buzzer/s, and switch/es (refer to 
+Section 2.7) [This can be used as a possible project]
+•	 Basic components 
+for a circuit, including 
+components such 
+as cell/s, light bulb/s 
+conducting wire/s, 
+buzzer/s, and switch/
+es
+Notes:	 * It is generally more difficult to produce heat using cells, but this can be explored
+
+=== page 64 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+59
+CAPS
+GRADE 6 TERM 3
+STRANDS:      NATURAL SCIENCES: ENERGY & CHANGE 
+                  TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+3 weeks
+(10 ½ 
+hours)
+Mains 
+electricity
+Fossil fuels and electricity
+•	 fossil fuels were formed in the Earth’s crust millions of 
+years ago from dead plants and animals
+•	 coal, oil and natural gas are fossil fuels
+•	 in South Africa coal is mostly used as a fuel in power 
+stations
+•	 coal was formed from fossilised plants which got their 
+energy from the Sun originally
+•	 in a power station coal is used to boil water, the steam 
+turns a turbine which turns a generator, which produces 
+electricity
+•	 fossil fuels are non-renewable resources
+Cost of electricity
+•	 electricity is costly because
+-- it requires infrastructure including coal mines, transport, 
+power stations, pylons, substations, wiring
+-- some electrical appliances require more electricity than 
+others (heating appliances use the most)
+•	 the more electricity we use the more we pay and the more 
+coal is used up
+•	 we can save energy in many ways including using energy 
+saving light bulbs and solar water heaters
+Illegal connections
+•	 illegal electrical connections are a danger to people 
+because they are often unsafe
+Renewable ways to generate electricity
+•	 people are looking for renewable ways to generate 
+electricity
+•	 drawing and writing about to explain how fossil fuels such 
+as coal were formed
+•	 drawing and writing to trace the electrical energy in a 
+sequence from an appliance, such as from your TV set, to 
+the coal-fired power station and back to the original source, 
+the Sun
+ 
+•	 examining labels (in adverts, or real electrical appliances) 
+to find out how much power they require (most kettles 
+require more than 2000 W, whilst a radio might require 
+about 15 W*). Recording findings on a table
+ 
+ 
+•	 Researching and writing about renewable ways to 
+generate electricity including in wind power generators, 
+solar panels (photovoltaics)**, hydro- electric power 
+generators
+•	 Pictures and video 
+clips of fuels and 
+their various uses
+•	 Pictures to show 
+how electricity is 
+generated in a coal- 
+fired power station
+•	 Examples of 
+electrical appliances
+•	 Pictures of 
+renewable ways to 
+generate electricity, 
+including examples 
+of wind power 
+generators, solar 
+power generators, 
+hydro- electric power 
+generators
+Notes:	 *   Learners in this grade do not have to know how Watts (W), kilo Watts (kW) and kilo Watt hours (kW.h) are measured and calculated
+	
+** Solar panels (photovoltaics) are different from solar water heaters
+
+=== page 65 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+60
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 6 TERM 3
+STRANDS:      NATURAL SCIENCES: ENERGY & CHANGE 
+                  TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+Assessment
+guidelines
+This content and the associated concepts must be integrated 
+with the aims and skills for
+Natural Sciences and Technology (refer to Section 2).
+•	 Learners should read, write, draw and do practical tasks 
+regularly
+•	 Evidence of learner’s work, including assessments, should 
+be kept in the learner’s notebook
+School-based assessment (including practical tasks and 
+class tests), checking for correctness, and providing 
+constructive feedback should be done regularly.
+Allow for a maximum of 7 hours to be used for assessment 
+throughout the term. For more detailed guidelines on 
+assessment, refer to Section 4.
+Check the learner’s knowledge and that they can:
+•	 draw and label an electric circuit correctly
+•	 demonstrate open and closed circuits with the use of a switch
+•	 distinguish between conductors and insulators in a range of materials
+•	 trace the electrical energy in a sequence from an appliance, such as from your TV 
+set, to the coal-fired power station and back to the original source, the Sun
+•	 explain how fossil fuels such as coal are formed
+•	 determine which appliances use more energy and explain why this is so
+
+=== page 66 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+61
+CAPS
+GRADE 6 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND
+     TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ weeks
+(8 ¾ 
+hours)
+The Solar 
+System
+The Sun, Planets and Asteroids
+•	 the Sun (a star) is at the centre of our Solar System
+•	 there are eight planets and the asteroid belt (Mercury, 
+Venus, Earth, Mars, Asteroid Belt, Jupiter, Saturn, Uranus, 
+and Neptune) in orbit around the Sun
+•	 each planet has its own
+-- features, size, orbit and position in relation to the Sun, 
+composition (rocky and gas planets) and number of 
+moons (some have no moons)
+•	 the planets and Asteroids take different amounts of time to 
+revolve around the Sun*
+Moons
+•	 moons, including our Moon do not give out their own heat 
+and light
+•	 our Moon can be seen from Earth because the light from 
+the Sun shines onto its surface
+•	 on the Moon we can see craters, lighter areas which are 
+mountains, and darker areas which are flat plains
+•	 researching/reading information about the planets focusing 
+on size, distance from the Sun, average temperature, 
+number of moons** and any other features
+•	 making models of the Solar System taking into account 
+position in relation to the Sun, size and features of the 
+planets***
+•	 describing and drawing the objects in our Solar System
+•	 Detailed pictures 
+and models of the 
+Solar System
+•	 Pictures of the 
+Moon
+Notes:	 *    It is not necessary to memorize exact numbers of size of planets, number of moons, and distance from the Sun
+	
+**  The number of moons around some planets may change as more are discovered
+	
+*** It is not necessary to make the models of the Solar System to scale
+
+=== page 67 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+62
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 6 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND
+     TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+1 week
+(3 ½ 
+hours)
+Movements**** 
+of the Earth 
+and planets
+Rotation (Earth)
+•	 in our Solar System, each planet rotates (spins) on its own 
+axis
+-- the planet Earth is spinning, and one complete rotation 
+takes about 24 hours. We experience this as a day and 
+a night
+-- during rotation the side of the Earth facing the Sun 
+experiences daytime, and the opposite side of the Earth 
+experiences night-time
+Revolution (Earth)
+•	 all planets also revolve (travel) around the Sun in their own 
+orbits
+•	 planet Earth revolves around the Sun in its own orbit 
+(pathway), and one complete revolution takes 365 ¼ days. 
+We experience this as a year
+•	 demonstrating the movements (rotation and revolution) and 
+of the Earth using models and body movements
+•	 demonstrating how day and night occur using a model of 
+the Earth and a light source (for the Sun)
+•	 drawing and writing about the rotation of the Earth in 
+relation to the Sun - how day and night occur
+•	 Models and a 
+light source such 
+as torch, lamp, 
+or candle to 
+demonstrate the 
+movements of the 
+Earth
+Notes:	 **** Video clips could be used to help clarify the movements of the planets
+
+=== page 68 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+63
+CAPS
+GRADE 6 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND 
+    TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+1 week
+(3 ½ 
+hours)
+The 
+movement of 
+the Moon
+Rotation (Moon)
+•	 the Moon is spinning and one complete rotation takes 
+about 28 days
+Revolution (Moon)
+•	 the Moon revolves around the Earth and one revolution 
+also takes about a month (about 28 days)
+•	 together, the Earth and the Moon revolve around the Sun
+•	 demonstrating rotation, and revolution of the Moon around 
+the Earth, using models and body movements
+•	 drawing and writing about the movements of the Moon in 
+relation to the Earth and the solar system
+•	 making a table of comparison between the Sun (a star), 
+the Earth (a planet) and the Moon including: shape, 
+composition, size, movement in relation to other space 
+objects, ability to produce light
+•	 Models and a 
+light source such 
+as torch, lamp, 
+or candle to 
+demonstrate the 
+movements of the 
+Moon
+1 week
+(3 ½ 
+hours)
+Systems for 
+looking into 
+space
+Telescopes
+•	 telescopes are used to look into space and gather 
+information
+•	 South Africa has built and uses some of the largest 
+telescopes
+•	 reading a case study about telescopes such as simple 
+telescopes, SALT (Southern African Large telescope), SKA 
+(Square Kilometre Array)
+•	 Pictures and 
+information about 
+telescopes
+
+=== page 69 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+64
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+GRADE 6 TERM 4
+STRANDS:      NATURAL SCIENCES: PLANET EARTH & BEYOND 
+    TECHNOLOGY: SYSTEMS & CONTROL
+Equipment and
+Resources
+Time
+Topic
+Content & Concepts
+Suggested Activities: Investigations, practical work, and 
+demonstrations
+2 ½ weeks
+(8 ¾ 
+hours)
+Systems to 
+explore the 
+Moon and 
+Mars
+Vehicles used on the Moon
+•	 a few people have visited the surface of the Moon and 
+explored it using a vehicle called a Moon Rover
+Vehicles used on Mars
+•	 robots called Mars Rovers have been used to visit and 
+explore the surface of Mars (people have not yet visited 
+Mars)
+• researching the key features and purposes of the Mars 
+or Moon Rovers including wheels and axles, cameras, 
+mechanical arms, and systems for using solar energy and 
+communications
+• designing, making and evaluating a model of one of 
+these vehicles which can move by means of wheels and 
+axles (refer to Section 2.7)
+•	 measuring how far the different vehicles can run down a 
+ramp and draw bar graphs [This can be used as a possible 
+project]
+•	 Pictures of the Moon 
+Rovers and Mars 
+Rovers
+•	 Apparatus including 
+bottle tops, round 
+tins or cardboard 
+circles for the 
+wheels, sosatie 
+sticks or dowels and 
+straws for the axles
+•	 Measuring tapes or 
+meter sticks
+Assessment
+guidelines
+This content and the associated concepts must be integrated 
+with the aims and skills for
+Natural Sciences and Technology (refer to Section 2).
+•	 Learners should read, write, draw and do practical tasks 
+regularly
+•	 Evidence of learner’s work, including assessments, should 
+be kept in the learner’s notebook
+School-based assessment (including practical tasks and 
+class tests), checking for correctness, and providing 
+constructive feedback should be done regularly.
+As this is the exam term, the final two weeks may be required 
+for revision of the year’s work and for examinations.
+For more detailed guidelines on assessment, refer to 
+Section 4.
+Check the learner’s knowledge and that they can:
+•	 describe objects in our Solar System (planets, moons, the Sun, Asteroids)
+•	 demonstrate the Earth’s rotation and revolution
+•	 explain the movements of the Moon
+•	 identify the essential differences between the Earth, Sun and the Moon
+•	 explain the uses of telescopes and the important telescopes in South Africa
+•	 make and evaluate a model vehicle featuring wheels and axles
+
+=== page 70 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+65
+CAPS
+SECTION 4: ASSESSMENT
+4.1	
+INTRODUCTION
+Assessment is a continuous planned process of identifying, gathering, interpreting and diagnosing, information about 
+the performance of learners. All forms of assessment involve generating and collecting evidence of achievement; 
+evaluating this evidence and using this information to understand and thereby assist the learner’s development and 
+the teaching process.
+Assessment should be both informal and formal. In both cases regular feedback should be provided to learners to 
+enhance the learning experience. In both cases regular feedback should be provided to learners.
+Informal and formal assessment
+Informal assessment consists of regular checking of learners’ class work (including practical tasks) asking ques-
+tions orally and giving constructive feedback. Marks for informal assessment need not be recorded.
+Formal assessment consists of selected assessment tasks, the marks of which should be recorded formally. These 
+assessment tasks are done throughout the year and include tests and examinations. All marks that are recorded 
+formally contribute to the final year mark.
+Assessment should be mapped out against the content (concepts and skills) and specific aims for Natural Sciences 
+and Technology. In both informal and formal assessments it is important to ensure that in the course of a school year: 
+•	
+all of the subject content is covered.
+•	
+the full range of major skills is included. (See Section 2.7 and Section 4.5) 
+•	
+a variety of different forms of assessment are used. (See Section 4.4) 
+4.2	
+INFORMAL ASSESSMENT OR DAILY ASSESSMENT
+The purpose of Informal assessment is to continuously collect information on a learner’s achievement that can be 
+used to improve their learning.
+Informal assessment is a daily monitoring of learners’ progress. It should not be seen as separate from the learning 
+activities taking place in the classroom.
+Informal assessment can be done through observation, discussion, practical demonstrations, informal classroom 
+interactions, classwork, investigations and so on. Informal assessment may be as simple as stopping during the 
+lesson to observe learners or to discuss with learners how learning is progressing. Informal assessment should also 
+be used to provide feedback to the learners and to inform planning for teaching. 
+Self-assessment and peer assessment, as part of informal assessment, actively involves learners in assessment 
+and a teacher playing an overseeing role. This is important as it allows learners to learn from and reflect on their own 
+performance.
+
+=== page 71 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+66
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+Selected informal assessment tasks may be marked by learners or teachers, but need not be recorded unless 
+the teacher wishes to do so. The results of daily assessment tasks are not taken into account for promotion and 
+certification purposes, but for improving teaching and learning.  
+Informal, on-going assessments should be used to encourage the acquisition of knowledge and skills and should 
+be the stepping stones leading up to the formal tasks in the Programme of Formal Assessment. (See Section 4.4) 
+4.3	
+FORMAL ASSESSMENT
+Formal assessment tasks and tests form part of a year-long formal Programme of Assessment in each grade and 
+subject. Formal assessments are marked and recorded by the teacher for progression purposes. All Formal Assess-
+ment tasks must be moderated for the purpose of quality assurance and to ensure that appropriate standards are 
+maintained.
+Formal assessment provides teachers with a systematic way of evaluating how well learners are progressing in a 
+Grade and in a particular subject. Formal assessment tasks in Natural Sciences and Technology are tests, examina-
+tions, practical tasks, which may include projects. (See details in Section 4.4.1) 
+The School-Based Assessment component in the different phases is as follows: 
+Grades
+Formal school-based
+End-of-year examinations
+R - 3
+100%
+n/a
+4 - 6
+75%
+25%
+7 - 9
+40%
+60%
+10 and 11
+25%
+75%
+12
+25% including school-based mid-year and ‘trial’ 
+examinations
+External examination: 75%
+Formally assessed tests and tasks must together reflect the whole term’s work. Weighting of marks should reflect 
+time allotted to each section in the curriculum content. 
+The cognitive demands of assessment
+The cognitive demands of assessment used should be appropriate to the age and developmental level of the learn-
+ers in the grade. Assessments in Natural Sciences and Technology must cater for a range of cognitive levels and 
+abilities of learners within this context. The assessment tasks should be carefully designed to cover the content of 
+the subject as well as the range of major skills that have been specified under the Major Process and Design skills. 
+(See Section 2.7) 
+The Specific Aims, the topics and content and the range of major skills must be used to inform the planning and 
+development of assessment tasks.
+
+=== page 72 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+67
+CAPS
+Cognitive levels for the assessment of content in Grades 4, 5 and 6
+Setting tests and 
+tasks for different 
+cognitive levels
+Knowing science 
+and technology
+Understanding 
+science and 
+technology
+Applying scientific 
+and technological 
+knowledge
+Evaluating, 
+analyzing, 
+synthesising 
+scientific and 
+technological 
+Knowledge
+Percentages 
+indicating the 
+proportion of low, 
+middle and high 
+order questions 
+in tasks, tests and 
+exams
+Low order questions
+50%
+Middle order questions
+35%
+High order questions
+15%
+Useful verbs to 
+use when setting 
+questions
+State
+Name
+Label
+List
+and others ...
+Explain
+Describe
+Compare
+Plan
+Rearrange
+Give an example  
+and others …
+Predict
+Compare
+Design
+Use knowledge to 
+demonstrate 
+and others …
+Evaluate
+Suggest a reason
+Interpret
+and others ...
+These cognitive skills apply to all three Specific Aims for Natural Sciences and Technology. (See Section 2.6) 
+4.4	
+PROGRAMME OF FORMAL ASSESSMENT FOR NATURAL SCIENCES AND TECHNOLOGY 
+Grades 4, 5 and 6 
+FORMAL 
+ASSESSMENTS
+TERM 1
+TERM 2
+TERM 3
+TERM 4
+TOTAL % FOR 
+THE YEAR
+School-based 
+assessments
+•	 1 Test 
+•	 1 selected 
+practical task *
+•	 1 Exam or test 
+on work from 
+terms 1 & 2
+•	 1 selected 
+practical task
+•	 1 Test
+•	 1 selected 
+practical task
+•	 1 selected 
+practical task
+75%
+Exams **
+•	 Exam on work 
+from terms 3 
+& 4
+25%
+Number 
+of formal 
+assessments
+2
+2
+2
+2
+Total: 100%
+Notes: 	*  Grade appropriate assessment on aspects of investigations and technological processes should form 	    	
+	
+    part of the selected practical tasks in the assessment programme for the year
+	
+** The class tests and examinations MUST include questions on both Natural Sciences and Technology
+A note on tests and examinations 
+Examinations MUST include questions on both Natural Science and Technology. Weighting of marks should reflect 
+time allotted to each section in the curriculum content.  
+A single formal class test in a term will not necessarily provide the most accurate and reliable evidence of every 
+learner’s performance. One formal class test in the first three terms is the minimum number that must be recorded.
+
+=== page 73 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+68
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+Tests and examinations consist of a range of questions that cover the different cognitive levels – knowledge recall, 
+understanding, application, evaluation, analysis and synthesis. Learners are required to respond to questions within 
+a specified time under controlled conditions. Examinations are similar to tests - the only difference is that they cover 
+more content.
+A note on practical tasks  
+In carrying out practical tasks learners are required to demonstrate their skills or proficiencies. Learners use materi-
+als, tools and equipment to create, produce or investigate something. The teacher observes the learner demonstrate 
+specific practical skills (e.g. measuring the height of a plant, using tools to manipulate materials to make models, 
+using a thermometer to measure temperature, etc.). Practical tasks can be very useful for assessing how learners 
+draw on knowledge and values to carry out practical skills (manual and/or behavioural, e.g. safety and handling of 
+equipment).
+Any practical task should provide opportunities for learners to demonstrate several different skills listed under Sec-
+tion 2.7 and Section 4.5. These may or may not include design/plan investigation skills. However, there are some 
+circumstances in which only some of these skills would apply and not every skill can be assessed in every practical 
+task.
+Practical tasks include a range of activities where learners communicate what they know and can do. Include a range 
+of tasks to ensure inclusivity and to accommodate different learning styles. These ways to communicate include: 
+acting out, speaking, drawing, making models, doing science practical work, working in the environment, writing and 
+doing calculations.
+A note on projects
+Certain practical activities in Section 3 have been suggested as suitable for possible projects, in which case the mark 
+will still be included as part of the School-based assessment. A project is optional and varies in extent. It may be 
+done in class and should be sufficiently diverse to promote inclusivity. One project per year may be done.  
+4.5	
+RECORDING AND REPORTING
+4.5.1	
+Recording is a process in which the teacher documents the level of a learner’s performance in a specific 
+assessment task. It indicates learner progress towards the achievement of the knowledge as prescribed in the Cur-
+riculum and Assessment Policy Statements. Records of learner performance should provide evidence of the learner’s 
+conceptual progression within a grade and her/his readiness to be promoted to the next Grade. Records of learner 
+performance should also be used to verify the progress made by teachers and learners in the teaching and learning 
+process. Records should be used to monitor learning and to plan ahead.
+Guidelines on how the major process skills can be recorded for marks in Natural Sciences and Technology
+Many of these major process skills (also refer to Section 2.7) are combined into one activity. Not every major skill 
+needs to be marked and recorded in each task.
+
+=== page 74 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+69
+CAPS
+Natural Sciences major investigation process skills 
+Mark allocation
+Writing the topic
+Raising/ writing a question to investigate
+Making a prediction/ hypothesis
+Planning the investigation
+Collecting data 
+Recording data
+Evaluating and communicating results
+Total
+Technology major process skills
+Mark allocation
+Stating a design brief
+Listing specifications
+Listing constraints
+Planning the product
+Drawing/designing the product
+Making the product
+Evaluating the product
+Presenting the product 
+Total 
+4.5.2	
+Reporting is a process of communicating learner performance to learners, parents, schools, and other stake-
+holders. Learner performance can be reported in a number of ways. These include report cards, parents’ meetings, 
+school visitation days, parent-teacher conferences, phone calls, letters, class or school newsletters, etc.
+Teachers will record actual marks against the task by using a record sheet; and report percentages against 
+the subject on the learners’ report cards. Percentages are reported and may be related to the 7-point rating 
+code as given below.
+Schools are required to provide quarterly feedback to parents on the Programme of Formal Assessment, using a 
+formal reporting tool, such as a report card. The schedule and the report card should indicate the overall level of 
+performance of a learner.
+
+=== page 75 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+70
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+4.5.3	
+Mark allocation
+A minimum mark allocation is prescribed for the tests, tasks and examinations for each Grade in the Intermediate 
+Phase. See the guideline below for each Grade under A. 
+However, should the teacher choose to allocate more marks for tests and tasks, these should also be converted to 
+conform to the total weighting percentages for the Intermediate Phase. See the example below under B.
+A: Minimum mark allocation for Grades 4, 5 and 6 
+Grade 4
+PROGRAMME OF FORMAL ASSESSMENT
+FORMAL 
+ASSESSMENTS
+TERM 1
+TERM 2
+TERM 3
+TERM 4
+TOTAL 
+MARKS FOR 
+THE YEAR
+TOTAL
+School-based
+assessments
+•	 1 Test [15 
+marks]
+•	 1 selected 
+practical 
+task [10 
+marks]
+•	 1 Exam or 
+test on work 
+from terms 
+1 & 2 [40 
+marks]
+•	 1 selected 
+practical 
+task [10 
+marks]
+•	 1 Test  
+[15 marks]
+•	 1 selected 
+practical 
+task 
+[15 marks]
+•	 1 selected 
+practical 
+task [15 
+marks]
+120 marks
+Together make 
+up 75% of total 
+marks for the 
+year
+Exams
+[60 Minutes]
+•	 Exam on 
+work from 
+terms 3 & 4 
+[40 marks]
+40 marks
+Makes up 25% 
+of total marks 
+for the year
+Number 
+of formal 
+assessments
+2
+2
+2
+2
+Total 8 
+assessments
+[160 marks]
+Total: 100%
+At the end of each term (Terms 1 – 3) : The marks can be reported as a percentage and related to the 7-point rating 
+code. 
+At the end of the year: 
+STEP 1:  ADD up all the School-based assessment raw marks from each term to get a total out of 120 marks
+STEP 2:  ADD the Final Exam raw mark to the School-based assessment total mark in Step 1
+STEP 3: CONVERT to a percentage and report in relation to the 7-point rating code below, if required
+
+=== page 76 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+71
+CAPS
+Grade 5
+PROGRAMME OF FORMAL ASSESSMENT
+FORMAL 
+ASSESSMENTS
+TERM 1
+TERM 2
+TERM 3
+TERM 4
+TOTAL 
+MARKS FOR 
+THE YEAR
+TOTAL
+School-based
+assessments
+•	 1 Test  
+[15 marks]
+•	 1 selected 
+practical 
+task 
+[15 marks]
+•	 1 Exam or 
+test on work 
+from terms 
+1 & 2  
+[45 marks]
+•	 1 selected 
+practical 
+task  
+[15 marks]
+•	 1 Test  
+[15 marks]
+•	 1 selected 
+practical 
+task [15 
+marks]
+•	 1 selected 
+practical 
+task  
+[15 marks]
+135 marks
+Together make 
+up 75% of 
+total marks for 
+the year
+Exams
+[60 Minutes]
+•	 Exam on 
+work from 
+terms 3 & 4 
+[45 marks]
+45 marks
+Makes up 25% 
+of total marks 
+for the year
+Number 
+of formal 
+assessments
+2
+2
+2
+2
+Total 8 
+assessments
+[180 marks]
+Total: 100%
+At the end of each term (Terms 1 – 3): The marks can be reported as a percentage and related to the 7-point rating 
+code. 
+At the end of the year: 
+Step 1:  ADD up all the School-based assessment raw marks from each term to get a total out of 135 marks
+Step 2:  ADD the Final Exam raw mark to the School-based assessment total mark in Step 1
+Step 3: CONVERT to a percentage and report in relation to the 7-point rating code below, if required
+
+=== page 77 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+72
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+Grade 6 
+PROGRAMME OF FORMAL ASSESSMENT
+FORMAL 
+ASSESSMENTS
+TERM 1
+TERM 2
+TERM 3
+TERM 4
+TOTAL 
+MARKS FOR 
+THE YEAR
+TOTAL
+School-based
+assessments
+•	 1 Test  
+[20 marks]
+•	 1 selected 
+practical 
+task  
+[15 marks]
+•	 1 Exam or 
+test on work 
+from terms  
+1 & 2  
+[50 marks]
+•	 1 selected 
+practical 
+task  
+[15 marks]
+•	 1 Test  
+[20 marks]
+•	 1 selected 
+practical 
+task  
+[15 marks]
+•	 1 selected 
+practical 
+task  
+[15 marks]
+150 marks
+Together 
+make up 75% 
+of total marks 
+for the year
+Exams
+[60 Minutes]
+•	 Exam on 
+work from 
+terms 3 & 4 
+[50 marks]
+50 marks
+Makes up 
+25% of total 
+marks for the 
+year
+Number of formal 
+assessments
+2
+2
+2
+2
+Total 8 
+assessments
+[200 marks]
+Total: 100%
+At the end of each term (Terms 1 – 3) : The marks can be reported as a percentage and related to the 7-point rating 
+code. 
+At the end of the year: 
+Step 1:  ADD up all the School-based assessment raw marks from each term to get a total out of 150 marks
+Step 2:  ADD the Final Exam raw mark to the School-based assessment total mark in Step 1
+Step 3: CONVERT to a percentage and report in relation to the 7-point rating code below, if required
+B: Should the teacher choose to allocate more marks for tests and tasks, the example below can be used.
+Recording and reporting for each term
+Marks should be recorded and converted into a percentage for each term. Percentages are reported and may be 
+related to the 7-point rating code as given below. 
+How to calculate each learner’s % for each term 
+Step 1. Add together formally assessed marks achieved by each learner 
+Step 2. Divide by total marks possible 
+Step 3. Multiply this mark by 100 to give the % achieved  
+For example: Learner score = 34 out of a possible 60 marks for the test and tasks added together for a term.
+34 ÷ 60 x 100 = 56.6%*
+* rather than use decimal points round any fraction from .5 and bigger up to next whole percentage. The above example will 
+be rounded up to 57%
+
+=== page 78 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+73
+CAPS
+Recording and reporting at the end of the year 
+•	
+The four percentages for each term must be calculated to give 75% of the total. This is the School-based 
+assessment mark.  
+• 
+The final exam mark must be converted to 25% of the total and added to the School-based assessment 
+mark. 
+How to calculate each learner’s % for reporting at the end of the year: 
+Step 1.	  Use the following formula to convert the four term School-based assessment %’s to 75% of the total: 
+1st Term % + 2nd Term % + 3rd Term % + 4th Term %; then divide the total by 400; then multiply by 75. 
+For example: (57% + 65% + 74% + 60%) ÷ 400 X 75 = 48 (This is the equivalent of 48 out of 75) 
+Step 2.	  Convert the final year examination mark to 25 % using the following formula: 
+Mark achieved in exam by learner ÷ total marks possible in exam X 25. 
+For example: a learner scores 28 out of a total of 40 marks in the final exam: 
+28 ÷ 40 X 25 = 17.5 (This is the equivalent of 17.5 out of 25) 
+Step 3.	  Add the calculated year mark (School-based assessment) to the exam mark as calculated above to reach the total 
+% for the year. 
+The learner in the example above has scored: 48 + 17.5 = 65.5 % for the year. (Round this up to 66%) 
+•	
+Percentages are reported and may be related to the 7-point rating code as given below. 
+Codes and percentages for reporting in Grades R – 12
+RATING CODE
+DESCRIPTION OF COMPETENCE
+PERCENTAGE
+7
+Outstanding achievement
+80 – 100
+6
+Meritorious achievement
+70 – 79
+5
+Substantial achievement
+60 – 69
+4
+Adequate achievement
+50 – 59
+3
+Moderate achievement
+40 – 49
+2
+Elementary achievement
+30 – 39
+1
+Not achieved
+0 – 29
+
+=== page 79 ===
+NATURAL SCIENCES AND TECHNOLOGY GRADES 4-6
+74
+CURRICULUM AND ASSESSMENT POLICY STATEMENT (CAPS)
+4.6	
+MODERATION OF ASSESSMENT	
+Moderation refers to the process that ensures that the assessment tasks are fair, valid and reliable. Moderation 
+should be implemented at school, district and, if necessary provincial levels. Comprehensive and appropriate mod-
+eration practices must be in place for the quality assurance of all subject assessments.
+In all Grades the formal School-based assessment (including the practical tasks) should be moderated by the rel-
+evant subject specialist(s) at school and district levels in an ongoing way. Moderation serves the following purposes: 
+1.	
+It should ascertain whether the subject content and skills have been taught and assessed.
+2.	
+It should ensure that the correct balance of cognitive demands is reflected in the assessment.
+3.	
+It should ensure that the assessments and marking are of an acceptable standard and consistency.
+4.	
+It should identify areas in which the teacher may need further development and should lead to support for such 
+development.
+5.	
+It should reflect the scope covered by the teacher in line with the term’s requirement 
+4.7	
+GENERAL
+This document should be read in conjunction with: 
+4.7.1  National policy pertaining to the programme and promotion requirements of the National Curriculum Statement 
+Grades R – 12; and
+4.7.2  The policy document, National Protocol for Assessment Grades R – 12.
+
+=== page 80 ===
