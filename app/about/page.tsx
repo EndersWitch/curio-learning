@@ -6,8 +6,8 @@ import Bloom from '@/components/Bloom'
 import { ArrowRight } from '@/components/icons'
 
 export const metadata: Metadata = {
-  title: 'About Us',
-  description: 'Curio Learning is a free, CAPS-aligned study site for South African learners: practice papers, quizzes and subject guides. Here’s who we are and why we built it.',
+  title: 'About Me',
+  description: 'Hi, I’m Josh. I’m a tutor, and I built curio learning because I kept running out of good, complete study material to teach from. Test papers and memos are free, always.',
   alternates: { canonical: '/about' },
 }
 
@@ -17,7 +17,7 @@ export default function AboutPage() {
       <SimpleNav />
       <RevealObserver />
 
-      {/* ── HERO — who we are ── */}
+      {/* ── HERO: who I am ── */}
       <section className="spread hero">
         <div className="spread-deco o2" style={{ top: '-70px', right: '-40px' }}>
           <Bloom size={340} />
@@ -32,19 +32,18 @@ export default function AboutPage() {
         <div className="spread-inner">
           <div className="spread-kicker">
             <span className="spread-kicker-line" />
-            Curio Learning
+            curio learning
           </div>
-          <p className="spread-tagline">Free, CAPS-aligned study help &mdash; built in South Africa, for South African students.</p>
+          <p className="spread-tagline">A tutor&apos;s project, built in South Africa for South African learners.</p>
 
           <h1 className="spread-h">
-            <span className="ln">who</span>
-            <span className="ln ac">we</span>
-            <span className="ln">are</span>
+            <span className="ln">hi, i&apos;m</span>
+            <span className="ln ac">josh</span>
           </h1>
 
           <p className="spread-lede rv">
-            Curio writes CAPS practice papers and <strong>quizzes that mark themselves</strong>, so studying
-            feels less like a chore and more like a game you&apos;re actually winning.
+            I&apos;m a tutor. I built curio learning because I kept <strong>running out of good things to teach from</strong>,
+            and I figured other parents, tutors and learners were running out too.
           </p>
 
           <a href="/subjects" className="spread-cta-corner">
@@ -54,7 +53,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── NUMBERS — just the facts ── */}
+      {/* ── WHERE IT STARTED ── */}
       <section className="spread">
         <div className="spread-deco o2" style={{ bottom: '-60px', right: '-30px' }}>
           <Bloom size={220} />
@@ -63,60 +62,26 @@ export default function AboutPage() {
         <div className="spread-inner">
           <div className="spread-kicker">
             <span className="spread-kicker-line" />
-            Curio Learning
-          </div>
-          <h2 className="spread-h rv">
-            <span className="ln">just</span>
-            <span className="ln">the</span>
-            <span className="ln ac">facts</span>
-          </h2>
-
-          <div className="spread-stats">
-            <div className="spread-stat c1 rv rv-d1">
-              <div className="spread-stat-val">R0</div>
-              <div className="spread-stat-label">to start. Every practice paper and memo is free &mdash; no account required, no strings attached.</div>
-            </div>
-            <div className="spread-stat c2 rv rv-d2">
-              <div className="spread-stat-val">Gr 4&ndash;12</div>
-              <div className="spread-stat-label">Subject guides for the CAPS subjects, mapped grade by grade. Quizzes start with English Home Language, Grades 4&ndash;7, and more are on the way.</div>
-            </div>
-            <div className="spread-stat c3 rv rv-d3">
-              <div className="spread-stat-val">24/7</div>
-              <div className="spread-stat-label">Practice on your own schedule &mdash; no timetable, no waiting on marking.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── WHAT WE DO ── */}
-      <section className="spread">
-        <div className="spread-deco o1" style={{ top: '10%', left: '2%' }}>
-          <Bloom size={180} />
-        </div>
-
-        <div className="spread-inner">
-          <div className="spread-kicker">
-            <span className="spread-kicker-line" />
-            Curio Learning
+            curio learning
           </div>
 
           <p className="spread-blurb-head rv">
-            CAPS practice that actually sticks:
+            I tutored a lot of kids, and I kept hitting the same two walls.
           </p>
           <div className="spread-blurb-cols rv rv-d1">
-            <p>Practice papers &amp; memos, topic-by-topic quizzes, subject guides mapped to the curriculum.</p>
-            <p>Instant marking, streaks that build the habit, progress you can actually see.</p>
+            <p>There weren&apos;t many exam papers online. Not nearly enough for a kid to practise properly.</p>
+            <p>The ones I did find never covered everything my students needed. So I&apos;d patch the gaps myself, again and again.</p>
           </div>
 
           <h2 className="spread-h rv rv-d2">
-            <span className="ln">what</span>
-            <span className="ln ac">we</span>
-            <span className="ln">do</span>
+            <span className="ln">where</span>
+            <span className="ln ac">it</span>
+            <span className="ln">started</span>
           </h2>
         </div>
       </section>
 
-      {/* ── WHY IT WORKS ── */}
+      {/* ── WHAT A KID NEEDS ── */}
       <section className="spread">
         <div className="spread-deco o2" style={{ top: '-40px', right: '6%' }}>
           <Bloom size={70} />
@@ -127,19 +92,27 @@ export default function AboutPage() {
 
         <div className="spread-inner">
           <h2 className="spread-h rv">
-            <span className="ln">why</span>
-            <span className="ln ac">it</span>
-            <span className="ln">works</span>
+            <span className="ln">what</span>
+            <span className="ln ac">a kid</span>
+            <span className="ln">needs</span>
           </h2>
+
+          <p className="spread-lede rv">
+            Three things, in this order. Skip any one of them and the exam turns into a guessing game.
+          </p>
 
           <div className="spread-pairs rv rv-d1">
             <div className="spread-pair">
-              <span className="spread-pair-k">Every paper</span>
-              <span className="spread-pair-v">checked against the real CAPS curriculum, not guessed at.</span>
+              <span className="spread-pair-k">Learn it</span>
+              <span className="spread-pair-v">Study the work as well as you can, with the rules and topics taught properly.</span>
             </div>
             <div className="spread-pair">
-              <span className="spread-pair-k">Every quiz</span>
-              <span className="spread-pair-v">marked the second you answer, with an explanation either way.</span>
+              <span className="spread-pair-k">Test it</span>
+              <span className="spread-pair-v">Find out what actually stuck by putting yourself under test conditions.</span>
+            </div>
+            <div className="spread-pair">
+              <span className="spread-pair-k">See the marking</span>
+              <span className="spread-pair-v">Understand how each question would have been marked, and where the marks went.</span>
             </div>
           </div>
 
@@ -150,7 +123,38 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── WHAT WE BELIEVE ── */}
+      {/* ── NOT ANOTHER BORING TEST ── */}
+      <section className="spread">
+        <div className="spread-deco o1" style={{ top: '10%', left: '2%' }}>
+          <Bloom size={180} />
+        </div>
+
+        <div className="spread-inner">
+          <div className="spread-kicker">
+            <span className="spread-kicker-line" />
+            curio learning
+          </div>
+
+          <h2 className="spread-h rv">
+            <span className="ln">not</span>
+            <span className="ln ac">another</span>
+            <span className="ln">boring test</span>
+          </h2>
+
+          <div className="spread-blurb-cols rv rv-d1">
+            <p>
+              I watched plenty of kids get bored of hour-long, pen-and-paper tests that all feel the same.
+              Some will do almost anything to avoid something that feels boring.
+            </p>
+            <p>
+              So I&apos;m making curio learning as interactive and approachable as I can, with something for every
+              kind of learner. Not just the ones who already love sitting down with a paper.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── BUILT BY ONE PERSON ── */}
       <section className="spread">
         <div className="spread-deco o1" style={{ bottom: '-50px', left: '-40px' }}>
           <Bloom size={240} />
@@ -158,8 +162,35 @@ export default function AboutPage() {
 
         <div className="spread-inner">
           <h2 className="spread-h rv">
+            <span className="ln">built</span>
+            <span className="ln ac">by one</span>
+            <span className="ln">person</span>
+          </h2>
+
+          <div className="spread-blurb-cols rv rv-d1">
+            <p>
+              I&apos;m not a developer. I&apos;m learning how to build this as I go, and it has been a headache and a joy
+              in about equal measure.
+            </p>
+            <p>
+              I&apos;ve learnt to work in small pieces instead of trying to fit a whole app into one week. I&apos;ve learnt
+              what people want, what they don&apos;t, and what makes them come back. Every day I learn something new,
+              and I&apos;m grateful for that.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHAT I BELIEVE ── */}
+      <section className="spread">
+        <div className="spread-deco o2" style={{ top: '-40px', right: '-20px' }}>
+          <Bloom size={200} />
+        </div>
+
+        <div className="spread-inner">
+          <h2 className="spread-h rv">
             <span className="ln">what</span>
-            <span className="ln ac">we</span>
+            <span className="ln ac">i</span>
             <span className="ln">believe</span>
           </h2>
 
@@ -167,17 +198,46 @@ export default function AboutPage() {
             <div className="spread-value rv rv-d1">
               <div className="spread-value-badge"><Bloom size={28} /></div>
               <div className="spread-value-title">Access</div>
-              <div className="spread-value-desc">Good study material shouldn&apos;t depend on where you live or what your family can afford.</div>
+              <div className="spread-value-desc">Not everyone can reach the top 1% of education. Those learners deserve the best I can give them, so test papers and memos are free, and always will be.</div>
             </div>
             <div className="spread-value rv rv-d2">
               <div className="spread-value-badge"><Bloom size={28} /></div>
               <div className="spread-value-title">Curiosity</div>
-              <div className="spread-value-desc">Learning sticks when it feels like discovery &mdash; not another chore before bed.</div>
+              <div className="spread-value-desc">Learning sticks when it feels like discovery, not another chore before bed.</div>
             </div>
             <div className="spread-value rv rv-d3">
               <div className="spread-value-badge"><Bloom size={28} /></div>
-              <div className="spread-value-title">Care</div>
-              <div className="spread-value-desc">Every question and every mark is checked by people who take getting it right seriously.</div>
+              <div className="spread-value-title">Getting it right</div>
+              <div className="spread-value-desc">Everything here follows CAPS, and I&apos;d like to work towards IEB one day. Kids should learn the rules once, correctly, instead of piecing them together from sources that disagree.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── THE FAMILY ── */}
+      <section className="spread">
+        <div className="spread-deco o1" style={{ bottom: '-40px', right: '4%' }}>
+          <Bloom size={150} />
+        </div>
+
+        <div className="spread-inner">
+          <h2 className="spread-h rv">
+            <span className="ln">more from</span>
+            <span className="ln ac">curio</span>
+          </h2>
+
+          <div className="spread-pairs rv rv-d1">
+            <div className="spread-pair">
+              <span className="spread-pair-k">Bloom</span>
+              <span className="spread-pair-v">An AI tutor that explains the work properly, step by step.</span>
+            </div>
+            <div className="spread-pair">
+              <span className="spread-pair-k">Whizz</span>
+              <span className="spread-pair-v">Build your own test from whatever you&apos;re being tested on, then see how it would be marked.</span>
+            </div>
+            <div className="spread-pair">
+              <span className="spread-pair-k">Millie</span>
+              <span className="spread-pair-v">A parent organiser for school messages, on its way.</span>
             </div>
           </div>
         </div>
@@ -195,7 +255,7 @@ export default function AboutPage() {
         <div className="spread-inner">
           <div className="spread-kicker">
             <span className="spread-kicker-line" />
-            Curio Learning
+            curio learning
           </div>
 
           <h2 className="spread-h">
@@ -206,8 +266,8 @@ export default function AboutPage() {
 
           <div className="spread-closing-row">
             <p className="spread-closing-sub">
-              Practice papers and memos are free forever, and so is a share of every quiz topic.
-              Upgrade to Premium whenever you want every quiz level and no ads.
+              Test papers and memos are free, and they always will be. Premium is there if you want every quiz level
+              and no ads, and it helps me keep building.
             </p>
             <div className="spread-closing-actions">
               <a href="/papers" className="spread-closing-cta">
